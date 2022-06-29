@@ -34,13 +34,17 @@ export default function createListener() {
         }
         
         if (!state.game.state.music?.duration || state.game.state.music?.duration >= state.game.state.music?.currentTime) {
-            if (keyPressed == 'Digit1' && on) state.game.startMusic({ name: 'Tutorial', difficulty: 'easy' })
+            if (keyPressed == 'Digit1' && on) state.game.startMusic({ name: 'Tutorial', difficulty: 'hard' })
             if (keyPressed == 'Digit2' && on) state.game.startMusic({ name: 'Bopeebo', difficulty: 'hard' })
             if (keyPressed == 'Digit3' && on) state.game.startMusic({ name: 'Dadbattle', difficulty: 'hard' })
             if (keyPressed == 'Digit4' && on) state.game.startMusic({ name: 'Milf', difficulty: 'hard' })
             if (keyPressed == 'Digit5' && on) state.game.startMusic({ name: 'Expurgation', difficulty: 'hard' })
         }
-        if (keyPressed == 'KeyP' && on) {
+
+        if (keyPressed == 'KeyQ' && on) state.game.state.downScroll = state.game.state.downScroll ? false : true
+        if (keyPressed == 'KeyW' && on) state.game.state.middleScroll = state.game.state.middleScroll ? false : true
+
+        if (keyPressed == 'KeyP' && on && state.game.state.music) {
             state.game.state.music.currentTime = 110
             state.game.state.musicVoice.currentTime = 110
         }
