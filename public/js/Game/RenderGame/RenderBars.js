@@ -23,6 +23,22 @@ module.exports = async (canvas, game, Listener) => {
     ctx.strokeStyle = 'black'
     ctx.strokeRect(canvas.width/2-musicBarWidth/2, 10, musicBarWidth, musicBarHeight)
 
+    let healthBarWidth = canvas.width*0.5
+    let healthBarHeight = 20
+    let healthBarY = game.state.downScroll ? 40 : canvas.height-60
+    let healthPercent = 1-(game.state.musicInfo.health > 100 ? 100 : game.state.musicInfo.health)/100 >= 1 ? 1 : 1-(game.state.musicInfo.health > 100 ? 100 : game.state.musicInfo.health)/100
+    //health
+
+    ctx.fillStyle = 'rgb(49, 176, 209)'
+    ctx.fillRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth, healthBarHeight)
+
+    ctx.fillStyle = 'red'
+    ctx.fillRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth*(healthPercent), healthBarHeight)
+
+    ctx.lineWidth = 2.5
+    ctx.strokeStyle = 'black'
+    ctx.strokeRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth, healthBarHeight)
+
     function formatTime(time) {
         if (!time) time = 0
 

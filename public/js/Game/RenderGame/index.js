@@ -6,10 +6,25 @@ module.exports = function renderGame(canvas, game, Listener) {
     const ctx = canvas.getContext('2d')
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    require('./RenderNotes')(canvas, game, Listener)
-    require('./RenderArrows')(canvas, game, Listener)
+    switch (game.state.gameStage) {
+        case 'game':
+            require('./RenderScreenGame')(canvas, game, Listener)
+            require('./RenderNotes')(canvas, game, Listener)
+            require('./RenderArrows')(canvas, game, Listener)
+            require('./RenderBars')(canvas, game, Listener)
+            break
+        case 'selectMusic':
+            require('./RenderMusicSelectScreen')(canvas, game, Listener)
+            break
+        case 'dead':
+            require('./RenderDeadScreen')(canvas, game, Listener)
+            break
+        case 'loading':
+            require('./RenderLoadingScreen')(canvas, game, Listener)
+            break
+    }
+
     require('./RenderScreenInformation')(canvas, game, Listener)
-    require('./RenderBars')(canvas, game, Listener)
 
     setTimeout(() => renderGame(canvas, game, Listener), 0)
 }

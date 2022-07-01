@@ -1,19 +1,30 @@
 module.exports = async({ arrowID, listenerState }, state) => {
     let notes = state.musicNotes.filter((n) => {
-        n.hitNote = n.Y//state.downScroll ? n.Y : -(n.Y)//-(state.arrowsSize**state.resizeNote/2)
+        n.hitNote = n.Y
         return n.arrowID == arrowID && n.type == 'normal' &&
-        n.Y >= -(state.arrowsSize**state.resizeNote*(state.musicBPM/100)/2) &&
-        n.Y <= (state.arrowsSize**state.resizeNote*(state.musicBPM/100)/2) ||
+        n.Y >= -(state.arrowsSize**state.resizeNote*1.5) &&
+        n.Y <= (state.arrowsSize**state.resizeNote*1.5) ||
         n.arrowID == arrowID && n.type != 'normal' &&
-        n.Y >= -(state.arrowsSize**state.resizeNote*0.5) &&
-        n.Y <= (state.arrowsSize**state.resizeNote*0.5)
+        n.Y >= -(state.arrowsSize**state.resizeNote) &&
+        n.Y <= (state.arrowsSize**state.resizeNote)
     })
 
     for (let i in notes) {
-        if (notes[i].type == 'normal') listenerState.arrows[arrowID].state = 'onNote'
-        else {
+        if (notes[i].type == 'normal') {
+            state.musicInfo.health += 2.5
+            listenerState.arrows[arrowID].state = 'onNote'
+        } else if (!notes.find(n => n.type == 'normal')) {
             listenerState.arrows[arrowID].state = 'onNoteKill'
-            alert('Morreu clico na seta errada')
+
+            switch (notes[i].type) {
+                case 'fireNote':
+                    state.musicInfo.health -= 20
+                    state.playSong('Sounds/burnSound.ogg', { newSong: true })
+                    break
+                case 'hitKill':
+                    state.musicInfo.health = 0
+                    break
+            }
         }
 
 
@@ -23,7 +34,7 @@ module.exports = async({ arrowID, listenerState }, state) => {
         }
         notes[i].clicked = true
 
-        state.musicInfo.accuracyMedia.push((state.arrowsSize**state.resizeNote*(state.musicBPM/100)/2-Math.abs(notes[i].hitNote))/(state.arrowsSize**state.resizeNote*(state.musicBPM/100)/2)*100)
+        state.musicInfo.accuracyMedia.push((state.arrowsSize**state.resizeNote*1.5-Math.abs(notes[i].hitNote))/(state.arrowsSize**state.resizeNote*1.5)*100)
         state.musicInfo.hitNote = notes[i].hitNote * -1
         state.musicInfo.score += state.musicInfo.hitNote > 25 ? 100 : 200
 
@@ -31,17 +42,21 @@ module.exports = async({ arrowID, listenerState }, state) => {
             let loop = setInterval(() => {
                 let note = notes[i]
                 
-                if (!listenerState.arrows[arrowID].click || note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2))) {
+                if (!listenerState.arrows[arrowID].click || note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
                     note.disabled = true
                     clearInterval(loop)
-                } else state.musicInfo.score += 20
+                } else {
+                    state.musicInfo.health += 0.2
+                    state.musicInfo.score += 20
+                }
             }, 1000/10)
         }
     }
 
     
-    if (!notes[0] && state.musicNotes.filter((n) => n.Y <= state.arrowsSize**state.resizeNote*1.5 && n.Y >= -(state.arrowsSize**state.resizeNote*1.5))[0]) {
+    if (!notes[0] && state.musicNotes.filter((n) => n.Y <= state.arrowsSize**state.resizeNote*1.5 && n.Y >= -(state.arrowsSize**state.resizeNote*2))[0]) {
         state.musicInfo.accuracyMedia.push(1)
         state.musicInfo.misses += 1
+        state.musicInfo.health -= 5
     }
 }

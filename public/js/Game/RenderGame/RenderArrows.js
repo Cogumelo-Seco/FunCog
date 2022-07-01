@@ -38,7 +38,7 @@ module.exports = async (canvas, game, Listener) => {
     for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
         let arrowImage = game.state.images[`Arrows/Arrow-${arrowID}.png`]
 
-        let note = game.state.musicOpponentNotes.find(n =>  n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2))
+        let note = game.state.musicOpponentNotes.find(n => n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2*2))
         if (note) {
             if (note.type != 'normal') arrowImage = game.state.images[`Arrows/deathnotes/Arrow-${arrowID}-press-deathnote-${game.state.animations.arrows.frame}.png`]
             else arrowImage = game.state.images[`Arrows/Arrow-${arrowID}-press-${game.state.animations.arrows.frame}.png`]

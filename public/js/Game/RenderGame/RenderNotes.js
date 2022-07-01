@@ -8,6 +8,8 @@ module.exports = async (canvas, game, Listener) => {
 
     for (let i in game.state.musicNotes) {
         let note = game.state.musicNotes[i]
+
+        //note.Y = -(game.state.arrowsSize**game.state.resizeNote*1.5)
         
         let noteY = game.state.downScroll ? arrowY+note.Y : arrowY-note.Y
 
@@ -17,6 +19,7 @@ module.exports = async (canvas, game, Listener) => {
             let holdEndImage = game.state.images[`Arrows/Arrow-${note.arrowID}-hold-end.png`]
 
             if (note.type == 'hitKill') arrowImage = game.state.images[`Arrows/deathnotes/Arrow-${note.arrowID}-deathnote-${game.state.animations.deathnotes.frame}.png`]
+            if (note.type == 'fireNote') arrowImage = game.state.images[`Arrows/firenotes/Arrow-${note.arrowID}-firenote-${game.state.animations.firenotes.frame}.png`]
 
             if (note.hold && arrowImage && holdImage && holdEndImage) {
                 let holdY = noteY
@@ -25,7 +28,7 @@ module.exports = async (canvas, game, Listener) => {
                 if (!note.holdHeight) note.holdHeight = holdImage.height
 
                 for (let i = 0;i <= note.hold;i += holdImage?.height) {
-                    holdY = game.state.downScroll ? holdY-(holdImage.height**resizeNote) : holdY+holdImage.height**resizeNote
+                    holdY = game.state.downScroll ? holdY-(holdImage.height**resizeNote) : holdY+(holdImage.height**resizeNote)
                     holdYInRelationToTheLine = game.state.downScroll ? holdY-arrowY : arrowY-holdY
                     ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.3 : 1
 
@@ -72,6 +75,7 @@ module.exports = async (canvas, game, Listener) => {
             let holdEndImage = game.state.images[`Arrows/Arrow-${note.arrowID}-hold-end.png`]
 
             if (note.type == 'hitKill') arrowImage = game.state.images[`Arrows/deathnotes/Arrow-${note.arrowID}-deathnote-${game.state.animations.deathnotes.frame}.png`]
+            if (note.type == 'fireNote') arrowImage = game.state.images[`Arrows/firenotes/Arrow-${note.arrowID}-firenote-${game.state.animations.firenotes.frame}.png`]
 
             if (note.hold && arrowImage && holdImage && holdEndImage) {
                 let holdY = noteY

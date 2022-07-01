@@ -1,9 +1,18 @@
 function createGame(Listener) {
     const state = {
         fps: '0-0',
+        debug: false,
         gameStage: 'loading',
-        images: [],
-        sounds: [],
+        gameStageTime: 0,
+        musicMenu: null,
+        selectMusicMenu: {
+            musicSelect: 0,
+            difficultySelected: 0,
+        },
+        images: {},
+        sounds: {},
+        musics: [],
+        difficulties: [],
         opponentArrows: [],
         spaceBetweenArrows: 10,
         resizeNote: 0.9,
@@ -28,11 +37,19 @@ function createGame(Listener) {
             misses: 0,
             score: 0,
             accuracy: 0,
-            accuracyMedia: []
+            accuracyMedia: [],
+            health: 50,
         },
         positionArrow: {},
         positionArrowOpponent: {},
         animations: {
+            BFDead: {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 5,
+                totalDalay: 120,
+                dalay: 0
+            },
             arrows: {
                 frame: 0,
                 startFrame: 0,
@@ -42,8 +59,15 @@ function createGame(Listener) {
             },
             deathnotes: {
                 frame: 0,
-                startFrame: 0,
+                startFrame: 1,
                 endFrame: 6,
+                totalDalay: 40,
+                dalay: 0
+            },
+            firenotes: {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 11,
                 totalDalay: 40,
                 dalay: 0
             },
@@ -57,6 +81,8 @@ function createGame(Listener) {
 
     const addImages = (command) => require('./GameFunctions/addImages')(state)
     const addSounds = (command) => require('./GameFunctions/addSounds')(state)
+    const addMusicList = (command) => require('./GameFunctions/addMusicList')(state)
+    const addDifficulties = (command) => require('./GameFunctions/addDifficulties')(state)
 
     const playSong = (type, command) => require('./GameFunctions/playSong')(type, command, state)
     state.playSong = playSong
@@ -74,22 +100,42 @@ function createGame(Listener) {
             state.arrowsYLineOpponent = state.middleScroll ? state.downScroll ? window.innerHeight*0.60 : window.innerHeight*0.40 : state.arrowsYLine
             state.resizeNoteOpponent = state.middleScroll ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
 
+            if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.debug) {
+                state.music?.pause()
+                state.musicVoice?.pause()
+                state.gameStage = 'dead'
+                state.musicInfo.health = 50
+                state.musicNotes = []
+                state.musicOpponentNotes= []
+                state.gameStageTime = +new Date()
+                playSong('Sounds/fnf_loss_sfx.ogg')
+                setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
+            } 
+            else if (state.musicInfo.health > 100) state.musicInfo.health = 100
+            else if (state.musicInfo.health < 0) state.musicInfo.health = 0
+
             let musicDuration = state.music?.duration
             let musicCurrentTime = state.music?.currentTime
-            let musicBPM = 100
+
+            if (musicDuration <= musicCurrentTime) {
+                state.gameStage = 'selectMusic'
+                state.musicInfo.health = 50
+                state.musicNotes = []
+                state.musicOpponentNotes= []
+            }
 
             for (let i in state.musicNotes) {
-                let percent = musicCurrentTime/state.musicNotes[i].time
-                state.musicNotes[i].Y = -(state.musicNotes[i].time/musicDuration)*(musicDuration*6**state.resizeNote*state.musicBPM)+(musicCurrentTime/musicDuration*(musicDuration*6**state.resizeNote*state.musicBPM))//-(percent*(musicDuration*(musicCurrentTime/musicDuration)*1000))//-(state.musicNotes[i].time/(musicDuration*1000)*((musicDuration*5**state.resizeNote)*state.musicBPM)-(musicCurrentTime/musicDuration*((musicDuration*5**state.resizeNote)*state.musicBPM)))
-                if (!state.musicNotes[i].errorWhenClicking && state.musicNotes[i].Y > 200 && state.musicNotes[i].Y < 400 && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
+                state.musicNotes[i].Y = -((state.musicNotes[i].time-musicCurrentTime)*(4*state.musicBPM))//-((state.musicNotes[i].time-musicCurrentTime)/musicDuration*(1000*state.musicBPM*state.resizeNote))
+                if (!state.musicNotes[i].errorWhenClicking && state.musicNotes[i].Y > 200 && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
                     state.musicNotes[i].disabled = true
                     state.musicInfo.misses += 1
+                    state.musicInfo.health -= 5
                     state.musicInfo.accuracyMedia.push(1)
                 }
             }
 
             for (let i in state.musicOpponentNotes) {
-                state.musicOpponentNotes[i].Y = -(state.musicOpponentNotes[i].time/musicDuration)*(musicDuration*6**state.resizeNoteOpponent*state.musicBPM)+(musicCurrentTime/musicDuration*(musicDuration*6**state.resizeNoteOpponent*state.musicBPM))//-(state.musicOpponentNotes[i].time/(musicDuration*1000)*((musicDuration*5**state.resizeNoteOpponent)*state.musicBPM)-(musicCurrentTime/musicDuration*((musicDuration*5**state.resizeNoteOpponent)*state.musicBPM)))
+                state.musicOpponentNotes[i].Y = -((state.musicOpponentNotes[i].time-musicCurrentTime)*(4*state.musicBPM))//-((state.musicOpponentNotes[i].time-musicCurrentTime)/musicDuration*(1000*state.musicBPM*state.resizeNoteOpponent))
             }
 
             state.musicInfo.accuracy = 0
@@ -100,8 +146,14 @@ function createGame(Listener) {
                 let animation = state.animations[i]
 
                 if (animation.dalay <= +new Date()) {
-                    animation.frame += 1
-                    if (animation.frame > animation.endFrame) animation.frame = animation.startFrame
+                    animation.frame += animation.boomerang ? animation.boomerangForward ? 1 : -1 : 1
+                    if (animation.frame > animation.endFrame) {
+                        if (!animation.boomerang) animation.frame = animation.startFrame
+                        else animation.boomerangForward = animation.boomerangForward ? false : true
+                    } else if (animation.frame < animation.startFrame) {
+                        animation.boomerangForward = animation.boomerangForward ? false : true
+                        animation.frame = animation.startFrame
+                    }
                     animation.dalay = +new Date()+animation.totalDalay
                 }
             }
@@ -111,6 +163,8 @@ function createGame(Listener) {
     async function loading(command) {
         state.loading.total += await addImages()
         state.loading.total += await addSounds()
+        addMusicList()
+        addDifficulties()
 
         /*state.loading.total = 50
         let interval = setInterval(() => {
@@ -124,27 +178,26 @@ function createGame(Listener) {
 
         for (let i of state.images) {
             let img = new Image()
+            img.addEventListener('error',(e) => newLoad('ERROR: '+e.path[0].src))
+            img.addEventListener('load', (e) => newLoad(e.path[0].src)?.join('/'))
             img.src = `/imgs/${i}`
             img.id = i
-            img.style.display = 'none'
-            document.body.appendChild(img)
             state.images[i] = img
-            img.addEventListener('error',(event) => state.images[event.path[0].id] = null)
-            img.addEventListener('load', (e) => newLoad(e.path[0].src.split('/')[e.path[0].src.split('/').length-1]))
         }
 
         for (let i of state.sounds) {
             let sound = new Audio()
+            sound.addEventListener('loadeddata', (e) => newLoad(e.path[0].src))
+            sound.addEventListener('error', (e) => newLoad('ERROR: '+e.path[0].src))
             sound.src = `/${i}`
             state.sounds[i] = sound
-            sound.addEventListener('loadeddata', (e) => newLoad(e.path[0].src.split('/')[e.path[0].src.split('/').length-1]))
         }
 
         let interval = setInterval(() => {
             if (state.loading.loaded >= state.loading.total) {
                 state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
                 clearInterval(interval)
-                setTimeout(() => state.gameStage = 'home', 1000)
+                if (!state.debug || state.gameStage == 'loading') setTimeout(() => state.gameStage = 'selectMusic', 1000)
             }
         }, 10)
     }
