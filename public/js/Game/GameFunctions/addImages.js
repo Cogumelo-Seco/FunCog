@@ -138,9 +138,6 @@ module.exports = async (state) => {
         'BF/BF Dead Loop0003.png',
         'BF/BF Dead Loop0004.png',
         'BF/BF Dead Loop0005.png',
-        'BF/BF Dead Loop0006.png',
-        'BF/BF Dead Loop0007.png',
-        'BF/BF Dead Loop0008.png',
     ]
     
     return state.images.length
