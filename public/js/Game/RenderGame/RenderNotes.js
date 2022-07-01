@@ -51,8 +51,8 @@ module.exports = async (canvas, game, Listener) => {
                 }
             }
 
-            if (!note.clicked && arrowImage) {
-                ctx.globalAlpha = note.Y > 0 ? 0.3 : 1
+            if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage) {
+                ctx.globalAlpha = note.Y > 0 ? 0.5 : 1
                 ctx.drawImage(arrowImage, game.state.positionArrow[note.arrowID]-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2), noteY-((arrowImage.height**resizeNote-arrowsSize**resizeNote)/2), arrowImage.width**resizeNote, arrowImage.height**resizeNote)
             }
 
@@ -106,7 +106,7 @@ module.exports = async (canvas, game, Listener) => {
                 }
             }
 
-            if (!note.clicked && arrowImage)
+            if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage)
                 ctx.drawImage(arrowImage, game.state.positionArrowOpponent[note.arrowID]-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2), noteY, arrowImage.width**resizeNoteOpponent, arrowImage.height**resizeNoteOpponent)
         }
     }

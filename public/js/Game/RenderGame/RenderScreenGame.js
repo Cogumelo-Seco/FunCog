@@ -12,6 +12,6 @@ module.exports = async (canvas, game, Listener) => {
 
     ctx.fillText(`Difficulty: ${game.state.musicInfo.difficulty}`, 5, canvas.height-20);
 
-    ctx.fillStyle = Math.abs(game.state.musicInfo.hitNote) > 25 ? 'rgb(220, 0, 0)' : 'rgb(19, 189, 0)'
-    ctx.fillText(game.state.musicInfo.hitNote.toFixed(2), Object.values(game.state.positionArrow)[0]-game.state.spaceBetweenArrows-ctx.measureText(game.state.musicInfo.hitNote.toFixed(2)).width, game.state.arrowsYLine+7.5+(game.state.arrowsSize**game.state.resizeNote/2));
+    ctx.fillStyle = Math.abs(game.state.musicInfo.hitNote) > 50 ? 'rgb(220, 0, 0)' : 'rgb(19, 189, 0)'
+    ctx.fillText(game.state.musicInfo.hitNote.toFixed(2)+'ms', Object.values(game.state.positionArrow)[0]-game.state.spaceBetweenArrows-ctx.measureText(game.state.musicInfo.hitNote.toFixed(2)+'ms').width, game.state.arrowsYLine+7.5+(game.state.arrowsSize**game.state.resizeNote/2));
 }

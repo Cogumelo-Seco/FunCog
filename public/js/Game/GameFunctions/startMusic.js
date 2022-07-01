@@ -54,22 +54,20 @@ module.exports = async({ name, difficulty }, state) => {
     }
 
     async function getNoteinfo(note) {
-        let arrowID = note[1]
+        let arrowID = note[1]%4
         let type = 'normal'
         let errorWhenClicking = false
 
         switch (name) {
             case 'Expurgation':
-                if (arrowID > 3) {
-                    arrowID = arrowID%4
+                if (note[1] > 3) {
                     note[2] = 0
                     errorWhenClicking = true
                     type = 'hitKill'
                 }
                 break
             case 'Hellclown':
-                if (arrowID > 3) {
-                    arrowID = arrowID%4
+                if (note[1] > 3) {
                     note[2] = 0
                     errorWhenClicking = true
                     type = 'fireNote'
@@ -80,7 +78,7 @@ module.exports = async({ name, difficulty }, state) => {
         return {
             Y: NaN,
             hold: Number.parseInt(note[2]),
-            time: note[0]/1000, 
+            time: Math.abs(note[0]/1000), 
             arrowID,
             clicked: false,
             disabled: false,
