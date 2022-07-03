@@ -4,6 +4,7 @@ module.exports = async({ name, difficulty, notesImageDir, backgroundImage }, sta
         state.musicNotes = []
         state.musicOpponentNotes = []
         state.countdown = 4
+        state.musicEventListener = () => null
         state.musicInfo = {
             name,
             backgroundImage,
@@ -57,7 +58,6 @@ module.exports = async({ name, difficulty, notesImageDir, backgroundImage }, sta
         try {
             state.musicEventListener = require(`../../../Musics/data/${name.toLowerCase()}/eventListener`)
         } catch {}
-        if (!state.musicEventListener) state.musicEventListener = () => null
         
         state.music = state.sounds[`Musics/musics/${name.toLowerCase()}/Inst.ogg`]
         state.musicVoice = state.sounds[`Musics/musics/${name.toLowerCase()}/Voices.ogg`]
