@@ -118,9 +118,10 @@ function createGame(Listener, canvas) {
             state.arrowsYLineOpponent = state.middleScroll ? state.downScroll ? canvas.height*0.60 : canvas.height*0.40 : state.arrowsYLine
             state.resizeNoteOpponent = state.middleScroll ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
 
-            if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.debug) {
+            if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.debug && state.music?.currentTime > 3) {
                 state.music?.pause()
                 state.musicVoice?.pause()
+                state.music.currentTime = 0
                 state.gameStage = 'dead'
                 state.musicInfo.health = 50
                 state.musicNotes = []
