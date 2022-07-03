@@ -1,40 +1,26 @@
 module.exports = async({ arrowID, listenerState }, state) => {
     let notes = state.musicNotes.filter((n) => {
         n.hitNote = (n.time-state.music?.currentTime)*1000
-        return n.arrowID == arrowID && n.type == 'normal' &&
+        return n.arrowID == arrowID && !n.errorWhenClicking && !n.disabled &&
         n.Y >= -(state.arrowsSize**state.resizeNote*1.5) &&
         n.Y <= (state.arrowsSize**state.resizeNote*1.5) ||
-        n.arrowID == arrowID && n.type != 'normal' &&
+        n.arrowID == arrowID && n.errorWhenClicking && !n.disabled &&
         n.Y >= -(state.arrowsSize**state.resizeNote) &&
         n.Y <= (state.arrowsSize**state.resizeNote)
     })
 
     for (let i in notes) {
+        state.musicEventListener('noteClick', { noteClickAuthor: 'player', note: notes[i], notes, listenerState }, state)
+
         if (notes[i].type == 'normal') {
             state.musicInfo.health += 2.5
+            state.musicInfo.combo += 1
             listenerState.arrows[arrowID].state = 'onNote'
-        } else if (!notes.find(n => n.type == 'normal')) {
-            listenerState.arrows[arrowID].state = 'onNoteKill'
-
-            switch (notes[i].type) {
-                case 'fireNote':
-                    state.musicInfo.health -= 20
-                    state.playSong('Sounds/burnSound.ogg', { newSong: true })
-                    break
-                case 'hitKill':
-                    state.musicInfo.health = 0
-                    break
-            }
+            notes[i].clicked = true
         }
 
-
-        if (notes[i].errorWhenClicking) {
-            state.musicInfo.accuracyMedia.push(1)
-            state.musicInfo.misses += 1
-        }
-        notes[i].clicked = true
-
-        //state.musicInfo.accuracyMedia.push((state.arrowsSize**state.resizeNote*1.5-Math.abs(notes[i].hitNote))/(state.arrowsSize**state.resizeNote*1.5)*100)
+        state.animations.ratingImage.frame = 0
+        state.musicInfo.accuracyMedia.push(state.calculateRating(notes[i].hitNote).media)
         state.musicInfo.hitNote = notes[i].hitNote*-1
         state.musicInfo.score += state.musicInfo.hitNote > 50 ? 100 : 200
 
@@ -54,9 +40,11 @@ module.exports = async({ arrowID, listenerState }, state) => {
     }
 
     
-    if (!notes[0] && state.musicNotes.filter((n) => !n.clicked && n.Y <= 0 && n.Y >= -(state.arrowsSize**state.resizeNote*2.5))[0]) {
+    if (!notes[0] && state.musicNotes.filter((n) => !n.errorWhenClicking && !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(state.arrowsSize**state.resizeNote*2.5))[0]) {
         state.musicInfo.accuracyMedia.push(1)
         state.musicInfo.misses += 1
+        state.musicInfo.score -= 50
         state.musicInfo.health -= 5
+        state.musicInfo.combo = 0
     }
 }

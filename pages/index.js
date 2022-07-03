@@ -11,11 +11,11 @@ const Game = (props) => {
     useEffect(() => {
         const canvas = document.getElementById('gameCanvas')        
         const Listener = createListener();
-        const game = createGame(Listener);
+        const game = createGame(Listener, canvas);
 
         game.loading({ Listener })
         Listener.state.game = game
-        game.start({ Listener })
+        game.start()
 
         renderGame(canvas, game, Listener);
     }, [])

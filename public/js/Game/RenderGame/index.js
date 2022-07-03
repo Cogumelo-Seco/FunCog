@@ -1,8 +1,13 @@
 module.exports = function renderGame(canvas, game, Listener) {
     game.state.fps = `${Number(game.state.fps.split('-')[0]) + 1}-${game.state.fps.split('-')[1]}`
 
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    canvas.style.left = game.state.screenXMovement-(game.state.screenZoom/2)+'px'
+    canvas.style.top = game.state.screenYMovement-(game.state.screenZoom/2)+'px'
+    canvas.style.width = window.innerWidth+(game.state.screenZoom)+'px'
+    canvas.style.height = window.innerHeight+(game.state.screenZoom)+'px'
+    canvas.width = window.innerWidth+(game.state.screenZoom/2)
+    canvas.height = window.innerHeight+(game.state.screenZoom/2)
+    canvas.style.backgroundImage = 'none'
     const ctx = canvas.getContext('2d')
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -11,6 +16,7 @@ module.exports = function renderGame(canvas, game, Listener) {
             require('./RenderScreenGame')(canvas, game, Listener)
             require('./RenderNotes')(canvas, game, Listener)
             require('./RenderArrows')(canvas, game, Listener)
+            require('./RenderScreenInfoGame')(canvas, game, Listener)
             require('./RenderBars')(canvas, game, Listener)
             break
         case 'selectMusic':

@@ -14,12 +14,17 @@ module.exports = async (canvas, game, Listener) => {
         let noteY = game.state.downScroll ? arrowY+note.Y : arrowY-note.Y
 
         if (noteY-(note.hold) < canvas.height && noteY+(note.hold) > -game.state.arrowsSize) {
-            let arrowImage = game.state.images[`Arrows/Arrow-${note.arrowID}-note.png`]
-            let holdImage = game.state.images[`Arrows/Arrow-${note.arrowID}-hold-piece.png`]
-            let holdEndImage = game.state.images[`Arrows/Arrow-${note.arrowID}-hold-end.png`]
+            let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-note.png`]
+            let holdImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-hold-piece.png`]
+            let holdEndImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-hold-end.png`]
 
             if (note.type == 'hitKill') arrowImage = game.state.images[`Arrows/deathnotes/Arrow-${note.arrowID}-deathnote-${game.state.animations.deathnotes.frame}.png`]
             if (note.type == 'fireNote') arrowImage = game.state.images[`Arrows/firenotes/Arrow-${note.arrowID}-firenote-${game.state.animations.firenotes.frame}.png`]
+            if (note.type == 'hurtNote') {
+                arrowImage = game.state.images[`Arrows/hurtnotes/Arrow-${note.arrowID}-hurtnote.png`]
+                holdImage = game.state.images[`Arrows/hurtnotes/Arrow-hurtnote-hold-piece.png`]
+                holdEndImage = game.state.images[`Arrows/hurtnotes/Arrow-hurtnote-hold-end.png`]
+            }
 
             if (note.hold && arrowImage && holdImage && holdEndImage) {
                 let holdY = noteY
@@ -30,7 +35,7 @@ module.exports = async (canvas, game, Listener) => {
                 for (let i = 0;i <= note.hold;i += holdImage?.height) {
                     holdY = game.state.downScroll ? holdY-(holdImage.height**resizeNote) : holdY+(holdImage.height**resizeNote)
                     holdYInRelationToTheLine = game.state.downScroll ? holdY-arrowY : arrowY-holdY
-                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.3 : 1
+                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : 1
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
                         if (i+holdImage?.height >= note.hold) {
@@ -52,7 +57,7 @@ module.exports = async (canvas, game, Listener) => {
             }
 
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage) {
-                ctx.globalAlpha = note.Y > 0 ? 0.5 : 1
+                ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : 1
                 ctx.drawImage(arrowImage, game.state.positionArrow[note.arrowID]-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2), noteY-((arrowImage.height**resizeNote-arrowsSize**resizeNote)/2), arrowImage.width**resizeNote, arrowImage.height**resizeNote)
             }
 
@@ -67,15 +72,24 @@ module.exports = async (canvas, game, Listener) => {
         let note = game.state.musicOpponentNotes[i]
         
         let noteY = game.state.downScroll ? arrowYOpponent+note.Y : arrowYOpponent-note.Y
-        if (note.Y >= 0 && game.state.opponentArrows[note.arrowID]) note.clicked = true
+        if (note.Y >= 0 && game.state.opponentArrows[note.arrowID] && !note.clicked && !note.disabled) {
+            game.state.musicEventListener('noteClick', { noteClickAuthor: 'bot' }, game.state)
+            note.clicked = true
+        }
 
         if (noteY-(note.hold) < canvas.height && noteY+(note.hold) > -game.state.arrowsSize) {
-            let arrowImage = game.state.images[`Arrows/Arrow-${note.arrowID}-note.png`]
-            let holdImage = game.state.images[`Arrows/Arrow-${note.arrowID}-hold-piece.png`]
-            let holdEndImage = game.state.images[`Arrows/Arrow-${note.arrowID}-hold-end.png`]
+            let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-note.png`]
+            let holdImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-hold-piece.png`]
+            let holdEndImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-hold-end.png`]
 
             if (note.type == 'hitKill') arrowImage = game.state.images[`Arrows/deathnotes/Arrow-${note.arrowID}-deathnote-${game.state.animations.deathnotes.frame}.png`]
             if (note.type == 'fireNote') arrowImage = game.state.images[`Arrows/firenotes/Arrow-${note.arrowID}-firenote-${game.state.animations.firenotes.frame}.png`]
+            if (note.type == 'hurtNote') {
+                arrowImage = game.state.images[`Arrows/hurtnotes/Arrow-${note.arrowID}-hurtnote.png`]
+                holdImage = game.state.images[`Arrows/hurtnotes/Arrow-hurtnote-hold-piece.png`]
+                holdEndImage = game.state.images[`Arrows/hurtnotes/Arrow-hurtnote-hold-end.png`]
+            }
+            ctx.globalAlpha = note.disabled ? 0.2 : 1
 
             if (note.hold && arrowImage && holdImage && holdEndImage) {
                 let holdY = noteY
@@ -108,6 +122,8 @@ module.exports = async (canvas, game, Listener) => {
 
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage)
                 ctx.drawImage(arrowImage, game.state.positionArrowOpponent[note.arrowID]-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2), noteY, arrowImage.width**resizeNoteOpponent, arrowImage.height**resizeNoteOpponent)
+
+            ctx.globalAlpha = 1
         }
     }
 }

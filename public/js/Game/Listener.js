@@ -34,18 +34,16 @@ export default function createListener() {
         }
         
         if (state.game.state.debug && on) {
-            if (keyPressed == 'Digit1') state.game.startMusic({ name: 'Tutorial', difficulty: 'hard' })
-            if (keyPressed == 'Digit2') state.game.startMusic({ name: 'Bopeebo', difficulty: 'hard' })
-            if (keyPressed == 'Digit3') state.game.startMusic({ name: 'Dadbattle', difficulty: 'hard' })
-            if (keyPressed == 'Digit4') state.game.startMusic({ name: 'Milf', difficulty: 'hard' })
-            if (keyPressed == 'Digit5') state.game.startMusic({ name: 'Expurgation', difficulty: 'hard' })
+            if (keyPressed == 'Digit1') state.game.startMusic({ name: 'Tutorial', difficulty: 'hard', notesImageDir: 'Arrows/' })
+            if (keyPressed == 'Digit2') state.game.startMusic({ name: 'Really-happy', difficulty: 'hard', notesImageDir: 'Arrows/' })
+            if (keyPressed == 'Digit3') state.game.startMusic({ name: 'Expurgation', difficulty: 'hard', notesImageDir: 'Arrows/' })
 
             if (keyPressed == 'KeyP' && state.game.state.music) {
-                state.game.state.music.currentTime = 110
-                state.game.state.musicVoice.currentTime = 110
+                state.game.state.music.currentTime = 50
+                state.game.state.musicVoice.currentTime = 50
             }
 
-            if (keyPressed == 'KeyE') state.game.state.musicInfo.health = 0
+            if (keyPressed == 'KeyE') state.game.state.screenZoom += 5
         }
 
         if (keyPressed == 'Enter' && state.game.state.gameStage == 'dead' && !state.game.state.musicMenu?.src.includes('gameOverEnd') && state.game.state.gameStageTime+2000 < +new Date()) {
@@ -78,7 +76,9 @@ export default function createListener() {
                         state.game.state.gameStage = 'game'
                         state.game.startMusic({ 
                             name: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].name, 
-                            difficulty: state.game.state.difficulties[state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].difficulties[state.game.state.selectMusicMenu.difficultySelected]]?.name
+                            difficulty: state.game.state.difficulties[state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].difficulties[state.game.state.selectMusicMenu.difficultySelected]],
+                            notesImageDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].notesImageDir,
+                            backgroundImage: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].backgroundImage,                            
                         })
                     }, 1500)
                     break

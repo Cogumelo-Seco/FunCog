@@ -1,4 +1,4 @@
-function createGame(Listener) {
+function createGame(Listener, canvas) {
     const state = {
         fps: '0-0',
         debug: false,
@@ -20,6 +20,7 @@ function createGame(Listener) {
         resizeNoteOpponentInMiddleScroll: 0.75,
         arrowsYLineMargin: 50,
         arrowsYLine: 0,
+        
         arrowsYLineOpponent: 0,
         amountOfArrowsOpponent: 3,
         amountOfArrows: 3,
@@ -30,46 +31,61 @@ function createGame(Listener) {
         musicBPM: 1,
         music: null,
         musicVoice: null,
-        musicInfo: {
-            name: 'none',
-            difficulty: 'none',
-            hitNote: 0,
-            misses: 0,
-            score: 0,
-            accuracy: 0,
-            accuracyMedia: [],
-            health: 50,
-        },
+        musicEventListener: null,
+        notesImageDir: null,
+        musicInfo: {},
+        countdown: 4,
         positionArrow: {},
         positionArrowOpponent: {},
+
+        arrowsYLineMovement: 0,
+        arrowsXLineMovement: 0,
+        arrowsYLineMovementOpponent: 0,
+        arrowsXLineMovementOpponent: 0,
+        screenYMovement: 0,
+        screenXMovement: 0,
+        screenZoom: 0,
+
         animations: {
+            ratingImage: {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 20,
+                totalDalay: 2,
+                dalay: 0,
+                loop: false
+            },
             BFDead: {
                 frame: 0,
                 startFrame: 0,
                 endFrame: 5,
                 totalDalay: 120,
-                dalay: 0
+                dalay: 0,
+                loop: true
             },
             arrows: {
                 frame: 0,
                 startFrame: 0,
-                endFrame: 1,
+                endFrame: 2,
                 totalDalay: 90,
-                dalay: 0
+                dalay: 0,
+                loop: true
             },
             deathnotes: {
                 frame: 0,
                 startFrame: 1,
                 endFrame: 6,
                 totalDalay: 40,
-                dalay: 0
+                dalay: 0,
+                loop: true
             },
             firenotes: {
                 frame: 0,
                 startFrame: 0,
                 endFrame: 11,
                 totalDalay: 40,
-                dalay: 0
+                dalay: 0,
+                loop: true
             },
         },
         loading: {
@@ -85,6 +101,8 @@ function createGame(Listener) {
     const addDifficulties = (command) => require('./GameFunctions/addDifficulties')(state)
 
     const playSong = (type, command) => require('./GameFunctions/playSong')(type, command, state)
+    const calculateRating = (command) => require('./GameFunctions/calculateRating')(command, state)
+    state.calculateRating = calculateRating
     state.playSong = playSong
 
     const startMusic = (command) => require('./GameFunctions/startMusic')(command, state)
@@ -96,8 +114,8 @@ function createGame(Listener) {
         }
 
         let interval = setInterval(() => {
-            if (state.arrowsSize) state.arrowsYLine = state.downScroll ? window.innerHeight-state.arrowsYLineMargin-state.arrowsSize**state.resizeNote : state.arrowsYLineMargin
-            state.arrowsYLineOpponent = state.middleScroll ? state.downScroll ? window.innerHeight*0.60 : window.innerHeight*0.40 : state.arrowsYLine
+            if (state.arrowsSize) state.arrowsYLine = state.downScroll ? canvas.height-state.arrowsYLineMargin-state.arrowsSize**state.resizeNote : state.arrowsYLineMargin
+            state.arrowsYLineOpponent = state.middleScroll ? state.downScroll ? canvas.height*0.60 : canvas.height*0.40 : state.arrowsYLine
             state.resizeNoteOpponent = state.middleScroll ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
 
             if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.debug) {
@@ -125,22 +143,24 @@ function createGame(Listener) {
             }
 
             for (let i in state.musicNotes) {
-                state.musicNotes[i].Y = -((state.musicNotes[i].time-musicCurrentTime)*(4*state.musicBPM))//-((state.musicNotes[i].time-musicCurrentTime)/musicDuration*(1000*state.musicBPM*state.resizeNote))
-                if (!state.musicNotes[i].errorWhenClicking && state.musicNotes[i].Y > 200 && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
+                state.musicNotes[i].Y = -((state.musicNotes[i].time-musicCurrentTime)*(4*state.musicBPM))
+                if (!state.musicNotes[i].errorWhenClicking && state.musicNotes[i].arrowID >= 0 && state.musicNotes[i].arrowID <= state.amountOfArrows && state.musicNotes[i].Y > 200 && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
                     state.musicNotes[i].disabled = true
                     state.musicInfo.misses += 1
+                    state.musicInfo.score -= 50
                     state.musicInfo.health -= 5
+                    state.musicInfo.combo = 0
                     state.musicInfo.accuracyMedia.push(1)
                 }
             }
 
             for (let i in state.musicOpponentNotes) {
-                state.musicOpponentNotes[i].Y = -((state.musicOpponentNotes[i].time-musicCurrentTime)*(4*state.musicBPM))//-((state.musicOpponentNotes[i].time-musicCurrentTime)/musicDuration*(1000*state.musicBPM*state.resizeNoteOpponent))
+                state.musicOpponentNotes[i].Y = -((state.musicOpponentNotes[i].time-musicCurrentTime)*(4*state.musicBPM))
             }
 
             state.musicInfo.accuracy = 0
             for (let i in state.musicInfo.accuracyMedia) state.musicInfo.accuracy += state.musicInfo.accuracyMedia[i]
-            state.musicInfo.accuracy = state.musicInfo.accuracy/state.musicInfo.accuracyMedia.length || 0
+            state.musicInfo.accuracy = state.musicInfo.accuracy/state.musicInfo.accuracyMedia?.length || 0
 
             for (let i in state.animations) {
                 let animation = state.animations[i]
@@ -148,7 +168,7 @@ function createGame(Listener) {
                 if (animation.dalay <= +new Date()) {
                     animation.frame += animation.boomerang ? animation.boomerangForward ? 1 : -1 : 1
                     if (animation.frame > animation.endFrame) {
-                        if (!animation.boomerang) animation.frame = animation.startFrame
+                        if (!animation.boomerang) animation.frame = animation.loop ? animation.startFrame : animation.endFrame
                         else animation.boomerangForward = animation.boomerangForward ? false : true
                     } else if (animation.frame < animation.startFrame) {
                         animation.boomerangForward = animation.boomerangForward ? false : true
