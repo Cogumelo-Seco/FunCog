@@ -7,7 +7,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, s
                 state.musicInfo.accuracyMedia.push(1)
                 state.musicInfo.misses += 1
                 state.musicInfo.score -= 50
-                state.musicInfo.health -= 20
+                state.musicInfo.health -= 15
             }
             break
         case 'started':
@@ -31,8 +31,18 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, s
                                 if (event[1] == 'Screen Shake') {
                                     state.screenXMovement = Number.parseInt(Math.random()*80)-40
                                     state.screenYMovement = Number.parseInt(Math.random()*80)-40
-                                } else {
+                                } else if (event[1] == 'Add Camera Zoom') {
                                     state.screenZoom += 5
+                                } else if (event[1] == 'Add Jumpscare') {
+                                    state.musicInfo.jumpscareImage = {
+                                        dir: `jumpscares/sadmouse-jumpscare-{{frame}}.png`,
+                                        random: true,
+                                        frame: 0,
+                                        minFrame: 0,
+                                        maxFrame: 2
+                                    }
+                                } else if (event[1] == 'Remove Jumpscare') {
+                                    state.musicInfo.jumpscareImage = null
                                 }
                             }
                         }, 1000/50)
@@ -47,6 +57,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, s
 }
 
 let events = [
+    [ 103000, 'Add Jumpscare'],
     [ 41142.8571428572, "Screen Shake" ],
     [ 41571.4285714286, "Screen Shake" ],
     [ 42000, "Screen Shake" ],

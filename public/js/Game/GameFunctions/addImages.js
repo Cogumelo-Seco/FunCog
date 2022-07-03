@@ -255,6 +255,12 @@ module.exports = async (state) => {
         'intro/1.png',
         'intro/2.png',
         'intro/3.png',
+
+        /* --- */
+
+        'jumpscares/sadmouse-jumpscare-0.png',
+        'jumpscares/sadmouse-jumpscare-1.png',
+        'jumpscares/sadmouse-jumpscare-2.png',
     ]
     
     return state.images.length

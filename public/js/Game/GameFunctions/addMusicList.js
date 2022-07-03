@@ -47,7 +47,7 @@ module.exports = async (state) => {
             menuColor: 'red',
             difficulties: [ 2, 3 ],
             notesImageDir: 'Arrows/',
-            backgroundImage: 'expurgation'
+            backgroundImage: 'backgrounds/expurgation.png'
         },
         {
             name: 'Sarvente-Tutorial-Remix',

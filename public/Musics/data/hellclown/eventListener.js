@@ -8,7 +8,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, s
                 state.musicInfo.accuracyMedia.push(1)
                 state.musicInfo.misses += 1
                 state.musicInfo.score -= 50
-                state.musicInfo.health -= 20
+                state.musicInfo.health -= 15
                 state.playSong('Sounds/burnSound.ogg', { newSong: true })
             }
             break

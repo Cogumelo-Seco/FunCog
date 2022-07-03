@@ -39,8 +39,8 @@ export default function createListener() {
             if (keyPressed == 'Digit3') state.game.startMusic({ name: 'Expurgation', difficulty: 'hard', notesImageDir: 'Arrows/' })
 
             if (keyPressed == 'KeyP' && state.game.state.music) {
-                state.game.state.music.currentTime = 50
-                state.game.state.musicVoice.currentTime = 50
+                state.game.state.music.currentTime += 10
+                state.game.state.musicVoice.currentTime += 10
             }
 
             if (keyPressed == 'KeyE') state.game.state.screenZoom += 5

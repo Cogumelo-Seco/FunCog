@@ -7,11 +7,13 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, s
                 state.musicInfo.accuracyMedia.push(1)
                 state.musicInfo.misses += 1
                 state.musicInfo.score -= 50
-                state.musicInfo.health -= 20
+                state.musicInfo.health -= 15
             }
             break
         case 'started':
             let oldCurrentTime = 0
+            let defaultBackgroundImage = state.musicInfo.backgroundImage
+
             let loop = setInterval(() => {
                 let currentTime = state.music?.currentTime
 
@@ -20,6 +22,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, s
 
                     if (oldCurrentTime*1000 <= event[0] && currentTime*1000 >= event[0]) {
                         let current = 0
+                        console.log(event)
                         let interval = setInterval(() => {
                             if (current >= 10) {
                                 state.screenXMovement = 0
@@ -31,8 +34,18 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, s
                                 if (event[1] == 'Screen Shake') {
                                     state.screenXMovement = Number.parseInt(Math.random()*20)-10
                                     state.screenYMovement = Number.parseInt(Math.random()*20)-10
-                                } else {
+                                } else if (event[1] == 'Add Camera Zoom') {
                                     state.screenZoom += 5
+                                } else if (event[1] == 'Add Jumpscare') {
+                                    state.musicInfo.jumpscareImage =  {
+                                        dir: `jumpscares/sadmouse-jumpscare-{{frame}}.png`,
+                                        random: true,
+                                        frame: 0,
+                                        minFrame: 0,
+                                        maxFrame: 2
+                                    }
+                                } else if (event[1] == 'Remove Jumpscare') {
+                                    state.musicInfo.jumpscareImage = null
                                 }
                             }
                         }, 1000/50)
@@ -47,6 +60,8 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, s
 }
 
 let events = [
+    [ 60000, "Add Jumpscare" ],
+    [ 60985.2272727273, "Remove Jumpscare" ],
     [ 60985.2272727273, "Add Camera Zoom" ],
     [ 60940.9090909091, "Add Camera Zoom" ],
     [ 60927.2727272728, "Add Camera Zoom" ],

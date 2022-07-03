@@ -26,11 +26,11 @@ module.exports = async({ name, difficulty, notesImageDir, backgroundImage }, sta
         state.musicBPM = musicData.song.bpm
 
         for (let i in musicBPMs) {
-            for (let a in musicBPMs[i]) state.musicNotes.push(await getNoteinfo(musicBPMs[i][a], difficulty))
+            for (let a in musicBPMs[i]) state.musicNotes.push(await getNoteinfo(musicBPMs[i][a], difficulty, musicData))
         }
 
         for (let i in musicOpponentBPMs) {
-            for (let a in musicOpponentBPMs[i]) state.musicOpponentNotes.push(await getNoteinfo(musicOpponentBPMs[i][a], difficulty))
+            for (let a in musicOpponentBPMs[i]) state.musicOpponentNotes.push(await getNoteinfo(musicOpponentBPMs[i][a], difficulty, musicData))
         }
 
         // FILTRAR NOTAS EM POSIÇÕES IGUAIS
@@ -74,36 +74,39 @@ module.exports = async({ name, difficulty, notesImageDir, backgroundImage }, sta
 
                 state.musicEventListener('started', {}, state)
             } else state.playSong(`Sounds/intro${state.countdown}.ogg`)
-        }, 600);
+        }, 900-(musicData.song.bpm*2));
     } catch (err) {
         console.error(err)
     }
 
-    async function getNoteinfo(note, difficulty) {
-        let arrowID = note[1]//%4
+    async function getNoteinfo(note, difficulty, musicData) {
+        name = name.toLowerCase()
+        let arrowID = note[1]%4
         let type = 'normal'
         let errorWhenClicking = false
         let disabled = false
+        let doNotFormatNotes = [ 'unhappy', 'happy', 'really-happy', 'smile' ]
+        if (doNotFormatNotes.includes(name)) arrowID = note[1]
 
-        if (name == 'Expurgation') {
+        if (name == 'expurgation') {
             if (note[1] > 3) {
                 arrowID = note[1]%4
                 note[2] = 0
                 disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenClicking = true
                 type = 'hitKill'
-            }
+            } else arrowID = note[1]%4
         }
-        if (name == 'Hellclown') {
+        if (name == 'hellclown') {
             if (note[1] > 3) {
                 arrowID = note[1]%4
                 note[2] = 0
                 disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenClicking = true
                 type = 'fireNote'
-            }
+            } else arrowID = note[1]%4
         }
-        if (name == 'Happy' || name == 'Really-happy') {
+        if (name == 'happy' || name == 'really-happy') {
             if (note[3] && note[1] != -1) {
                 arrowID = note[1]%4
                 disabled = difficulty.name == 'Mania' ? true : false
@@ -114,7 +117,7 @@ module.exports = async({ name, difficulty, notesImageDir, backgroundImage }, sta
 
         return {
             Y: NaN,
-            hold: Number.parseInt(note[2]),
+            hold: Number.parseInt(note[2]) * (musicData.song.bpm/200),
             time: Math.abs(note[0]/1000), 
             arrowID,
             clicked: false,
