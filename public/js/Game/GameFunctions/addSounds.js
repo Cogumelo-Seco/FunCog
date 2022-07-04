@@ -62,6 +62,30 @@ module.exports = async (state) => {
 
         'Musics/musics/smile/Inst.ogg',
         'Musics/musics/smile/Voices.ogg',
+        
+        'Musics/musics/dusk-till-dawn/Inst.ogg',
+        'Musics/musics/dusk-till-dawn/Voices.ogg',
+
+        'Musics/musics/little-man/Inst.ogg',
+        'Musics/musics/little-man/Voices.ogg',
+
+        'Musics/musics/onslaught/Inst.ogg',
+        'Musics/musics/onslaught/Voices.ogg',
+
+        'Musics/musics/ron/Inst.ogg',
+        'Musics/musics/ron/Voices.ogg',
+
+        'Musics/musics/run/Inst.ogg',
+        'Musics/musics/run/Voices.ogg',
+
+        'Musics/musics/sunshine/Inst.ogg',
+        'Musics/musics/sunshine/Voices.ogg',
+
+        'Musics/musics/trouble/Inst.ogg',
+        'Musics/musics/trouble/Voices.ogg',
+
+        'Musics/musics/withered/Inst.ogg',
+        'Musics/musics/withered/Voices.ogg',
     ]
 
     return state.sounds.length

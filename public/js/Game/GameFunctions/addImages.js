@@ -124,6 +124,48 @@ module.exports = async (state) => {
         'Arrows/suicidemouse/Arrow-3-hold-piece.png',
         'Arrows/suicidemouse/Arrow-3-hold-end.png',
 
+        /* ---- */        
+
+        'Arrows/dusk-till-dawn/Arrow-0.png',
+        'Arrows/dusk-till-dawn/Arrow-0-note.png',
+        'Arrows/dusk-till-dawn/Arrow-0-press-0.png',
+        'Arrows/dusk-till-dawn/Arrow-0-press-1.png',
+        'Arrows/dusk-till-dawn/Arrow-0-press-2.png',
+        'Arrows/dusk-till-dawn/Arrow-0-press-0-no.png',
+        'Arrows/dusk-till-dawn/Arrow-0-press-1-no.png',
+        'Arrows/dusk-till-dawn/Arrow-0-hold-piece.png',
+        'Arrows/dusk-till-dawn/Arrow-0-hold-end.png',
+
+        'Arrows/dusk-till-dawn/Arrow-1.png',
+        'Arrows/dusk-till-dawn/Arrow-1-note.png',
+        'Arrows/dusk-till-dawn/Arrow-1-press-0.png',
+        'Arrows/dusk-till-dawn/Arrow-1-press-1.png',
+        'Arrows/dusk-till-dawn/Arrow-1-press-2.png',
+        'Arrows/dusk-till-dawn/Arrow-1-press-0-no.png',
+        'Arrows/dusk-till-dawn/Arrow-1-press-1-no.png',
+        'Arrows/dusk-till-dawn/Arrow-1-hold-piece.png',
+        'Arrows/dusk-till-dawn/Arrow-1-hold-end.png',
+        
+        'Arrows/dusk-till-dawn/Arrow-2.png',
+        'Arrows/dusk-till-dawn/Arrow-2-note.png',
+        'Arrows/dusk-till-dawn/Arrow-2-press-0.png',
+        'Arrows/dusk-till-dawn/Arrow-2-press-1.png',
+        'Arrows/dusk-till-dawn/Arrow-2-press-2.png',
+        'Arrows/dusk-till-dawn/Arrow-2-press-0-no.png',
+        'Arrows/dusk-till-dawn/Arrow-2-press-1-no.png',
+        'Arrows/dusk-till-dawn/Arrow-2-hold-piece.png',
+        'Arrows/dusk-till-dawn/Arrow-2-hold-end.png',
+
+        'Arrows/dusk-till-dawn/Arrow-3.png',
+        'Arrows/dusk-till-dawn/Arrow-3-note.png',
+        'Arrows/dusk-till-dawn/Arrow-3-press-0.png',
+        'Arrows/dusk-till-dawn/Arrow-3-press-1.png',
+        'Arrows/dusk-till-dawn/Arrow-3-press-2.png',
+        'Arrows/dusk-till-dawn/Arrow-3-press-0-no.png',
+        'Arrows/dusk-till-dawn/Arrow-3-press-1-no.png',
+        'Arrows/dusk-till-dawn/Arrow-3-hold-piece.png',
+        'Arrows/dusk-till-dawn/Arrow-3-hold-end.png',
+
         /* ---- */
 
         'Arrows/deathnotes/Arrow-0-deathnote-0.png',
@@ -136,6 +178,7 @@ module.exports = async (state) => {
         'Arrows/deathnotes/Arrow-0-deathnote-6.png',
         'Arrows/deathnotes/Arrow-0-press-deathnote-0.png',
         'Arrows/deathnotes/Arrow-0-press-deathnote-1.png',
+        'Arrows/deathnotes/Arrow-0-press-deathnote-2.png',
 
         'Arrows/deathnotes/Arrow-1-deathnote-0.png',
         'Arrows/deathnotes/Arrow-1-deathnote-1.png',
@@ -147,6 +190,7 @@ module.exports = async (state) => {
         'Arrows/deathnotes/Arrow-1-deathnote-6.png',
         'Arrows/deathnotes/Arrow-1-press-deathnote-0.png',
         'Arrows/deathnotes/Arrow-1-press-deathnote-1.png',
+        'Arrows/deathnotes/Arrow-1-press-deathnote-2.png',
 
         'Arrows/deathnotes/Arrow-2-deathnote-0.png',
         'Arrows/deathnotes/Arrow-2-deathnote-1.png',
@@ -158,6 +202,7 @@ module.exports = async (state) => {
         'Arrows/deathnotes/Arrow-2-deathnote-6.png',
         'Arrows/deathnotes/Arrow-2-press-deathnote-0.png',
         'Arrows/deathnotes/Arrow-2-press-deathnote-1.png',
+        'Arrows/deathnotes/Arrow-2-press-deathnote-2.png',
 
         'Arrows/deathnotes/Arrow-3-deathnote-0.png',
         'Arrows/deathnotes/Arrow-3-deathnote-1.png',
@@ -169,6 +214,7 @@ module.exports = async (state) => {
         'Arrows/deathnotes/Arrow-3-deathnote-6.png',
         'Arrows/deathnotes/Arrow-3-press-deathnote-0.png',
         'Arrows/deathnotes/Arrow-3-press-deathnote-1.png',
+        'Arrows/deathnotes/Arrow-3-press-deathnote-2.png',
 
         /* ---- */
 
@@ -232,6 +278,15 @@ module.exports = async (state) => {
         'Arrows/hurtnotes/Arrow-3-hurtnote.png',
         'Arrows/hurtnotes/Arrow-hurtnote-hold-piece.png',
         'Arrows/hurtnotes/Arrow-hurtnote-hold-end.png',
+
+        /* --- */
+
+        'Arrows/pinkieSing/Arrow-0-pinkieSing.png',
+        'Arrows/pinkieSing/Arrow-1-pinkieSing.png',
+        'Arrows/pinkieSing/Arrow-2-pinkieSing.png',
+        'Arrows/pinkieSing/Arrow-3-pinkieSing.png',
+        'Arrows/pinkieSing/Arrow-pinkieSing-hold-piece.png',
+        'Arrows/pinkieSing/Arrow-pinkieSing-hold-end.png',
 
         /* ---- */
 

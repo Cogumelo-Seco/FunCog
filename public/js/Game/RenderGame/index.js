@@ -1,10 +1,11 @@
-module.exports = function renderGame(canvas, game, Listener) {
+module.exports = async function renderGame(canvas, game, Listener) {
     game.state.fps = `${Number(game.state.fps.split('-')[0]) + 1}-${game.state.fps.split('-')[1]}`
 
     canvas.style.left = game.state.screenXMovement-(game.state.screenZoom/2)+'px'
     canvas.style.top = game.state.screenYMovement-(game.state.screenZoom/2)+'px'
     canvas.style.width = window.innerWidth+(game.state.screenZoom)+'px'
     canvas.style.height = window.innerHeight+(game.state.screenZoom)+'px'
+    canvas.style.transform = `rotate(${game.state.screenRotation}deg)`
     canvas.width = window.innerWidth+(game.state.screenZoom/2)
     canvas.height = window.innerHeight+(game.state.screenZoom/2)
     canvas.style.backgroundImage = 'none'
@@ -15,7 +16,7 @@ module.exports = function renderGame(canvas, game, Listener) {
         case 'game':
             require('./RenderScreenGame')(canvas, game, Listener)
             require('./RenderArrows')(canvas, game, Listener)
-            require('./RenderNotes')(canvas, game, Listener)
+            await require('./RenderNotes')(canvas, game, Listener)
             require('./RenderScreenInfoGame')(canvas, game, Listener)
             require('./RenderBars')(canvas, game, Listener)
             require('./RenderJumpscares')(canvas, game, Listener)

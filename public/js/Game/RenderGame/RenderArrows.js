@@ -16,10 +16,20 @@ module.exports = async (canvas, game, Listener) => {
     for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
         let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}.png`]
 
-        if (Listener.state.arrows[arrowID]?.click) {
-            let onNote = Listener.state.arrows[arrowID]?.state == 'onNote'
-            if (Listener.state.arrows[arrowID]?.state == 'onNoteKill') arrowImage = game.state.images[`Arrows/deathnotes/Arrow-${arrowID}-press-deathnote-${game.state.animations.arrows.frame}.png`]
-            else arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}-press-${onNote ? game.state.animations.arrows.frame : game.state.animations.arrows.frame%2}${onNote ? '' : '-no'}.png`]
+        let autoClickNote = game.state.musicNotes.find(n => n.autoClick && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2*2))
+        if (Listener.state.arrows[arrowID]?.click || autoClickNote) {
+            let onNote = Listener.state.arrows[arrowID]?.state == 'onNote' || autoClickNote
+
+            if (onNote || Listener.state.arrows[arrowID]?.state == 'noNote') arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}-press-${onNote ? game.state.animations.arrows.frame : game.state.animations.arrows.frame%2}${onNote ? '' : '-no'}.png`]
+            else arrowImage = game.state.images[Listener.state.arrows[arrowID].state.replace(/{{arrowID}}/g, arrowID).replace(/{{frame}}/g, game.state.animations.arrows.frame)]
+            /*if (game.state.personalizedNotes[note.type] && onNote) {
+                let { newArrowImage, newHoldImage, newHoldEndImage } = await game.state.personalizedNotes[note.type]({ arrowID: note.arrowID })
+                arrowImage = newArrowImage ? newArrowImage : arrowImage
+                holdImage = newHoldImage ? newHoldImage : holdImage
+                holdEndImage = newHoldEndImage ? newHoldEndImage : holdEndImage
+            } else arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}-press-${onNote ? game.state.animations.arrows.frame : game.state.animations.arrows.frame%2}${onNote ? '' : '-no'}.png`]*/
+            //if (Listener.state.arrows[arrowID]?.state == 'onNoteKill') arrowImage = game.state.images[`Arrows/deathnotes/Arrow-${arrowID}-press-deathnote-${game.state.animations.arrows.frame}.png`]
+            //else arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}-press-${onNote ? game.state.animations.arrows.frame : game.state.animations.arrows.frame%2}${onNote ? '' : '-no'}.png`]
         }
 
         if (arrowImage) {
@@ -40,7 +50,8 @@ module.exports = async (canvas, game, Listener) => {
 
         let note = game.state.musicOpponentNotes.find(n => !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2*2))
         if (note) {
-            if (note.type == 'hitKill' || note.type == 'fireNote') arrowImage = game.state.images[`Arrows/deathnotes/Arrow-${arrowID}-press-deathnote-${game.state.animations.arrows.frame}.png`]
+            let pressImage = game.state.personalizedNotes[note.type]?.pressImage
+            if (pressImage) arrowImage = game.state.images[pressImage.replace(/{{arrowID}}/g, arrowID).replace(/{{frame}}/g, game.state.animations.arrows.frame)]
             else arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}-press-${game.state.animations.arrows.frame}.png`]
         }
 

@@ -1,4 +1,4 @@
-module.exports = async({ name, difficulty, notesImageDir, backgroundImage }, state) => {
+module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage }, state) => {
     try {
         state.notesImageDir = notesImageDir
         state.musicNotes = []
@@ -83,35 +83,41 @@ module.exports = async({ name, difficulty, notesImageDir, backgroundImage }, sta
         name = name.toLowerCase()
         let arrowID = note[1]%4
         let type = 'normal'
-        let errorWhenClicking = false
+        let errorWhenNotClicking = true
         let disabled = false
-        let doNotFormatNotes = [ 'unhappy', 'happy', 'really-happy', 'smile' ]
-        if (doNotFormatNotes.includes(name)) arrowID = note[1]
+        let autoClick = false
+        if (note[3]) arrowID = note[1]
+        let doNotFormatNotes = [ 'SuicideMouse', 'Bob' ]
+        if (doNotFormatNotes.includes(mod)) arrowID = note[1]
 
         if (name == 'expurgation') {
             if (note[1] > 3) {
-                arrowID = note[1]%4
                 note[2] = 0
                 disabled = difficulty.name == 'Mania' ? true : false
-                errorWhenClicking = true
-                type = 'hitKill'
-            } else arrowID = note[1]%4
+                errorWhenNotClicking = false
+                type = 'hitKillNote'
+            } 
         }
         if (name == 'hellclown') {
             if (note[1] > 3) {
-                arrowID = note[1]%4
                 note[2] = 0
                 disabled = difficulty.name == 'Mania' ? true : false
-                errorWhenClicking = true
+                errorWhenNotClicking = false
                 type = 'fireNote'
-            } else arrowID = note[1]%4
+            }
         }
         if (name == 'happy' || name == 'really-happy') {
             if (note[3] && note[1] != -1) {
-                arrowID = note[1]%4
                 disabled = difficulty.name == 'Mania' ? true : false
-                errorWhenClicking = true
+                errorWhenNotClicking = false
                 type = 'hurtNote'
+            }
+        }
+        if (name == 'dusk-till-dawn') {
+            if (note[3] && note[3] != 'Pinkie Sing') {
+                autoClick = true
+                errorWhenNotClicking = false
+                type = 'pinkieSing'
             }
         }
 
@@ -122,7 +128,8 @@ module.exports = async({ name, difficulty, notesImageDir, backgroundImage }, sta
             arrowID,
             clicked: false,
             disabled,
-            errorWhenClicking,
+            errorWhenNotClicking,
+            autoClick,
             type
         }
     }

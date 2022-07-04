@@ -38,12 +38,25 @@ export default function createListener() {
             if (keyPressed == 'Digit2') state.game.startMusic({ name: 'Really-happy', difficulty: 'hard', notesImageDir: 'Arrows/' })
             if (keyPressed == 'Digit3') state.game.startMusic({ name: 'Expurgation', difficulty: 'hard', notesImageDir: 'Arrows/' })
 
+            if (keyPressed == 'KeyI' && state.game.state.music) {
+                state.game.state.music.currentTime -= 10
+                state.game.state.musicVoice.currentTime -= 10
+            }
+            if (keyPressed == 'KeyO' && state.game.state.music) {
+                if (state.game.state.music.paused) {
+                    state.game.state.music.play()
+                    state.game.state.musicVoice.play()
+                } else {
+                    state.game.state.music.pause()
+                    state.game.state.musicVoice.pause()
+                }
+            }
             if (keyPressed == 'KeyP' && state.game.state.music) {
                 state.game.state.music.currentTime += 10
                 state.game.state.musicVoice.currentTime += 10
             }
 
-            if (keyPressed == 'KeyE') state.game.state.screenZoom += 5
+            if (keyPressed == 'KeyE') state.game.state.screenRotation += 5
         }
 
         if (keyPressed == 'Enter' && state.game.state.gameStage == 'dead' && !state.game.state.musicMenu?.src.includes('gameOverEnd') && state.game.state.gameStageTime+2000 < +new Date()) {
@@ -78,7 +91,8 @@ export default function createListener() {
                             name: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].name, 
                             difficulty: state.game.state.difficulties[state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].difficulties[state.game.state.selectMusicMenu.difficultySelected]],
                             notesImageDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].notesImageDir,
-                            backgroundImage: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].backgroundImage,                            
+                            backgroundImage: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].backgroundImage,
+                            mod: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].mod
                         })
                     }, 1500)
                     break

@@ -9,6 +9,7 @@ function createGame(Listener, canvas) {
             musicSelect: 0,
             difficultySelected: 0,
         },
+        personalizedNotes: {},
         images: {},
         sounds: {},
         musics: [],
@@ -45,6 +46,7 @@ function createGame(Listener, canvas) {
         screenYMovement: 0,
         screenXMovement: 0,
         screenZoom: 0,
+        screenRotation: 0,
 
         animations: {
             ratingImage: {
@@ -71,7 +73,7 @@ function createGame(Listener, canvas) {
                 dalay: 0,
                 loop: true
             },
-            deathnotes: {
+            hitKillNote: {
                 frame: 0,
                 startFrame: 1,
                 endFrame: 6,
@@ -79,7 +81,7 @@ function createGame(Listener, canvas) {
                 dalay: 0,
                 loop: true
             },
-            firenotes: {
+            fireNote: {
                 frame: 0,
                 startFrame: 0,
                 endFrame: 11,
@@ -99,6 +101,7 @@ function createGame(Listener, canvas) {
     const addSounds = (command) => require('./GameFunctions/addSounds')(state)
     const addMusicList = (command) => require('./GameFunctions/addMusicList')(state)
     const addDifficulties = (command) => require('./GameFunctions/addDifficulties')(state)
+    const addPersonalizedNotes = (command) => require('./GameFunctions/addPersonalizedNotes')(state)
 
     const playSong = (type, command) => require('./GameFunctions/playSong')(type, command, state)
     const calculateRating = (command) => require('./GameFunctions/calculateRating')(command, state)
@@ -145,7 +148,7 @@ function createGame(Listener, canvas) {
 
             for (let i in state.musicNotes) {
                 state.musicNotes[i].Y = -((state.musicNotes[i].time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM))
-                if (!state.musicNotes[i].errorWhenClicking && state.musicNotes[i].arrowID >= 0 && state.musicNotes[i].arrowID <= state.amountOfArrows && state.musicNotes[i].Y > 200 && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
+                if (state.musicNotes[i].errorWhenNotClicking && state.musicNotes[i].arrowID >= 0 && state.musicNotes[i].arrowID <= state.amountOfArrows && state.musicNotes[i].Y > 200 && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
                     state.musicNotes[i].disabled = true
                     state.musicInfo.misses += 1
                     state.musicInfo.score -= 50
@@ -186,6 +189,7 @@ function createGame(Listener, canvas) {
         state.loading.total += await addSounds()
         addMusicList()
         addDifficulties()
+        addPersonalizedNotes()
 
         /*state.loading.total = 50
         let interval = setInterval(() => {
