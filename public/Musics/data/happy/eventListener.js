@@ -53,7 +53,12 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, s
                 }
 
                 oldCurrentTime = currentTime
-                if (state.music?.duration <= state.music?.currentTime) clearInterval(loop)
+                if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
+                    clearInterval(loop)
+                    state.screenXMovement = 0
+                    state.screenYMovement = 0
+                    state.screenZoom = 0
+                }
             }, 1000/50)
             break
     }

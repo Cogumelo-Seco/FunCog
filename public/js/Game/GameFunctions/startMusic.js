@@ -87,7 +87,7 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage }
         let disabled = false
         let autoClick = false
         if (note[3]) arrowID = note[1]
-        let doNotFormatNotes = [ 'SuicideMouse', 'Bob' ]
+        let doNotFormatNotes = [ 'SuicideMouse', 'Bob', 'DuskTillDawn' ]
         if (doNotFormatNotes.includes(mod)) arrowID = note[1]
 
         if (name == 'expurgation') {

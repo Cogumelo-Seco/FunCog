@@ -22,9 +22,9 @@ module.exports = async (canvas, game, Listener) => {
                 let newArrowImage = game.state.personalizedNotes[note.type].newArrowImage
                 let newHoldImage = game.state.personalizedNotes[note.type].newHoldImage
                 let newHoldEndImage = game.state.personalizedNotes[note.type].newHoldEndImage
-                arrowImage = newArrowImage ? game.state.images[newArrowImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type].frame)] : arrowImage
-                holdImage = newHoldImage ? game.state.images[newHoldImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type].frame)] : holdImage
-                holdEndImage = newHoldEndImage ? game.state.images[newHoldEndImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type].frame)] : holdEndImage
+                arrowImage = newArrowImage ? game.state.images[newArrowImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type]?.frame)] : arrowImage
+                holdImage = newHoldImage ? game.state.images[newHoldImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type]?.frame)] : holdImage
+                holdEndImage = newHoldEndImage ? game.state.images[newHoldEndImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type]?.frame)] : holdEndImage
             }
 
             if (note.hold && arrowImage && holdImage && holdEndImage) {
@@ -87,28 +87,10 @@ module.exports = async (canvas, game, Listener) => {
                 let newArrowImage = game.state.personalizedNotes[note.type].newArrowImage
                 let newHoldImage = game.state.personalizedNotes[note.type].newHoldImage
                 let newHoldEndImage = game.state.personalizedNotes[note.type].newHoldEndImage
-                arrowImage = newArrowImage ? game.state.images[newArrowImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type].frame)] : arrowImage
-                holdImage = newHoldImage ? game.state.images[newHoldImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type].frame)] : holdImage
-                holdEndImage = newHoldEndImage ? game.state.images[newHoldEndImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type].frame)] : holdEndImage
+                arrowImage = newArrowImage ? game.state.images[newArrowImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type]?.frame)] : arrowImage
+                holdImage = newHoldImage ? game.state.images[newHoldImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type]?.frame)] : holdImage
+                holdEndImage = newHoldEndImage ? game.state.images[newHoldEndImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type]?.frame)] : holdEndImage
             }
-            /*if (game.state.personalizedNotes[note.type]) {
-                let { newArrowImage, newHoldImage, newHoldEndImage } = await game.state.personalizedNotes[note.type]({ arrowID: note.arrowID })
-                arrowImage = newArrowImage ? newArrowImage : arrowImage
-                holdImage = newHoldImage ? newHoldImage : holdImage
-                holdEndImage = newHoldEndImage ? newHoldEndImage : holdEndImage
-            }
-            /*if (note.type == 'hitKill') arrowImage = game.state.images[`Arrows/deathnotes/Arrow-${note.arrowID}-deathnote-${game.state.animations.deathnotes.frame}.png`]
-            if (note.type == 'fireNote') arrowImage = game.state.images[`Arrows/firenotes/Arrow-${note.arrowID}-firenote-${game.state.animations.firenotes.frame}.png`]
-            if (note.type == 'hurtNote') {
-                arrowImage = game.state.images[`Arrows/hurtnotes/Arrow-${note.arrowID}-hurtnote.png`]
-                holdImage = game.state.images[`Arrows/hurtnotes/Arrow-hurtnote-hold-piece.png`]
-                holdEndImage = game.state.images[`Arrows/hurtnotes/Arrow-hurtnote-hold-end.png`]
-            }
-            if (note.type == 'pinkieSing') {
-                arrowImage = game.state.images[`Arrows/pinkieSing/Arrow-${note.arrowID}-pinkieSing.png`]
-                holdImage = game.state.images[`Arrows/pinkieSing/Arrow-pinkieSing-hold-piece.png`]
-                holdEndImage = game.state.images[`Arrows/pinkieSing/Arrow-pinkieSing-hold-end.png`]
-            }*/
             ctx.globalAlpha = note.disabled ? 0.2 : 1
 
             if (note.hold && arrowImage && holdImage && holdEndImage) {

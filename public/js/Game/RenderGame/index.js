@@ -1,4 +1,4 @@
-module.exports = async function renderGame(canvas, game, Listener) {
+module.exports = function renderGame(canvas, game, Listener) {
     game.state.fps = `${Number(game.state.fps.split('-')[0]) + 1}-${game.state.fps.split('-')[1]}`
 
     canvas.style.left = game.state.screenXMovement-(game.state.screenZoom/2)+'px'
@@ -16,7 +16,7 @@ module.exports = async function renderGame(canvas, game, Listener) {
         case 'game':
             require('./RenderScreenGame')(canvas, game, Listener)
             require('./RenderArrows')(canvas, game, Listener)
-            await require('./RenderNotes')(canvas, game, Listener)
+            require('./RenderNotes')(canvas, game, Listener)
             require('./RenderScreenInfoGame')(canvas, game, Listener)
             require('./RenderBars')(canvas, game, Listener)
             require('./RenderJumpscares')(canvas, game, Listener)
