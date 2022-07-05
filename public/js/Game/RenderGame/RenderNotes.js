@@ -59,7 +59,21 @@ module.exports = async (canvas, game, Listener) => {
 
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage) {
                 ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : 1
-                ctx.drawImage(arrowImage, game.state.positionArrow[note.arrowID]-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2), noteY-((arrowImage.height**resizeNote-arrowsSize**resizeNote)/2), arrowImage.width**resizeNote, arrowImage.height**resizeNote)
+
+                ctx.save()
+
+                let arrowWidth = arrowImage.width**resizeNote
+                let arrowHeight = arrowImage.height**resizeNote
+                let currentArrowX = game.state.positionArrow[note.arrowID]-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2)+game.state.arrowsXLineMovement
+                let currentArrowY = noteY-((arrowImage.height**resizeNote-arrowsSize**resizeNote)/2)+game.state.arrowsYLineMovement
+
+                ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
+                ctx.rotate((game.state.arrowsRotation[note.arrowID] || 0)*Math.PI/180);
+                
+                ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+
+                ctx.restore()
+                //ctx.drawImage(arrowImage, game.state.positionArrow[note.arrowID]-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2), noteY-((arrowImage.height**resizeNote-arrowsSize**resizeNote)/2), arrowImage.width**resizeNote, arrowImage.height**resizeNote)
             }
 
             ctx.globalAlpha = 1
@@ -122,8 +136,22 @@ module.exports = async (canvas, game, Listener) => {
                 }
             }
 
-            if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage)
-                ctx.drawImage(arrowImage, game.state.positionArrowOpponent[note.arrowID]-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2), noteY, arrowImage.width**resizeNoteOpponent, arrowImage.height**resizeNoteOpponent)
+            if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage) {
+                ctx.save()
+
+                let arrowWidth = arrowImage.width**resizeNoteOpponent
+                let arrowHeight = arrowImage.height**resizeNoteOpponent
+                let currentArrowX = game.state.positionArrowOpponent[note.arrowID]-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)+game.state.arrowsXLineMovementOpponent
+                let currentArrowY = noteY-((arrowImage.height**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)+game.state.arrowsYLineMovementOpponent
+
+                ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
+                ctx.rotate((game.state.arrowsRotationOpponent[note.arrowID] || 0)*Math.PI/180);
+                
+                ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+
+                ctx.restore()
+                //ctx.drawImage(arrowImage, game.state.positionArrowOpponent[note.arrowID]-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2), noteY, arrowImage.width**resizeNoteOpponent, arrowImage.height**resizeNoteOpponent)
+            }
 
             ctx.globalAlpha = 1
         }

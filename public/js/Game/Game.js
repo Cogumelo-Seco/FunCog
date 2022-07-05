@@ -30,6 +30,7 @@ function createGame(Listener, canvas) {
         musicNotes: [],
         musicOpponentNotes: [],
         musicBPM: 1,
+        musicBeat: 0,
         music: null,
         musicVoice: null,
         musicEventListener: null,
@@ -43,12 +44,41 @@ function createGame(Listener, canvas) {
         arrowsXLineMovement: 0,
         arrowsYLineMovementOpponent: 0,
         arrowsXLineMovementOpponent: 0,
+        arrowsAlpha: 1,
+        arrowsAlphaOpponent: 1,
         screenYMovement: 0,
         screenXMovement: 0,
         screenZoom: 0,
+        screenZooming: false,
         screenRotation: 0,
+        arrowsRotation: {},
+        arrowsRotationOpponent: {},
 
         animations: {
+            expurgationSing1: {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 47,
+                totalDalay: 20,
+                dalay: 0,
+                loop: true
+            },
+            expurgationSing3: {
+                frame: 0,
+                startFrame: 1,
+                endFrame: 20,
+                totalDalay: 40,
+                dalay: 0,
+                loop: true
+            },
+            expurgationSing4: {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 61,
+                totalDalay: 20,
+                dalay: 0,
+                loop: true
+            },
             ratingImage: {
                 frame: 0,
                 startFrame: 0,
@@ -107,6 +137,7 @@ function createGame(Listener, canvas) {
     const calculateRating = (command) => require('./GameFunctions/calculateRating')(command, state)
     state.calculateRating = calculateRating
     state.playSong = playSong
+    state.canvas = canvas
 
     const startMusic = (command) => require('./GameFunctions/startMusic')(command, state)
     const verifyClick = (command) => require('./GameFunctions/verifyClick')(command, state)
@@ -117,6 +148,9 @@ function createGame(Listener, canvas) {
         }
 
         let interval = setInterval(() => {
+            state.musicBeat = Number.parseInt((state.musicBPM/60)*state.music?.currentTime)
+            state.musicStep = Number.parseInt(state.music?.currentTime*1000/60)
+
             if (state.arrowsSize) state.arrowsYLine = state.downScroll ? canvas.height-state.arrowsYLineMargin-state.arrowsSize**state.resizeNote : state.arrowsYLineMargin
             state.arrowsYLineOpponent = state.middleScroll ? state.downScroll ? canvas.height*0.60 : canvas.height*0.40 : state.arrowsYLine
             state.resizeNoteOpponent = state.middleScroll ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote

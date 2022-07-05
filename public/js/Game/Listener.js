@@ -20,17 +20,21 @@ export default function createListener() {
         let keyPressed = event.code
         state.keys[keyPressed] = on
 
-        for (let arrowID = 0;arrowID <= state.game.state.amountOfArrows;arrowID++) {
-            if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote',  click: false }
+        if (state.game.state.gameStage == 'game') {
+            for (let arrowID = 0;arrowID <= state.game.state.amountOfArrows;arrowID++) {
+                if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote',  click: false }
 
-            if (
-                state.keyBindings[arrowID](keyPressed) && on && !state.arrows[arrowID].click || 
-                state.keyBindings[arrowID](keyPressed) && !on && state.arrows[arrowID].click
-            ) {
-                if (on) state.game.verifyClick({ arrowID, listenerState: state })
-                else state.arrows[arrowID].state = 'noNote'
-                state.arrows[arrowID].click = on
+                if (
+                    state.keyBindings[arrowID](keyPressed) && on && !state.arrows[arrowID].click || 
+                    state.keyBindings[arrowID](keyPressed) && !on && state.arrows[arrowID].click
+                ) {
+                    if (on) state.game.verifyClick({ arrowID, listenerState: state })
+                    else state.arrows[arrowID].state = 'noNote'
+                    state.arrows[arrowID].click = on
+                }
             }
+
+            if (keyPressed == 'KeyR' && on) state.game.state.musicInfo.health = -100
         }
         
         if (state.game.state.debug && on) {

@@ -1,10 +1,25 @@
 module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage }, state) => {
     try {
-        state.notesImageDir = notesImageDir
+        state.positionArrow = {},
+        state.positionArrowOpponent = {},
+        state.arrowsYLineMovement = 0,
+        state.arrowsXLineMovement = 0,
+        state.arrowsYLineMovementOpponent = 0,
+        state.arrowsXLineMovementOpponent = 0,
+        state.arrowsAlpha = 1,
+        state.arrowsAlphaOpponent = 1,
+        state.screenYMovement = 0,
+        state.screenXMovement = 0,
+        state.screenZoom = 0,
+        state.screenZooming = false,
+        state.screenRotation = 0,
+        state.arrowsRotation = {},
+        state.arrowsRotationOpponent = {},
         state.musicNotes = []
         state.musicOpponentNotes = []
         state.countdown = 4
         state.musicEventListener = () => null
+        state.notesImageDir = notesImageDir
         state.musicInfo = {
             name,
             backgroundImage,
@@ -17,11 +32,13 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage }
             accuracyMedia: [],
             rating: {},
             health: 50,
+            popups: [],
+            lastPopupTime: 0
         }
 
         let musicData = require(`../../../Musics/data/${name.toLowerCase()}/${name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)
-        let musicBPMs = musicData.song.notes.filter(i => i.mustHitSection).map(i => i.sectionNotes)//.filter(i => i[0])
-        let musicOpponentBPMs = musicData.song.notes.filter(i => !i.mustHitSection).map(i => i.sectionNotes)//.filter(i => i[0])
+        let musicBPMs = musicData.song.notes.filter(i => i.mustHitSection).map(i => i.sectionNotes)
+        let musicOpponentBPMs = musicData.song.notes.filter(i => !i.mustHitSection).map(i => i.sectionNotes)
     
         state.musicBPM = musicData.song.bpm
 
@@ -72,7 +89,7 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage }
 
                 if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
 
-                state.musicEventListener('started', {}, state)
+                state.musicEventListener('started', { difficulty }, state)
             } else state.playSong(`Sounds/intro${state.countdown}.ogg`)
         }, 900-(musicData.song.bpm*2));
     } catch (err) {
@@ -81,33 +98,36 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage }
 
     async function getNoteinfo(note, difficulty, musicData) {
         name = name.toLowerCase()
-        let arrowID = note[1]%4
+        let arrowID = note[1]//%4
         let type = 'normal'
         let errorWhenNotClicking = true
         let disabled = false
         let autoClick = false
-        if (note[3]) arrowID = note[1]
-        let doNotFormatNotes = [ 'SuicideMouse', 'Bob', 'DuskTillDawn' ]
-        if (doNotFormatNotes.includes(mod)) arrowID = note[1]
+        //if (note[3]) arrowID = note[1]
+        //let doNotFormatNotes = [ 'SuicideMouse', 'Bob', 'DuskTillDawn' ]
+        //if (doNotFormatNotes.includes(mod)) arrowID = note[1]
 
         if (name == 'expurgation') {
             if (note[1] > 3) {
                 note[2] = 0
+                arrowID = note[1]%4
                 disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'hitKillNote'
             } 
         }
-        if (name == 'hellclown') {
+        if (name == 'hellclown' || name == 'madness') {
             if (note[1] > 3) {
                 note[2] = 0
+                arrowID = note[1]%4
                 disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'fireNote'
             }
         }
-        if (name == 'happy' || name == 'really-happy') {
+        if (mod == 'SuicideMouse') {
             if (note[3] && note[1] != -1) {
+                arrowID = note[1]%4
                 disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'hurtNote'
@@ -116,10 +136,12 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage }
         if (name == 'dusk-till-dawn') {
             if (note[3] && note[3] != 'Pinkie Sing') {
                 autoClick = true
+                arrowID = note[1]%4
                 errorWhenNotClicking = false
                 type = 'pinkieSing'
-            }
+            } else arrowID = note[1]%4
         }
+        //if (mod == 'Bob') arrowID = note[1]%4
 
         return {
             Y: NaN,

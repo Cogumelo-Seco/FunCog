@@ -33,8 +33,23 @@ module.exports = async (canvas, game, Listener) => {
         }
 
         if (arrowImage) {
-            ctx.drawImage(arrowImage, arrowX-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2)+game.state.arrowsXLineMovement, arrowY-((arrowImage.height**resizeNote-arrowsSize**resizeNote)/2)+game.state.arrowsYLineMovement, arrowImage.width**resizeNote, arrowImage.height**resizeNote)
+            ctx.globalAlpha = game.state.arrowsAlpha
+
+            ctx.save()
+
+            let arrowWidth = arrowImage.width**resizeNote
+            let arrowHeight = arrowImage.height**resizeNote
+            let currentArrowX = arrowX-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2)+game.state.arrowsXLineMovement
+            let currentArrowY = arrowY-((arrowImage.height**resizeNote-arrowsSize**resizeNote)/2)+game.state.arrowsYLineMovement
+
+            ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
+            ctx.rotate((game.state.arrowsRotation[arrowID] || 0)*Math.PI/180);
+            
+            ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+
+            ctx.restore()
             if (!arrowImage.id.includes('press')) game.state.positionArrow[arrowID] = arrowX+game.state.arrowsXLineMovement
+            ctx.globalAlpha = 1
         }
 
         arrowX += arrowsSize**resizeNote+spaceBetweenArrows
@@ -56,8 +71,28 @@ module.exports = async (canvas, game, Listener) => {
         }
 
         if (arrowImage) {
+            ctx.globalAlpha = game.state.arrowsAlphaOpponent
+
+            ctx.save()
+
+            let arrowWidth = arrowImage.width**resizeNoteOpponent
+            let arrowHeight = arrowImage.height**resizeNoteOpponent
+            let currentArrowX = arrowXOpponent-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)+game.state.arrowsXLineMovementOpponent
+            let currentArrowY = arrowYOpponent-((arrowImage.height**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)+game.state.arrowsYLineMovementOpponent
+
+            ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
+            ctx.rotate((game.state.arrowsRotationOpponent[arrowID] || 0)*Math.PI/180);
+            
+            ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+
+            ctx.restore()
+            if (!arrowImage.id.includes('press')) game.state.positionArrowOpponent[arrowID] = arrowXOpponent+game.state.arrowsXLineMovementOpponent
+            ctx.globalAlpha = 1
+
+            /*ctx.globalAlpha = game.state.arrowsAlphaOpponent
             ctx.drawImage(arrowImage, arrowXOpponent-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)+game.state.arrowsXLineMovementOpponent, arrowYOpponent-((arrowImage.height**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)+game.state.arrowsYLineMovementOpponent, arrowImage.width**resizeNoteOpponent, arrowImage.height**resizeNoteOpponent)
             if (!arrowImage.id.includes('press')) game.state.positionArrowOpponent[arrowID] = arrowXOpponent+game.state.arrowsXLineMovementOpponent
+            ctx.globalAlpha = 1*/
         }
 
         arrowXOpponent += arrowsSize**resizeNoteOpponent+spaceBetweenArrows

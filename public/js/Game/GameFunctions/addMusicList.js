@@ -33,6 +33,7 @@ module.exports = async (state) => {
             menuColor: 'green',
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/trick.png',
             mod: 'VSTricky'
         },
         {
@@ -40,6 +41,7 @@ module.exports = async (state) => {
             menuColor: 'green',
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/trick.png',
             mod: 'VSTricky'
         },
         {
@@ -47,6 +49,7 @@ module.exports = async (state) => {
             menuColor: 'green',
             difficulties: [ 0, 1, 2, 3 ],
             notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/hellclown.png',
             mod: 'VSTricky'
         },
         {
@@ -62,6 +65,7 @@ module.exports = async (state) => {
             menuColor: 'rgb(255, 43, 234)',
             difficulties: [ 0, 1, 2, 4 ],
             notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/mid-fight-masses.png',
             mod: 'MidFightMasses'
         },
         {
@@ -69,6 +73,7 @@ module.exports = async (state) => {
             menuColor: 'rgb(255, 43, 234)',
             difficulties: [ 0, 1, 2, 4 ],
             notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/mid-fight-masses.png',
             mod: 'MidFightMasses'
         },
         {
@@ -76,6 +81,7 @@ module.exports = async (state) => {
             menuColor: 'rgb(255, 43, 234)',
             difficulties: [ 0, 1, 2, 4 ],
             notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/mid-fight-masses.png',
             mod: 'MidFightMasses'
         },
         {
@@ -83,6 +89,7 @@ module.exports = async (state) => {
             menuColor: 'grey',
             difficulties: [ 0, 1, 2, 4 ],
             notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/mid-fight-masses.png',
             mod: 'MidFightMasses'
         },
         {
@@ -90,6 +97,7 @@ module.exports = async (state) => {
             menuColor: 'rgb(255, 43, 234)',
             difficulties: [ 0, 1, 2, 4 ],
             notesImageDir: 'Arrows/sarvente/',
+            backgroundImage: 'backgrounds/mid-fight-masses.png',
             mod: 'MidFightMasses'
         },
         {
@@ -97,6 +105,7 @@ module.exports = async (state) => {
             menuColor: 'rgb(255, 43, 234)',
             difficulties: [ 0, 1, 2, 4 ],
             notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/mid-fight-masses.png',
             mod: 'MidFightMasses'
         },
         {
@@ -104,6 +113,7 @@ module.exports = async (state) => {
             menuColor: 'rgb(50, 50, 50)',
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/suicidemouse/',
+            backgroundImage: 'backgrounds/suicidemouse.png',
             mod: 'SuicideMouse'
         },
         {
@@ -111,6 +121,7 @@ module.exports = async (state) => {
             menuColor: 'rgb(50, 50, 50)',
             difficulties: [ 0, 1, 2, 3 ],
             notesImageDir: 'Arrows/suicidemouse/',
+            backgroundImage: 'backgrounds/suicidemouse.png',
             mod: 'SuicideMouse'
         },
         {
@@ -118,6 +129,7 @@ module.exports = async (state) => {
             menuColor: 'rgb(50, 50, 50)',
             difficulties: [ 0, 1, 2, 3 ],
             notesImageDir: 'Arrows/suicidemouse/',
+            backgroundImage: 'backgrounds/suicidemouse.png',
             mod: 'SuicideMouse'
         },
         {
@@ -125,6 +137,7 @@ module.exports = async (state) => {
             menuColor: 'rgb(50, 50, 50)',
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/suicidemouse/',
+            backgroundImage: 'backgrounds/suicidemouse.png',
             mod: 'SuicideMouse'
         },
         {
@@ -132,48 +145,15 @@ module.exports = async (state) => {
             menuColor: 'rgb(196, 0, 244)',
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/dusk-till-dawn/',
+            backgroundImage: 'backgrounds/dusk-till-dawn.png',
             mod: 'DuskTillDawn'
-        },
-        {
-            name: 'Little-man',
-            menuColor: null,
-            difficulties: [ 0, 1, 2 ],
-            notesImageDir: 'Arrows/',
-            mod: 'Bob'
-        },
-        {
-            name: 'Onslaught',
-            menuColor: null,
-            difficulties: [ 0, 1, 2 ],
-            notesImageDir: 'Arrows/',
-            mod: 'Bob'
-        },
-        {
-            name: 'Ron',
-            menuColor: null,
-            difficulties: [ 0, 1, 2 ],
-            notesImageDir: 'Arrows/',
-            mod: 'Bob'
-        },
-        {
-            name: 'Run',
-            menuColor: null,
-            difficulties: [ 0, 1, 2 ],
-            notesImageDir: 'Arrows/',
-            mod: 'Bob'
         },
         {
             name: 'Sunshine',
             menuColor: null,
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
-            mod: 'Bob'
-        },
-        {
-            name: 'Trouble',
-            menuColor: null,
-            difficulties: [ 0, 1, 2 ],
-            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/bob.png',
             mod: 'Bob'
         },
         {
@@ -181,6 +161,47 @@ module.exports = async (state) => {
             menuColor: null,
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/bob.png',
+            mod: 'Bob'
+        },
+        {
+            name: 'Run',
+            menuColor: null,
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/bob.png',
+            mod: 'Bob'
+        },
+        {
+            name: 'Ron',
+            menuColor: null,
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/bob.png',
+            mod: 'Bob'
+        },
+        {
+            name: 'Trouble',
+            menuColor: null,
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/bob.png',
+            mod: 'Bob'
+        },
+        {
+            name: 'Onslaught',
+            menuColor: null,
+            difficulties: [ 0, 1, 2, 3 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/bob.png',
+            mod: 'Bob'
+        },
+        {
+            name: 'Little-man',
+            menuColor: null,
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/bob.png',
             mod: 'Bob'
         },
     ]
