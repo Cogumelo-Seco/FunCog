@@ -13,6 +13,9 @@ module.exports = async (state) => {
         'Sounds/Meow.ogg',
         'Sounds/woeM.ogg',
         'Sounds/pop_up.ogg',
+        'Sounds/alert.ogg',
+        'Sounds/alertDouble.ogg',
+        'Sounds/attack.ogg',
 
         'Musics/musics/tutorial/Inst.ogg',
 
@@ -89,6 +92,24 @@ module.exports = async (state) => {
 
         'Musics/musics/withered/Inst.ogg',
         'Musics/musics/withered/Voices.ogg',
+
+        'Musics/musics/carefree/Inst.ogg',
+        'Musics/musics/carefree/Voices.ogg',
+
+        'Musics/musics/careless/Inst.ogg',
+        'Musics/musics/careless/Voices.ogg',
+
+        'Musics/musics/censory-overload/Inst.ogg',
+        'Musics/musics/censory-overload/Voices.ogg',
+
+        'Musics/musics/cessation/Inst.ogg',
+        'Musics/musics/cessation/Voices.ogg',
+
+        'Musics/musics/interlope/Inst.ogg',
+        'Musics/musics/interlope/Voices.ogg',
+
+        'Musics/musics/termination/Inst.ogg',
+        'Musics/musics/termination/Voices.ogg',
     ]
 
     return state.sounds.length

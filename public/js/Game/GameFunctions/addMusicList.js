@@ -204,6 +204,54 @@ module.exports = async (state) => {
             backgroundImage: 'backgrounds/bob.png',
             mod: 'Bob'
         },
+        {
+            name: 'Carefree',
+            menuColor: 'rgb(251, 150, 183)',
+            difficulties: [ 0, 1, 2, 5 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/qt.png',
+            mod: 'QT'
+        },
+        {
+            name: 'Careless',
+            menuColor: 'rgb(251, 150, 183)',
+            difficulties: [ 0, 1, 2, 5 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/qt.png',
+            mod: 'QT'
+        },
+        {
+            name: 'Censory-overload',
+            menuColor: 'rgb(251, 150, 183)',
+            difficulties: [ 0, 1, 2, 5 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/qt.png',
+            mod: 'QT'
+        },
+        {
+            name: 'Termination',
+            menuColor: 'rgb(251, 150, 183)',
+            difficulties: [ 1, 2, 3 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/qt.png',
+            mod: 'QT'
+        },
+        {
+            name: 'Cessation',
+            menuColor: 'rgb(251, 150, 183)',
+            difficulties: [ 1 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/qt.png',
+            mod: 'QT'
+        },
+        {
+            name: 'Interlope',
+            menuColor: 'rgb(251, 150, 183)',
+            difficulties: [ 1 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/qt.png',
+            mod: 'QT'
+        },
     ]
     
     return state.musics.length

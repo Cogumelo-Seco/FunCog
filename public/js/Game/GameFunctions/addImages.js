@@ -465,6 +465,20 @@ module.exports = async (state) => {
         'expurgation-sings/Signature-Stop Sign-4-59.png',
         'expurgation-sings/Signature-Stop Sign-4-60.png',
         'expurgation-sings/Signature-Stop Sign-4-61.png',
+
+        /* ---- */
+
+        'QTAlerts/alert-0.png',
+        'QTAlerts/alert-1.png',
+        'QTAlerts/alert-2.png',
+        'QTAlerts/alert-3.png',
+        'QTAlerts/alert-4.png',
+
+        'QTAlerts/alert-double-0.png',
+        'QTAlerts/alert-double-1.png',
+        'QTAlerts/alert-double-2.png',
+        'QTAlerts/alert-double-3.png',
+        'QTAlerts/alert-double-4.png',
     ]
     
     return state.images.length

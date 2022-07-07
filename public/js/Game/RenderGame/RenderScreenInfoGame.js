@@ -4,7 +4,7 @@ module.exports = async (canvas, game, Listener) => {
     ctx.fillStyle = 'rgb(200, 200, 200)'
     ctx.font = `bold 15px Arial`
 
-    let musicInfoTxt = `SCORE: ${game.state.musicInfo.score} | MISSES: ${game.state.musicInfo.misses} | COMBO: ${game.state.musicInfo.combo} | ACCURANCY: ${game.state.musicInfo.accuracy?.toFixed(2)}%`
+    let musicInfoTxt = `SCORE: ${game.state.musicInfo.score} | MISSES: ${game.state.musicInfo.misses} | COMBO: ${game.state.musicInfo.combo} ${game.state.musicInfo.misses <= 0 ? '(FC)' : ''} | ACCURANCY: ${game.state.musicInfo.accuracy?.toFixed(2)}%`
 
     ctx.fillText(musicInfoTxt, canvas.width/2-(ctx.measureText(musicInfoTxt).width/2), canvas.height-20);
 
@@ -27,7 +27,7 @@ module.exports = async (canvas, game, Listener) => {
         let ratingImageWidth = ratingImage.width*0.25
         let ratingImageHeight = ratingImage.height*0.25
         let ratingImageY = (game.state.arrowsYLine+(game.state.arrowsSize**game.state.resizeNote/2)-(ratingImage.height*0.3/2))-50*((game.state.animations.ratingImage.frame/20))
-        let ratingImageX = Object.values(game.state.positionArrow)[0]-ratingImageWidth-game.state.spaceBetweenArrows
+        let ratingImageX = game.state.arrowsInfo[0]?.defaultX-ratingImageWidth-game.state.spaceBetweenArrows
 
         ctx.drawImage(ratingImage, ratingImageX, ratingImageY, ratingImageWidth, ratingImageHeight);
 

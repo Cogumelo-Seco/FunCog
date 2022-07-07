@@ -18,22 +18,26 @@ export default function createListener() {
     
     function handleKeys({ event, on }) {
         let keyPressed = event.code
-        state.keys[keyPressed] = on
+        console.log(keyPressed)
+        state.keys[keyPressed] = {
+            clicked: on,
+            time: +new Date()
+        }
+
+        for (let arrowID = 0;arrowID <= state.game.state.amountOfArrows;arrowID++) {
+            if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote',  click: false }
+
+            if (
+                state.keyBindings[arrowID](keyPressed) && on && !state.arrows[arrowID].click || 
+                state.keyBindings[arrowID](keyPressed) && !on && state.arrows[arrowID].click
+            ) {
+                if (on) state.game.verifyClick({ arrowID, listenerState: state })
+                else state.arrows[arrowID].state = 'noNote'
+                state.arrows[arrowID].click = on
+            }
+        }
 
         if (state.game.state.gameStage == 'game') {
-            for (let arrowID = 0;arrowID <= state.game.state.amountOfArrows;arrowID++) {
-                if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote',  click: false }
-
-                if (
-                    state.keyBindings[arrowID](keyPressed) && on && !state.arrows[arrowID].click || 
-                    state.keyBindings[arrowID](keyPressed) && !on && state.arrows[arrowID].click
-                ) {
-                    if (on) state.game.verifyClick({ arrowID, listenerState: state })
-                    else state.arrows[arrowID].state = 'noNote'
-                    state.arrows[arrowID].click = on
-                }
-            }
-
             if (keyPressed == 'KeyR' && on) state.game.state.musicInfo.health = -100
         }
         
@@ -96,7 +100,8 @@ export default function createListener() {
                             difficulty: state.game.state.difficulties[state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].difficulties[state.game.state.selectMusicMenu.difficultySelected]],
                             notesImageDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].notesImageDir,
                             backgroundImage: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].backgroundImage,
-                            mod: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].mod
+                            mod: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].mod,
+                            listenerState: state
                         })
                     }, 1500)
                     break

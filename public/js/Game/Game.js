@@ -1,7 +1,7 @@
 function createGame(Listener, canvas) {
     const state = {
         fps: '0-0',
-        debug: false,
+        debug: true,
         gameStage: 'loading',
         gameStageTime: 0,
         musicMenu: null,
@@ -37,24 +37,25 @@ function createGame(Listener, canvas) {
         notesImageDir: null,
         musicInfo: {},
         countdown: 4,
-        positionArrow: {},
-        positionArrowOpponent: {},
 
-        arrowsYLineMovement: 0,
-        arrowsXLineMovement: 0,
-        arrowsYLineMovementOpponent: 0,
-        arrowsXLineMovementOpponent: 0,
-        arrowsAlpha: 1,
-        arrowsAlphaOpponent: 1,
+        arrowsInfo: {},
+        arrowsInfoOpponent: {},
+
         screenYMovement: 0,
         screenXMovement: 0,
         screenZoom: 0,
         screenZooming: false,
         screenRotation: 0,
-        arrowsRotation: {},
-        arrowsRotationOpponent: {},
 
         animations: {
+            QTAlerts: {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 5,
+                totalDalay: 50,
+                dalay: 0,
+                loop: false
+            },
             expurgationSing1: {
                 frame: 0,
                 startFrame: 0,
@@ -145,15 +146,61 @@ function createGame(Listener, canvas) {
     async function start(command) {
         for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {
             if (!state.opponentArrows[arrowID]) state.opponentArrows[arrowID] = { click: false }
+            if (!state.arrowsInfoOpponent[arrowID]) state.arrowsInfoOpponent[arrowID] = { 
+                X: null,
+                Y: null,
+                defaultX: null,
+                defaultY: null,
+                resetX: true,
+                resetY: true,
+                resetEnable: true,
+                alpha: 1,
+                noteAlpha: 1,
+                rotation: 0
+            }
+        }
+
+        for (let arrowID = 0;arrowID <= state.amountOfArrows;arrowID++) {
+            if (!state.arrowsInfo[arrowID]) state.arrowsInfo[arrowID] = { 
+                X: null,
+                Y: null,
+                defaultX: null,
+                defaultY: null,
+                resetX: true,
+                resetY: true,
+                resetEnable: true,
+                alpha: 1,
+                noteAlpha: 1,
+                rotation: 0
+            }
         }
 
         let interval = setInterval(() => {
             state.musicBeat = Number.parseInt((state.musicBPM/60)*state.music?.currentTime)
             state.musicStep = Number.parseInt(state.music?.currentTime*1000/60)
 
-            if (state.arrowsSize) state.arrowsYLine = state.downScroll ? canvas.height-state.arrowsYLineMargin-state.arrowsSize**state.resizeNote : state.arrowsYLineMargin
+            let lastResizeNoteOpponent = state.resizeNoteOpponent
+            let lastArrowsYLineOpponent = state.arrowsYLineOpponent
+            let lastArrowsYLine = state.arrowsYLine
+
+            state.arrowsYLine = state.downScroll ? canvas.height-state.arrowsYLineMargin-state.arrowsSize**state.resizeNote : state.arrowsYLineMargin
             state.arrowsYLineOpponent = state.middleScroll ? state.downScroll ? canvas.height*0.60 : canvas.height*0.40 : state.arrowsYLine
             state.resizeNoteOpponent = state.middleScroll ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
+
+            if (state.arrowsYLineOpponent != lastArrowsYLineOpponent || state.arrowsYLine != lastArrowsYLine || state.resizeNoteOpponent != lastResizeNoteOpponent) {
+                for (let i in state.arrowsInfo) {
+                    if (state.arrowsInfo[i].resetEnable) {
+                        state.arrowsInfo[i].resetX = true
+                        state.arrowsInfo[i].resetY = true
+                    }
+                }
+                for (let i in state.arrowsInfoOpponent) {
+                    if (state.arrowsInfoOpponent[i].resetEnable) {
+                        state.arrowsInfoOpponent[i].resetX = true
+                        state.arrowsInfoOpponent[i].resetY = true
+                    }
+                }
+            }
 
             if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.debug && state.music?.currentTime > 3) {
                 state.music?.pause()

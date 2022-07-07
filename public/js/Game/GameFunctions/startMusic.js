@@ -1,4 +1,4 @@
-module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage }, state) => {
+module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, listenerState }, state) => {
     try {
         state.positionArrow = {},
         state.positionArrowOpponent = {},
@@ -23,6 +23,7 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage }
         state.musicInfo = {
             name,
             backgroundImage,
+            defaultBackgroundImage: backgroundImage,
             difficulty: difficulty.name,
             hitNote: 0,
             misses: 0,
@@ -89,7 +90,7 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage }
 
                 if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
 
-                state.musicEventListener('started', { difficulty }, state)
+                state.musicEventListener('started', { difficulty, events: musicData.song.events, listenerState }, state)
             } else state.playSong(`Sounds/intro${state.countdown}.ogg`)
         }, 900-(musicData.song.bpm*2));
     } catch (err) {
@@ -141,7 +142,6 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage }
                 type = 'pinkieSing'
             } else arrowID = note[1]%4
         }
-        //if (mod == 'Bob') arrowID = note[1]%4
 
         return {
             Y: NaN,

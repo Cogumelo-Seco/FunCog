@@ -8,12 +8,13 @@ module.exports = async (canvas, game, Listener) => {
 
     for (let i in game.state.musicNotes) {
         let note = game.state.musicNotes[i]
+        let arrowInfo = game.state.arrowsInfo[note.arrowID]
 
         if (note.autoClick && note.Y >= 0 && !note.clicked && !note.disabled) note.clicked = true
         
-        let noteY = game.state.downScroll ? arrowY+note.Y : arrowY-note.Y
+        let noteY = game.state.downScroll ? (arrowInfo?.Y || arrowY)+note.Y : (arrowInfo?.Y || arrowY)-note.Y
 
-        if (noteY-(note.hold) < canvas.height && noteY+(note.hold) > -game.state.arrowsSize) {
+        if (noteY-(note.hold) < canvas.height && noteY+(note.hold) > -game.state.arrowsSize && arrowInfo) {
             let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-note.png`]
             let holdImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-hold-piece.png`]
             let holdEndImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-hold-end.png`]
@@ -29,28 +30,27 @@ module.exports = async (canvas, game, Listener) => {
 
             if (note.hold && arrowImage && holdImage && holdEndImage) {
                 let holdY = noteY
-                let holdX = game.state.positionArrow[note.arrowID]+(arrowImage.height**resizeNote/2)-(holdImage.width**resizeNote/2)
+                let holdX = arrowInfo.X+(arrowImage.height**resizeNote/2)-(holdImage.width**resizeNote/2)
                 let holdYInRelationToTheLine = null
                 if (!note.holdHeight) note.holdHeight = holdImage.height
 
                 for (let i = 0;i <= note.hold;i += holdImage?.height) {
                     holdY = game.state.downScroll ? holdY-(holdImage.height**resizeNote) : holdY+(holdImage.height**resizeNote)
                     holdYInRelationToTheLine = game.state.downScroll ? holdY-arrowY : arrowY-holdY
-                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : 1
+                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
                         if (i+holdImage?.height >= note.hold) {
-                            ctx.save()
+                            let holdWidth = holdEndImage.width**resizeNote
+                            let holdHeight = holdEndImage.height**resizeNote
+                            let scaleV = game.state.downScroll ? -1 : 1
+                            let posY = game.state.downScroll ? (holdHeight+holdY) * -1 : holdY
 
-                            let degRotate = game.state.downScroll ? 180 : 0
-                            let newHoldX = game.state.downScroll ? 0 : -(holdEndImage.width**resizeNote)
-                            let newHoldY = game.state.downScroll ? 0 : -(holdEndImage.height**resizeNote)
+                            ctx.save();
+                            ctx.scale(1, scaleV);
 
-                            ctx.setTransform(1, 0, 0, 1, holdX+(holdEndImage.width**resizeNote), holdY+(holdEndImage.height**resizeNote));
-                            ctx.rotate(degRotate*Math.PI/180);
-
-                            ctx.drawImage(holdEndImage, newHoldX, newHoldY, holdEndImage.width**resizeNote, holdEndImage.height**resizeNote)
-
+                            ctx.drawImage(holdEndImage, holdX, posY, holdWidth, holdHeight)
+                            
                             ctx.restore()
                         } else ctx.drawImage(holdImage, holdX, holdY, holdImage.width**resizeNote, holdImage.height**resizeNote)
                     }
@@ -58,22 +58,20 @@ module.exports = async (canvas, game, Listener) => {
             }
 
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage) {
-                ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : 1
-
-                ctx.save()
+                ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha
 
                 let arrowWidth = arrowImage.width**resizeNote
                 let arrowHeight = arrowImage.height**resizeNote
-                let currentArrowX = game.state.positionArrow[note.arrowID]-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2)+game.state.arrowsXLineMovement
+                let currentArrowX = arrowInfo.X-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2)+game.state.arrowsXLineMovement
                 let currentArrowY = noteY-((arrowImage.height**resizeNote-arrowsSize**resizeNote)/2)+game.state.arrowsYLineMovement
 
+                ctx.save()
                 ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
-                ctx.rotate((game.state.arrowsRotation[note.arrowID] || 0)*Math.PI/180);
+                ctx.rotate((arrowInfo.rotation)*Math.PI/180);
                 
                 ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
 
                 ctx.restore()
-                //ctx.drawImage(arrowImage, game.state.positionArrow[note.arrowID]-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2), noteY-((arrowImage.height**resizeNote-arrowsSize**resizeNote)/2), arrowImage.width**resizeNote, arrowImage.height**resizeNote)
             }
 
             ctx.globalAlpha = 1
@@ -85,14 +83,15 @@ module.exports = async (canvas, game, Listener) => {
 
     for (let i in game.state.musicOpponentNotes) {
         let note = game.state.musicOpponentNotes[i]
+        let arrowInfo = game.state.arrowsInfoOpponent[note.arrowID]
         
-        let noteY = game.state.downScroll ? arrowYOpponent+note.Y : arrowYOpponent-note.Y
+        let noteY = game.state.downScroll ? (arrowInfo?.Y || arrowYOpponent)+note.Y : (arrowInfo?.Y || arrowYOpponent)-note.Y
         if (note.Y >= 0 && game.state.opponentArrows[note.arrowID] && !note.clicked && !note.disabled) {
             game.state.musicEventListener('noteClick', { noteClickAuthor: 'bot' }, game.state)
             note.clicked = true
         }
 
-        if (noteY-(note.hold) < canvas.height && noteY+(note.hold) > -game.state.arrowsSize) {
+        if (noteY-(note.hold) < canvas.height && noteY+(note.hold) > -game.state.arrowsSize && arrowInfo) {
             let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-note.png`]
             let holdImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-hold-piece.png`]
             let holdEndImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-hold-end.png`]
@@ -105,11 +104,11 @@ module.exports = async (canvas, game, Listener) => {
                 holdImage = newHoldImage ? game.state.images[newHoldImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type]?.frame)] : holdImage
                 holdEndImage = newHoldEndImage ? game.state.images[newHoldEndImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type]?.frame)] : holdEndImage
             }
-            ctx.globalAlpha = note.disabled ? 0.2 : 1
+            ctx.globalAlpha = note.disabled ? 0.2 : arrowInfo.noteAlpha
 
             if (note.hold && arrowImage && holdImage && holdEndImage) {
                 let holdY = noteY
-                let holdX = game.state.positionArrowOpponent[note.arrowID]+(arrowImage.height**resizeNoteOpponent/2)-(holdImage.width**resizeNoteOpponent/2)
+                let holdX = arrowInfo.X+(arrowImage.height**resizeNoteOpponent/2)-(holdImage.width**resizeNoteOpponent/2)
                 let holdYInRelationToTheLine = null
                 if (!note.holdHeight) note.holdHeight = holdImage.height
 
@@ -119,17 +118,16 @@ module.exports = async (canvas, game, Listener) => {
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
                         if (i+holdImage?.height >= note.hold) {
-                            ctx.save()
+                            let holdWidth = holdEndImage.width**resizeNoteOpponent
+                            let holdHeight = holdEndImage.height**resizeNoteOpponent
+                            let scaleV = game.state.downScroll ? -1 : 1
+                            let posY = game.state.downScroll ? (holdHeight+holdY) * -1 : holdY
 
-                            let degRotate = game.state.downScroll ? 180 : 0
-                            let newHoldX = game.state.downScroll ? 0 : -(holdEndImage.width**resizeNoteOpponent)
-                            let newHoldY = game.state.downScroll ? 0 : -(holdEndImage.height**resizeNoteOpponent)
-        
-                            ctx.setTransform(1, 0, 0, 1, holdX+(holdEndImage.width**resizeNoteOpponent), holdY+(holdEndImage.height**resizeNoteOpponent));
-                            ctx.rotate(degRotate*Math.PI/180);
-        
-                            ctx.drawImage(holdEndImage, newHoldX, newHoldY, holdEndImage.width**resizeNoteOpponent, holdEndImage.height**resizeNoteOpponent)
-        
+                            ctx.save();
+                            ctx.scale(1, scaleV);
+
+                            ctx.drawImage(holdEndImage, holdX, posY, holdWidth, holdHeight)
+
                             ctx.restore()
                         } else ctx.drawImage(holdImage, holdX, holdY, holdImage.width**resizeNoteOpponent, holdImage.height**resizeNoteOpponent)
                     }
@@ -137,20 +135,18 @@ module.exports = async (canvas, game, Listener) => {
             }
 
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage) {
-                ctx.save()
-
                 let arrowWidth = arrowImage.width**resizeNoteOpponent
                 let arrowHeight = arrowImage.height**resizeNoteOpponent
-                let currentArrowX = game.state.positionArrowOpponent[note.arrowID]-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)+game.state.arrowsXLineMovementOpponent
+                let currentArrowX = arrowInfo.X-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)+game.state.arrowsXLineMovementOpponent
                 let currentArrowY = noteY-((arrowImage.height**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)+game.state.arrowsYLineMovementOpponent
 
+                ctx.save()
                 ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
-                ctx.rotate((game.state.arrowsRotationOpponent[note.arrowID] || 0)*Math.PI/180);
+                ctx.rotate((arrowInfo.rotation)*Math.PI/180);
                 
                 ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
 
                 ctx.restore()
-                //ctx.drawImage(arrowImage, game.state.positionArrowOpponent[note.arrowID]-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2), noteY, arrowImage.width**resizeNoteOpponent, arrowImage.height**resizeNoteOpponent)
             }
 
             ctx.globalAlpha = 1

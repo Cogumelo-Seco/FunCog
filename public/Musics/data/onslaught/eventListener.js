@@ -33,28 +33,28 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 					}
 
 					if (oldBeat <= 96 && beat >= 96 || oldBeat <= 240 && beat >= 240) {
-						state.arrowsAlpha = 0
-						state.arrowsAlphaOpponent = 0
+						for (let i in state.arrowsInfo) state.arrowsInfo[i].alpha = 0
+						for (let i in state.arrowsInfoOpponent) state.arrowsInfoOpponent[i].alpha = 0
 						state.playSong('Sounds/Meow.ogg')
 					}
 
 					if (oldBeat <= 128 && beat >= 128) {
-						state.arrowsAlpha = 1
-						state.arrowsAlphaOpponent = 1
+						for (let i in state.arrowsInfo) state.arrowsInfo[i].alpha = 1
+						for (let i in state.arrowsInfoOpponent) state.arrowsInfoOpponent[i].alpha = 1
 						state.playSong('Sounds/woeM.ogg')
 						state.IsNoteSpinning = true
-						state.arrowsRotation = { 0: 0, 1: 0, 2: 0, 3: 0 }
 					}
 
 					if (oldBeat <= 352 && beat >= 352) {
-						state.arrowsAlpha = 1
-						state.arrowsAlphaOpponent = 1
+						for (let i in state.arrowsInfo) state.arrowsInfo[i].alpha = 1
+						for (let i in state.arrowsInfoOpponent) state.arrowsInfoOpponent[i].alpha = 1
 						state.playSong('Sounds/woeM.ogg')
 						state.IsNoteSpinning = false
-						state.arrowsRotation = {}
+						for (let i in state.arrowsInfo) state.arrowsInfo[i].rotation = 0
+						for (let i in state.arrowsInfoOpponent) state.arrowsInfoOpponent[i].rotation = 0
 					}
 
-					if (state.IsNoteSpinning) for (let i in state.arrowsRotation) state.arrowsRotation[i] += 0.5
+					if (state.IsNoteSpinning) for (let i in state.arrowsInfo) state.arrowsInfo[i].rotation += 1
 				}
 
 				oldBeat = beat
