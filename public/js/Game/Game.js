@@ -1,7 +1,7 @@
 function createGame(Listener, canvas) {
     const state = {
         fps: '0-0',
-        debug: true,
+        debug: false,
         gameStage: 'loading',
         gameStageTime: 0,
         musicMenu: null,
