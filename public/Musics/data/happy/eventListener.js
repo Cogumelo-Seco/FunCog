@@ -1,7 +1,7 @@
 module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, state) => {
     switch (type) {
         case 'noteClick':
-            if (noteClickAuthor == 'player' && note?.type == 'hurtNote' && !notes?.find(n => n.type == 'normal')) {
+            if (noteClickAuthor == 'player' && note?.type != 'normal' && !notes?.find(n => n.type == 'normal')) {
                 note.clicked = true
                 state.musicInfo.combo = 0
                 state.musicInfo.accuracyMedia.push(1)

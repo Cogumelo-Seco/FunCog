@@ -56,30 +56,6 @@ function createGame(Listener, canvas) {
                 dalay: 0,
                 loop: false
             },
-            expurgationSing1: {
-                frame: 0,
-                startFrame: 0,
-                endFrame: 47,
-                totalDalay: 20,
-                dalay: 0,
-                loop: true
-            },
-            expurgationSing3: {
-                frame: 0,
-                startFrame: 1,
-                endFrame: 20,
-                totalDalay: 40,
-                dalay: 0,
-                loop: true
-            },
-            expurgationSing4: {
-                frame: 0,
-                startFrame: 0,
-                endFrame: 61,
-                totalDalay: 20,
-                dalay: 0,
-                loop: true
-            },
             ratingImage: {
                 frame: 0,
                 startFrame: 0,

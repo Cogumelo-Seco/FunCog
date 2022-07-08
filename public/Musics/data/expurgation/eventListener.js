@@ -4,7 +4,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
             if (noteClickAuthor == 'player' && note?.type == 'hitKillNote' && !notes?.find(n => n.type == 'normal'))
                 state.musicInfo.health = -100
             break
-        case 'started':
+        /*case 'started':
 			let oldStep = 0
             if (difficulty.name == 'Mania') return
 
@@ -141,8 +141,8 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
                     clearInterval(loop)
 					state.screenZoom = 0
                 }
-            }, 1000/50)//state.musicBPM*1.1)
-            break
+            }, 1000/50)
+            break*/
     }
 
     let lastTimeSing = 0

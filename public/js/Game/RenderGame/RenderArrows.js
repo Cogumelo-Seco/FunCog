@@ -14,7 +14,6 @@ module.exports = async (canvas, game, Listener) => {
     
 
     for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
-        game.state.notesImageDir = 'Arrows/'
         let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}.png`]
         let arrowInfo = game.state.arrowsInfo[arrowID]
 

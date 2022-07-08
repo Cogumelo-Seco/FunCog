@@ -8,10 +8,10 @@ module.exports = async (state) => {
             newArrowImage: `Arrows/firenotes/Arrow-{{arrowID}}-firenote-{{frame}}.png`,
             pressImage: `Arrows/deathnotes/Arrow-{{arrowID}}-press-deathnote-{{frame}}.png`
         },
-        hurtNote: {
-            newArrowImage: `Arrows/hurtnotes/Arrow-{{arrowID}}-hurtnote.png`,
-            newHoldImage: `Arrows/hurtnotes/Arrow-hurtnote-hold-piece.png`,
-            newHoldEndImage: `Arrows/hurtnotes/Arrow-hurtnote-hold-end.png`
+        hurtNoteSuicidemouse: {
+            newArrowImage: `Arrows/hurtnotes-suicidemouse/Arrow-{{arrowID}}-hurtnote.png`,
+            newHoldImage: `Arrows/hurtnotes-suicidemouse/Arrow-hurtnote-hold-piece.png`,
+            newHoldEndImage: `Arrows/hurtnotes-suicidemouse/Arrow-hurtnote-hold-end.png`
         },
         pinkieSing: {
             newArrowImage: `Arrows/pinkieSing/Arrow-{{arrowID}}-pinkieSing.png`,

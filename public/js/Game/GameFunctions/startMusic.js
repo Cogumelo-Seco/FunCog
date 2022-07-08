@@ -125,7 +125,7 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, 
                 arrowID = note[1]%4
                 disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
-                type = 'hurtNote'
+                type = 'hurtNoteSuicidemouse'
             }
         }
         if (name == 'dusk-till-dawn') {
