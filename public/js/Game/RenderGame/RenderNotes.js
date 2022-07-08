@@ -62,8 +62,8 @@ module.exports = async (canvas, game, Listener) => {
 
                 let arrowWidth = arrowImage.width**resizeNote
                 let arrowHeight = arrowImage.height**resizeNote
-                let currentArrowX = arrowInfo.X-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2)+game.state.arrowsXLineMovement
-                let currentArrowY = noteY-((arrowImage.height**resizeNote-arrowsSize**resizeNote)/2)+game.state.arrowsYLineMovement
+                let currentArrowX = arrowInfo.X-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2)
+                let currentArrowY = noteY-((arrowImage.height**resizeNote-arrowsSize**resizeNote)/2)
 
                 ctx.save()
                 ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
@@ -137,8 +137,8 @@ module.exports = async (canvas, game, Listener) => {
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage) {
                 let arrowWidth = arrowImage.width**resizeNoteOpponent
                 let arrowHeight = arrowImage.height**resizeNoteOpponent
-                let currentArrowX = arrowInfo.X-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)+game.state.arrowsXLineMovementOpponent
-                let currentArrowY = noteY-((arrowImage.height**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)+game.state.arrowsYLineMovementOpponent
+                let currentArrowX = arrowInfo.X-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)
+                let currentArrowY = noteY-((arrowImage.height**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)
 
                 ctx.save()
                 ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));

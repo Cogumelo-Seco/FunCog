@@ -16,6 +16,7 @@ module.exports = async (state) => {
         'Sounds/alert.ogg',
         'Sounds/alertDouble.ogg',
         'Sounds/attack.ogg',
+        'Sounds/attack-double.ogg',
 
         'Musics/musics/tutorial/Inst.ogg',
 

@@ -1,20 +1,14 @@
 module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, listenerState }, state) => {
     try {
+        state.arrowsInfo = {},
+        state.arrowsInfoOpponent = {},
         state.positionArrow = {},
         state.positionArrowOpponent = {},
-        state.arrowsYLineMovement = 0,
-        state.arrowsXLineMovement = 0,
-        state.arrowsYLineMovementOpponent = 0,
-        state.arrowsXLineMovementOpponent = 0,
-        state.arrowsAlpha = 1,
-        state.arrowsAlphaOpponent = 1,
         state.screenYMovement = 0,
         state.screenXMovement = 0,
         state.screenZoom = 0,
         state.screenZooming = false,
         state.screenRotation = 0,
-        state.arrowsRotation = {},
-        state.arrowsRotationOpponent = {},
         state.musicNotes = []
         state.musicOpponentNotes = []
         state.countdown = 4

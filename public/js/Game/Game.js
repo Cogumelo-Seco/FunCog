@@ -144,40 +144,44 @@ function createGame(Listener, canvas) {
     const verifyClick = (command) => require('./GameFunctions/verifyClick')(command, state)
 
     async function start(command) {
-        for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {
-            if (!state.opponentArrows[arrowID]) state.opponentArrows[arrowID] = { click: false }
-            if (!state.arrowsInfoOpponent[arrowID]) state.arrowsInfoOpponent[arrowID] = { 
-                X: null,
-                Y: null,
-                defaultX: null,
-                defaultY: null,
-                resetX: true,
-                resetY: true,
-                resetEnable: true,
-                alpha: 1,
-                noteAlpha: 1,
-                rotation: 0
-            }
-        }
-
-        for (let arrowID = 0;arrowID <= state.amountOfArrows;arrowID++) {
-            if (!state.arrowsInfo[arrowID]) state.arrowsInfo[arrowID] = { 
-                X: null,
-                Y: null,
-                defaultX: null,
-                defaultY: null,
-                resetX: true,
-                resetY: true,
-                resetEnable: true,
-                alpha: 1,
-                noteAlpha: 1,
-                rotation: 0
-            }
-        }
-
         let interval = setInterval(() => {
             state.musicBeat = Number.parseInt((state.musicBPM/60)*state.music?.currentTime)
             state.musicStep = Number.parseInt(state.music?.currentTime*1000/60)
+
+            if (!state.arrowsInfoOpponent[0]) {
+                for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {
+                    if (!state.opponentArrows[arrowID]) state.opponentArrows[arrowID] = { click: false }
+                    if (!state.arrowsInfoOpponent[arrowID]) state.arrowsInfoOpponent[arrowID] = { 
+                        X: null,
+                        Y: null,
+                        defaultX: null,
+                        defaultY: null,
+                        resetX: true,
+                        resetY: true,
+                        resetEnable: true,
+                        alpha: 1,
+                        noteAlpha: 1,
+                        rotation: 0
+                    }
+                }
+            }
+
+            if (!state.arrowsInfo[0]) {
+                for (let arrowID = 0;arrowID <= state.amountOfArrows;arrowID++) {
+                    if (!state.arrowsInfo[arrowID]) state.arrowsInfo[arrowID] = { 
+                        X: null,
+                        Y: null,
+                        defaultX: null,
+                        defaultY: null,
+                        resetX: true,
+                        resetY: true,
+                        resetEnable: true,
+                        alpha: 1,
+                        noteAlpha: 1,
+                        rotation: 0
+                    }
+                }
+            }
 
             let lastResizeNoteOpponent = state.resizeNoteOpponent
             let lastArrowsYLineOpponent = state.arrowsYLineOpponent
@@ -229,14 +233,14 @@ function createGame(Listener, canvas) {
 
             for (let i in state.musicNotes) {
                 state.musicNotes[i].Y = -((state.musicNotes[i].time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM))
-                if (state.musicNotes[i].errorWhenNotClicking && state.musicNotes[i].arrowID >= 0 && state.musicNotes[i].arrowID <= state.amountOfArrows && state.musicNotes[i].Y > 200 && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
+                /*if (state.musicNotes[i].errorWhenNotClicking && state.musicNotes[i].arrowID >= 0 && state.musicNotes[i].arrowID <= state.amountOfArrows && state.musicNotes[i].Y > 200 && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
                     state.musicNotes[i].disabled = true
                     state.musicInfo.misses += 1
                     state.musicInfo.score -= 50
                     state.musicInfo.health -= 5
                     state.musicInfo.combo = 0
                     state.musicInfo.accuracyMedia.push(1)
-                }
+                }*/
             }
 
             for (let i in state.musicOpponentNotes) {
