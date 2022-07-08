@@ -124,6 +124,8 @@ function createGame(Listener, canvas) {
             state.musicBeat = Number.parseInt((state.musicBPM/60)*state.music?.currentTime)
             state.musicStep = Number.parseInt(state.music?.currentTime*1000/60)
 
+            if (state.musicBeat%20 == 0 && state.musicVoice && state.music) state.musicVoice.currentTime = state.music.currentTime
+
             if (!state.arrowsInfoOpponent[0]) {
                 for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {
                     if (!state.opponentArrows[arrowID]) state.opponentArrows[arrowID] = { click: false }

@@ -102,13 +102,13 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 								case 'KB_AttackFire':
 									state.playSong('Sounds/attack.ogg')
 									setTimeout(() => {
-										if (!listenerState.keys['Space'] || listenerState.keys['Space']?.time+170 < +new Date()) state.musicInfo.health = -100
+										if (!listenerState.keys['Space'] || listenerState.keys['Space']?.time+200 < +new Date()) state.musicInfo.health = -100
 									}, 140)
 									break
 								case 'KB_AttackFireDOUBLE':
 									state.playSong('Sounds/attack-double.ogg')
 									setTimeout(() => {
-										if (!listenerState.keys['Space'] || listenerState.keys['Space']?.time+170 < +new Date()) state.musicInfo.health = -100
+										if (!listenerState.keys['Space'] || listenerState.keys['Space']?.time+200 < +new Date()) state.musicInfo.health = -100
 									}, 140)
 									break
 								case 'streetBG state':

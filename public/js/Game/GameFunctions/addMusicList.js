@@ -231,7 +231,7 @@ module.exports = async (state) => {
         {
             name: 'Termination',
             menuColor: 'rgb(251, 150, 183)',
-            difficulties: [ 1, 2, 3 ],
+            difficulties: [ 2, 5, 3 ],
             notesImageDir: 'Arrows/',
             backgroundImage: 'backgrounds/qt.png',
             mod: 'QT'
