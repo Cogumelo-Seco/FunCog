@@ -19,9 +19,11 @@ export default function createListener() {
     function handleKeys({ event, on }) {
         let keyPressed = event.code
         console.log(keyPressed)
+        let lastClick = state.keys[keyPressed]
         state.keys[keyPressed] = {
             clicked: on,
-            time: +new Date()
+            time: +new Date(),
+            lastClickTime: lastClick?.time || null
         }
 
         for (let arrowID = 0;arrowID <= state.game.state.amountOfArrows;arrowID++) {
