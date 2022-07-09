@@ -32,12 +32,34 @@ module.exports = async (canvas, game, Listener) => {
     ctx.fillRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth, healthBarHeight)
 
     ctx.fillStyle = 'red'
-    ctx.fillRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth*(healthPercent), healthBarHeight)
+    ctx.fillRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth*healthPercent, healthBarHeight)
 
     ctx.lineWidth = 2.5
     ctx.strokeStyle = 'black'
     ctx.strokeRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth, healthBarHeight)
 
+    function drawIcon({ dir, flipY, pos }) {
+        let iconImage = game.state.images[dir]
+        let iconResize = 0.9+(game.state.musicStep%6/200)
+        let iconWidth = iconImage.width/2
+        let iconHeight = iconImage.height
+        let iconX = canvas.width/2-healthBarWidth/2+(healthBarWidth*healthPercent)-(flipY ? 10 : iconWidth**iconResize-10)
+        let iconY = healthBarY-20
+
+        let scaleH = flipY ? -1 : 1
+        let posX = flipY ? ((iconWidth**iconResize)+iconX)* -1 : iconX
+
+        ctx.save();
+        ctx.scale(scaleH, 1);
+        
+        ctx.drawImage(iconImage, pos == 1 ? 0 : iconWidth, 0, iconWidth, iconHeight, posX, iconY, iconWidth**iconResize, iconHeight**iconResize)
+
+        ctx.restore();
+    }
+
+    drawIcon({ dir: 'icons/icon-bf.png', pos: healthPercent >= 0.80 ? 2 : 1, flipY: true })
+    drawIcon({ dir: 'icons/icon-face.png', pos: healthPercent <= 0.30 ? 2 : 1 })
+    
     function formatTime(time) {
         if (!time) time = 0
 

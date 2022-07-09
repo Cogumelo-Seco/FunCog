@@ -165,14 +165,14 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 								case 'KB_AttackFire':
 									state.playSong('Sounds/attack.ogg')
 									setTimeout(() => {
-										if (!listenerState.keys['Space'] || listenerState.keys['Space']?.lastClickTime && listenerState.keys['Space']?.time-listenerState.keys['Space']?.lastClickTime <= 100 || listenerState.keys['Space']?.time+200 < +new Date()) state.musicInfo.health = -100
-									}, 140)
+										if (!listenerState.keys['Space'] || listenerState.keys['Space']?.lastClickTime && listenerState.keys['Space']?.time-listenerState.keys['Space']?.lastClickTime <= 100 || listenerState.keys['Space']?.time+220 < +new Date()) state.musicInfo.health = -100
+									}, 145)
 									break
 								case 'KB_AttackFireDOUBLE':
 									state.playSong('Sounds/attack-double.ogg')
 									setTimeout(() => {
-										if (!listenerState.keys['Space'] || listenerState.keys['Space']?.lastClickTime && listenerState.keys['Space']?.time-listenerState.keys['Space']?.lastClickTime <= 100 || listenerState.keys['Space']?.time+200 < +new Date()) state.musicInfo.health = -100
-									}, 140)
+										if (!listenerState.keys['Space'] || listenerState.keys['Space']?.time+220 < +new Date()) state.musicInfo.health = -100
+									}, 145)
 									break
 								case 'streetBG state':
 									if (Number(values[1]) == 0) state.musicInfo.backgroundImage = state.musicInfo.defaultBackgroundImage
