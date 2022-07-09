@@ -124,7 +124,7 @@ function createGame(Listener, canvas) {
             state.musicBeat = Number.parseInt((state.musicBPM/60)*state.music?.currentTime)
             state.musicStep = Number.parseInt(state.music?.currentTime*1000/60)
 
-            if (state.musicBeat%20 == 0 && state.musicVoice && state.music) state.musicVoice.currentTime = state.music.currentTime
+            if (state.musicBeat%50 == 0 && state.musicVoice && state.music && state.musicVoice.currentTime != state.music.currentTime) state.musicVoice.currentTime = state.music.currentTime
 
             if (!state.arrowsInfoOpponent[0]) {
                 for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {
@@ -285,7 +285,7 @@ function createGame(Listener, canvas) {
             if (state.loading.loaded >= state.loading.total) {
                 state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
                 clearInterval(interval)
-                if (!state.debug || state.gameStage == 'loading') setTimeout(() => state.gameStage = 'selectMusic', 1000)
+                if (!state.debug || state.gameStage == 'loading') setTimeout(() => state.gameStage = 'selectMusic', 500)
             }
         }, 10)
     }

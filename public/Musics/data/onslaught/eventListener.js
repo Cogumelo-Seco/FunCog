@@ -19,16 +19,16 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 					if (beat >= 128 && oldBeat <= 352) {
 						if (beat%20 == 0 && state.musicInfo.lastPopupTime+1000 <= +new Date()) {
 							state.playSong('Sounds/pop_up.ogg')
+							let id = Number.parseInt(Math.random()*1000)
 							let dir = `bob-PopUps/popup${Number.parseInt(Math.random()*11)+1}.png`
 							let image = state.images[dir]
-							let popup = {
+							state.musicInfo.popups[id] = {
 								image: dir,
 								x: Number.parseInt(Math.random()*(state.canvas.width-image.width)),
 								y: Number.parseInt(Math.random()*(state.canvas.height-image.height))
 							}
-							state.musicInfo.popups.push(popup)
 							state.musicInfo.lastPopupTime = +new Date()
-							setTimeout(() => state.musicInfo.popups.splice(state.musicInfo.popups.indexOf(popup), 1), 1000+Number.parseInt(Math.random()*5000))
+							setTimeout(() => delete state.musicInfo.popups[id], 1000+Number.parseInt(Math.random()*5000))
 						}
 					}
 

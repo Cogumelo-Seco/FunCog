@@ -12,7 +12,7 @@ module.exports = async (canvas, game, Listener) => {
             let popupX = popup.x
             let popupY = popup.y
 
-            /*if (popup.rotation) {
+            if (popup.rotation) {
                 ctx.save()
 
                 ctx.translate(popupX+(popupWidth/2), popupY+(popupHeight/2));
@@ -21,19 +21,19 @@ module.exports = async (canvas, game, Listener) => {
                 ctx.drawImage(image, -(popupWidth/2), -(popupHeight/2), popupWidth, popupHeight)
 
                 ctx.restore()
-            }*/
+            } else {
+                let scaleH = popup.flipY ? -1 : 1
+                let scaleV = popup.flipX ? -1 : 1
+                let posX = popup.flipY ? (popupWidth+popupX)* -1 : popupX
+                let posY = popup.flipX ? (popupHeight+popupY) * -1 : popupY
 
-            let scaleH = popup.flipY ? -1 : 1
-            let scaleV = popup.flipX ? -1 : 1
-            let posX = popup.flipY ? (popupWidth+popupX)* -1 : popupX
-            let posY = popup.flipX ? (popupHeight+popupY) * -1 : popupY
+                ctx.save();
+                ctx.scale(scaleH, scaleV);
+                
+                ctx.drawImage(image, posX, posY, popupWidth, popupHeight)
 
-            ctx.save();
-            ctx.scale(scaleH, scaleV);
-            
-            ctx.drawImage(image, posX, posY, popupWidth, popupHeight)
-
-            ctx.restore();
+                ctx.restore();
+            }
         }
     }
 }

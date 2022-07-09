@@ -344,6 +344,11 @@ module.exports = async (state) => {
         'QTAlerts/alert-double-2.png',
         'QTAlerts/alert-double-3.png',
         'QTAlerts/alert-double-4.png',
+
+        /* ---- */
+        
+        'imgs/QT/pincer-close.png',
+        'imgs/QT/pincer-open.png',
     ]
     
     return state.images.length

@@ -1,6 +1,9 @@
 module.exports = async (type, { noteClickAuthor, note, notes, listenerState, difficulty, events }, state) => {
     switch (type) {
         case 'started':
+			let oldCurrentTime = 0
+			let screenShake = false
+
 			for (let i in state.arrowsInfo) state.arrowsInfo[i].alpha = 0
 			for (let i in state.arrowsInfoOpponent) state.arrowsInfoOpponent[i].alpha = 0
 			function intro_outro(player, arrowID, add) {
@@ -13,8 +16,35 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 				}, 1000/10)
 			}
 
+			let pincerPrepareIntervals = {}
+			function pincerPrepare({ arrowID, goAway, opponent }) {
+				let arrow = state[opponent ? 'arrowsInfoOpponent' : 'arrowsInfo'][arrowID]
+				let image = state.images['imgs/QT/pincer-open.png']
+				
+				clearInterval(pincerPrepareIntervals[arrowID])
+				pincerPrepareIntervals[arrowID] = setInterval(() => {
+					if (state.downScroll ? goAway ? state.musicInfo.popups[arrowID]?.y >= state.canvas.height+100 : state.musicInfo.popups[arrowID]?.y <= arrow.Y+(state.arrowsSize**state.resizeNote/2) : goAway ? state.musicInfo.popups[arrowID]?.y <= -((image.height*1.5)**state.resizeNote)-100 : state.musicInfo.popups[arrowID]?.y >= arrow.Y+(state.arrowsSize**state.resizeNote/2)-((image.height*1.5)**state.resizeNote)) {
+						clearInterval(pincerPrepareIntervals[arrowID])
+						state.musicInfo.popups[arrowID].image = `imgs/QT/pincer-close.png`
+						if (goAway) setTimeout(() => delete state.musicInfo.popups[arrowID], 1000)
+					} else {
+						let y = state.musicInfo.popups[arrowID]?.y+(state.downScroll ? goAway ? 20 : -20 : goAway ? -20 : 20)
+						if (!y) y = state.downScroll ? goAway ? arrow.Y+((image.height*1.5)**state.resizeNote/2) : state.canvas.height+50 : goAway ? arrow.Y+(state.arrowsSize**state.resizeNote/2)-((image.height*1.5)**state.resizeNote) : -((image.height*1.5)**state.resizeNote)-100
+
+						state.musicInfo.popups[arrowID] = {
+								image: `imgs/QT/pincer-open.png`,
+								x: arrow.X-(image.width**state.resizeNote/2)-(state.downScroll ? 5 : 25),
+								y,
+								rotation: state.downScroll ? -90 : 90,
+								width: (image.width*1.5)**state.resizeNote,
+								height: (image.height*1.5)**state.resizeNote,
+						}
+					}
+				}, 1000/50)
+			}
+
 			let arrowMoveIntervals = {}
-			function arrowMove({ X, Y, rotation, arrowID }) {
+			function arrowMove({ X, Y, rotation, arrowID, pincer, speed }) {
 				let arrow = state.arrowsInfo[arrowID]
 
 				let directionX = X ? X < arrow.X ? '-' : '+' : null
@@ -26,32 +56,44 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 					let clear = []
 
 					if (Y != undefined && directionY == '-' && Y < arrow.Y || Y != undefined && directionY == '+' && Y > arrow.Y) {
-						arrow.Y += directionY == '-' ? -7 : 7
+						arrow.Y += directionY == '-' ? -(speed) || -7 : speed || 7
 						clear.push(false)
 					} else if (Y != undefined) clear.push(true)
 
 					if (X != undefined && directionX == '-' && X < arrow.X || X != undefined && directionX == '+' && X > arrow.X) {
-						arrow.X += directionX == '-' ? -7 : 7
+						arrow.X += directionX == '-' ? -(speed) || -7 : speed || 7
 						clear.push(false)
 					} else if (X != undefined) clear.push(true)
 
-					if (!clear.includes(false)) clearInterval(arrowMoveIntervals[arrowID])
+					if (!clear.includes(false)) {
+						clearInterval(arrowMoveIntervals[arrowID])						
+						//delete state.musicInfo.popups[arrowID]
+					} else if (pincer) {
+						let image = state.images['imgs/QT/pincer-close.png']
+						state.musicInfo.popups[arrowID] = {
+								image: `imgs/QT/pincer-close.png`,
+								x: arrow.X-(image.width**state.resizeNote/2)-(state.downScroll ? 5 : 25),//+(state.arrowsSize**state.resizeNote/2),//+(state.arrowsSize*state.resizeNote/2)-(image.width*state.resizeNote/2)+(state.downScroll ? 10 : 35),
+								y: arrow.Y+(state.arrowsSize**state.resizeNote/2)-(state.downScroll ? 0 : (image.height*1.5)**state.resizeNote),
+								rotation: state.downScroll ? -90 : 90,
+								width: (image.width*1.5)**state.resizeNote,
+								height: (image.height*1.5)**state.resizeNote,
+						}
+					}
 				}, 1000/50)
 			}
 
 			function attackAlert(alertType) {
 				let image = state.images[`QTAlerts/alert${alertType == 2 ? '-double' : ''}-0.png`]
-				let popup = {
-                    image: `QTAlerts/alert${alertType == 2 ? '-double' : ''}-{{frame}}.png`,
-                    x: state.canvas.width/2-(image.width/2),
-                    y: state.canvas.height/2-(image.height/2),
-                    animation: 'QTAlerts',
-                }
-				state.musicInfo.popups = [ popup ]
+				state.musicInfo.popups.QTAlert = {
+					image: `QTAlerts/alert${alertType == 2 ? '-double' : ''}-{{frame}}.png`,
+					x: state.canvas.width/2-(image.width/2),
+					y: state.canvas.height/2-(image.height/2),
+					animation: 'QTAlerts',
+				}
                 state.animations.QTAlerts.frame = 0
 				let verifyInterval = setInterval(() => {
 					if (state.animations.QTAlerts.frame >= 5) {
-						state.musicInfo.popups = []
+						delete state.musicInfo.popups.QTAlert
 						clearInterval(verifyInterval)
 					}
 				}, 1000/20)
@@ -60,8 +102,20 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 				else state.playSong('Sounds/alert.ogg')
 			}
 
-			let oldCurrentTime = 0
+			state.animations['QTScreenShake'] = {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 10,
+                totalDalay: 4,
+                dalay: 0,
+                boomerang: true,
+                boomerangForward: false
+            }
+
             let loop = setInterval(() => {
+				if (screenShake) state.screenRotation = (state.animations.QTScreenShake.frame*0.7)-((state.animations.QTScreenShake.endFrame/2)*0.7)
+				else state.screenRotation = 0
+
 				let beat = state.musicBeat
 				let currentTime = state.music?.currentTime
 
@@ -117,54 +171,114 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 									break
 								case 'KB_Pincer':
 									let pincers = {
+										0: () => {
+											pincerPrepare({ arrowID: 2, goAway: false })
+										},
 										1: () => {
 											for (let i in state.arrowsInfo) state.arrowsInfo[i].resetEnable = false
-											arrowMove({ Y: state.arrowsInfo[2].defaultY+(state.downScroll ? -70 : 70), arrowID: 2 })
+											arrowMove({ Y: state.arrowsInfo[2].defaultY+(state.downScroll ? -70 : 70), pincer: true, arrowID: 2 })
+										},
+										2: () => {
+											pincerPrepare({ arrowID: 2, goAway: true })
+										},
+										3: () => {
+											pincerPrepare({ arrowID: 2, goAway: false })
+											pincerPrepare({ arrowID: 0, goAway: false })
 										},
 										4: () => {
-											arrowMove({ Y: state.arrowsInfo[2].defaultY, arrowID: 2 })
-											arrowMove({ Y: state.arrowsInfo[0].defaultY+(state.downScroll ? -70 : 70), arrowID: 0 })
+											arrowMove({ Y: state.arrowsInfo[2].defaultY, pincer: true, arrowID: 2 })
+											arrowMove({ Y: state.arrowsInfo[0].defaultY+(state.downScroll ? -70 : 70), pincer: true, arrowID: 0 })
+										},
+										5: () => {
+											pincerPrepare({ arrowID: 2, goAway: true })
+											pincerPrepare({ arrowID: 0, goAway: true })
+										},
+										6: () => {
+											pincerPrepare({ arrowID: 0, goAway: false })
+											pincerPrepare({ arrowID: 1, goAway: false })
+											pincerPrepare({ arrowID: 3, goAway: false })
 										},
 										7: () => {
-											arrowMove({ Y: state.arrowsInfo[0].defaultY, arrowID: 0 })
-											arrowMove({ Y: state.arrowsInfo[3].defaultY+(state.downScroll ? -70 : 70), arrowID: 3 })
-											arrowMove({ Y: state.arrowsInfo[1].defaultY+(state.downScroll ? -70 : 70), arrowID: 1 })
+											arrowMove({ Y: state.arrowsInfo[0].defaultY, pincer: true, arrowID: 0 })
+											arrowMove({ Y: state.arrowsInfo[3].defaultY+(state.downScroll ? -70 : 70), pincer: true, arrowID: 3 })
+											arrowMove({ Y: state.arrowsInfo[1].defaultY+(state.downScroll ? -70 : 70), pincer: true, arrowID: 1 })
+										},
+										8: () => {
+											pincerPrepare({ arrowID: 3, goAway: true })
+											pincerPrepare({ arrowID: 1, goAway: true })
+											pincerPrepare({ arrowID: 0, goAway: true })
+										},
+										9: () => {
+											pincerPrepare({ arrowID: 0, goAway: false })
+											pincerPrepare({ arrowID: 1, goAway: false })
+											pincerPrepare({ arrowID: 2, goAway: false })
+											pincerPrepare({ arrowID: 3, goAway: false })
 										},
 										10: () => {
-											arrowMove({ Y: state.arrowsInfo[3].defaultY, arrowID: 3 })
-											arrowMove({ Y: state.arrowsInfo[1].defaultY, arrowID: 1 })
-											arrowMove({ Y: state.arrowsInfo[3].defaultY+(state.downScroll ? -70 : 70), rotation: state.downScroll ? -45 : 45, arrowID: 3 })
-											arrowMove({ Y: state.arrowsInfo[0].defaultY+(state.downScroll ? -70 : 70), rotation: state.downScroll ? 45 : -45, arrowID: 0 })
+											arrowMove({ Y: state.arrowsInfo[3].defaultY, pincer: true, arrowID: 3 })
+											arrowMove({ Y: state.arrowsInfo[1].defaultY, pincer: true, arrowID: 1 })
+											arrowMove({ Y: state.arrowsInfo[3].defaultY+(state.downScroll ? -70 : 70), pincer: true, rotation: state.downScroll ? -45 : 45, arrowID: 3 })
+											arrowMove({ Y: state.arrowsInfo[0].defaultY+(state.downScroll ? -70 : 70), pincer: true, rotation: state.downScroll ? 45 : -45, arrowID: 0 })
+										},
+										11: () => {
+											pincerPrepare({ arrowID: 0, goAway: true })
+											pincerPrepare({ arrowID: 1, goAway: true })
+											pincerPrepare({ arrowID: 2, goAway: true })
+											pincerPrepare({ arrowID: 3, goAway: true })
+										},
+										12: () => {
+											pincerPrepare({ arrowID: 3, goAway: false })
+											pincerPrepare({ arrowID: 0, goAway: false })
 										},
 										13: () => {
-											arrowMove({ Y: state.arrowsInfo[3].defaultY+80, rotation: 0, arrowID: 3 })
-											arrowMove({ Y: state.arrowsInfo[0].defaultY-80, rotation: 0, arrowID: 0 })
+											arrowMove({ Y: state.arrowsInfo[3].defaultY+80, pincer: true, rotation: 0, arrowID: 3 })
+											arrowMove({ Y: state.arrowsInfo[0].defaultY-80, pincer: true, rotation: 0, arrowID: 0 })
 										},
 										14: () => {
-											arrowMove({ X: state.arrowsInfo[0].defaultX, arrowID: 3 })
-											arrowMove({ X: state.arrowsInfo[3].defaultX, arrowID: 0 })
+											arrowMove({ X: state.arrowsInfo[0].defaultX, pincer: true, speed: 20, arrowID: 3 })
+											arrowMove({ X: state.arrowsInfo[3].defaultX, pincer: true, speed: 20, arrowID: 0 })
+										},
+										15: () => {
+											arrowMove({ Y: state.arrowsInfo[3].defaultY, X: state.arrowsInfo[0].defaultX, pincer: true, arrowID: 3 })
+											arrowMove({ Y: state.arrowsInfo[0].defaultY, X: state.arrowsInfo[3].defaultX, pincer: true, arrowID: 0 })
 										},
 										16: () => {
-											arrowMove({ Y: state.arrowsInfo[3].defaultY, X: state.arrowsInfo[0].defaultX, arrowID: 3 })
-											arrowMove({ Y: state.arrowsInfo[0].defaultY, X: state.arrowsInfo[3].defaultX, arrowID: 0 })
+											pincerPrepare({ arrowID: 3, goAway: true })
+											pincerPrepare({ arrowID: 0, goAway: true })
+											pincerPrepare({ arrowID: 2, goAway: false })
+											pincerPrepare({ arrowID: 1, goAway: false })
 										},
 										17: () => {
-											arrowMove({ Y: state.arrowsInfo[2].defaultY+80, rotation: 0, arrowID: 2 })
-											arrowMove({ Y: state.arrowsInfo[1].defaultY-80, rotation: 0, arrowID: 1 })
+											arrowMove({ Y: state.arrowsInfo[2].defaultY+80, pincer: true, rotation: 0, arrowID: 2 })
+											arrowMove({ Y: state.arrowsInfo[1].defaultY-80, pincer: true, rotation: 0, arrowID: 1 })
 										},
 										18: () => {
-											arrowMove({ X: state.arrowsInfo[1].defaultX, arrowID: 2 })
-											arrowMove({ X: state.arrowsInfo[2].defaultX, arrowID: 1 })
+											arrowMove({ X: state.arrowsInfo[1].defaultX, pincer: true, arrowID: 2 })
+											arrowMove({ X: state.arrowsInfo[2].defaultX, pincer: true, arrowID: 1 })
 										},
 										19: () => {
-											arrowMove({ Y: state.arrowsInfo[2].defaultY, X: state.arrowsInfo[1].defaultX, arrowID: 2 })
-											arrowMove({ Y: state.arrowsInfo[1].defaultY, X: state.arrowsInfo[2].defaultX, arrowID: 1 })
+											arrowMove({ Y: state.arrowsInfo[2].defaultY, X: state.arrowsInfo[1].defaultX, pincer: true, arrowID: 2 })
+											arrowMove({ Y: state.arrowsInfo[1].defaultY, X: state.arrowsInfo[2].defaultX,pincer: true,  arrowID: 1 })
+										},
+										20: () => {
+											pincerPrepare({ arrowID: 2, goAway: true })
+											pincerPrepare({ arrowID: 1, goAway: true })
 										},
 										21: () => {
 											for (let i in state.arrowsInfo) {
-												arrowMove({ Y: state.arrowsInfo[i].defaultY, X: state.arrowsInfo[i].defaultX, rotation: 0, arrowID: i})
+												arrowMove({ Y: state.arrowsInfo[i].defaultY, X: state.arrowsInfo[i].defaultX, rotation: 0, speed: 20, arrowID: i})
 												setTimeout(() => state.arrowsInfo[i].resetEnable = true, 2000)
 											}
+										},
+										22: () => {
+											pincerPrepare({ arrowID: 3, goAway: false })
+											pincerPrepare({ arrowID: 0, opponent: state.middleScroll ? false : true, goAway: false })
+											setTimeout(() => screenShake = true, 500)
+										},
+										24: () => {
+											pincerPrepare({ arrowID: 3, goAway: true })
+											pincerPrepare({ arrowID: 0, opponent: state.middleScroll ? false : true, goAway: true })
+											screenShake = false
 										}
 									}
 
@@ -178,6 +292,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
                 if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
                     clearInterval(loop)
 					state.screenZoom = 0
+					state.screenRotation = 0
                 }
             }, 1000/50)
             break
