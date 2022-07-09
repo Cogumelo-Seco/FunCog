@@ -23,6 +23,6 @@ module.exports = function renderGame(canvas, game, Listener) {
     ctx.strokeStyle = 'black'
     ctx.strokeRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-(loadingBarHeight/2), loadingBarWidth, loadingBarHeight)
 
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)'
+    ctx.fillStyle = game.state.loading.msg.includes('ERROR:') ? 'rgba(255, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.2)'
     ctx.fillText(game.state.loading.msg, canvas.width-ctx.measureText(game.state.loading.msg).width-10, canvas.height-10);
 }

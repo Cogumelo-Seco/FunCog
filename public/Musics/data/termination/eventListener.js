@@ -112,6 +112,15 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
                 boomerangForward: false
             }
 
+			state.animations['QTAlerts'] = {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 5,
+                totalDalay: 50,
+                dalay: 0,
+                loop: false
+            }
+
             let loop = setInterval(() => {
 				if (screenShake) state.screenRotation = (state.animations.QTScreenShake.frame*0.7)-((state.animations.QTScreenShake.endFrame/2)*0.7)
 				else state.screenRotation = 0

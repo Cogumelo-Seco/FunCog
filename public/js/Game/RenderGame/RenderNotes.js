@@ -6,7 +6,7 @@ module.exports = async (canvas, game, Listener) => {
     let resizeNote = game.state.resizeNote
     let arrowY = game.state.arrowsYLine
 
-    for (let i in game.state.musicNotes) {
+    if (game.state.countdown < 0) for (let i in game.state.musicNotes) {
         let note = game.state.musicNotes[i]
         let arrowInfo = game.state.arrowsInfo[note.arrowID]
 
@@ -81,7 +81,7 @@ module.exports = async (canvas, game, Listener) => {
     let arrowYOpponent = game.state.arrowsYLineOpponent
     let resizeNoteOpponent = game.state.resizeNoteOpponent
 
-    for (let i in game.state.musicOpponentNotes) {
+    if (game.state.countdown < 0) for (let i in game.state.musicOpponentNotes) {
         let note = game.state.musicOpponentNotes[i]
         let arrowInfo = game.state.arrowsInfoOpponent[note.arrowID]
         

@@ -39,18 +39,8 @@ export default function createListener() {
 
         if (state.game.state.gameStage == 'game') {
             if (keyPressed == 'KeyR' && on) state.game.state.musicInfo.health = -100
-        }
-        
-        if (state.game.state.debug && on) {
-            if (keyPressed == 'Digit1') state.game.startMusic({ name: 'Tutorial', difficulty: 'hard', notesImageDir: 'Arrows/' })
-            if (keyPressed == 'Digit2') state.game.startMusic({ name: 'Really-happy', difficulty: 'hard', notesImageDir: 'Arrows/' })
-            if (keyPressed == 'Digit3') state.game.startMusic({ name: 'Expurgation', difficulty: 'hard', notesImageDir: 'Arrows/' })
 
-            if (keyPressed == 'KeyI' && state.game.state.music) {
-                state.game.state.music.currentTime -= 10
-                state.game.state.musicVoice.currentTime -= 10
-            }
-            if (keyPressed == 'KeyO' && state.game.state.music) {
+            if (keyPressed == 'Escape' && on) {
                 if (state.game.state.music.paused) {
                     state.game.state.music.play()
                     state.game.state.musicVoice.play()
@@ -59,12 +49,21 @@ export default function createListener() {
                     state.game.state.musicVoice.pause()
                 }
             }
+        }
+        
+        if (state.game.state.debug && on) {
+            if (keyPressed == 'Digit1') state.game.startMusic({ name: 'Tutorial', difficulty: 'hard', notesImageDir: 'Arrows/' })
+            if (keyPressed == 'Digit2') state.game.startMusic({ name: 'Really-happy', difficulty: 'hard', notesImageDir: 'Arrows/' })
+            if (keyPressed == 'Digit3') state.game.startMusic({ name: 'Expurgation', difficulty: 'hard', notesImageDir: 'Arrows/' })
+
+            if (keyPressed == 'KeyO' && state.game.state.music) {
+                state.game.state.music.currentTime -= 10
+                state.game.state.musicVoice.currentTime -= 10
+            } 
             if (keyPressed == 'KeyP' && state.game.state.music) {
                 state.game.state.music.currentTime += 10
                 state.game.state.musicVoice.currentTime += 10
             }
-
-            if (keyPressed == 'KeyE') state.game.state.screenRotation += 5
         }
 
         if (keyPressed == 'Enter' && state.game.state.gameStage == 'dead' && !state.game.state.musicMenu?.src.includes('gameOverEnd') && state.game.state.gameStageTime+2000 < +new Date()) {

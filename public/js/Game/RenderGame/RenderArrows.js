@@ -13,7 +13,7 @@ module.exports = async (canvas, game, Listener) => {
     let arrowY = game.state.arrowsYLine
     
 
-    for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
+    if (game.state.countdown < 0) for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
         let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}.png`]
         let arrowInfo = game.state.arrowsInfo[arrowID]
 
@@ -64,7 +64,7 @@ module.exports = async (canvas, game, Listener) => {
     let arrowXOpponent = game.state.middleScroll ? canvas.width/6-((arrowsSize**resizeNoteOpponent+spaceBetweenArrows)*(amountOfArrowsOpponent+1)/2) : arrowsSize**resizeNoteOpponent+spaceBetweenArrows
     let arrowYOpponent = game.state.arrowsYLineOpponent
 
-    for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
+    if (game.state.countdown < 0) for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
         let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}.png`]
         let arrowInfo = game.state.arrowsInfoOpponent[arrowID]
 

@@ -48,14 +48,6 @@ function createGame(Listener, canvas) {
         screenRotation: 0,
 
         animations: {
-            QTAlerts: {
-                frame: 0,
-                startFrame: 0,
-                endFrame: 5,
-                totalDalay: 50,
-                dalay: 0,
-                loop: false
-            },
             ratingImage: {
                 frame: 0,
                 startFrame: 0,
@@ -124,7 +116,7 @@ function createGame(Listener, canvas) {
             state.musicBeat = Number.parseInt((state.musicBPM/60)*state.music?.currentTime)
             state.musicStep = Number.parseInt(state.music?.currentTime*1000/60)
 
-            if (state.musicBeat%50 == 0 && state.musicVoice && state.music && state.musicVoice.currentTime != state.music.currentTime) state.musicVoice.currentTime = state.music.currentTime
+            if (/*state.musicBeat%10 == 0 && */state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 1) state.musicVoice.currentTime = state.music.currentTime
 
             if (!state.arrowsInfoOpponent[0]) {
                 for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {
