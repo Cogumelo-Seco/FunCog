@@ -208,7 +208,7 @@ function createGame(Listener, canvas) {
                     state.musicNotes[i].disabled = true
                     state.musicInfo.misses += 1
                     state.musicInfo.score -= 50
-                    state.musicInfo.health -= 2
+                    state.musicInfo.health -= 2.5
                     state.musicInfo.combo = 0
                     state.musicInfo.accuracyMedia.push(1)
                 }

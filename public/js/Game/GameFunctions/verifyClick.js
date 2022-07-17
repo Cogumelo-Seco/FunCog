@@ -49,7 +49,7 @@ module.exports = async({ arrowID, listenerState }, state) => {
         state.musicInfo.accuracyMedia.push(1)
         state.musicInfo.misses += 1
         state.musicInfo.score -= 50
-        state.musicInfo.health -= 2
+        state.musicInfo.health -= 2.5
         state.musicInfo.combo = 0
     }
 }
