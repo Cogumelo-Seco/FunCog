@@ -1,6 +1,7 @@
 function createGame(Listener, canvas) {
     const state = {
         fps: '0-0',
+        rainbowColor: 0,
         debug: false,
         gameStage: 'loading',
         gameStageTime: 0,
@@ -116,7 +117,7 @@ function createGame(Listener, canvas) {
             state.musicBeat = Number.parseInt((state.musicBPM/60)*state.music?.currentTime)
             state.musicStep = Number.parseInt(state.music?.currentTime*1000/60)
 
-            if (/*state.musicBeat%10 == 0 && */state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 1) state.musicVoice.currentTime = state.music.currentTime
+            if (state.musicBeat%10 == 0 && state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.05) state.musicVoice.currentTime = state.music.currentTime
 
             if (!state.arrowsInfoOpponent[0]) {
                 for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {
@@ -207,7 +208,7 @@ function createGame(Listener, canvas) {
                     state.musicNotes[i].disabled = true
                     state.musicInfo.misses += 1
                     state.musicInfo.score -= 50
-                    state.musicInfo.health -= 5
+                    state.musicInfo.health -= 2
                     state.musicInfo.combo = 0
                     state.musicInfo.accuracyMedia.push(1)
                 }
@@ -236,7 +237,9 @@ function createGame(Listener, canvas) {
                     animation.dalay = +new Date()+animation.totalDalay
                 }
             }
-        }, 1000/50);
+
+            state.rainbowColor = state.rainbowColor >= 360 ? 0 : state.rainbowColor+1
+        }, 1000/40);
     }
 
     async function loading(command) {

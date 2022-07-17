@@ -13,7 +13,7 @@ module.exports = async({ arrowID, listenerState }, state) => {
         state.musicEventListener('noteClick', { noteClickAuthor: 'player', note: notes[i], notes, listenerState }, state)
 
         if (notes[i].type == 'normal') {
-            state.musicInfo.health += 5
+            state.musicInfo.health += 2
             state.musicInfo.combo += 1
             listenerState.arrows[arrowID].state = 'onNote'
             notes[i].clicked = true
@@ -49,7 +49,7 @@ module.exports = async({ arrowID, listenerState }, state) => {
         state.musicInfo.accuracyMedia.push(1)
         state.musicInfo.misses += 1
         state.musicInfo.score -= 50
-        state.musicInfo.health -= 5
+        state.musicInfo.health -= 2
         state.musicInfo.combo = 0
     }
 }

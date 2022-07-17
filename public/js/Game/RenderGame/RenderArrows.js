@@ -13,7 +13,7 @@ module.exports = async (canvas, game, Listener) => {
     let arrowY = game.state.arrowsYLine
     
 
-    if (game.state.countdown < 0) for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
+    for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
         let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}.png`]
         let arrowInfo = game.state.arrowsInfo[arrowID]
 
@@ -49,7 +49,7 @@ module.exports = async (canvas, game, Listener) => {
             ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
             ctx.rotate((arrowInfo.rotation)*Math.PI/180);
             
-            ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+            if (game.state.countdown < 0) ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
 
             ctx.restore()
             //if (!arrowImage.id.includes('press')) game.state.positionArrow[arrowID] = arrowX
@@ -64,7 +64,7 @@ module.exports = async (canvas, game, Listener) => {
     let arrowXOpponent = game.state.middleScroll ? canvas.width/6-((arrowsSize**resizeNoteOpponent+spaceBetweenArrows)*(amountOfArrowsOpponent+1)/2) : arrowsSize**resizeNoteOpponent+spaceBetweenArrows
     let arrowYOpponent = game.state.arrowsYLineOpponent
 
-    if (game.state.countdown < 0) for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
+    for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
         let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}.png`]
         let arrowInfo = game.state.arrowsInfoOpponent[arrowID]
 
@@ -99,7 +99,7 @@ module.exports = async (canvas, game, Listener) => {
             ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
             ctx.rotate((arrowInfo.rotation)*Math.PI/180);
             
-            ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+            if (game.state.countdown < 0)  ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
 
             ctx.restore()
             //if (!arrowImage.id.includes('press')) game.state.positionArrowOpponent[arrowID] = arrowXOpponent

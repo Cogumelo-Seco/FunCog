@@ -4,16 +4,34 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 			let oldCurrentTime = 0
 			let screenShake = false
 
-			for (let i in state.arrowsInfo) state.arrowsInfo[i].alpha = 0
-			for (let i in state.arrowsInfoOpponent) state.arrowsInfoOpponent[i].alpha = 0
+			for (let i in state.arrowsInfo) {
+				state.arrowsInfo[i].alpha = 0
+				state.arrowsInfo[i].resetEnable = false
+				state.arrowsInfo[i].Y = state.arrowsInfo[i].defaultY+(state.downScroll ? -50 : 50)
+			}
+			for (let i in state.arrowsInfoOpponent) {
+				state.arrowsInfoOpponent[i].alpha = 0
+				state.arrowsInfoOpponent[i].resetEnable = false
+				state.arrowsInfoOpponent[i].Y = state.arrowsInfoOpponent[i].defaultY+(state.downScroll ? -50 : 50)
+			}
+
 			function intro_outro(player, arrowID, add) {
+				arrowMove({ speed: 3, Y: state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].defaultY, arrowID, opponent: player ? false : true })
+				setTimeout(() => state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].resetEnable = true, 2000)
+
 				let introLoop = setInterval(() => {
+
+					if (add > 0) {
+						state.screenXMovement = Number.parseInt(Math.random()*10)-5
+                        state.screenYMovement = Number.parseInt(Math.random()*10)-5
+					}
+
 					if (add > 0 && state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].alpha < 1 || add < 0 && state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].alpha > 0) {
 						if (state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].alpha+add <= 0) state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].alpha = 0
 						else if (state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].alpha+add >= 1) state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].alpha = 1
 						else state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].alpha += add
 					} else clearInterval(introLoop)
-				}, 1000/10)
+				}, 1000/40)
 			}
 
 			let pincerPrepareIntervals = {}
@@ -40,16 +58,16 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 								height: (image.height*1.5)**state.resizeNote,
 						}
 					}
-				}, 1000/50)
+				}, 1000/40)
 			}
 
 			let arrowMoveIntervals = {}
-			function arrowMove({ X, Y, rotation, arrowID, pincer, speed }) {
-				let arrow = state.arrowsInfo[arrowID]
+			function arrowMove({ X, Y, rotation, arrowID, pincer, speed, opponent }) {
+				let arrow = state[opponent ? 'arrowsInfoOpponent' : 'arrowsInfo'][arrowID]
 
 				let directionX = X ? X < arrow.X ? '-' : '+' : null
 				let directionY = Y ? Y < arrow.Y ? '-' : '+' : null
-				arrow.rotation = rotation
+				if (rotation != undefined) arrow.rotation = rotation
 
 				clearInterval(arrowMoveIntervals[arrowID])
 				arrowMoveIntervals[arrowID] = setInterval(() => {
@@ -79,7 +97,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 								height: (image.height*1.5)**state.resizeNote,
 						}
 					}
-				}, 1000/50)
+				}, 1000/40)
 			}
 
 			function attackAlert(alertType) {
@@ -148,10 +166,10 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 						if (oldCurrentTime*1000 <= time && currentTime*1000 >= time) {
 							if (difficulty.name != 'Mania' || values[0] == 'TerminationIntro' || values[0] == 'TerminationOutro') switch(values[0]) {
 								case 'TerminationIntro':
-									intro_outro(values[2] == 'player', Number(values[1]), 0.1)
+									intro_outro(values[2] == 'player', Number(values[1]), 0.04)
 									break
 								case 'TerminationOutro':
-									intro_outro(Number(values[1]) > 3, Number(values[1])%4, -0.1)
+									intro_outro(Number(values[1]) > 3, Number(values[1])%4, -0.04)
 									break
 								case 'KB_Alert':
 									attackAlert()
@@ -196,7 +214,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 										},
 										4: () => {
 											arrowMove({ Y: state.arrowsInfo[2].defaultY, pincer: true, arrowID: 2 })
-											arrowMove({ Y: state.arrowsInfo[0].defaultY+(state.downScroll ? -70 : 70), pincer: true, arrowID: 0 })
+											arrowMove({ Y: state.arrowsInfo[0].defaultY+(state.downScroll ? -70 : 70), X: state.arrowsInfo[0].defaultX-20, pincer: true, arrowID: 0 })
 										},
 										5: () => {
 											pincerPrepare({ arrowID: 2, goAway: true })
@@ -208,9 +226,9 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 											pincerPrepare({ arrowID: 3, goAway: false })
 										},
 										7: () => {
-											arrowMove({ Y: state.arrowsInfo[0].defaultY, pincer: true, arrowID: 0 })
-											arrowMove({ Y: state.arrowsInfo[3].defaultY+(state.downScroll ? -70 : 70), pincer: true, arrowID: 3 })
-											arrowMove({ Y: state.arrowsInfo[1].defaultY+(state.downScroll ? -70 : 70), pincer: true, arrowID: 1 })
+											arrowMove({ Y: state.arrowsInfo[0].defaultY, X: state.arrowsInfo[0].defaultX, pincer: true, arrowID: 0 })
+											arrowMove({ Y: state.arrowsInfo[3].defaultY+(state.downScroll ? -50 : 50), X: state.arrowsInfo[3].defaultX+40, pincer: true, arrowID: 3 })
+											arrowMove({ Y: state.arrowsInfo[1].defaultY+(state.downScroll ? -70 : 70), X: state.arrowsInfo[1].defaultX+11, pincer: true, arrowID: 1 })
 										},
 										8: () => {
 											pincerPrepare({ arrowID: 3, goAway: true })
@@ -224,10 +242,10 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 											pincerPrepare({ arrowID: 3, goAway: false })
 										},
 										10: () => {
-											arrowMove({ Y: state.arrowsInfo[3].defaultY, pincer: true, arrowID: 3 })
-											arrowMove({ Y: state.arrowsInfo[1].defaultY, pincer: true, arrowID: 1 })
-											arrowMove({ Y: state.arrowsInfo[3].defaultY+(state.downScroll ? -70 : 70), pincer: true, rotation: state.downScroll ? -45 : 45, arrowID: 3 })
-											arrowMove({ Y: state.arrowsInfo[0].defaultY+(state.downScroll ? -70 : 70), pincer: true, rotation: state.downScroll ? 45 : -45, arrowID: 0 })
+											arrowMove({ Y: state.arrowsInfo[3].defaultY, X: state.arrowsInfo[3].defaultX, pincer: true, arrowID: 3 })
+											arrowMove({ Y: state.arrowsInfo[1].defaultY, X: state.arrowsInfo[1].defaultX, pincer: true, arrowID: 1 })
+											arrowMove({ Y: state.arrowsInfo[3].defaultY+(state.downScroll ? -70 : 70), X: state.arrowsInfo[3].defaultX, pincer: true, rotation: state.downScroll ? -45 : 45, arrowID: 3 })
+											arrowMove({ Y: state.arrowsInfo[0].defaultY+(state.downScroll ? -70 : 70), X: state.arrowsInfo[0].defaultX, pincer: true, rotation: state.downScroll ? 45 : -45, arrowID: 0 })
 										},
 										11: () => {
 											pincerPrepare({ arrowID: 0, goAway: true })
@@ -240,16 +258,16 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 											pincerPrepare({ arrowID: 0, goAway: false })
 										},
 										13: () => {
-											arrowMove({ Y: state.arrowsInfo[3].defaultY+80, pincer: true, rotation: 0, arrowID: 3 })
-											arrowMove({ Y: state.arrowsInfo[0].defaultY-80, pincer: true, rotation: 0, arrowID: 0 })
+											arrowMove({ Y: state.arrowsInfo[3].defaultY+80, pincer: true, arrowID: 3 })
+											arrowMove({ Y: state.arrowsInfo[0].defaultY-80, pincer: true, arrowID: 0 })
 										},
 										14: () => {
 											arrowMove({ X: state.arrowsInfo[0].defaultX, pincer: true, speed: 20, arrowID: 3 })
 											arrowMove({ X: state.arrowsInfo[3].defaultX, pincer: true, speed: 20, arrowID: 0 })
 										},
 										15: () => {
-											arrowMove({ Y: state.arrowsInfo[3].defaultY, X: state.arrowsInfo[0].defaultX, pincer: true, arrowID: 3 })
-											arrowMove({ Y: state.arrowsInfo[0].defaultY, X: state.arrowsInfo[3].defaultX, pincer: true, arrowID: 0 })
+											arrowMove({ Y: state.arrowsInfo[3].defaultY, X: state.arrowsInfo[0].defaultX, rotation: 0, pincer: true, arrowID: 3 })
+											arrowMove({ Y: state.arrowsInfo[0].defaultY, X: state.arrowsInfo[3].defaultX, rotation: 0, pincer: true, arrowID: 0 })
 										},
 										16: () => {
 											pincerPrepare({ arrowID: 3, goAway: true })
@@ -258,8 +276,8 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 											pincerPrepare({ arrowID: 1, goAway: false })
 										},
 										17: () => {
-											arrowMove({ Y: state.arrowsInfo[2].defaultY+80, pincer: true, rotation: 0, arrowID: 2 })
-											arrowMove({ Y: state.arrowsInfo[1].defaultY-80, pincer: true, rotation: 0, arrowID: 1 })
+											arrowMove({ Y: state.arrowsInfo[2].defaultY+80, pincer: true, arrowID: 2 })
+											arrowMove({ Y: state.arrowsInfo[1].defaultY-80, pincer: true, arrowID: 1 })
 										},
 										18: () => {
 											arrowMove({ X: state.arrowsInfo[1].defaultX, pincer: true, arrowID: 2 })
@@ -267,7 +285,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 										},
 										19: () => {
 											arrowMove({ Y: state.arrowsInfo[2].defaultY, X: state.arrowsInfo[1].defaultX, pincer: true, arrowID: 2 })
-											arrowMove({ Y: state.arrowsInfo[1].defaultY, X: state.arrowsInfo[2].defaultX,pincer: true,  arrowID: 1 })
+											arrowMove({ Y: state.arrowsInfo[1].defaultY, X: state.arrowsInfo[2].defaultX, pincer: true,  arrowID: 1 })
 										},
 										20: () => {
 											pincerPrepare({ arrowID: 2, goAway: true })
@@ -275,7 +293,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 										},
 										21: () => {
 											for (let i in state.arrowsInfo) {
-												arrowMove({ Y: state.arrowsInfo[i].defaultY, X: state.arrowsInfo[i].defaultX, rotation: 0, speed: 20, arrowID: i})
+												arrowMove({ /*Y: state.arrowsInfo[i].defaultY,*/ X: state.arrowsInfo[i].defaultX, rotation: 0, speed: 20, arrowID: i})
 												setTimeout(() => state.arrowsInfo[i].resetEnable = true, 2000)
 											}
 										},
@@ -302,8 +320,10 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
                     clearInterval(loop)
 					state.screenZoom = 0
 					state.screenRotation = 0
+					state.screenXMovement = 0
+                    state.screenYMovement = 0
                 }
-            }, 1000/50)
+            }, 1000/40)
             break
     }
 }

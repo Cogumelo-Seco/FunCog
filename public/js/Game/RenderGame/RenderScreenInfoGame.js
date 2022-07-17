@@ -8,10 +8,13 @@ module.exports = async (canvas, game, Listener) => {
 
     ctx.fillText(musicInfoTxt, canvas.width/2-(ctx.measureText(musicInfoTxt).width/2), canvas.height-20);
 
+    ctx.fillStyle = `hsl(${game.state.rainbowColor}, 100%, 40%)`
     ctx.font = `bold 10px Arial`
-    ctx.fillText(`Difficulty: ${game.state.musicInfo.difficulty}`, 5, canvas.height-10);
-    ctx.fillText(`Beat: ${game.state.musicBeat}`, 5, canvas.height-20);
-    ctx.fillText(`Step: ${game.state.musicStep}`, 5, canvas.height-30);    
+    ctx.fillText(`Difficulty: ${game.state.musicInfo.difficulty}`, 2, canvas.height-5);
+    ctx.fillText(`Beat: ${game.state.musicBeat}`, 2, canvas.height-15);
+    ctx.fillText(`Step: ${game.state.musicStep}`, 2, canvas.height-25); 
+
+    ctx.fillStyle = 'rgb(200, 200, 200)'   
     
     let introImage = game.state.images[`intro/${game.state.countdown}.png`]
     if (game.state.countdown >= 0 && introImage) {

@@ -1,8 +1,14 @@
 export default function createListener() {
     const state = {
-        mobile: false,
+        buttons: {},
         keys: {},
-        arrows: { },
+        arrows: {},
+        mouseInfo: {
+            x: NaN,
+            y: NaN,
+            mouseOnHover: false,
+            mouseInfoType: 'percent',
+        },
         keyBindings: {
             0: (key) => key == 'ArrowLeft' || key == 'KeyD',
             1: (key) => key == 'ArrowDown' || key == 'KeyF',
@@ -11,7 +17,39 @@ export default function createListener() {
         }
     }
 
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) state.mobile = true
+    require('./ListenerFunctions/addButtons')(state)
+
+    document.onmousemove = (event) => {
+        state.mouseInfo.x = event.pageX/window.innerWidth
+        state.mouseInfo.y = event.pageY/window.window.innerHeight
+
+        let X = Math.floor(event.pageX/window.innerWidth*1000)
+        let Y = Math.floor(event.pageY/window.window.innerHeight*1000)
+        
+        let onAButton = false
+        if (state.game) for (let i in state.buttons) {
+            let button = state.buttons[i]
+            if (X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.gameStage.includes(state.game.state.gameStage)) {                
+                if (!button.over && button.onOver) button.onOver()
+                button.over = true
+                if (button.pointer) {
+                    onAButton = true                    
+                    state.mouseInfo.mouseOnHover = true
+                }
+            } else button.over = false
+        }
+        if (!onAButton) state.mouseInfo.mouseOnHover = false
+    }
+
+    document.addEventListener('click', (event) => {
+        let X = Math.floor(event.pageX/window.innerWidth*1000)
+        let Y = Math.floor(event.pageY/window.window.innerHeight*1000)
+
+        if (state.game) for (let i in state.buttons) {
+            let button = state.buttons[i]
+            if (X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.onClick && button.gameStage.includes(state.game.state.gameStage)) button.onClick()
+        }
+    })
 
     document.addEventListener('keydown', (event) => handleKeys({ event, on: true }))
     document.addEventListener('keyup', (event) => handleKeys({ event, on: false }))

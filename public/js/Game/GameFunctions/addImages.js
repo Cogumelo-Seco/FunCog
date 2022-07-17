@@ -1,9 +1,14 @@
 module.exports = async (state) => {
     state.images = [
+        'imgs/cursor.png',
+        'imgs/cursor-hover.png',
+
+        /* ---- */
+
         'icons/icon-bf.png',
         'icons/icon-face.png',
 
-        /* ----*/
+        /* ---- */
 
         'Arrows/Arrow-0.png',
         'Arrows/Arrow-0-note.png',
