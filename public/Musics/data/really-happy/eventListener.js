@@ -1,4 +1,13 @@
 module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, state) => {
+    state.animations['sadmouseJumpscare'] = {
+		frame: 0,
+		startFrame: 0,
+		endFrame: 2,
+		totalDalay: 1,
+		dalay: 0,
+        loop: true,
+	}
+
     switch (type) {
         case 'noteClick':
             if (noteClickAuthor == 'player' && note?.type != 'normal' && !notes?.find(n => n.type == 'normal')) {
@@ -34,15 +43,16 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, s
                                 } else if (event[1] == 'Add Camera Zoom') {
                                     state.screenZoom += 5
                                 } else if (event[1] == 'Add Jumpscare') {
-                                    state.musicInfo.jumpscareImage = {
-                                        dir: `jumpscares/sadmouse-jumpscare-{{frame}}.png`,
-                                        random: true,
-                                        frame: 0,
-                                        minFrame: 0,
-                                        maxFrame: 2
+                                    state.musicInfo.popups.sadmouseJumpscare = {
+                                        image: 'jumpscares/sadmouse-jumpscare-{{frame}}.png',
+                                        x: 0,
+                                        y: 0,
+                                        width: state.canvas.width,
+                                        height: state.canvas.height,
+                                        animation: 'sadmouseJumpscare',
                                     }
                                 } else if (event[1] == 'Remove Jumpscare') {
-                                    state.musicInfo.jumpscareImage = null
+                                    delete state.musicInfo.popups.sadmouseJumpscare
                                 }
                             }
                         }, 1000/50)

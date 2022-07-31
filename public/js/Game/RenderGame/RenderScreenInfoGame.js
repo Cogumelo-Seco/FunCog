@@ -12,6 +12,10 @@ module.exports = async (canvas, game, Listener) => {
     ctx.fillText(`Difficulty: ${game.state.musicInfo.difficulty}`, 2, canvas.height-5);
     ctx.fillText(`Beat: ${game.state.musicBeat}`, 2, canvas.height-15);
     ctx.fillText(`Step: ${game.state.musicStep}`, 2, canvas.height-25); 
+    if (game.state.musicInfo.dev) {
+        ctx.fillStyle = 'rgb(255, 66, 66)'
+        ctx.fillText(`In development`, 2, canvas.height-35); 
+    }
     
     let introImage = game.state.images[`intro/${game.state.countdown}.png`]
     if (game.state.countdown >= 0 && introImage) {

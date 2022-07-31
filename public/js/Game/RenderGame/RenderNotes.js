@@ -86,7 +86,7 @@ module.exports = async (canvas, game, Listener) => {
         let arrowInfo = game.state.arrowsInfoOpponent[note.arrowID]
         
         let noteY = game.state.downScroll ? (arrowInfo?.Y || arrowYOpponent)+note.Y : (arrowInfo?.Y || arrowYOpponent)-note.Y
-        if (note.Y >= 0 && game.state.opponentArrows[note.arrowID] && !note.clicked && !note.disabled) {
+        if (note.Y >= 0 && game.state.opponentArrows[note.arrowID] && !note.clicked && !note.disabled && note.errorWhenNotClicking) {
             game.state.musicEventListener('noteClick', { noteClickAuthor: 'bot' }, game.state)
             note.clicked = true
         }
@@ -104,7 +104,6 @@ module.exports = async (canvas, game, Listener) => {
                 holdImage = newHoldImage ? game.state.images[newHoldImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type]?.frame)] : holdImage
                 holdEndImage = newHoldEndImage ? game.state.images[newHoldEndImage.replace(/{{arrowID}}/g, note.arrowID).replace(/{{frame}}/g, game.state.animations[note.type]?.frame)] : holdEndImage
             }
-            ctx.globalAlpha = note.disabled ? 0.2 : arrowInfo.noteAlpha
 
             if (note.hold && arrowImage && holdImage && holdEndImage) {
                 let holdY = noteY
@@ -115,6 +114,7 @@ module.exports = async (canvas, game, Listener) => {
                 for (let i = 0;i <= note.hold;i += holdImage?.height) {
                     holdY = game.state.downScroll ? holdY-(holdImage.height**resizeNoteOpponent) : holdY+holdImage.height**resizeNoteOpponent
                     holdYInRelationToTheLine = game.state.downScroll ? holdY-arrowYOpponent : arrowYOpponent-holdY
+                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
                         if (i+holdImage?.height >= note.hold) {
@@ -135,6 +135,8 @@ module.exports = async (canvas, game, Listener) => {
             }
 
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage) {
+                ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha
+                
                 let arrowWidth = arrowImage.width**resizeNoteOpponent
                 let arrowHeight = arrowImage.height**resizeNoteOpponent
                 let currentArrowX = arrowInfo.X-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)

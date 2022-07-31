@@ -21,9 +21,21 @@ module.exports = function renderGame(canvas, game, Listener) {
 
     for (let i in game.state.musics) {
         let music = game.state.musics[i]
+        let alertImage = game.state.images['QTAlerts/alert-0.png']
+        let X = canvas.width*0.2-(Math.abs(canvas.height/2-Y))
         ctx.fillStyle = music.menuColor || 'rgb(255, 255, 255)'
+        ctx.font = `bold 40px Arial`
 
-        ctx.fillText(music.name, canvas.width*0.2-(Math.abs(canvas.height/2-Y)), Y);
+        ctx.fillText(music.name, X, Y);
+
+        if (music.dev && alertImage) {
+            let txtWidth = ctx.measureText(music.name).width
+            ctx.font = `bold 10px Arial`
+            ctx.fillStyle = 'rgb(255, 66, 66)'
+
+            ctx.drawImage(alertImage, X+txtWidth+5, Y-28, 30, 30)
+            ctx.fillText('In development', X+txtWidth+30, Y-(30/2));
+        }
 
         Y += 70
     }

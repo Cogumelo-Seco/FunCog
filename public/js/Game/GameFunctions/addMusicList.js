@@ -252,6 +252,115 @@ module.exports = async (state) => {
             backgroundImage: 'backgrounds/qt.png',
             mod: 'QT'
         },
+
+        {
+            name: 'Too-slow',
+            menuColor: 'rgb(0, 0, 110)',
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'SonicEXE',
+            dev: true
+        },
+        {
+            name: 'You-cant-run',
+            menuColor: 'rgb(0, 0, 110)',
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'SonicEXE',
+            dev: true
+        },
+        {
+            name: 'Triple-trouble',
+            menuColor: 'rgb(0, 0, 110)',
+            difficulties: [ 1, 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'SonicEXE',
+            dev: true
+        },
+        {
+            name: 'Cycles',
+            menuColor: 'rgb(0, 0, 110)',
+            difficulties: [ 1, 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'SonicEXE',
+            dev: true
+        },
+        {
+            name: 'Endless',
+            menuColor: 'rgb(0, 0, 110)',
+            difficulties: [ 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'SonicEXE',
+            dev: true
+        },
+        {
+            name: 'Sunshine',
+            menuColor: 'rgb(0, 0, 110)',
+            difficulties: [ 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'SonicEXE',
+            dev: true
+        },
+        {
+            name: 'Chaos',
+            menuColor: 'rgb(0, 0, 110)',
+            difficulties: [ 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'SonicEXE',
+            dev: true
+        },
+        {
+            name: 'Faker',
+            menuColor: 'rgb(0, 0, 110)',
+            difficulties: [ 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'SonicEXE',
+            dev: true
+        },
+        {
+            name: 'Black-sun',
+            menuColor: 'rgb(0, 0, 110)',
+            difficulties: [ 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'SonicEXE',
+            dev: true
+        },
+        {
+            name: 'Milk',
+            menuColor: 'rgb(0, 0, 110)',
+            difficulties: [ 1 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'SonicEXE',
+            dev: true
+        },
+        {
+            name: 'Too-fest',
+            menuColor: 'rgb(0, 0, 110)',
+            difficulties: [ 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'SonicEXE',
+            dev: true
+        },
+        {
+            name: 'Execution',
+            menuColor: 'rgb(0, 0, 110)',
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'SonicEXE',
+            dev: true
+        },
     ]
     
     return state.musics.length

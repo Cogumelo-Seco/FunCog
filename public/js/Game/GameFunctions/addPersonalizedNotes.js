@@ -17,7 +17,13 @@ module.exports = async (state) => {
             newArrowImage: `Arrows/pinkieSing/Arrow-{{arrowID}}-pinkieSing.png`,
             newHoldImage: `Arrows/pinkieSing/Arrow-pinkieSing-hold-piece.png`,
             newHoldEndImage: `Arrows/pinkieSing/Arrow-pinkieSing-hold-end.png`
-        }
+        },
+        sonicEXEStaticNote: {
+            newArrowImage: `Arrows/sonicEXEStaticNotes/Arrow-{{arrowID}}-sonicEXEStaticNote.png`,
+        },
+        sonicEXEphantomNote: {
+            newArrowImage: `Arrows/sonicEXEphantomNotes/Arrow-{{arrowID}}-sonicEXEphantomNote.png`,
+        },
     }
     
     return state.sounds.length

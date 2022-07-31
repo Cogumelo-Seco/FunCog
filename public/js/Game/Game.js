@@ -30,6 +30,8 @@ function createGame(Listener, canvas) {
         middleScroll: true,
         musicNotes: [],
         musicOpponentNotes: [],
+        musicOriginalNotes: [],
+        musicOriginalOpponentNotes: [],
         musicBPM: 1,
         musicBeat: 0,
         music: null,
@@ -113,9 +115,9 @@ function createGame(Listener, canvas) {
     const verifyClick = (command) => require('./GameFunctions/verifyClick')(command, state)
 
     async function start(command) {
-        let interval = setInterval(() => {
+        function gameLoop() {
             state.musicBeat = Number.parseInt((state.musicBPM/60)*state.music?.currentTime)
-            state.musicStep = Number.parseInt(state.music?.currentTime*1000/60)
+            state.musicStep = Number.parseInt(state.music?.currentTime*1000/95)
 
             if (state.musicBeat%10 == 0 && state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.05) state.musicVoice.currentTime = state.music.currentTime
 
@@ -211,6 +213,7 @@ function createGame(Listener, canvas) {
                     state.musicInfo.health -= 2.5
                     state.musicInfo.combo = 0
                     state.musicInfo.accuracyMedia.push(1)
+                    state.musicEventListener('passedNote', { note: state.musicNotes[i], listenerState: Listener.state }, state)
                 }
             }
 
@@ -239,7 +242,12 @@ function createGame(Listener, canvas) {
             }
 
             state.rainbowColor = state.rainbowColor >= 360 ? 0 : state.rainbowColor+1
-        }, 1000/40);
+
+            setTimeout(() => gameLoop(), 1000/40)
+        }
+        gameLoop()
+        
+        //let interval = setInterval(() => null, 1000/30);
     }
 
     async function loading(command) {
@@ -261,8 +269,8 @@ function createGame(Listener, canvas) {
 
         for (let i of state.images) {
             let img = new Image()
-            img.addEventListener('error',(e) => newLoad('ERROR: '+e.path[0].src))
-            img.addEventListener('load', (e) => newLoad(e.path[0].src)?.join('/'))
+            img.addEventListener('error',(e) => setTimeout(() => newLoad('ERROR: '+e.path[0].src), 1000))
+            img.addEventListener('load', (e) => newLoad(e.path[0].src))
             img.src = `/imgs/${i}`
             img.id = i
             state.images[i] = img
@@ -271,18 +279,24 @@ function createGame(Listener, canvas) {
         for (let i of state.sounds) {
             let sound = new Audio()
             sound.addEventListener('loadeddata', (e) => newLoad(e.path[0].src))
-            sound.addEventListener('error', (e) => newLoad('ERROR: '+e.path[0].src))
+            sound.addEventListener('error', (e) => setTimeout(() => newLoad('ERROR: '+e.path[0].src), 1000))
             sound.src = `/${i}`
             state.sounds[i] = sound
         }
 
         let interval = setInterval(() => {
-            if (state.loading.loaded >= state.loading.total) {
+            if (state.loading.loaded >= state.loading.total) {// || state.gameStage != 'loading') {
                 state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
                 clearInterval(interval)
-                if (!state.debug || state.gameStage == 'loading') setTimeout(() => state.gameStage = 'selectMusic', 500)
+                if (state.gameStage == 'loading') setTimeout(() => state.gameStage = 'selectMusic', 500)
             }
-        }, 10)
+        }, 1000/40)
+
+        setTimeout(() => {
+            state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
+            clearInterval(interval)
+            if (state.gameStage == 'loading') setTimeout(() => state.gameStage = 'selectMusic', 500)
+        }, 60000)
     }
     
     return {

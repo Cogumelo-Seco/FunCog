@@ -68,7 +68,7 @@ module.exports = async (canvas, game, Listener) => {
         let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}.png`]
         let arrowInfo = game.state.arrowsInfoOpponent[arrowID]
 
-        let note = game.state.musicOpponentNotes.find(n => !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2*2))
+        let note = game.state.musicOpponentNotes.find(n => n.errorWhenNotClicking && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2))
         if (note) {
             let pressImage = game.state.personalizedNotes[note.type]?.pressImage
             if (pressImage) arrowImage = game.state.images[pressImage.replace(/{{arrowID}}/g, arrowID).replace(/{{frame}}/g, game.state.animations.arrows.frame)]

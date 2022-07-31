@@ -1,7 +1,7 @@
 module.exports = async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
-    let musicBarWidth = canvas.width*0.5
+    let musicBarWidth = canvas.width*0.25
     let musicBarHeight = 20
 
     let musicDuration = game.state.music?.duration || 0
@@ -11,7 +11,7 @@ module.exports = async (canvas, game, Listener) => {
     ctx.fillStyle = 'rgb(100, 100, 100)'
     ctx.fillRect(canvas.width/2-musicBarWidth/2, 10, musicBarWidth, musicBarHeight)
 
-    ctx.fillStyle = 'rgb(19, 189, 0)'
+    ctx.fillStyle = `hsl(${musiPercent*720}, 100%, 40%)`//'rgb(19, 189, 0)'
     ctx.fillRect(canvas.width/2-musicBarWidth/2, 10, musicBarWidth*musiPercent, musicBarHeight)
 
     ctx.font = `bold 15px Arial`
@@ -25,10 +25,10 @@ module.exports = async (canvas, game, Listener) => {
 
     let healthBarWidth = canvas.width*0.5
     let healthBarHeight = 20
-    let healthBarY = game.state.downScroll ? 40 : canvas.height-60
+    let healthBarY = game.state.downScroll ? 40 : canvas.height-80
     let healthPercent = 1-(game.state.musicInfo.health > 100 ? 100 : game.state.musicInfo.health)/100 >= 1 ? 1 : 1-(game.state.musicInfo.health > 100 ? 100 : game.state.musicInfo.health)/100
 
-    ctx.fillStyle = 'rgb(19, 189, 0)'
+    ctx.fillStyle = 'rgb(49, 176, 209)'//'rgb(19, 189, 0)'
     ctx.fillRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth, healthBarHeight)
 
     ctx.fillStyle = 'red'

@@ -23,8 +23,8 @@ module.exports = (time, state) => {
     let rating = null
 
     if (time >= 170) rating = ratings[0]
-    else if (time <= 170 && time >= 100) rating = ratings[1]
-    else if (time <= 100 && time >= 50) rating = ratings[2]
+    else if (time <= 170 && time >= 120) rating = ratings[1]
+    else if (time <= 120 && time >= 75) rating = ratings[2]
     else rating = ratings[3]
 
     state.musicInfo.rating = rating

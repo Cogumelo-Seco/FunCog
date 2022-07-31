@@ -140,6 +140,7 @@ export default function createListener() {
                             notesImageDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].notesImageDir,
                             backgroundImage: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].backgroundImage,
                             mod: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].mod,
+                            dev: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].dev,
                             listenerState: state
                         })
                     }, 1500)

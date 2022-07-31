@@ -7,7 +7,7 @@ module.exports = async (canvas, game, Listener) => {
         else {
             let frame = game.state.musicInfo.jumpscareImage.frame
             if (frame > game.state.musicInfo.jumpscareImage.maxFrame) frame = game.state.musicInfo.jumpscareImage.minFrame
-            dir = dir.replace(/{{frame}}/g,frame)
+            dir = dir.replace(/{{frame}}/g, frame)
         }
         let jumpscareImage = game.state.images[dir]
 

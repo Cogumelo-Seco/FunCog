@@ -289,7 +289,7 @@ module.exports = async (state) => {
         'Arrows/hurtnotes-suicidemouse/Arrow-hurtnote-hold-piece.png',
         'Arrows/hurtnotes-suicidemouse/Arrow-hurtnote-hold-end.png',
 
-        /* --- */
+        /* ---- */
 
         'Arrows/pinkieSing/Arrow-0-pinkieSing.png',
         'Arrows/pinkieSing/Arrow-1-pinkieSing.png',
@@ -297,6 +297,20 @@ module.exports = async (state) => {
         'Arrows/pinkieSing/Arrow-3-pinkieSing.png',
         'Arrows/pinkieSing/Arrow-pinkieSing-hold-piece.png',
         'Arrows/pinkieSing/Arrow-pinkieSing-hold-end.png',
+
+        /* ---- */
+
+        'Arrows/sonicEXEStaticNotes/Arrow-0-sonicEXEStaticNote.png',
+        'Arrows/sonicEXEStaticNotes/Arrow-1-sonicEXEStaticNote.png',
+        'Arrows/sonicEXEStaticNotes/Arrow-2-sonicEXEStaticNote.png',
+        'Arrows/sonicEXEStaticNotes/Arrow-3-sonicEXEStaticNote.png',
+
+        /* ---- */
+
+        'Arrows/sonicEXEphantomNotes/Arrow-0-sonicEXEphantomNote.png',
+        'Arrows/sonicEXEphantomNotes/Arrow-1-sonicEXEphantomNote.png',
+        'Arrows/sonicEXEphantomNotes/Arrow-2-sonicEXEphantomNote.png',
+        'Arrows/sonicEXEphantomNotes/Arrow-3-sonicEXEphantomNote.png',
 
         /* ---- */
 
@@ -326,6 +340,34 @@ module.exports = async (state) => {
         'jumpscares/sadmouse-jumpscare-0.png',
         'jumpscares/sadmouse-jumpscare-1.png',
         'jumpscares/sadmouse-jumpscare-2.png',
+
+        /* ---- */
+
+        'jumpscares/sonicEXESimpleJump.png',
+
+        /* ---- */
+
+        'jumpscares/sonicJumpscares/sonicJumpscare-0.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-1.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-2.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-3.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-4.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-5.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-6.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-7.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-8.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-9.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-10.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-11.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-12.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-13.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-14.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-15.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-16.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-17.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-18.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-19.png',
+        'jumpscares/sonicJumpscares/sonicJumpscare-20.png',
 
         /* ---- */
 
@@ -359,6 +401,28 @@ module.exports = async (state) => {
         
         'imgs/QT/pincer-close.png',
         'imgs/QT/pincer-open.png',
+
+        /* ---- */
+
+        'sonicEXE/sonicEXEHitStatic/hitStatic-0.png',
+        'sonicEXE/sonicEXEHitStatic/hitStatic-1.png',
+        'sonicEXE/sonicEXEHitStatic/hitStatic-2.png',
+        'sonicEXE/sonicEXEHitStatic/hitStatic-3.png',
+        'sonicEXE/sonicEXEHitStatic/hitStatic-4.png',
+        'sonicEXE/sonicEXEHitStatic/hitStatic-5.png',
+        'sonicEXE/sonicEXEHitStatic/hitStatic-6.png',
+        'sonicEXE/sonicEXEHitStatic/hitStatic-7.png',
+        'sonicEXE/sonicEXEHitStatic/hitStatic-8.png',
+        'sonicEXE/sonicEXEHitStatic/hitStatic-9.png',
+
+        /* ---- */
+
+        'sonicEXE/sonicEXESimpleStatic/static-0.png',
+        'sonicEXE/sonicEXESimpleStatic/static-1.png',
+        'sonicEXE/sonicEXESimpleStatic/static-2.png',
+        'sonicEXE/sonicEXESimpleStatic/static-3.png',
+        'sonicEXE/sonicEXESimpleStatic/static-4.png',
+        'sonicEXE/sonicEXESimpleStatic/static-5.png',
     ]
     
     return state.images.length

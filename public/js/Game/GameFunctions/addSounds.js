@@ -17,6 +17,10 @@ module.exports = async (state) => {
         'Sounds/alertDouble.ogg',
         'Sounds/attack.ogg',
         'Sounds/attack-double.ogg',
+        'Sounds/hitStatic1.ogg',
+        'Sounds/simplejumpsound.ogg',
+        'Sounds/datOneSound.ogg',
+        'Sounds/sppok.ogg',
 
         'Musics/musics/tutorial/Inst.ogg',
 
@@ -111,6 +115,42 @@ module.exports = async (state) => {
 
         'Musics/musics/termination/Inst.ogg',
         'Musics/musics/termination/Voices.ogg',
+
+        'Musics/musics/endless/Inst.ogg',
+        'Musics/musics/endless/Voices.ogg',
+
+        'Musics/musics/too-slow/Inst.ogg',
+        'Musics/musics/too-slow/Voices.ogg',
+
+        'Musics/musics/you-cant-run/Inst.ogg',
+        'Musics/musics/you-cant-run/Voices.ogg',
+
+        'Musics/musics/triple-trouble/Inst.ogg',
+        'Musics/musics/triple-trouble/Voices.ogg',
+
+        'Musics/musics/cycles/Inst.ogg',
+        'Musics/musics/cycles/Voices.ogg',
+
+        'Musics/musics/sunshine/Inst.ogg',
+        'Musics/musics/sunshine/Voices.ogg',
+
+        'Musics/musics/chaos/Inst.ogg',
+        'Musics/musics/chaos/Voices.ogg',
+
+        'Musics/musics/faker/Inst.ogg',
+        'Musics/musics/faker/Voices.ogg',
+
+        'Musics/musics/black-sun/Inst.ogg',
+        'Musics/musics/black-sun/Voices.ogg',
+
+        'Musics/musics/milk/Inst.ogg',
+        'Musics/musics/milk/Voices.ogg',
+
+        'Musics/musics/too-fest/Inst.ogg',
+        'Musics/musics/too-fest/Voices.ogg',
+
+        'Musics/musics/execution/Inst.ogg',
+        'Musics/musics/execution/Voices.ogg',
     ]
 
     return state.sounds.length

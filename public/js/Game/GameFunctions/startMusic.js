@@ -1,4 +1,4 @@
-module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, listenerState }, state) => {
+module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState }, state) => {
     try {
         state.arrowsInfo = {},
         state.arrowsInfoOpponent = {},
@@ -17,6 +17,7 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, 
         state.musicInfo = {
             name,
             backgroundImage,
+            dev,
             defaultBackgroundImage: backgroundImage,
             difficulty: difficulty.name,
             hitNote: 0,
@@ -38,11 +39,17 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, 
         state.musicBPM = musicData.song.bpm
 
         for (let i in musicBPMs) {
-            for (let a in musicBPMs[i]) state.musicNotes.push(await getNoteinfo(musicBPMs[i][a], difficulty, musicData))
+            for (let a in musicBPMs[i]) {
+                state.musicOriginalNotes.push(musicBPMs[i][a])
+                state.musicNotes.push(await getNoteinfo(musicBPMs[i][a], difficulty, musicData))
+            }
         }
 
         for (let i in musicOpponentBPMs) {
-            for (let a in musicOpponentBPMs[i]) state.musicOpponentNotes.push(await getNoteinfo(musicOpponentBPMs[i][a], difficulty, musicData))
+            for (let a in musicOpponentBPMs[i]) {
+                state.musicOriginalOpponentNotes.push(musicOpponentBPMs[i][a])
+                state.musicOpponentNotes.push(await getNoteinfo(musicOpponentBPMs[i][a], difficulty, musicData))
+            }
         }
 
         // FILTRAR NOTAS EM POSIÇÕES IGUAIS
@@ -136,6 +143,22 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, 
                 type = 'pinkieSing'
             } else arrowID = note[1]%4
         }
+
+        if (mod == 'SonicEXE') {
+            if (note[3] == 2) {
+                arrowID = note[1]%4
+                disabled = difficulty.name == 'Mania' ? true : false
+                //errorWhenNotClicking = false
+                type = 'sonicEXEStaticNote'
+            } else if (note[3]) {
+                arrowID = note[1]%4
+                disabled = difficulty.name == 'Mania' ? true : false
+                errorWhenNotClicking = false
+                type = 'sonicEXEphantomNote'
+            }
+        }
+
+        //console.log(note)
 
         return {
             Y: NaN,

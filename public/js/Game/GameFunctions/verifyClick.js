@@ -12,11 +12,11 @@ module.exports = async({ arrowID, listenerState }, state) => {
     for (let i in notes) {
         state.musicEventListener('noteClick', { noteClickAuthor: 'player', note: notes[i], notes, listenerState }, state)
 
+        notes[i].clicked = true
         if (notes[i].type == 'normal') {
             state.musicInfo.health += 2
             state.musicInfo.combo += 1
             listenerState.arrows[arrowID].state = 'onNote'
-            notes[i].clicked = true
         }
 
         if (state.personalizedNotes[notes[i].type]) {
