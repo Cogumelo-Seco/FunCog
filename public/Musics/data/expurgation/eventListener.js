@@ -1,11 +1,29 @@
 module.exports = async (type, { noteClickAuthor, note, notes, listenerState, difficulty }, state) => {
+    state.animations['hitKillNote'] = {
+        frame: 0,
+        startFrame: 1,
+        endFrame: 6,
+        totalDalay: 40,
+        dalay: 0,
+        loop: true
+    }
+    
     switch (type) {
         case 'noteClick':
             if (noteClickAuthor == 'player' && note?.type == 'hitKillNote' && !notes?.find(n => n.type == 'normal'))
                 state.musicInfo.health = -100
             break
-        /*case 'started':
-			let oldStep = 0
+        case 'started':
+            let loop = setInterval(() => {
+                if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
+                    clearInterval(loop)
+					state.screenZoom = 0
+
+					delete state.animations['hitKillNote']
+                }
+            }, 1000/30)
+            break
+			/*let oldStep = 0
             if (difficulty.name == 'Mania') return
 
             let loop = setInterval(() => {

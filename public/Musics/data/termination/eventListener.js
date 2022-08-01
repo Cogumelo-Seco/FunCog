@@ -164,7 +164,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 						let values = events[i][1][a]
 
 						if (oldCurrentTime*1000 <= time && currentTime*1000 >= time) {
-							if (difficulty.name != 'Mania' || values[0] == 'TerminationIntro' || values[0] == 'TerminationOutro') switch(values[0]) {
+							if (difficulty.name != 'Mania' || values[0] == 'streetBG state' || values[0] == 'TerminationIntro' || values[0] == 'TerminationOutro') switch(values[0]) {
 								case 'TerminationIntro':
 									intro_outro(values[2] == 'player', Number(values[1]), 0.04)
 									break
@@ -182,13 +182,13 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 									break
 								case 'KB_AttackFire':
 									state.playSong('Sounds/attack.ogg')
-									setTimeout(() => {
+									if (!state.botPlay) setTimeout(() => {
 										if (!listenerState.keys['Space'] || listenerState.keys['Space']?.lastClickTime && listenerState.keys['Space']?.time-listenerState.keys['Space']?.lastClickTime <= 100 || listenerState.keys['Space']?.time+220 < +new Date()) state.musicInfo.health = -100
 									}, 145)
 									break
 								case 'KB_AttackFireDOUBLE':
 									state.playSong('Sounds/attack-double.ogg')
-									setTimeout(() => {
+									if (!state.botPlay) setTimeout(() => {
 										if (!listenerState.keys['Space'] || listenerState.keys['Space']?.time+220 < +new Date()) state.musicInfo.health = -100
 									}, 145)
 									break
@@ -322,6 +322,9 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 					state.screenRotation = 0
 					state.screenXMovement = 0
                     state.screenYMovement = 0
+
+					delete state.animations['QTScreenShake']
+					delete state.animations['QTAlerts']
                 }
             }, 1000/40)
             break

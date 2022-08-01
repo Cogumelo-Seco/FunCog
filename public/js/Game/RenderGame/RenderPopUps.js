@@ -6,7 +6,6 @@ module.exports = async (canvas, game, Listener) => {
         let image = popup.image?.replace(/{{frame}}/g, game.state.animations[popup.animation]?.frame)
         image = game.state.images[image]
         if (image) {
-
             let popupWidth = (popup.width || image.width)*(popup.resize || 1)
             let popupHeight = (popup.height || image.height)*(popup.resize || 1)
             let popupX = popup.x

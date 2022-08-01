@@ -29,7 +29,10 @@ export default function createListener() {
         let onAButton = false
         if (state.game) for (let i in state.buttons) {
             let button = state.buttons[i]
-            if (X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.gameStage.includes(state.game.state.gameStage)) {                
+            if (
+                button.gameStage && button.gameStage.includes(state.game.state.gameStage) && X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY ||
+                !button.gameStage && X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY
+            ) {
                 if (!button.over && button.onOver) button.onOver()
                 button.over = true
                 if (button.pointer) {
@@ -47,7 +50,10 @@ export default function createListener() {
 
         if (state.game) for (let i in state.buttons) {
             let button = state.buttons[i]
-            if (X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.onClick && button.gameStage.includes(state.game.state.gameStage)) button.onClick()
+            if (
+                button.gameStage && button.gameStage.includes(state.game.state.gameStage) && X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.onClick ||
+                !button.gameStage && X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.onClick
+            ) button.onClick()
         }
     })
 

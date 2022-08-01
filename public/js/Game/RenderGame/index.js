@@ -17,10 +17,10 @@ module.exports = function renderGame(canvas, game, Listener) {
             require('./RenderScreenGame')(canvas, game, Listener)
             require('./RenderArrows')(canvas, game, Listener)
             require('./RenderNotes')(canvas, game, Listener)
+            require('./RenderBongoCat')(canvas, game, Listener)
             require('./RenderBars')(canvas, game, Listener)
             require('./RenderScreenInfoGame')(canvas, game, Listener)
             require('./RenderPopUps')(canvas, game, Listener)
-            //require('./RenderJumpscares')(canvas, game, Listener)
             break
         case 'selectMusic':
             require('./RenderMusicSelectScreen')(canvas, game, Listener)

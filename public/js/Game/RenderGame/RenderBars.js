@@ -40,7 +40,7 @@ module.exports = async (canvas, game, Listener) => {
 
     function drawIcon({ dir, flipY, pos }) {
         let iconImage = game.state.images[dir]
-        let iconResize = 0.9+(game.state.musicStep%6/200)
+        let iconResize = 0.9+(game.state.animations.icons.frame%6/200)
         let iconWidth = iconImage.width/2
         let iconHeight = iconImage.height
         let iconX = canvas.width/2-healthBarWidth/2+(healthBarWidth*healthPercent)-(flipY ? 10 : iconWidth**iconResize-10)
@@ -57,8 +57,8 @@ module.exports = async (canvas, game, Listener) => {
         ctx.restore();
     }
 
-    drawIcon({ dir: 'icons/icon-bf.png', pos: healthPercent >= 0.80 ? 2 : 1, flipY: true })
-    drawIcon({ dir: 'icons/icon-face.png', pos: healthPercent <= 0.30 ? 2 : 1 })
+    drawIcon({ dir: game.state.botPlay ? 'icons/BongoCat.png' : 'icons/icon-bf.png', pos: healthPercent >= 0.80 ? 2 : 1, flipY: true })
+    drawIcon({ dir: 'icons/icon-face.png', pos: healthPercent <= 0.20 ? 2 : 1 })
     
     function formatTime(time) {
         if (!time) time = 0

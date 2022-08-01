@@ -17,8 +17,33 @@ module.exports = async (canvas, game, Listener) => {
         let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}.png`]
         let arrowInfo = game.state.arrowsInfo[arrowID]
 
-        let autoClickNote = game.state.musicNotes.find(n => n.autoClick && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2*2))
+        let autoClickNote = game.state.musicNotes.find(n => 
+            n.autoClick && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2) ||
+            game.state.botPlay && n.errorWhenNotClicking && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2)
+        )
+
+        if (game.state.botPlay) Listener.state.arrows[arrowID].click = false
         if (Listener.state.arrows[arrowID]?.click || autoClickNote) {
+            if (game.state.botPlay) {
+                Listener.state.arrows[arrowID].state = 'onNote'
+                Listener.state.arrows[arrowID].click = true
+
+                if (!autoClickNote.clicked) {
+                    autoClickNote.clicked = true
+                    
+                    game.state.animations.ratingImage.frame = 0
+                    game.state.calculateRating(0)
+                    game.state.musicInfo.accuracyMedia = [ 100 ]
+                    game.state.musicInfo.hitNote = Math.random()*10-5
+                    game.state.musicInfo.score += 200
+    
+                    game.state.musicInfo.health += 2
+                    game.state.musicInfo.combo += 1
+                } else {
+                    game.state.musicInfo.health += 0.05
+                    game.state.musicInfo.score += 20
+                }
+            }
             let onNote = Listener.state.arrows[arrowID]?.state == 'onNote' || autoClickNote
 
             if (onNote || Listener.state.arrows[arrowID]?.state == 'noNote') arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}-press-${onNote ? game.state.animations.arrows.frame : game.state.animations.arrows.frame%2}${onNote ? '' : '-no'}.png`]
@@ -70,6 +95,7 @@ module.exports = async (canvas, game, Listener) => {
 
         let note = game.state.musicOpponentNotes.find(n => n.errorWhenNotClicking && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2))
         if (note) {
+            if (game.state.musicInfo.health > 5 && game.state.music?.currentTime > 1) game.state.musicInfo.health -= 0.05
             let pressImage = game.state.personalizedNotes[note.type]?.pressImage
             if (pressImage) arrowImage = game.state.images[pressImage.replace(/{{arrowID}}/g, arrowID).replace(/{{frame}}/g, game.state.animations.arrows.frame)]
             else arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}-press-${game.state.animations.arrows.frame}.png`]
@@ -102,13 +128,7 @@ module.exports = async (canvas, game, Listener) => {
             if (game.state.countdown < 0)  ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
 
             ctx.restore()
-            //if (!arrowImage.id.includes('press')) game.state.positionArrowOpponent[arrowID] = arrowXOpponent
             ctx.globalAlpha = 1
-
-            /*ctx.globalAlpha = game.state.arrowsAlphaOpponent
-            ctx.drawImage(arrowImage, arrowXOpponent-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2), arrowYOpponent-((arrowImage.height**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2), arrowImage.width**resizeNoteOpponent, arrowImage.height**resizeNoteOpponent)
-            if (!arrowImage.id.includes('press')) game.state.positionArrowOpponent[arrowID] = arrowXOpponent+
-            ctx.globalAlpha = 1*/
         }
 
         arrowXOpponent += arrowsSize**resizeNoteOpponent+spaceBetweenArrows

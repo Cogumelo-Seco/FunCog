@@ -5,6 +5,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 		endFrame: 9,
 		totalDalay: 1,
 		dalay: 0,
+		loop: true
 	}
 	state.animations['sonicEXESimpleStatic'] = {
 		frame: 0,
@@ -17,7 +18,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 		frame: 0,
 		startFrame: 0,
 		endFrame: 20,
-		totalDalay: 15,
+		totalDalay: 50,
 		dalay: 0,
 	}
 
@@ -61,7 +62,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 				}
 
                 state.animations.sonicEXESimpleStatic.frame = 0
-				setTimeout(() => delete state.musicInfo.popups.sonicEXESimpleStatic, 300)
+				setTimeout(() => delete state.musicInfo.popups.sonicEXESimpleStatic, 200)
 			}
 
 			function doSimpleJump() {
@@ -77,27 +78,32 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 			}
 
 			function doJumpscare() {
-				/*let image = state.images['jumpscares/sonicJumpscares/sonicJumpscare-0.png']
-				state.musicInfo.popups.sonicEXEJumpscare = {
-					image: 'jumpscares/sonicJumpscares/sonicJumpscare-{{frame}}.png',
-					x: state.canvas.width/2-(image.width/2),
-					y: state.canvas.height-(image.height/2),
-					animation: 'sonicJumpscare'
-				}
-				state.animations.sonicJumpscare.frame = 0
-				/*let verifyInterval = setInterval(() => {
-					if (state.animations.sonicJumpscare.frame >= state.animations.sonicJumpscare.endFrame) {
-						clearInterval(verifyInterval)
+				let frame = 0
+				//state.animations.sonicJumpscare.frame = state.animations.sonicJumpscare.startFrame
+				let loop = setInterval(() => {
+					frame += 1
+					let image = state.images[`jumpscares/sonicJumpscares/sonicJumpscare-${frame}.png`]
+
+					state.musicInfo.popups.sonicEXEJumpscare = {
+						image: `jumpscares/sonicJumpscares/sonicJumpscare-${frame}.png`,
+						x: state.canvas.width/2-(image.width/2),
+						y: state.canvas.height-(image.height/2),
+					}
+
+					if (frame >= state.animations.sonicJumpscare.endFrame) {
+						clearInterval(loop)
 						delete state.musicInfo.popups.sonicEXEJumpscare
 					}
-				}, 1000/40)
-				setTimeout(() => delete state.musicInfo.popups.sonicEXEJumpscare, 2000)
+				}, 1000/state.animations.sonicJumpscare.totalDalay)
+				//setTimeout(() => delete state.musicInfo.popups.sonicEXEJumpscare, 2000)
 
 				state.playSong('Sounds/datOneSound.ogg')
 				//setTimeout(() => delete state.musicInfo.popups.sonicEXEJumpscare, 250)*/
 			}
 
-			setTimeout(() => doJumpscare(), 3000)
+			/*setTimeout(() => doJumpscare(), 3000)
+			setTimeout(() => doJumpscare(), 8000)
+			setTimeout(() => doJumpscare(), 15000)*/
 
             let loop = setInterval(() => {
 				let beat = state.musicBeat
@@ -115,7 +121,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 
 				//if (beat%30 == 0 && beat != oldBeat) doStaticSign()
 
-				if (step >= 1723 && oldStep <= 1723) doJumpscare();
+				//if (step >= 1723 && oldStep <= 1723) doJumpscare();
 				//if (step >= 1900 && oldStep <= 1900) doJumpscare();
 
 				/*case 1723:
@@ -259,6 +265,10 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
                 if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
                     clearInterval(loop)
 					state.screenZoom = 0
+
+					delete state.animations['sonicEXEHitStatic']
+					delete state.animations['sonicEXESimpleStatic']
+					delete state.animations['sonicJumpscare']
                 }
             }, 1000/30)
             break

@@ -9,7 +9,7 @@ module.exports = async({ arrowID, listenerState }, state) => {
         n.Y <= (state.arrowsSize**state.resizeNote)
     })
 
-    for (let i in notes) {
+    if (!state.botPlay) for (let i in notes) {
         state.musicEventListener('noteClick', { noteClickAuthor: 'player', note: notes[i], notes, listenerState }, state)
 
         notes[i].clicked = true

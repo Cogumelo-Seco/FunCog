@@ -28,11 +28,14 @@ function createGame(Listener, canvas) {
         amountOfArrows: 3,
         downScroll: true,
         middleScroll: true,
+        botPlay: false,
         musicNotes: [],
         musicOpponentNotes: [],
         musicOriginalNotes: [],
         musicOriginalOpponentNotes: [],
         musicBPM: 1,
+        totalMusicSteps: 0,
+        totalMusicPos: 0,
         musicBeat: 0,
         music: null,
         musicVoice: null,
@@ -51,6 +54,14 @@ function createGame(Listener, canvas) {
         screenRotation: 0,
 
         animations: {
+            icons: {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 10,
+                totalDalay: 4,
+                dalay: 0,
+                loop: true,
+            },
             ratingImage: {
                 frame: 0,
                 startFrame: 0,
@@ -116,8 +127,29 @@ function createGame(Listener, canvas) {
 
     async function start(command) {
         function gameLoop() {
-            state.musicBeat = Number.parseInt((state.musicBPM/60)*state.music?.currentTime)
-            state.musicStep = Number.parseInt(state.music?.currentTime*1000/95)
+            if (state.botPlay) {
+                state.musicInfo.misses = 0
+            }
+
+            /*
+            crochet = ((60 / bpm) * 1000);
+		stepCrochet = crochet / 4;
+
+        (((60 / state.musicBPM) * 1000)/4)
+        */
+
+            state.musicBeat = Number.parseInt(state.music?.currentTime*(state.musicBPM/60))
+            //state.musicStep = Number.parseInt(state.music?.currentTime*1000/95)
+            state.songPosition = (((60 / state.musicBPM) * 1000))*5
+
+            //state.musicStep = Number.parseInt((state.songPosition-state.totalMusicSteps)*(state.music?.currentTime/state.music?.duration))
+
+            //curStep = lastChange.stepTime + Math.floor((Conductor.songPosition - lastChange.songTime) / Conductor.stepCrochet);
+
+            state.musicStep = Number.parseInt(2000*(state.music?.currentTime/state.music?.duration))//state.totalMusicSteps + (state.songPosition-state.totalMusicPos/(state.songPosition/5/4))// + Number.parseInt((state.music?.currentTime*1000)/(state.songPosition/5/4))//Number.parseInt((state.songPosition-state.totalMusicPos)/(state.songPosition/5/4))
+            //state.musicStep = Number.parseInt(state.songPosition/(state.songPosition/5/4))//*(state.music?.currentTime/state.music?.duration))
+
+            //Number.parseInt((state.music?.currentTime*(state.songPosition/ (((60 / state.musicBPM) * 1000)/4)))/2)
 
             if (state.musicBeat%10 == 0 && state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.05) state.musicVoice.currentTime = state.music.currentTime
 
@@ -179,7 +211,7 @@ function createGame(Listener, canvas) {
                 }
             }
 
-            if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.debug && state.music?.currentTime > 3) {
+            if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.botPlay && !state.debug && state.music?.currentTime > 3) {
                 state.music?.pause()
                 state.musicVoice?.pause()
                 state.music.currentTime = 0
@@ -206,7 +238,7 @@ function createGame(Listener, canvas) {
 
             for (let i in state.musicNotes) {
                 state.musicNotes[i].Y = -((state.musicNotes[i].time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM))
-                if (state.musicNotes[i].errorWhenNotClicking && state.musicNotes[i].arrowID >= 0 && state.musicNotes[i].arrowID <= state.amountOfArrows && state.musicNotes[i].Y > 200 && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
+                if (state.musicNotes[i].errorWhenNotClicking && !state.botPlay && state.musicNotes[i].arrowID >= 0 && state.musicNotes[i].arrowID <= state.amountOfArrows && state.musicNotes[i].Y > 200 && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
                     state.musicNotes[i].disabled = true
                     state.musicInfo.misses += 1
                     state.musicInfo.score -= 50
@@ -269,7 +301,10 @@ function createGame(Listener, canvas) {
 
         for (let i of state.images) {
             let img = new Image()
-            img.addEventListener('error',(e) => setTimeout(() => newLoad('ERROR: '+e.path[0].src), 1000))
+            img.addEventListener('error',(e) => {
+                console.warn('ERROR: '+e.path[0].src)
+                newLoad('ERROR: '+e.path[0].src)
+            })
             img.addEventListener('load', (e) => newLoad(e.path[0].src))
             img.src = `/imgs/${i}`
             img.id = i
@@ -279,7 +314,10 @@ function createGame(Listener, canvas) {
         for (let i of state.sounds) {
             let sound = new Audio()
             sound.addEventListener('loadeddata', (e) => newLoad(e.path[0].src))
-            sound.addEventListener('error', (e) => setTimeout(() => newLoad('ERROR: '+e.path[0].src), 1000))
+            sound.addEventListener('error', (e) => {
+                console.warn('ERROR: '+e.path[0].src)
+                newLoad('ERROR: '+e.path[0].src)
+            })
             sound.src = `/${i}`
             state.sounds[i] = sound
         }
@@ -296,7 +334,7 @@ function createGame(Listener, canvas) {
             state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
             clearInterval(interval)
             if (state.gameStage == 'loading') setTimeout(() => state.gameStage = 'selectMusic', 500)
-        }, 60000)
+        }, 40000)
     }
     
     return {

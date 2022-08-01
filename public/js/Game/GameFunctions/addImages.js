@@ -1,5 +1,21 @@
 module.exports = async (state) => {
     state.images = [
+        'BongoCat/bg.png',
+        'BongoCat/arrow-0.png',
+        'BongoCat/arrow-1.png',
+        'BongoCat/arrow-2.png',
+        'BongoCat/arrow-3.png',
+        'BongoCat/leftHandUp.png',
+        'BongoCat/leftHand1.png',
+        'BongoCat/leftHand2.png',
+        'BongoCat/leftHand3.png',
+        'BongoCat/rightHandUp.png',
+        'BongoCat/rightHand1.png',
+        'BongoCat/rightHand2.png',
+        'BongoCat/rightHand3.png',
+
+        /* ---- */
+
         'imgs/cursor.png',
         'imgs/cursor-hover.png',
 
@@ -7,6 +23,7 @@ module.exports = async (state) => {
 
         'icons/icon-bf.png',
         'icons/icon-face.png',
+        'icons/BongoCat.png',
 
         /* ---- */
 

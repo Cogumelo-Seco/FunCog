@@ -35,7 +35,11 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, 
         let musicData = require(`../../../Musics/data/${name.toLowerCase()}/${name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)
         let musicBPMs = musicData.song.notes.filter(i => i.mustHitSection).map(i => i.sectionNotes)
         let musicOpponentBPMs = musicData.song.notes.filter(i => !i.mustHitSection).map(i => i.sectionNotes)
-    
+        let musicSteps = musicData.song.notes.map(n => n.lengthInSteps)
+        for (let i in musicSteps) {
+            state.totalMusicSteps += musicSteps[i]
+            state.totalMusicPos += ((60 / musicData.song.bpm) * 1000 / 4) * musicSteps[i];
+        }
         state.musicBPM = musicData.song.bpm
 
         for (let i in musicBPMs) {
