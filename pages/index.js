@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { io } from 'socket.io-client';
 import React, { useEffect } from 'react';
 import Head from "next/head";
 import createGame from '../public/js/Game/Game.js';
@@ -9,13 +10,26 @@ const Game = (props) => {
     const router = useRouter()
 
     useEffect(() => {
+        const socket = io(props.SERVER, {
+            withCredentials: true,
+        })
+
         const canvas = document.getElementById('gameCanvas')        
-        const Listener = createListener();
-        const game = createGame(Listener, canvas);
+        const Listener = createListener(socket);
+        const game = createGame(Listener, canvas, socket);
 
         game.loading({ Listener })
         Listener.state.game = game
         game.start()
+        
+        socket.on('listServers', (listServers) => {
+            game.state.selectServerOption.listServers = listServers
+            let server = listServers.find(s => s.id == game.state.serverId)
+            if (server && server.playerData2) {
+                game.state.waiting = false
+                game.state.musicInfoOpponent = game.state.musicInfo.playerId == 1 ? server.playerData2 : server.playerData1
+            }
+        })
 
         renderGame(canvas, game, Listener);
     }, [])
@@ -45,9 +59,11 @@ const Game = (props) => {
 }
 
 export async function getStaticProps() {
+    const SERVER = process.env.SERVER
+
     return {
         props: {
-            
+            SERVER,
         },
         revalidate: 1800
     }

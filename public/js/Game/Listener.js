@@ -1,4 +1,4 @@
-export default function createListener() {
+export default function createListener(socket) {
     const state = {
         buttons: {},
         keys: {},
@@ -136,10 +136,14 @@ export default function createListener() {
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
                 case 'Enter':
-                    state.musicMenu?.pause()
-                    state.game.playSong('Sounds/confirmMenu.ogg')
-                    setTimeout(() => {
+                    if (state.game.state.online) {
+                        state.musicMenu?.pause()
                         state.game.state.gameStage = 'game'
+                        socket.emit('newServer', {
+                            difficulty: state.game.state.selectMusicMenu.difficultySelected,
+                            music: state.game.state.selectMusicMenu.musicSelect
+                        })
+
                         state.game.startMusic({ 
                             name: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].name, 
                             difficulty: state.game.state.difficulties[state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].difficulties[state.game.state.selectMusicMenu.difficultySelected]],
@@ -149,7 +153,89 @@ export default function createListener() {
                             dev: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].dev,
                             listenerState: state
                         })
-                    }, 1500)
+                    } else {
+                        state.musicMenu?.pause()
+                        state.game.playSong('Sounds/confirmMenu.ogg')
+                        setTimeout(() => {
+                            state.game.state.gameStage = 'game'
+                            state.game.startMusic({ 
+                                name: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].name, 
+                                difficulty: state.game.state.difficulties[state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].difficulties[state.game.state.selectMusicMenu.difficultySelected]],
+                                notesImageDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].notesImageDir,
+                                backgroundImage: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].backgroundImage,
+                                mod: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].mod,
+                                dev: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].dev,
+                                listenerState: state
+                            })
+                        }, 1500)
+                    }
+                    break
+            }
+        }
+
+        if (state.game.state.gameStage == 'onlineServerList' && on) {
+            switch (keyPressed) {
+                case 'ArrowUp':
+                    state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect <= 0 ? state.game.state.selectServerOption.listServers.length-1 : state.game.state.selectServerOption.serverSelect-1
+                    state.game.playSong('Sounds/scrollMenu.ogg')
+                    break
+                case 'ArrowDown':
+                    state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect >= state.game.state.selectServerOption.listServers.length-1 ? 0 : state.game.state.selectServerOption.serverSelect+1
+                    state.game.playSong('Sounds/scrollMenu.ogg')
+                    break
+                case 'ArrowLeft':
+                    state.game.state.selectServerOption.createServer = true
+                    state.game.playSong('Sounds/scrollMenu.ogg')
+                    break
+                case 'ArrowRight':
+                    state.game.state.selectServerOption.createServer = false
+                    state.game.playSong('Sounds/scrollMenu.ogg')
+                    break
+                case 'Enter':
+                    if (state.game.state.selectServerOption.createServer) {
+                        state.game.state.gameStage = 'selectMusic'
+
+                        state.game.state.serverId = socket.id
+                    } else if (state.game.state.selectServerOption.listServers[0]) {
+                        let server = state.game.state.selectServerOption.listServers[state.game.state.selectServerOption.serverSelect]
+                        state.game.state.serverId = server.id
+
+                        if (state.game.state.serverId) {
+                            state.game.startMusic({ 
+                                name: state.game.state.musics[server.music].name, 
+                                difficulty: state.game.state.difficulties[state.game.state.musics[server.music].difficulties[server.difficulty]],
+                                notesImageDir: state.game.state.musics[server.music].notesImageDir,
+                                backgroundImage: state.game.state.musics[server.music].backgroundImage,
+                                mod: state.game.state.musics[server.music].mod,
+                                dev: state.game.state.musics[server.music].dev,
+                                listenerState: state,
+                                opponentPlayer: true,
+                            })
+
+                            socket.emit('connectServer', {
+                                serverId: state.game.state.serverId
+                            })
+
+                            state.game.state.gameStage = 'game'
+                        }
+                    }
+                    break
+            }
+        }
+
+        if (state.game.state.gameStage == 'menu' && on) {
+            switch (keyPressed) {
+                case 'ArrowUp':
+                    state.game.state.selectMenuOption.menuSelect = state.game.state.selectMenuOption.menuSelect <= 0 ? state.game.state.selectMenuOption.menuOptions.length-1 : state.game.state.selectMenuOption.menuSelect-1
+                    state.game.playSong('Sounds/scrollMenu.ogg')
+                    break
+                case 'ArrowDown':
+                    state.game.state.selectMenuOption.menuSelect = state.game.state.selectMenuOption.menuSelect >= state.game.state.selectMenuOption.menuOptions.length-1 ? 0 : state.game.state.selectMenuOption.menuSelect+1
+                    state.game.playSong('Sounds/scrollMenu.ogg')
+                    break
+                case 'Enter':
+                    state.game.state.gameStage = 'onlineServerList'
+                    socket.emit('getListServers')
                     break
             }
         }

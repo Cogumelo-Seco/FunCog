@@ -1,4 +1,4 @@
-module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState }, state) => {
+module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer }, state) => {
     try {
         state.arrowsInfo = {},
         state.arrowsInfoOpponent = {},
@@ -29,12 +29,13 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, 
             rating: {},
             health: 50,
             popups: [],
-            lastPopupTime: 0
+            lastPopupTime: 0,
+            playerId: opponentPlayer ? 2 : 1
         }
 
         let musicData = require(`../../../Musics/data/${name.toLowerCase()}/${name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)
-        let musicBPMs = musicData.song.notes.filter(i => i.mustHitSection).map(i => i.sectionNotes)
-        let musicOpponentBPMs = musicData.song.notes.filter(i => !i.mustHitSection).map(i => i.sectionNotes)
+        let musicBPMs = musicData.song.notes.filter(i => opponentPlayer ? !i.mustHitSection : i.mustHitSection).map(i => i.sectionNotes)
+        let musicOpponentBPMs = musicData.song.notes.filter(i => opponentPlayer ? i.mustHitSection : !i.mustHitSection).map(i => i.sectionNotes)
         let musicSteps = musicData.song.notes.map(n => n.lengthInSteps)
         for (let i in musicSteps) {
             state.totalMusicSteps += musicSteps[i]
@@ -86,17 +87,19 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, 
         state.musicVoice = state.sounds[`Musics/musics/${name.toLowerCase()}/Voices.ogg`]
 
         let interval = setInterval(() => {
-            state.countdown -= 1
-            if (state.countdown <= -1) {
-                clearInterval(interval)
+            if (state.online && !state.waiting || !state.online) {
+                state.countdown -= 1
+                if (state.countdown <= -1) {
+                    clearInterval(interval)
 
-                state.music?.play()
-                state.musicVoice?.play()
+                    state.music?.play()
+                    state.musicVoice?.play()
 
-                if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
+                    if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
 
-                state.musicEventListener('started', { difficulty, events: musicData.song.events, listenerState }, state)
-            } else state.playSong(`Sounds/intro${state.countdown}.ogg`)
+                    state.musicEventListener('started', { difficulty, events: musicData.song.events, listenerState }, state)
+                } else state.playSong(`Sounds/intro${state.countdown}.ogg`)
+            }
         }, 900-(musicData.song.bpm*2));
     } catch (err) {
         console.error(err)

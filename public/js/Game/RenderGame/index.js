@@ -22,6 +22,12 @@ module.exports = function renderGame(canvas, game, Listener) {
             require('./RenderScreenInfoGame')(canvas, game, Listener)
             require('./RenderPopUps')(canvas, game, Listener)
             break
+        case 'menu':
+            require('./RenderMenuScreen')(canvas, game, Listener)
+            break
+        case 'onlineServerList':
+            require('./RenderOnlineServerListScreen')(canvas, game, Listener)
+            break
         case 'selectMusic':
             require('./RenderMusicSelectScreen')(canvas, game, Listener)
             break

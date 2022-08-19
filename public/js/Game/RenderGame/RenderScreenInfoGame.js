@@ -2,11 +2,13 @@ module.exports = async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
     ctx.fillStyle = 'rgb(200, 200, 200)'
-    ctx.font = `bold 15px Arial`
+    ctx.font = `bold 13px Arial`
 
     let musicInfoTxt = `SCORE: ${game.state.musicInfo.score} | MISSES: ${game.state.musicInfo.misses} | COMBO: ${game.state.musicInfo.combo} ${game.state.musicInfo.misses <= 0 ? '(FC)' : ''} | ACCURANCY: ${game.state.musicInfo.accuracy?.toFixed(2)}%`
+    let musicInfoTxtOpponent = `SCORE: ${game.state.musicInfoOpponent.score} | MISSES: ${game.state.musicInfoOpponent.misses} | COMBO: ${game.state.musicInfoOpponent.combo} ${game.state.musicInfoOpponent.misses <= 0 ? '(FC)' : ''} | ACCURANCY: ${game.state.musicInfoOpponent.accuracy?.toFixed(2)}%`
 
-    ctx.fillText(musicInfoTxt, canvas.width/2-(ctx.measureText(musicInfoTxt).width/2), canvas.height-20);
+    ctx.fillText(musicInfoTxt, game.state.online ? (canvas.width-canvas.width/4)-(ctx.measureText(musicInfoTxt).width/2) : canvas.width/2-(ctx.measureText(musicInfoTxt).width/2), canvas.height-20);
+    if (game.state.online) ctx.fillText(musicInfoTxtOpponent, canvas.width/4-(ctx.measureText(musicInfoTxtOpponent).width/2), canvas.height-20);
 
     ctx.font = `bold 10px Arial`
     ctx.fillText(`Difficulty: ${game.state.musicInfo.difficulty}`, 2, canvas.height-5);
@@ -39,4 +41,12 @@ module.exports = async (canvas, game, Listener) => {
         ctx.fillText(game.state.musicInfo.hitNote?.toFixed(2)+'ms', ratingImageX+ratingImageWidth-(ctx.measureText(game.state.musicInfo.hitNote?.toFixed(2)+'ms').width), ratingImageY+ratingImageHeight+8);
     }
     ctx.globalAlpha = 1
+
+    if (game.state.online && game.state.waiting) {
+        ctx.font = 'bold 30px Arial'
+        ctx.fillStyle = `rgba(50, 50, 50, 0.5)`
+        ctx.fillRect(0, canvas.height/2-20, canvas.width, 40)
+        ctx.fillStyle = `white`
+        ctx.fillText('Waiting for player', canvas.width/2-(ctx.measureText('Waiting for player').width/2), canvas.height/2+10)
+    }
 }

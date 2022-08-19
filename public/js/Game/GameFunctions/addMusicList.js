@@ -259,8 +259,7 @@ module.exports = async (state) => {
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
             backgroundImage: null,
-            mod: 'SonicEXE',
-            dev: true
+            mod: 'SonicEXE'
         },
         {
             name: 'You-cant-run',

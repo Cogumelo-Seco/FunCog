@@ -1,14 +1,26 @@
-function createGame(Listener, canvas) {
+function createGame(Listener, canvas, socket) {
     const state = {
         fps: '0-0',
+        online: true,
+        waiting: true,
+        serverId: null,
         rainbowColor: 0,
         debug: false,
-        gameStage: 'loading',
+        gameStage: 'menu',
         gameStageTime: 0,
         musicMenu: null,
         selectMusicMenu: {
             musicSelect: 0,
             difficultySelected: 0,
+        },
+        selectMenuOption: {
+            menuOptions: [ 'Singleplayer', 'Multiplayer', 'Settings' ],
+            menuSelect: 0
+        },
+        selectServerOption: {
+            serverSelect: 0,
+            createServer: false,
+            listServers: []
         },
         personalizedNotes: {},
         images: {},
@@ -42,6 +54,7 @@ function createGame(Listener, canvas) {
         musicEventListener: null,
         notesImageDir: null,
         musicInfo: {},
+        musicInfoOpponent: {},
         countdown: 4,
 
         arrowsInfo: {},
@@ -127,31 +140,23 @@ function createGame(Listener, canvas) {
 
     async function start(command) {
         function gameLoop() {
+            if (state.online && state.serverId) {
+                state.musicInfo.arrows = Listener.state.arrows
+                
+                socket.emit('updateGame', {
+                    serverId: state.serverId,
+                    data: state.musicInfo
+                })
+            }
+
             if (state.botPlay) {
                 state.musicInfo.misses = 0
             }
 
-            /*
-            crochet = ((60 / bpm) * 1000);
-		stepCrochet = crochet / 4;
-
-        (((60 / state.musicBPM) * 1000)/4)
-        */
-
             state.musicBeat = Number.parseInt(state.music?.currentTime*(state.musicBPM/60))
-            //state.musicStep = Number.parseInt(state.music?.currentTime*1000/95)
-            state.songPosition = (((60 / state.musicBPM) * 1000))*5
+            state.musicStep = Number.parseInt(state.music?.currentTime*(state.musicBPM/60)*4)
 
-            //state.musicStep = Number.parseInt((state.songPosition-state.totalMusicSteps)*(state.music?.currentTime/state.music?.duration))
-
-            //curStep = lastChange.stepTime + Math.floor((Conductor.songPosition - lastChange.songTime) / Conductor.stepCrochet);
-
-            state.musicStep = Number.parseInt(2000*(state.music?.currentTime/state.music?.duration))//state.totalMusicSteps + (state.songPosition-state.totalMusicPos/(state.songPosition/5/4))// + Number.parseInt((state.music?.currentTime*1000)/(state.songPosition/5/4))//Number.parseInt((state.songPosition-state.totalMusicPos)/(state.songPosition/5/4))
-            //state.musicStep = Number.parseInt(state.songPosition/(state.songPosition/5/4))//*(state.music?.currentTime/state.music?.duration))
-
-            //Number.parseInt((state.music?.currentTime*(state.songPosition/ (((60 / state.musicBPM) * 1000)/4)))/2)
-
-            if (state.musicBeat%10 == 0 && state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.05) state.musicVoice.currentTime = state.music.currentTime
+            if (state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.05) state.musicVoice.currentTime = state.music.currentTime
 
             if (!state.arrowsInfoOpponent[0]) {
                 for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {
@@ -326,14 +331,14 @@ function createGame(Listener, canvas) {
             if (state.loading.loaded >= state.loading.total) {// || state.gameStage != 'loading') {
                 state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
                 clearInterval(interval)
-                if (state.gameStage == 'loading') setTimeout(() => state.gameStage = 'selectMusic', 500)
+                if (state.gameStage == 'loading') setTimeout(() => state.gameStage = 'menu', 500)
             }
         }, 1000/40)
 
         setTimeout(() => {
             state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
             clearInterval(interval)
-            if (state.gameStage == 'loading') setTimeout(() => state.gameStage = 'selectMusic', 500)
+            if (state.gameStage == 'loading') setTimeout(() => state.gameStage = 'menu', 500)
         }, 40000)
     }
     

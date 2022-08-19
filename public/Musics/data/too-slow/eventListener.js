@@ -18,7 +18,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 		frame: 0,
 		startFrame: 0,
 		endFrame: 20,
-		totalDalay: 50,
+		totalDalay: 45,
 		dalay: 0,
 	}
 
@@ -119,16 +119,7 @@ module.exports = async (type, { noteClickAuthor, note, notes, listenerState, dif
 					state.screenZoom -= 1
 				}
 
-				//if (beat%30 == 0 && beat != oldBeat) doStaticSign()
-
-				//if (step >= 1723 && oldStep <= 1723) doJumpscare();
-				//if (step >= 1900 && oldStep <= 1900) doJumpscare();
-
-				/*case 1723:
-						doJumpscare();
-						break*/
-
-				if (step != oldStep) switch (step) {
+				if (step != oldStep) switch (Number.parseInt(step*1.16)) {
 					case 27:
 						doStaticSign(0);
 						break

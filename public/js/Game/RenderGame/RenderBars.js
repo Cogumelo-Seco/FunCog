@@ -40,6 +40,7 @@ module.exports = async (canvas, game, Listener) => {
 
     function drawIcon({ dir, flipY, pos }) {
         let iconImage = game.state.images[dir]
+        if (!iconImage) return
         let iconResize = 0.9+(game.state.animations.icons.frame%6/200)
         let iconWidth = iconImage.width/2
         let iconHeight = iconImage.height
