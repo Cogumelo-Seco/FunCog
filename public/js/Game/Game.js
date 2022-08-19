@@ -6,7 +6,7 @@ function createGame(Listener, canvas, socket) {
         serverId: null,
         rainbowColor: 0,
         debug: false,
-        gameStage: 'menu',
+        gameStage: 'loading',
         gameStageTime: 0,
         musicMenu: null,
         selectMusicMenu: {
@@ -142,7 +142,7 @@ function createGame(Listener, canvas, socket) {
         function gameLoop() {
             if (state.online && state.serverId) {
                 state.musicInfo.arrows = Listener.state.arrows
-                
+
                 socket.emit('updateGame', {
                     serverId: state.serverId,
                     data: state.musicInfo
