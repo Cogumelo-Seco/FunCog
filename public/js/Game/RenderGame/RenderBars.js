@@ -27,6 +27,12 @@ module.exports = async (canvas, game, Listener) => {
     let healthBarHeight = 20
     let healthBarY = game.state.downScroll ? 40 : canvas.height-80
     let healthPercent = 1-(game.state.musicInfo.health > 100 ? 100 : game.state.musicInfo.health)/100 >= 1 ? 1 : 1-(game.state.musicInfo.health > 100 ? 100 : game.state.musicInfo.health)/100
+    if (game.state.online) {
+        let health = game.state.musicInfo.health
+        let opponentHealth = game.state.musicInfoOpponent.health
+
+        healthPercent = 0.5-(health/150)+(opponentHealth/150)
+    }
 
     ctx.fillStyle = 'rgb(49, 176, 209)'//'rgb(19, 189, 0)'
     ctx.fillRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth, healthBarHeight)

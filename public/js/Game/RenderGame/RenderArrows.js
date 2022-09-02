@@ -1,5 +1,4 @@
 module.exports = async (canvas, game, Listener) => {
-    game.state.notesImageDir = 'Arrows/'
     const ctx = canvas.getContext('2d')
 
     ctx.fillStyle = 'red'

@@ -17,7 +17,7 @@ export default function createListener(socket) {
         }
     }
 
-    require('./ListenerFunctions/addButtons')(state)
+    //require('./ListenerFunctions/addButtons')(state)
 
     document.onmousemove = (event) => {
         state.mouseInfo.x = event.pageX/window.innerWidth
@@ -98,10 +98,6 @@ export default function createListener(socket) {
         }
         
         if (state.game.state.debug && on) {
-            if (keyPressed == 'Digit1') state.game.startMusic({ name: 'Tutorial', difficulty: 'hard', notesImageDir: 'Arrows/' })
-            if (keyPressed == 'Digit2') state.game.startMusic({ name: 'Really-happy', difficulty: 'hard', notesImageDir: 'Arrows/' })
-            if (keyPressed == 'Digit3') state.game.startMusic({ name: 'Expurgation', difficulty: 'hard', notesImageDir: 'Arrows/' })
-
             if (keyPressed == 'KeyO' && state.game.state.music) {
                 state.game.state.music.currentTime -= 10
                 state.game.state.musicVoice.currentTime -= 10
@@ -234,8 +230,15 @@ export default function createListener(socket) {
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
                 case 'Enter':
-                    state.game.state.gameStage = 'onlineServerList'
-                    socket.emit('getListServers')
+                    if (state.game.state.selectMenuOption.menuOptions[state.game.state.selectMenuOption.menuSelect] == 'Singleplayer') {
+                        state.game.state.online = false
+                        state.game.state.gameStage = 'selectMusic'
+                    } else {
+                        state.game.state.online = true
+                        state.game.state.gameStage = 'onlineServerList'
+                        socket.emit('getListServers')
+                    }
+                    
                     break
             }
         }

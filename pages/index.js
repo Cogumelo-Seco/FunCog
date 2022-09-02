@@ -25,11 +25,15 @@ const Game = (props) => {
         socket.on('listServers', (listServers) => {
             game.state.selectServerOption.listServers = listServers
             let server = listServers.find(s => s.id == game.state.serverId)
+            if (server) game.state.serverInfo = server
             if (server && server.playerData2) {
                 game.state.waiting = false
                 game.state.musicInfoOpponent = game.state.musicInfo.playerId == 1 ? server.playerData2 : server.playerData1
             }
         })
+
+        socket.on('ping', (time) => game.state.ping = +new Date()-time)
+        setInterval(() => socket.emit('ping', +new Date()), 1000)
 
         renderGame(canvas, game, Listener);
     }, [])

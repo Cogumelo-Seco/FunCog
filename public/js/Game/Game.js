@@ -4,6 +4,7 @@ function createGame(Listener, canvas, socket) {
         online: true,
         waiting: true,
         serverId: null,
+        serverInfo: {},
         rainbowColor: 0,
         debug: false,
         gameStage: 'loading',
@@ -14,7 +15,7 @@ function createGame(Listener, canvas, socket) {
             difficultySelected: 0,
         },
         selectMenuOption: {
-            menuOptions: [ 'Singleplayer', 'Multiplayer', 'Settings' ],
+            menuOptions: [ 'Singleplayer', 'Multiplayer' ], //'Settings' ],
             menuSelect: 0
         },
         selectServerOption: {
@@ -141,6 +142,19 @@ function createGame(Listener, canvas, socket) {
     async function start(command) {
         function gameLoop() {
             if (state.online && state.serverId) {
+                if (state.serverInfo.end == true) {
+                    state.waiting = true
+                    state.serverId = null
+                    state.serverInfo = {}
+                    state.gameStage = 'onlineServerList'
+                    state.music?.pause()
+                    state.musicVoice?.pause()
+                    state.music.currentTime = 0
+                    state.musicInfo.health = 50
+                    state.musicNotes = []
+                    state.musicOpponentNotes = []
+                }
+
                 state.musicInfo.arrows = Listener.state.arrows
 
                 socket.emit('updateGame', {
@@ -223,11 +237,18 @@ function createGame(Listener, canvas, socket) {
                 state.gameStage = 'dead'
                 state.musicInfo.health = 50
                 state.musicNotes = []
-                state.musicOpponentNotes= []
+                state.musicOpponentNotes = []
                 state.gameStageTime = +new Date()
-                playSong('Sounds/fnf_loss_sfx.ogg')
-                setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
-            } 
+
+                if (state.online && state.serverId) {
+                    socket.emit('deadPlayer', { 
+                        serverId: state.serverId
+                     })
+                } else {
+                    playSong('Sounds/fnf_loss_sfx.ogg')
+                    setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
+                }
+            }
             else if (state.musicInfo.health > 100) state.musicInfo.health = 100
             else if (state.musicInfo.health < 0) state.musicInfo.health = 0
 

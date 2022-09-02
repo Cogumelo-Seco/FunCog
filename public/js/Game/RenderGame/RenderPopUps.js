@@ -14,6 +14,7 @@ module.exports = async (canvas, game, Listener) => {
             if (popup.alphaRandom) {
                 ctx.globalAlpha =  (Math.random()*(Number(popup.alpha.split('-')[1])-Number(popup.alpha.split('-')[0])))+Number(popup.alpha.split('-')[0])
             } else ctx.globalAlpha = popup.alpha == undefined ? 1 : popup.alpha
+            
             if (popup.rotation) {
                 ctx.save()
 

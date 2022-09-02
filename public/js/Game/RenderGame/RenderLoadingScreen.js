@@ -13,7 +13,7 @@ module.exports = function renderGame(canvas, game, Listener) {
     ctx.fillStyle = 'rgb(100, 100, 100)'
     ctx.fillRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-(loadingBarHeight/2), loadingBarWidth, loadingBarHeight)
 
-    ctx.fillStyle = 'rgb(19, 189, 0)'
+    ctx.fillStyle = `hsl(${loadinPercent*360}, 100%, 40%)`//'rgb(19, 189, 0)'
     ctx.fillRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-(loadingBarHeight/2), loadingBarWidth*loadinPercent, loadingBarHeight)
 
     ctx.fillStyle = 'rgb(255, 255, 255)'
