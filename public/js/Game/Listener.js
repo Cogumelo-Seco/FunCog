@@ -86,7 +86,7 @@ export default function createListener(socket) {
         if (state.game.state.gameStage == 'game') {
             if (keyPressed == 'KeyR' && on) state.game.state.musicInfo.health = -100
 
-            if (keyPressed == 'Escape' && on) {
+            if (keyPressed == 'Escape' && on && !state.game.state.online) {
                 if (state.game.state.music.paused) {
                     state.game.state.music.play()
                     state.game.state.musicVoice.play()

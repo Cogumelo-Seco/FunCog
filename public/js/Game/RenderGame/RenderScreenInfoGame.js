@@ -5,7 +5,7 @@ module.exports = async (canvas, game, Listener) => {
     ctx.font = `bold 13px Arial`
 
     let musicInfoTxt = `SCORE: ${game.state.musicInfo.score} | MISSES: ${game.state.musicInfo.misses} | COMBO: ${game.state.musicInfo.combo} ${game.state.musicInfo.misses <= 0 ? '(FC)' : ''} | ACCURANCY: ${game.state.musicInfo.accuracy?.toFixed(2)}%`
-    let musicInfoTxtOpponent = `SCORE: ${game.state.musicInfoOpponent.score || 0} | MISSES: ${game.state.musicInfoOpponent.misses || 0} | COMBO: ${game.state.musicInfoOpponent.combo || 0} ${game.state.musicInfoOpponent.misses <= 0 ? '(FC)' : ''} | ACCURANCY: ${(game.state.musicInfoOpponent.accuracy || 0)?.toFixed(2)}%`
+    let musicInfoTxtOpponent = `SCORE: ${game.state.musicInfoOpponent.score || 0} | MISSES: ${game.state.musicInfoOpponent.misses || 0} | COMBO: ${game.state.musicInfoOpponent.combo || 0} ${game.state.musicInfoOpponent.misses <= 0 ? '(FC)' : ''} | HEALTH: ${(game.state.musicInfoOpponent.health || 0)?.toFixed(0)}% | ACCURANCY: ${(game.state.musicInfoOpponent.accuracy || 0)?.toFixed(2)}%`
 
     ctx.fillText(musicInfoTxt, game.state.online ? (canvas.width-canvas.width/4)-(ctx.measureText(musicInfoTxt).width/2) : canvas.width/2-(ctx.measureText(musicInfoTxt).width/2), canvas.height-20);
     if (game.state.online) ctx.fillText(musicInfoTxtOpponent, canvas.width/4-(ctx.measureText(musicInfoTxtOpponent).width/2), canvas.height-20);
