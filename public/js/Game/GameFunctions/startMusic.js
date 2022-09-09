@@ -33,8 +33,6 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
             playerId: opponentPlayer ? 2 : 1
         }
 
-        opponentPlayer = false
-
         let musicData = require(`../../../Musics/data/${name.toLowerCase()}/${name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)
         let musicNotes = musicData.song.notes
         state.musicBPM = musicData.song.bpm

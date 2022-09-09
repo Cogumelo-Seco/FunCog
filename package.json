@@ -1,5 +1,5 @@
 {
-  "name": "pec-man",
+  "name": "cogu-fnf",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,7 +12,8 @@
     "socket.io-client": "^4.5.1"
   },
   "scripts": {
-    "start": "next dev"
+    "start": "next dev",
+    "build": "next build"
   },
   "keywords": [],
   "author": "",
