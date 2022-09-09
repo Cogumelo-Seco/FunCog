@@ -1,4 +1,4 @@
-module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, state) => {
+export default async (type, { noteClickAuthor, note, notes, listenerState }, state) => {
     state.animations['fireNote'] = {
         frame: 0,
         startFrame: 0,

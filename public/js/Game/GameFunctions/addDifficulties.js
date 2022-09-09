@@ -1,4 +1,4 @@
-module.exports = async (state) => {
+export default async (state) => {
     state.difficulties = [
         {// 0
             name: 'Easy',

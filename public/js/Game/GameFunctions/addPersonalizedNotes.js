@@ -1,4 +1,4 @@
-module.exports = async (state) => {
+export default async (state) => {
     state.personalizedNotes = {
         hitKillNote:  {
             newArrowImage: `Arrows/deathnotes/Arrow-{{arrowID}}-deathnote-{{frame}}.png`,
@@ -23,6 +23,21 @@ module.exports = async (state) => {
         },
         sonicEXEphantomNote: {
             newArrowImage: `Arrows/sonicEXEphantomNotes/Arrow-{{arrowID}}-sonicEXEphantomNote.png`,
+        },
+        LNCTBlack: {
+            newArrowImage: `Arrows/LNCTBlack/Arrow-{{arrowID}}.png`,
+            newHoldImage: `Arrows/LNCTBlack/Arrow-hold-piece.png`,
+            newHoldEndImage: `Arrows/LNCTBlack/Arrow-hold-end.png`
+        },
+        LNCTRed: {
+            newArrowImage: `Arrows/LNCTRed/Arrow-{{arrowID}}.png`,
+            newHoldImage: `Arrows/LNCTRed/Arrow-hold-piece.png`,
+            newHoldEndImage: `Arrows/LNCTRed/Arrow-hold-end.png`
+        },
+        LNCTWhite: {
+            newArrowImage: `Arrows/LNCTWhite/Arrow-{{arrowID}}.png`,
+            newHoldImage: `Arrows/LNCTWhite/Arrow-hold-piece.png`,
+            newHoldEndImage: `Arrows/LNCTWhite/Arrow-hold-end.png`
         },
     }
     

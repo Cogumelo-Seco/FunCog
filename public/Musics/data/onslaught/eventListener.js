@@ -1,4 +1,4 @@
-module.exports = async (type, { noteClickAuthor, note, notes, listenerState, difficulty }, state) => {
+export default async (type, { noteClickAuthor, note, notes, listenerState, difficulty }, state) => {
     switch (type) {
         case 'started':
 			let oldBeat = 0

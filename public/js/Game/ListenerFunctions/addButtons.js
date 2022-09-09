@@ -1,4 +1,4 @@
-module.exports = (state) => {
+export default (state) => {
     state.buttons['MouseInfoButton'] = {
         minX: 0,
         maxX: 80,
@@ -45,6 +45,20 @@ module.exports = (state) => {
         over: false,
         onClick: () => {
             open('https://www.instagram.com/wellingtonfelipe_cogu/')
+        }
+    }
+
+    state.buttons['ReturnPageButton'] = {
+        gameStage: [ 'selectMusic', 'onlineServerList' ],
+        keyPress: 'KeyQ',
+        minX: 468,
+        maxX: 530,
+        minY: 9,
+        maxY: 45,
+        pointer: true,
+        over: false,
+        onClick: () => {
+            state.game.state.smallFunctions.redirectGameStage(state.game.state.oldGameStage)
         }
     }
 }

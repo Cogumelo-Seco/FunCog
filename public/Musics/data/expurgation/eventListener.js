@@ -1,4 +1,4 @@
-module.exports = async (type, { noteClickAuthor, note, notes, listenerState, difficulty }, state) => {
+export default async (type, { noteClickAuthor, note, notes, listenerState, difficulty }, state) => {
     state.animations['hitKillNote'] = {
         frame: 0,
         startFrame: 1,

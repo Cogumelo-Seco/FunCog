@@ -1,4 +1,4 @@
-module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer }, state) => {
+export default async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer }, state) => {
     try {
         state.arrowsInfo = {},
         state.arrowsInfoOpponent = {},
@@ -33,54 +33,35 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, 
             playerId: opponentPlayer ? 2 : 1
         }
 
+        opponentPlayer = false
+
         let musicData = require(`../../../Musics/data/${name.toLowerCase()}/${name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)
-        let musicBPMs = musicData.song.notes.filter(i => opponentPlayer ? !i.mustHitSection : i.mustHitSection).map(i => i.sectionNotes)
-        let musicOpponentBPMs = musicData.song.notes.filter(i => opponentPlayer ? i.mustHitSection : !i.mustHitSection).map(i => i.sectionNotes)
-        let musicSteps = musicData.song.notes.map(n => n.lengthInSteps)
-        for (let i in musicSteps) {
-            state.totalMusicSteps += musicSteps[i]
-            state.totalMusicPos += ((60 / musicData.song.bpm) * 1000 / 4) * musicSteps[i];
-        }
+        let musicNotes = musicData.song.notes
         state.musicBPM = musicData.song.bpm
 
-        for (let i in musicBPMs) {
-            for (let a in musicBPMs[i]) {
-                state.musicOriginalNotes.push(musicBPMs[i][a])
-                state.musicNotes.push(await getNoteinfo(musicBPMs[i][a], difficulty, musicData))
-            }
-        }
+        for (let i in musicNotes) {
+            for (let a in musicNotes[i].sectionNotes) {
+                let noteInfo = musicNotes[i].sectionNotes[a]
+                let mustHitSection = musicNotes[i].mustHitSection
+                mustHitSection = opponentPlayer ? mustHitSection ? false : true : mustHitSection
 
-        for (let i in musicOpponentBPMs) {
-            for (let a in musicOpponentBPMs[i]) {
-                state.musicOriginalOpponentNotes.push(musicOpponentBPMs[i][a])
-                state.musicOpponentNotes.push(await getNoteinfo(musicOpponentBPMs[i][a], difficulty, musicData))
-            }
-        }
-
-        // FILTRAR NOTAS EM POSIÇÕES IGUAIS
-
-        for (let i in musicBPMs) {
-            for (let a in musicBPMs[i]) {
-                let notes = state.musicNotes.filter(n => n.time <= musicBPMs[i][a][0]/1000+0.1 && n.time >= musicBPMs[i][a][0]/1000-0.1 && n.arrowID == musicBPMs[i][a][1]%4)
-                if (notes.length > 1) {
-                    notes = notes.filter(n => n.type != 'normal')
-                    for (let b in notes) state.musicNotes.splice(state.musicNotes.indexOf(notes[b]), 1)
+                if (noteInfo[1] > 3 && noteInfo[1] < 8) {
+                    noteInfo[1] = noteInfo[1]%4
+                    mustHitSection = mustHitSection ? false : true
                 }
-            }
-        }
 
-        for (let i in musicOpponentBPMs) {
-            for (let a in musicOpponentBPMs[i]) {
-                let notes = state.musicOpponentNotes.filter(n => n.time <= musicOpponentBPMs[i][a][0]/1000+0.1 && n.time >= musicOpponentBPMs[i][a][0]/1000-0.1 && n.arrowID == musicOpponentBPMs[i][a][1]%4)
-                if (notes.length > 1) {
-                    notes = notes.filter(n => n.type != 'normal')
-                    for (let b in notes) state.musicOpponentNotes.splice(state.musicOpponentNotes.indexOf(notes[b]), 1)
+                if (mustHitSection) {
+                    state.musicOriginalNotes.push(noteInfo)
+                    state.musicNotes.push(await getNoteinfo(noteInfo, difficulty, musicData))
+                } else {
+                    state.musicOriginalOpponentNotes.push(noteInfo)
+                    state.musicOpponentNotes.push(await getNoteinfo(noteInfo, difficulty, musicData))
                 }
             }
         }
 
         try {
-            state.musicEventListener = require(`../../../Musics/data/${name.toLowerCase()}/eventListener`)
+            state.musicEventListener = require(`../../../Musics/data/${name.toLowerCase()}/eventListener`).default
         } catch {}
         
         state.music = state.sounds[`Musics/musics/${name.toLowerCase()}/Inst.ogg`]
@@ -107,14 +88,11 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, 
 
     async function getNoteinfo(note, difficulty, musicData) {
         name = name.toLowerCase()
-        let arrowID = note[1]//%4
+        let arrowID = note[1]
         let type = 'normal'
         let errorWhenNotClicking = true
         let disabled = false
         let autoClick = false
-        //if (note[3]) arrowID = note[1]
-        //let doNotFormatNotes = [ 'SuicideMouse', 'Bob', 'DuskTillDawn' ]
-        //if (doNotFormatNotes.includes(mod)) arrowID = note[1]
 
         if (name == 'expurgation') {
             if (note[1] > 3) {
@@ -162,6 +140,22 @@ module.exports = async({ name, mod, difficulty, notesImageDir, backgroundImage, 
                 disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'sonicEXEphantomNote'
+            }
+        }
+
+        if (mod == 'LateNightCityTale') {
+            if (note[3] == 'black') {
+                disabled = difficulty.name == 'Mania' ? true : false
+                errorWhenNotClicking = false
+                type = 'LNCTBlack'
+            }
+            if (note[3] == 'white') {
+                disabled = difficulty.name == 'Mania' ? true : false
+                type = 'LNCTWhite'
+            }
+            if (note[3] == 'red') {
+                disabled = difficulty.name == 'Mania' ? true : false
+                type = 'LNCTRed'
             }
         }
 

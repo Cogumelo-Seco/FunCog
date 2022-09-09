@@ -1,4 +1,4 @@
-module.exports = async (canvas, game, Listener) => {
+export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
     if (+new Date()-game.state.fps.split('-')[1] > 1000) {
@@ -16,6 +16,24 @@ module.exports = async (canvas, game, Listener) => {
     ctx.fillText(`BotPlay: ${game.state.botPlay}`, 2, 45)
 
     ctx.fillText('Created by: Cogu', canvas.width-ctx.measureText('Created by: Cogu').width-5, canvas.height-5);
+
+    let ReturnPageButton = Listener.state.buttons['ReturnPageButton']
+    if (ReturnPageButton.gameStage.includes(game.state.gameStage)) {
+        let returnButtonX = canvas.width*(ReturnPageButton.minX/1000)
+        let returnButtonY = canvas.height*(ReturnPageButton.minY/1000)
+        let returnButtonWidth = canvas.width*(ReturnPageButton.maxX/1000)-(canvas.width*(ReturnPageButton.minX/1000))
+        let returnButtonHeight = canvas.height*(ReturnPageButton.maxY/1000)-(canvas.height*(ReturnPageButton.minY/1000))
+
+        ctx.fillStyle = Listener.state.buttons['ReturnPageButton'].over ? 'rgb(40, 40, 90)' : 'rgb(50, 50, 50)'
+        ctx.strokeStyle = 'white'
+        ctx.fillRect(returnButtonX, returnButtonY, returnButtonWidth, returnButtonHeight)
+        ctx.rect(returnButtonX, returnButtonY, returnButtonWidth, returnButtonHeight)
+        ctx.stroke()
+
+        ctx.fillStyle = 'white'
+        ctx.font = `bold ${returnButtonWidth*0.15}px Arial`
+        ctx.fillText(`[Q] Return`, returnButtonX+(returnButtonWidth/2)-(ctx.measureText(`[Q] Return`).width/2), returnButtonY+(returnButtonWidth*0.19))
+    }
 
     let cursorX = window.innerWidth*Listener.state.mouseInfo.x
     let cursorY = window.innerHeight*Listener.state.mouseInfo.y

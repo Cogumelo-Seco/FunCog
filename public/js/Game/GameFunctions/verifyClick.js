@@ -1,4 +1,4 @@
-module.exports = async({ arrowID, listenerState }, state) => {
+export default async({ arrowID, listenerState }, state) => {
     let notes = state.musicNotes.filter((n) => {
         n.hitNote = (n.time-state.music?.currentTime)*1000
         return n.arrowID == arrowID && n.errorWhenNotClicking && !n.disabled &&

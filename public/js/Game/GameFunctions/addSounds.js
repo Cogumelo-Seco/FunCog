@@ -1,4 +1,4 @@
-module.exports = async (state) => {
+export default async (state) => {
     state.sounds = [
         'Sounds/scrollMenu.ogg',
         'Sounds/confirmMenu.ogg',
@@ -151,6 +151,21 @@ module.exports = async (state) => {
 
         'Musics/musics/execution/Inst.ogg',
         'Musics/musics/execution/Voices.ogg',
+
+        'Musics/musics/azure-encounter/Inst.ogg',
+        'Musics/musics/azure-encounter/Voices.ogg',
+
+        'Musics/musics/secret-marilee/Inst.ogg',
+        'Musics/musics/secret-marilee/Voices.ogg',
+
+        'Musics/musics/broken-heart/Inst.ogg',
+        'Musics/musics/broken-heart/Voices.ogg',
+
+        'Musics/musics/aquaphobia/Inst.ogg',
+        'Musics/musics/aquaphobia/Voices.ogg',
+
+        'Musics/musics/lonely-sapphire/Inst.ogg',
+        'Musics/musics/lonely-sapphire/Voices.ogg',
     ]
 
     return state.sounds.length

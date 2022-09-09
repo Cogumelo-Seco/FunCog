@@ -1,4 +1,4 @@
-module.exports = (time, state) => {
+export default (time, state) => {
     time = Number.parseInt(Math.abs(time))
 
     let ratings = [

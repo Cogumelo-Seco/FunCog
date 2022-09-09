@@ -1,4 +1,4 @@
-module.exports = async (type, { noteClickAuthor, note, notes, listenerState, difficulty, events }, state) => {
+export default async (type, { noteClickAuthor, note, notes, listenerState, difficulty, events }, state) => {
 	state.animations['sonicEXEHitStatic'] = {
 		frame: 0,
 		startFrame: 0,

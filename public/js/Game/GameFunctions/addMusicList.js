@@ -1,4 +1,4 @@
-module.exports = async (state) => {
+export default async (state) => {
     state.musics = [
         {
             name: 'Tutorial',
@@ -294,8 +294,7 @@ module.exports = async (state) => {
             difficulties: [ 2 ],
             notesImageDir: 'Arrows/',
             backgroundImage: null,
-            mod: 'SonicEXE',
-            dev: true
+            mod: 'SonicEXE'
         },
         {
             name: 'Sunshine',
@@ -358,6 +357,53 @@ module.exports = async (state) => {
             notesImageDir: 'Arrows/',
             backgroundImage: null,
             mod: 'SonicEXE',
+            dev: true
+        },
+
+        {
+            name: 'Azure-encounter',
+            menuColor: 'rgb(138, 12, 162)',
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/LNCTNotes/',
+            backgroundImage: null,
+            mod: 'LateNightCityTale',
+            dev: true
+        },
+        {
+            name: 'Secret-marilee',
+            menuColor: 'rgb(138, 12, 162)',
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/LNCTNotes/',
+            backgroundImage: null,
+            mod: 'LateNightCityTale',
+            dev: true
+        },
+        {
+            name: 'Broken-heart',
+            menuColor: 'rgb(138, 12, 162)',
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/LNCTNotes/',
+            backgroundImage: null,
+            mod: 'LateNightCityTale',
+            dev: true
+        },
+        {
+            name: 'Aquaphobia',
+            menuColor: 'rgb(138, 12, 162)',
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/LNCTNotes/',
+            backgroundImage: null,
+            mod: 'LateNightCityTale',
+            dev: true
+        },
+
+        {
+            name: 'Lonely-sapphire',
+            menuColor: 'rgb(138, 12, 162)',
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/LNCTNotes/',
+            backgroundImage: null,
+            mod: 'LateNightCityTale',
             dev: true
         },
     ]

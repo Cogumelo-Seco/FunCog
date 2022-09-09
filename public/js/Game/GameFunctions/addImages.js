@@ -1,4 +1,4 @@
-module.exports = async (state) => {
+export default async (state) => {
     state.images = [
         'BongoCat/bg.png',
         'BongoCat/arrow-0.png',
@@ -16,6 +16,13 @@ module.exports = async (state) => {
 
         /* ---- */
 
+        'imgs/sonicEXE/three.png',
+        'imgs/sonicEXE/two.png',
+        'imgs/sonicEXE/one.png',
+        'imgs/sonicEXE/go.png',
+
+        /* ---- */
+
         'imgs/cursor.png',
         'imgs/cursor-hover.png',
 
@@ -24,6 +31,90 @@ module.exports = async (state) => {
         'icons/icon-bf.png',
         'icons/icon-face.png',
         'icons/BongoCat.png',
+
+        /* ---- */        
+
+        'Arrows/LNCTNotes/Arrow-0.png',
+        'Arrows/LNCTNotes/Arrow-0-note.png',
+        'Arrows/LNCTNotes/Arrow-0-press-0.png',
+        'Arrows/LNCTNotes/Arrow-0-press-1.png',
+        'Arrows/LNCTNotes/Arrow-0-press-2.png',
+        'Arrows/LNCTNotes/Arrow-0-press-0-no.png',
+        'Arrows/LNCTNotes/Arrow-0-press-1-no.png',
+        'Arrows/LNCTNotes/Arrow-0-hold-piece.png',
+        'Arrows/LNCTNotes/Arrow-0-hold-end.png',
+
+        'Arrows/LNCTNotes/Arrow-1.png',
+        'Arrows/LNCTNotes/Arrow-1-note.png',
+        'Arrows/LNCTNotes/Arrow-1-press-0.png',
+        'Arrows/LNCTNotes/Arrow-1-press-1.png',
+        'Arrows/LNCTNotes/Arrow-1-press-2.png',
+        'Arrows/LNCTNotes/Arrow-1-press-0-no.png',
+        'Arrows/LNCTNotes/Arrow-1-press-1-no.png',
+        'Arrows/LNCTNotes/Arrow-1-hold-piece.png',
+        'Arrows/LNCTNotes/Arrow-1-hold-end.png',
+        
+        'Arrows/LNCTNotes/Arrow-2.png',
+        'Arrows/LNCTNotes/Arrow-2-note.png',
+        'Arrows/LNCTNotes/Arrow-2-press-0.png',
+        'Arrows/LNCTNotes/Arrow-2-press-1.png',
+        'Arrows/LNCTNotes/Arrow-2-press-2.png',
+        'Arrows/LNCTNotes/Arrow-2-press-0-no.png',
+        'Arrows/LNCTNotes/Arrow-2-press-1-no.png',
+        'Arrows/LNCTNotes/Arrow-2-hold-piece.png',
+        'Arrows/LNCTNotes/Arrow-2-hold-end.png',
+
+        'Arrows/LNCTNotes/Arrow-3.png',
+        'Arrows/LNCTNotes/Arrow-3-note.png',
+        'Arrows/LNCTNotes/Arrow-3-press-0.png',
+        'Arrows/LNCTNotes/Arrow-3-press-1.png',
+        'Arrows/LNCTNotes/Arrow-3-press-2.png',
+        'Arrows/LNCTNotes/Arrow-3-press-0-no.png',
+        'Arrows/LNCTNotes/Arrow-3-press-1-no.png',
+        'Arrows/LNCTNotes/Arrow-3-hold-piece.png',
+        'Arrows/LNCTNotes/Arrow-3-hold-end.png',
+
+        /* ---- */        
+
+        'Arrows/sonicEXEMajinNotes/Arrow-0.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-0-note.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-0-press-0.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-0-press-1.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-0-press-2.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-0-press-0-no.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-0-press-1-no.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-0-hold-piece.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-0-hold-end.png',
+
+        'Arrows/sonicEXEMajinNotes/Arrow-1.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-1-note.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-1-press-0.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-1-press-1.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-1-press-2.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-1-press-0-no.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-1-press-1-no.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-1-hold-piece.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-1-hold-end.png',
+        
+        'Arrows/sonicEXEMajinNotes/Arrow-2.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-2-note.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-2-press-0.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-2-press-1.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-2-press-2.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-2-press-0-no.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-2-press-1-no.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-2-hold-piece.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-2-hold-end.png',
+
+        'Arrows/sonicEXEMajinNotes/Arrow-3.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-3-note.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-3-press-0.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-3-press-1.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-3-press-2.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-3-press-0-no.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-3-press-1-no.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-3-hold-piece.png',
+        'Arrows/sonicEXEMajinNotes/Arrow-3-hold-end.png',
 
         /* ---- */
 
@@ -328,6 +419,33 @@ module.exports = async (state) => {
         'Arrows/sonicEXEphantomNotes/Arrow-1-sonicEXEphantomNote.png',
         'Arrows/sonicEXEphantomNotes/Arrow-2-sonicEXEphantomNote.png',
         'Arrows/sonicEXEphantomNotes/Arrow-3-sonicEXEphantomNote.png',
+
+        /* ---- */
+
+        'Arrows/LNCTBlack/Arrow-0.png',
+        'Arrows/LNCTBlack/Arrow-1.png',
+        'Arrows/LNCTBlack/Arrow-2.png',
+        'Arrows/LNCTBlack/Arrow-3.png',
+        'Arrows/LNCTBlack/Arrow-hold-piece.png',
+        'Arrows/LNCTBlack/Arrow-hold-end.png',
+
+        /* ---- */
+
+        'Arrows/LNCTRed/Arrow-0.png',
+        'Arrows/LNCTRed/Arrow-1.png',
+        'Arrows/LNCTRed/Arrow-2.png',
+        'Arrows/LNCTRed/Arrow-3.png',
+        'Arrows/LNCTRed/Arrow-hold-piece.png',
+        'Arrows/LNCTRed/Arrow-hold-end.png',
+
+        /* ---- */
+
+        'Arrows/LNCTWhite/Arrow-0.png',
+        'Arrows/LNCTWhite/Arrow-1.png',
+        'Arrows/LNCTWhite/Arrow-2.png',
+        'Arrows/LNCTWhite/Arrow-3.png',
+        'Arrows/LNCTWhite/Arrow-hold-piece.png',
+        'Arrows/LNCTWhite/Arrow-hold-end.png',
 
         /* ---- */
 

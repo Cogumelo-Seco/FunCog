@@ -1,4 +1,4 @@
-module.exports = async (type, { noteClickAuthor, note, notes, listenerState }, state) => {
+export default async (type, { noteClickAuthor, note, notes, listenerState }, state) => {
     switch (type) {
         case 'noteClick':
             if (noteClickAuthor == 'player' && note?.type != 'normal' && !notes?.find(n => n.type == 'normal')) {

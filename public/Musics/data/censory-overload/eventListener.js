@@ -1,4 +1,4 @@
-module.exports = async (type, { noteClickAuthor, note, notes, listenerState, difficulty, events }, state) => {
+export default async (type, { noteClickAuthor, note, notes, listenerState, difficulty, events }, state) => {
     switch (type) {
         case 'started':
 			let oldCurrentTime = 0

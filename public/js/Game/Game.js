@@ -72,7 +72,7 @@ function createGame(Listener, canvas, socket) {
                 frame: 0,
                 startFrame: 0,
                 endFrame: 10,
-                totalDalay: 4,
+                totalDalay: 5,
                 dalay: 0,
                 loop: true,
             },
@@ -96,7 +96,7 @@ function createGame(Listener, canvas, socket) {
                 frame: 0,
                 startFrame: 0,
                 endFrame: 2,
-                totalDalay: 90,
+                totalDalay: 70,
                 dalay: 0,
                 loop: true
             },
@@ -124,20 +124,22 @@ function createGame(Listener, canvas, socket) {
         },
     }
 
-    const addImages = (command) => require('./GameFunctions/addImages')(state)
-    const addSounds = (command) => require('./GameFunctions/addSounds')(state)
-    const addMusicList = (command) => require('./GameFunctions/addMusicList')(state)
-    const addDifficulties = (command) => require('./GameFunctions/addDifficulties')(state)
-    const addPersonalizedNotes = (command) => require('./GameFunctions/addPersonalizedNotes')(state)
+    const addImages = (command) => require('./GameFunctions/addImages').default(state)
+    const addSounds = (command) => require('./GameFunctions/addSounds').default(state)
+    const addMusicList = (command) => require('./GameFunctions/addMusicList').default(state)
+    const addDifficulties = (command) => require('./GameFunctions/addDifficulties').default(state)
+    const addPersonalizedNotes = (command) => require('./GameFunctions/addPersonalizedNotes').default(state)
 
-    const playSong = (type, command) => require('./GameFunctions/playSong')(type, command, state)
-    const calculateRating = (command) => require('./GameFunctions/calculateRating')(command, state)
+    const playSong = (type, command) => require('./GameFunctions/playSong').default(type, command, state)
+    const calculateRating = (command) => require('./GameFunctions/calculateRating').default(command, state)
+    const smallFunctions = require('./GameFunctions/smallFunctions').default(state)
+    state.smallFunctions = smallFunctions
     state.calculateRating = calculateRating
     state.playSong = playSong
     state.canvas = canvas
 
-    const startMusic = (command) => require('./GameFunctions/startMusic')(command, state)
-    const verifyClick = (command) => require('./GameFunctions/verifyClick')(command, state)
+    const startMusic = (command) => require('./GameFunctions/startMusic').default(command, state)
+    const verifyClick = (command) => require('./GameFunctions/verifyClick').default(command, state)
 
     async function start(command) {
         function gameLoop() {
@@ -146,7 +148,7 @@ function createGame(Listener, canvas, socket) {
                     state.waiting = true
                     state.serverId = null
                     state.serverInfo = {}
-                    state.gameStage = 'onlineServerList'
+                    state.smallFunctions.redirectGameStage('onlineServerList')
                     state.music?.pause()
                     state.musicVoice?.pause()
                     state.music.currentTime = 0
@@ -234,7 +236,7 @@ function createGame(Listener, canvas, socket) {
                 state.music?.pause()
                 state.musicVoice?.pause()
                 state.music.currentTime = 0
-                state.gameStage = 'dead'
+                state.smallFunctions.redirectGameStage('dead')
                 state.musicInfo.health = 50
                 state.musicNotes = []
                 state.musicOpponentNotes = []
@@ -256,7 +258,7 @@ function createGame(Listener, canvas, socket) {
             let musicCurrentTime = state.music?.currentTime
 
             if (musicDuration <= musicCurrentTime) {
-                state.gameStage = 'selectMusic'
+                state.smallFunctions.redirectGameStage('selectMusic')
                 state.musicInfo.health = 50
                 state.musicNotes = []
                 state.musicOpponentNotes= []
@@ -352,14 +354,14 @@ function createGame(Listener, canvas, socket) {
             if (state.loading.loaded >= state.loading.total) {// || state.gameStage != 'loading') {
                 state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
                 clearInterval(interval)
-                if (state.gameStage == 'loading') setTimeout(() => state.gameStage = 'menu', 500)
+                if (state.gameStage == 'loading') setTimeout(() => state.smallFunctions.redirectGameStage('menu'), 500)
             }
         }, 1000/40)
 
         setTimeout(() => {
             state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
             clearInterval(interval)
-            if (state.gameStage == 'loading') setTimeout(() => state.gameStage = 'menu', 500)
+            if (state.gameStage == 'loading') setTimeout(() => state.smallFunctions.redirectGameStage('menu'), 500)
         }, 40000)
     }
     
@@ -373,4 +375,4 @@ function createGame(Listener, canvas, socket) {
     }
 }
 
-module.exports = createGame
+export default createGame

@@ -1,4 +1,4 @@
-module.exports = async (canvas, game, Listener) => {
+export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
     let bg = game.state.images['BongoCat/bg.png']

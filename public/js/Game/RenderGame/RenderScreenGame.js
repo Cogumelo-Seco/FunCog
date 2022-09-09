@@ -1,4 +1,4 @@
-module.exports = async (canvas, game, Listener) => {
+export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
     
     canvas.style.backgroundImage = `url(../../imgs/${game.state.musicInfo.backgroundImage})`

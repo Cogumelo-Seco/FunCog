@@ -1,4 +1,4 @@
-module.exports = async (type, { noteClickAuthor }, state) => {
+export default async (type, { noteClickAuthor }, state) => {
     switch (type) {
         case 'noteClick':
             if (noteClickAuthor == 'bot') {

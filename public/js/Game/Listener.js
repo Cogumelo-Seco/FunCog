@@ -17,7 +17,7 @@ export default function createListener(socket) {
         }
     }
 
-    //require('./ListenerFunctions/addButtons')(state)
+    require('./ListenerFunctions/addButtons').default(state)
 
     document.onmousemove = (event) => {
         state.mouseInfo.x = event.pageX/window.innerWidth
@@ -62,12 +62,16 @@ export default function createListener(socket) {
     
     function handleKeys({ event, on }) {
         let keyPressed = event.code
-        console.log(keyPressed)
         let lastClick = state.keys[keyPressed]
         state.keys[keyPressed] = {
             clicked: on,
             time: +new Date(),
             lastClickTime: lastClick?.time || null
+        }
+
+        if (state.game) for (let i in state.buttons) {
+            let button = state.buttons[i]
+            if (button && on && button.gameStage?.includes(state.game.state.gameStage) && button.keyPress == keyPressed) button.onClick()
         }
 
         for (let arrowID = 0;arrowID <= state.game.state.amountOfArrows;arrowID++) {
@@ -110,7 +114,7 @@ export default function createListener(socket) {
 
         if (keyPressed == 'Enter' && state.game.state.gameStage == 'dead' && !state.game.state.musicMenu?.src.includes('gameOverEnd') && state.game.state.gameStageTime+2000 < +new Date()) {
             state.game.state.playSong('Sounds/gameOverEnd.ogg', { musicMenu: true })
-            setTimeout(() => state.game.state.gameStage = 'selectMusic', 1500)
+            setTimeout(() => state.game.state.smallFunctions.redirectGameStage('selectMusic'), 1500)
         }
 
         if (state.game.state.gameStage == 'selectMusic' && on) {
@@ -134,7 +138,7 @@ export default function createListener(socket) {
                 case 'Enter':
                     if (state.game.state.online) {
                         state.musicMenu?.pause()
-                        state.game.state.gameStage = 'game'
+                        state.game.state.smallFunctions.redirectGameStage('game')
                         socket.emit('newServer', {
                             difficulty: state.game.state.selectMusicMenu.difficultySelected,
                             music: state.game.state.selectMusicMenu.musicSelect
@@ -153,7 +157,7 @@ export default function createListener(socket) {
                         state.musicMenu?.pause()
                         state.game.playSong('Sounds/confirmMenu.ogg')
                         setTimeout(() => {
-                            state.game.state.gameStage = 'game'
+                            state.game.state.smallFunctions.redirectGameStage('game')
                             state.game.startMusic({ 
                                 name: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].name, 
                                 difficulty: state.game.state.difficulties[state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].difficulties[state.game.state.selectMusicMenu.difficultySelected]],
@@ -172,11 +176,11 @@ export default function createListener(socket) {
         if (state.game.state.gameStage == 'onlineServerList' && on) {
             switch (keyPressed) {
                 case 'ArrowUp':
-                    state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect <= 0 ? state.game.state.selectServerOption.listServers.length-1 : state.game.state.selectServerOption.serverSelect-1
+                    state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect <= 0 ? (state.game.state.selectServerOption.listServers.filter(s => s.open)).length-1 : state.game.state.selectServerOption.serverSelect-1
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
                 case 'ArrowDown':
-                    state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect >= state.game.state.selectServerOption.listServers.length-1 ? 0 : state.game.state.selectServerOption.serverSelect+1
+                    state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect >= (state.game.state.selectServerOption.listServers.filter(s => s.open)).length-1 ? 0 : state.game.state.selectServerOption.serverSelect+1
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
                 case 'ArrowLeft':
@@ -189,7 +193,7 @@ export default function createListener(socket) {
                     break
                 case 'Enter':
                     if (state.game.state.selectServerOption.createServer) {
-                        state.game.state.gameStage = 'selectMusic'
+                        state.game.state.smallFunctions.redirectGameStage('selectMusic')
 
                         state.game.state.serverId = socket.id
                     } else if (state.game.state.selectServerOption.listServers[0]) {
@@ -212,7 +216,7 @@ export default function createListener(socket) {
                                 serverId: state.game.state.serverId
                             })
 
-                            state.game.state.gameStage = 'game'
+                            state.game.state.smallFunctions.redirectGameStage('game')
                         }
                     }
                     break
@@ -232,10 +236,10 @@ export default function createListener(socket) {
                 case 'Enter':
                     if (state.game.state.selectMenuOption.menuOptions[state.game.state.selectMenuOption.menuSelect] == 'Singleplayer') {
                         state.game.state.online = false
-                        state.game.state.gameStage = 'selectMusic'
+                        state.game.state.smallFunctions.redirectGameStage('selectMusic')
                     } else {
                         state.game.state.online = true
-                        state.game.state.gameStage = 'onlineServerList'
+                        state.game.state.smallFunctions.redirectGameStage('onlineServerList')
                         socket.emit('getListServers')
                     }
                     

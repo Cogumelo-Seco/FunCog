@@ -1,4 +1,4 @@
-module.exports = async (canvas, game, Listener) => {
+export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
     if (!game.state.holdHeight) game.state.holdHeight = game.state.images[`Arrows/Arrow-0.png`]?.height

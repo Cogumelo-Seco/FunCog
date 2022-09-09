@@ -1,4 +1,4 @@
-module.exports = function renderGame(canvas, game, Listener) {
+export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
     
     let loadingBarWidth = canvas.width*0.5

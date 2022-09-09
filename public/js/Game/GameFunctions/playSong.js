@@ -1,4 +1,4 @@
-module.exports = (type, command, state) => {
+export default (type, command, state) => {
     let song = null
 
     if (command?.newSong) {

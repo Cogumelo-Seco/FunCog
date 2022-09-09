@@ -1,4 +1,4 @@
-module.exports = async (canvas, game, Listener) => {
+export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
     ctx.fillStyle = 'rgb(200, 200, 200)'
@@ -15,7 +15,7 @@ module.exports = async (canvas, game, Listener) => {
     ctx.fillText(`Beat: ${game.state.musicBeat}`, 2, canvas.height-15);
     ctx.fillText(`Step: ${game.state.musicStep}`, 2, canvas.height-25); 
     if (game.state.musicInfo.dev) {
-        ctx.fillStyle = 'rgb(255, 66, 66)'
+        ctx.fillStyle = 'rgb(255, 0, 0)'
         ctx.fillText(`In development`, 2, canvas.height-35); 
     }
     

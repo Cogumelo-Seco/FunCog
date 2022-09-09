@@ -1,4 +1,4 @@
-module.exports = async (canvas, game, Listener) => {
+export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
     ctx.fillStyle = 'red'
@@ -95,7 +95,7 @@ module.exports = async (canvas, game, Listener) => {
         let note = game.state.musicOpponentNotes.find(n => n.errorWhenNotClicking && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2))
         let onClickNoteOpponent = game.state.musicInfoOpponent.arrows && game.state.musicInfoOpponent.arrows[arrowID]?.click
         if (note || onClickNoteOpponent) {
-            if (game.state.musicInfo.health > 5 && game.state.music?.currentTime > 1) game.state.musicInfo.health -= 0.05
+            if (note && game.state.musicInfo.health > 5 && game.state.music?.currentTime > 1) game.state.musicInfo.health -= 0.05
             let pressImage = game.state.personalizedNotes[note?.type]?.pressImage
             if (pressImage) arrowImage = game.state.images[pressImage.replace(/{{arrowID}}/g, arrowID).replace(/{{frame}}/g, game.state.animations.arrows.frame)]
             else arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}-press-${note ? game.state.animations.arrows.frame : game.state.animations.arrows.frame%2}${note ? '' : '-no'}.png`]//arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}-press-${game.state.animations.arrows.frame}.png`]
