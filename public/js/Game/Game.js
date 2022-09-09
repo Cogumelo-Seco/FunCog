@@ -322,7 +322,7 @@ function createGame(Listener, canvas, socket) {
             state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) - ${msg}`
         }
 
-        for (let i of state.images) {
+        /*for (let i of state.images) {
             let img = new Image()
             img.addEventListener('error',(e) => {
                 console.warn('ERROR: '+e.path[0].src)
