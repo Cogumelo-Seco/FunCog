@@ -40,6 +40,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
         for (let i in musicNotes) {
             for (let a in musicNotes[i].sectionNotes) {
                 let noteInfo = musicNotes[i].sectionNotes[a]
+                let newNoteInfo = await getNoteinfo(noteInfo, difficulty, musicData)
                 let mustHitSection = musicNotes[i].mustHitSection
                 mustHitSection = opponentPlayer ? mustHitSection ? false : true : mustHitSection
 
@@ -50,10 +51,10 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
 
                 if (mustHitSection) {
                     state.musicOriginalNotes.push(noteInfo)
-                    state.musicNotes.push(await getNoteinfo(noteInfo, difficulty, musicData))
+                    state.musicNotes.push(newNoteInfo)
                 } else {
                     state.musicOriginalOpponentNotes.push(noteInfo)
-                    state.musicOpponentNotes.push(await getNoteinfo(noteInfo, difficulty, musicData))
+                    state.musicOpponentNotes.push(newNoteInfo)
                 }
             }
         }
