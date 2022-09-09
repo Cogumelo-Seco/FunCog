@@ -40,7 +40,6 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
         for (let i in musicNotes) {
             for (let a in musicNotes[i].sectionNotes) {
                 let noteInfo = musicNotes[i].sectionNotes[a]
-                let newNoteInfo = await getNoteinfo(noteInfo, difficulty, musicData)
                 let mustHitSection = musicNotes[i].mustHitSection
                 mustHitSection = opponentPlayer ? mustHitSection ? false : true : mustHitSection
 
