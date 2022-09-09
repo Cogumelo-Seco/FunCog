@@ -311,8 +311,10 @@ function createGame(Listener, canvas, socket) {
     }
 
     async function loading(command) {
-        /*state.loading.total += await addImages()
-        state.loading.total += await addSounds()*/
+        let loadingImagesTotal = await addImages()
+        let loadingSoundsTotal = await addSounds()
+        state.loading.total = loadingImagesTotal
+        state.loading.total = loadingSoundsTotal
         addMusicList()
         addDifficulties()
         addPersonalizedNotes()
