@@ -314,7 +314,7 @@ function createGame(Listener, canvas, socket) {
         let loadingImagesTotal = await addImages()
         let loadingSoundsTotal = await addSounds()
         state.loading.total = loadingImagesTotal
-        state.loading.total = loadingSoundsTotal
+        state.loading.total += loadingSoundsTotal
         addMusicList()
         addDifficulties()
         addPersonalizedNotes()
