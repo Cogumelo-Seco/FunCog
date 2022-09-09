@@ -48,6 +48,8 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                     mustHitSection = mustHitSection ? false : true
                 }
 
+                let newNoteInfo = await getNoteinfo(noteInfo, difficulty, musicData)
+
                 if (mustHitSection) {
                     state.musicOriginalNotes.push(noteInfo)
                     state.musicNotes.push(newNoteInfo)
