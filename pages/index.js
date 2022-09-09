@@ -14,6 +14,7 @@ const Game = (props) => {
             withCredentials: true,
         })
 
+        console.log(game)
         const canvas = document.getElementById('gameCanvas')        
         const Listener = createListener(socket);
         const game = createGame(Listener, canvas, socket);
