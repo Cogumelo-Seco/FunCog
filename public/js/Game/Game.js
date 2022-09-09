@@ -310,17 +310,12 @@ function createGame(Listener, canvas, socket) {
         //let interval = setInterval(() => null, 1000/30);
     }
 
-    async function loading(command) {
+    /*async function loading(command) {
         state.loading.total += await addImages()
         state.loading.total += await addSounds()
         addMusicList()
         addDifficulties()
         addPersonalizedNotes()
-
-        /*state.loading.total = 50
-        let interval = setInterval(() => {
-            if (state.loading.loaded < state.loading.total) state.loading.loaded += 1
-        }, 100)*/
 
         const newLoad = (msg) => {
             state.loading.loaded += 1
@@ -342,10 +337,10 @@ function createGame(Listener, canvas, socket) {
         for (let i of state.sounds) {
             let sound = new Audio()
             sound.addEventListener('loadeddata', (e) => newLoad(e.path[0].src))
-            /*sound.addEventListener('error', (e) => {
+            sound.addEventListener('error', (e) => {
                 console.warn('ERROR: '+e.path[0].src)
                 newLoad('ERROR: '+e.path[0].src)
-            })*/
+            })
             sound.src = `/${i}`
             state.sounds[i] = sound
         }
@@ -363,7 +358,7 @@ function createGame(Listener, canvas, socket) {
             clearInterval(interval)
             if (state.gameStage == 'loading') setTimeout(() => state.smallFunctions.redirectGameStage('menu'), 500)
         }, 40000)
-    }
+    }*/
     
     return {
         start,
