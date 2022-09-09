@@ -317,10 +317,10 @@ function createGame(Listener, canvas, socket) {
         addDifficulties()
         addPersonalizedNotes()
 
-        const newLoad = (msg) => {
+        /*const newLoad = (msg) => {
             state.loading.loaded += 1
-            //state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) - ${msg}`
-        }
+            state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) - ${msg}`
+        }*/
 
         for (let i of state.images) {
             let img = new Image()
