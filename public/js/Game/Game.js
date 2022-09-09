@@ -343,7 +343,7 @@ function createGame(Listener, canvas, socket) {
             })
             sound.src = `/${i}`
             state.sounds[i] = sound
-        }
+        }*/
 
         let interval = setInterval(() => {
             if (state.loading.loaded >= state.loading.total) {
