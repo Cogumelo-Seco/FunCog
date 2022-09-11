@@ -19,10 +19,10 @@ export default async (state) => {
             newHoldEndImage: `Arrows/pinkieSing/Arrow-pinkieSing-hold-end.png`
         },
         sonicEXEStaticNote: {
-            newArrowImage: `Arrows/sonicEXEStaticNotes/Arrow-{{arrowID}}.png`,
+            newArrowImage: `Arrows/staticNotesSonicEXE/Arrow-{{arrowID}}.png`,
         },
         sonicEXEphantomNote: {
-            newArrowImage: `Arrows/sonicEXEphantomNotes/Arrow-{{arrowID}}.png`,
+            newArrowImage: `Arrows/phantomNotesSonicEXE/Arrow-{{arrowID}}.png`,
         },
         LNCTBlack: {
             newArrowImage: `Arrows/LNCTBlack/Arrow-{{arrowID}}.png`,
