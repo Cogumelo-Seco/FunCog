@@ -340,7 +340,7 @@ function createGame(Listener, canvas, socket) {
             setTimeout(() => {
                 if (!loaded) {
                     alert('[ERROR File failed to load] '+dir)
-                    newLoad('[ERROR File failed to load] '+dir)
+                    //newLoad('[ERROR File failed to load] '+dir)
                     load(dir)
                 }
             }, 10000)
