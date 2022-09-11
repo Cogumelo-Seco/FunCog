@@ -1,5 +1,10 @@
 export default async (state) => {
     state.images = [
+        'imgs/LateNightCityTale/hurt.png',
+        'imgs/LateNightCityTale/Broken.png',
+
+        /* ---- */
+
         'BongoCat/bg.png',
         'BongoCat/arrow-0.png',
         'BongoCat/arrow-1.png',

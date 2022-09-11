@@ -126,7 +126,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                 arrowID = note[1]%4
                 errorWhenNotClicking = false
                 type = 'pinkieSing'
-            } else arrowID = note[1]%4
+            }
         }
 
         if (mod == 'SonicEXE') {
@@ -158,8 +158,6 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                 type = 'LNCTRed'
             }
         }
-
-        //console.log(note)
 
         return {
             Y: NaN,

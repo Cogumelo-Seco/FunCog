@@ -21,6 +21,9 @@ export default async (state) => {
         'Sounds/simplejumpsound.ogg',
         'Sounds/datOneSound.ogg',
         'Sounds/sppok.ogg',
+        'Sounds/LateNightCityTale/blackNote1.ogg',
+        'Sounds/LateNightCityTale/blackNote2.ogg',
+        'Sounds/LateNightCityTale/heal.ogg',
 
         'Musics/musics/tutorial/Inst.ogg',
 

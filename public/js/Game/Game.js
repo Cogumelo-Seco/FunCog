@@ -324,42 +324,39 @@ function createGame(Listener, canvas, socket) {
             state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) - ${msg}`
         }
 
-        for (let i of state.images) {
-            let img = new Image()
-            img.addEventListener('error',(e) => {
-                console.warn('ERROR: '+e.path[0].src)
-                newLoad('ERROR: '+e.path[0].src)
-            })
-            img.addEventListener('load', (e) => newLoad(e.path[0].src))
-            img.src = `/imgs/${i}`
-            img.id = i
-            state.images[i] = img
-        }
+        try {
+            for (let i of state.images) {
+                let img = new Image()
+                img.addEventListener('error',(e) => newLoad('ERROR: '+e.path[0].src))
+                img.addEventListener('load', (e) => newLoad(e.path[0].src))
+                img.src = `/imgs/${i}`
+                img.id = i
+                state.images[i] = img
+            }
 
-        for (let i of state.sounds) {
-            let sound = new Audio()
-            sound.addEventListener('loadeddata', (e) => newLoad(e.path[0].src))
-            sound.addEventListener('error', (e) => {
-                console.warn('ERROR: '+e.path[0].src)
-                newLoad('ERROR: '+e.path[0].src)
-            })
-            sound.src = `/${i}`
-            state.sounds[i] = sound
-        }
+            for (let i of state.sounds) {
+                let sound = new Audio()
+                sound.addEventListener('loadeddata', (e) => newLoad(e.path[0].src))
+                sound.addEventListener('error', (e) => {
+                    newLoad('ERROR: '+e.path[0].src)
+                    completeLoading()
+                })
+                sound.src = `/${i}`
+                state.sounds[i] = sound
+            }
+        } catch (err) { }
 
         let interval = setInterval(() => {
-            if (state.loading.loaded >= state.loading.total) {
-                state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
-                clearInterval(interval)
-                if (state.gameStage == 'loading') setTimeout(() => state.smallFunctions.redirectGameStage('menu'), 500)
-            }
+            if (state.loading.loaded >= state.loading.total) completeLoading()
         }, 1000/40)
 
-        setTimeout(() => {
+        const completeLoading = () => {
             state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
             clearInterval(interval)
             if (state.gameStage == 'loading') setTimeout(() => state.smallFunctions.redirectGameStage('menu'), 500)
-        }, 40000)
+        }
+
+        setTimeout(completeLoading, 40000)
     }
     
     return {

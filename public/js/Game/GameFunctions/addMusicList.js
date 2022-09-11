@@ -359,22 +359,20 @@ export default async (state) => {
             mod: 'SonicEXE',
             dev: true
         },
-
         {
             name: 'Azure-encounter',
             menuColor: 'rgb(138, 12, 162)',
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/LNCTNotes/',
-            backgroundImage: null,
-            mod: 'LateNightCityTale',
-            dev: true
+            backgroundImage: 'backgrounds/LateNightCityTale.jpg',
+            mod: 'LateNightCityTale'
         },
         {
             name: 'Secret-marilee',
             menuColor: 'rgb(138, 12, 162)',
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/LNCTNotes/',
-            backgroundImage: null,
+            backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
             dev: true
         },
@@ -383,7 +381,7 @@ export default async (state) => {
             menuColor: 'rgb(138, 12, 162)',
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/LNCTNotes/',
-            backgroundImage: null,
+            backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
             dev: true
         },
@@ -392,7 +390,7 @@ export default async (state) => {
             menuColor: 'rgb(138, 12, 162)',
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/LNCTNotes/',
-            backgroundImage: null,
+            backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
             dev: true
         },
@@ -402,7 +400,7 @@ export default async (state) => {
             menuColor: 'rgb(138, 12, 162)',
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/LNCTNotes/',
-            backgroundImage: null,
+            backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
             dev: true
         },

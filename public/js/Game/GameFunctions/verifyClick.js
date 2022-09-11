@@ -1,12 +1,15 @@
 export default async({ arrowID, listenerState }, state) => {
     let notes = state.musicNotes.filter((n) => {
         n.hitNote = (n.time-state.music?.currentTime)*1000
-        return n.arrowID == arrowID && n.errorWhenNotClicking && !n.disabled &&
+        return n.arrowID == arrowID && !n.disabled &&
+        n.Y >= -(state.arrowsSize**state.resizeNote) &&
+        n.Y <= (state.arrowsSize**state.resizeNote)
+        /*n.arrowID == arrowID && n.errorWhenNotClicking && !n.disabled &&
         n.Y >= -(state.arrowsSize**state.resizeNote*1.5) &&
         n.Y <= (state.arrowsSize**state.resizeNote*1.5) ||
         n.arrowID == arrowID && !n.errorWhenNotClicking && !n.disabled &&
         n.Y >= -(state.arrowsSize**state.resizeNote) &&
-        n.Y <= (state.arrowsSize**state.resizeNote)
+        n.Y <= (state.arrowsSize**state.resizeNote)*/
     })
 
     if (!state.botPlay) for (let i in notes) {
@@ -21,7 +24,7 @@ export default async({ arrowID, listenerState }, state) => {
 
         if (state.personalizedNotes[notes[i].type]) {
             let pressImage = state.personalizedNotes[notes[i].type].pressImage
-            if (pressImage) listenerState.arrows[arrowID].state = pressImage || 'onNote'
+            listenerState.arrows[arrowID].state = pressImage || 'onNote'
         }
 
         state.animations.ratingImage.frame = 0
@@ -45,11 +48,11 @@ export default async({ arrowID, listenerState }, state) => {
     }
 
     
-    if (!notes[0] && state.musicNotes.filter((n) => n.errorWhenNotClicking && !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(state.arrowsSize**state.resizeNote*2.5))[0]) {
+    if (!notes[0] && state.musicNotes.filter((n) => !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(state.arrowsSize**state.resizeNote*3))[0]) {
         state.musicInfo.accuracyMedia.push(1)
         state.musicInfo.misses += 1
         state.musicInfo.score -= 50
-        state.musicInfo.health -= 2.5
+        state.musicInfo.health -= 3
         state.musicInfo.combo = 0
     }
 }
