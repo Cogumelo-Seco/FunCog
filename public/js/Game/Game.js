@@ -319,7 +319,6 @@ function createGame(Listener, canvas, socket) {
         addPersonalizedNotes()
 
         let toLoad = state.images.concat(state.sounds)
-        setTimeout(completeLoading, 40000)
 
         const newLoad = (msg) => {
             state.loading.loaded += 1
