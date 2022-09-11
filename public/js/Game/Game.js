@@ -334,21 +334,36 @@ function createGame(Listener, canvas, socket) {
         }
 
         const load = (dir) => {
+            let loaded = false
             let err = [false, false]
+
+            setTimeout(() => {
+                if (!loaded) newLoad('[ERROR File failed to load] '+dir)
+            }, 10000)
+
             let sound = new Audio()
-            sound.addEventListener('loadeddata', (e) => newLoad(e.path[0].src))
+            sound.addEventListener('loadeddata', (e) => {
+                loaded = true
+                newLoad(e.path[0].src)
+            })
             sound.addEventListener('error', (e) => err[0] = true)
             sound.src = `/${dir}`
             state.sounds[dir] = sound
 
             let img = new Image()
-            img.addEventListener('load', (e) => newLoad(e.path[0].src))
+            img.addEventListener('load', (e) => {
+                loaded = true
+                newLoad(e.path[0].src)
+            })
             img.addEventListener('error',(e) => err[1] = true)
             img.src = `/imgs/${dir}`
             img.id = dir
             state.images[dir] = img
 
-            if (err[0] && err[1]) newLoad('ERROR: '+dir)
+            if (err[0] && err[1]) {
+                loaded = true
+                newLoad('[ERROR] '+dir)
+            }
         }
 
         load(toLoad[0])
