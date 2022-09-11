@@ -66,6 +66,8 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
         
         state.music = state.sounds[`Musics/musics/${name.toLowerCase()}/Inst.ogg`]
         state.musicVoice = state.sounds[`Musics/musics/${name.toLowerCase()}/Voices.ogg`]
+        state.music?.load()
+        state.musicVoice?.load()
 
         let interval = setInterval(() => {
             if (state.online && !state.waiting || !state.online) {
