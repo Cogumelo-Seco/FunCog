@@ -68,8 +68,8 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					if (noteAlpha < 1) noteAlpha += 0.002
 					if (noteAlpha >= 1) addAlpha = false
 				} else if (!pauseAlpha) {
-					if (noteAlpha > 0.7) noteAlpha -= 0.002
-					if (noteAlpha <= 0.7) addAlpha = true
+					if (noteAlpha > 0.65) noteAlpha -= 0.002
+					if (noteAlpha <= 0.65) addAlpha = true
 				}
 
 				for (let i in state.arrowsInfo) {

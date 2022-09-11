@@ -1,7 +1,7 @@
 export default (state) => {
     return {
-        redirectGameStage: async (newStage) => {
-            state.oldGameStage = state.gameStage
+        redirectGameStage: async (newStage, oldStage) => {
+            state.oldGameStage = oldStage || state.gameStage
             state.gameStage = newStage
         }
     }

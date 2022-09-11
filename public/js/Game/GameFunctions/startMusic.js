@@ -60,6 +60,15 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
             }
         }
 
+        if (state.musicOpponentNotes.length <= 0 && state.online) {
+            state.musicOpponentNotes = JSON.parse(JSON.stringify(state.musicNotes));
+            state.musicOriginalOpponentNotes = JSON.parse(JSON.stringify(state.musicOriginalNotes));
+        }
+        if (state.musicNotes.length <= 0 && state.online) {
+            state.musicNotes = JSON.parse(JSON.stringify(state.musicOpponentNotes));
+            state.musicOriginalNotes = JSON.parse(JSON.stringify(state.musicOriginalOpponentNotes));
+        }
+
         try {
             state.musicEventListener = require(`../../../Musics/data/${name.toLowerCase()}/eventListener`).default
         } catch {}

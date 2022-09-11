@@ -257,8 +257,9 @@ function createGame(Listener, canvas, socket) {
             let musicDuration = state.music?.duration
             let musicCurrentTime = state.music?.currentTime
 
-            if (musicDuration <= musicCurrentTime) {
-                state.smallFunctions.redirectGameStage('selectMusic')
+            if (musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
+                if (state.online) state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
+                else state.smallFunctions.redirectGameStage('selectMusic', 'menu')
                 state.musicInfo.health = 50
                 state.musicNotes = []
                 state.musicOpponentNotes= []
@@ -306,8 +307,6 @@ function createGame(Listener, canvas, socket) {
             setTimeout(() => gameLoop(), 1000/40)
         }
         gameLoop()
-        
-        //let interval = setInterval(() => null, 1000/30);
     }
 
     async function loading(command) {
@@ -319,44 +318,41 @@ function createGame(Listener, canvas, socket) {
         addDifficulties()
         addPersonalizedNotes()
 
+        let toLoad = state.images.concat(state.sounds)
+        setTimeout(completeLoading, 40000)
+
         const newLoad = (msg) => {
             state.loading.loaded += 1
-            state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) - ${msg}`
+            state.loading.msg = `(${state.loading.loaded+1}/${state.loading.total}) - ${msg}`
+
+            if (state.loading.loaded+1 >= state.loading.total) completeLoading()
+            else load(toLoad[state.loading.loaded])
         }
 
-        try {
-            for (let i of state.images) {
-                let img = new Image()
-                img.addEventListener('error',(e) => newLoad('ERROR: '+e.path[0].src))
-                img.addEventListener('load', (e) => newLoad(e.path[0].src))
-                img.src = `/imgs/${i}`
-                img.id = i
-                state.images[i] = img
-            }
-
-            for (let i of state.sounds) {
-                let sound = new Audio()
-                sound.addEventListener('loadeddata', (e) => newLoad(e.path[0].src))
-                sound.addEventListener('error', (e) => {
-                    newLoad('ERROR: '+e.path[0].src)
-                    //completeLoading()
-                })
-                sound.src = `/${i}`
-                state.sounds[i] = sound
-            }
-        } catch (err) { }
-
-        let interval = setInterval(() => {
-            if (state.loading.loaded >= state.loading.total) completeLoading()
-        }, 1000/40)
-
         const completeLoading = () => {
-            state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
-            clearInterval(interval)
+            state.loading.msg = `(${state.loading.loaded+1}/${state.loading.total}) 100% - Complete loading`
             if (state.gameStage == 'loading') setTimeout(() => state.smallFunctions.redirectGameStage('menu'), 500)
         }
 
-        setTimeout(completeLoading, 40000)
+        const load = (dir) => {
+            let err = [false, false]
+            let sound = new Audio()
+            sound.addEventListener('loadeddata', (e) => newLoad(e.path[0].src))
+            sound.addEventListener('error', (e) => err[0] = true)
+            sound.src = `/${dir}`
+            state.sounds[dir] = sound
+
+            let img = new Image()
+            img.addEventListener('load', (e) => newLoad(e.path[0].src))
+            img.addEventListener('error',(e) => err[1] = true)
+            img.src = `/imgs/${dir}`
+            img.id = dir
+            state.images[dir] = img
+
+            if (err[0] && err[1]) newLoad('ERROR: '+dir)
+        }
+
+        load(toLoad[0])
     }
     
     return {
