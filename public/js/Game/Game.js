@@ -338,7 +338,10 @@ function createGame(Listener, canvas, socket) {
             let err = [false, false]
 
             setTimeout(() => {
-                if (!loaded) newLoad('[ERROR File failed to load] '+dir)
+                if (!loaded) {
+                    alert('[ERROR File failed to load] '+dir)
+                    newLoad('[ERROR File failed to load] '+dir)
+                }
             }, 10000)
 
             let sound = new Audio()

@@ -413,17 +413,17 @@ export default async (state) => {
 
         /* ---- */
 
-        'Arrows/sonicEXEStaticNotes/Arrow-0-sonicEXEStaticNote.png',
-        'Arrows/sonicEXEStaticNotes/Arrow-1-sonicEXEStaticNote.png',
-        'Arrows/sonicEXEStaticNotes/Arrow-2-sonicEXEStaticNote.png',
-        'Arrows/sonicEXEStaticNotes/Arrow-3-sonicEXEStaticNote.png',
+        'Arrows/sonicEXEStaticNotes/Arrow-0.png',
+        'Arrows/sonicEXEStaticNotes/Arrow-1.png',
+        'Arrows/sonicEXEStaticNotes/Arrow-2.png',
+        'Arrows/sonicEXEStaticNotes/Arrow-3.png',
 
         /* ---- */
 
-        'Arrows/sonicEXEphantomNotes/Arrow-0-sonicEXEphantomNote.png',
-        'Arrows/sonicEXEphantomNotes/Arrow-1-sonicEXEphantomNote.png',
-        'Arrows/sonicEXEphantomNotes/Arrow-2-sonicEXEphantomNote.png',
-        'Arrows/sonicEXEphantomNotes/Arrow-3-sonicEXEphantomNote.png',
+        'Arrows/sonicEXEphantomNotes/Arrow-0.png',
+        'Arrows/sonicEXEphantomNotes/Arrow-1.png',
+        'Arrows/sonicEXEphantomNotes/Arrow-2.png',
+        'Arrows/sonicEXEphantomNotes/Arrow-3.png',
 
         /* ---- */
 
