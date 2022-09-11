@@ -339,7 +339,7 @@ function createGame(Listener, canvas, socket) {
                 sound.addEventListener('loadeddata', (e) => newLoad(e.path[0].src))
                 sound.addEventListener('error', (e) => {
                     newLoad('ERROR: '+e.path[0].src)
-                    completeLoading()
+                    //completeLoading()
                 })
                 sound.src = `/${i}`
                 state.sounds[i] = sound
