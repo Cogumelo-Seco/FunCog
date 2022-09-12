@@ -237,6 +237,7 @@ function createGame(Listener, canvas, socket) {
                 state.musicVoice?.pause()
                 state.music.currentTime = 0
                 state.smallFunctions.redirectGameStage('dead')
+                state.waiting = true
                 state.musicInfo.health = 50
                 state.musicNotes = []
                 state.musicOpponentNotes = []
@@ -260,6 +261,7 @@ function createGame(Listener, canvas, socket) {
             if (musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
                 if (state.online) state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
                 else state.smallFunctions.redirectGameStage('selectMusic', 'menu')
+                state.waiting = true
                 state.musicInfo.health = 50
                 state.musicNotes = []
                 state.musicOpponentNotes= []
