@@ -1,4 +1,4 @@
-export default async({ arrowID, listenerState }, state) => {
+export default async({ arrowID, listenerState, bot }, state) => {
     let notes = state.musicNotes.filter((n) => {
         n.hitNote = (n.time-state.music?.currentTime)*1000
         return n.arrowID == arrowID && !n.disabled &&
@@ -12,10 +12,13 @@ export default async({ arrowID, listenerState }, state) => {
         n.Y <= (state.arrowsSize**state.resizeNote)*/
     })
 
-    if (!state.botPlay) for (let i in notes) {
-        state.musicEventListener('noteClick', { noteClickAuthor: 'player', note: notes[i], notes, listenerState }, state)
+    /*if (!state.botPlay)*/ for (let i in notes) {
+        state.musicEventListener('noteClick', { noteClickAuthor: bot ? 'bot' : 'player', note: notes[i], notes, listenerState }, state)
 
         notes[i].clicked = true
+        state.arrowsInfo[notes[i].arrowID].splashTime = +new Date()
+        state.arrowsInfo[notes[i].arrowID].splashFrame = 0
+
         if (notes[i].type == 'normal') {
             state.musicInfo.health += 2
             state.musicInfo.combo += 1

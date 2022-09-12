@@ -2,6 +2,7 @@ export default async (state) => {
     state.images = [
         'imgs/LateNightCityTale/hurt.png',
         'imgs/LateNightCityTale/Broken.png',
+        'imgs/LateNightCityTale/purple-filter.png',
 
         /* ---- */
 
@@ -122,6 +123,42 @@ export default async (state) => {
         'Arrows/sonicEXEMajinNotes/Arrow-3-hold-end.png',
 
         /* ---- */
+
+        'Arrows/splash/Arrow-0-splash-0.png',
+        'Arrows/splash/Arrow-0-splash-1.png',
+        'Arrows/splash/Arrow-0-splash-2.png',
+        'Arrows/splash/Arrow-0-splash-3.png',
+        'Arrows/splash/Arrow-0-splash-4.png',
+        'Arrows/splash/Arrow-0-splash-5.png',
+        'Arrows/splash/Arrow-0-splash-6.png',
+        'Arrows/splash/Arrow-0-splash-7.png',
+
+        'Arrows/splash/Arrow-1-splash-0.png',
+        'Arrows/splash/Arrow-1-splash-1.png',
+        'Arrows/splash/Arrow-1-splash-2.png',
+        'Arrows/splash/Arrow-1-splash-3.png',
+        'Arrows/splash/Arrow-1-splash-4.png',
+        'Arrows/splash/Arrow-1-splash-5.png',
+        'Arrows/splash/Arrow-1-splash-6.png',
+        'Arrows/splash/Arrow-1-splash-7.png',
+
+        'Arrows/splash/Arrow-2-splash-0.png',
+        'Arrows/splash/Arrow-2-splash-1.png',
+        'Arrows/splash/Arrow-2-splash-2.png',
+        'Arrows/splash/Arrow-2-splash-3.png',
+        'Arrows/splash/Arrow-2-splash-4.png',
+        'Arrows/splash/Arrow-2-splash-5.png',
+        'Arrows/splash/Arrow-2-splash-6.png',
+        'Arrows/splash/Arrow-2-splash-7.png',
+
+        'Arrows/splash/Arrow-3-splash-0.png',
+        'Arrows/splash/Arrow-3-splash-1.png',
+        'Arrows/splash/Arrow-3-splash-2.png',
+        'Arrows/splash/Arrow-3-splash-3.png',
+        'Arrows/splash/Arrow-3-splash-4.png',
+        'Arrows/splash/Arrow-3-splash-5.png',
+        'Arrows/splash/Arrow-3-splash-6.png',
+        'Arrows/splash/Arrow-3-splash-7.png',
 
         'Arrows/Arrow-0.png',
         'Arrows/Arrow-0-note.png',

@@ -29,21 +29,21 @@ export default async (state) => {
             newHoldImage: `Arrows/LNCTBlack/Arrow-hold-piece.png`,
             newHoldEndImage: `Arrows/LNCTBlack/Arrow-hold-end.png`,
             noteShadowColor: 'black',
-            noteShadowBlur: 13
+            noteShadowBlur: 15
         },
         LNCTRed: {
             newArrowImage: `Arrows/LNCTRed/Arrow-{{arrowID}}.png`,
             newHoldImage: `Arrows/LNCTRed/Arrow-hold-piece.png`,
             newHoldEndImage: `Arrows/LNCTRed/Arrow-hold-end.png`,
             noteShadowColor: 'red',
-            noteShadowBlur: 13
+            noteShadowBlur: 15
         },
         LNCTWhite: {
             newArrowImage: `Arrows/LNCTWhite/Arrow-{{arrowID}}.png`,
             newHoldImage: `Arrows/LNCTWhite/Arrow-hold-piece.png`,
             newHoldEndImage: `Arrows/LNCTWhite/Arrow-hold-end.png`,
             noteShadowColor: 'white',
-            noteShadowBlur: 13
+            noteShadowBlur: 15
         },
     }
     

@@ -373,8 +373,7 @@ export default async (state) => {
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
-            mod: 'LateNightCityTale',
-            dev: true
+            mod: 'LateNightCityTale'
         },
         {
             name: 'Broken-heart',

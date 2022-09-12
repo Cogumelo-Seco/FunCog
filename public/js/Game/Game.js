@@ -72,7 +72,7 @@ function createGame(Listener, canvas, socket) {
                 frame: 0,
                 startFrame: 0,
                 endFrame: 10,
-                totalDalay: 5,
+                totalDalay: 10,
                 dalay: 0,
                 loop: true,
             },
@@ -172,7 +172,7 @@ function createGame(Listener, canvas, socket) {
             state.musicBeat = Number.parseInt(state.music?.currentTime*(state.musicBPM/60))
             state.musicStep = Number.parseInt(state.music?.currentTime*(state.musicBPM/60)*4)
 
-            if (state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.05) state.musicVoice.currentTime = state.music.currentTime
+            if (state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.04) state.musicVoice.currentTime = state.music.currentTime
 
             if (!state.arrowsInfoOpponent[0]) {
                 for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {

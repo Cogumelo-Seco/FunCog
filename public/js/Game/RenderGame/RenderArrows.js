@@ -14,8 +14,14 @@ export default async (canvas, game, Listener) => {
     
 
     for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
-        let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}.png`]
         let arrowInfo = game.state.arrowsInfo[arrowID]
+        let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}.png`]
+
+        let splashImage = game.state.images[`Arrows/splash/Arrow-${arrowID}-splash-${arrowInfo?.splashFrame}.png`]
+        if (arrowInfo && arrowInfo.splashFrame <= 7 && arrowInfo.splashTime+20 <= +new Date()) {
+            arrowInfo.splashFrame += 1
+            arrowInfo.splashTime = +new Date()
+        }
 
         let autoClickNote = game.state.musicNotes.find(n => 
             n.autoClick && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2) ||
@@ -25,9 +31,11 @@ export default async (canvas, game, Listener) => {
         if (game.state.botPlay) Listener.state.arrows[arrowID].click = false
         if (Listener.state.arrows[arrowID]?.click || autoClickNote) {
             if (game.state.botPlay) {
+                if (!autoClickNote.clicked) game.verifyClick({ arrowID, listenerState: Listener.state, bot: true })
                 Listener.state.arrows[arrowID].state = 'onNote'
                 Listener.state.arrows[arrowID].click = true
-
+            }
+            /*
                 if (!autoClickNote.clicked) {
                     autoClickNote.clicked = true
                     game.state.musicEventListener('noteClick', { noteClickAuthor: 'player', note: autoClickNote }, game.state)
@@ -43,7 +51,7 @@ export default async (canvas, game, Listener) => {
                 } else {
                     game.state.musicInfo.health += 0.05
                 }
-            }
+            }*/
             let onNote = Listener.state.arrows[arrowID]?.state == 'onNote' || autoClickNote
 
             if (onNote || Listener.state.arrows[arrowID]?.state == 'noNote') arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${arrowID}-press-${onNote ? game.state.animations.arrows.frame : game.state.animations.arrows.frame%2}${onNote ? '' : '-no'}.png`]
@@ -76,7 +84,10 @@ export default async (canvas, game, Listener) => {
             ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
             ctx.rotate((arrowInfo.rotation)*Math.PI/180);
             
-            if (game.state.countdown < 0) ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+            if (game.state.countdown < 0) {
+                ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+                if (splashImage) ctx.drawImage(splashImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+            }
 
             ctx.restore()
             //if (!arrowImage.id.includes('press')) game.state.positionArrow[arrowID] = arrowX
