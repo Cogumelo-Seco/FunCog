@@ -1,9 +1,6 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
-    ctx.fillStyle = 'red'
-    //ctx.fillRect(0, game.state.arrowsYLine, canvas.width, 1)
-
     let amountOfArrows = game.state.amountOfArrows
     let spaceBetweenArrows = game.state.spaceBetweenArrows
     let resizeNote = game.state.resizeNote
@@ -16,14 +13,14 @@ export default async (canvas, game, Listener) => {
     for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
         let arrowInfo = game.state.arrowsInfo[arrowID]
         let arrowImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${arrowID}.png`]
-        let splashInfo = game.state.splash[arrowInfo?.splashType]//[game.state.musicInfo.splashType]
+        let splashInfo = game.state.splash[arrowInfo?.splashType]
 
         let splashImage = game.state.images[splashInfo?.dir.replace(/{{arrowID}}/g, arrowID).replace(/{{frame}}/g, arrowInfo?.splashFrame)]
         if (arrowInfo && splashInfo && arrowInfo.splashFrame <= arrowInfo.splashMaxFrame && arrowInfo.splashTime+40 <= +new Date()) {
             arrowInfo.splashMaxFrame = splashInfo.maxFrame
             arrowInfo.splashFrame += 1
             arrowInfo.splashTime = +new Date()
-        } //else if (game.state.musicInfo.splashType != game.state.musicInfo.splashDefaultType) game.state.musicInfo.splashType = game.state.musicInfo.splashDefaultType
+        }
 
         let autoClickNote = game.state.musicNotes.find(n => 
             n.autoClick && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2) ||
@@ -37,23 +34,6 @@ export default async (canvas, game, Listener) => {
                 Listener.state.arrows[arrowID].state = 'onNote'
                 Listener.state.arrows[arrowID].click = true
             }
-            /*
-                if (!autoClickNote.clicked) {
-                    autoClickNote.clicked = true
-                    game.state.musicEventListener('noteClick', { noteClickAuthor: 'player', note: autoClickNote }, game.state)
-                    
-                    game.state.animations.ratingImage.frame = 0
-                    game.state.calculateRating(0)
-                    game.state.musicInfo.accuracyMedia = [ 100 ]
-                    game.state.musicInfo.hitNote = Math.random()*10-5
-                    game.state.musicInfo.score += 200
-    
-                    game.state.musicInfo.health += 2
-                    game.state.musicInfo.combo += 1
-                } else {
-                    game.state.musicInfo.health += 0.05
-                }
-            }*/
             let onNote = Listener.state.arrows[arrowID]?.state == 'onNote' || autoClickNote
 
             if (onNote || Listener.state.arrows[arrowID]?.state == 'noNote') arrowImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${arrowID}-press-${onNote ? game.state.animations.arrows.frame : game.state.animations.arrows.frame%2}${onNote ? '' : '-no'}.png`]
@@ -112,7 +92,7 @@ export default async (canvas, game, Listener) => {
         if (note || onClickNoteOpponent) {
             let pressImage = game.state.personalizedNotes[note?.type]?.pressImage
             if (pressImage) arrowImage = game.state.images[pressImage.replace(/{{arrowID}}/g, arrowID).replace(/{{frame}}/g, game.state.animations.arrows.frame)]
-            else arrowImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${arrowID}-press-${note ? game.state.animations.arrows.frame : game.state.animations.arrows.frame%2}${note ? '' : '-no'}.png`]//arrowImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${arrowID}-press-${game.state.animations.arrows.frame}.png`]
+            else arrowImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${arrowID}-press-${note ? game.state.animations.arrows.frame : game.state.animations.arrows.frame%2}${note ? '' : '-no'}.png`]
         }
 
         if (arrowImage && arrowInfo) {

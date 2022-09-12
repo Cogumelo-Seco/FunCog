@@ -413,8 +413,7 @@ export default async (state) => {
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
             splashType: 'default',
-            splashResize: 2,
-            dev: true
+            splashResize: 2
         },
         {
             name: 'Aquaphobia',
@@ -424,8 +423,7 @@ export default async (state) => {
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
             splashType: 'default',
-            splashResize: 2,
-            dev: true
+            splashResize: 2
         },
         {
             name: 'Lonely-sapphire',
@@ -435,8 +433,7 @@ export default async (state) => {
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
             splashType: 'default',
-            splashResize: 2,
-            dev: true
+            splashResize: 2
         },
     ]
     

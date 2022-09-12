@@ -61,15 +61,15 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				let beat = state.musicBeat
 				let currentTime = state.music?.currentTime
 
-				if (state.screenZoom < 10 && state.camZooming) {
-					if (beat%4 == 0 && beat >= 96) state.screenZoom = 10
+				/*if (state.screenZoom < 10 && state.camZooming) {
+					if (beat%4 == 0) state.screenZoom = 10
 				} else if (state.screenZoom <= 0) {
 					state.screenZoom = 0
 					state.camZooming = true
 				} else {
 					state.camZooming = false
 					state.screenZoom -= 0.5
-				}
+				}*/
 
 				if (addAlpha) {
 					if (noteAlpha < 1) noteAlpha += 0.002
@@ -118,7 +118,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					alpha: screenFilterAlpha
 				}
 
-				screenFilterAlpha = screenFilterAlpha-(screenFilterAlpha/25) <= 0 ? 0 : screenFilterAlpha-(screenFilterAlpha/25)
+				screenFilterAlpha = screenFilterAlpha-(screenFilterAlpha/15) <= 0 ? 0 : screenFilterAlpha-(screenFilterAlpha/15)
 
 				oldBeat = beat
 				oldCurrentTime = currentTime
@@ -126,7 +126,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
                     clearInterval(loop)
 					state.screenZoom = 0
                 }
-            }, 1000/40)
+            }, 1000/30)
             break
     }
 }

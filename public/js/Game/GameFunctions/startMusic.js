@@ -1,6 +1,8 @@
 export default async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer, splashType, splashResize }, state) => {
     try {
         state.arrowsInfo = {},
+        state.arrow = {},
+        state.arrowsInfoOpponent = {},
         state.arrowsInfoOpponent = {},
         state.positionArrow = {},
         state.positionArrowOpponent = {},
@@ -9,7 +11,9 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
         state.screenZoom = 0,
         state.screenZooming = false,
         state.screenRotation = 0,
+        state.musicOriginalNotes = []
         state.musicNotes = []
+        state.musicOriginalOpponentNotes = []
         state.musicOpponentNotes = []
         state.countdown = 4
         state.musicEventListener = () => null

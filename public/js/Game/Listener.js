@@ -158,7 +158,7 @@ export default function createListener(socket) {
                     } else {
                         state.musicMenu?.pause()
                         state.game.playSong('Sounds/confirmMenu.ogg')
-                        setTimeout(() => {
+                        //setTimeout(() => {
                             state.game.state.smallFunctions.redirectGameStage('game')
                             state.game.startMusic({ 
                                 name: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].name, 
@@ -171,7 +171,7 @@ export default function createListener(socket) {
                                 splashResize: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashResize,
                                 listenerState: state
                             })
-                        }, 1500)
+                        //}, 1500)
                     }
                     break
             }
