@@ -40,10 +40,11 @@ export default async({ arrowID, listenerState }, state) => {
                     note.disabled = true
                     clearInterval(loop)
                 } else {
+                    state.musicEventListener('noteClick', { noteClickAuthor: 'player', note: notes[i], notes, listenerState }, state)
                     state.musicInfo.health += 0.2
                     state.musicInfo.score += 20
                 }
-            }, 1000/10)
+            }, 1000/5)
         }
     }
 
