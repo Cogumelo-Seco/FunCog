@@ -1,7 +1,7 @@
 export default async (type, { noteClickAuthor }, state) => {
     switch (type) {
         case 'noteClick':
-            if (noteClickAuthor == 'bot') {
+            if (state.musicInfo.playerId == 2 && noteClickAuthor == 'player' || state.musicInfo.playerId == 1 && noteClickAuthor == 'opponent') {
                 let current = 0
                 let interval = setInterval(() => {
                     if (current >= 3) {

@@ -28,6 +28,7 @@ export default async (state) => {
             newArrowImage: `Arrows/LNCTBlack/Arrow-{{arrowID}}.png`,
             newHoldImage: `Arrows/LNCTBlack/Arrow-hold-piece.png`,
             newHoldEndImage: `Arrows/LNCTBlack/Arrow-hold-end.png`,
+            splashType: 'LNCTBlack',
             noteShadowColor: 'black',
             noteShadowBlur: 15
         },
@@ -35,6 +36,7 @@ export default async (state) => {
             newArrowImage: `Arrows/LNCTRed/Arrow-{{arrowID}}.png`,
             newHoldImage: `Arrows/LNCTRed/Arrow-hold-piece.png`,
             newHoldEndImage: `Arrows/LNCTRed/Arrow-hold-end.png`,
+            splashType: 'LNCTRed',
             noteShadowColor: 'red',
             noteShadowBlur: 15
         },
@@ -42,8 +44,9 @@ export default async (state) => {
             newArrowImage: `Arrows/LNCTWhite/Arrow-{{arrowID}}.png`,
             newHoldImage: `Arrows/LNCTWhite/Arrow-hold-piece.png`,
             newHoldEndImage: `Arrows/LNCTWhite/Arrow-hold-end.png`,
+            splashType: 'LNCTWhite',
             noteShadowColor: 'white',
-            noteShadowBlur: 15
+            noteShadowBlur: 15,
         },
     }
     

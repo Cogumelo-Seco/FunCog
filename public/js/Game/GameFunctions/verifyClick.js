@@ -13,7 +13,7 @@ export default async({ arrowID, listenerState, bot }, state) => {
     })
 
     /*if (!state.botPlay)*/ for (let i in notes) {
-        state.musicEventListener('noteClick', { noteClickAuthor: bot ? 'bot' : 'player', note: notes[i], notes, listenerState }, state)
+        state.musicEventListener('noteClick', { noteClickAuthor: 'player', note: notes[i], notes, listenerState }, state)
 
         notes[i].clicked = true
         state.arrowsInfo[notes[i].arrowID].splashTime = +new Date()
@@ -28,7 +28,8 @@ export default async({ arrowID, listenerState, bot }, state) => {
         if (state.personalizedNotes[notes[i].type]) {
             let pressImage = state.personalizedNotes[notes[i].type].pressImage
             listenerState.arrows[arrowID].state = pressImage || 'onNote'
-        }
+            state.arrowsInfo[notes[i].arrowID].splashType = state.personalizedNotes[notes[i].type].splashType || state.musicInfo.splashType
+        } else state.arrowsInfo[notes[i].arrowID].splashType = state.musicInfo.splashType
 
         state.animations.ratingImage.frame = 0
         state.musicInfo.accuracyMedia.push(state.calculateRating(notes[i].hitNote).media)

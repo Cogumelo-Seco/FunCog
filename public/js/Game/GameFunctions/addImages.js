@@ -38,6 +38,14 @@ export default async (state) => {
         'icons/icon-face.png',
         'icons/BongoCat.png',
 
+        /* ---- */
+
+        'Arrows/BloodSplash/splash-0.png',
+        'Arrows/BloodSplash/splash-1.png',
+        'Arrows/BloodSplash/splash-2.png',
+        'Arrows/BloodSplash/splash-3.png',
+        'Arrows/BloodSplash/splash-4.png',
+
         /* ---- */        
 
         'Arrows/LNCTNotes/Arrow-0.png',
@@ -464,6 +472,54 @@ export default async (state) => {
 
         /* ---- */
 
+        'Arrows/LNCTBlack/splash/Arrow-0-splash-0.png',
+        'Arrows/LNCTBlack/splash/Arrow-0-splash-1.png',
+        'Arrows/LNCTBlack/splash/Arrow-0-splash-2.png',
+        'Arrows/LNCTBlack/splash/Arrow-0-splash-3.png',
+        'Arrows/LNCTBlack/splash/Arrow-0-splash-4.png',
+        'Arrows/LNCTBlack/splash/Arrow-0-splash-5.png',
+        'Arrows/LNCTBlack/splash/Arrow-0-splash-6.png',
+        'Arrows/LNCTBlack/splash/Arrow-0-splash-7.png',
+        'Arrows/LNCTBlack/splash/Arrow-0-splash-8.png',
+        'Arrows/LNCTBlack/splash/Arrow-0-splash-9.png',
+        'Arrows/LNCTBlack/splash/Arrow-0-splash-10.png',
+
+        'Arrows/LNCTBlack/splash/Arrow-1-splash-0.png',
+        'Arrows/LNCTBlack/splash/Arrow-1-splash-1.png',
+        'Arrows/LNCTBlack/splash/Arrow-1-splash-2.png',
+        'Arrows/LNCTBlack/splash/Arrow-1-splash-3.png',
+        'Arrows/LNCTBlack/splash/Arrow-1-splash-4.png',
+        'Arrows/LNCTBlack/splash/Arrow-1-splash-5.png',
+        'Arrows/LNCTBlack/splash/Arrow-1-splash-6.png',
+        'Arrows/LNCTBlack/splash/Arrow-1-splash-7.png',
+        'Arrows/LNCTBlack/splash/Arrow-1-splash-8.png',
+        'Arrows/LNCTBlack/splash/Arrow-1-splash-9.png',
+        'Arrows/LNCTBlack/splash/Arrow-1-splash-10.png',
+
+        'Arrows/LNCTBlack/splash/Arrow-2-splash-0.png',
+        'Arrows/LNCTBlack/splash/Arrow-2-splash-1.png',
+        'Arrows/LNCTBlack/splash/Arrow-2-splash-2.png',
+        'Arrows/LNCTBlack/splash/Arrow-2-splash-3.png',
+        'Arrows/LNCTBlack/splash/Arrow-2-splash-4.png',
+        'Arrows/LNCTBlack/splash/Arrow-2-splash-5.png',
+        'Arrows/LNCTBlack/splash/Arrow-2-splash-6.png',
+        'Arrows/LNCTBlack/splash/Arrow-2-splash-7.png',
+        'Arrows/LNCTBlack/splash/Arrow-2-splash-8.png',
+        'Arrows/LNCTBlack/splash/Arrow-2-splash-9.png',
+        'Arrows/LNCTBlack/splash/Arrow-2-splash-10.png',
+
+        'Arrows/LNCTBlack/splash/Arrow-3-splash-0.png',
+        'Arrows/LNCTBlack/splash/Arrow-3-splash-1.png',
+        'Arrows/LNCTBlack/splash/Arrow-3-splash-2.png',
+        'Arrows/LNCTBlack/splash/Arrow-3-splash-3.png',
+        'Arrows/LNCTBlack/splash/Arrow-3-splash-4.png',
+        'Arrows/LNCTBlack/splash/Arrow-3-splash-5.png',
+        'Arrows/LNCTBlack/splash/Arrow-3-splash-6.png',
+        'Arrows/LNCTBlack/splash/Arrow-3-splash-7.png',
+        'Arrows/LNCTBlack/splash/Arrow-3-splash-8.png',
+        'Arrows/LNCTBlack/splash/Arrow-3-splash-9.png',
+        'Arrows/LNCTBlack/splash/Arrow-3-splash-10.png',
+
         'Arrows/LNCTBlack/Arrow-0.png',
         'Arrows/LNCTBlack/Arrow-1.png',
         'Arrows/LNCTBlack/Arrow-2.png',
@@ -473,6 +529,34 @@ export default async (state) => {
 
         /* ---- */
 
+        'Arrows/LNCTRed/splash/Arrow-0-splash-0.png',
+        'Arrows/LNCTRed/splash/Arrow-0-splash-1.png',
+        'Arrows/LNCTRed/splash/Arrow-0-splash-2.png',
+        'Arrows/LNCTRed/splash/Arrow-0-splash-3.png',
+        'Arrows/LNCTRed/splash/Arrow-0-splash-4.png',
+        'Arrows/LNCTRed/splash/Arrow-0-splash-5.png',
+
+        'Arrows/LNCTRed/splash/Arrow-1-splash-0.png',
+        'Arrows/LNCTRed/splash/Arrow-1-splash-1.png',
+        'Arrows/LNCTRed/splash/Arrow-1-splash-2.png',
+        'Arrows/LNCTRed/splash/Arrow-1-splash-3.png',
+        'Arrows/LNCTRed/splash/Arrow-1-splash-4.png',
+        'Arrows/LNCTRed/splash/Arrow-1-splash-5.png',
+
+        'Arrows/LNCTRed/splash/Arrow-2-splash-0.png',
+        'Arrows/LNCTRed/splash/Arrow-2-splash-1.png',
+        'Arrows/LNCTRed/splash/Arrow-2-splash-2.png',
+        'Arrows/LNCTRed/splash/Arrow-2-splash-3.png',
+        'Arrows/LNCTRed/splash/Arrow-2-splash-4.png',
+        'Arrows/LNCTRed/splash/Arrow-2-splash-5.png',
+
+        'Arrows/LNCTRed/splash/Arrow-3-splash-0.png',
+        'Arrows/LNCTRed/splash/Arrow-3-splash-1.png',
+        'Arrows/LNCTRed/splash/Arrow-3-splash-2.png',
+        'Arrows/LNCTRed/splash/Arrow-3-splash-3.png',
+        'Arrows/LNCTRed/splash/Arrow-3-splash-4.png',
+        'Arrows/LNCTRed/splash/Arrow-3-splash-5.png',
+
         'Arrows/LNCTRed/Arrow-0.png',
         'Arrows/LNCTRed/Arrow-1.png',
         'Arrows/LNCTRed/Arrow-2.png',
@@ -481,6 +565,34 @@ export default async (state) => {
         'Arrows/LNCTRed/Arrow-hold-end.png',
 
         /* ---- */
+
+        'Arrows/LNCTWhite/splash/Arrow-0-splash-0.png',
+        'Arrows/LNCTWhite/splash/Arrow-0-splash-1.png',
+        'Arrows/LNCTWhite/splash/Arrow-0-splash-2.png',
+        'Arrows/LNCTWhite/splash/Arrow-0-splash-3.png',
+        'Arrows/LNCTWhite/splash/Arrow-0-splash-4.png',
+        'Arrows/LNCTWhite/splash/Arrow-0-splash-5.png',
+
+        'Arrows/LNCTWhite/splash/Arrow-1-splash-0.png',
+        'Arrows/LNCTWhite/splash/Arrow-1-splash-1.png',
+        'Arrows/LNCTWhite/splash/Arrow-1-splash-2.png',
+        'Arrows/LNCTWhite/splash/Arrow-1-splash-3.png',
+        'Arrows/LNCTWhite/splash/Arrow-1-splash-4.png',
+        'Arrows/LNCTWhite/splash/Arrow-1-splash-5.png',
+
+        'Arrows/LNCTWhite/splash/Arrow-2-splash-0.png',
+        'Arrows/LNCTWhite/splash/Arrow-2-splash-1.png',
+        'Arrows/LNCTWhite/splash/Arrow-2-splash-2.png',
+        'Arrows/LNCTWhite/splash/Arrow-2-splash-3.png',
+        'Arrows/LNCTWhite/splash/Arrow-2-splash-4.png',
+        'Arrows/LNCTWhite/splash/Arrow-2-splash-5.png',
+
+        'Arrows/LNCTWhite/splash/Arrow-3-splash-0.png',
+        'Arrows/LNCTWhite/splash/Arrow-3-splash-1.png',
+        'Arrows/LNCTWhite/splash/Arrow-3-splash-2.png',
+        'Arrows/LNCTWhite/splash/Arrow-3-splash-3.png',
+        'Arrows/LNCTWhite/splash/Arrow-3-splash-4.png',
+        'Arrows/LNCTWhite/splash/Arrow-3-splash-5.png',
 
         'Arrows/LNCTWhite/Arrow-0.png',
         'Arrows/LNCTWhite/Arrow-1.png',

@@ -1,4 +1,4 @@
-export default async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer }, state) => {
+export default async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer, splashType, splashResize }, state) => {
     try {
         state.arrowsInfo = {},
         state.arrowsInfoOpponent = {},
@@ -13,9 +13,11 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
         state.musicOpponentNotes = []
         state.countdown = 4
         state.musicEventListener = () => null
-        state.notesImageDir = notesImageDir
         state.musicInfo = {
             name,
+            splashType,
+            splashResize,
+            notesImageDir,
             backgroundImage,
             dev,
             defaultBackgroundImage: backgroundImage,
@@ -35,6 +37,8 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
 
         let musicData = require(`../../../Musics/data/${name.toLowerCase()}/${name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)
         let musicNotes = musicData.song.notes
+        let totalNotes = ((musicData.song.notes.map((n) => n.sectionNotes)).map((n) => n.length)).reduce((a, b) => a+b)
+        console.log(totalNotes)
         state.musicBPM = musicData.song.bpm
 
         for (let i in musicNotes) {
@@ -57,42 +61,46 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                     state.musicOriginalOpponentNotes.push(noteInfo)
                     state.musicOpponentNotes.push(newNoteInfo)
                 }
+
+                if ((state.musicNotes.concat(state.musicOpponentNotes)).length >= totalNotes) loaded()
             }
         }
 
-        if (state.musicOpponentNotes.length <= 0 && state.online) {
-            state.musicOpponentNotes = JSON.parse(JSON.stringify(state.musicNotes));
-            state.musicOriginalOpponentNotes = JSON.parse(JSON.stringify(state.musicOriginalNotes));
-        }
-        if (state.musicNotes.length <= 0 && state.online) {
-            state.musicNotes = JSON.parse(JSON.stringify(state.musicOpponentNotes));
-            state.musicOriginalNotes = JSON.parse(JSON.stringify(state.musicOriginalOpponentNotes));
-        }
-
-        try {
-            state.musicEventListener = require(`../../../Musics/data/${name.toLowerCase()}/eventListener`).default
-        } catch {}
-        
-        state.music = state.sounds[`Musics/musics/${name.toLowerCase()}/Inst.ogg`]
-        state.musicVoice = state.sounds[`Musics/musics/${name.toLowerCase()}/Voices.ogg`]
-        state.music?.load()
-        state.musicVoice?.load()
-
-        let interval = setInterval(() => {
-            if (state.online && !state.waiting || !state.online) {
-                state.countdown -= 1
-                if (state.countdown <= -1) {
-                    clearInterval(interval)
-
-                    state.music?.play()
-                    state.musicVoice?.play()
-
-                    if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
-
-                    state.musicEventListener('started', { difficulty, events: musicData.song.events, listenerState }, state)
-                } else state.playSong(`Sounds/intro${state.countdown}.ogg`)
+        async function loaded() {
+            if (state.musicOpponentNotes.length <= 0 && state.online) {
+                state.musicOpponentNotes = JSON.parse(JSON.stringify(state.musicNotes));
+                state.musicOriginalOpponentNotes = JSON.parse(JSON.stringify(state.musicOriginalNotes));
             }
-        }, 900-(musicData.song.bpm*2));
+            if (state.musicNotes.length <= 0 && state.online) {
+                state.musicNotes = JSON.parse(JSON.stringify(state.musicOpponentNotes));
+                state.musicOriginalNotes = JSON.parse(JSON.stringify(state.musicOriginalOpponentNotes));
+            }
+
+            try {
+                state.musicEventListener = require(`../../../Musics/data/${name.toLowerCase()}/eventListener`).default
+            } catch {}
+            
+            state.music = state.sounds[`Musics/musics/${name.toLowerCase()}/Inst.ogg`]
+            state.musicVoice = state.sounds[`Musics/musics/${name.toLowerCase()}/Voices.ogg`]
+            state.music?.load()
+            state.musicVoice?.load()
+
+            let interval = setInterval(() => {
+                if (state.online && !state.waiting || !state.online) {
+                    state.countdown -= 1
+                    if (state.countdown <= -1) {
+                        clearInterval(interval)
+
+                        state.music?.play()
+                        state.musicVoice?.play()
+
+                        if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
+
+                        state.musicEventListener('started', { difficulty, events: musicData.song.events, listenerState }, state)
+                    } else state.playSong(`Sounds/intro${state.countdown}.ogg`)
+                }
+            }, 900-(musicData.song.bpm*2));
+        }
     } catch (err) {
         console.error(err)
     }

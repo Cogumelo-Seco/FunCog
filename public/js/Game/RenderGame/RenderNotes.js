@@ -15,9 +15,9 @@ export default async (canvas, game, Listener) => {
         let noteY = game.state.downScroll ? (arrowInfo?.Y || arrowY)+note.Y : (arrowInfo?.Y || arrowY)-note.Y
 
         if (noteY-(note.hold) < canvas.height && noteY+(note.hold) > -game.state.arrowsSize && arrowInfo) {
-            let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-note.png`]
-            let holdImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-hold-piece.png`]
-            let holdEndImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-hold-end.png`]
+            let arrowImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${note.arrowID}-note.png`]
+            let holdImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${note.arrowID}-hold-piece.png`]
+            let holdEndImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${note.arrowID}-hold-end.png`]
             let noteShadowColor = arrowInfo.noteShadowColor
             let noteShadowBlur = arrowInfo.shadowBlur
 
@@ -106,9 +106,9 @@ export default async (canvas, game, Listener) => {
         }
 
         if (noteY-(note.hold) < canvas.height && noteY+(note.hold) > -game.state.arrowsSize && arrowInfo) {
-            let arrowImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-note.png`]
-            let holdImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-hold-piece.png`]
-            let holdEndImage = game.state.images[`${game.state.notesImageDir}Arrow-${note.arrowID}-hold-end.png`]
+            let arrowImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${note.arrowID}-note.png`]
+            let holdImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${note.arrowID}-hold-piece.png`]
+            let holdEndImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${note.arrowID}-hold-end.png`]
             let noteShadowColor = arrowInfo.noteShadowColor
             let noteShadowBlur = arrowInfo.shadowBlur
 

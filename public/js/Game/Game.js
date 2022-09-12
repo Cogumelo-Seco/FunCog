@@ -129,6 +129,7 @@ function createGame(Listener, canvas, socket) {
     const addMusicList = (command) => require('./GameFunctions/addMusicList').default(state)
     const addDifficulties = (command) => require('./GameFunctions/addDifficulties').default(state)
     const addPersonalizedNotes = (command) => require('./GameFunctions/addPersonalizedNotes').default(state)
+    const addSplashConfig = (command) => require('./GameFunctions/addSplashConfig').default(state)
 
     const playSong = (type, command) => require('./GameFunctions/playSong').default(type, command, state)
     const calculateRating = (command) => require('./GameFunctions/calculateRating').default(command, state)
@@ -187,7 +188,8 @@ function createGame(Listener, canvas, socket) {
                         resetEnable: true,
                         alpha: 1,
                         noteAlpha: 1,
-                        rotation: 0
+                        rotation: 0,
+                        splashMaxFrame: 7
                     }
                 }
             }
@@ -204,7 +206,8 @@ function createGame(Listener, canvas, socket) {
                         resetEnable: true,
                         alpha: 1,
                         noteAlpha: 1,
-                        rotation: 0
+                        rotation: 0,
+                        splashMaxFrame: 7
                     }
                 }
             }
@@ -312,6 +315,7 @@ function createGame(Listener, canvas, socket) {
     }
 
     async function loading(command) {
+        let songFileExtension = [ 'ogg', 'mp3' ]
         let loadingImagesTotal = await addImages()
         let loadingSoundsTotal = await addSounds()
         state.loading.total = loadingImagesTotal
@@ -319,6 +323,7 @@ function createGame(Listener, canvas, socket) {
         addMusicList()
         addDifficulties()
         addPersonalizedNotes()
+        addSplashConfig()
 
         let toLoad = state.images.concat(state.sounds)
 
@@ -337,7 +342,6 @@ function createGame(Listener, canvas, socket) {
 
         const load = (dir) => {
             let loaded = false
-            let err = [false, false]
 
             setTimeout(() => {
                 if (!loaded) {
@@ -346,28 +350,25 @@ function createGame(Listener, canvas, socket) {
                 }
             }, 10000)
 
-            let sound = new Audio()
-            sound.addEventListener('loadeddata', (e) => {
-                loaded = true
-                newLoad(e.path[0].src)
-            })
-            sound.addEventListener('error', (e) => err[0] = true)
-            sound.src = `/${dir}`
-            state.sounds[dir] = sound
-
-            let img = new Image()
-            img.addEventListener('load', (e) => {
-                loaded = true
-                newLoad(e.path[0].src)
-            })
-            img.addEventListener('error',(e) => err[1] = true)
-            img.src = `/imgs/${dir}`
-            img.id = dir
-            state.images[dir] = img
-
-            if (err[0] && err[1]) {
-                loaded = true
-                newLoad('[ERROR] '+dir)
+            if (songFileExtension.includes(dir.split('.')[dir.split('.').length-1])) {
+                let sound = new Audio()
+                sound.addEventListener('loadeddata', (e) => {
+                    loaded = true
+                    newLoad(e.path[0].src)
+                })
+                sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
+                sound.src = `/${dir}`
+                state.sounds[dir] = sound
+            } else {
+                let img = new Image()
+                img.addEventListener('load', (e) => {
+                    loaded = true
+                    newLoad(e.path[0].src)
+                })
+                img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
+                img.src = `/imgs/${dir}`
+                img.id = dir
+                state.images[dir] = img
             }
         }
 

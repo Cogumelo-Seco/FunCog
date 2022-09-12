@@ -49,7 +49,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				if (step >= 896 && oldStep <= 896) {
 					state.screenZoom = 100
 					setTimeout(() => state.screenZoom -= 20, 100)
-					state.notesImageDir = 'Arrows/sonicEXEMajinNotes/'
+					state.musicInfo.notesImageDir = 'Arrows/sonicEXEMajinNotes/'
 
 					let image = state.images['imgs/sonicEXE/one.png']
 					state.musicInfo.popups.sonicEXEEndlessCounter = {

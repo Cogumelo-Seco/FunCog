@@ -89,7 +89,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					}
 				}
 
-				if (beat <= 96 && oldBeat >= 96) {
+				if (beat >= 96 && oldBeat <= 96) {
 					screenFilterAlpha = 1
 					for (let i in state.arrowsInfo) {
 						state.arrowsInfo[i].shadowColor = '#02f7ff'
@@ -99,7 +99,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					}
 				}
 
-				if (beat <= 352 && oldBeat >= 352) {
+				if (beat >= 352 && oldBeat <= 352) {
 					screenFilterAlpha = 1
 					for (let i in state.arrowsInfo) {
 						state.arrowsInfo[i].shadowColor = '#d20ef1'

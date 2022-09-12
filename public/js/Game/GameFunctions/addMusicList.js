@@ -5,28 +5,36 @@ export default async (state) => {
             menuColor: null,
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
-            mod: 'FNFDefault'
+            mod: 'FNFDefault',
+            splashType: 'default',
+            splashResize: 1.5,
         },
         {
             name: 'Bopeebo',
             menuColor: null,
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
-            mod: 'FNFDefault'
+            mod: 'FNFDefault',
+            splashType: 'default',
+            splashResize: 1.5,
         },
         {
             name: 'Dadbattle',
             menuColor: null,
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
-            mod: 'FNFDefault'
+            mod: 'FNFDefault',
+            splashType: 'default',
+            splashResize: 1.5,
         },
         {
             name: 'Milf',
             menuColor: null,
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
-            mod: 'FNFDefault'
+            mod: 'FNFDefault',
+            splashType: 'default',
+            splashResize: 1.5,
         },
         {
             name: 'Improbable-outset',
@@ -259,6 +267,8 @@ export default async (state) => {
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
             backgroundImage: null,
+            splashType: 'BloodSplash',
+            splashResize: 1,
             mod: 'SonicEXE'
         },
         {
@@ -267,6 +277,8 @@ export default async (state) => {
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
             backgroundImage: null,
+            splashType: 'BloodSplash',
+            splashResize: 1,
             mod: 'SonicEXE',
             dev: true
         },
@@ -277,6 +289,8 @@ export default async (state) => {
             notesImageDir: 'Arrows/',
             backgroundImage: null,
             mod: 'SonicEXE',
+            splashType: 'BloodSplash',
+            splashResize: 1,
             dev: true
         },
         {
@@ -286,6 +300,8 @@ export default async (state) => {
             notesImageDir: 'Arrows/',
             backgroundImage: null,
             mod: 'SonicEXE',
+            splashType: 'BloodSplash',
+            splashResize: 1,
             dev: true
         },
         {
@@ -302,6 +318,8 @@ export default async (state) => {
             difficulties: [ 2 ],
             notesImageDir: 'Arrows/',
             backgroundImage: null,
+            splashType: 'BloodSplash',
+            splashResize: 1,
             mod: 'SonicEXE',
             dev: true
         },
@@ -311,6 +329,8 @@ export default async (state) => {
             difficulties: [ 2 ],
             notesImageDir: 'Arrows/',
             backgroundImage: null,
+            splashType: 'BloodSplash',
+            splashResize: 1,
             mod: 'SonicEXE',
             dev: true
         },
@@ -320,6 +340,8 @@ export default async (state) => {
             difficulties: [ 2 ],
             notesImageDir: 'Arrows/',
             backgroundImage: null,
+            splashType: 'BloodSplash',
+            splashResize: 1,
             mod: 'SonicEXE',
             dev: true
         },
@@ -329,6 +351,8 @@ export default async (state) => {
             difficulties: [ 2 ],
             notesImageDir: 'Arrows/',
             backgroundImage: null,
+            splashType: 'BloodSplash',
+            splashResize: 1,
             mod: 'SonicEXE',
             dev: true
         },
@@ -347,6 +371,8 @@ export default async (state) => {
             difficulties: [ 2 ],
             notesImageDir: 'Arrows/',
             backgroundImage: null,
+            splashType: 'BloodSplash',
+            splashResize: 1,
             mod: 'SonicEXE',
             dev: true
         },
@@ -365,7 +391,9 @@ export default async (state) => {
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
-            mod: 'LateNightCityTale'
+            mod: 'LateNightCityTale',
+            splashType: 'default',
+            splashResize: 2,
         },
         {
             name: 'Secret-marilee',
@@ -373,7 +401,9 @@ export default async (state) => {
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
-            mod: 'LateNightCityTale'
+            mod: 'LateNightCityTale',
+            splashType: 'default',
+            splashResize: 2,
         },
         {
             name: 'Broken-heart',
@@ -382,6 +412,8 @@ export default async (state) => {
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
+            splashType: 'default',
+            splashResize: 2,
             dev: true
         },
         {
@@ -391,9 +423,10 @@ export default async (state) => {
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
+            splashType: 'default',
+            splashResize: 2,
             dev: true
         },
-
         {
             name: 'Lonely-sapphire',
             menuColor: 'rgb(138, 12, 162)',
@@ -401,6 +434,8 @@ export default async (state) => {
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
+            splashType: 'default',
+            splashResize: 2,
             dev: true
         },
     ]

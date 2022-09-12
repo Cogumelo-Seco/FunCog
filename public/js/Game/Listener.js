@@ -151,6 +151,8 @@ export default function createListener(socket) {
                             backgroundImage: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].backgroundImage,
                             mod: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].mod,
                             dev: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].dev,
+                            splashType: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashType,
+                            splashResize: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashResize,
                             listenerState: state
                         })
                     } else {
@@ -165,6 +167,8 @@ export default function createListener(socket) {
                                 backgroundImage: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].backgroundImage,
                                 mod: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].mod,
                                 dev: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].dev,
+                                splashType: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashType,
+                                splashResize: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashResize,
                                 listenerState: state
                             })
                         }, 1500)
@@ -208,6 +212,8 @@ export default function createListener(socket) {
                                 backgroundImage: state.game.state.musics[server.music].backgroundImage,
                                 mod: state.game.state.musics[server.music].mod,
                                 dev: state.game.state.musics[server.music].dev,
+                                splashType: state.game.state.musics[server.music].splashType,
+                                splashResize: state.game.state.musics[server.music].splashResize,
                                 listenerState: state,
                                 opponentPlayer: true,
                             })
