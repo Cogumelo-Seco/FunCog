@@ -19,12 +19,12 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 
     switch (type) {
 		case 'noteClick':
-			if (noteClickAuthor == 'player' && note?.type == 'LNCTWhite' && !notes?.find(n => n.type == 'normal')) {
+			if (noteClickAuthor == 'player' && note?.type == 'LNCTWhite') {
 				state.playSong('Sounds/LateNightCityTale/heal.ogg', { newSong: true })
 				hurtFunction(false)
 			}
 
-			if (noteClickAuthor == 'player' && note?.type == 'LNCTBlack' && !notes?.find(n => n.type == 'normal')) {
+			if (noteClickAuthor == 'player' && note?.type == 'LNCTBlack' && !notes?.find(n => n.errorWhenNotClicking)) {
 				state.playSong(`Sounds/LateNightCityTale/blackNote${Number.parseInt(Math.random()*2)+1}.ogg`, { newSong: true })
 				hurtFunction(true)
 				note.clicked = true

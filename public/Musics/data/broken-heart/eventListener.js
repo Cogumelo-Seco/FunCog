@@ -18,7 +18,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 
     switch (type) {
 		case 'noteClick':
-			if (noteClickAuthor == 'player' && note?.type == 'LNCTRed' && !notes?.find(n => n.type == 'normal'))
+			if (noteClickAuthor == 'player' && note?.type == 'LNCTRed')
 				state.playSong('Sounds/LateNightCityTale/heal.ogg', { newSong: true })
 			break
 		case 'passedNote':

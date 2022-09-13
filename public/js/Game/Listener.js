@@ -88,7 +88,10 @@ export default function createListener(socket) {
         }
 
         if (state.game.state.gameStage == 'game') {
-            if (keyPressed == 'KeyR' && on) state.game.state.musicInfo.health = -100
+            if (keyPressed == 'KeyQ' && on) state.game.state.downScroll = state.game.state.downScroll ? false : true
+            if (keyPressed == 'KeyW' && on) state.game.state.middleScroll = state.game.state.middleScroll ? false : true
+
+            if (keyPressed == 'KeyR' && on && !state.game.state.online) state.game.state.musicInfo.health = -100
 
             if (keyPressed == 'Escape' && on && !state.game.state.online) {
                 if (state.game.state.music.paused) {
@@ -252,9 +255,6 @@ export default function createListener(socket) {
                     break
             }
         }
-
-        if (keyPressed == 'KeyQ' && on) state.game.state.downScroll = state.game.state.downScroll ? false : true
-        if (keyPressed == 'KeyW' && on) state.game.state.middleScroll = state.game.state.middleScroll ? false : true
     }
 
     return {

@@ -24,7 +24,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
                     }
                 }, 1000/50)
             }
-            if (noteClickAuthor == 'player' && note?.type == 'fireNote' && !notes?.find(n => n.type == 'normal')) {
+            if (noteClickAuthor == 'player' && note?.type == 'fireNote' && !notes?.find(n => n.errorWhenNotClicking)) {
                 listenerState.arrows[note.arrowID].state = 'onNoteKill'
                 note.clicked = true
                 state.musicInfo.combo = 0

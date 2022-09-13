@@ -264,7 +264,7 @@ export default async (state) => {
         {
             name: 'Too-slow',
             menuColor: 'rgb(0, 0, 110)',
-            difficulties: [ 0, 1, 2 ],
+            difficulties: [ 0, 1, 2, 3 ],
             notesImageDir: 'Arrows/',
             backgroundImage: null,
             splashType: 'BloodSplash',
@@ -388,7 +388,7 @@ export default async (state) => {
         {
             name: 'Azure-encounter',
             menuColor: 'rgb(138, 12, 162)',
-            difficulties: [ 0, 1, 2 ],
+            difficulties: [ 0, 1, 2, 3 ],
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
@@ -398,7 +398,7 @@ export default async (state) => {
         {
             name: 'Secret-marilee',
             menuColor: 'rgb(138, 12, 162)',
-            difficulties: [ 0, 1, 2 ],
+            difficulties: [ 0, 1, 2, 3 ],
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
@@ -408,7 +408,7 @@ export default async (state) => {
         {
             name: 'Broken-heart',
             menuColor: 'rgb(138, 12, 162)',
-            difficulties: [ 0, 1, 2 ],
+            difficulties: [ 0, 1, 2, 3 ],
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
@@ -418,7 +418,7 @@ export default async (state) => {
         {
             name: 'Aquaphobia',
             menuColor: 'rgb(138, 12, 162)',
-            difficulties: [ 0, 1, 2 ],
+            difficulties: [ 0, 1, 2, 3 ],
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',

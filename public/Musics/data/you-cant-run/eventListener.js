@@ -23,7 +23,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 
     switch (type) {
 		case 'noteClick':
-			if (noteClickAuthor == 'player' && note?.type == 'sonicEXEphantomNote' && !notes?.find(n => n.type == 'normal')) {
+			if (noteClickAuthor == 'player' && note?.type == 'sonicEXEphantomNote' && !notes?.find(n => n.errorWhenNotClicking)) {
                 note.clicked = true
                 state.musicInfo.combo = 0
                 state.musicInfo.accuracyMedia.push(1)
@@ -33,7 +33,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
             }
 			break
 		case 'passedNote':
-			if (note?.type == 'sonicEXEStaticNote' && !notes?.find(n => n.type == 'normal')) {
+			if (note?.type == 'sonicEXEStaticNote') {
 				state.musicInfo.health -= 15
 				state.playSong('Sounds/hitStatic1.ogg', { newSong: true })
 

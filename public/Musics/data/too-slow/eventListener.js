@@ -26,7 +26,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 		case 'noteClick':
 			break
 		case 'passedNote':
-			if (note?.type == 'sonicEXEStaticNote' && !notes?.find(n => n.type == 'normal')) {
+			if (note?.type == 'sonicEXEStaticNote') {
 				state.musicInfo.health -= 15
 				state.playSong('Sounds/hitStatic1.ogg', { newSong: true })
 

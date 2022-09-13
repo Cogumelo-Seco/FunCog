@@ -5,19 +5,22 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			let addAlpha = true
 			let pauseAlpha = false
 
+			for (let i in state.arrowsInfoOpponent) {
+				state.arrowsInfoOpponent[i].alpha = 0
+				state.arrowsInfoOpponent[i].noteAlpha = 0
+			}
+
 			for (let i in state.arrowsInfo) {
 				state.arrowsInfo[i].shadowBlur = 15
 				state.arrowsInfo[i].noteShadowBlur = 15
-				state.arrowsInfoOpponent[i].shadowBlur = 15
-				state.arrowsInfoOpponent[i].noteShadowBlur = 15
 				
 				state.arrowsInfo[i].shadowColor = '#d20ef1'
 				state.arrowsInfo[i].noteShadowColor = '#d20ef1'
-				state.arrowsInfoOpponent[i].shadowColor = '#d20ef1'
-				state.arrowsInfoOpponent[i].noteShadowColor = '#d20ef1'
 			}
 
             let loop = setInterval(() => {
+				state.middleScroll = true
+
 				if (addAlpha) {
 					if (noteAlpha < 1) noteAlpha += 0.002
 					if (noteAlpha >= 1) addAlpha = false
@@ -30,9 +33,6 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					if (!pauseAlpha) {
 						state.arrowsInfo[i].alpha = noteAlpha
 						state.arrowsInfo[i].noteAlpha = noteAlpha
-
-						state.arrowsInfoOpponent[i].alpha = noteAlpha
-						state.arrowsInfoOpponent[i].noteAlpha = noteAlpha
 					}
 				}
 
