@@ -1,12 +1,12 @@
 export default async (state) => {
     state.personalizedNotes = {
         hitKillNote:  {
-            newArrowImage: `Arrows/deathnotes/Arrow-{{arrowID}}-deathnote-{{frame}}.png`,
-            pressImage: `Arrows/deathnotes/Arrow-{{arrowID}}-press-deathnote-{{frame}}.png`
+            newArrowImage: `Arrows/deathnotes/Arrows.png`,
+            pressImage: `Arrows/deathnotes/Arrows.png`
         },
         fireNote: {
-            newArrowImage: `Arrows/firenotes/Arrow-{{arrowID}}-firenote-{{frame}}.png`,
-            pressImage: `Arrows/deathnotes/Arrow-{{arrowID}}-press-deathnote-{{frame}}.png`
+            newArrowImage: `Arrows/firenotes/Arrows.png`,
+            pressImage: `Arrows/deathnotes/Arrows.png`
         },
         hurtNoteSuicidemouse: {
             newArrowImage: `Arrows/hurtnotes-suicidemouse/Arrow-{{arrowID}}-hurtnote.png`,
@@ -25,26 +25,26 @@ export default async (state) => {
             newArrowImage: `Arrows/phantomNotes/Arrow-{{arrowID}}.png`,
         },
         LNCTBlack: {
-            newArrowImage: `Arrows/LNCTBlack/Arrow-{{arrowID}}.png`,
+            newArrowImage: `Arrows/LNCTBlack/Arrows.png`,
             newHoldImage: `Arrows/LNCTBlack/Arrow-hold-piece.png`,
             newHoldEndImage: `Arrows/LNCTBlack/Arrow-hold-end.png`,
-            splashType: 'LNCTBlack',
+            splashDir: 'Arrows/LNCTBlack/splash.png',
             noteShadowColor: 'black',
             noteShadowBlur: 15
         },
         LNCTRed: {
-            newArrowImage: `Arrows/LNCTRed/Arrow-{{arrowID}}.png`,
+            newArrowImage: `Arrows/LNCTRed/Arrows.png`,
             newHoldImage: `Arrows/LNCTRed/Arrow-hold-piece.png`,
             newHoldEndImage: `Arrows/LNCTRed/Arrow-hold-end.png`,
-            splashType: 'LNCTRed',
+            splashDir: 'Arrows/LNCTRed/splash.png',
             noteShadowColor: 'red',
             noteShadowBlur: 15
         },
         LNCTWhite: {
-            newArrowImage: `Arrows/LNCTWhite/Arrow-{{arrowID}}.png`,
+            newArrowImage: `Arrows/LNCTWhite/Arrows.png`,
             newHoldImage: `Arrows/LNCTWhite/Arrow-hold-piece.png`,
             newHoldEndImage: `Arrows/LNCTWhite/Arrow-hold-end.png`,
-            splashType: 'LNCTWhite',
+            splashDir: 'Arrows/LNCTWhite/splash.png',
             noteShadowColor: 'white',
             noteShadowBlur: 15,
         },

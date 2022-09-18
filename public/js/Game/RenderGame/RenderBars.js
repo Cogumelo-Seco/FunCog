@@ -39,7 +39,7 @@ export default async (canvas, game, Listener) => {
     ctx.strokeRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth, healthBarHeight)
 
     function drawIcon({ dir, flipY, pos }) {
-        let iconImage = game.state.images[dir]
+        let iconImage = game.state.images[dir].image
         if (!iconImage) return
         let iconResize = 0.9+(game.state.animations.icons.frame%6/200)
         let iconWidth = iconImage.width/2

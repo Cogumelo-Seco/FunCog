@@ -1,5 +1,76 @@
 export default async (state) => {
     state.images = [
+        { dir: 'BongoCat/bg.png' },
+        { dir: 'BongoCat/arrow-0.png' },
+        { dir: 'BongoCat/arrow-1.png' },
+        { dir: 'BongoCat/arrow-2.png' },
+        { dir: 'BongoCat/arrow-3.png' },
+        { dir: 'BongoCat/leftHandUp.png' },
+        { dir: 'BongoCat/leftHand1.png' },
+        { dir: 'BongoCat/leftHand2.png' },
+        { dir: 'BongoCat/leftHand3.png' },
+        { dir: 'BongoCat/rightHandUp.png' },
+        { dir: 'BongoCat/rightHand1.png' },
+        { dir: 'BongoCat/rightHand2.png' },
+        { dir: 'BongoCat/rightHand3.png' },
+
+
+        /* ----- */
+
+        { dir: 'Arrows/Arrows.png', animationConfigDir: 'Arrows/Arrows.json' },
+        { dir: 'Arrows/firenotes/Arrows.png', animationConfigDir: 'Arrows/firenotes/Arrows.json' },
+        { dir: 'Arrows/deathnotes/Arrows.png', animationConfigDir: 'Arrows/deathnotes/Arrows.json' },
+        { dir: 'Arrows/LNCTNotes/Arrows.png', animationConfigDir: 'Arrows/LNCTNotes/Arrows.json' },
+        { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
+        { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
+        { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
+
+        /* ---- */
+
+        { dir: 'Arrows/splash.png', animationConfigDir: 'Arrows/splash.json' },
+        { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
+        { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
+        { dir: 'Arrows/LNCTRed/splash.png', animationConfigDir: 'Arrows/LNCTRed/splash.json' },
+
+        /* ---- */
+
+        { dir: 'imgs/LateNightCityTale/purple-filter.png' },
+        { dir: 'imgs/LateNightCityTale/hurt.png' },
+        { dir: 'imgs/LateNightCityTale/Broken.png' },
+        { dir: 'imgs/LateNightCityTale/brokenScreen/whiteScreen.png' },
+        { dir: 'imgs/LateNightCityTale/brokenScreen/brokenScreen.png', animationConfigDir: 'imgs/LateNightCityTale/brokenScreen/brokenScreen.json' },
+        { dir: 'imgs/QT/pincer-open.png' },
+        { dir: 'imgs/QT/pincer-close.png' },
+        { dir: 'imgs/QT/alert.png', animationConfigDir: 'imgs/QT/alert.json' },
+
+        /* ---- */
+
+        { dir: 'icons/icon-bf.png' },
+        { dir: 'icons/icon-face.png' },
+        { dir: 'icons/BongoCat.png' },
+
+        /* ---- */
+
+        { dir: 'imgs/cursor.png' },
+        { dir: 'imgs/cursor-hover.png' },
+
+        /* ---- */
+
+        { dir: 'ratings/bad.png' },
+        { dir: 'ratings/good.png' },
+        { dir: 'ratings/shit.png' },
+        { dir: 'ratings/sick.png' },
+
+        /* ---- */
+
+        { dir: 'intro/0.png' },
+        { dir: 'intro/1.png' },
+        { dir: 'intro/2.png' },
+        { dir: 'intro/3.png' },
+
+        /* ---- */
+
+        /*
         'imgs/LateNightCityTale/hurt.png',
         'imgs/LateNightCityTale/Broken.png',
         'imgs/LateNightCityTale/purple-filter.png',
@@ -27,41 +98,20 @@ export default async (state) => {
         'imgs/LateNightCityTale/brokenScreen/brokenScreen-20.png',
         'imgs/LateNightCityTale/brokenScreen/brokenScreen-21.png',
 
-        /* ---- */
 
-        'BongoCat/bg.png',
-        'BongoCat/arrow-0.png',
-        'BongoCat/arrow-1.png',
-        'BongoCat/arrow-2.png',
-        'BongoCat/arrow-3.png',
-        'BongoCat/leftHandUp.png',
-        'BongoCat/leftHand1.png',
-        'BongoCat/leftHand2.png',
-        'BongoCat/leftHand3.png',
-        'BongoCat/rightHandUp.png',
-        'BongoCat/rightHand1.png',
-        'BongoCat/rightHand2.png',
-        'BongoCat/rightHand3.png',
-
-        /* ---- */
 
         'imgs/sonicEXE/three.png',
         'imgs/sonicEXE/two.png',
         'imgs/sonicEXE/one.png',
         'imgs/sonicEXE/go.png',
 
-        /* ---- */
 
-        'imgs/cursor.png',
-        'imgs/cursor-hover.png',
-
-        /* ---- */
 
         'icons/icon-bf.png',
         'icons/icon-face.png',
         'icons/BongoCat.png',
 
-        /* ---- */
+        
 
         'Arrows/BloodSplash/splash-0.png',
         'Arrows/BloodSplash/splash-1.png',
@@ -69,7 +119,7 @@ export default async (state) => {
         'Arrows/BloodSplash/splash-3.png',
         'Arrows/BloodSplash/splash-4.png',
 
-        /* ---- */        
+               
 
         'Arrows/LNCTNotes/Arrow-0.png',
         'Arrows/LNCTNotes/Arrow-0-note.png',
@@ -111,7 +161,7 @@ export default async (state) => {
         'Arrows/LNCTNotes/Arrow-3-hold-piece.png',
         'Arrows/LNCTNotes/Arrow-3-hold-end.png',
 
-        /* ---- */        
+           
 
         'Arrows/sonicEXEMajinNotes/Arrow-0.png',
         'Arrows/sonicEXEMajinNotes/Arrow-0-note.png',
@@ -153,7 +203,7 @@ export default async (state) => {
         'Arrows/sonicEXEMajinNotes/Arrow-3-hold-piece.png',
         'Arrows/sonicEXEMajinNotes/Arrow-3-hold-end.png',
 
-        /* ---- */
+        
 
         'Arrows/splash/Arrow-0-splash-0.png',
         'Arrows/splash/Arrow-0-splash-1.png',
@@ -231,7 +281,7 @@ export default async (state) => {
         'Arrows/Arrow-3-hold-piece.png',
         'Arrows/Arrow-3-hold-end.png',
 
-        /* ---- */
+        
 
         'Arrows/sarvente/Arrow-0.png',
         'Arrows/sarvente/Arrow-0-note.png',
@@ -273,7 +323,7 @@ export default async (state) => {
         'Arrows/sarvente/Arrow-3-hold-piece.png',
         'Arrows/sarvente/Arrow-3-hold-end.png',
 
-        /* ---- */        
+          
 
         'Arrows/suicidemouse/Arrow-0.png',
         'Arrows/suicidemouse/Arrow-0-note.png',
@@ -315,7 +365,7 @@ export default async (state) => {
         'Arrows/suicidemouse/Arrow-3-hold-piece.png',
         'Arrows/suicidemouse/Arrow-3-hold-end.png',
 
-        /* ---- */        
+        
 
         'Arrows/dusk-till-dawn/Arrow-0.png',
         'Arrows/dusk-till-dawn/Arrow-0-note.png',
@@ -357,7 +407,7 @@ export default async (state) => {
         'Arrows/dusk-till-dawn/Arrow-3-hold-piece.png',
         'Arrows/dusk-till-dawn/Arrow-3-hold-end.png',
 
-        /* ---- */
+        
 
         'Arrows/deathnotes/Arrow-0-deathnote-0.png',
         'Arrows/deathnotes/Arrow-0-deathnote-1.png',
@@ -407,7 +457,7 @@ export default async (state) => {
         'Arrows/deathnotes/Arrow-3-press-deathnote-1.png',
         'Arrows/deathnotes/Arrow-3-press-deathnote-2.png',
 
-        /* ---- */
+        
 
         'Arrows/firenotes/Arrow-0-firenote-0.png',
         'Arrows/firenotes/Arrow-0-firenote-1.png',
@@ -461,7 +511,7 @@ export default async (state) => {
         'Arrows/firenotes/Arrow-3-firenote-10.png',
         'Arrows/firenotes/Arrow-3-firenote-11.png',
 
-        /* ---- */
+        
 
         'Arrows/hurtnotes-suicidemouse/Arrow-0-hurtnote.png',
         'Arrows/hurtnotes-suicidemouse/Arrow-1-hurtnote.png',
@@ -470,7 +520,7 @@ export default async (state) => {
         'Arrows/hurtnotes-suicidemouse/Arrow-hurtnote-hold-piece.png',
         'Arrows/hurtnotes-suicidemouse/Arrow-hurtnote-hold-end.png',
 
-        /* ---- */
+        
 
         'Arrows/pinkieSing/Arrow-0-pinkieSing.png',
         'Arrows/pinkieSing/Arrow-1-pinkieSing.png',
@@ -479,21 +529,21 @@ export default async (state) => {
         'Arrows/pinkieSing/Arrow-pinkieSing-hold-piece.png',
         'Arrows/pinkieSing/Arrow-pinkieSing-hold-end.png',
 
-        /* ---- */
+        
 
         'Arrows/staticNotes/Arrow-0.png',
         'Arrows/staticNotes/Arrow-1.png',
         'Arrows/staticNotes/Arrow-2.png',
         'Arrows/staticNotes/Arrow-3.png',
 
-        /* ---- */
+        
 
         'Arrows/phantomNotes/Arrow-0.png',
         'Arrows/phantomNotes/Arrow-1.png',
         'Arrows/phantomNotes/Arrow-2.png',
         'Arrows/phantomNotes/Arrow-3.png',
 
-        /* ---- */
+        
 
         'Arrows/LNCTBlack/splash/Arrow-0-splash-0.png',
         'Arrows/LNCTBlack/splash/Arrow-0-splash-1.png',
@@ -550,7 +600,7 @@ export default async (state) => {
         'Arrows/LNCTBlack/Arrow-hold-piece.png',
         'Arrows/LNCTBlack/Arrow-hold-end.png',
 
-        /* ---- */
+        
 
         'Arrows/LNCTRed/splash/Arrow-0-splash-0.png',
         'Arrows/LNCTRed/splash/Arrow-0-splash-1.png',
@@ -587,7 +637,7 @@ export default async (state) => {
         'Arrows/LNCTRed/Arrow-hold-piece.png',
         'Arrows/LNCTRed/Arrow-hold-end.png',
 
-        /* ---- */
+    
 
         'Arrows/LNCTWhite/splash/Arrow-0-splash-0.png',
         'Arrows/LNCTWhite/splash/Arrow-0-splash-1.png',
@@ -624,7 +674,7 @@ export default async (state) => {
         'Arrows/LNCTWhite/Arrow-hold-piece.png',
         'Arrows/LNCTWhite/Arrow-hold-end.png',
 
-        /* ---- */
+        
 
         'BF/BF Dead Loop0000.png',
         'BF/BF Dead Loop0001.png',
@@ -633,31 +683,17 @@ export default async (state) => {
         'BF/BF Dead Loop0004.png',
         'BF/BF Dead Loop0005.png',
 
-        /* ---- */
 
-        'ratings/bad.png',
-        'ratings/good.png',
-        'ratings/shit.png',
-        'ratings/sick.png',
-
-         /* ---- */
-
-        'intro/0.png',
-        'intro/1.png',
-        'intro/2.png',
-        'intro/3.png',
-
-        /* ---- */
 
         'jumpscares/sadmouse-jumpscare-0.png',
         'jumpscares/sadmouse-jumpscare-1.png',
         'jumpscares/sadmouse-jumpscare-2.png',
 
-        /* ---- */
+        
 
         'jumpscares/sonicEXESimpleJump.png',
 
-        /* ---- */
+        
 
         'jumpscares/sonicJumpscares/sonicJumpscare-0.png',
         'jumpscares/sonicJumpscares/sonicJumpscare-1.png',
@@ -681,7 +717,7 @@ export default async (state) => {
         'jumpscares/sonicJumpscares/sonicJumpscare-19.png',
         'jumpscares/sonicJumpscares/sonicJumpscare-20.png',
 
-        /* ---- */
+        
 
         'bob-PopUps/popup1.png',
         'bob-PopUps/popup2.png',
@@ -695,7 +731,7 @@ export default async (state) => {
         'bob-PopUps/popup10.png',
         'bob-PopUps/popup11.png',
 
-        /* ---- */
+        
 
         'QTAlerts/alert-0.png',
         'QTAlerts/alert-1.png',
@@ -709,12 +745,12 @@ export default async (state) => {
         'QTAlerts/alert-double-3.png',
         'QTAlerts/alert-double-4.png',
 
-        /* ---- */
+        
         
         'imgs/QT/pincer-close.png',
         'imgs/QT/pincer-open.png',
 
-        /* ---- */
+        
 
         'sonicEXE/sonicEXEHitStatic/hitStatic-0.png',
         'sonicEXE/sonicEXEHitStatic/hitStatic-1.png',
@@ -727,14 +763,14 @@ export default async (state) => {
         'sonicEXE/sonicEXEHitStatic/hitStatic-8.png',
         'sonicEXE/sonicEXEHitStatic/hitStatic-9.png',
 
-        /* ---- */
+        
 
         'sonicEXE/sonicEXESimpleStatic/static-0.png',
         'sonicEXE/sonicEXESimpleStatic/static-1.png',
         'sonicEXE/sonicEXESimpleStatic/static-2.png',
         'sonicEXE/sonicEXESimpleStatic/static-3.png',
         'sonicEXE/sonicEXESimpleStatic/static-4.png',
-        'sonicEXE/sonicEXESimpleStatic/static-5.png',
+        'sonicEXE/sonicEXESimpleStatic/static-5.png',*/
     ]
     
     return state.images.length

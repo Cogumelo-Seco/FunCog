@@ -3,11 +3,13 @@ export default async (canvas, game, Listener) => {
 
     for (let i in game.state.musicInfo.popups) {
         let popup = game.state.musicInfo.popups[i]
-        let image = popup.image?.replace(/{{frame}}/g, game.state.animations[popup.animation]?.frame)
-        image = game.state.images[image]
-        if (image) {
-            let popupWidth = (popup.width || image.width)*(popup.resize || 1)
-            let popupHeight = (popup.height || image.height)*(popup.resize || 1)
+        let image = game.state.images[popup.image]?.image
+        let imagePos = null
+        if (popup.animationDir && popup.image && popup.frame != undefined) imagePos = game.state.images[popup.image]?.animationConfig[popup.animationDir][popup.frame.replace ? popup.frame.replace(/{{frame}}/g, game.state.animations[popup.animation]?.frame) : popup.frame] 
+
+        if (image && game.state.images[popup.image]?.animationConfig && imagePos || image) {
+            let popupWidth = (popup.width || imagePos?.width || image.width)*(popup.resize || 1)
+            let popupHeight = (popup.height || imagePos?.height || image.height)*(popup.resize || 1)
             let popupX = popup.x
             let popupY = popup.y
 
@@ -21,7 +23,8 @@ export default async (canvas, game, Listener) => {
                 ctx.translate(popupX+(popupWidth/2), popupY+(popupHeight/2));
                 ctx.rotate((popup.rotation || 0)*Math.PI/180);
                 
-                ctx.drawImage(image, -(popupWidth/2), -(popupHeight/2), popupWidth, popupHeight)
+                if (imagePos) ctx.drawImage(image, imagePos.x, imagePos.y, imagePos.width, imagePos.height, -(popupWidth/2), -(popupHeight/2), popupWidth, popupHeight)
+                else ctx.drawImage(image, -(popupWidth/2), -(popupHeight/2), popupWidth, popupHeight)
 
                 ctx.restore()
             } else {
@@ -33,7 +36,8 @@ export default async (canvas, game, Listener) => {
                 ctx.save();
                 ctx.scale(scaleH, scaleV);
                 
-                ctx.drawImage(image, posX, posY, popupWidth, popupHeight)
+                if (imagePos) ctx.drawImage(image, imagePos.x, imagePos.y, imagePos.width, imagePos.height, posX, posY, popupWidth, popupHeight)
+                else ctx.drawImage(image, posX, posY, popupWidth, popupHeight)
 
                 ctx.restore();
             }

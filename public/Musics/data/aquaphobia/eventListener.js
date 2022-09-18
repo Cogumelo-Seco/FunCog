@@ -117,14 +117,29 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				if (beat >= 365 && beat <= 374) {
 					brokenScreenFilterAlpha = brokenScreenFilterAlpha+0.02 >= 1 ? 1 : brokenScreenFilterAlpha+0.02
 
-					state.musicInfo.popups.LNCTBrokenScreenFilter = {
-						image: `imgs/LateNightCityTale/brokenScreen/brokenScreen-${beat >= 371 ? 1 : 0}.png`,
-						x: 0,
-						y: 0,
-						width: state.canvas.width,
-						height: state.canvas.height,
-						alpha: brokenScreenFilterAlpha
+					if (beat >= 371) {
+						state.musicInfo.popups.LNCTBrokenScreenFilter = {
+							image: `imgs/LateNightCityTale/brokenScreen/brokenScreen.png`,
+							animationDir: 'frames',
+							frame: 0,
+							x: 0,
+							y: 0,
+							width: state.canvas.width,
+							height: state.canvas.height,
+							alpha: 1
+						}
+					} else {
+						state.musicInfo.popups.LNCTBrokenScreenFilter = {
+							image: `imgs/LateNightCityTale/brokenScreen/whiteScreen.png`,
+							x: 0,
+							y: 0,
+							width: state.canvas.width,
+							height: state.canvas.height,
+							alpha: brokenScreenFilterAlpha
+						}
 					}
+
+					//beat >= 371 ? 1 : 0
 				}
 
 
@@ -141,14 +156,16 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					state.musicInfo.backgroundImage = state.musicInfo.defaultBackgroundImage
 
 					state.musicInfo.popups.LNCTBrokenScreenFilter = {
-						image: `imgs/LateNightCityTale/brokenScreen/brokenScreen-${brokenScreenFrame}.png`,
+						image: `imgs/LateNightCityTale/brokenScreen/brokenScreen.png`,
+						frame: brokenScreenFrame,
+						animationDir: 'frames',
 						x: 0,
 						y: 0,
 						width: state.canvas.width,
 						height: state.canvas.height
 					}
 
-					if (brokenScreenFrame <= 21) brokenScreenFrame += 1
+					if (brokenScreenFrame <= 20) brokenScreenFrame += 1
 					else delete state.musicInfo.popups.LNCTBrokenScreenFilter
 				}
 

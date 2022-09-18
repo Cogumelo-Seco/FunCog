@@ -154,7 +154,7 @@ export default function createListener(socket) {
                             backgroundImage: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].backgroundImage,
                             mod: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].mod,
                             dev: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].dev,
-                            splashType: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashType,
+                            splashDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashDir,
                             splashResize: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashResize,
                             listenerState: state
                         })
@@ -170,7 +170,7 @@ export default function createListener(socket) {
                                 backgroundImage: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].backgroundImage,
                                 mod: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].mod,
                                 dev: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].dev,
-                                splashType: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashType,
+                                splashDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashDir,
                                 splashResize: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashResize,
                                 listenerState: state
                             })
@@ -215,7 +215,7 @@ export default function createListener(socket) {
                                 backgroundImage: state.game.state.musics[server.music].backgroundImage,
                                 mod: state.game.state.musics[server.music].mod,
                                 dev: state.game.state.musics[server.music].dev,
-                                splashType: state.game.state.musics[server.music].splashType,
+                                splashDir: state.game.state.musics[server.music].splashDir,
                                 splashResize: state.game.state.musics[server.music].splashResize,
                                 listenerState: state,
                                 opponentPlayer: true,

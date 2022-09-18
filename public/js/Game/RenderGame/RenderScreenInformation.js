@@ -39,5 +39,5 @@ export default async (canvas, game, Listener) => {
     let cursorY = window.innerHeight*Listener.state.mouseInfo.y
 
     let cursorImage = game.state.images[`imgs/cursor${Listener.state.mouseInfo.mouseOnHover ? '-hover' : ''}.png`]
-    if (cursorImage) ctx.drawImage(cursorImage, cursorX, cursorY, 30, 30)
+    if (cursorImage) ctx.drawImage(cursorImage.image, cursorX, cursorY, 30, 30)
 }

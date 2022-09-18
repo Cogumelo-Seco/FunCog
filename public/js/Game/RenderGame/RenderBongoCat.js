@@ -3,8 +3,8 @@ export default async (canvas, game, Listener) => {
 
     let bg = game.state.images['BongoCat/bg.png']
     if (!game.state.botPlay || !bg) return
-    let width = bg.width*0.5
-    let height = bg.height*0.5
+    let width = bg.image.width*0.5
+    let height = bg.image.height*0.5
     let X = game.state.middleScroll ? canvas.width-width-20 : canvas.width/2-(width/2)
     let Y = canvas.height/2-(height/2)
 
@@ -29,33 +29,33 @@ export default async (canvas, game, Listener) => {
     let leftHandUp = game.state.images['BongoCat/leftHandUp.png']
     let rightHandUp = game.state.images['BongoCat/rightHandUp.png']
     
-    if (bg) ctx.drawImage(bg, X, Y, width, height)
+    if (bg) ctx.drawImage(bg.image, X, Y, width, height)
 
     if (arrow0 && Listener.state.arrows[0]?.click) {
-        ctx.drawImage(arrow0, X, Y, width, height)
+        ctx.drawImage(arrow0.image, X, Y, width, height)
         leftHand = 1
     }
 
     if (arrow1 && Listener.state.arrows[1]?.click) {
-        ctx.drawImage(arrow1, X, Y, width, height)
+        ctx.drawImage(arrow1.image, X, Y, width, height)
         if (!leftHand) leftHand = 2
         else leftHand = 3
     }
 
     if (arrow2 && Listener.state.arrows[2]?.click) {
-        ctx.drawImage(arrow2, X, Y, width, height)
+        ctx.drawImage(arrow2.image, X, Y, width, height)
         rightHand = 1
     }
 
     if (arrow3 && Listener.state.arrows[3]?.click) {
-        ctx.drawImage(arrow3, X, Y, width, height)
+        ctx.drawImage(arrow3.image, X, Y, width, height)
         if (!rightHand) rightHand = 2
         else rightHand = 3
     }
 
-    if (leftHands[leftHand]) ctx.drawImage(leftHands[leftHand], X, Y, width, height)
-    else ctx.drawImage(leftHandUp, X, Y, width, height)
+    if (leftHands[leftHand]) ctx.drawImage(leftHands[leftHand].image, X, Y, width, height)
+    else ctx.drawImage(leftHandUp.image, X, Y, width, height)
 
-    if (rightHands[rightHand]) ctx.drawImage(rightHands[rightHand], X, Y, width, height)
-    else ctx.drawImage(rightHandUp, X, Y, width, height)
+    if (rightHands[rightHand]) ctx.drawImage(rightHands[rightHand].image, X, Y, width, height)
+    else ctx.drawImage(rightHandUp.image, X, Y, width, height)
 }

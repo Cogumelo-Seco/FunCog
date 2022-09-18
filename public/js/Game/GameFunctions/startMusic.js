@@ -1,4 +1,4 @@
-export default async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer, splashType, splashResize }, state) => {
+export default async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer, splashDir, splashResize }, state) => {
     try {
         state.arrowsInfo = {},
         state.arrow = {},
@@ -19,7 +19,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
         state.musicEventListener = () => null
         state.musicInfo = {
             name,
-            splashType,
+            splashDir,
             splashResize,
             notesImageDir,
             backgroundImage,
@@ -42,7 +42,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
         let musicData = require(`../../../Musics/data/${name.toLowerCase()}/${name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)
         let musicNotes = musicData.song.notes
         let totalNotes = ((musicData.song.notes.map((n) => n.sectionNotes)).map((n) => n.length)).reduce((a, b) => a+b)
-        console.log(totalNotes)
+        state.musicInfo.events = musicData.song.events
         state.musicBPM = musicData.song.bpm
 
         for (let i in musicNotes) {

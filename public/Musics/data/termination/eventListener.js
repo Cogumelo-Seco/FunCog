@@ -37,7 +37,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			let pincerPrepareIntervals = {}
 			function pincerPrepare({ arrowID, goAway, opponent }) {
 				let arrow = state[opponent ? 'arrowsInfoOpponent' : 'arrowsInfo'][arrowID]
-				let image = state.images['imgs/QT/pincer-open.png']
+				let image = state.images['imgs/QT/pincer-open.png'].image
 				
 				clearInterval(pincerPrepareIntervals[arrowID])
 				pincerPrepareIntervals[arrowID] = setInterval(() => {
@@ -50,12 +50,12 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 						if (!y) y = state.downScroll ? goAway ? arrow.Y+((image.height*1.5)**state.resizeNote/2) : state.canvas.height+50 : goAway ? arrow.Y+(state.arrowsSize**state.resizeNote/2)-((image.height*1.5)**state.resizeNote) : -((image.height*1.5)**state.resizeNote)-100
 
 						state.musicInfo.popups[arrowID] = {
-								image: `imgs/QT/pincer-open.png`,
-								x: arrow.X-(image.width**state.resizeNote/2)-(state.downScroll ? 5 : 25),
-								y,
-								rotation: state.downScroll ? -90 : 90,
-								width: (image.width*1.5)**state.resizeNote,
-								height: (image.height*1.5)**state.resizeNote,
+							image: `imgs/QT/pincer-open.png`,
+							x: arrow.X-(image.width**state.resizeNote/2)-(state.downScroll ? 5 : 25),
+							y,
+							rotation: state.downScroll ? -90 : 90,
+							width: (image.width*1.5)**state.resizeNote,
+							height: (image.height*1.5)**state.resizeNote,
 						}
 					}
 				}, 1000/40)
@@ -87,27 +87,32 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 						clearInterval(arrowMoveIntervals[arrowID])						
 						//delete state.musicInfo.popups[arrowID]
 					} else if (pincer) {
-						let image = state.images['imgs/QT/pincer-close.png']
+						let image = state.images['imgs/QT/pincer-close.png'].image
+
 						state.musicInfo.popups[arrowID] = {
-								image: `imgs/QT/pincer-close.png`,
-								x: arrow.X-(image.width**state.resizeNote/2)-(state.downScroll ? 5 : 25),//+(state.arrowsSize**state.resizeNote/2),//+(state.arrowsSize*state.resizeNote/2)-(image.width*state.resizeNote/2)+(state.downScroll ? 10 : 35),
-								y: arrow.Y+(state.arrowsSize**state.resizeNote/2)-(state.downScroll ? 0 : (image.height*1.5)**state.resizeNote),
-								rotation: state.downScroll ? -90 : 90,
-								width: (image.width*1.5)**state.resizeNote,
-								height: (image.height*1.5)**state.resizeNote,
+							image: `imgs/QT/pincer-close.png`,
+							x: arrow.X-(image.width**state.resizeNote/2)-(state.downScroll ? 5 : 25),//+(state.arrowsSize**state.resizeNote/2),//+(state.arrowsSize*state.resizeNote/2)-(image.width*state.resizeNote/2)+(state.downScroll ? 10 : 35),
+							y: arrow.Y+(state.arrowsSize**state.resizeNote/2)-(state.downScroll ? 0 : (image.height*1.5)**state.resizeNote),
+							rotation: state.downScroll ? -90 : 90,
+							width: (image.width*1.5)**state.resizeNote,
+							height: (image.height*1.5)**state.resizeNote,
 						}
 					}
 				}, 1000/40)
 			}
 
 			function attackAlert(alertType) {
-				let image = state.images[`QTAlerts/alert${alertType == 2 ? '-double' : ''}-0.png`]
+				let imageData = state.images[`imgs/QT/alert.png`].animationConfig[alertType == 2 ? 'double' : 'single'][`${alertType == 2 ? 'double' : 'single'}-0`]
+
 				state.musicInfo.popups.QTAlert = {
-					image: `QTAlerts/alert${alertType == 2 ? '-double' : ''}-{{frame}}.png`,
-					x: state.canvas.width/2-(image.width/2),
-					y: state.canvas.height/2-(image.height/2),
+					image: `imgs/QT/alert.png`,
+					frame: `${alertType == 2 ? 'double' : 'single'}-{{frame}}`,
+					animationDir: alertType == 2 ? 'double' : 'single',
+					x: state.canvas.width/2-(imageData.width/2),
+					y: state.canvas.height/2-(imageData.height/2),
 					animation: 'QTAlerts',
 				}
+
                 state.animations.QTAlerts.frame = 0
 				let verifyInterval = setInterval(() => {
 					if (state.animations.QTAlerts.frame >= 5) {

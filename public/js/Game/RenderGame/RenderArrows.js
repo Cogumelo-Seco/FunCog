@@ -5,26 +5,32 @@ export default async (canvas, game, Listener) => {
     let spaceBetweenArrows = game.state.spaceBetweenArrows
     let resizeNote = game.state.resizeNote
     let arrowsSize = game.state.arrowsSize || 100
-    if (!game.state.arrowsSize) game.state.arrowsSize = game.state.images[`Arrows/Arrow-0.png`]?.width
+    if (!game.state.arrowsSize) game.state.arrowsSize = game.state.images[`Arrows/Arrows.png`]?.animationConfig['Arrow-0']['Arrow-0'].width
     let arrowX = game.state.middleScroll ? canvas.width/2-((arrowsSize**resizeNote+spaceBetweenArrows)*(amountOfArrows+1)/2) : canvas.width-((arrowsSize**resizeNote+spaceBetweenArrows)*(amountOfArrows+2))
     let arrowY = game.state.arrowsYLine
     
 
     for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
         let arrowInfo = game.state.arrowsInfo[arrowID]
-        let arrowImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${arrowID}.png`]
-        let splashInfo = game.state.splash[arrowInfo?.splashType]
 
-        let splashImage = game.state.images[splashInfo?.dir.replace(/{{arrowID}}/g, arrowID).replace(/{{frame}}/g, arrowInfo?.splashFrame)]
-        if (arrowInfo && splashInfo && arrowInfo.splashFrame <= arrowInfo.splashMaxFrame && arrowInfo.splashTime+40 <= +new Date()) {
-            arrowInfo.splashMaxFrame = splashInfo.maxFrame
+        let arrowImageData = game.state.images[`${game.state.musicInfo.notesImageDir}Arrows.png`]
+        let arrowImage = arrowImageData?.image
+        let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
+        let arrowImagePos = arrowFrames[`Arrow-${arrowID}`]
+        
+        let splashImageData = game.state.images[arrowInfo?.splashDir]
+        let splashImage = splashImageData?.image
+        let splashFrames = splashImageData?.animationConfig[`Arrow-${arrowID}`]
+        let splashImagePos = splashFrames ? splashFrames[`Arrow-${arrowID}-splash-${arrowInfo.splashFrame}`] : null
+
+        if (arrowInfo && splashFrames && arrowInfo.splashFrame <= Object.keys(splashFrames).length && arrowInfo.splashTime+40 <= +new Date()) {
             arrowInfo.splashFrame += 1
             arrowInfo.splashTime = +new Date()
         }
 
         let autoClickNote = game.state.musicNotes.find(n => 
-            n.autoClick && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2) ||
-            game.state.botPlay && n.errorWhenNotClicking && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2)
+            n.autoClick && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2) ||
+            game.state.botPlay && n.errorWhenNotClicking && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2)
         )
 
         if (game.state.botPlay) Listener.state.arrows[arrowID].click = false
@@ -36,11 +42,16 @@ export default async (canvas, game, Listener) => {
             }
             let onNote = Listener.state.arrows[arrowID]?.state == 'onNote' || autoClickNote
 
-            if (onNote || Listener.state.arrows[arrowID]?.state == 'noNote') arrowImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${arrowID}-press-${onNote ? game.state.animations.arrows.frame : game.state.animations.arrows.frame%2}${onNote ? '' : '-no'}.png`]
-            else arrowImage = game.state.images[Listener.state.arrows[arrowID].state.replace(/{{arrowID}}/g, arrowID).replace(/{{frame}}/g, game.state.animations.arrows.frame)]
+            if (onNote || Listener.state.arrows[arrowID]?.state == 'noNote') arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}${onNote ? '' : '-no'}`]
+            else {
+                arrowImageData = game.state.images[Listener.state.arrows[arrowID]?.state]
+                arrowImage = arrowImageData?.image
+                arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
+                arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}`] || arrowImagePos
+            }
         }
 
-        if (arrowImage && arrowInfo) {
+        if (arrowImage && arrowImagePos && arrowInfo) {
             ctx.globalAlpha = arrowInfo.alpha > 1 ? 1 : arrowInfo.alpha < 0 ? 0 : arrowInfo.alpha
             ctx.shadowColor = arrowInfo.shadowColor
             ctx.shadowBlur = arrowInfo.shadowBlur
@@ -58,17 +69,17 @@ export default async (canvas, game, Listener) => {
                 arrowInfo.resetY = false
             }
 
-            let arrowWidth = arrowImage.width**resizeNote
-            let arrowHeight = arrowImage.height**resizeNote
-            let currentArrowX = arrowInfo.X-((arrowImage.width**resizeNote-arrowsSize**resizeNote)/2)
-            let currentArrowY = arrowInfo.Y-((arrowImage.height**resizeNote-arrowsSize**resizeNote)/2)
+            let arrowWidth = arrowImagePos.width**resizeNote
+            let arrowHeight = arrowImagePos.height**resizeNote
+            let currentArrowX = arrowInfo.X-((arrowImagePos.width**resizeNote-arrowsSize**resizeNote)/2)
+            let currentArrowY = arrowInfo.Y-((arrowImagePos.height**resizeNote-arrowsSize**resizeNote)/2)
 
             ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
             ctx.rotate((arrowInfo.rotation)*Math.PI/180);
             
             if (game.state.countdown < 0) {
-                ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
-                if (splashImage) ctx.drawImage(splashImage, -((arrowWidth*game.state.musicInfo.splashResize)/2), -((arrowHeight*game.state.musicInfo.splashResize)/2), arrowWidth*game.state.musicInfo.splashResize, arrowHeight*game.state.musicInfo.splashResize)
+                ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+                if (splashImage && splashImagePos) ctx.drawImage(splashImage, splashImagePos.x, splashImagePos.y, splashImagePos.width, splashImagePos.height, -((arrowWidth*game.state.musicInfo.splashResize)/2), -((arrowHeight*game.state.musicInfo.splashResize)/2), arrowWidth*game.state.musicInfo.splashResize, arrowHeight*game.state.musicInfo.splashResize)
             }
 
             ctx.restore()
@@ -84,15 +95,23 @@ export default async (canvas, game, Listener) => {
     let arrowYOpponent = game.state.arrowsYLineOpponent
 
     for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
-        let arrowImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${arrowID}.png`]
+        let arrowImageData = game.state.images[`${game.state.musicInfo.notesImageDir}Arrows.png`]
+        let arrowImage = arrowImageData?.image
+        let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
+        let arrowImagePos = arrowFrames[`Arrow-${arrowID}`]
+        
         let arrowInfo = game.state.arrowsInfoOpponent[arrowID]
 
-        let note = game.state.musicOpponentNotes.find(n => n.errorWhenNotClicking && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight/2))
+        let note = game.state.musicOpponentNotes.find(n => n.errorWhenNotClicking && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
         let onClickNoteOpponent = game.state.musicInfoOpponent.arrows && game.state.musicInfoOpponent.arrows[arrowID]?.click
         if (note || onClickNoteOpponent) {
             let pressImage = game.state.personalizedNotes[note?.type]?.pressImage
-            if (pressImage) arrowImage = game.state.images[pressImage.replace(/{{arrowID}}/g, arrowID).replace(/{{frame}}/g, game.state.animations.arrows.frame)]
-            else arrowImage = game.state.images[`${game.state.musicInfo.notesImageDir}Arrow-${arrowID}-press-${note ? game.state.animations.arrows.frame : game.state.animations.arrows.frame%2}${note ? '' : '-no'}.png`]
+            if (pressImage) {
+                arrowImageData = game.state.images[Listener.state.arrows[arrowID]?.state]
+                arrowImage = arrowImageData?.image
+                arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
+                arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}`] || arrowImagePos
+            } else arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}`]
         }
 
         if (arrowImage && arrowInfo) {
@@ -113,15 +132,15 @@ export default async (canvas, game, Listener) => {
                 arrowInfo.resetY = false
             }
 
-            let arrowWidth = arrowImage.width**resizeNoteOpponent
-            let arrowHeight = arrowImage.height**resizeNoteOpponent
-            let currentArrowX = arrowInfo.X-((arrowImage.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)
-            let currentArrowY = arrowInfo.Y-((arrowImage.height**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)
+            let arrowWidth = arrowImagePos.width**resizeNoteOpponent
+            let arrowHeight = arrowImagePos.height**resizeNoteOpponent
+            let currentArrowX = arrowInfo.X-((arrowImagePos.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)
+            let currentArrowY = arrowInfo.Y-((arrowImagePos.height**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)
 
             ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
             ctx.rotate((arrowInfo.rotation)*Math.PI/180);
             
-            if (game.state.countdown < 0)  ctx.drawImage(arrowImage, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+            if (game.state.countdown < 0)  ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
 
             ctx.restore()
             ctx.globalAlpha = 1

@@ -4,7 +4,7 @@ export default async (canvas, game, Listener) => {
     let loadingBarWidth = canvas.width*0.5
     let loadingBarHeight = 20
 
-    let loadinPercent = (game.state.loading.loaded+1)/game.state.loading.total || 0
+    let loadinPercent = (game.state.loading.loaded)/game.state.loading.total || 0
 
     ctx.font = `bold 15px Arial`
     ctx.fillStyle = 'rgb(255, 255, 255)'

@@ -37,6 +37,9 @@ export default function renderGame(canvas, game, Listener) {
         case 'loading':
             require('./RenderLoadingScreen').default(canvas, game, Listener)
             break
+        case 'test':
+            require('./RenderTestScreen').default(canvas, game, Listener)
+            break
     }
 
     require('./RenderScreenInformation').default(canvas, game, Listener)

@@ -24,6 +24,7 @@ function createGame(Listener, canvas, socket) {
             listServers: []
         },
         personalizedNotes: {},
+        toLoadImages: {},
         images: {},
         sounds: {},
         musics: [],
@@ -72,7 +73,7 @@ function createGame(Listener, canvas, socket) {
                 frame: 0,
                 startFrame: 0,
                 endFrame: 10,
-                totalDalay: 10,
+                totalDalay: 20,
                 dalay: 0,
                 loop: true,
             },
@@ -114,7 +115,7 @@ function createGame(Listener, canvas, socket) {
                 endFrame: 11,
                 totalDalay: 40,
                 dalay: 0,
-                loop: true
+                loop: false
             },
         },
         loading: {
@@ -129,7 +130,6 @@ function createGame(Listener, canvas, socket) {
     const addMusicList = (command) => require('./GameFunctions/addMusicList').default(state)
     const addDifficulties = (command) => require('./GameFunctions/addDifficulties').default(state)
     const addPersonalizedNotes = (command) => require('./GameFunctions/addPersonalizedNotes').default(state)
-    const addSplashConfig = (command) => require('./GameFunctions/addSplashConfig').default(state)
 
     const playSong = (type, command) => require('./GameFunctions/playSong').default(type, command, state)
     const calculateRating = (command) => require('./GameFunctions/calculateRating').default(command, state)
@@ -188,8 +188,7 @@ function createGame(Listener, canvas, socket) {
                         resetEnable: true,
                         alpha: 1,
                         noteAlpha: 1,
-                        rotation: 0,
-                        splashMaxFrame: 7
+                        rotation: 0
                     }
                 }
             }
@@ -206,8 +205,7 @@ function createGame(Listener, canvas, socket) {
                         resetEnable: true,
                         alpha: 1,
                         noteAlpha: 1,
-                        rotation: 0,
-                        splashMaxFrame: 7
+                        rotation: 0
                     }
                 }
             }
@@ -323,25 +321,56 @@ function createGame(Listener, canvas, socket) {
         addMusicList()
         addDifficulties()
         addPersonalizedNotes()
-        addSplashConfig()
 
         let toLoad = state.images.concat(state.sounds)
 
         const newLoad = (msg) => {
             state.loading.loaded += 1
-            state.loading.msg = `(${state.loading.loaded+1}/${state.loading.total}) - ${msg}`
+            state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) - ${msg}`
 
-            if (state.loading.loaded+1 >= state.loading.total) completeLoading()
+            if (state.loading.loaded >= state.loading.total) completeLoading()
             else load(toLoad[state.loading.loaded])
         }
 
         const completeLoading = () => {
-            state.loading.msg = `(${state.loading.loaded+1}/${state.loading.total}) 100% - Complete loading`
+            console.log(state.images)
+            state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
             if (state.gameStage == 'loading') setTimeout(() => state.smallFunctions.redirectGameStage('menu'), 500)
         }
 
-        const load = (dir) => {
+        const load = ({ dir, animationConfigDir}) => {
             let loaded = false
+
+            setTimeout(() => {
+                if (!loaded) newLoad('[ERROR File failed to load] '+dir)
+            }, 10000)
+
+            if (songFileExtension.includes(dir.split('.')[dir.split('.').length-1])) {
+                let sound = new Audio()
+                sound.addEventListener('loadeddata', (e) => {
+                    loaded = true
+                    newLoad(e.path[0].src)
+                })
+                sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
+                sound.src = `/${dir}`
+                state.sounds[dir] = sound
+            } else {
+                let animationConfig = animationConfigDir ? require(`../../imgs/${animationConfigDir}`) : null
+                let img = new Image()
+                img.addEventListener('load', (e) => {
+                    loaded = true
+                    newLoad(e.path[0].src)
+                })
+                img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
+                img.src = `/imgs/${dir}`
+                img.id = dir
+                state.images[dir] = {
+                    image: img,
+                    animationConfig
+                }
+            }
+
+            /*let loaded = false
 
             setTimeout(() => {
                 if (!loaded) {
@@ -368,8 +397,11 @@ function createGame(Listener, canvas, socket) {
                 img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
                 img.src = `/imgs/${dir}`
                 img.id = dir
-                state.images[dir] = img
-            }
+                state.images[dir] = {
+                    image: img,
+                    animationConfig: 
+                }
+            }*/
         }
 
         load(toLoad[0])

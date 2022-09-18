@@ -6,7 +6,7 @@ export default async (state) => {
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
             mod: 'FNFDefault',
-            splashType: 'default',
+            splashDir: 'Arrows/splash.png',
             splashResize: 1.5,
         },
         {
@@ -15,7 +15,7 @@ export default async (state) => {
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
             mod: 'FNFDefault',
-            splashType: 'default',
+            splashDir: 'Arrows/splash.png',
             splashResize: 1.5,
         },
         {
@@ -24,7 +24,7 @@ export default async (state) => {
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
             mod: 'FNFDefault',
-            splashType: 'default',
+            splashDir: 'Arrows/splash.png',
             splashResize: 1.5,
         },
         {
@@ -33,7 +33,7 @@ export default async (state) => {
             difficulties: [ 0, 1, 2 ],
             notesImageDir: 'Arrows/',
             mod: 'FNFDefault',
-            splashType: 'default',
+            splashDir: 'Arrows/splash.png',
             splashResize: 1.5,
         },
         {
@@ -392,7 +392,7 @@ export default async (state) => {
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
-            splashType: 'default',
+            splashDir: 'Arrows/splash.png',
             splashResize: 2,
         },
         {
@@ -402,7 +402,7 @@ export default async (state) => {
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
-            splashType: 'default',
+            splashDir: 'Arrows/splash.png',
             splashResize: 2,
         },
         {
@@ -412,7 +412,7 @@ export default async (state) => {
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
-            splashType: 'default',
+            splashDir: 'Arrows/splash.png',
             splashResize: 2
         },
         {
@@ -422,7 +422,7 @@ export default async (state) => {
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
-            splashType: 'default',
+            splashDir: 'Arrows/splash.png',
             splashResize: 2
         },
         {
@@ -432,7 +432,7 @@ export default async (state) => {
             notesImageDir: 'Arrows/LNCTNotes/',
             backgroundImage: 'backgrounds/LateNightCityTale.jpg',
             mod: 'LateNightCityTale',
-            splashType: 'default',
+            splashDir: 'Arrows/splash.png',
             splashResize: 2
         },
     ]
