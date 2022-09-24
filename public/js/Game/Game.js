@@ -332,7 +332,7 @@ function createGame(Listener, canvas, socket) {
     }
 
     async function loading(command) {
-        let songFileExtension = [ 'ogg', 'mp3' ]
+        /*let songFileExtension = [ 'ogg', 'mp3' ]
         let loadingImagesTotal = await addImages()
         let loadingSoundsTotal = await addSounds()
         state.loading.total = loadingImagesTotal
@@ -405,7 +405,75 @@ function createGame(Listener, canvas, socket) {
         }
 
         load(toLoadImages[0], toLoadImages, toLoadImagesCurrent)
-        load(toLoadSongs[0], toLoadSongs, toLoadSongsCurrent)
+        load(toLoadSongs[0], toLoadSongs, toLoadSongsCurrent)*/
+
+        
+        let songFileExtension = [ 'ogg', 'mp3' ]
+        let loadingImagesTotal = await addImages()
+        let loadingSoundsTotal = await addSounds()
+        state.loading.total = loadingImagesTotal
+        state.loading.total += loadingSoundsTotal
+        addMusicList()
+        addDifficulties()
+        addPersonalizedNotes()
+
+        let toLoad = state.images.concat(state.sounds)
+
+        const newLoad = (msg) => {
+            state.loading.loaded += 1
+            state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) - ${msg}`
+
+            if (state.loading.loaded >= state.loading.total) completeLoading()
+            else load(toLoad[state.loading.loaded])
+        }
+
+        const completeLoading = () => {
+            state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
+            if (state.gameStage == 'loading') {
+                let interval = setInterval(() => {
+                    if (state.animations.loadingLogo.frame >= state.animations.loadingLogo.endFrame) {
+                        clearInterval(interval)
+                        state.animations.loadingLogo.paused = true
+                        state.smallFunctions.redirectGameStage('menu')
+                    }
+                }, 2000)
+            }
+        }
+
+        const load = ({ dir, animationConfigDir}) => {
+            let loaded = false
+
+            setTimeout(() => {
+                if (!loaded) newLoad('[ERROR File failed to load] '+dir)
+            }, 10000)
+
+            if (songFileExtension.includes(dir.split('.')[dir.split('.').length-1])) {
+                let sound = new Audio()
+                sound.addEventListener('loadeddata', (e) => {
+                    loaded = true
+                    newLoad(e.path[0].src)
+                })
+                sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
+                sound.src = `/${dir}`
+                state.sounds[dir] = sound
+            } else {
+                let animationConfig = animationConfigDir ? require(`../../imgs/${animationConfigDir}`) : null
+                let img = new Image()
+                img.addEventListener('load', (e) => {
+                    loaded = true
+                    newLoad(e.path[0].src)
+                })
+                img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
+                img.src = `/imgs/${dir}`
+                img.id = dir
+                state.images[dir] = {
+                    image: img,
+                    animationConfig
+                }
+            }
+        }
+
+        load(toLoad[0])
     }
     
     return {
