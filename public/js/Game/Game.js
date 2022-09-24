@@ -429,6 +429,7 @@ function createGame(Listener, canvas, socket) {
 
         const completeLoading = () => {
             state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
+            state.animations.loadingLogo.paused = false
             if (state.gameStage == 'loading') {
                 let interval = setInterval(() => {
                     if (state.animations.loadingLogo.frame >= state.animations.loadingLogo.endFrame) {
