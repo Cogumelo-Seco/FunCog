@@ -171,7 +171,9 @@ export default async (state) => {
         { dir: 'Musics/musics/aquaphobia/Voices.ogg' },
 
         { dir: 'Musics/musics/lonely-sapphire/Inst.ogg' },
-        { dir: 'Musics/musics/lonely-sapphire/Voices.ogg' },
+
+        { dir: 'Musics/musics/test/Inst.ogg' },
+        { dir: 'Musics/musics/test/Voices.ogg' },
     ]
 
     return state.sounds.length

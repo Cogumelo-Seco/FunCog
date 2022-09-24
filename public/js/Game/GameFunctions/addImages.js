@@ -1,5 +1,9 @@
 export default async (state) => {
     state.images = [
+        { dir: 'imgs/logo.png' },
+        
+        /* ---- */
+
         { dir: 'BongoCat/bg.png' },
         { dir: 'BongoCat/arrow-0.png' },
         { dir: 'BongoCat/arrow-1.png' },

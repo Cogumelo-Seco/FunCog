@@ -43,6 +43,8 @@ function createGame(Listener, canvas, socket) {
         downScroll: true,
         middleScroll: true,
         botPlay: false,
+        musicChangeBPM: {},
+        oldChangeBPM: 0,
         musicNotes: [],
         musicOpponentNotes: [],
         musicOriginalNotes: [],
@@ -69,6 +71,14 @@ function createGame(Listener, canvas, socket) {
         screenRotation: 0,
 
         animations: {
+            loadingLogo: {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 50,
+                totalDalay: 0,
+                dalay: 0,
+                paused: true,
+            },
             icons: {
                 frame: 0,
                 startFrame: 0,
@@ -144,6 +154,8 @@ function createGame(Listener, canvas, socket) {
 
     async function start(command) {
         function gameLoop() {
+            document.title = `Cogu - ${state.gameStage}`
+
             if (state.online && state.serverId) {
                 if (state.serverInfo.end == true) {
                     state.waiting = true
@@ -268,6 +280,13 @@ function createGame(Listener, canvas, socket) {
                 state.musicOpponentNotes= []
             }
 
+            for (let i in state.musicChangeBPM) {
+                if (Number(i)/1000 <= musicCurrentTime && state.musicChangeBPM[i] != state.oldChangeBPM) {
+                    state.musicBPM = state.musicChangeBPM[i]
+                    state.oldChangeBPM = state.musicChangeBPM[i]
+                }
+            }
+
             for (let i in state.musicNotes) {
                 state.musicNotes[i].Y = -((state.musicNotes[i].time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM))
                 if (state.musicNotes[i].errorWhenNotClicking && !state.botPlay && state.musicNotes[i].arrowID >= 0 && state.musicNotes[i].arrowID <= state.amountOfArrows && state.musicNotes[i].Y > (state.arrowsSize**state.resizeNote) && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
@@ -292,7 +311,7 @@ function createGame(Listener, canvas, socket) {
             for (let i in state.animations) {
                 let animation = state.animations[i]
 
-                if (animation.dalay <= +new Date()) {
+                if (animation.dalay <= +new Date() && !animation.paused) {
                     animation.frame += animation.boomerang ? animation.boomerangForward ? 1 : -1 : 1
                     if (animation.frame > animation.endFrame) {
                         if (!animation.boomerang) animation.frame = animation.loop ? animation.startFrame : animation.endFrame
@@ -322,36 +341,50 @@ function createGame(Listener, canvas, socket) {
         addDifficulties()
         addPersonalizedNotes()
 
-        let toLoad = state.images.concat(state.sounds)
+        let toLoadImagesCurrent = 0
+        let toLoadSongsCurrent = 0
+        let toLoadImages = state.images
+        let toLoadSongs = state.sounds
 
-        const newLoad = (msg) => {
+        const newLoad = (msg, list, current) => {
+            console.log(current)
             state.loading.loaded += 1
+            current += 1
             state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) - ${msg}`
 
             if (state.loading.loaded >= state.loading.total) completeLoading()
-            else load(toLoad[state.loading.loaded])
+            else if (!isNaN(current) && list[current]) load(list[current], list, current)
         }
 
         const completeLoading = () => {
             console.log(state.images)
             state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
-            if (state.gameStage == 'loading') setTimeout(() => state.smallFunctions.redirectGameStage('menu'), 500)
+            state.animations.loadingLogo.paused = false
+            if (state.gameStage == 'loading') {
+                let interval = setInterval(() => {
+                    if (state.animations.loadingLogo.frame >= state.animations.loadingLogo.endFrame) {
+                        clearInterval(interval)
+                        state.animations.loadingLogo.paused = true
+                        state.smallFunctions.redirectGameStage('menu')
+                    }
+                }, 2000)
+            }
         }
 
-        const load = ({ dir, animationConfigDir}) => {
+        const load = ({ dir, animationConfigDir }, list, current) => {
             let loaded = false
 
             setTimeout(() => {
-                if (!loaded) newLoad('[ERROR File failed to load] '+dir)
+                if (!loaded) newLoad('[ERROR File failed to load] '+dir, list, current)
             }, 10000)
 
             if (songFileExtension.includes(dir.split('.')[dir.split('.').length-1])) {
                 let sound = new Audio()
                 sound.addEventListener('loadeddata', (e) => {
                     loaded = true
-                    newLoad(e.path[0].src)
+                    newLoad(e.path[0].src, list, current)
                 })
-                sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
+                sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir), list, current)
                 sound.src = `/${dir}`
                 state.sounds[dir] = sound
             } else {
@@ -359,9 +392,9 @@ function createGame(Listener, canvas, socket) {
                 let img = new Image()
                 img.addEventListener('load', (e) => {
                     loaded = true
-                    newLoad(e.path[0].src)
+                    newLoad(e.path[0].src, list, current)
                 })
-                img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
+                img.addEventListener('error',(e) => newLoad('[ERROR] '+dir), list, current)
                 img.src = `/imgs/${dir}`
                 img.id = dir
                 state.images[dir] = {
@@ -369,42 +402,10 @@ function createGame(Listener, canvas, socket) {
                     animationConfig
                 }
             }
-
-            /*let loaded = false
-
-            setTimeout(() => {
-                if (!loaded) {
-                    alert('[ERROR File failed to load] '+dir)
-                    newLoad('[ERROR File failed to load] '+dir)
-                }
-            }, 10000)
-
-            if (songFileExtension.includes(dir.split('.')[dir.split('.').length-1])) {
-                let sound = new Audio()
-                sound.addEventListener('loadeddata', (e) => {
-                    loaded = true
-                    newLoad(e.path[0].src)
-                })
-                sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
-                sound.src = `/${dir}`
-                state.sounds[dir] = sound
-            } else {
-                let img = new Image()
-                img.addEventListener('load', (e) => {
-                    loaded = true
-                    newLoad(e.path[0].src)
-                })
-                img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
-                img.src = `/imgs/${dir}`
-                img.id = dir
-                state.images[dir] = {
-                    image: img,
-                    animationConfig: 
-                }
-            }*/
         }
 
-        load(toLoad[0])
+        load(toLoadImages[0], toLoadImages, toLoadImagesCurrent)
+        load(toLoadSongs[0], toLoadSongs, toLoadSongsCurrent)
     }
     
     return {

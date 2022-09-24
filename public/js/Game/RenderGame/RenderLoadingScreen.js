@@ -1,29 +1,37 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
-    
-    let loadingBarWidth = canvas.width*0.5
-    let loadingBarHeight = 20
 
     let loadinPercent = (game.state.loading.loaded)/game.state.loading.total || 0
+    let alpha = game.state.animations.loadingLogo.frame/(game.state.animations.loadingLogo.endFrame-game.state.animations.loadingLogo.endFrame*0.25)
+    alpha = alpha >= 1 ? 1 : alpha <= 0 ? 0 : alpha
+
+    ctx.globalAlpha = 1-alpha
+    ctx.lineWidth = 15;
+
+    ctx.beginPath();    
+    ctx.arc(canvas.width/2, canvas.height/2, 80, 0, Math.PI*2);    
+    ctx.strokeStyle = 'rgb(20, 20, 20)';
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(canvas.width/2, canvas.height/2, 80, -(Math.PI)*loadinPercent, Math.PI*loadinPercent)
+    ctx.strokeStyle = `hsl(${300-loadinPercent*360}, 100%, 40%)`
+    ctx.stroke();
 
     ctx.font = `bold 15px Arial`
-    ctx.fillStyle = 'rgb(255, 255, 255)'
-    ctx.fillText('LOADING', canvas.width/2-(ctx.measureText('LOADING').width/2), canvas.height/2-loadingBarHeight);
-
-    ctx.fillStyle = 'rgb(100, 100, 100)'
-    ctx.fillRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-(loadingBarHeight/2), loadingBarWidth, loadingBarHeight)
-
-    ctx.fillStyle = `hsl(${loadinPercent*360}, 100%, 40%)`//'rgb(19, 189, 0)'
-    ctx.fillRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-(loadingBarHeight/2), loadingBarWidth*loadinPercent, loadingBarHeight)
 
     ctx.fillStyle = 'rgb(255, 255, 255)'
-    ctx.fillText(`${Number.parseInt(loadinPercent*100)}%`, canvas.width/2-(ctx.measureText(`${Number.parseInt(loadinPercent*100)}%`).width/2), canvas.height/2-(loadingBarHeight/2)+15);
+    ctx.fillText(`${Number.parseInt(loadinPercent*100)}%`, canvas.width/2-(ctx.measureText(`${Number.parseInt(loadinPercent*100)}%`).width/2), canvas.height/2+7.5);
 
-    ctx.lineWidth = 2.5
-    ctx.strokeStyle = 'black'
-    ctx.strokeRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-(loadingBarHeight/2), loadingBarWidth, loadingBarHeight)
+    ctx.font = `bold 10px Arial`
+    ctx.fillStyle = game.state.loading.msg.includes('ERROR') ? 'rgba(255, 0, 0, 0.4)' : 'rgba(255, 255, 255, 0.1)'
+    ctx.fillText(game.state.loading.msg, 5, canvas.height-5);
 
-    ctx.fillStyle = game.state.loading.msg.includes('ERROR') ? 'rgba(255, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.2)'
-    //ctx.fillText(game.state.loading.msg, canvas.width-ctx.measureText(game.state.loading.msg).width-10, canvas.height-10);
-    ctx.fillText(game.state.loading.msg, 5, canvas.height-10);
+    let logoImage = game.state.images['imgs/logo.png']?.image
+    let size = 180
+
+    ctx.globalAlpha = alpha
+    if (logoImage) ctx.drawImage(logoImage, canvas.width/2-(size/2), canvas.height/2-(size/2), size, size)
+
+    ctx.globalAlpha = 1
 }

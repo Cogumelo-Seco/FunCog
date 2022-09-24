@@ -1,6 +1,18 @@
 export default async (state) => {
     state.musics = [
         {
+            name: 'Test',
+            menuColor: 'rgb(255, 0, 0)',
+            difficulties: [ 1 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: null,
+            mod: 'Well',
+            splashDir: 'Arrows/splash.png',
+            splashResize: 1.5,
+            dev: true
+        },
+        
+        {
             name: 'Tutorial',
             menuColor: null,
             difficulties: [ 0, 1, 2 ],
@@ -434,7 +446,7 @@ export default async (state) => {
             mod: 'LateNightCityTale',
             splashDir: 'Arrows/splash.png',
             splashResize: 2
-        },
+        }
     ]
     
     return state.musics.length

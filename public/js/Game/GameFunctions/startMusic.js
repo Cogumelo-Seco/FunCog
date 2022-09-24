@@ -46,6 +46,12 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
         state.musicBPM = musicData.song.bpm
 
         for (let i in musicNotes) {
+            if (musicNotes[i].changeBPM) {
+                try {
+                    //state.musicChangeBPM[musicNotes[i].timeToChangeBPM || musicNotes[i].sectionNotes[0][0]] = musicNotes[i].bpm
+                } catch {}
+            }
+
             for (let a in musicNotes[i].sectionNotes) {
                 let noteInfo = musicNotes[i].sectionNotes[a]
                 let mustHitSection = musicNotes[i].mustHitSection
@@ -100,6 +106,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
 
                         if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
 
+                        //alert(state.music.duration)
                         state.musicEventListener('started', { difficulty, events: musicData.song.events, listenerState }, state)
                     } else state.playSong(`Sounds/intro${state.countdown}.ogg`)
                 }
