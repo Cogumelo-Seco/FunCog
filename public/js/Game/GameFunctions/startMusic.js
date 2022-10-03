@@ -1,5 +1,6 @@
 export default async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer, splashDir, splashResize, toLoad }, state) => {
     try {
+        state.music = null
         state.arrowsInfo = {},
         state.arrow = {},
         state.arrowsInfoOpponent = {},
@@ -90,27 +91,35 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
             }, 10000)
 
             if ([ 'ogg', 'mp3' ].includes(dir.split('.')[dir.split('.').length-1])) {
-                let sound = new Audio()
-                sound.addEventListener('loadeddata', (e) => {
-                    loaded = true
-                    newLoad(e.path[0].src)
-                })
-                sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
-                sound.src = `/${dir}`
-                state.sounds[dir] = sound
+                if (state.sounds[dir]) newLoad(dir)
+                else {
+                    console.log('p-p')
+                    let sound = new Audio()
+                    sound.addEventListener('loadeddata', (e) => {
+                        loaded = true
+                        newLoad(e.path[0].src)
+                    })
+                    sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
+                    sound.src = `/${dir}`
+                    state.sounds[dir] = sound
+                }
             } else {
-                let animationConfig = animationConfigDir ? require(`../../../imgs/${animationConfigDir}`) : null
-                let img = new Image()
-                img.addEventListener('load', (e) => {
-                    loaded = true
-                    newLoad(e.path[0].src)
-                })
-                img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
-                img.src = `/imgs/${dir}`
-                img.id = dir
-                state.images[dir] = {
-                    image: img,
-                    animationConfig
+                if (state.images[dir] || state.sounds[dir]) newLoad(dir)
+                else {
+                    console.log('p-p')
+                    let animationConfig = animationConfigDir ? require(`../../../imgs/${animationConfigDir}`) : null
+                    let img = new Image()
+                    img.addEventListener('load', (e) => {
+                        loaded = true
+                        newLoad(e.path[0].src)
+                    })
+                    img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
+                    img.src = `/imgs/${dir}`
+                    img.id = dir
+                    state.images[dir] = {
+                        image: img,
+                        animationConfig
+                    }
                 }
             }
         }
@@ -120,6 +129,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
         load(toLoad[0])
 
         async function loaded() {
+            console.log('q-q')
             if (state.musicOpponentNotes.length <= 0 && state.online) {
                 state.musicOpponentNotes = JSON.parse(JSON.stringify(state.musicNotes));
                 state.musicOriginalOpponentNotes = JSON.parse(JSON.stringify(state.musicOriginalNotes));
