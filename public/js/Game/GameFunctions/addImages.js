@@ -24,6 +24,8 @@ export default async (state) => {
         { dir: 'imgs/cursor-hover.png' },
 
 
+        /* ---- */
+
         { dir: 'ratings/bad.png' },
         { dir: 'ratings/good.png' },
         { dir: 'ratings/shit.png' },

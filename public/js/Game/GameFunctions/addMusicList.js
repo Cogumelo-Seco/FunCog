@@ -276,6 +276,18 @@ export default async (state) => {
             ]
         },
         {
+            name: 'Run-remix',
+            menuColor: '#ff9ce6',
+            difficulties: [ 0, 1, 2 ],
+            notesImageDir: 'Arrows/',
+            backgroundImage: 'backgrounds/bob.png',
+            mod: 'Bob',
+            toLoad: [
+                { dir: 'Musics/musics/run-remix/Inst.ogg' },
+                { dir: 'Musics/musics/run-remix/Voices.ogg' },
+            ]
+        },
+        {
             name: 'Ron',
             menuColor: null,
             difficulties: [ 0, 1, 2 ],
@@ -309,6 +321,17 @@ export default async (state) => {
             toLoad: [
                 { dir: 'Musics/musics/onslaught/Inst.ogg' },
                 { dir: 'Musics/musics/onslaught/Voices.ogg' },
+                { dir: 'bob-PopUps/popup1.png' },
+                { dir: 'bob-PopUps/popup2.png' },
+                { dir: 'bob-PopUps/popup3.png' },
+                { dir: 'bob-PopUps/popup4.png' },
+                { dir: 'bob-PopUps/popup5.png' },
+                { dir: 'bob-PopUps/popup6.png' },
+                { dir: 'bob-PopUps/popup7.png' },
+                { dir: 'bob-PopUps/popup8.png' },
+                { dir: 'bob-PopUps/popup9.png' },
+                { dir: 'bob-PopUps/popup10.png' },
+                { dir: 'bob-PopUps/popup11.png' },
             ]
         },
         {

@@ -77,7 +77,6 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
 
         const newLoad = (msg) => {
             state.loadingSong.loaded += 1
-            //state.loadingSong.msg = `(${state.loadingSong.loaded}/${state.loadingSong.total}) - ${msg}`
 
             if (state.loadingSong.loaded >= state.loadingSong.total && !state.music) loaded()
             else if (toLoad[state.loadingSong.loaded]) load(toLoad[state.loadingSong.loaded])
@@ -87,33 +86,32 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
             let loaded = false
 
             setTimeout(() => {
-                if (!loaded) newLoad('[ERROR File failed to load] '+dir)
+                if (!loaded) newLoad()
             }, 10000)
 
             if ([ 'ogg', 'mp3' ].includes(dir.split('.')[dir.split('.').length-1])) {
-                if (state.sounds[dir]) newLoad(dir)
+                if (state.sounds[dir]) newLoad()
                 else {
                     console.log('p-p')
                     let sound = new Audio()
                     sound.addEventListener('loadeddata', (e) => {
                         loaded = true
-                        newLoad(e.path[0].src)
+                        newLoad()
                     })
-                    sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
+                    sound.addEventListener('error', (e) => newLoad())
                     sound.src = `/${dir}`
                     state.sounds[dir] = sound
                 }
             } else {
                 if (state.images[dir] || state.sounds[dir]) newLoad(dir)
                 else {
-                    console.log('p-p')
                     let animationConfig = animationConfigDir ? require(`../../../imgs/${animationConfigDir}`) : null
                     let img = new Image()
                     img.addEventListener('load', (e) => {
                         loaded = true
-                        newLoad(e.path[0].src)
+                        newLoad()
                     })
-                    img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
+                    img.addEventListener('error',(e) => newLoad())
                     img.src = `/imgs/${dir}`
                     img.id = dir
                     state.images[dir] = {
