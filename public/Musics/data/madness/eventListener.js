@@ -1,4 +1,4 @@
-export default async (type, { noteClickAuthor }, state) => {
+export default async (type, { noteClickAuthor, note }, state) => {
     switch (type) {
 		case 'noteClick':
             if (noteClickAuthor == 'player' && note?.type == 'fireNote' && !notes?.find(n => n.errorWhenNotClicking)) {

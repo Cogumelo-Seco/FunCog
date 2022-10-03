@@ -1,6 +1,27 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
+    let loadingBarWidth = canvas.width*0.25
+    let loadingBarHeight = 20
+    let loadingPercent = game.state.loadingSong.loaded/game.state.loadingSong.total
+
+    if (loadingPercent < 1) {
+        ctx.fillStyle = 'rgb(100, 100, 100)'
+        ctx.fillRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-loadingBarHeight/2, loadingBarWidth, loadingBarHeight)
+
+        ctx.fillStyle = 'rgb(19, 189, 0)'
+        ctx.fillRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-loadingBarHeight/2, loadingBarWidth*loadingPercent, loadingBarHeight)
+
+        ctx.font = `bold 15px Arial`
+        ctx.fillStyle = 'white'
+        ctx.fillText(Number.parseInt(loadingPercent*100)+'%', canvas.width/2-(ctx.measureText(Number.parseInt(loadingPercent*100)+'%').width/2), canvas.height/2-loadingBarHeight/2+15);
+
+        ctx.lineWidth = 2.5
+        ctx.strokeStyle = 'black'
+        ctx.strokeRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-loadingBarHeight/2, loadingBarWidth, loadingBarHeight)
+    }
+
+
     let musicBarWidth = canvas.width*0.25
     let musicBarHeight = 20
 

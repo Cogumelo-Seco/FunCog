@@ -1,4 +1,4 @@
-export default async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer, splashDir, splashResize }, state) => {
+export default async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer, splashDir, splashResize, toLoad }, state) => {
     try {
         state.arrowsInfo = {},
         state.arrow = {},
@@ -71,10 +71,53 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                     state.musicOriginalOpponentNotes.push(noteInfo)
                     state.musicOpponentNotes.push(newNoteInfo)
                 }
-
-                if ((state.musicNotes.concat(state.musicOpponentNotes)).length >= totalNotes) loaded()
             }
         }
+
+        const newLoad = (msg) => {
+            state.loadingSong.loaded += 1
+            //state.loadingSong.msg = `(${state.loadingSong.loaded}/${state.loadingSong.total}) - ${msg}`
+
+            if (state.loadingSong.loaded >= state.loadingSong.total && !state.music) loaded()
+            else if (toLoad[state.loadingSong.loaded]) load(toLoad[state.loadingSong.loaded])
+        }
+
+        const load = ({ dir, animationConfigDir}) => {
+            let loaded = false
+
+            setTimeout(() => {
+                if (!loaded) newLoad('[ERROR File failed to load] '+dir)
+            }, 10000)
+
+            if ([ 'ogg', 'mp3' ].includes(dir.split('.')[dir.split('.').length-1])) {
+                let sound = new Audio()
+                sound.addEventListener('loadeddata', (e) => {
+                    loaded = true
+                    newLoad(e.path[0].src)
+                })
+                sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
+                sound.src = `/${dir}`
+                state.sounds[dir] = sound
+            } else {
+                let animationConfig = animationConfigDir ? require(`../../../imgs/${animationConfigDir}`) : null
+                let img = new Image()
+                img.addEventListener('load', (e) => {
+                    loaded = true
+                    newLoad(e.path[0].src)
+                })
+                img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
+                img.src = `/imgs/${dir}`
+                img.id = dir
+                state.images[dir] = {
+                    image: img,
+                    animationConfig
+                }
+            }
+        }
+
+        state.loadingSong.loaded = 0
+        state.loadingSong.total = toLoad.length
+        load(toLoad[0])
 
         async function loaded() {
             if (state.musicOpponentNotes.length <= 0 && state.online) {
@@ -106,7 +149,6 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
 
                         if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
 
-                        //alert(state.music.duration)
                         state.musicEventListener('started', { difficulty, events: musicData.song.events, listenerState }, state)
                     } else state.playSong(`Sounds/intro${state.countdown}.ogg`)
                 }

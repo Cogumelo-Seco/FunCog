@@ -10,12 +10,13 @@ export default async (canvas, game, Listener) => {
     let arrowY = game.state.arrowsYLine
     
 
-    for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
+    if (game.state.musicInfo.notesImageDir) for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
         let arrowInfo = game.state.arrowsInfo[arrowID]
 
         let arrowImageData = game.state.images[`${game.state.musicInfo.notesImageDir}Arrows.png`]
         let arrowImage = arrowImageData?.image
         let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
+        if (!arrowFrames) return
         let arrowImagePos = arrowFrames[`Arrow-${arrowID}`]
         
         let splashImageData = game.state.images[arrowInfo?.splashDir]
@@ -94,10 +95,11 @@ export default async (canvas, game, Listener) => {
     let arrowXOpponent = game.state.middleScroll ? canvas.width/6-((arrowsSize**resizeNoteOpponent+spaceBetweenArrows)*(amountOfArrowsOpponent+1)/2) : arrowsSize**resizeNoteOpponent+spaceBetweenArrows
     let arrowYOpponent = game.state.arrowsYLineOpponent
 
-    for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
+    if (game.state.musicInfo.notesImageDir) for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
         let arrowImageData = game.state.images[`${game.state.musicInfo.notesImageDir}Arrows.png`]
         let arrowImage = arrowImageData?.image
         let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
+        if (!arrowFrames) return
         let arrowImagePos = arrowFrames[`Arrow-${arrowID}`]
         
         let arrowInfo = game.state.arrowsInfoOpponent[arrowID]

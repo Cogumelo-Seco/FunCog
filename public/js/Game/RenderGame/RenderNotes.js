@@ -1,7 +1,7 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
-    if (!game.state.holdHeight) game.state.holdHeight = game.state.images[`Arrows/Arrows.png`]?.animationConfig['Arrow-0']['Arrow-0-hold-piece'].height
+    if (!game.state.holdHeight) game.state.holdHeight = game.state.images[`Arrows/Arrows.png`]?.animationConfig['Arrow-0']['Arrow-0-hold-piece']?.height
     let arrowsSize = game.state.arrowsSize || 100
     let resizeNote = game.state.resizeNote
     let arrowY = game.state.arrowsYLine
@@ -57,7 +57,7 @@ export default async (canvas, game, Listener) => {
                 }
             }
 
-            if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage) {
+            if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage && arrowImagePos) {
                 ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : arrowInfo.noteAlpha
 
                 let arrowWidth = arrowImagePos.width**resizeNote
@@ -135,7 +135,7 @@ export default async (canvas, game, Listener) => {
                 }
             }
 
-            if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage) {
+            if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage && arrowImagePos) {
                 ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : arrowInfo.noteAlpha
                 
                 let arrowWidth = arrowImagePos.width**resizeNoteOpponent

@@ -14,6 +14,7 @@ export default function createListener(socket) {
             1: (key) => key == 'ArrowDown' || key == 'KeyF',
             2: (key) => key == 'ArrowUp' || key == 'KeyJ',
             3: (key) => key == 'ArrowRight' || key == 'KeyK',
+            4: (key) => key == 'ArrowRight' || key == 'KeyK',
         }
     }
 
@@ -156,6 +157,7 @@ export default function createListener(socket) {
                             dev: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].dev,
                             splashDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashDir,
                             splashResize: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashResize,
+                            toLoad: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].toLoad,
                             listenerState: state
                         })
                     } else {
@@ -172,6 +174,7 @@ export default function createListener(socket) {
                                 dev: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].dev,
                                 splashDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashDir,
                                 splashResize: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashResize,
+                                toLoad: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].toLoad,
                                 listenerState: state
                             })
                         //}, 1500)
@@ -217,6 +220,7 @@ export default function createListener(socket) {
                                 dev: state.game.state.musics[server.music].dev,
                                 splashDir: state.game.state.musics[server.music].splashDir,
                                 splashResize: state.game.state.musics[server.music].splashResize,
+                                toLoad: state.game.state.musics[server.music].toLoad,
                                 listenerState: state,
                                 opponentPlayer: true,
                             })

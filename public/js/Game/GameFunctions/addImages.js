@@ -18,47 +18,11 @@ export default async (state) => {
         { dir: 'BongoCat/rightHand2.png' },
         { dir: 'BongoCat/rightHand3.png' },
 
-
-        /* ----- */
-
-        { dir: 'Arrows/Arrows.png', animationConfigDir: 'Arrows/Arrows.json' },
-        { dir: 'Arrows/firenotes/Arrows.png', animationConfigDir: 'Arrows/firenotes/Arrows.json' },
-        { dir: 'Arrows/deathnotes/Arrows.png', animationConfigDir: 'Arrows/deathnotes/Arrows.json' },
-        { dir: 'Arrows/LNCTNotes/Arrows.png', animationConfigDir: 'Arrows/LNCTNotes/Arrows.json' },
-        { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
-        { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
-        { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
-
-        /* ---- */
-
-        { dir: 'Arrows/splash.png', animationConfigDir: 'Arrows/splash.json' },
-        { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
-        { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
-        { dir: 'Arrows/LNCTRed/splash.png', animationConfigDir: 'Arrows/LNCTRed/splash.json' },
-
-        /* ---- */
-
-        { dir: 'imgs/LateNightCityTale/purple-filter.png' },
-        { dir: 'imgs/LateNightCityTale/hurt.png' },
-        { dir: 'imgs/LateNightCityTale/Broken.png' },
-        { dir: 'imgs/LateNightCityTale/brokenScreen/whiteScreen.png' },
-        { dir: 'imgs/LateNightCityTale/brokenScreen/brokenScreen.png', animationConfigDir: 'imgs/LateNightCityTale/brokenScreen/brokenScreen.json' },
-        { dir: 'imgs/QT/pincer-open.png' },
-        { dir: 'imgs/QT/pincer-close.png' },
-        { dir: 'imgs/QT/alert.png', animationConfigDir: 'imgs/QT/alert.json' },
-
-        /* ---- */
-
-        { dir: 'icons/icon-bf.png' },
-        { dir: 'icons/icon-face.png' },
-        { dir: 'icons/BongoCat.png' },
-
         /* ---- */
 
         { dir: 'imgs/cursor.png' },
         { dir: 'imgs/cursor-hover.png' },
 
-        /* ---- */
 
         { dir: 'ratings/bad.png' },
         { dir: 'ratings/good.png' },
@@ -74,6 +38,16 @@ export default async (state) => {
 
         /* ---- */
 
+        { dir: 'Arrows/Arrows.png', animationConfigDir: 'Arrows/Arrows.json' },
+        { dir: 'Arrows/splash.png', animationConfigDir: 'Arrows/splash.json' },
+
+        /* ---- */
+
+        { dir: 'icons/icon-bf.png' },
+        { dir: 'icons/icon-face.png' },
+        { dir: 'icons/BongoCat.png' },
+
+        
         /*
         'imgs/LateNightCityTale/hurt.png',
         'imgs/LateNightCityTale/Broken.png',
