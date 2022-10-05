@@ -9,6 +9,7 @@ export default async (canvas, game, Listener) => {
     let startY = canvas.height/2-(50/2)
     let endY = canvas.height-50
     let Y = startY+((endY-startY)*(musicSelectFiltered/(game.state.musics[modSelect].musics.length)))-(musicSelectFiltered*50)
+    if (startY+(50*game.state.musics[modSelect].musics.length) < endY) Y = startY
 
     for (let i in game.state.musics[modSelect].musics) {
         let music = game.state.musics[modSelect].musics[i]
