@@ -28,7 +28,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					state.screenZoom = 80
 					setTimeout(() => state.screenZoom -= 10, 100)
 
-					let image = state.images['imgs/sonicEXE/three.png']
+					let image = state.images['imgs/sonicEXE/three.png'].image
 					state.musicInfo.popups.sonicEXEEndlessCounter = {
 						image: `imgs/sonicEXE/three.png`,
 						x: state.canvas.width/2-(image.width/2),
@@ -39,7 +39,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					state.screenZoom = 100
 					setTimeout(() => state.screenZoom -= 20, 100)
 
-					let image = state.images['imgs/sonicEXE/two.png']
+					let image = state.images['imgs/sonicEXE/two.png'].image
 					state.musicInfo.popups.sonicEXEEndlessCounter = {
 						image: `imgs/sonicEXE/two.png`,
 						x: state.canvas.width/2-(image.width/2),
@@ -51,7 +51,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					setTimeout(() => state.screenZoom -= 20, 100)
 					state.musicInfo.notesImageDir = 'Arrows/sonicEXEMajinNotes/'
 
-					let image = state.images['imgs/sonicEXE/one.png']
+					let image = state.images['imgs/sonicEXE/one.png'].image
 					state.musicInfo.popups.sonicEXEEndlessCounter = {
 						image: `imgs/sonicEXE/one.png`,
 						x: state.canvas.width/2-(image.width/2),
@@ -62,7 +62,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					state.screenZoom = 100
 					setTimeout(() => state.screenZoom -= 20, 100)
 
-					let image = state.images['imgs/sonicEXE/go.png']
+					let image = state.images['imgs/sonicEXE/go.png'].image
 					state.musicInfo.popups.sonicEXEEndlessCounter = {
 						image: `imgs/sonicEXE/go.png`,
 						x: state.canvas.width/2-(image.width/2),

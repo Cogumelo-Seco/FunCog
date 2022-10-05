@@ -124,60 +124,70 @@ export default function createListener(socket) {
         if (state.game.state.gameStage == 'selectMusic' && on) {
             switch (keyPressed) {
                 case 'ArrowUp':
-                    state.game.state.selectMusicMenu.musicSelect = state.game.state.selectMusicMenu.musicSelect <= 0 ? state.game.state.musics.length-1 : state.game.state.selectMusicMenu.musicSelect-1
+                    state.game.state.selectMusicMenu.musicSelect = state.game.state.selectMusicMenu.musicSelect-1 < -1 ? state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics.length-1 : state.game.state.selectMusicMenu.musicSelect-1
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
                 case 'ArrowDown':
-                    state.game.state.selectMusicMenu.musicSelect = state.game.state.selectMusicMenu.musicSelect >= state.game.state.musics.length-1 ? 0 : state.game.state.selectMusicMenu.musicSelect+1
+                    state.game.state.selectMusicMenu.musicSelect = state.game.state.selectMusicMenu.musicSelect+1 > state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics.length-1 ? -1 : state.game.state.selectMusicMenu.musicSelect+1
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
                 case 'ArrowLeft':
-                    state.game.state.selectMusicMenu.difficultySelected -= 1
+                    if (state.game.state.selectMusicMenu.musicSelect == -1) 
+                        state.game.state.selectMusicMenu.modSelect = !state.game.state.musics[state.game.state.selectMusicMenu.modSelect-1] ? state.game.state.musics.length-1 : state.game.state.selectMusicMenu.modSelect-1
+                    else 
+                        state.game.state.selectMusicMenu.difficultySelected -= 1
+
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
                 case 'ArrowRight':
-                    state.game.state.selectMusicMenu.difficultySelected += 1
+                    if (state.game.state.selectMusicMenu.musicSelect == -1) 
+                        state.game.state.selectMusicMenu.modSelect = !state.game.state.musics[state.game.state.selectMusicMenu.modSelect+1] ? 0 : state.game.state.selectMusicMenu.modSelect+1
+                    else 
+                        state.game.state.selectMusicMenu.difficultySelected += 1
+
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
                 case 'Enter':
+                    let musicInfo = state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics[state.game.state.selectMusicMenu.musicSelect]
+
                     if (state.game.state.online) {
                         state.musicMenu?.pause()
                         state.game.state.smallFunctions.redirectGameStage('game')
                         socket.emit('newServer', {
                             difficulty: state.game.state.selectMusicMenu.difficultySelected,
+                            mod: state.game.state.selectMusicMenu.modSelect,
                             music: state.game.state.selectMusicMenu.musicSelect
                         })
 
                         state.game.startMusic({ 
-                            name: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].name, 
-                            difficulty: state.game.state.difficulties[state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].difficulties[state.game.state.selectMusicMenu.difficultySelected]],
-                            notesImageDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].notesImageDir,
-                            backgroundImage: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].backgroundImage,
-                            mod: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].mod,
-                            dev: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].dev,
-                            splashDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashDir,
-                            splashResize: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashResize,
-                            toLoad: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].toLoad,
+                            name: musicInfo.name, 
+                            difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
+                            notesImageDir: musicInfo.notesImageDir,
+                            backgroundImage: musicInfo.backgroundImage,
+                            mod: musicInfo.mod,
+                            dev: musicInfo.dev,
+                            splashDir: musicInfo.splashDir,
+                            splashResize: musicInfo.splashResize,
+                            toLoad: musicInfo.toLoad,
                             listenerState: state
                         })
                     } else {
                         state.musicMenu?.pause()
                         state.game.playSong('Sounds/confirmMenu.ogg')
-                        //setTimeout(() => {
-                            state.game.state.smallFunctions.redirectGameStage('game')
-                            state.game.startMusic({ 
-                                name: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].name, 
-                                difficulty: state.game.state.difficulties[state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].difficulties[state.game.state.selectMusicMenu.difficultySelected]],
-                                notesImageDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].notesImageDir,
-                                backgroundImage: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].backgroundImage,
-                                mod: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].mod,
-                                dev: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].dev,
-                                splashDir: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashDir,
-                                splashResize: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].splashResize,
-                                toLoad: state.game.state.musics[state.game.state.selectMusicMenu.musicSelect].toLoad,
-                                listenerState: state
-                            })
-                        //}, 1500)
+                        state.game.state.smallFunctions.redirectGameStage('game')
+
+                        state.game.startMusic({ 
+                            name: musicInfo.name, 
+                            difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
+                            notesImageDir: musicInfo.notesImageDir,
+                            backgroundImage: musicInfo.backgroundImage,
+                            mod: musicInfo.mod,
+                            dev: musicInfo.dev,
+                            splashDir: musicInfo.splashDir,
+                            splashResize: musicInfo.splashResize,
+                            toLoad: musicInfo.toLoad,
+                            listenerState: state
+                        })
                     }
                     break
             }
@@ -211,16 +221,18 @@ export default function createListener(socket) {
                         state.game.state.serverId = server.id
 
                         if (state.game.state.serverId) {
+                            let musicInfo = state.game.state.musics[server.mod].musics[server.music]
+
                             state.game.startMusic({ 
-                                name: state.game.state.musics[server.music].name, 
-                                difficulty: state.game.state.difficulties[state.game.state.musics[server.music].difficulties[server.difficulty]],
-                                notesImageDir: state.game.state.musics[server.music].notesImageDir,
-                                backgroundImage: state.game.state.musics[server.music].backgroundImage,
-                                mod: state.game.state.musics[server.music].mod,
-                                dev: state.game.state.musics[server.music].dev,
-                                splashDir: state.game.state.musics[server.music].splashDir,
-                                splashResize: state.game.state.musics[server.music].splashResize,
-                                toLoad: state.game.state.musics[server.music].toLoad,
+                                name: musicInfo.name, 
+                                difficulty: state.game.state.difficulties[musicInfo.difficulties[server.difficulty]],
+                                notesImageDir: musicInfo.notesImageDir,
+                                backgroundImage: musicInfo.backgroundImage,
+                                mod: musicInfo.mod,
+                                dev: musicInfo.dev,
+                                splashDir: musicInfo.splashDir,
+                                splashResize: musicInfo.splashResize,
+                                toLoad: musicInfo.toLoad,
                                 listenerState: state,
                                 opponentPlayer: true,
                             })

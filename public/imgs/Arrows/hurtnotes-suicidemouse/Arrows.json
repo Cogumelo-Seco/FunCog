@@ -1,0 +1,94 @@
+{
+  "Arrow-1": {
+    "Arrow-1-hold-end": {
+      "name": "Arrow-1-hold-end",
+      "x": 5,
+      "y": 5,
+      "width": 50,
+      "height": 64
+    },
+    "Arrow-1-hold-piece": {
+      "name": "Arrow-1-hold-piece",
+      "x": 60,
+      "y": 5,
+      "width": 50,
+      "height": 44
+    },
+    "Arrow-1-note": {
+      "name": "Arrow-1-note",
+      "x": 115,
+      "y": 5,
+      "width": 157,
+      "height": 154
+    }
+  },
+  "Arrow-2": {
+    "Arrow-2-hold-end": {
+      "name": "Arrow-2-hold-end",
+      "x": 5,
+      "y": 5,
+      "width": 50,
+      "height": 64
+    },
+    "Arrow-2-hold-piece": {
+      "name": "Arrow-2-hold-piece",
+      "x": 60,
+      "y": 5,
+      "width": 50,
+      "height": 44
+    },
+    "Arrow-2-note": {
+      "name": "Arrow-2-note",
+      "x": 277,
+      "y": 5,
+      "width": 157,
+      "height": 154
+    }
+  },
+  "Arrow-0": {
+    "Arrow-0-note": {
+      "name": "Arrow-0-note",
+      "x": 5,
+      "y": 164,
+      "width": 154,
+      "height": 157
+    },
+    "Arrow-0-hold-end": {
+      "name": "Arrow-0-hold-end",
+      "x": 5,
+      "y": 5,
+      "width": 50,
+      "height": 64
+    },
+    "Arrow-0-hold-piece": {
+      "name": "Arrow-0-hold-piece",
+      "x": 60,
+      "y": 5,
+      "width": 50,
+      "height": 44
+    }
+  },
+  "Arrow-3": {
+    "Arrow-3-hold-end": {
+      "name": "Arrow-3-hold-end",
+      "x": 5,
+      "y": 5,
+      "width": 50,
+      "height": 64
+    },
+    "Arrow-3-hold-piece": {
+      "name": "Arrow-3-hold-piece",
+      "x": 60,
+      "y": 5,
+      "width": 50,
+      "height": 44
+    },
+    "Arrow-3-note": {
+      "name": "Arrow-3-note",
+      "x": 164,
+      "y": 164,
+      "width": 154,
+      "height": 157
+    }
+  }
+}

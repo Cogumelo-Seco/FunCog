@@ -35,7 +35,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
                                     state.screenZoom += 5
                                 } else if (event[1] == 'Add Jumpscare') {
                                     state.musicInfo.popups.sadmouseJumpscare = {
-                                        image: 'jumpscares/sadmouse-jumpscare-1.png',
+                                        image: 'jumpscares/sadmouse-jumpscare.png',
                                         x: 0,
                                         y: 0,
                                         width: state.canvas.width,

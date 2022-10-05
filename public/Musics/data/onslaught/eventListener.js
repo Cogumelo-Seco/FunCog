@@ -21,7 +21,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 							state.playSong('Sounds/pop_up.ogg')
 							let id = Number.parseInt(Math.random()*1000)
 							let dir = `bob-PopUps/popup${Number.parseInt(Math.random()*11)+1}.png`
-							let image = state.images[dir]
+							let image = state.images[dir].image
 							state.musicInfo.popups[id] = {
 								image: dir,
 								x: Number.parseInt(Math.random()*(state.canvas.width-image.width)),

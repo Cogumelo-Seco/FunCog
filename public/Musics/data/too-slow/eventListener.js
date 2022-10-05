@@ -1,27 +1,4 @@
 export default async (type, { noteClickAuthor, note, notes, listenerState, difficulty, events }, state) => {
-	state.animations['sonicEXEHitStatic'] = {
-		frame: 0,
-		startFrame: 0,
-		endFrame: 9,
-		totalDalay: 1,
-		dalay: 0,
-		loop: true
-	}
-	state.animations['sonicEXESimpleStatic'] = {
-		frame: 0,
-		startFrame: 0,
-		endFrame: 5,
-		totalDalay: 1,
-		dalay: 0,
-	}
-	state.animations['sonicJumpscare'] = {
-		frame: 0,
-		startFrame: 0,
-		endFrame: 20,
-		totalDalay: 45,
-		dalay: 0,
-	}
-
     switch (type) {
 		case 'noteClick':
 			break
@@ -31,16 +8,22 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				state.playSong('Sounds/hitStatic1.ogg', { newSong: true })
 
 				state.musicInfo.popups.sonicEXEHitStatic = {
-					image: `sonicEXE/sonicEXEHitStatic/hitStatic-{{frame}}.png`,
+					image: `imgs/sonicEXE/sonicEXEHitStatic/sonicEXEHitStatic.png`,
+					animationDir: 'frames',
+					frame: 0,
 					x: 0,
 					y: 0,
 					width: state.canvas.width,
 					height: state.canvas.height,
-					animation: 'sonicEXEHitStatic',
 				}
 
-                state.animations.sonicEXEHitStatic.frame = 0
-				setTimeout(() => delete state.musicInfo.popups.sonicEXEHitStatic, 500)
+				let interval = setInterval(() => {
+					if (state.musicInfo.popups.sonicEXEHitStatic?.frame >= state.images['imgs/sonicEXE/sonicEXEHitStatic/sonicEXEHitStatic.png']?.animationConfig.frames.length-1) {
+						clearInterval(interval)
+						delete state.musicInfo.popups.sonicEXEHitStatic
+					} else if (state.musicInfo.popups.sonicEXEHitStatic) state.musicInfo.popups.sonicEXEHitStatic.frame += 1
+				}, 1000/30);
+				//setTimeout(() => delete state.musicInfo.popups.sonicEXEHitStatic, 500)
 			}
 			break
         case 'started':
@@ -51,22 +34,23 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				state.playSong('Sounds/simplejumpsound.ogg')
 
 				state.musicInfo.popups.sonicEXESimpleStatic = {
-					image: `sonicEXE/sonicEXESimpleStatic/static-{{frame}}.png`,
+					image: `imgs/sonicEXE/sonicEXESimpleStatic/sonicEXESimpleStatic.png`,
+					animationDir: 'frames',
+					frame: Number.parseInt(Math.random()*6),
 					x: 0,
 					y: 0,
 					width: state.canvas.width,
 					height: state.canvas.height,
 					alpha: '0.1-0.5',
-					alphaRandom: true,
-					animation: 'sonicEXESimpleStatic',
+					alphaRandom: true
 				}
 
-                state.animations.sonicEXESimpleStatic.frame = 0
 				setTimeout(() => delete state.musicInfo.popups.sonicEXESimpleStatic, 200)
 			}
 
 			function doSimpleJump() {
 				state.playSong('Sounds/sppok.ogg')
+
 				state.musicInfo.popups.sonicEXESimpleJumpscare = {
 					image: 'jumpscares/sonicEXESimpleJump.png',
 					x: 0,
@@ -74,36 +58,33 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					width: state.canvas.width,
 					height: state.canvas.height,
 				}
+
 				setTimeout(() => delete state.musicInfo.popups.sonicEXESimpleJumpscare, 250)
 			}
 
 			function doJumpscare() {
 				let frame = 0
-				//state.animations.sonicJumpscare.frame = state.animations.sonicJumpscare.startFrame
 				let loop = setInterval(() => {
 					frame += 1
-					let image = state.images[`jumpscares/sonicJumpscares/sonicJumpscare-${frame}.png`]
+					let imageData = state.images[`imgs/sonicEXE/sonicJumpscare/sonicJumpscare.png`]
+					let imageConfig = imageData.animationConfig
 
 					state.musicInfo.popups.sonicEXEJumpscare = {
-						image: `jumpscares/sonicJumpscares/sonicJumpscare-${frame}.png`,
-						x: state.canvas.width/2-(image.width/2),
-						y: state.canvas.height-(image.height/2),
+						image: `imgs/sonicEXE/sonicJumpscare/sonicJumpscare.png`,
+						animationDir: 'frames',
+						frame,
+						x: state.canvas.width/2-(imageConfig.frames[0].width/2),
+						y: state.canvas.height-(imageConfig.frames[0].height/2),
 					}
 
-					if (frame >= state.animations.sonicJumpscare.endFrame) {
+					if (frame >= imageData.animationConfig.frames.length-1) {
 						clearInterval(loop)
 						delete state.musicInfo.popups.sonicEXEJumpscare
 					}
-				}, 1000/state.animations.sonicJumpscare.totalDalay)
-				//setTimeout(() => delete state.musicInfo.popups.sonicEXEJumpscare, 2000)
+				}, 1000/20)
 
 				state.playSong('Sounds/datOneSound.ogg')
-				//setTimeout(() => delete state.musicInfo.popups.sonicEXEJumpscare, 250)*/
 			}
-
-			/*setTimeout(() => doJumpscare(), 3000)
-			setTimeout(() => doJumpscare(), 8000)
-			setTimeout(() => doJumpscare(), 15000)*/
 
             let loop = setInterval(() => {
 				let beat = state.musicBeat
@@ -256,10 +237,6 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
                 if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
                     clearInterval(loop)
 					state.screenZoom = 0
-
-					delete state.animations['sonicEXEHitStatic']
-					delete state.animations['sonicEXESimpleStatic']
-					delete state.animations['sonicJumpscare']
                 }
             }, 1000/30)
             break

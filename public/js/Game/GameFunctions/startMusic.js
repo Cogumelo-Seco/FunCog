@@ -127,7 +127,6 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
         load(toLoad[0])
 
         async function loaded() {
-            console.log('q-q')
             if (state.musicOpponentNotes.length <= 0 && state.online) {
                 state.musicOpponentNotes = JSON.parse(JSON.stringify(state.musicNotes));
                 state.musicOriginalOpponentNotes = JSON.parse(JSON.stringify(state.musicOriginalNotes));

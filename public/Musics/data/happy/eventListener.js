@@ -12,7 +12,6 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
             break
         case 'started':
             let oldCurrentTime = 0
-            let defaultBackgroundImage = state.musicInfo.backgroundImage
 
             let loop = setInterval(() => {
                 let currentTime = state.music?.currentTime
@@ -38,7 +37,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
                                     state.screenZoom += 5
                                 } else if (event[1] == 'Add Jumpscare') {
                                     state.musicInfo.popups.sadmouseJumpscare = {
-                                        image: 'jumpscares/sadmouse-jumpscare-1.png',
+                                        image: 'jumpscares/sadmouse-jumpscare.png',
                                         x: 0,
                                         y: 0,
                                         width: state.canvas.width,
@@ -65,7 +64,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 }
 
 let events = [
-    [ 60000, "Add Jumpscare" ],
+    [ 60712.5, "Add Jumpscare" ],
     [ 60985.2272727273, "Remove Jumpscare" ],
     [ 60985.2272727273, "Add Camera Zoom" ],
     [ 60940.9090909091, "Add Camera Zoom" ],

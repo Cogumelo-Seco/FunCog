@@ -3,7 +3,7 @@ export default async (canvas, game, Listener) => {
 
     ctx.font = 'bold 20px Arial'
 
-    ctx.fillStyle = game.state.selectServerOption.createServer == true ? 'rgb(40, 40, 90)' : 'rgb(50, 50, 50)'
+    ctx.fillStyle = game.state.selectServerOption.createServer == true ? 'rgb(30, 30, 30)' : 'rgb(50, 50, 50)'
     ctx.strokeStyle = 'white'
     ctx.fillRect(10, canvas.height/2-25, canvas.width*0.15, 50)
     ctx.rect(10, canvas.height/2-25, canvas.width*0.15, 50)
@@ -21,16 +21,18 @@ export default async (canvas, game, Listener) => {
         if (game.state.selectServerOption.listServers[i].open) {
             noServers = false
 
-            ctx.fillStyle = game.state.selectServerOption.createServer == false && serverSelect == i ? 'rgb(40, 40, 90)' : 'rgb(50, 50, 50)'
+            ctx.fillStyle = game.state.selectServerOption.createServer == false && serverSelect == i ? 'rgb(30, 30, 30)' : 'rgb(50, 50, 50)'
             ctx.strokeStyle = 'white'
             ctx.fillRect(X, Y-10, endPosX-X, 50)
             ctx.rect(X, Y-10, endPosX-X, 50)
             ctx.stroke()
 
-            ctx.fillStyle = game.state.musics[game.state.selectServerOption.listServers[i].music].menuColor || 'white'
-            ctx.fillText(game.state.musics[game.state.selectServerOption.listServers[i].music].name, X+10, Y+20)
-            ctx.fillStyle = game.state.difficulties[game.state.musics[game.state.selectServerOption.listServers[i].music].difficulties[game.state.selectServerOption.listServers[i].difficulty]].color || 'white'
-            ctx.fillText(game.state.difficulties[game.state.musics[game.state.selectServerOption.listServers[i].music].difficulties[game.state.selectServerOption.listServers[i].difficulty]].name, endPosX-(ctx.measureText(game.state.difficulties[game.state.selectServerOption.listServers[i].difficulty].name).width)-10, Y+20)
+            let musicInfo =  game.state.musics[game.state.selectServerOption.listServers[i].mod].musics[game.state.selectServerOption.listServers[i].music]
+
+            ctx.fillStyle = musicInfo.menuColor || 'white'
+            ctx.fillText(musicInfo.name, X+10, Y+20)
+            ctx.fillStyle = game.state.difficulties[musicInfo.difficulties[game.state.selectServerOption.listServers[i].difficulty]].color || 'white'
+            ctx.fillText(game.state.difficulties[musicInfo.difficulties[game.state.selectServerOption.listServers[i].difficulty]].name, endPosX-(ctx.measureText(game.state.difficulties[game.state.selectServerOption.listServers[i].difficulty].name).width)-10, Y+20)
 
             Y += 80
         }

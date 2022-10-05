@@ -18,6 +18,7 @@ export default async (canvas, game, Listener) => {
             let arrowImageData = game.state.personalizedNotes[note.type] ? game.state.images[game.state.personalizedNotes[note.type].newArrowImage] : game.state.images[`${game.state.musicInfo.notesImageDir}Arrows.png`]
             let arrowImage = arrowImageData?.image
             let arrowFrames = arrowImageData?.animationConfig[`Arrow-${note.arrowID}`]
+            if (!arrowFrames) return
             let arrowImagePos = arrowFrames[`Arrow-${note.arrowID}-note${game.state.animations[note.type] ? '-'+game.state.animations[note.type]?.frame : ''}`]
             
             let holdImagePos = arrowFrames[`Arrow-${note.arrowID}-hold-piece`]
@@ -98,6 +99,7 @@ export default async (canvas, game, Listener) => {
             let arrowImage = arrowImageData?.image
             let arrowImageHold = arrowImageData?.image
             let arrowFrames = arrowImageData?.animationConfig[`Arrow-${note.arrowID}`]
+            if (!arrowFrames) return
             let arrowImagePos = arrowFrames[`Arrow-${note.arrowID}-note${game.state.animations[note.type] ? '-'+game.state.animations[note.type]?.frame : ''}`]
             
             let holdImagePos = arrowFrames[`Arrow-${note.arrowID}-hold-piece`]

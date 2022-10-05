@@ -11,7 +11,8 @@ function createGame(Listener, canvas, socket) {
         gameStageTime: 0,
         musicMenu: null,
         selectMusicMenu: {
-            musicSelect: 0,
+            musicSelect: -1,
+            modSelect: 0,
             difficultySelected: 0,
         },
         selectMenuOption: {
@@ -98,8 +99,15 @@ function createGame(Listener, canvas, socket) {
             BFDead: {
                 frame: 0,
                 startFrame: 0,
-                endFrame: 5,
-                totalDalay: 120,
+                endFrame: 11,
+                totalDalay: 110,
+                dalay: 0
+            },
+            BFDeadLoop: {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 3,
+                totalDalay: 110,
                 dalay: 0,
                 loop: true
             },
@@ -182,10 +190,6 @@ function createGame(Listener, canvas, socket) {
                 })
             }
 
-            if (state.botPlay) {
-                state.musicInfo.misses = 0
-            }
-
             state.musicBeat = Number.parseInt(state.music?.currentTime*(state.musicBPM/60))
             state.musicStep = Number.parseInt(state.music?.currentTime*(state.musicBPM/60)*4)
 
@@ -253,6 +257,7 @@ function createGame(Listener, canvas, socket) {
                 state.music?.pause()
                 state.musicVoice?.pause()
                 state.music.currentTime = 0
+                state.animations.BFDead.frame = 0
                 state.smallFunctions.redirectGameStage('dead')
                 state.waiting = true
                 state.musicInfo.health = 50

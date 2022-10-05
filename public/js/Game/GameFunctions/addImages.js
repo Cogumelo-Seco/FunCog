@@ -1,28 +1,17 @@
 export default async (state) => {
     state.images = [
         { dir: 'imgs/logo.png' },
+        { dir: 'imgs/alert.png' },
         
         /* ---- */
 
-        { dir: 'BongoCat/bg.png' },
-        { dir: 'BongoCat/arrow-0.png' },
-        { dir: 'BongoCat/arrow-1.png' },
-        { dir: 'BongoCat/arrow-2.png' },
-        { dir: 'BongoCat/arrow-3.png' },
-        { dir: 'BongoCat/leftHandUp.png' },
-        { dir: 'BongoCat/leftHand1.png' },
-        { dir: 'BongoCat/leftHand2.png' },
-        { dir: 'BongoCat/leftHand3.png' },
-        { dir: 'BongoCat/rightHandUp.png' },
-        { dir: 'BongoCat/rightHand1.png' },
-        { dir: 'BongoCat/rightHand2.png' },
-        { dir: 'BongoCat/rightHand3.png' },
+        { dir: 'BongoCat/BongoCat.png', animationConfigDir: 'BongoCat/BongoCat.json' },
 
         /* ---- */
 
         { dir: 'imgs/cursor.png' },
         { dir: 'imgs/cursor-hover.png' },
-
+        { dir: 'imgs/BF/Dead.png', animationConfigDir: 'imgs/BF/Dead.json' },
 
         /* ---- */
 

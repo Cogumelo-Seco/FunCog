@@ -3,7 +3,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 		state.musicInfo.hurtLevel += hurt ? 1 : -1
 		if (state.musicInfo.hurtLevel <= 0) state.musicInfo.hurtLevel = 0
 
-		state.musicInfo.popups.sonicEXEHitStatic = {
+		state.musicInfo.popups.LNCTHurt = {
 			image: `imgs/LateNightCityTale/hurt.png`,
 			x: 0,
 			y: 0,
