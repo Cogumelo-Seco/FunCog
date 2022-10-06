@@ -148,6 +148,7 @@ export default function createListener(socket) {
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
                 case 'Enter':
+                    if (state.game.state.selectMusicMenu.musicSelect < 0) return
                     let musicInfo = state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics[state.game.state.selectMusicMenu.musicSelect]
 
                     if (state.game.state.online) {

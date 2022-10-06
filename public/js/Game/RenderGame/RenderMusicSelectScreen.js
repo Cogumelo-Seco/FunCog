@@ -22,7 +22,7 @@ export default async (canvas, game, Listener) => {
         if (i == musicSelect) ctx.fillRect(X-4, (Y-(30/1.2))-4, ctx.measureText(music.name).width+8, 30+8);
 
         ctx.fillStyle = music.menuColor || 'rgb(255, 255, 255)'
-        ctx.fillText(music.name, X, Y);
+        ctx.fillText(music.name.replace(/-/g, ' '), X, Y);
 
         let alertImage = game.state.images[`imgs/alert.png`]?.image
         if (music.dev && alertImage) {

@@ -24,6 +24,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
             splashResize,
             notesImageDir,
             backgroundImage,
+            lifeDrain: difficulty.lifeDrain || 0,
             dev,
             defaultBackgroundImage: backgroundImage,
             difficulty: difficulty.name,
@@ -42,14 +43,13 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
 
         let musicData = require(`../../../Musics/data/${name.toLowerCase()}/${name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)
         let musicNotes = musicData.song.notes
-        let totalNotes = ((musicData.song.notes.map((n) => n.sectionNotes)).map((n) => n.length)).reduce((a, b) => a+b)
         state.musicInfo.events = musicData.song.events
         state.musicBPM = musicData.song.bpm
-
+        
         for (let i in musicNotes) {
             if (musicNotes[i].changeBPM) {
                 try {
-                    //state.musicChangeBPM[musicNotes[i].timeToChangeBPM || musicNotes[i].sectionNotes[0][0]] = musicNotes[i].bpm
+                    state.musicChangeBPM[musicNotes[i].timeToChangeBPM || musicNotes[i].sectionNotes[0][0]] = musicNotes[i].bpm
                 } catch {}
             }
 
@@ -92,7 +92,6 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
             if ([ 'ogg', 'mp3' ].includes(dir.split('.')[dir.split('.').length-1])) {
                 if (state.sounds[dir]) newLoad()
                 else {
-                    console.log('p-p')
                     let sound = new Audio()
                     sound.addEventListener('loadeddata', (e) => {
                         loaded = true
@@ -235,6 +234,28 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
             if (note[3] == 'red') {
                 disabled = difficulty.name == 'Mania' ? true : false
                 type = 'LNCTRed'
+            }
+        }
+        if (mod == 'WitheredFreddy') {
+            if (note[3] == 3) {
+                disabled = difficulty.name == 'Mania' ? true : false
+                errorWhenNotClicking = false
+                type = 'WitheredFreddyDanger'
+            }
+            if (note[3] == 4) {
+                disabled = difficulty.name == 'Mania' ? true : false
+                errorWhenNotClicking = false
+                type = 'WitheredFreddyCharge'
+            }
+            if (note[3] == 2) {
+                disabled = difficulty.name == 'Mania' ? true : false
+                errorWhenNotClicking = false
+                type = 'WitheredFreddyRemnant'
+            }
+            if (note[3] == 5) {
+                disabled = difficulty.name == 'Mania' ? true : false
+                errorWhenNotClicking = false
+                type = 'WitheredFreddyLoose'
             }
         }
 

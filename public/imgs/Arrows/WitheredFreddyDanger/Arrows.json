@@ -1,0 +1,46 @@
+{
+  "Arrow-1": {
+    "Arrow-1-note": {
+      "name": "Arrow-1-note",
+      "x": 0,
+      "y": 0,
+      "width": 140,
+      "height": 150,
+      "frameX": 0,
+      "frameY": -1,
+      "frameWidth": 140,
+      "frameHeight": 151
+    }
+  },
+  "Arrow-2": {
+    "Arrow-2-note": {
+      "name": "Arrow-2-note",
+      "x": 280,
+      "y": 0,
+      "width": 157,
+      "height": 154
+    }
+  },
+  "Arrow-0": {
+    "Arrow-0-note": {
+      "name": "Arrow-0-note",
+      "x": 157,
+      "y": 154,
+      "width": 140,
+      "height": 150,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 141,
+      "frameHeight": 150
+    }
+  },
+  "Arrow-3": {
+    "Arrow-3-note": {
+      "name": "Arrow-3-note",
+      "x": 0,
+      "y": 308,
+      "width": 154,
+      "height": 157
+    }
+  }
+}

@@ -39,6 +39,18 @@ export default async (state) => {
             noteShadowColor: 'white',
             noteShadowBlur: 15,
         },
+        WitheredFreddyRemnant: {
+            newArrowImage: `Arrows/WitheredFreddyRemnant/Arrows.png`,
+        },
+        WitheredFreddyCharge: {
+            newArrowImage: `Arrows/WitheredFreddyCharge/Arrows.png`,
+        },
+        WitheredFreddyDanger: {
+            newArrowImage: `Arrows/WitheredFreddyDanger/Arrows.png`,
+        },
+        WitheredFreddyLoose: {
+            newArrowImage: `Arrows/WitheredFreddyLoose/Arrows.png`,
+        },
     }
     
     return state.sounds.length

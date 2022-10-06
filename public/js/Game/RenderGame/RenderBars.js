@@ -37,7 +37,7 @@ export default async (canvas, game, Listener) => {
 
     ctx.font = `bold 15px Arial`
     ctx.fillStyle = 'white'
-    let infoTxt = `${game.state.musicInfo.name} - (${formatTime(musicCurrentTime)} / ${formatTime(musicDuration)}) - ${Number.parseInt(musiPercent*100)}%`
+    let infoTxt = `${game.state.musicInfo.name.replace(/-/g, ' ')} - (${formatTime(musicCurrentTime)} / ${formatTime(musicDuration)}) - ${Number.parseInt(musiPercent*100)}%`
     ctx.fillText(infoTxt, canvas.width/2-(ctx.measureText(infoTxt).width/2), 25);
 
     ctx.lineWidth = 2.5

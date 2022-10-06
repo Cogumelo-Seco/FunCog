@@ -230,7 +230,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    name: 'Really-happy',
+                    name: 'Really-Happy',
                     menuColor: 'rgb(50, 50, 50)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/suicidemouse/',
@@ -269,7 +269,7 @@ export default async (state) => {
             name: 'Dusk Till Dawn',
             musics: [
                 {
-                    name: 'Dusk-till-dawn',
+                    name: 'Dusk-Till-Dawn',
                     menuColor: 'rgb(196, 0, 244)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/dusk-till-dawn/',
@@ -327,7 +327,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    name: 'Run-remix',
+                    name: 'Run-Remix',
                     menuColor: '#ff9ce6',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
@@ -389,7 +389,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    name: 'Little-man',
+                    name: 'Little-Man',
                     menuColor: null,
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
@@ -430,7 +430,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    name: 'Censory-overload',
+                    name: 'Censory-Overload',
                     menuColor: 'rgb(251, 150, 183)',
                     difficulties: [ 0, 1, 2, 5 ],
                     notesImageDir: 'Arrows/',
@@ -490,7 +490,7 @@ export default async (state) => {
             name: 'SonicEXE',
             musics: [
                 {
-                    name: 'Too-slow',
+                    name: 'Too-Slow',
                     menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/',
@@ -514,7 +514,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    name: 'You-cant-run',
+                    name: 'You-Cant-Run',
                     menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
@@ -532,7 +532,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    name: 'Triple-trouble',
+                    name: 'Triple-Trouble',
                     menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 1, 2 ],
                     notesImageDir: 'Arrows/',
@@ -629,7 +629,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    name: 'Black-sun',
+                    name: 'Black-Sun',
                     menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
@@ -658,7 +658,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    name: 'Too-fest',
+                    name: 'Too-Fest',
                     menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
@@ -692,7 +692,7 @@ export default async (state) => {
             name: 'Late Night City Tale',
             musics: [
                 {
-                    name: 'Azure-encounter',
+                    name: 'Azure-Encounter',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/LNCTNotes/',
@@ -717,7 +717,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    name: 'Secret-marilee',
+                    name: 'Secret-Marilee',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/LNCTNotes/',
@@ -743,7 +743,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    name: 'Broken-heart',
+                    name: 'Broken-Heart',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/LNCTNotes/',
@@ -796,7 +796,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    name: 'Lonely-sapphire',
+                    name: 'Lonely-Sapphire',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/LNCTNotes/',
@@ -814,6 +814,53 @@ export default async (state) => {
                         { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
                         { dir: 'Musics/musics/lonely-sapphire/Inst.ogg' },
                         { dir: 'Musics/musics/lonely-sapphire/Voices.ogg' },
+                    ]
+                }
+            ]
+        },
+        {
+            name: 'VS Withered Freddy',
+            musics: [
+                {
+                    name: 'Nightshift',
+                    menuColor: '#42c3e6',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'WitheredFreddy',
+                    toLoad: [
+                        { dir: 'Musics/musics/nightshift/Inst.ogg' },
+                        { dir: 'Musics/musics/nightshift/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Flashing-Lights',
+                    menuColor: '#FFF',
+                    difficulties: [ 0, 1, 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'WitheredFreddy',
+                    dev: true,
+                    toLoad: [
+                        { dir: 'Arrows/WitheredFreddyDanger/Arrows.png', animationConfigDir: 'Arrows/WitheredFreddyDanger/Arrows.json' },
+                        { dir: 'Arrows/WitheredFreddyCharge/Arrows.png', animationConfigDir: 'Arrows/WitheredFreddyCharge/Arrows.json' },
+                        { dir: 'Musics/musics/flashing-lights/Inst.ogg' },
+                        { dir: 'Musics/musics/flashing-lights/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Shadows',
+                    menuColor: '#9529c7',
+                    difficulties: [ 0, 1, 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'WitheredFreddy',
+                    dev: true,
+                    toLoad: [
+                        { dir: 'Arrows/WitheredFreddyRemnant/Arrows.png', animationConfigDir: 'Arrows/WitheredFreddyRemnant/Arrows.json' },
+                        { dir: 'Arrows/WitheredFreddyLoose/Arrows.png', animationConfigDir: 'Arrows/WitheredFreddyLoose/Arrows.json' },
+                        { dir: 'Musics/musics/shadows/Inst.ogg' },
+                        { dir: 'Musics/musics/shadows/Voices.ogg' },
                     ]
                 }
             ]
