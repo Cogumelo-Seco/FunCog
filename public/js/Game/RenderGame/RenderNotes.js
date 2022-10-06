@@ -88,7 +88,7 @@ export default async (canvas, game, Listener) => {
         let arrowInfo = game.state.arrowsInfoOpponent[note.arrowID]
         
         let noteY = game.state.downScroll ? (arrowInfo?.Y || arrowYOpponent)+note.Y : (arrowInfo?.Y || arrowYOpponent)-note.Y
-        if (note.Y >= 0 && game.state.opponentArrows[note.arrowID] && !note.clicked && !note.disabled && note.errorWhenNotClicking) {
+        if (note.Y >= 0 && game.state.opponentArrows[note.arrowID] && !note.clicked && !note.disabled && (note.errorWhenNotClicking || note.autoClick)) {
             game.state.musicEventListener('noteClick', { noteClickAuthor: 'opponent' }, game.state)
             note.clicked = true
             if (game.state.musicInfo.health > 5 && game.state.music?.currentTime > 1) game.state.musicInfo.health -= game.state.musicInfo.lifeDrain

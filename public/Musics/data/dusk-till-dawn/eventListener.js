@@ -15,8 +15,26 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
             }
 
             let oldCurrentTime = 0
+			let oldBeat = 0
             let loop = setInterval(() => {
-                state.screenRotation = (state.animations.duskTillDawnScreenRotation.frame/15)-(25/15)
+				let beat = state.musicBeat
+
+				if (state.screenZoom < 10 && state.camZooming) {
+					if (oldBeat != beat && beat%4 == 0) state.screenZoom = 10
+				} else if (state.screenZoom <= 0) {
+					state.screenZoom = 0
+					state.camZooming = true
+				} else {
+					state.camZooming = false
+					state.screenZoom -= 0.5
+				}
+
+				try {
+					if (beat >= 193 && beat <= 258) state.screenRotation = (state.animations.duskTillDawnScreenRotation.frame/15)-(25/15)
+					if (beat >= 258 && beat <= 278 && state.screenRotation != 0) state.screenRotation = state.screenRotation < 0 ? (state.screenRotation.toFixed(1))+0.1 : (state.screenRotation.toFixed(1))-0.1
+					if (beat >= 278 && state.screenRotation != 0) state.screenRotation = 0
+				} catch {}
+
                 let currentTime = state.music?.currentTime
 
                 for (let i in events) {
@@ -43,6 +61,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
                     }
                 }
 
+				oldBeat = beat
                 oldCurrentTime = currentTime
                 if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
                     clearInterval(loop)

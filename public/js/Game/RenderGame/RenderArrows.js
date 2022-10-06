@@ -104,7 +104,7 @@ export default async (canvas, game, Listener) => {
         
         let arrowInfo = game.state.arrowsInfoOpponent[arrowID]
 
-        let note = game.state.musicOpponentNotes.find(n => n.errorWhenNotClicking && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
+        let note = game.state.musicOpponentNotes.find(n => (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
         let onClickNoteOpponent = game.state.musicInfoOpponent.arrows && game.state.musicInfoOpponent.arrows[arrowID]?.click
         if (note || onClickNoteOpponent) {
             let pressImage = game.state.personalizedNotes[note?.type]?.pressImage
@@ -113,7 +113,7 @@ export default async (canvas, game, Listener) => {
                 arrowImage = arrowImageData?.image
                 arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
                 arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}`] || arrowImagePos
-            } else arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}`]
+            } else arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}${onClickNoteOpponent ? '-no' : ''}`]
         }
 
         if (arrowImage && arrowInfo) {

@@ -198,8 +198,8 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                 type = 'hurtNoteSuicidemouse'
             }
         }
-        if (name == 'dusk-till-dawn') {
-            if (note[3] && note[3] != 'Pinkie Sing') {
+        if (mod == 'DuskTillDawn') {
+            if (note[3] != undefined) {
                 autoClick = true
                 arrowID = note[1]%4
                 errorWhenNotClicking = false
