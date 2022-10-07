@@ -258,6 +258,12 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                 type = 'WitheredFreddyLoose'
             }
         }
+        if (mod == 'VSChira') {
+            if (note[3] == 'chiraNote') {
+                disabled = difficulty.name == 'Mania' ? true : false
+                type = 'VSChiraMarsh'
+            }
+        }
 
         return {
             Y: NaN,

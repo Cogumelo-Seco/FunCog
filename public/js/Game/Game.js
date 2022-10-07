@@ -1,5 +1,6 @@
 function createGame(Listener, canvas, socket) {
     const state = {
+        speed: 1,
         fps: '0-0',
         online: true,
         waiting: true,
@@ -115,7 +116,7 @@ function createGame(Listener, canvas, socket) {
                 frame: 0,
                 startFrame: 0,
                 endFrame: 2,
-                totalDalay: 70,
+                totalDalay: 30,
                 dalay: 0,
                 loop: true
             },
@@ -133,7 +134,15 @@ function createGame(Listener, canvas, socket) {
                 endFrame: 11,
                 totalDalay: 40,
                 dalay: 0,
-                loop: false
+                loop: true
+            },
+            VSChiraMarsh: {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 12,
+                totalDalay: 40,
+                dalay: 0,
+                loop: true
             },
         },
         loading: {
@@ -292,20 +301,31 @@ function createGame(Listener, canvas, socket) {
 
             for (let i in state.musicChangeBPM) {
                 if (Number(i)/1000 <= musicCurrentTime && state.musicChangeBPM[i] != state.oldChangeBPM) {
-                    changeBPM(state.musicChangeBPM[i])
+                    changeBPM(state.musicChangeBPM[i], true)
                     state.oldChangeBPM = state.musicChangeBPM[i]
                 }
             }
 
-            function changeBPM(bpm) {
+            function changeBPM(bpm, newBPM) {
+                if (state.musicChangeBPMNew && newBPM) state.musicBPM = state.musicChangeBPMNew
+                clearTimeout(state.changeBPMTimeout)
+
+                if (state.musicBPM > bpm-2 && state.musicBPM < bpm+2) state.musicBPM = bpm
                 if (state.musicBPM != bpm) {
-                    state.musicBPM = state.musicBPM > bpm ? state.musicBPM-1 : state.musicBPM+1
-                    setTimeout(() => changeBPM(bpm), 1000/30)
+                    state.musicBPM = state.musicBPM > bpm ? state.musicBPM-2 : state.musicBPM+2
+                    state.musicChangeBPMNew = bpm
+                    state.changeBPMTimeout = setTimeout(() => changeBPM(bpm), 1000/30)
                 }
             }
 
             for (let i in state.musicNotes) {
-                state.musicNotes[i].Y = -((state.musicNotes[i].time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM))
+                let newNoteY = -((state.musicNotes[i].time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM))
+                let oldNoteY = state.musicNotes[i].oldY || -musicDuration*1000
+                if (newNoteY >= oldNoteY) {
+                    state.musicNotes[i].Y = newNoteY
+                    state.musicNotes[i].oldY = newNoteY
+                }
+
                 if (state.musicNotes[i].errorWhenNotClicking && !state.botPlay && state.musicNotes[i].arrowID >= 0 && state.musicNotes[i].arrowID <= state.amountOfArrows && state.musicNotes[i].Y > (state.arrowsSize**state.resizeNote) && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
                     state.musicNotes[i].disabled = true
                     state.musicInfo.misses += 1
@@ -318,7 +338,12 @@ function createGame(Listener, canvas, socket) {
             }
 
             for (let i in state.musicOpponentNotes) {
-                state.musicOpponentNotes[i].Y = -((state.musicOpponentNotes[i].time-musicCurrentTime)*((5**state.resizeNoteOpponent)*state.musicBPM))
+                let newNoteY = -((state.musicOpponentNotes[i].time-musicCurrentTime)*((5**state.resizeNoteOpponent)*state.musicBPM))
+                let oldNoteY = state.musicOpponentNotes[i].oldY || -musicDuration*1000
+                if (newNoteY >= oldNoteY) {
+                    state.musicOpponentNotes[i].Y = newNoteY
+                    state.musicOpponentNotes[i].oldY = newNoteY
+                }
             }
 
             state.musicInfo.accuracy = 0

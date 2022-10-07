@@ -89,6 +89,7 @@ export default function createListener(socket) {
         }
 
         if (state.game.state.gameStage == 'game') {
+            //if (keyPressed == 'KeyT' && on) state.game.state.speed += 0.2
             if (keyPressed == 'KeyQ' && on) state.game.state.downScroll = state.game.state.downScroll ? false : true
             if (keyPressed == 'KeyW' && on) state.game.state.middleScroll = state.game.state.middleScroll ? false : true
 

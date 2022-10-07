@@ -5,6 +5,7 @@ export default async (canvas, game, Listener) => {
     let musicSelect = game.state.selectMusicMenu.musicSelect
     let musicSelectFiltered = (musicSelect < 0 ? 0 : musicSelect)
 
+    let mod = game.state.musics[modSelect]
 
     let startY = canvas.height/2-(50/2)
     let endY = canvas.height-50
@@ -21,7 +22,7 @@ export default async (canvas, game, Listener) => {
         ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'
         if (i == musicSelect) ctx.fillRect(X-4, (Y-(30/1.2))-4, ctx.measureText(music.name).width+8, 30+8);
 
-        ctx.fillStyle = music.menuColor || 'rgb(255, 255, 255)'
+        ctx.fillStyle = music.menuColor || mod.menuColor || 'rgb(255, 255, 255)'
         ctx.fillText(music.name.replace(/-/g, ' '), X, Y);
 
         let alertImage = game.state.images[`imgs/alert.png`]?.image
@@ -50,13 +51,10 @@ export default async (canvas, game, Listener) => {
         game.state.selectMusicMenu.difficultySelected = game.state.selectMusicMenu.difficultySelected < 0 ? selectMusicInfo.difficulties.length-1 : game.state.selectMusicMenu.difficultySelected
     }
 
-
-    let mod = game.state.musics[modSelect]
-
     ctx.fillStyle = 'black'
     ctx.fillRect(0, 0, canvas.width, 175);
 
-    ctx.fillStyle = 'rgb(255, 255, 255)'
+    ctx.fillStyle = mod.menuColor || 'rgb(255, 255, 255)'
     ctx.font = `bold 30px Arial`
     ctx.fillText(`${musicSelect == -1 ? '<' : ''}  ${mod.name}  ${musicSelect == -1 ? '>' : ''}`, canvas.width/2-(ctx.measureText(`${musicSelect == -1 ? '<' : ''}  ${mod.name}  ${musicSelect == -1 ? '>' : ''}`).width/2), 150);
 }
