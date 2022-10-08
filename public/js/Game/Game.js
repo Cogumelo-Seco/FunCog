@@ -407,7 +407,7 @@ function createGame(Listener, canvas, socket) {
         }
 
         const load = ({ dir, animationConfigDir}) => {
-            let dir = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/'+dir+'?token=GHSAT0AAAAAABYN3MNCAQDAW4OXMMF5QCJWY2BUKYQ'
+            //let dir = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/'+dir+'?token=GHSAT0AAAAAABYN3MNCAQDAW4OXMMF5QCJWY2BUKYQ'
             let loaded = false
 
             setTimeout(() => {
