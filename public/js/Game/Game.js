@@ -407,6 +407,7 @@ function createGame(Listener, canvas, socket) {
         }
 
         const load = ({ dir, animationConfigDir}) => {
+            let dir = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/'+dir+'?token=GHSAT0AAAAAABYN3MNCAQDAW4OXMMF5QCJWY2BUKYQ'
             let loaded = false
 
             setTimeout(() => {
@@ -423,7 +424,7 @@ function createGame(Listener, canvas, socket) {
                 sound.src = `/${dir}`
                 state.sounds[dir] = sound
             } else {
-                let animationConfig = animationConfigDir ? require(`../../imgs/${animationConfigDir}`) : null
+                let animationConfig = null//animationConfigDir ? require(`../../imgs/${animationConfigDir}`) : null
                 let img = new Image()
                 img.addEventListener('load', (e) => {
                     loaded = true
