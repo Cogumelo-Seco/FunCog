@@ -505,7 +505,7 @@ export default async (state) => {
                     splashResize: 1,
                     mod: 'SonicEXE',
                     toLoad: [
-                        { dir: 'Sounds/hitStatic1.ogg' },
+                        { dir: 'Sounds/hitStatic.ogg' },
                         { dir: 'Sounds/simplejumpsound.ogg' },
                         { dir: 'Sounds/sppok.ogg' },
                         { dir: 'Sounds/datOneSound.ogg' },

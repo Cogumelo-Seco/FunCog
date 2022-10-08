@@ -76,35 +76,54 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
         }
 
         const newLoad = (msg) => {
+            if (msg) console.log(msg)
             state.loadingSong.loaded += 1
 
             if (state.loadingSong.loaded >= state.loadingSong.total && !state.music) loaded()
             else if (toLoad[state.loadingSong.loaded]) load(toLoad[state.loadingSong.loaded])
         }
 
-        const load = ({ dir, animationConfigDir}) => {
+        const load = async ({ dir, animationConfigDir}) => {
             let loaded = false
 
             setTimeout(() => {
-                if (!loaded) newLoad()
+                if (!loaded) newLoad('[ERROR] '+dir)
             }, 10000)
 
             if ([ 'ogg', 'mp3' ].includes(dir.split('.')[dir.split('.').length-1])) {
                 if (state.sounds[dir]) newLoad()
                 else {
+                    let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/'+dir
+
                     let sound = new Audio()
                     sound.addEventListener('loadeddata', (e) => {
                         loaded = true
                         newLoad()
                     })
-                    sound.addEventListener('error', (e) => newLoad())
-                    sound.src = `/${dir}`
+                    sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
+                    sound.src = dir.split('/')[0] == 'Sounds' ? `/${dir}` : link
                     state.sounds[dir] = sound
                 }
             } else {
-                if (state.images[dir] || state.sounds[dir]) newLoad(dir)
+                if (state.images[dir] || state.sounds[dir]) newLoad()
                 else {
-                    let animationConfig = animationConfigDir ? require(`../../../imgs/${animationConfigDir}`) : null
+                    let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+dir
+                    let animationConfig = animationConfigDir ? JSON.parse(await fetch('https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+animationConfigDir).then(r => r.text())) : null
+    
+                    let img = new Image()
+                    img.addEventListener('load', (e) => {
+                        loaded = true
+                        newLoad()
+                    })
+                    img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
+                    img.src = link//`/imgs/${dir}`
+                    img.id = dir
+                    state.images[dir] = {
+                        image: img,
+                        animationConfig
+                    }
+
+                    /*let animationConfig = animationConfigDir ? require(`../../../imgs/${animationConfigDir}`) : null
                     let img = new Image()
                     img.addEventListener('load', (e) => {
                         loaded = true
@@ -116,7 +135,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                     state.images[dir] = {
                         image: img,
                         animationConfig
-                    }
+                    }*/
                 }
             }
         }

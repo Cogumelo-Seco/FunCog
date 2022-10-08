@@ -29,7 +29,7 @@ export default async (state) => {
 
         /* ---- */
 
-        { dir: 'Arrows/Arrows.png', animationConfigDir: 'Arrows/Arrows.json' },
+        { dir: 'Arrows/Arrows.png', animationConfigDir: 'Arrows/Arrows.txt' },
         { dir: 'Arrows/splash.png', animationConfigDir: 'Arrows/splash.json' },
 
         /* ---- */

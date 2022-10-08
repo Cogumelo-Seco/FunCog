@@ -5,7 +5,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 		case 'passedNote':
 			if (note?.type == 'sonicEXEStaticNote') {
 				state.musicInfo.health -= 15
-				state.playSong('Sounds/hitStatic1.ogg', { newSong: true })
+				state.playSong('Sounds/hitStatic.ogg', { newSong: true })
 
 				state.musicInfo.popups.sonicEXEHitStatic = {
 					image: `imgs/sonicEXE/sonicEXEHitStatic/sonicEXEHitStatic.png`,
@@ -23,7 +23,6 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 						delete state.musicInfo.popups.sonicEXEHitStatic
 					} else if (state.musicInfo.popups.sonicEXEHitStatic) state.musicInfo.popups.sonicEXEHitStatic.frame += 1
 				}, 1000/30);
-				//setTimeout(() => delete state.musicInfo.popups.sonicEXEHitStatic, 500)
 			}
 			break
         case 'started':
@@ -100,7 +99,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					state.screenZoom -= 1
 				}
 
-				if (step != oldStep) switch (Number.parseInt(step*1.16)) {
+				if (step != oldStep) switch (Number.parseInt(step*(1723/1970))) {
 					case 27:
 						doStaticSign(0);
 						break

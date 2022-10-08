@@ -406,8 +406,7 @@ function createGame(Listener, canvas, socket) {
             }
         }
 
-        const load = ({ dir, animationConfigDir}) => {
-            //let dir = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/'+dir+'?token=GHSAT0AAAAAABYN3MNCAQDAW4OXMMF5QCJWY2BUKYQ'
+        const load = async({ dir, animationConfigDir}) => {
             let loaded = false
 
             setTimeout(() => {
@@ -415,23 +414,27 @@ function createGame(Listener, canvas, socket) {
             }, 10000)
 
             if ([ 'ogg', 'mp3' ].includes(dir.split('.')[dir.split('.').length-1])) {
+                let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/'+dir
+
                 let sound = new Audio()
                 sound.addEventListener('loadeddata', (e) => {
                     loaded = true
                     newLoad(e.path[0].src)
                 })
                 sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
-                sound.src = `/${dir}`
+                sound.src = dir.split('/')[0] == 'Sounds' ? `/${dir}` : link
                 state.sounds[dir] = sound
             } else {
-                let animationConfig = null//animationConfigDir ? require(`../../imgs/${animationConfigDir}`) : null
+                let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+dir
+                let animationConfig = animationConfigDir ? JSON.parse(await fetch('https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+animationConfigDir).then(r => r.text())) : null
+
                 let img = new Image()
                 img.addEventListener('load', (e) => {
                     loaded = true
                     newLoad(e.path[0].src)
                 })
                 img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
-                img.src = `/imgs/${dir}`
+                img.src = link//`/imgs/${dir}`
                 img.id = dir
                 state.images[dir] = {
                     image: img,
