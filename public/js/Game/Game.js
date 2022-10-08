@@ -33,9 +33,9 @@ function createGame(Listener, canvas, socket) {
         difficulties: [],
         opponentArrows: [],
         spaceBetweenArrows: 10,
-        resizeNote: 0.9,
+        resizeNote: 0.87,
         resizeNoteOpponent: 0,
-        resizeNoteOpponentInMiddleScroll: 0.75,
+        resizeNoteOpponentInMiddleScroll: 0.73,
         arrowsYLineMargin: 50,
         arrowsYLine: 0,
         

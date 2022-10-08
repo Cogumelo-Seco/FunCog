@@ -13,6 +13,13 @@ export default async (canvas, game, Listener) => {
     if (game.state.musicInfo.notesImageDir) for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
         let arrowInfo = game.state.arrowsInfo[arrowID]
 
+        if (game.state.debug && arrowInfo) {
+            ctx.fillStyle = 'rgba(255, 0, 0, 1)'
+            ctx.fillRect(arrowInfo.X, arrowInfo.Y, game.state.arrowsSize**game.state.resizeNote, 1)
+            ctx.fillStyle = 'rgba(255, 0, 0, 0.1)'
+            ctx.fillRect(arrowInfo.X, arrowInfo.Y, game.state.arrowsSize**game.state.resizeNote, game.state.arrowsSize**game.state.resizeNote)
+        }
+
         let arrowImageData = game.state.images[`${game.state.musicInfo.notesImageDir}Arrows.png`]
         let arrowImage = arrowImageData?.image
         let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
@@ -30,13 +37,13 @@ export default async (canvas, game, Listener) => {
         }
 
         let autoClickNote = game.state.musicNotes.find(n => 
-            n.autoClick && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2) ||
-            game.state.botPlay && n.errorWhenNotClicking && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2)
+            (game.state.botPlay || n.autoClick) && (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2)
         )
 
-        if (game.state.botPlay) Listener.state.arrows[arrowID].click = false
+        if (game.state.botPlay || Listener.state.arrows[arrowID].inAutoClick) Listener.state.arrows[arrowID].click = false
         if (Listener.state.arrows[arrowID]?.click || autoClickNote) {
-            if (game.state.botPlay) {
+            if (game.state.botPlay || autoClickNote) {
+                Listener.state.arrows[arrowID].inAutoClick = autoClickNote.autoClick
                 if (!autoClickNote.clicked) game.verifyClick({ arrowID, listenerState: Listener.state, bot: true })
                 Listener.state.arrows[arrowID].state = 'onNote'
                 Listener.state.arrows[arrowID].click = true

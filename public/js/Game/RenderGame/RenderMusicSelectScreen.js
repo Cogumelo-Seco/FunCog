@@ -54,7 +54,8 @@ export default async (canvas, game, Listener) => {
     ctx.fillStyle = 'black'
     ctx.fillRect(0, 0, canvas.width, 175);
 
-    ctx.fillStyle = mod.menuColor || 'rgb(255, 255, 255)'
+    ctx.fillStyle = /*mod.menuColor ||*/ 'rgb(255, 255, 255)'
     ctx.font = `bold 30px Arial`
-    ctx.fillText(`${musicSelect == -1 ? '<' : ''}  ${mod.name}  ${musicSelect == -1 ? '>' : ''}`, canvas.width/2-(ctx.measureText(`${musicSelect == -1 ? '<' : ''}  ${mod.name}  ${musicSelect == -1 ? '>' : ''}`).width/2), 150);
+    let modNameTxt = `${musicSelect == -1 ? '<' : ''}  ${mod.name}  ${musicSelect == -1 ? '>' : ''}`
+    ctx.fillText(modNameTxt, canvas.width/2-(ctx.measureText(modNameTxt).width/2), 150);
 }
