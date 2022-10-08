@@ -5,7 +5,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, event
                 state.musicInfo.health += 25
             }
             if (noteClickAuthor == 'opponent') {
-                state.musicInfo.health -= 3
+                state.musicInfo.health -= 2
             }
             break
         case 'started':
