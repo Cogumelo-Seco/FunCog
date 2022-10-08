@@ -4,16 +4,18 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, event
             if (noteClickAuthor == 'player' && note?.type == 'VSChiraMarsh') {
                 state.musicInfo.health += 25
             }
+            if (noteClickAuthor == 'opponent') {
+                state.musicInfo.health -= 3
+            }
             break
         case 'started':
 			for (let i in events) {
 				let change = events[i]
 
-				state.musicChangeBPM[change.startTime] = state.musicBPM*(change.multiplier+0.25)
+				state.musicChangeBPM[change.startTime] = state.musicBPM*(change.multiplier+0.3)
 			}
 
             let loop = setInterval(() => {
-
                 for (let i in state.arrowsInfo) {
                     state.arrowsInfo[i].resetEnable = false
                     state.arrowsInfo[i].Y = state.arrowsInfo[i].defaultY+(Math.random()*2-1)

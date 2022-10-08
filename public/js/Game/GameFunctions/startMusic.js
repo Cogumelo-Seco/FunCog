@@ -1,6 +1,7 @@
 export default async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer, splashDir, splashResize, toLoad }, state) => {
     try {
         state.music = null
+        state.musicChangeBPM = {}
         state.arrowsInfo = {},
         state.arrow = {},
         state.arrowsInfoOpponent = {},
