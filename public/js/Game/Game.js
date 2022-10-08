@@ -310,9 +310,9 @@ function createGame(Listener, canvas, socket) {
                 if (state.musicChangeBPMNew && newBPM) state.musicBPM = state.musicChangeBPMNew
                 clearTimeout(state.changeBPMTimeout)
 
-                if (state.musicBPM > bpm-2 && state.musicBPM < bpm+2) state.musicBPM = bpm
+                //if (state.musicBPM > bpm-2 && state.musicBPM < bpm+2) state.musicBPM = bpm
                 if (state.musicBPM != bpm) {
-                    state.musicBPM = state.musicBPM > bpm ? state.musicBPM-2 : state.musicBPM+2
+                    state.musicBPM = state.musicBPM > bpm ? state.musicBPM-1 : state.musicBPM+1
                     state.musicChangeBPMNew = bpm
                     state.changeBPMTimeout = setTimeout(() => changeBPM(bpm), 1000/30)
                 }
