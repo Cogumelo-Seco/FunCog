@@ -1,0 +1,182 @@
+{
+  "death": [
+    {
+      "name": "death BF dies0001",
+      "x": 1284,
+      "y": 0,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF dies0002",
+      "x": 2568,
+      "y": 0,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF dies0003",
+      "x": 3852,
+      "y": 0,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF dies0004",
+      "x": 0,
+      "y": 724,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF dies0005",
+      "x": 1284,
+      "y": 724,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF dies0006",
+      "x": 2568,
+      "y": 724,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF dies0008",
+      "x": 0,
+      "y": 1448,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF dies0009",
+      "x": 1284,
+      "y": 1448,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF dies0010",
+      "x": 2568,
+      "y": 1448,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF dies0011",
+      "x": 3852,
+      "y": 1448,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF dies0012",
+      "x": 0,
+      "y": 2172,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF dies0013",
+      "x": 1284,
+      "y": 2172,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    }
+  ],
+  "loop": [
+    {
+      "name": "death BF Dead Loop0000",
+      "x": 2568,
+      "y": 2172,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF Dead Loop0001",
+      "x": 3852,
+      "y": 2172,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF Dead Loop0002",
+      "x": 0,
+      "y": 2896,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    },
+    {
+      "name": "death BF Dead Loop0003",
+      "x": 1284,
+      "y": 2896,
+      "width": 1284,
+      "height": 724,
+      "frameX": 0,
+      "frameY": 0,
+      "frameWidth": 1284,
+      "frameHeight": 724
+    }
+  ]
+}
