@@ -8,6 +8,7 @@ export default async (state) => {
                     menuColor: null,
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.5,
@@ -20,6 +21,7 @@ export default async (state) => {
                     menuColor: null,
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.5,
@@ -29,10 +31,25 @@ export default async (state) => {
                     ]
                 },
                 {
+                    name: 'Fresh',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/fresh/Inst.ogg' },
+                        { dir: 'Musics/musics/fresh/Voices.ogg' },
+                    ]
+                },
+                {
                     name: 'Dadbattle',
                     menuColor: null,
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.5,
@@ -42,10 +59,123 @@ export default async (state) => {
                     ]
                 },
                 {
+                    name: 'Spookeez',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/spookeez/Inst.ogg' },
+                        { dir: 'Musics/musics/spookeez/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'South',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/south/Inst.ogg' },
+                        { dir: 'Musics/musics/south/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Monster',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/monster/Inst.ogg' },
+                        { dir: 'Musics/musics/monster/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Pico',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/pico/Inst.ogg' },
+                        { dir: 'Musics/musics/pico/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Philly',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/philly/Inst.ogg' },
+                        { dir: 'Musics/musics/philly/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Blammed',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/blammed/Inst.ogg' },
+                        { dir: 'Musics/musics/blammed/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Satin-Panties',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/satin-panties/Inst.ogg' },
+                        { dir: 'Musics/musics/satin-panties/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'High',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/high/Inst.ogg' },
+                        { dir: 'Musics/musics/high/Voices.ogg' },
+                    ]
+                },
+                {
                     name: 'Milf',
                     menuColor: null,
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.5,
@@ -53,7 +183,133 @@ export default async (state) => {
                         { dir: 'Musics/musics/milf/Inst.ogg' },
                         { dir: 'Musics/musics/milf/Voices.ogg' },
                     ]
-                }
+                },
+                {
+                    name: 'Cocoa',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/cocoa/Inst.ogg' },
+                        { dir: 'Musics/musics/cocoa/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Eggnog',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/eggnog/Inst.ogg' },
+                        { dir: 'Musics/musics/eggnog/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Winter-Horrorland',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/winter-horrorland/Inst.ogg' },
+                        { dir: 'Musics/musics/winter-horrorland/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Senpai',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/senpai/Inst.ogg' },
+                        { dir: 'Musics/musics/senpai/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Roses',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/roses/Inst.ogg' },
+                        { dir: 'Musics/musics/roses/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Thorns',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/thorns/Inst.ogg' },
+                        { dir: 'Musics/musics/thorns/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'UGH',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/ugh/Inst.mp3' },
+                        { dir: 'Musics/musics/ugh/Voices.mp3' },
+                    ]
+                },
+                {
+                    name: 'Guns',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/guns/Inst.mp3' },
+                        { dir: 'Musics/musics/guns/Voices.mp3' },
+                    ]
+                },
+                {
+                    name: 'Stress',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/FNFDefault.png',
+                    mod: 'FNFDefault',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    toLoad: [
+                        { dir: 'Musics/musics/stress/Inst.mp3' },
+                        { dir: 'Musics/musics/stress/Voices.mp3' },
+                    ]
+                },
             ],
         },
         {

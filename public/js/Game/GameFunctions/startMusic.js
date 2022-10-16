@@ -98,6 +98,11 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
 
                     let sound = new Audio()
                     sound.addEventListener('loadeddata', (e) => {
+                        state.toLoadInScreen[dir] = {
+                            sound,
+                            counter: 0
+                        }
+
                         loaded = true
                         newLoad()
                     })
@@ -113,6 +118,11 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
     
                     let img = new Image()
                     img.addEventListener('load', (e) => {
+                        state.toLoadInScreen[dir] = {
+                            image: img,
+                            counter: 0
+                        }
+
                         loaded = true
                         newLoad()
                     })
@@ -159,10 +169,10 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                 state.musicEventListener = require(`../../../Musics/data/${name.toLowerCase()}/eventListener`).default
             } catch {}
             
-            state.music = state.sounds[`Musics/musics/${name.toLowerCase()}/Inst.ogg`]
-            state.musicVoice = state.sounds[`Musics/musics/${name.toLowerCase()}/Voices.ogg`]
-            state.music?.load()
-            state.musicVoice?.load()
+            state.music = state.sounds[`Musics/musics/${name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${name.toLowerCase()}/Inst.mp3`]
+            state.musicVoice = state.sounds[`Musics/musics/${name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${name.toLowerCase()}/Voices.mp3`]
+            state.music?.pause()
+            state.musicVoice?.pause()
 
             let interval = setInterval(() => {
                 if (state.online && !state.waiting || !state.online) {

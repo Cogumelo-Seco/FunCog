@@ -26,7 +26,7 @@ function createGame(Listener, canvas, socket) {
             listServers: []
         },
         personalizedNotes: {},
-        toLoadImages: {},
+        toLoadInScreen: {},
         images: {},
         sounds: {},
         musics: [],

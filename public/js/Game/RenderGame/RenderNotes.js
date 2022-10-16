@@ -39,7 +39,7 @@ export default async (canvas, game, Listener) => {
 
                 for (let i = 0;i <= note.hold;i += holdImagePos?.height) {
                     holdY = game.state.downScroll ? holdY-(holdImagePos.height**resizeNote) : holdY+(holdImagePos.height**resizeNote)
-                    holdYInRelationToTheLine = game.state.downScroll ? holdY-arrowY : arrowY-holdY
+                    holdYInRelationToTheLine = game.state.downScroll ? holdY-arrowY : (arrowY+(arrowImagePos.height**resizeNote/2))-holdY
                     ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : arrowInfo.noteAlpha
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
@@ -120,7 +120,7 @@ export default async (canvas, game, Listener) => {
 
                 for (let i = 0;i <= note.hold;i += holdImagePos?.height) {
                     holdY = game.state.downScroll ? holdY-(holdImagePos.height**resizeNoteOpponent) : holdY+holdImagePos.height**resizeNoteOpponent
-                    holdYInRelationToTheLine = game.state.downScroll ? holdY-arrowYOpponent : arrowYOpponent-holdY
+                    holdYInRelationToTheLine = game.state.downScroll ? holdY-arrowYOpponent : (arrowYOpponent+(arrowImagePos.height**resizeNoteOpponent/2))-holdY
                     ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : arrowInfo.noteAlpha
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {

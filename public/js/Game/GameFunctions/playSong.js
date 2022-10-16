@@ -16,6 +16,6 @@ export default (type, command, state) => {
     song.pause()
     song.currentTime = 0
     song.loop = command?.loop ? true : false
-    song.volume = Number(command?.volume) || 1
+    song.volume = isNaN(Number(command?.volume)) ? 1 : Number(command?.volume)
     song.play()
 }
