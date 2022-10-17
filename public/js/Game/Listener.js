@@ -97,7 +97,7 @@ export default function createListener(socket) {
 
             if (keyPressed == 'Enter' && on) document.getElementById('gameVideo').currentTime = document.getElementById('gameVideo').duration
 
-            if (keyPressed == 'Escape' && on && !state.game.state.online) {
+            if (keyPressed == 'Escape' && on && !state.game.state.online && state.game.state.countdown <= -1) {
                 if (state.game.state.music.paused) {
                     state.game.state.music.play()
                     state.game.state.musicVoice.play()
