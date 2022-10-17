@@ -1,9 +1,6 @@
 export default async (type, { noteClickAuthor, note, notes, listenerState, difficulty, events }, state) => {
     switch (type) {
-        case 'started':
-			let oldCurrentTime = 0
-			let screenShake = false
-
+		case 'loaded':
 			for (let i in state.arrowsInfo) {
 				state.arrowsInfo[i].alpha = 0
 				state.arrowsInfo[i].resetEnable = false
@@ -14,6 +11,10 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				state.arrowsInfoOpponent[i].resetEnable = false
 				state.arrowsInfoOpponent[i].Y = state.arrowsInfoOpponent[i].defaultY+(state.downScroll ? -50 : 50)
 			}
+			break
+        case 'started':
+			let oldCurrentTime = 0
+			let screenShake = false
 
 			function intro_outro(player, arrowID, add) {
 				arrowMove({ speed: 3, Y: state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].defaultY, arrowID, opponent: player ? false : true })

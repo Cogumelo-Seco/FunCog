@@ -1,4 +1,4 @@
-export default async({ name, mod, difficulty, notesImageDir, backgroundImage, dev, listenerState, opponentPlayer, splashDir, splashResize, toLoad }, state) => {
+export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, state) => {
     try {
         state.music = null
         state.musicChangeBPM = {}
@@ -20,14 +20,14 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
         state.countdown = 4
         state.musicEventListener = () => null
         state.musicInfo = {
-            name,
-            splashDir,
-            splashResize,
-            notesImageDir,
-            backgroundImage,
+            name: musicInfo.name,
+            splashDir: musicInfo.splashDir,
+            splashResize: musicInfo.splashResize,
+            notesImageDir: musicInfo.notesImageDir,
+            backgroundImage: musicInfo.backgroundImage,
             lifeDrain: difficulty.lifeDrain || 0,
-            dev,
-            defaultBackgroundImage: backgroundImage,
+            dev: musicInfo.dev,
+            defaultBackgroundImage: musicInfo.backgroundImage,
             difficulty: difficulty.name,
             hitNote: 0,
             misses: 0,
@@ -42,10 +42,13 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
             playerId: opponentPlayer ? 2 : 1
         }
 
-        let musicData = require(`../../../Musics/data/${name.toLowerCase()}/${name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)
+        let musicData = require(`../../../Musics/data/${musicInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)
         let musicNotes = musicData.song.notes
         state.musicInfo.events = musicData.song.events
         state.musicBPM = musicData.song.bpm
+        try {
+            state.musicEventListener = require(`../../../Musics/data/${musicInfo.name.toLowerCase()}/eventListener`).default
+        } catch {}
         
         for (let i in musicNotes) {
             if (musicNotes[i].changeBPM) {
@@ -80,8 +83,10 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
             if (msg) console.log(msg)
             state.loadingSong.loaded += 1
 
-            if (state.loadingSong.loaded >= state.loadingSong.total && !state.music) loaded()
-            else if (toLoad[state.loadingSong.loaded]) load(toLoad[state.loadingSong.loaded])
+            if (state.loadingSong.loaded >= state.loadingSong.total && !state.music) {
+                state.musicEventListener('loaded', {}, state)
+                loaded()
+            } else if (musicInfo.toLoad[state.loadingSong.loaded]) load(musicInfo.toLoad[state.loadingSong.loaded])
         }
 
         const load = async ({ dir, animationConfigDir}) => {
@@ -133,27 +138,13 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                         image: img,
                         animationConfig
                     }
-
-                    /*let animationConfig = animationConfigDir ? require(`../../../imgs/${animationConfigDir}`) : null
-                    let img = new Image()
-                    img.addEventListener('load', (e) => {
-                        loaded = true
-                        newLoad()
-                    })
-                    img.addEventListener('error',(e) => newLoad())
-                    img.src = `/imgs/${dir}`
-                    img.id = dir
-                    state.images[dir] = {
-                        image: img,
-                        animationConfig
-                    }*/
                 }
             }
         }
 
         state.loadingSong.loaded = 0
-        state.loadingSong.total = toLoad.length
-        load(toLoad[0])
+        state.loadingSong.total = musicInfo.toLoad.length
+        load(musicInfo.toLoad[0])
 
         async function loaded() {
             if (state.musicOpponentNotes.length <= 0 && state.online) {
@@ -165,37 +156,40 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                 state.musicOriginalNotes = JSON.parse(JSON.stringify(state.musicOriginalOpponentNotes));
             }
 
-            try {
-                state.musicEventListener = require(`../../../Musics/data/${name.toLowerCase()}/eventListener`).default
-            } catch {}
+            state.music = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
+            state.musicVoice = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
+
+            let videoElement = document.getElementById('gameVideo')
+
+            if (musicInfo.cutscene && !state.online) {
+                videoElement.onended = () => startMusic()
+                videoElement.src = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/'+musicInfo.cutscene
+            } else startMusic()
             
-            state.music = state.sounds[`Musics/musics/${name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${name.toLowerCase()}/Inst.mp3`]
-            state.musicVoice = state.sounds[`Musics/musics/${name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${name.toLowerCase()}/Voices.mp3`]
-            state.music?.pause()
-            state.musicVoice?.pause()
+            async function startMusic() {
+                let interval = setInterval(() => {
+                    if (state.online && !state.waiting || !state.online) {
+                        state.countdown -= 1
+                        if (state.countdown <= -1) {
+                            clearInterval(interval)
 
-            let interval = setInterval(() => {
-                if (state.online && !state.waiting || !state.online) {
-                    state.countdown -= 1
-                    if (state.countdown <= -1) {
-                        clearInterval(interval)
+                            state.music?.play()
+                            state.musicVoice?.play()
 
-                        state.music?.play()
-                        state.musicVoice?.play()
+                            if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
 
-                        if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
-
-                        state.musicEventListener('started', { difficulty, events: musicData.song.events, listenerState }, state)
-                    } else state.playSong(`Sounds/intro${state.countdown}.ogg`)
-                }
-            }, 900-(musicData.song.bpm*2));
+                            state.musicEventListener('started', { difficulty, events: musicData.song.events, listenerState }, state)
+                        } else state.playSong(`Sounds/intro${state.countdown}.ogg`)
+                    }
+                }, 900-(musicData.song.bpm*2));
+            }
         }
     } catch (err) {
         console.error(err)
     }
 
     async function getNoteinfo(note, difficulty, musicData) {
-        name = name.toLowerCase()
+        let name = musicInfo.name.toLowerCase()
         let arrowID = note[1]
         let type = 'normal'
         let errorWhenNotClicking = true
@@ -220,7 +214,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                 type = 'fireNote'
             }
         }
-        if (mod == 'SuicideMouse') {
+        if (musicInfo.mod == 'SuicideMouse') {
             if (note[3] && note[1] != -1) {
                 arrowID = note[1]%4
                 disabled = difficulty.name == 'Mania' ? true : false
@@ -228,7 +222,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                 type = 'hurtNoteSuicidemouse'
             }
         }
-        if (mod == 'DuskTillDawn') {
+        if (musicInfo.mod == 'DuskTillDawn') {
             if (note[3] != undefined) {
                 autoClick = true
                 arrowID = note[1]%4
@@ -237,7 +231,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
             }
         }
 
-        if (mod == 'SonicEXE') {
+        if (musicInfo.mod == 'SonicEXE') {
             if (note[3] == 2) {
                 arrowID = note[1]%4
                 disabled = difficulty.name == 'Mania' ? true : false
@@ -251,7 +245,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
             }
         }
 
-        if (mod == 'LateNightCityTale') {
+        if (musicInfo.mod == 'LateNightCityTale') {
             if (note[3] == 'black') {
                 disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
@@ -266,7 +260,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                 type = 'LNCTRed'
             }
         }
-        if (mod == 'WitheredFreddy') {
+        if (musicInfo.mod == 'WitheredFreddy') {
             if (note[3] == 3) {
                 disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
@@ -288,7 +282,7 @@ export default async({ name, mod, difficulty, notesImageDir, backgroundImage, de
                 type = 'WitheredFreddyLoose'
             }
         }
-        if (mod == 'VSChira') {
+        if (musicInfo.mod == 'VSChira') {
             if (note[3] == 'chiraNote') {
                 disabled = difficulty.name == 'Mania' ? true : false
                 type = 'VSChiraMarsh'

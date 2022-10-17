@@ -16,7 +16,6 @@ canvas#gameCanvas {
     /*image-rendering: pixelated;
     image-rendering: crisp-edges;
     image-rendering: -moz-crisp-edges;*/
-    z-index: 5;
     position: fixed;
     left: 0;
     top: 0;
@@ -24,4 +23,14 @@ canvas#gameCanvas {
     height: 100%;
     background-position: center;
     background-size: cover;
+}
+
+video#gameVideo {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: none;
 }

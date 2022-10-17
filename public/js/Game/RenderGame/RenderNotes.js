@@ -6,7 +6,7 @@ export default async (canvas, game, Listener) => {
     let resizeNote = game.state.resizeNote
     let arrowY = game.state.arrowsYLine
 
-    if (game.state.countdown < 0) for (let i in game.state.musicNotes) {
+    for (let i in game.state.musicNotes) {
         let note = game.state.musicNotes[i]
         let arrowInfo = game.state.arrowsInfo[note.arrowID]
         
@@ -31,9 +31,9 @@ export default async (canvas, game, Listener) => {
             ctx.shadowColor = game.state.personalizedNotes[note.type]?.noteShadowColor || arrowInfo.noteShadowColor
             ctx.shadowBlur = game.state.personalizedNotes[note.type]?.noteShadowBlur || arrowInfo.noteShadowBlur
 
-            if (note.hold && arrowImage && holdImagePos && holdEndImagePos) {
+            if (note.hold && arrowImage && holdImagePos && holdEndImagePos && arrowImagePos) {
                 let holdY = noteY
-                let holdX = arrowInfo.X+(arrowImagePos.height**resizeNote/2)-(holdImagePos.width**resizeNote/2)
+                let holdX = (arrowInfo.X-((arrowImagePos.width**resizeNote-arrowsSize**resizeNote)/2))+(arrowImagePos.width**resizeNote/2)-(holdImagePos.width**resizeNote/2)
                 let holdYInRelationToTheLine = null
                 if (!note.holdHeight) note.holdHeight = holdImagePos.height
 
@@ -87,7 +87,7 @@ export default async (canvas, game, Listener) => {
     let arrowYOpponent = game.state.arrowsYLineOpponent
     let resizeNoteOpponent = game.state.resizeNoteOpponent
 
-    if (game.state.countdown < 0) for (let i in game.state.musicOpponentNotes) {
+    for (let i in game.state.musicOpponentNotes) {
         let note = game.state.musicOpponentNotes[i]
         let arrowInfo = game.state.arrowsInfoOpponent[note.arrowID]
         
@@ -112,9 +112,9 @@ export default async (canvas, game, Listener) => {
             ctx.shadowColor = game.state.personalizedNotes[note.type]?.noteShadowColor || arrowInfo.noteShadowColor
             ctx.shadowBlur = game.state.personalizedNotes[note.type]?.noteShadowBlur || arrowInfo.noteShadowBlur
 
-            if (note.hold && arrowImage && holdImagePos && holdEndImagePos) {
+            if (note.hold && arrowImage && holdImagePos && holdEndImagePos && arrowImagePos) {
                 let holdY = noteY
-                let holdX = arrowInfo.X+(arrowImagePos.height**resizeNoteOpponent/2)-(holdImagePos.width**resizeNoteOpponent/2)
+                let holdX = (arrowInfo.X-((arrowImagePos.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2))+(arrowImagePos.width**resizeNoteOpponent/2)-(holdImagePos.width**resizeNoteOpponent/2)
                 let holdYInRelationToTheLine = null
                 if (!note.holdHeight) note.holdHeight = holdImagePos.height
 

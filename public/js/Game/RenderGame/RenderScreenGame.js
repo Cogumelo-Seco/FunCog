@@ -7,7 +7,7 @@ export default async (canvas, game, Listener) => {
         let image = data.image
         data.counter += 1
 
-        if (data.counter > 60) delete game.state.toLoadInScreen[i]
+        if (data.counter > 5) delete game.state.toLoadInScreen[i]
 
         if (image) ctx.drawImage(image, 0, 0)
         else if (!['Inst.ogg', 'Voices.ogg', 'Inst.mp3', 'Voices.mp3'].includes(i.split('/')[i.split('/').length-1])) game.playSong(i, { volume: 0 })

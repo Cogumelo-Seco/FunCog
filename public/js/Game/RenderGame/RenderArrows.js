@@ -85,10 +85,8 @@ export default async (canvas, game, Listener) => {
             ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
             ctx.rotate((arrowInfo.rotation)*Math.PI/180);
             
-            if (game.state.countdown < 0) {
-                ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
-                if (splashImage && splashImagePos) ctx.drawImage(splashImage, splashImagePos.x, splashImagePos.y, splashImagePos.width, splashImagePos.height, -((arrowWidth*game.state.musicInfo.splashResize)/2), -((arrowHeight*game.state.musicInfo.splashResize)/2), arrowWidth*game.state.musicInfo.splashResize, arrowHeight*game.state.musicInfo.splashResize)
-            }
+            ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+            if (splashImage && splashImagePos) ctx.drawImage(splashImage, splashImagePos.x, splashImagePos.y, splashImagePos.width, splashImagePos.height, -((arrowWidth*game.state.musicInfo.splashResize)/2), -((arrowHeight*game.state.musicInfo.splashResize)/2), arrowWidth*game.state.musicInfo.splashResize, arrowHeight*game.state.musicInfo.splashResize)
 
             ctx.restore()
             ctx.globalAlpha = 1
@@ -149,7 +147,7 @@ export default async (canvas, game, Listener) => {
             ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
             ctx.rotate((arrowInfo.rotation)*Math.PI/180);
             
-            if (game.state.countdown < 0)  ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+            ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
 
             ctx.restore()
             ctx.globalAlpha = 1

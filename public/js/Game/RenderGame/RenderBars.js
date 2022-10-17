@@ -5,7 +5,10 @@ export default async (canvas, game, Listener) => {
     let loadingBarHeight = 20
     let loadingPercent = game.state.loadingSong.loaded/game.state.loadingSong.total
 
-    if (loadingPercent < 1) {
+    if (game.state.countdown > 3) {
+        ctx.fillStyle = 'black'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+
         ctx.fillStyle = 'rgb(100, 100, 100)'
         ctx.fillRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-loadingBarHeight/2, loadingBarWidth, loadingBarHeight)
 
@@ -19,6 +22,8 @@ export default async (canvas, game, Listener) => {
         ctx.lineWidth = 2.5
         ctx.strokeStyle = 'black'
         ctx.strokeRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-loadingBarHeight/2, loadingBarWidth, loadingBarHeight)
+
+        return
     }
 
 

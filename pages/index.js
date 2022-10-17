@@ -53,6 +53,7 @@ const Game = (props) => {
             </Head>
             <body id="body">
                 <canvas id="gameCanvas" />
+                <video id="gameVideo" />
 
                 <section id="section">
                     

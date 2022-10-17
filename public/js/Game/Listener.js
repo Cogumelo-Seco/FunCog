@@ -95,6 +95,8 @@ export default function createListener(socket) {
 
             if (keyPressed == 'KeyR' && on && !state.game.state.online) state.game.state.musicInfo.health = -100
 
+            if (keyPressed == 'Enter' && on) document.getElementById('gameVideo').currentTime = document.getElementById('gameVideo').duration
+
             if (keyPressed == 'Escape' && on && !state.game.state.online) {
                 if (state.game.state.music.paused) {
                     state.game.state.music.play()
@@ -162,15 +164,8 @@ export default function createListener(socket) {
                         })
 
                         state.game.startMusic({ 
-                            name: musicInfo.name, 
+                            musicInfo,
                             difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
-                            notesImageDir: musicInfo.notesImageDir,
-                            backgroundImage: musicInfo.backgroundImage,
-                            mod: musicInfo.mod,
-                            dev: musicInfo.dev,
-                            splashDir: musicInfo.splashDir,
-                            splashResize: musicInfo.splashResize,
-                            toLoad: musicInfo.toLoad,
                             listenerState: state
                         })
                     } else {
@@ -179,15 +174,8 @@ export default function createListener(socket) {
                         state.game.state.smallFunctions.redirectGameStage('game')
 
                         state.game.startMusic({ 
-                            name: musicInfo.name, 
+                            musicInfo,
                             difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
-                            notesImageDir: musicInfo.notesImageDir,
-                            backgroundImage: musicInfo.backgroundImage,
-                            mod: musicInfo.mod,
-                            dev: musicInfo.dev,
-                            splashDir: musicInfo.splashDir,
-                            splashResize: musicInfo.splashResize,
-                            toLoad: musicInfo.toLoad,
                             listenerState: state
                         })
                     }
@@ -226,15 +214,8 @@ export default function createListener(socket) {
                             let musicInfo = state.game.state.musics[server.mod].musics[server.music]
 
                             state.game.startMusic({ 
-                                name: musicInfo.name, 
+                                musicInfo,
                                 difficulty: state.game.state.difficulties[musicInfo.difficulties[server.difficulty]],
-                                notesImageDir: musicInfo.notesImageDir,
-                                backgroundImage: musicInfo.backgroundImage,
-                                mod: musicInfo.mod,
-                                dev: musicInfo.dev,
-                                splashDir: musicInfo.splashDir,
-                                splashResize: musicInfo.splashResize,
-                                toLoad: musicInfo.toLoad,
                                 listenerState: state,
                                 opponentPlayer: true,
                             })

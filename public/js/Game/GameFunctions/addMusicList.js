@@ -14,6 +14,7 @@ export default async (state) => {
                     splashResize: 1.5,
                     toLoad: [
                         { dir: 'Musics/musics/tutorial/Inst.ogg' },
+                        { dir: 'Musics/musics/tutorial/Voices.ogg' },
                     ]
                 },
                 {
@@ -274,6 +275,7 @@ export default async (state) => {
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/FNFDefault.png',
+                    cutscene: 'week7/ughCutscene.mp4',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.5,
@@ -288,6 +290,7 @@ export default async (state) => {
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/FNFDefault.png',
+                    cutscene: 'week7/gunsCutscene.mp4',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.5,
@@ -302,6 +305,7 @@ export default async (state) => {
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/FNFDefault.png',
+                    cutscene: 'week7/stressCutscene.mp4',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.5,
@@ -534,6 +538,7 @@ export default async (state) => {
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/dusk-till-dawn/',
                     backgroundImage: 'backgrounds/dusk-till-dawn.png',
+                    cutscene: 'DuskTillDawn/cutscene.mp4',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.3,
                     mod: 'DuskTillDawn',

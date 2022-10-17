@@ -6,6 +6,7 @@ function createGame(Listener, canvas, socket) {
         waiting: true,
         serverId: null,
         serverInfo: {},
+        gameLoopFPSControlTime: 0,
         rainbowColor: 0,
         debug: false,
         gameStage: 'loading',
@@ -116,7 +117,7 @@ function createGame(Listener, canvas, socket) {
                 frame: 0,
                 startFrame: 0,
                 endFrame: 2,
-                totalDalay: 30,
+                totalDalay: 40,
                 dalay: 0,
                 loop: true
             },
@@ -173,8 +174,21 @@ function createGame(Listener, canvas, socket) {
     const startMusic = (command) => require('./GameFunctions/startMusic').default(command, state)
     const verifyClick = (command) => require('./GameFunctions/verifyClick').default(command, state)
 
-    async function start(command) {
-        function gameLoop() {
+    async function start() {
+        let videoElement = document.getElementById('gameVideo')
+
+        videoElement.addEventListener('loadeddata', () => {
+            videoElement.style.display = 'block'
+            videoElement.play()
+        })
+
+        videoElement.addEventListener('ended', () => {
+            videoElement.style.display = 'none'
+        })
+    }
+
+    async function gameLoop(command) {
+        /*function gameLoop() {*/
             document.title = `Cogu - ${state.gameStage}`
 
             if (state.online && state.serverId) {
@@ -350,27 +364,31 @@ function createGame(Listener, canvas, socket) {
             for (let i in state.musicInfo.accuracyMedia) state.musicInfo.accuracy += state.musicInfo.accuracyMedia[i]
             state.musicInfo.accuracy = state.musicInfo.accuracy/state.musicInfo.accuracyMedia?.length || 0
 
-            for (let i in state.animations) {
-                let animation = state.animations[i]
+            if (state.gameLoopFPSControlTime+30 <= +new Date()) {
+                state.gameLoopFPSControlTime = +new Date()
 
-                if (animation.dalay <= +new Date() && !animation.paused) {
-                    animation.frame += animation.boomerang ? animation.boomerangForward ? 1 : -1 : 1
-                    if (animation.frame > animation.endFrame) {
-                        if (!animation.boomerang) animation.frame = animation.loop ? animation.startFrame : animation.endFrame
-                        else animation.boomerangForward = animation.boomerangForward ? false : true
-                    } else if (animation.frame < animation.startFrame) {
-                        animation.boomerangForward = animation.boomerangForward ? false : true
-                        animation.frame = animation.startFrame
+                for (let i in state.animations) {
+                    let animation = state.animations[i]
+
+                    if (animation.dalay <= +new Date() && !animation.paused) {
+                        animation.frame += animation.boomerang ? animation.boomerangForward ? 1 : -1 : 1
+                        if (animation.frame > animation.endFrame) {
+                            if (!animation.boomerang) animation.frame = animation.loop ? animation.startFrame : animation.endFrame
+                            else animation.boomerangForward = animation.boomerangForward ? false : true
+                        } else if (animation.frame < animation.startFrame) {
+                            animation.boomerangForward = animation.boomerangForward ? false : true
+                            animation.frame = animation.startFrame
+                        }
+                        animation.dalay = +new Date()+animation.totalDalay
                     }
-                    animation.dalay = +new Date()+animation.totalDalay
                 }
+
+                state.rainbowColor = state.rainbowColor >= 360 ? 0 : state.rainbowColor+1
             }
 
-            state.rainbowColor = state.rainbowColor >= 360 ? 0 : state.rainbowColor+1
-
-            setTimeout(() => gameLoop(), 1000/40)
+            /*setTimeout(() => gameLoop(), 1000/40)
         }
-        gameLoop()
+        gameLoop()*/
     }
 
     async function loading(command) {
@@ -448,6 +466,7 @@ function createGame(Listener, canvas, socket) {
     
     return {
         start,
+        gameLoop,
         loading,
         playSong,
         state,

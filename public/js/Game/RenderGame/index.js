@@ -1,4 +1,8 @@
 export default function renderGame(canvas, game, Listener) {
+    if (+new Date()-game.state.fps.split('-')[1] > 1000) {
+        game.state.fpsDisplay = game.state.fps.split('-')[0]
+        game.state.fps = `0-${+new Date()}`
+    }
     game.state.fps = `${Number(game.state.fps.split('-')[0]) + 1}-${game.state.fps.split('-')[1]}`
 
     canvas.style.left = game.state.screenXMovement-(game.state.screenZoom/2)+'px'
@@ -44,5 +48,8 @@ export default function renderGame(canvas, game, Listener) {
 
     require('./RenderScreenInformation').default(canvas, game, Listener)
 
-    setTimeout(() => renderGame(canvas, game, Listener), 0)
+    setTimeout(() => {
+        game.gameLoop()
+        renderGame(canvas, game, Listener)
+    }, 0)
 }
