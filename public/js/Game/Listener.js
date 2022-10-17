@@ -93,7 +93,7 @@ export default function createListener(socket) {
             if (keyPressed == 'KeyQ' && on) state.game.state.downScroll = state.game.state.downScroll ? false : true
             if (keyPressed == 'KeyW' && on) state.game.state.middleScroll = state.game.state.middleScroll ? false : true
 
-            if (keyPressed == 'KeyR' && on && !state.game.state.online) state.game.state.musicInfo.health = -100
+            if (keyPressed == 'KeyR' && on && !state.game.state.online && !state.game.state.botPlay) state.game.state.musicInfo.health = -100
 
             if (keyPressed == 'Enter' && on) document.getElementById('gameVideo').currentTime = document.getElementById('gameVideo').duration
 
