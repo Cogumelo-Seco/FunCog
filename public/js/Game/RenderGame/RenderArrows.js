@@ -13,13 +13,6 @@ export default async (canvas, game, Listener) => {
     if (game.state.musicInfo.notesImageDir) for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
         let arrowInfo = game.state.arrowsInfo[arrowID]
 
-        if (game.state.debug && arrowInfo) {
-            ctx.fillStyle = 'rgba(255, 0, 0, 1)'
-            ctx.fillRect(arrowInfo.X, arrowInfo.Y, game.state.arrowsSize**game.state.resizeNote, 1)
-            ctx.fillStyle = 'rgba(255, 0, 0, 0.1)'
-            ctx.fillRect(arrowInfo.X, arrowInfo.Y, game.state.arrowsSize**game.state.resizeNote, game.state.arrowsSize**game.state.resizeNote)
-        }
-
         let arrowImageData = game.state.images[`${game.state.musicInfo.notesImageDir}Arrows.png`]
         let arrowImage = arrowImageData?.image
         let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
@@ -31,7 +24,7 @@ export default async (canvas, game, Listener) => {
         let splashFrames = splashImageData?.animationConfig[`Arrow-${arrowID}`]
         let splashImagePos = splashFrames ? splashFrames[`Arrow-${arrowID}-splash-${arrowInfo.splashFrame}`] : null
 
-        if (arrowInfo && splashFrames && arrowInfo.splashFrame <= Object.keys(splashFrames).length && arrowInfo.splashTime+40 <= +new Date()) {
+        if (arrowInfo && splashFrames && arrowInfo.splashFrame <= Object.keys(splashFrames).length && arrowInfo.splashTime+30 <= +new Date()) {
             arrowInfo.splashFrame += 1
             arrowInfo.splashTime = +new Date()
         }

@@ -34,17 +34,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
                 state.musicInfo.score -= 50
 			}
 			break
-		case 'passedNote':
-			break
-        case 'started':
-			state.musicInfo.hurtLevel = 0
-			let oldCurrentTime = 0
-			let screenFilterAlpha = 0
-			let oldBeat = 0
-			let noteAlpha = 1
-			let addAlpha = true
-			let pauseAlpha = false
-
+		case 'loaded':
 			for (let i in state.arrowsInfo) {
 				state.arrowsInfo[i].shadowBlur = 15
 				state.arrowsInfo[i].noteShadowBlur = 15
@@ -56,6 +46,15 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				state.arrowsInfoOpponent[i].shadowColor = '#d20ef1'
 				state.arrowsInfoOpponent[i].noteShadowColor = '#d20ef1'
 			}
+			break
+        case 'started':
+			state.musicInfo.hurtLevel = 0
+			let oldCurrentTime = 0
+			let screenFilterAlpha = 0
+			let oldBeat = 0
+			let noteAlpha = 1
+			let addAlpha = true
+			let pauseAlpha = false
 
             let loop = setInterval(() => {
 				let beat = state.musicBeat

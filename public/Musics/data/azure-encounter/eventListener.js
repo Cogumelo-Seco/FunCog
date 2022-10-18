@@ -34,7 +34,16 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
                 state.musicInfo.score -= 50
 			}
 			break
-		case 'passedNote':
+		case 'loaded':
+			for (let i in state.arrowsInfo) {
+				state.arrowsInfo[i].shadowBlur = 15
+				state.arrowsInfo[i].noteShadowBlur = 15
+				state.arrowsInfoOpponent[i].shadowBlur = 15
+				state.arrowsInfoOpponent[i].noteShadowBlur = 15
+
+				state.arrowsInfo[i].shadowColor = '#d20ef1'
+				state.arrowsInfo[i].noteShadowColor = '#d20ef1'
+			}
 			break
         case 'started':
 			state.musicInfo.hurtLevel = 0
@@ -42,13 +51,6 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			let noteAlpha = 1
 			let addAlpha = true
 			let pauseAlpha = false
-
-			for (let i in state.arrowsInfo) {
-				state.arrowsInfo[i].shadowBlur = 15
-				state.arrowsInfo[i].noteShadowBlur = 15
-				state.arrowsInfoOpponent[i].shadowBlur = 15
-				state.arrowsInfoOpponent[i].noteShadowBlur = 15
-			}
 
             let loop = setInterval(() => {
 				let beat = state.musicBeat
@@ -74,10 +76,10 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 
 				for (let i in state.arrowsInfo) {
 					if (currentTime <= 85 && oldCurrentTime >= 76) {
-						if (state.arrowsInfo[i].shadowBlur > 0) state.arrowsInfo[i].shadowBlur -= 0.1
-						if (state.arrowsInfo[i].noteShadowBlur > 0) state.arrowsInfo[i].noteShadowBlur -= 0.1
-						if (state.arrowsInfoOpponent[i].shadowBlur > 0) state.arrowsInfoOpponent[i].shadowBlur -= 0.1
-						if (state.arrowsInfoOpponent[i].noteShadowBlur > 0) state.arrowsInfoOpponent[i].noteShadowBlur -= 0.1
+						if (state.arrowsInfo[i].shadowBlur > 0) state.arrowsInfo[i].shadowBlur -= 0.15
+						if (state.arrowsInfo[i].noteShadowBlur > 0) state.arrowsInfo[i].noteShadowBlur -= 0.15
+						if (state.arrowsInfoOpponent[i].shadowBlur > 0) state.arrowsInfoOpponent[i].shadowBlur -= 0.15
+						if (state.arrowsInfoOpponent[i].noteShadowBlur > 0) state.arrowsInfoOpponent[i].noteShadowBlur -= 0.15
 						
 						if (state.arrowsInfo[i].alpha < 1) state.arrowsInfo[i].alpha += 0.1
 						if (state.arrowsInfo[i].noteAlpha < 1) state.arrowsInfo[i].noteAlpha += 0.1

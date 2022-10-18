@@ -368,6 +368,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/expurgation.png',
                     mod: 'VSTricky',
                     toLoad: [
+                        { dir: 'imgs/Expurgation/signs.png', animationConfigDir: 'imgs/Expurgation/signs.json' },
                         { dir: 'Arrows/deathnotes/Arrows.png', animationConfigDir: 'Arrows/deathnotes/Arrows.json' },
                         { dir: 'Musics/musics/expurgation/Inst.ogg' },
                         { dir: 'Musics/musics/expurgation/Voices.ogg' },

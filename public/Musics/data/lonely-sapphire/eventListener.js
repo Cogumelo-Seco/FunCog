@@ -1,10 +1,6 @@
 export default async (type, { noteClickAuthor, note, notes, listenerState, difficulty, events }, state) => {
     switch (type) {
-        case 'started':
-			let noteAlpha = 1
-			let addAlpha = true
-			let pauseAlpha = false
-
+		case 'loaded':
 			for (let i in state.arrowsInfoOpponent) {
 				state.arrowsInfoOpponent[i].alpha = 0
 				state.arrowsInfoOpponent[i].noteAlpha = 0
@@ -17,6 +13,11 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				state.arrowsInfo[i].shadowColor = '#d20ef1'
 				state.arrowsInfo[i].noteShadowColor = '#d20ef1'
 			}
+			break
+        case 'started':
+			let noteAlpha = 1
+			let addAlpha = true
+			let pauseAlpha = false
 
             let loop = setInterval(() => {
 				state.middleScroll = true

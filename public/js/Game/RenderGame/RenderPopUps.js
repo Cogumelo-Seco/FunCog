@@ -17,7 +17,7 @@ export default async (canvas, game, Listener) => {
                 ctx.globalAlpha =  (Math.random()*(Number(popup.alpha.split('-')[1])-Number(popup.alpha.split('-')[0])))+Number(popup.alpha.split('-')[0])
             } else ctx.globalAlpha = popup.alpha == undefined ? 1 : popup.alpha
             
-            if (popup.rotation) {
+            /*if (popup.rotation) {
                 ctx.save()
 
                 ctx.translate(popupX+(popupWidth/2), popupY+(popupHeight/2));
@@ -27,7 +27,7 @@ export default async (canvas, game, Listener) => {
                 else ctx.drawImage(image, -(popupWidth/2), -(popupHeight/2), popupWidth, popupHeight)
 
                 ctx.restore()
-            } else {
+            } else {*/
                 let scaleH = popup.flipY ? -1 : 1
                 let scaleV = popup.flipX ? -1 : 1
                 let posX = popup.flipY ? (popupWidth+popupX)* -1 : popupX
@@ -36,11 +36,19 @@ export default async (canvas, game, Listener) => {
                 ctx.save();
                 ctx.scale(scaleH, scaleV);
                 
-                if (imagePos) ctx.drawImage(image, imagePos.x, imagePos.y, imagePos.width, imagePos.height, posX, posY, popupWidth, popupHeight)
-                else ctx.drawImage(image, posX, posY, popupWidth, popupHeight)
+                if (!popup.rotation) {
+                    if (imagePos) ctx.drawImage(image, imagePos.x, imagePos.y, imagePos.width, imagePos.height, posX, posY, popupWidth, popupHeight)
+                    else ctx.drawImage(image, posX, posY, popupWidth, popupHeight)
+                } else {
+                    ctx.translate(posX+(popupWidth/2), posY+(popupHeight/2));
+                    ctx.rotate((popup.rotation || 0)*Math.PI/180);
+
+                    if (imagePos) ctx.drawImage(image, imagePos.x, imagePos.y, imagePos.width, imagePos.height, -(popupWidth/2), -(popupHeight/2), popupWidth, popupHeight)
+                    else ctx.drawImage(image, -(popupWidth/2), -(popupHeight/2), popupWidth, popupHeight)
+                }
 
                 ctx.restore();
-            }
+            //}
             ctx.globalAlpha = 1
         }
     }

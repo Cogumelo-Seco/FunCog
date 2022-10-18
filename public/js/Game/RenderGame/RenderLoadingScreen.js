@@ -28,7 +28,7 @@ export default async (canvas, game, Listener) => {
     ctx.fillText(game.state.loading.msg, 5, canvas.height-5);
 
     let logoImage = game.state.images['imgs/logo.png']?.image
-    let size = 180
+    let size = 180*((alpha/8)+1)
 
     ctx.globalAlpha = alpha
     if (logoImage) ctx.drawImage(logoImage, canvas.width/2-(size/2), canvas.height/2-(size/2), size, size)

@@ -167,21 +167,20 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
             } else startMusic()
             
             async function startMusic() {
-                let interval = setInterval(() => {
-                    if (state.online && !state.waiting || !state.online) {
-                        state.countdown -= 1
-                        if (state.countdown <= -1) {
-                            clearInterval(interval)
+                if (state.online && !state.waiting || !state.online) {
+                    state.countdown -= 1
+                    if (state.countdown <= -1) {
+                        state.music?.play()
+                        state.musicVoice?.play()
 
-                            state.music?.play()
-                            state.musicVoice?.play()
+                        if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
 
-                            if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
-
-                            state.musicEventListener('started', { difficulty, events: musicData.song.events, listenerState }, state)
-                        } else state.playSong(`Sounds/intro${state.countdown}.ogg`)
+                        state.musicEventListener('started', { difficulty, events: musicData.song.events, listenerState }, state)
+                    } else {
+                        setTimeout(() => startMusic(), 900-(musicData.song.bpm*2))
+                        state.playSong(`Sounds/intro${state.countdown}.ogg`)
                     }
-                }, 900-(musicData.song.bpm*2));
+                }
             }
         }
     } catch (err) {

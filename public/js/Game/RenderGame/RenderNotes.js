@@ -12,12 +12,6 @@ export default async (canvas, game, Listener) => {
         
         let noteY = game.state.downScroll ? (arrowInfo?.Y || arrowY)+note.Y : (arrowInfo?.Y || arrowY)-note.Y
 
-        if (game.state.debug && arrowInfo && note) {
-            ctx.lineWidth = 1
-            ctx.strokeStyle = 'rgba(0, 0, 255, 1)'
-            ctx.strokeRect(arrowInfo.X, noteY, game.state.arrowsSize**game.state.resizeNote, game.state.arrowsSize**game.state.resizeNote)
-        }
-
         if (noteY-(note.hold) < canvas.height && noteY+(note.hold) > -game.state.arrowsSize && arrowInfo) {
             let arrowImageData = game.state.personalizedNotes[note.type] ? game.state.images[game.state.personalizedNotes[note.type].newArrowImage] : game.state.images[`${game.state.musicInfo.notesImageDir}Arrows.png`]
             let arrowImage = arrowImageData?.image
