@@ -1,4 +1,4 @@
-export default function renderGame(canvas, game, Listener) {
+export default async function renderGame(canvas, game, Listener) {
     if (+new Date()-game.state.fps.split('-')[1] > 1000) {
         game.state.fpsDisplay = game.state.fps.split('-')[0]
         game.state.fps = `0-${+new Date()}`
@@ -39,7 +39,7 @@ export default function renderGame(canvas, game, Listener) {
             require('./RenderDeadScreen').default(canvas, game, Listener)
             break
         case 'loading':
-            require('./RenderLoadingScreen').default(canvas, game, Listener)
+            await require('./RenderLoadingScreen').default(canvas, game, Listener)
             break
         case 'test':
             require('./RenderTestScreen').default(canvas, game, Listener)
@@ -48,8 +48,11 @@ export default function renderGame(canvas, game, Listener) {
 
     require('./RenderScreenInformation').default(canvas, game, Listener)
 
-    setTimeout(() => {
+    let renderFunction = () => {
         game.gameLoop()
-        renderGame(canvas, game, Listener)
-    }, 0)
+        renderGame(canvas, game, Listener) 
+    }
+
+    if (game.state.renderType == 'limited') window.requestAnimationFrame(renderFunction)
+    else setTimeout(renderFunction, 0)
 }

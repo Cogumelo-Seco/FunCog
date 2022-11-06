@@ -9,6 +9,7 @@ export default async (canvas, game, Listener) => {
     ctx.fillText(`Mouse: X: ${Listener.state.mouseInfo.mouseInfoType == 'percent' ? Number.parseInt(Listener.state.mouseInfo.x*100)+'%' : Number.parseInt(Listener.state.mouseInfo.x*1000)} Y: ${Listener.state.mouseInfo.mouseInfoType == 'percent' ? Number.parseInt(Listener.state.mouseInfo.y*100)+'%' : Number.parseInt(Listener.state.mouseInfo.y*1000)}`, 2, 15)
     ctx.fillText(`Debug: ${game.state.debug}`, 2, 30)
     ctx.fillText(`BotPlay: ${game.state.botPlay}`, 2, 45)
+    ctx.fillText(`RenderType: ${game.state.renderType}`, 2, 60)
 
     ctx.fillText('Created by: Cogu', canvas.width-ctx.measureText('Created by: Cogu').width-5, canvas.height-5);
 

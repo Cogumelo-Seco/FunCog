@@ -151,7 +151,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					state.playSong('Sounds/LateNightCityTale/glassBreak2.ogg')
 				}
 
-				if (beat >= 374) {
+				if (beat >= 374 && beat <= 390) {
 					state.musicInfo.backgroundImage = state.musicInfo.defaultBackgroundImage
 
 					state.musicInfo.popups.LNCTBrokenScreenFilter = {

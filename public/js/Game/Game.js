@@ -2,6 +2,7 @@ function createGame(Listener, canvas, socket) {
     const state = {
         speed: 1,
         fps: '0-0',
+        renderType: 'limited',
         online: true,
         waiting: true,
         serverId: null,
@@ -216,7 +217,8 @@ function createGame(Listener, canvas, socket) {
             state.musicBeat = Number.parseInt(state.music?.currentTime*(state.musicBPM/60))
             state.musicStep = Number.parseInt(state.music?.currentTime*(state.musicBPM/60)*4)
 
-            if (state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.04) state.musicVoice.currentTime = state.music.currentTime
+            console.log(Math.abs(state.musicVoice?.currentTime-state.music?.currentTime))
+            if (state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.09) state.musicVoice.currentTime = state.music.currentTime
 
             if (!state.arrowsInfoOpponent[0]) {
                 for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {

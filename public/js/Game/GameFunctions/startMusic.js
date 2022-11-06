@@ -171,7 +171,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
                     state.countdown -= 1
                     if (state.countdown <= -1) {
                         state.music?.play()
-                        state.musicVoice?.play()
+                        setTimeout(() => state.musicVoice?.play(), 1000)
 
                         if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
 
