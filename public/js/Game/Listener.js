@@ -79,8 +79,8 @@ export default function createListener(socket) {
             if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote',  click: false }
 
             if (
-                state.keyBindings[arrowID](keyPressed) && on && !state.arrows[arrowID].click || 
-                state.keyBindings[arrowID](keyPressed) && !on && state.arrows[arrowID].click
+                !state.game?.state.botPlay && state.keyBindings[arrowID](keyPressed) && on && !state.arrows[arrowID].click || 
+                !state.game?.state.botPlay && state.keyBindings[arrowID](keyPressed) && !on && state.arrows[arrowID].click
             ) {
                 if (on) state.game.verifyClick({ arrowID, listenerState: state })
                 else state.arrows[arrowID].state = 'noNote'
