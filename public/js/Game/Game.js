@@ -25,12 +25,46 @@ function createGame(Listener, canvas, socket) {
         selectSettingsOption: {
             settingsOptions: [
                 {
+                    name: 'KeyBind',
+                    type: 'ConfigTitle'
+                },
+                {
+                    name: 'Arrow Left',
+                    id: 'Arrow-0',
+                    type: 'KeyBind',
+                    content: 'KeyD'
+                },
+                {
+                    name: 'Arrow Down',
+                    id: 'Arrow-1',
+                    type: 'KeyBind',
+                    content: 'KeyF'
+                },
+                {
+                    name: 'Arrow Up',
+                    id: 'Arrow-2',
+                    type: 'KeyBind',
+                    content: 'KeyJ'
+                },
+                {
+                    name: 'Arrow Right',
+                    id: 'Arrow-3',
+                    type: 'KeyBind',
+                    content: 'KeyK'
+                },
+                {
+                    name: 'Gameplay',
+                    type: 'ConfigTitle'
+                },
+                {
                     name: 'DownScrool',
+                    id: 'DownScrool',
                     type: 'Boolean',
                     content: true
                 },
                 {
                     name: 'MiddleScroll',
+                    id: 'MiddleScroll',
                     type: 'Boolean',
                     content: true
                 }
@@ -230,7 +264,6 @@ function createGame(Listener, canvas, socket) {
             state.musicBeat = Number.parseInt(state.music?.currentTime*(state.musicBPM/60))
             state.musicStep = Number.parseInt(state.music?.currentTime*(state.musicBPM/60)*4)
 
-            console.log(Math.abs(state.musicVoice?.currentTime-state.music?.currentTime))
             if (state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.09) state.musicVoice.currentTime = state.music.currentTime
 
             if (!state.arrowsInfoOpponent[0]) {

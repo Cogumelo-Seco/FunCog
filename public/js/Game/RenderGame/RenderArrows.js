@@ -5,7 +5,7 @@ export default async (canvas, game, Listener) => {
     let spaceBetweenArrows = game.state.spaceBetweenArrows
     let resizeNote = game.state.resizeNote
     let arrowsSize = game.state.arrowsSize || 100
-    if (!game.state.arrowsSize) game.state.arrowsSize = game.state.images[`Arrows/Arrows.png`]?.animationConfig['Arrow-0']['Arrow-0'].width
+    if (!game.state.arrowsSize) return game.state.arrowsSize = game.state.images[`Arrows/Arrows.png`]?.animationConfig['Arrow-0']['Arrow-0'].width
     let arrowX = game.state.smallFunctions.getConfig('MiddleScroll') ? canvas.width/2-((arrowsSize**resizeNote+spaceBetweenArrows)*(amountOfArrows+1)/2) : canvas.width-((arrowsSize**resizeNote+spaceBetweenArrows)*(amountOfArrows+2))
     let arrowY = game.state.arrowsYLine
     

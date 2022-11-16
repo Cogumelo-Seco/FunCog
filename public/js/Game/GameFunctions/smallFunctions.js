@@ -4,8 +4,8 @@ export default (state) => {
             state.oldGameStage = oldStage || state.gameStage
             state.gameStage = newStage
         },
-        getConfig: (config) => {
-            return (state.selectSettingsOption.settingsOptions.find((g) => g.name = config)).content
+        getConfig: (id) => {
+            return (state.selectSettingsOption.settingsOptions.find((g) => g.id == id))?.content
         }
     }
 }

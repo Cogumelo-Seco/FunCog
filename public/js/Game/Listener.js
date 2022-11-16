@@ -8,13 +8,6 @@ export default function createListener(socket) {
             y: NaN,
             mouseOnHover: false,
             mouseInfoType: 'percent',
-        },
-        keyBindings: {
-            0: (key) => key == 'ArrowLeft' || key == 'KeyD',
-            1: (key) => key == 'ArrowDown' || key == 'KeyF',
-            2: (key) => key == 'ArrowUp' || key == 'KeyJ',
-            3: (key) => key == 'ArrowRight' || key == 'KeyK',
-            4: (key) => key == 'ArrowRight' || key == 'KeyK',
         }
     }
 
@@ -78,9 +71,13 @@ export default function createListener(socket) {
         for (let arrowID = 0;arrowID <= state.game.state.amountOfArrows;arrowID++) {
             if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote',  click: false }
 
-            if (
+            /*if (
                 !state.game?.state.botPlay && state.keyBindings[arrowID](keyPressed) && on && !state.arrows[arrowID].click || 
                 !state.game?.state.botPlay && state.keyBindings[arrowID](keyPressed) && !on && state.arrows[arrowID].click
+            ) {*/
+            if (
+                !state.game?.state.botPlay && state.game.state.smallFunctions.getConfig(`Arrow-${arrowID}`) == keyPressed && on && !state.arrows[arrowID].click || 
+                !state.game?.state.botPlay && state.game.state.smallFunctions.getConfig(`Arrow-${arrowID}`) == keyPressed && !on && state.arrows[arrowID].click
             ) {
                 if (on) state.game.verifyClick({ arrowID, listenerState: state })
                 else state.arrows[arrowID].state = 'noNote'
@@ -232,7 +229,10 @@ export default function createListener(socket) {
         }
 
         if (state.game.state.gameStage == 'settings' && on) {
-            switch (keyPressed) {
+            if (state.onChangeKeyBind) {
+                if (keyPressed != 'Escape') state.game.state.selectSettingsOption.settingsOptions[state.game.state.selectSettingsOption.settingsSelect].content = keyPressed
+                state.onChangeKeyBind = false
+            } else switch (keyPressed) {
                 case 'ArrowUp':
                     state.game.state.selectSettingsOption.settingsSelect = state.game.state.selectSettingsOption.settingsSelect <= 0 ? state.game.state.selectSettingsOption.settingsOptions.length-1 : state.game.state.selectSettingsOption.settingsSelect-1
                     state.game.playSong('Sounds/scrollMenu.ogg')
@@ -242,11 +242,17 @@ export default function createListener(socket) {
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
                 case 'Enter':
-                    state.game.playSong('Sounds/scrollMenu.ogg')
-
                     let currentConfig = state.game.state.selectSettingsOption.settingsOptions[state.game.state.selectSettingsOption.settingsSelect]
-                    if (currentConfig.type == 'Boolean') {
-                        currentConfig.content = currentConfig.content ? false : true
+
+                    if (currentConfig.type != 'ConfigTitle') state.game.playSong('Sounds/scrollMenu.ogg')
+
+                    switch (currentConfig.type) {
+                        case 'Boolean':
+                            currentConfig.content = currentConfig.content ? false : true
+                            break
+                        case 'KeyBind':
+                            state.onChangeKeyBind = true
+                            break
                     }
                     
                     break
