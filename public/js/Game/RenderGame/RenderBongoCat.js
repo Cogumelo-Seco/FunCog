@@ -10,7 +10,7 @@ export default async (canvas, game, Listener) => {
     let bgConfig = imageConfig.bg
     let width = bgConfig.width*0.5
     let height = bgConfig.height*0.5
-    let X = game.state.middleScroll ? canvas.width-width-20 : canvas.width/2-(width/2)
+    let X = game.state.smallFunctions.getConfig('MiddleScroll') ? canvas.width-width-20 : canvas.width/2-(width/2)
     let Y = canvas.height/2-(height/2)
 
     ctx.drawImage(image, bgConfig.x, bgConfig.y, bgConfig.width, bgConfig.height, X, Y, width, height)

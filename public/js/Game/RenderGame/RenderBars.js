@@ -51,7 +51,7 @@ export default async (canvas, game, Listener) => {
 
     let healthBarWidth = canvas.width*0.5
     let healthBarHeight = 20
-    let healthBarY = game.state.downScroll ? 40 : canvas.height-80
+    let healthBarY = game.state.smallFunctions.getConfig('DownScrool') ? 40 : canvas.height-80
     let healthPercent = game.state.online ? 0.5-(game.state.musicInfo.health/200)+(game.state.musicInfoOpponent.health/200) : 1-(game.state.musicInfo.health > 100 ? 100 : game.state.musicInfo.health)/100 >= 1 ? 1 : 1-(game.state.musicInfo.health > 100 ? 100 : game.state.musicInfo.health)/100
 
     ctx.fillStyle = 'rgb(49, 176, 209)'//'rgb(19, 189, 0)'

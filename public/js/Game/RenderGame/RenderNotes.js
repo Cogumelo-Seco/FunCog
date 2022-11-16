@@ -10,7 +10,7 @@ export default async (canvas, game, Listener) => {
         let note = game.state.musicNotes[i]
         let arrowInfo = game.state.arrowsInfo[note.arrowID]
         
-        let noteY = game.state.downScroll ? (arrowInfo?.Y || arrowY)+note.Y : (arrowInfo?.Y || arrowY)-note.Y
+        let noteY = game.state.smallFunctions.getConfig('DownScrool') ? (arrowInfo?.Y || arrowY)+note.Y : (arrowInfo?.Y || arrowY)-note.Y
 
         if (noteY-(note.hold) < canvas.height && noteY+(note.hold) > -game.state.arrowsSize && arrowInfo) {
             let arrowImageData = game.state.personalizedNotes[note.type] ? game.state.images[game.state.personalizedNotes[note.type].newArrowImage] : game.state.images[`${game.state.musicInfo.notesImageDir}Arrows.png`]
@@ -32,16 +32,16 @@ export default async (canvas, game, Listener) => {
                 if (!note.holdHeight) note.holdHeight = holdImagePos.height
 
                 for (let i = 0;i <= note.hold;i += holdImagePos?.height) {
-                    holdY = game.state.downScroll ? holdY-(holdImagePos.height**resizeNote) : holdY+(holdImagePos.height**resizeNote)
-                    holdYInRelationToTheLine = game.state.downScroll ? holdY-arrowY : (arrowY+(arrowImagePos.height**resizeNote/2))-holdY
+                    holdY = game.state.smallFunctions.getConfig('DownScrool') ? holdY-(holdImagePos.height**resizeNote) : holdY+(holdImagePos.height**resizeNote)
+                    holdYInRelationToTheLine = game.state.smallFunctions.getConfig('DownScrool') ? holdY-arrowY : (arrowY+(arrowImagePos.height**resizeNote/2))-holdY
                     ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : arrowInfo.noteAlpha
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
                         if (i+holdImagePos?.height >= note.hold) {
                             let holdWidth = holdEndImagePos.width**resizeNote
                             let holdHeight = holdEndImagePos.height**resizeNote
-                            let scaleV = game.state.downScroll ? -1 : 1
-                            let posY = game.state.downScroll ? (holdHeight+holdY) * -1 : holdY
+                            let scaleV = game.state.smallFunctions.getConfig('DownScrool') ? -1 : 1
+                            let posY = game.state.smallFunctions.getConfig('DownScrool') ? (holdHeight+holdY) * -1 : holdY
 
                             ctx.save();
                             ctx.scale(1, scaleV);
@@ -85,7 +85,7 @@ export default async (canvas, game, Listener) => {
         let note = game.state.musicOpponentNotes[i]
         let arrowInfo = game.state.arrowsInfoOpponent[note.arrowID]
         
-        let noteY = game.state.downScroll ? (arrowInfo?.Y || arrowYOpponent)+note.Y : (arrowInfo?.Y || arrowYOpponent)-note.Y
+        let noteY = game.state.smallFunctions.getConfig('DownScrool') ? (arrowInfo?.Y || arrowYOpponent)+note.Y : (arrowInfo?.Y || arrowYOpponent)-note.Y
         if (note.Y >= 0 && game.state.opponentArrows[note.arrowID] && !note.clicked && !note.disabled && (note.errorWhenNotClicking || note.autoClick)) {
             game.state.musicEventListener('noteClick', { noteClickAuthor: 'opponent' }, game.state)
             note.clicked = true
@@ -113,16 +113,16 @@ export default async (canvas, game, Listener) => {
                 if (!note.holdHeight) note.holdHeight = holdImagePos.height
 
                 for (let i = 0;i <= note.hold;i += holdImagePos?.height) {
-                    holdY = game.state.downScroll ? holdY-(holdImagePos.height**resizeNoteOpponent) : holdY+holdImagePos.height**resizeNoteOpponent
-                    holdYInRelationToTheLine = game.state.downScroll ? holdY-arrowYOpponent : (arrowYOpponent+(arrowImagePos.height**resizeNoteOpponent/2))-holdY
+                    holdY = game.state.smallFunctions.getConfig('DownScrool') ? holdY-(holdImagePos.height**resizeNoteOpponent) : holdY+holdImagePos.height**resizeNoteOpponent
+                    holdYInRelationToTheLine = game.state.smallFunctions.getConfig('DownScrool') ? holdY-arrowYOpponent : (arrowYOpponent+(arrowImagePos.height**resizeNoteOpponent/2))-holdY
                     ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : arrowInfo.noteAlpha
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
                         if (i+holdImagePos?.height >= note.hold) {
                             let holdWidth = holdEndImagePos.width**resizeNoteOpponent
                             let holdHeight = holdEndImagePos.height**resizeNoteOpponent
-                            let scaleV = game.state.downScroll ? -1 : 1
-                            let posY = game.state.downScroll ? (holdHeight+holdY) * -1 : holdY
+                            let scaleV = game.state.smallFunctions.getConfig('DownScrool') ? -1 : 1
+                            let posY = game.state.smallFunctions.getConfig('DownScrool') ? (holdHeight+holdY) * -1 : holdY
 
                             ctx.save();
                             ctx.scale(1, scaleV);

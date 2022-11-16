@@ -90,8 +90,8 @@ export default function createListener(socket) {
 
         if (state.game.state.gameStage == 'game') {
             //if (keyPressed == 'KeyT' && on) state.game.state.speed += 0.2
-            if (keyPressed == 'KeyQ' && on) state.game.state.downScroll = state.game.state.downScroll ? false : true
-            if (keyPressed == 'KeyW' && on) state.game.state.middleScroll = state.game.state.middleScroll ? false : true
+            //if (keyPressed == 'KeyQ' && on) state.game.state.smallFunctions.getConfig('DownScrool') = state.game.state.smallFunctions.getConfig('DownScrool') ? false : true
+            //if (keyPressed == 'KeyW' && on) state.game.state.middleScroll = state.game.state.middleScroll ? false : true
 
             if (keyPressed == 'KeyR' && on && !state.game.state.online && !state.game.state.botPlay) state.game.state.musicInfo.health = -100
 
@@ -121,7 +121,7 @@ export default function createListener(socket) {
 
         if (keyPressed == 'Enter' && state.game.state.gameStage == 'dead' && !state.game.state.musicMenu?.src.includes('gameOverEnd') && state.game.state.gameStageTime+2000 < +new Date()) {
             state.game.state.playSong('Sounds/gameOverEnd.ogg', { musicMenu: true })
-            setTimeout(() => state.game.state.smallFunctions.redirectGameStage('selectMusic'), 1500)
+            setTimeout(() => state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu'), 1500)
         }
 
         if (state.game.state.gameStage == 'selectMusic' && on) {
@@ -231,6 +231,28 @@ export default function createListener(socket) {
             }
         }
 
+        if (state.game.state.gameStage == 'settings' && on) {
+            switch (keyPressed) {
+                case 'ArrowUp':
+                    state.game.state.selectSettingsOption.settingsSelect = state.game.state.selectSettingsOption.settingsSelect <= 0 ? state.game.state.selectSettingsOption.settingsOptions.length-1 : state.game.state.selectSettingsOption.settingsSelect-1
+                    state.game.playSong('Sounds/scrollMenu.ogg')
+                    break
+                case 'ArrowDown':
+                    state.game.state.selectSettingsOption.settingsSelect = state.game.state.selectSettingsOption.settingsSelect >= state.game.state.selectSettingsOption.settingsOptions.length-1 ? 0 : state.game.state.selectSettingsOption.settingsSelect+1
+                    state.game.playSong('Sounds/scrollMenu.ogg')
+                    break
+                case 'Enter':
+                    state.game.playSong('Sounds/scrollMenu.ogg')
+
+                    let currentConfig = state.game.state.selectSettingsOption.settingsOptions[state.game.state.selectSettingsOption.settingsSelect]
+                    if (currentConfig.type == 'Boolean') {
+                        currentConfig.content = currentConfig.content ? false : true
+                    }
+                    
+                    break
+            }
+        }
+
         if (state.game.state.gameStage == 'menu' && on) {
             switch (keyPressed) {
                 case 'ArrowUp':
@@ -245,10 +267,13 @@ export default function createListener(socket) {
                     if (state.game.state.selectMenuOption.menuOptions[state.game.state.selectMenuOption.menuSelect] == 'Singleplayer') {
                         state.game.state.online = false
                         state.game.state.smallFunctions.redirectGameStage('selectMusic')
-                    } else {
+                    } else if (state.game.state.selectMenuOption.menuOptions[state.game.state.selectMenuOption.menuSelect] == 'Multiplayer') {
                         state.game.state.online = true
                         state.game.state.smallFunctions.redirectGameStage('onlineServerList')
                         socket.emit('getListServers')
+                    } else {
+                        state.game.state.online = true
+                        state.game.state.smallFunctions.redirectGameStage('settings')
                     }
                     
                     break

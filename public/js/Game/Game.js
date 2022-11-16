@@ -19,8 +19,23 @@ function createGame(Listener, canvas, socket) {
             difficultySelected: 0,
         },
         selectMenuOption: {
-            menuOptions: [ 'Singleplayer', 'Multiplayer' ], //'Settings' ],
+            menuOptions: [ 'Singleplayer', 'Multiplayer', 'Settings' ],
             menuSelect: 0
+        },
+        selectSettingsOption: {
+            settingsOptions: [
+                {
+                    name: 'DownScrool',
+                    type: 'Boolean',
+                    content: true
+                },
+                {
+                    name: 'MiddleScroll',
+                    type: 'Boolean',
+                    content: true
+                }
+            ],
+            settingsSelect: 0
         },
         selectServerOption: {
             serverSelect: 0,
@@ -44,8 +59,6 @@ function createGame(Listener, canvas, socket) {
         arrowsYLineOpponent: 0,
         amountOfArrowsOpponent: 3,
         amountOfArrows: 3,
-        downScroll: true,
-        middleScroll: true,
         botPlay: false,
         musicChangeBPM: {},
         oldChangeBPM: 0,
@@ -259,9 +272,9 @@ function createGame(Listener, canvas, socket) {
             let lastArrowsYLineOpponent = state.arrowsYLineOpponent
             let lastArrowsYLine = state.arrowsYLine
 
-            state.arrowsYLine = state.downScroll ? canvas.height-state.arrowsYLineMargin-state.arrowsSize**state.resizeNote : state.arrowsYLineMargin
-            state.arrowsYLineOpponent = state.middleScroll ? state.downScroll ? canvas.height*0.60 : canvas.height*0.40 : state.arrowsYLine
-            state.resizeNoteOpponent = state.middleScroll ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
+            state.arrowsYLine = state.smallFunctions.getConfig('DownScrool') ? canvas.height-state.arrowsYLineMargin-state.arrowsSize**state.resizeNote : state.arrowsYLineMargin
+            state.arrowsYLineOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.smallFunctions.getConfig('DownScrool') ? canvas.height*0.60 : canvas.height*0.40 : state.arrowsYLine
+            state.resizeNoteOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
 
             if (state.arrowsYLineOpponent != lastArrowsYLineOpponent || state.arrowsYLine != lastArrowsYLine || state.resizeNoteOpponent != lastResizeNoteOpponent) {
                 for (let i in state.arrowsInfo) {

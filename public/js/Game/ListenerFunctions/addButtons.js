@@ -61,7 +61,7 @@ export default (state) => {
     }
 
     state.buttons['ReturnPageButton'] = {
-        gameStage: [ 'selectMusic', 'onlineServerList' ],
+        gameStage: [ 'selectMusic', 'onlineServerList', 'settings' ],
         keyPress: 'KeyQ',
         minX: 468,
         maxX: 530,

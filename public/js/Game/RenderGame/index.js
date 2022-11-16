@@ -29,6 +29,9 @@ export default async function renderGame(canvas, game, Listener) {
         case 'menu':
             require('./RenderMenuScreen').default(canvas, game, Listener)
             break
+        case 'settings':
+            require('./RenderSettingsScreen').default(canvas, game, Listener)
+            break
         case 'onlineServerList':
             require('./RenderOnlineServerListScreen').default(canvas, game, Listener)
             break
