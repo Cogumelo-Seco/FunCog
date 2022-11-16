@@ -42,7 +42,7 @@ export default function createListener(socket) {
         let X = Math.floor(event.pageX/window.innerWidth*1000)
         let Y = Math.floor(event.pageY/window.window.innerHeight*1000)
 
-        if (state.game) for (let i in state.buttons) {
+        if (state.game && !state.onChangeKeyBind) for (let i in state.buttons) {
             let button = state.buttons[i]
             if (
                 button.gameStage && button.gameStage.includes(state.game.state.gameStage) && X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.onClick ||
@@ -63,7 +63,7 @@ export default function createListener(socket) {
             lastClickTime: lastClick?.time || null
         }
 
-        if (state.game) for (let i in state.buttons) {
+        if (state.game && !state.onChangeKeyBind) for (let i in state.buttons) {
             let button = state.buttons[i]
             if (button && on && button.gameStage?.includes(state.game.state.gameStage) && button.keyPress == keyPressed) button.onClick()
         }

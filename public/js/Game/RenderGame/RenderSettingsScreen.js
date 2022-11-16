@@ -21,11 +21,7 @@ export default async (canvas, game, Listener) => {
             ctx.lineWidth = 4
             ctx.strokeStyle  = 'white'
             ctx.strokeText(game.state.selectSettingsOption.settingsOptions[i].name, canvas.width/2-(ctx.measureText(game.state.selectSettingsOption.settingsOptions[i].name).width/2), Y);
-        } else /*if (settingsSelect == i) {
-            ctx.lineWidth = 4
-            ctx.strokeStyle  = 'white'
-            ctx.strokeText(game.state.selectSettingsOption.settingsOptions[i].name, (settingsSelect == i ? 20 : 0)+X, Y);
-        } else*/ {
+        } else {
             ctx.fillStyle = 'white'
             ctx.fillText(game.state.selectSettingsOption.settingsOptions[i].name, (settingsSelect == i ? 20 : 0)+X, Y);
         }
@@ -54,7 +50,7 @@ export default async (canvas, game, Listener) => {
             'ou pressione ESC para sair'
         ]
 
-        let msgY = -(msgArr.length*(popupWidth*resizeMsg)/2)
+        let msgY = -((msgArr.length-1)*(popupWidth*resizeMsg)/2)
         for (let i in msgArr) {
             let msg = msgArr[i]
 
