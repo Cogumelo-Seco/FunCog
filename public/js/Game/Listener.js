@@ -87,12 +87,12 @@ export default function createListener(socket) {
 
         if (state.game.state.gameStage == 'game') {
             //if (keyPressed == 'KeyT' && on) state.game.state.speed += 0.2
-            //if (keyPressed == 'KeyQ' && on) state.game.state.smallFunctions.getConfig('DownScrool') = state.game.state.smallFunctions.getConfig('DownScrool') ? false : true
+            //if (keyPressed == 'KeyQ' && on) state.game.state.smallFunctions.getConfig('DownScroll') = state.game.state.smallFunctions.getConfig('DownScroll') ? false : true
             //if (keyPressed == 'KeyW' && on) state.game.state.middleScroll = state.game.state.middleScroll ? false : true
 
             if (keyPressed == 'KeyR' && on && !state.game.state.online && !state.game.state.botPlay) state.game.state.musicInfo.health = -100
 
-            if (keyPressed == 'Enter' && on && document.getElementById('gameVideo').src) document.getElementById('gameVideo').currentTime = document.getElementById('gameVideo').duration
+            if (keyPressed == 'Enter' && on && document.getElementById('gameVideo').src && state.game.state.music.currentTime <= 0) document.getElementById('gameVideo').currentTime = document.getElementById('gameVideo').duration
 
             if (keyPressed == 'Escape' && on && !state.game.state.online && state.game.state.countdown <= -1) {
                 if (state.game.state.music.paused) {

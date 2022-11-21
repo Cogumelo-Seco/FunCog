@@ -1,13 +1,4 @@
 export default async (type, { noteClickAuthor, note, notes, listenerState }, state) => {
-    state.animations['fireNote'] = {
-        frame: 0,
-        startFrame: 0,
-        endFrame: 11,
-        totalDalay: 40,
-        dalay: 0,
-        loop: true
-    }
-
     switch (type) {
         case 'noteClick':
             if (state.musicInfo.playerId == 2 && noteClickAuthor == 'player' || state.musicInfo.playerId == 1 && noteClickAuthor == 'opponent') {
@@ -36,31 +27,33 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
             }
             break
         case 'started':
-            let oldStep = 0
-            let loop = setInterval(() => {
-                let beat = state.musicBeat
-				let step = state.musicStep
+            state.animations['fireNote'] = {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 11,
+                totalDalay: 40,
+                dalay: 0,
+                loop: true
+            }
 
-				if (state.screenZoom < 20 && state.camZooming) {
-					if (beat%4 == 0) state.screenZoom = 20
-				} else if (state.screenZoom <= 0) {
-					state.screenZoom = 0
-					state.camZooming = true
-				} else {
-					state.camZooming = false
-					state.screenZoom -= 2
-				}
+            state.musicInfo.variables = {
+				oldBeat: 0,
+			}
+		case 'gameLoop':
+			let beat = state.musicBeat
 
-				oldStep = step
-                if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
-                    clearInterval(loop)
-					state.screenZoom = 0
-                    state.screenXMovement = 0
-                    state.screenYMovement = 0
+			if (state.screenZoom < 20 && state.camZooming) {
+				if (state.musicInfo.variables.oldBeat != beat && beat%4 == 0) state.screenZoom = 20
+			} else if (state.screenZoom <= 0) {
+				state.screenZoom = 0
+				state.camZooming = true
+			} else {
+				state.camZooming = false
+				state.screenZoom -= 2
+			}
 
-					delete state.animations['fireNote']
-                }
-            }, 1000/30)
+			state.musicInfo.variables.oldBeat = beat
+            if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') delete state.animations['fireNote']
             break
     }
 }

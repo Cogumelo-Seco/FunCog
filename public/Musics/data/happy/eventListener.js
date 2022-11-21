@@ -11,54 +11,50 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
             }
             break
         case 'started':
-            let oldCurrentTime = 0
+            state.musicInfo.variables = {
+                oldCurrentTime: 0
+            }
+            break
+        case 'gameLoop':
+            let variables = state.musicInfo.variables
+            let currentTime = state.music?.currentTime
 
-            let loop = setInterval(() => {
-                let currentTime = state.music?.currentTime
+            for (let i in events) {
+                let event = events[i]
 
-                for (let i in events) {
-                    let event = events[i]
-
-                    if (oldCurrentTime*1000 <= event[0] && currentTime*1000 >= event[0]) {
-                        let current = 0
-                        console.log(event)
-                        let interval = setInterval(() => {
-                            if (current >= 10) {
-                                state.screenXMovement = 0
-                                state.screenYMovement = 0
-                                state.screenZoom = 0
-                                clearInterval(interval)
-                            } else {
-                                current += 1
-                                if (event[1] == 'Screen Shake') {
-                                    state.screenXMovement = Number.parseInt(Math.random()*20)-10
-                                    state.screenYMovement = Number.parseInt(Math.random()*20)-10
-                                } else if (event[1] == 'Add Camera Zoom') {
-                                    state.screenZoom += 5
-                                } else if (event[1] == 'Add Jumpscare') {
-                                    state.musicInfo.popups.sadmouseJumpscare = {
-                                        image: 'jumpscares/sadmouse-jumpscare.png',
-                                        x: 0,
-                                        y: 0,
-                                        width: state.canvas.width,
-                                        height: state.canvas.height,
-                                    }
-                                } else if (event[1] == 'Remove Jumpscare') {
-                                    delete state.musicInfo.popups.sadmouseJumpscare
+                if (variables.oldCurrentTime*1000 <= event[0] && currentTime*1000 >= event[0]) {
+                    let current = 0
+                    console.log(event)
+                    let interval = setInterval(() => {
+                        if (current >= 10) {
+                            state.screenXMovement = 0
+                            state.screenYMovement = 0
+                            state.screenZoom = 0
+                            clearInterval(interval)
+                        } else {
+                            current += 1
+                            if (event[1] == 'Screen Shake') {
+                                state.screenXMovement = Number.parseInt(Math.random()*20)-10
+                                state.screenYMovement = Number.parseInt(Math.random()*20)-10
+                            } else if (event[1] == 'Add Camera Zoom') {
+                                state.screenZoom += 5
+                            } else if (event[1] == 'Add Jumpscare') {
+                                state.musicInfo.popups.sadmouseJumpscare = {
+                                    image: 'jumpscares/sadmouse-jumpscare.png',
+                                    x: 0,
+                                    y: 0,
+                                    width: state.canvas.width,
+                                    height: state.canvas.height,
                                 }
+                            } else if (event[1] == 'Remove Jumpscare') {
+                                delete state.musicInfo.popups.sadmouseJumpscare
                             }
-                        }, 1000/50)
-                    }
+                        }
+                    }, 1000/50)
                 }
+            }
 
-                oldCurrentTime = currentTime
-                if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
-                    clearInterval(loop)
-                    state.screenXMovement = 0
-                    state.screenYMovement = 0
-                    state.screenZoom = 0
-                }
-            }, 1000/50)
+            variables.oldCurrentTime = currentTime
             break
     }
 }

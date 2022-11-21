@@ -3,15 +3,17 @@ export default async (canvas, game, Listener) => {
 
     ctx.fillStyle = `hsl(${game.state.rainbowColor}, 100%, 40%)`//'rgb(200, 200, 200)'
     ctx.font = `bold 10px Arial`
-    ctx.fillText(`${game.state.fpsDisplay}FPS`, (canvas.width-5)-ctx.measureText(`${game.state.fpsDisplay}FPS`).width, 15);
-    ctx.fillText(`${game.state.ping}Ping`, (canvas.width-5)-ctx.measureText(`${game.state.ping}Ping`).width, 30);
-
-    ctx.fillText(`Mouse: X: ${Listener.state.mouseInfo.mouseInfoType == 'percent' ? Number.parseInt(Listener.state.mouseInfo.x*100)+'%' : Number.parseInt(Listener.state.mouseInfo.x*1000)} Y: ${Listener.state.mouseInfo.mouseInfoType == 'percent' ? Number.parseInt(Listener.state.mouseInfo.y*100)+'%' : Number.parseInt(Listener.state.mouseInfo.y*1000)}`, 2, 15)
-    ctx.fillText(`Debug: ${game.state.debug}`, 2, 30)
-    ctx.fillText(`BotPlay: ${game.state.botPlay}`, 2, 45)
-    ctx.fillText(`RenderType: ${game.state.renderType}`, 2, 60)
-
     ctx.fillText('Created by: Cogu', canvas.width-ctx.measureText('Created by: Cogu').width-5, canvas.height-5);
+
+    if (game.state.smallFunctions.getConfig('GameInfo')) {
+        ctx.fillText(`${game.state.fpsDisplay}FPS`, (canvas.width-5)-ctx.measureText(`${game.state.fpsDisplay}FPS`).width, 15);
+        ctx.fillText(`${game.state.ping}Ping`, (canvas.width-5)-ctx.measureText(`${game.state.ping}Ping`).width, 30);
+
+        ctx.fillText(`Mouse: X: ${Listener.state.mouseInfo.mouseInfoType == 'percent' ? Number.parseInt(Listener.state.mouseInfo.x*100)+'%' : Number.parseInt(Listener.state.mouseInfo.x*1000)} Y: ${Listener.state.mouseInfo.mouseInfoType == 'percent' ? Number.parseInt(Listener.state.mouseInfo.y*100)+'%' : Number.parseInt(Listener.state.mouseInfo.y*1000)}`, 2, 15)
+        ctx.fillText(`Debug: ${game.state.debug}`, 2, 30)
+        ctx.fillText(`BotPlay: ${game.state.botPlay}`, 2, 45)
+        ctx.fillText(`RenderType: ${game.state.renderType}`, 2, 60)
+    }
 
     let ReturnPageButton = Listener.state.buttons['ReturnPageButton']
     if (ReturnPageButton.gameStage.includes(game.state.gameStage)) {

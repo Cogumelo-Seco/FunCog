@@ -1,7 +1,7 @@
 export default async (type, { noteClickAuthor, note, notes, listenerState, difficulty, events }, state) => {
 	const hurtFunction = (hurt) => {
-		state.musicInfo.hurtLevel += hurt ? 1 : -1
-		if (state.musicInfo.hurtLevel <= 0) state.musicInfo.hurtLevel = 0
+		state.musicInfo.variables.hurtLevel += hurt ? 1 : -1
+		if (state.musicInfo.variables.hurtLevel <= 0) state.musicInfo.variables.hurtLevel = 0
 
 		state.musicInfo.popups.LNCTHurt = {
 			image: `imgs/LateNightCityTale/hurt.png`,
@@ -9,10 +9,10 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			y: 0,
 			width: state.canvas.width,
 			height: state.canvas.height,
-			alpha: state.musicInfo.hurtLevel/3
+			alpha: state.musicInfo.variables.hurtLevel/3
 		}
 
-		if (state.musicInfo.hurtLevel > 3) {
+		if (state.musicInfo.variables.hurtLevel > 3) {
 			state.musicInfo.health = -100
 		}
 	}
@@ -46,75 +46,62 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			}
 			break
         case 'started':
-			state.musicInfo.hurtLevel = 0
-			let oldCurrentTime = 0
-			let noteAlpha = 1
-			let addAlpha = true
-			let pauseAlpha = false
+			state.musicInfo.variables = {
+				hurtLevel: 0,
+				oldCurrentTime: 0,
+				noteAlpha: 1,
+				addAlpha: true,
+				pauseAlpha: false
+			}
+			break
+		case 'gameLoop':
+			let variables = state.musicInfo.variables
+			let currentTime = state.music?.currentTime
 
-            let loop = setInterval(() => {
-				let beat = state.musicBeat
-				let currentTime = state.music?.currentTime
+			if (variables.addAlpha) {
+				if (variables.noteAlpha < 1) variables.noteAlpha += 0.002
+				if (variables.noteAlpha >= 1) variables.addAlpha = false
+			} else if (!variables.pauseAlpha) {
+				if (variables.noteAlpha > 0.7) variables.noteAlpha -= 0.002
+				if (variables.noteAlpha <= 0.7) variables.addAlpha = true
+			}
 
-				/*if (state.screenZoom < 10 && state.camZooming) {
-					if (beat%4 == 0) state.screenZoom = 10
-				} else if (state.screenZoom <= 0) {
-					state.screenZoom = 0
-					state.camZooming = true
-				} else {
-					state.camZooming = false
-					state.screenZoom -= 0.5
-				}*/
+			for (let i in state.arrowsInfo) {
+				if (currentTime <= 85 && variables.oldCurrentTime >= 76) {
+					if (state.arrowsInfo[i].shadowBlur > 0) state.arrowsInfo[i].shadowBlur -= 0.15
+					if (state.arrowsInfo[i].noteShadowBlur > 0) state.arrowsInfo[i].noteShadowBlur -= 0.15
+					if (state.arrowsInfoOpponent[i].shadowBlur > 0) state.arrowsInfoOpponent[i].shadowBlur -= 0.15
+					if (state.arrowsInfoOpponent[i].noteShadowBlur > 0) state.arrowsInfoOpponent[i].noteShadowBlur -= 0.15
+					
+					if (state.arrowsInfo[i].alpha < 1) state.arrowsInfo[i].alpha += 0.1
+					if (state.arrowsInfo[i].noteAlpha < 1) state.arrowsInfo[i].noteAlpha += 0.1
+					if (state.arrowsInfoOpponent[i].alpha < 1) state.arrowsInfoOpponent[i].alpha += 0.1
+					if (state.arrowsInfoOpponent[i].noteAlpha < 1) state.arrowsInfoOpponent[i].noteAlpha += 0.1
 
-				if (addAlpha) {
-					if (noteAlpha < 1) noteAlpha += 0.002
-					if (noteAlpha >= 1) addAlpha = false
-				} else if (!pauseAlpha) {
-					if (noteAlpha > 0.7) noteAlpha -= 0.002
-					if (noteAlpha <= 0.7) addAlpha = true
+					variables.pauseAlpha = true
+				} else if (currentTime >= 88 && variables.oldCurrentTime <= 95) {
+					variables.pauseAlpha = false
+
+					if (state.arrowsInfo[i].shadowBlur < 15) state.arrowsInfo[i].shadowBlur += 0.1
+					if (state.arrowsInfo[i].noteShadowBlur < 15) state.arrowsInfo[i].noteShadowBlur += 0.1
+					if (state.arrowsInfoOpponent[i].shadowBlur < 15) state.arrowsInfoOpponent[i].shadowBlur += 0.1
+					if (state.arrowsInfoOpponent[i].noteShadowBlur < 15) state.arrowsInfoOpponent[i].noteShadowBlur += 0.1
 				}
 
-				for (let i in state.arrowsInfo) {
-					if (currentTime <= 85 && oldCurrentTime >= 76) {
-						if (state.arrowsInfo[i].shadowBlur > 0) state.arrowsInfo[i].shadowBlur -= 0.15
-						if (state.arrowsInfo[i].noteShadowBlur > 0) state.arrowsInfo[i].noteShadowBlur -= 0.15
-						if (state.arrowsInfoOpponent[i].shadowBlur > 0) state.arrowsInfoOpponent[i].shadowBlur -= 0.15
-						if (state.arrowsInfoOpponent[i].noteShadowBlur > 0) state.arrowsInfoOpponent[i].noteShadowBlur -= 0.15
-						
-						if (state.arrowsInfo[i].alpha < 1) state.arrowsInfo[i].alpha += 0.1
-						if (state.arrowsInfo[i].noteAlpha < 1) state.arrowsInfo[i].noteAlpha += 0.1
-						if (state.arrowsInfoOpponent[i].alpha < 1) state.arrowsInfoOpponent[i].alpha += 0.1
-						if (state.arrowsInfoOpponent[i].noteAlpha < 1) state.arrowsInfoOpponent[i].noteAlpha += 0.1
+				if (!variables.pauseAlpha) {
+					state.arrowsInfo[i].shadowColor = currentTime <= 80 ? '#d20ef1' : '#02f7ff'
+					state.arrowsInfo[i].noteShadowColor = currentTime <= 80 ? '#d20ef1' : '#02f7ff'
+					state.arrowsInfo[i].alpha = variables.noteAlpha
+					state.arrowsInfo[i].noteAlpha = variables.noteAlpha
 
-						pauseAlpha = true
-					} else if (currentTime >= 88 && oldCurrentTime <= 95) {
-						pauseAlpha = false
-
-						if (state.arrowsInfo[i].shadowBlur < 15) state.arrowsInfo[i].shadowBlur += 0.1
-						if (state.arrowsInfo[i].noteShadowBlur < 15) state.arrowsInfo[i].noteShadowBlur += 0.1
-						if (state.arrowsInfoOpponent[i].shadowBlur < 15) state.arrowsInfoOpponent[i].shadowBlur += 0.1
-						if (state.arrowsInfoOpponent[i].noteShadowBlur < 15) state.arrowsInfoOpponent[i].noteShadowBlur += 0.1
-					}
-
-					if (!pauseAlpha) {
-						state.arrowsInfo[i].shadowColor = currentTime <= 80 ? '#d20ef1' : '#02f7ff'
-						state.arrowsInfo[i].noteShadowColor = currentTime <= 80 ? '#d20ef1' : '#02f7ff'
-						state.arrowsInfo[i].alpha = noteAlpha
-						state.arrowsInfo[i].noteAlpha = noteAlpha
-
-						state.arrowsInfoOpponent[i].shadowColor = currentTime <= 80 ? '#d20ef1' : '#02f7ff'
-						state.arrowsInfoOpponent[i].noteShadowColor = currentTime <= 80 ? '#d20ef1' : '#02f7ff'
-						state.arrowsInfoOpponent[i].alpha = noteAlpha
-						state.arrowsInfoOpponent[i].noteAlpha = noteAlpha
-					}
+					state.arrowsInfoOpponent[i].shadowColor = currentTime <= 80 ? '#d20ef1' : '#02f7ff'
+					state.arrowsInfoOpponent[i].noteShadowColor = currentTime <= 80 ? '#d20ef1' : '#02f7ff'
+					state.arrowsInfoOpponent[i].alpha = variables.noteAlpha
+					state.arrowsInfoOpponent[i].noteAlpha = variables.noteAlpha
 				}
+			}
 
-				oldCurrentTime = currentTime
-                if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
-                    clearInterval(loop)
-					state.screenZoom = 0
-                }
-            }, 1000/40)
-            break
+			variables.oldCurrentTime = currentTime
+			break
     }
 }

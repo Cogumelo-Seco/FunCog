@@ -14,9 +14,11 @@ export default async({ arrowID, listenerState, bot }, state) => {
             state.arrowsInfo[notes[i].arrowID].splashTime = +new Date()
             state.arrowsInfo[notes[i].arrowID].splashFrame = 0
 
-            if (notes[i].type == 'normal') {
+            //if (notes[i].type == 'normal') {
+            if (notes[i].errorWhenNotClicking) {
                 state.musicInfo.health += 2
                 state.musicInfo.combo += 1
+                if (state.musicInfo.combo >= state.musicInfo.bestCombo) state.musicInfo.bestCombo = state.musicInfo.combo
                 listenerState.arrows[arrowID].state = 'onNote'
             }
 

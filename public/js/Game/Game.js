@@ -57,8 +57,8 @@ function createGame(Listener, canvas, socket) {
                     type: 'ConfigTitle'
                 },
                 {
-                    name: 'DownScrool',
-                    id: 'DownScrool',
+                    name: 'DownScroll',
+                    id: 'DownScroll',
                     type: 'Boolean',
                     content: true
                 },
@@ -67,7 +67,19 @@ function createGame(Listener, canvas, socket) {
                     id: 'MiddleScroll',
                     type: 'Boolean',
                     content: true
-                }
+                },
+                {
+                    name: 'GameInfo',
+                    id: 'GameInfo',
+                    type: 'Boolean',
+                    content: true
+                },
+                {
+                    name: 'LifeDrain',
+                    id: 'LifeDrain',
+                    type: 'Boolean',
+                    content: true
+                },
             ],
             settingsSelect: 0
         },
@@ -106,7 +118,7 @@ function createGame(Listener, canvas, socket) {
         musicBeat: 0,
         music: null,
         musicVoice: null,
-        musicEventListener: null,
+        musicEventListener: () => null,
         notesImageDir: null,
         musicInfo: {},
         musicInfoOpponent: {},
@@ -245,6 +257,7 @@ function createGame(Listener, canvas, socket) {
                     state.serverId = null
                     state.serverInfo = {}
                     state.smallFunctions.redirectGameStage('onlineServerList')
+                    state.smallFunctions.resetScreen()
                     state.music?.pause()
                     state.musicVoice?.pause()
                     state.music.currentTime = 0
@@ -305,8 +318,8 @@ function createGame(Listener, canvas, socket) {
             let lastArrowsYLineOpponent = state.arrowsYLineOpponent
             let lastArrowsYLine = state.arrowsYLine
 
-            state.arrowsYLine = state.smallFunctions.getConfig('DownScrool') ? canvas.height-state.arrowsYLineMargin-state.arrowsSize**state.resizeNote : state.arrowsYLineMargin
-            state.arrowsYLineOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.smallFunctions.getConfig('DownScrool') ? canvas.height*0.60 : canvas.height*0.40 : state.arrowsYLine
+            state.arrowsYLine = state.smallFunctions.getConfig('DownScroll') ? canvas.height-state.arrowsYLineMargin-state.arrowsSize**state.resizeNote : state.arrowsYLineMargin
+            state.arrowsYLineOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.smallFunctions.getConfig('DownScroll') ? canvas.height*0.60 : canvas.height*0.40 : state.arrowsYLine
             state.resizeNoteOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
 
             if (state.arrowsYLineOpponent != lastArrowsYLineOpponent || state.arrowsYLine != lastArrowsYLine || state.resizeNoteOpponent != lastResizeNoteOpponent) {
@@ -330,6 +343,7 @@ function createGame(Listener, canvas, socket) {
                 state.music.currentTime = 0
                 state.animations.BFDead.frame = 0
                 state.smallFunctions.redirectGameStage('dead')
+                state.smallFunctions.resetScreen()
                 state.waiting = true
                 state.musicInfo.health = 50
                 state.musicNotes = []
@@ -351,12 +365,13 @@ function createGame(Listener, canvas, socket) {
             let musicDuration = state.music?.duration
             let musicCurrentTime = state.music?.currentTime
 
-            if (musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
+            if (musicCurrentTime > 3 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
                 state.waiting = true
                 state.musicInfo.health = 50
                 state.musicNotes = []
-                state.musicOpponentNotes= []
+                state.musicOpponentNotes = []
                 state.music = null
+                state.smallFunctions.resetScreen()
                 if (state.online) state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
                 else state.smallFunctions.redirectGameStage('selectMusic', 'menu')
             }
@@ -406,14 +421,25 @@ function createGame(Listener, canvas, socket) {
                     state.musicOpponentNotes[i].Y = newNoteY
                     state.musicOpponentNotes[i].oldY = newNoteY
                 }
+
+                if (newNoteY >= 0 && !state.musicOpponentNotes[i].clicked && !state.musicOpponentNotes[i].disabled && (state.musicOpponentNotes[i].errorWhenNotClicking || state.musicOpponentNotes[i].autoClick)) {
+                    state.musicEventListener('noteClick', { noteClickAuthor: 'opponent' }, state)
+                    state.musicOpponentNotes[i].clicked = true
+                    if ((state.online || state.smallFunctions.getConfig('LifeDrain')) && state.musicInfo.health > 5 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
+                }
             }
 
             state.musicInfo.accuracy = 0
             for (let i in state.musicInfo.accuracyMedia) state.musicInfo.accuracy += state.musicInfo.accuracyMedia[i]
             state.musicInfo.accuracy = state.musicInfo.accuracy/state.musicInfo.accuracyMedia?.length || 0
 
+
+            /* !!!!!!! FPS LIMITADO !!!!!!! */
+
             if (state.gameLoopFPSControlTime+30 <= +new Date()) {
                 state.gameLoopFPSControlTime = +new Date()
+
+                if (state.music?.currentTime > 0) state.musicEventListener('gameLoop', { listenerState: Listener.state }, state)
 
                 for (let i in state.animations) {
                     let animation = state.animations[i]

@@ -26,8 +26,13 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			}
 			break
         case 'started':
-			let oldBeat = 0
-			let oldStep = 0
+			state.musicInfo.variables = {
+				oldBeat: 0,
+				oldStep: 0
+			}
+			break
+		case 'gameLoop':
+			let variables = state.musicInfo.variables
 
 			function doStaticSign() {
 				state.playSong('Sounds/simplejumpsound.ogg')
@@ -85,159 +90,153 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				state.playSong('Sounds/datOneSound.ogg')
 			}
 
-            let loop = setInterval(() => {
-				let beat = state.musicBeat
-				let step = state.musicStep
+			let beat = state.musicBeat
+			let step = state.musicStep
 
-				if (state.screenZoom < 10 && state.camZooming) {
-					if (beat%5 == 0 && beat != oldBeat) state.screenZoom = 10
-				} else if (state.screenZoom <= 0) {
-					state.screenZoom = 0
-					state.camZooming = true
-				} else {
-					state.camZooming = false
-					state.screenZoom -= 1
-				}
+			if (state.screenZoom < 10 && state.camZooming) {
+				if (beat%5 == 0 && beat != variables.oldBeat) state.screenZoom = 10
+			} else if (state.screenZoom <= 0) {
+				state.screenZoom = 0
+				state.camZooming = true
+			} else {
+				state.camZooming = false
+				state.screenZoom -= 1
+			}
 
-				if (step != oldStep) switch (Number.parseInt(step*(1723/1970))) {
-					case 27:
-						doStaticSign(0);
-						break
-					case 130:
-						doStaticSign(0);
-						break
-					case 265:
-						doStaticSign(0);
-						break
-					case 450:
-						doStaticSign(0);
-						break
-					case 645:
-						doStaticSign(0);
-						break
-					case 800:
-						doStaticSign(0);
-						break
-					case 855:
-						doStaticSign(0);
-						break
-					case 889:
-						doStaticSign(0);
-						break
-					case 921:
-						doSimpleJump();
-						break
-					case 938:
-						doStaticSign(0);
-						break
-					case 981:
-						doStaticSign(0);
-						break
-					case 1030:
-						doStaticSign(0);
-						break
-					case 1065:
-						doStaticSign(0);
-						break
-					case 1105:
-						doStaticSign(0);
-						break
-					case 1123:
-						doStaticSign(0);
-						break
-					case 1178:
-						doSimpleJump();
-						break
-					case 1245:
-						doStaticSign(0);
-						break
-					case 1337:
-						doSimpleJump();
-						break
-					case 1345:
-						doStaticSign(0);
-						break
-					case 1432:
-						doStaticSign(0);
-						break
-					case 1454:
-						doStaticSign(0);
-						break
-					case 1495:
-						doStaticSign(0);
-						break
-					case 1521:
-						doStaticSign(0);
-						break
-					case 1558:
-						doStaticSign(0);
-						break
-					case 1578:
-						doStaticSign(0);
-						break
-					case 1599:
-						doStaticSign(0);
-						break
-					case 1618:
-						doStaticSign(0);
-						break
-					case 1647:
-						doStaticSign(0);
-						break
-					case 1657:
-						doStaticSign(0);
-						break
-					case 1692:
-						doStaticSign(0);
-						break
-					case 1713:
-						doStaticSign(0);
-						break
-					case 1723:
-						doJumpscare();
-						break
-					case 1738:
-						doStaticSign(0);
-						break
-					case 1747:
-						doStaticSign(0);
-						break
-					case 1761:
-						doStaticSign(0);
-						break
-					case 1785:
-						doStaticSign(0);
-						break
-					case 1806:
-						doStaticSign(0);
-						break
-					case 1816:
-						doStaticSign(0);
-						break
-					case 1832:
-						doStaticSign(0);
-						break
-					case 1849:
-						doStaticSign(0);
-						break
-					case 1868:
-						doStaticSign(0);
-						break
-					case 1887:
-						doStaticSign(0);
-						break
-					case 1909:
-						doStaticSign(0);
-						break
-				}
+			if (step != variables.oldStep) switch (Number.parseInt(step*(1723/1970))) {
+				case 27:
+					doStaticSign(0);
+					break
+				case 130:
+					doStaticSign(0);
+					break
+				case 265:
+					doStaticSign(0);
+					break
+				case 450:
+					doStaticSign(0);
+					break
+				case 645:
+					doStaticSign(0);
+					break
+				case 800:
+					doStaticSign(0);
+					break
+				case 855:
+					doStaticSign(0);
+					break
+				case 889:
+					doStaticSign(0);
+					break
+				case 921:
+					doSimpleJump();
+					break
+				case 938:
+					doStaticSign(0);
+					break
+				case 981:
+					doStaticSign(0);
+					break
+				case 1030:
+					doStaticSign(0);
+					break
+				case 1065:
+					doStaticSign(0);
+					break
+				case 1105:
+					doStaticSign(0);
+					break
+				case 1123:
+					doStaticSign(0);
+					break
+				case 1178:
+					doSimpleJump();
+					break
+				case 1245:
+					doStaticSign(0);
+					break
+				case 1337:
+					doSimpleJump();
+					break
+				case 1345:
+					doStaticSign(0);
+					break
+				case 1432:
+					doStaticSign(0);
+					break
+				case 1454:
+					doStaticSign(0);
+					break
+				case 1495:
+					doStaticSign(0);
+					break
+				case 1521:
+					doStaticSign(0);
+					break
+				case 1558:
+					doStaticSign(0);
+					break
+				case 1578:
+					doStaticSign(0);
+					break
+				case 1599:
+					doStaticSign(0);
+					break
+				case 1618:
+					doStaticSign(0);
+					break
+				case 1647:
+					doStaticSign(0);
+					break
+				case 1657:
+					doStaticSign(0);
+					break
+				case 1692:
+					doStaticSign(0);
+					break
+				case 1713:
+					doStaticSign(0);
+					break
+				case 1723:
+					doJumpscare();
+					break
+				case 1738:
+					doStaticSign(0);
+					break
+				case 1747:
+					doStaticSign(0);
+					break
+				case 1761:
+					doStaticSign(0);
+					break
+				case 1785:
+					doStaticSign(0);
+					break
+				case 1806:
+					doStaticSign(0);
+					break
+				case 1816:
+					doStaticSign(0);
+					break
+				case 1832:
+					doStaticSign(0);
+					break
+				case 1849:
+					doStaticSign(0);
+					break
+				case 1868:
+					doStaticSign(0);
+					break
+				case 1887:
+					doStaticSign(0);
+					break
+				case 1909:
+					doStaticSign(0);
+					break
+			}
 
-				oldStep = step
-				oldBeat = beat
-                if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
-                    clearInterval(loop)
-					state.screenZoom = 0
-                }
-            }, 1000/30)
+			variables.oldStep = step
+			variables.oldBeat = beat
             break
     }
 }

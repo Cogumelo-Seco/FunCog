@@ -13,28 +13,23 @@ export default async (type, { noteClickAuthor, note }, state) => {
             }
             break
         case 'started':
-            let oldStep = 0
-            let loop = setInterval(() => {
-				let beat = state.musicBeat
-				let step = state.musicStep
+            state.musicInfo.variables = {
+                oldBeat: 0,
+            }
+        case 'gameLoop':
+            let beat = state.musicBeat
 
-				if (state.screenZoom < 20 && state.camZooming) {
-					if (beat%4 == 0) state.screenZoom = 20
-				} else if (state.screenZoom <= 0) {
-					state.screenZoom = 0
-					state.camZooming = true
-				} else {
-					state.camZooming = false
-					state.screenZoom -= 2
-				}
+            if (state.screenZoom < 20 && state.camZooming) {
+                if (state.musicInfo.variables.oldBeat != beat && beat%4 == 0) state.screenZoom = 20
+            } else if (state.screenZoom <= 0) {
+                state.screenZoom = 0
+                state.camZooming = true
+            } else {
+                state.camZooming = false
+                state.screenZoom -= 2
+            }
 
-				oldStep = step
-                if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
-                    clearInterval(loop)
-					state.screenZoom = 0
-                }
-            }, 1000/30)
+            state.musicInfo.variables.oldBeat = beat
             break
-        
     }
 }

@@ -2,17 +2,17 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
     try {
         state.music = null
         state.musicChangeBPM = {}
-        state.arrowsInfo = {},
-        state.arrow = {},
-        state.arrowsInfoOpponent = {},
-        state.arrowsInfoOpponent = {},
-        state.positionArrow = {},
-        state.positionArrowOpponent = {},
-        state.screenYMovement = 0,
-        state.screenXMovement = 0,
-        state.screenZoom = 0,
-        state.screenZooming = false,
-        state.screenRotation = 0,
+        state.arrowsInfo = {}
+        state.arrow = {}
+        state.arrowsInfoOpponent = {}
+        state.arrowsInfoOpponent = {}
+        state.positionArrow = {}
+        state.positionArrowOpponent = {}
+        state.screenYMovement = 0
+        state.screenXMovement = 0
+        state.screenZoom = 0
+        state.screenZooming = false
+        state.screenRotation = 0
         state.musicOriginalNotes = []
         state.musicNotes = []
         state.musicOriginalOpponentNotes = []
@@ -33,17 +33,24 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
             misses: 0,
             score: 0,
             combo: 0,
+            bestCombo: 0,
             accuracy: 0,
             accuracyMedia: [],
             rating: {},
             health: 50,
             popups: [],
             lastPopupTime: 0,
+            variables: {},
             playerId: opponentPlayer ? 2 : 1
         }
 
-        let musicData = require(`../../../Musics/data/${musicInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)
+        let musicData = JSON.parse(JSON.stringify(require(`../../../Musics/data/${musicInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)))
         let musicNotes = musicData.song.notes
+        let musicNotesTotal = ((musicNotes.map(a => a.sectionNotes)).map(a => a.length)).reduce((a, b) => a+b)
+
+        state.loadingSong.loaded = 0
+        state.loadingSong.total = musicInfo.toLoad.length
+
         state.musicInfo.events = musicData.song.events
         state.musicBPM = musicData.song.bpm
         try {
@@ -76,20 +83,22 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
                     state.musicOriginalOpponentNotes.push(noteInfo)
                     state.musicOpponentNotes.push(newNoteInfo)
                 }
+
+                if (state.musicNotes.length+state.musicOpponentNotes.length >= musicNotesTotal) load(musicInfo.toLoad[0])
             }
         }
 
-        const newLoad = (msg) => {
+        function newLoad(msg) {
             if (msg) console.log(msg)
             state.loadingSong.loaded += 1
 
-            if (state.loadingSong.loaded >= state.loadingSong.total && !state.music) {
-                state.musicEventListener('loaded', {}, state)
+            if (state.loadingSong.loaded >= state.loadingSong.total && !state.music)
                 loaded()
-            } else if (musicInfo.toLoad[state.loadingSong.loaded]) load(musicInfo.toLoad[state.loadingSong.loaded])
+            else if (musicInfo.toLoad[state.loadingSong.loaded]) 
+                load(musicInfo.toLoad[state.loadingSong.loaded])
         }
 
-        const load = async ({ dir, animationConfigDir}) => {
+        async function load({ dir, animationConfigDir}) {
             let loaded = false
 
             setTimeout(() => {
@@ -97,8 +106,8 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
             }, 10000)
 
             if ([ 'ogg', 'mp3' ].includes(dir.split('.')[dir.split('.').length-1])) {
-                if (state.sounds[dir]) newLoad()
-                else {
+                /*if (state.sounds[dir]?.src) newLoad()
+                else {*/
                     let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/'+dir
 
                     let sound = new Audio()
@@ -114,10 +123,10 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
                     sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
                     sound.src = dir.split('/')[0] == 'Sounds' ? `/${dir}` : link
                     state.sounds[dir] = sound
-                }
+                //}
             } else {
-                if (state.images[dir] || state.sounds[dir]) newLoad()
-                else {
+                /*if (state.images[dir]?.image) newLoad()
+                else {*/
                     let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+dir
                     let animationConfig = animationConfigDir ? JSON.parse(await fetch('https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+animationConfigDir).then(r => r.text())) : null
     
@@ -138,15 +147,13 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
                         image: img,
                         animationConfig
                     }
-                }
+                //}
             }
         }
 
-        state.loadingSong.loaded = 0
-        state.loadingSong.total = musicInfo.toLoad.length
-        load(musicInfo.toLoad[0])
-
         async function loaded() {
+            state.musicEventListener('loaded', {}, state)
+
             if (state.musicOpponentNotes.length <= 0 && state.online) {
                 state.musicOpponentNotes = JSON.parse(JSON.stringify(state.musicNotes));
                 state.musicOriginalOpponentNotes = JSON.parse(JSON.stringify(state.musicOriginalNotes));
@@ -171,11 +178,11 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
                     state.countdown -= 1
                     if (state.countdown <= -1) {
                         state.music?.play()
-                        setTimeout(() => state.musicVoice?.play(), 1000)
+                        state.musicVoice?.play()
 
                         if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
 
-                        state.musicEventListener('started', { difficulty, events: musicData.song.events, listenerState }, state)
+                        state.musicEventListener('started', { difficulty, listenerState }, state)
                     } else {
                         setTimeout(() => startMusic(), 900-(musicData.song.bpm*2))
                         state.playSong(`Sounds/intro${state.countdown}.ogg`)
@@ -295,6 +302,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
             arrowID,
             clicked: false,
             disabled,
+            defaultDisabled: disabled,
             errorWhenNotClicking,
             autoClick,
             type

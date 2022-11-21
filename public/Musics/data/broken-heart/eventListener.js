@@ -1,6 +1,6 @@
 export default async (type, { noteClickAuthor, note, notes, listenerState, difficulty, events }, state) => {
 	const hurtFunction = (hurt) => {
-		state.musicInfo.hurtLevel += 1
+		state.musicInfo.variables.hurtLevel += 1
 
 		state.musicInfo.popups.sonicEXEHitStatic = {
 			image: `imgs/LateNightCityTale/Broken.png`,
@@ -11,7 +11,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			alpha: 0.5
 		}
 
-		if (state.musicInfo.hurtLevel >= 2) {
+		if (state.musicInfo.variables.hurtLevel >= 2) {
 			state.musicInfo.health = -100
 		}
 	}
@@ -41,47 +41,33 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			}
 			break
         case 'started':
-			state.musicInfo.hurtLevel = 0
-			let noteAlpha = 1
-			let addAlpha = true
-			let pauseAlpha = false
+			state.musicInfo.variables = {
+				hurtLevel: 0,
+				noteAlpha: 1,
+				addAlpha: false,
+				pauseAlpha: false
+			}
+			break
+		case 'gameLoop':
+			let variables = state.musicInfo.variables
 
-            let loop = setInterval(() => {
-				let beat = state.musicBeat
+			if (variables.addAlpha) {
+				if (variables.noteAlpha < 1) variables.noteAlpha += 0.002
+				if (variables.noteAlpha >= 1) variables.addAlpha = false
+			} else if (!variables.pauseAlpha) {
+				if (variables.noteAlpha > 0.7) variables.noteAlpha -= 0.002
+				if (variables.noteAlpha <= 0.7) variables.addAlpha = true
+			}
 
-				/*if (state.screenZoom < 10 && state.camZooming) {
-					if (beat%4 == 0) state.screenZoom = 10
-				} else if (state.screenZoom <= 0) {
-					state.screenZoom = 0
-					state.camZooming = true
-				} else {
-					state.camZooming = false
-					state.screenZoom -= 0.5
-				}*/
+			for (let i in state.arrowsInfo) {
+				if (!variables.pauseAlpha) {
+					state.arrowsInfo[i].alpha = variables.noteAlpha
+					state.arrowsInfo[i].noteAlpha = variables.noteAlpha
 
-				if (addAlpha) {
-					if (noteAlpha < 1) noteAlpha += 0.002
-					if (noteAlpha >= 1) addAlpha = false
-				} else if (!pauseAlpha) {
-					if (noteAlpha > 0.7) noteAlpha -= 0.002
-					if (noteAlpha <= 0.7) addAlpha = true
+					state.arrowsInfoOpponent[i].alpha = variables.noteAlpha
+					state.arrowsInfoOpponent[i].noteAlpha = variables.noteAlpha
 				}
-
-				for (let i in state.arrowsInfo) {
-					if (!pauseAlpha) {
-						state.arrowsInfo[i].alpha = noteAlpha
-						state.arrowsInfo[i].noteAlpha = noteAlpha
-
-						state.arrowsInfoOpponent[i].alpha = noteAlpha
-						state.arrowsInfoOpponent[i].noteAlpha = noteAlpha
-					}
-				}
-
-                if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
-                    clearInterval(loop)
-					state.screenZoom = 0
-                }
-            }, 1000/40)
-            break
+			}
+			break
     }
 }

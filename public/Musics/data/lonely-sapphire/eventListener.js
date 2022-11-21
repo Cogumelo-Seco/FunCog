@@ -15,33 +15,36 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			}
 			break
         case 'started':
-			let noteAlpha = 1
-			let addAlpha = true
-			let pauseAlpha = false
+			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content = true
 
-            let loop = setInterval(() => {
-				state.middleScroll = true
+			state.musicInfo.variables = {
+				noteAlpha: 1,
+				addAlpha: true,
+				pauseAlpha: false
+			}
+			break
+		case 'gameLoop':
+			let variables = state.musicInfo.variables
 
-				if (addAlpha) {
-					if (noteAlpha < 1) noteAlpha += 0.002
-					if (noteAlpha >= 1) addAlpha = false
-				} else if (!pauseAlpha) {
-					if (noteAlpha > 0.7) noteAlpha -= 0.002
-					if (noteAlpha <= 0.7) addAlpha = true
+			if (variables.addAlpha) {
+				if (variables.noteAlpha < 1) variables.noteAlpha += 0.002
+				if (variables.noteAlpha >= 1) variables.addAlpha = false
+			} else if (!variables.pauseAlpha) {
+				if (variables.noteAlpha > 0.7) variables.noteAlpha -= 0.002
+				if (variables.noteAlpha <= 0.7) variables.addAlpha = true
+			}
+
+			for (let i in state.arrowsInfo) {
+				if (!variables.pauseAlpha) {
+					state.arrowsInfo[i].alpha = variables.noteAlpha
+					state.arrowsInfo[i].noteAlpha = variables.noteAlpha
 				}
+			}
 
-				for (let i in state.arrowsInfo) {
-					if (!pauseAlpha) {
-						state.arrowsInfo[i].alpha = noteAlpha
-						state.arrowsInfo[i].noteAlpha = noteAlpha
-					}
-				}
-
-                if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
-                    clearInterval(loop)
-					state.screenZoom = 0
-                }
-            }, 1000/40)
+			if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
+				clearInterval(loop)
+				state.screenZoom = 0
+			}
             break
     }
 }
