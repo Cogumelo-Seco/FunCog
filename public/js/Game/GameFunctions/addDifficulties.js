@@ -10,13 +10,13 @@ export default async (state) => {
             name: 'Normal',
             fileNameDifficulty: '',
             color: 'rgb(255, 255, 10)',
-            lifeDrain: 0.5
+            lifeDrain: 0.3
         },
         {// 2
             name: 'Hard',
             fileNameDifficulty: 'hard',
             color: 'rgb(254, 7, 7)',
-            lifeDrain: 1
+            lifeDrain: 0.8
         },
         {// 3
             name: 'Mania',
@@ -28,13 +28,13 @@ export default async (state) => {
             name: 'Alt',
             fileNameDifficulty: 'alt',
             color: 'rgb(232, 105, 236)',
-            lifeDrain: 1.5
+            lifeDrain: 1.2
         },
         {// 5
             name: 'Harder',
             fileNameDifficulty: 'harder',
             color: 'rgb(255, 0, 0)',
-            lifeDrain: 1.5
+            lifeDrain: 1.2
         }
     ]
     

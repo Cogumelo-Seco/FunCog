@@ -37,7 +37,7 @@ export default async (canvas, game, Listener) => {
 
         ctx.drawImage(ratingImage.image, ratingImageX, ratingImageY, ratingImageWidth, ratingImageHeight);
 
-        ctx.fillStyle = game.state.musicInfo.rating?.name == 'good' || game.state.musicInfo.rating?.name == 'sick' ? 'rgb(19, 189, 0)' : 'rgb(220, 0, 0)'
+        ctx.fillStyle = game.state.musicInfo.rating?.media >= 80 ? 'rgb(19, 189, 0)' : 'rgb(220, 50, 50)'
         ctx.fillText(game.state.musicInfo.hitNote?.toFixed(2)+'ms', ratingImageX+ratingImageWidth-(ctx.measureText(game.state.musicInfo.hitNote?.toFixed(2)+'ms').width), ratingImageY+ratingImageHeight+8);
     }
     ctx.globalAlpha = 1
