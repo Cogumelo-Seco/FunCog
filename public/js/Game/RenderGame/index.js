@@ -44,6 +44,9 @@ export default async function renderGame(canvas, game, Listener) {
         case 'loading':
             await require('./RenderLoadingScreen').default(canvas, game, Listener)
             break
+        case 'score':
+            require('./RenderScoreScreen').default(canvas, game, Listener)
+            break
         case 'test':
             require('./RenderTestScreen').default(canvas, game, Listener)
             break

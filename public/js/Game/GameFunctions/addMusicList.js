@@ -318,11 +318,10 @@ export default async (state) => {
         },
         {
             name: 'VS Tricky',
-            menuColor: 'green',
             musics: [
                 {
                     name: 'Improbable-outset',
-                    menuColor: null,
+                    menuColor: 'green',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/trick.png',
@@ -334,7 +333,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Madness',
-                    menuColor: null,
+                    menuColor: 'green',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/trick.png',
@@ -348,7 +347,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Hellclown',
-                    menuColor: null,
+                    menuColor: 'green',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/hellclown.png',
@@ -378,11 +377,10 @@ export default async (state) => {
         },
         {
             name: 'Mid Fight Masses',
-            menuColor: 'rgb(255, 43, 234)',
             musics: [
                 {
                     name: 'Sarvente-Tutorial-Remix',
-                    menuColor: null,
+                    menuColor: 'rgb(255, 43, 234)',
                     difficulties: [ 0, 1, 2, 4 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/mid-fight-masses.png',
@@ -394,7 +392,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Parish',
-                    menuColor: null,
+                    menuColor: 'rgb(255, 43, 234)',
                     difficulties: [ 0, 1, 2, 4 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/mid-fight-masses.png',
@@ -406,7 +404,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Worship',
-                    menuColor: null,
+                    menuColor: 'rgb(255, 43, 234)',
                     difficulties: [ 0, 1, 2, 4 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/mid-fight-masses.png',
@@ -430,7 +428,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Gospel',
-                    menuColor: null,
+                    menuColor: 'rgb(255, 43, 234)',
                     difficulties: [ 0, 1, 2, 4 ],
                     notesImageDir: 'Arrows/sarvente/',
                     backgroundImage: 'backgrounds/mid-fight-masses.png',
@@ -443,7 +441,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Casanova',
-                    menuColor: null,
+                    menuColor: 'rgb(255, 43, 234)',
                     difficulties: [ 0, 1, 2, 4 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/mid-fight-masses.png',
@@ -457,11 +455,10 @@ export default async (state) => {
         },
         {
             name: 'Suicide Mouse',
-            menuColor: 'rgb(60, 60, 60)',
             musics: [
                 {
                     name: 'Unhappy',
-                    menuColor: null,
+                    menuColor: 'rgb(60, 60, 60)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/suicidemouse/',
                     backgroundImage: 'backgrounds/suicidemouse.png',
@@ -477,7 +474,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Happy',
-                    menuColor: null,
+                    menuColor: 'rgb(60, 60, 60)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/suicidemouse/',
                     backgroundImage: 'backgrounds/suicidemouse.png',
@@ -495,7 +492,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Really-Happy',
-                    menuColor: null,
+                    menuColor: 'rgb(60, 60, 60)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/suicidemouse/',
                     backgroundImage: 'backgrounds/suicidemouse.png',
@@ -513,7 +510,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Smile',
-                    menuColor: null,
+                    menuColor: 'rgb(60, 60, 60)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/suicidemouse/',
                     backgroundImage: 'backgrounds/suicidemouse.png',
@@ -531,11 +528,10 @@ export default async (state) => {
         },
         {
             name: 'Dusk Till Dawn',
-            menuColor: 'rgb(196, 0, 244)',
             musics: [
                 {
                     name: 'Dusk-Till-Dawn',
-                    menuColor: null,
+                    menuColor:  'rgb(196, 0, 244)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/dusk-till-dawn/',
                     backgroundImage: 'backgrounds/dusk-till-dawn.png',
@@ -670,11 +666,10 @@ export default async (state) => {
         },
         {
             name: 'QT',
-            menuColor: 'rgb(251, 150, 183)',
             musics: [
                 {
                     name: 'Carefree',
-                    menuColor: null,
+                    menuColor: 'rgb(251, 150, 183)',
                     difficulties: [ 0, 1, 2, 5 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/qt.png',
@@ -686,7 +681,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Careless',
-                    menuColor: null,
+                    menuColor: 'rgb(251, 150, 183)',
                     difficulties: [ 0, 1, 2, 5 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/qt.png',
@@ -698,7 +693,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Censory-Overload',
-                    menuColor: null,
+                    menuColor: 'rgb(251, 150, 183)',
                     difficulties: [ 0, 1, 2, 5 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/qt.png',
@@ -710,7 +705,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Termination',
-                    menuColor: null,
+                    menuColor: 'rgb(251, 150, 183)',
                     difficulties: [ 2, 5, 3 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/qt.png',
@@ -729,7 +724,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Cessation',
-                    menuColor: null,
+                    menuColor: 'rgb(251, 150, 183)',
                     difficulties: [ 1 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/qt.png',
@@ -741,7 +736,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Interlope',
-                    menuColor: null,
+                    menuColor: 'rgb(251, 150, 183)',
                     difficulties: [ 1 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/qt.png',
@@ -755,11 +750,10 @@ export default async (state) => {
         },
         {
             name: 'SonicEXE',
-            menuColor: 'rgb(0, 0, 110)',
             musics: [
                 {
                     name: 'Too-Slow',
-                    menuColor: null,
+                    menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -783,7 +777,7 @@ export default async (state) => {
                 },
                 {
                     name: 'You-Cant-Run',
-                    menuColor: null,
+                    menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -801,7 +795,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Triple-Trouble',
-                    menuColor: null,
+                    menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -817,7 +811,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Cycles',
-                    menuColor: null,
+                    menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -833,7 +827,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Endless',
-                    menuColor: null,
+                    menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -850,7 +844,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Sunshine',
-                    menuColor: null,
+                    menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -866,7 +860,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Chaos',
-                    menuColor: null,
+                    menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -882,7 +876,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Faker',
-                    menuColor: null,
+                    menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -898,7 +892,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Black-Sun',
-                    menuColor: null,
+                    menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -914,7 +908,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Milk',
-                    menuColor: null,
+                    menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 1 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -927,7 +921,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Too-Fest',
-                    menuColor: null,
+                    menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -943,7 +937,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Execution',
-                    menuColor: null,
+                    menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -958,11 +952,10 @@ export default async (state) => {
         },
         {
             name: 'Late Night City Tale',
-            menuColor: 'rgb(138, 12, 162)',
             musics: [
                 {
                     name: 'Azure-Encounter',
-                    menuColor: null,
+                    menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/LNCTNotes/',
                     backgroundImage: 'backgrounds/LateNightCityTale.jpg',
@@ -987,7 +980,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Secret-Marilee',
-                    menuColor: null,
+                    menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/LNCTNotes/',
                     backgroundImage: 'backgrounds/LateNightCityTale.jpg',
@@ -1013,7 +1006,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Broken-Heart',
-                    menuColor: null,
+                    menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/LNCTNotes/',
                     backgroundImage: 'backgrounds/LateNightCityTale.jpg',
@@ -1036,7 +1029,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Aquaphobia',
-                    menuColor: null,
+                    menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/LNCTNotes/',
                     backgroundImage: 'backgrounds/LateNightCityTale.jpg',
@@ -1066,7 +1059,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Lonely-Sapphire',
-                    menuColor: null,
+                    menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/LNCTNotes/',
                     backgroundImage: 'backgrounds/LateNightCityTale.jpg',

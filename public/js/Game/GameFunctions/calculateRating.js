@@ -4,11 +4,11 @@ export default (time, state) => {
     let ratings = [
         {
             name: 'shit',
-            media: 50
+            media: 40
         },
         {
             name: 'bad',
-            media: 75
+            media: 65
         },
         {
             name: 'good',

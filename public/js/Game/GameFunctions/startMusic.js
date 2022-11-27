@@ -25,10 +25,11 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
             splashResize: musicInfo.splashResize,
             notesImageDir: musicInfo.notesImageDir,
             backgroundImage: musicInfo.backgroundImage,
+            menuColor: musicInfo.menuColor,
             lifeDrain: difficulty.lifeDrain || 0,
             dev: musicInfo.dev,
             defaultBackgroundImage: musicInfo.backgroundImage,
-            difficulty: difficulty.name,
+            difficulty,
             hitNote: 0,
             misses: 0,
             score: 0,
@@ -36,12 +37,19 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
             bestCombo: 0,
             accuracy: 0,
             accuracyMedia: [],
+            linearAccuracyMedia: [],
             rating: {},
             health: 50,
             popups: [],
             lastPopupTime: 0,
             variables: {},
-            playerId: opponentPlayer ? 2 : 1
+            playerId: opponentPlayer ? 2 : 1,
+            judgements: {
+                shit: 0,
+                bad: 0,
+                good: 0,
+                sick: 0,
+            }
         }
 
         let musicData = JSON.parse(JSON.stringify(require(`../../../Musics/data/${musicInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)))

@@ -11,7 +11,7 @@ export default async (canvas, game, Listener) => {
     if (game.state.online) ctx.fillText(musicInfoTxtOpponent, canvas.width/4-(ctx.measureText(musicInfoTxtOpponent).width/2), canvas.height-20);
 
     ctx.font = `bold 10px Arial`
-    ctx.fillText(`Difficulty: ${game.state.musicInfo.difficulty}`, 2, canvas.height-5);
+    ctx.fillText(`Difficulty: ${game.state.musicInfo.difficulty.name}`, 2, canvas.height-5);
     ctx.fillText(`Beat: ${game.state.musicBeat}`, 2, canvas.height-15);
     ctx.fillText(`Step: ${game.state.musicStep}`, 2, canvas.height-25); 
     if (game.state.musicInfo.dev) {

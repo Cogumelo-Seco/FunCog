@@ -37,7 +37,12 @@ export default async (canvas, game, Listener) => {
         if (Listener.state.arrows[arrowID]?.click || autoClickNote) {
             if (game.state.botPlay || autoClickNote) {
                 Listener.state.arrows[arrowID].inAutoClick = autoClickNote.autoClick
-                if (!autoClickNote.clicked) game.verifyClick({ arrowID, listenerState: Listener.state, bot: true })
+                if (!autoClickNote.clicked) {
+                    if (game.state.debug) {
+                        setTimeout(() => game.verifyClick({ arrowID, listenerState: Listener.state, bot: true }), Math.floor(Math.random()*120))
+                        autoClickNote.clicked = true
+                    } else game.verifyClick({ arrowID, listenerState: Listener.state, bot: true })
+                }
                 Listener.state.arrows[arrowID].state = 'onNote'
                 Listener.state.arrows[arrowID].click = true
             }

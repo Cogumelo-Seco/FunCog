@@ -28,9 +28,10 @@ export default async({ arrowID, listenerState, bot }, state) => {
 
         let rating = state.calculateRating(note.hitNote)
         state.animations.ratingImage.frame = 0
-        state.musicInfo.accuracyMedia.push(rating.media)
+        state.musicInfo.accuracyMedia.push((rating.media < 100 ? rating.media+((note.hitNote*-1)/10) : rating.media))
         state.musicInfo.hitNote = note.hitNote*-1
         state.musicInfo.score += Number((100*(rating.media/100)).toFixed(0))
+        state.musicInfo.judgements[rating.name] += 1
 
         if (note.hold > 0) {
             let loop = setInterval(() => {
@@ -46,13 +47,14 @@ export default async({ arrowID, listenerState, bot }, state) => {
         }
     }
 
-    if (notes.length >= 3) {
+    if (notes.length >= 3 || notes.length == 2 && Math.abs(notes[0].time-notes[1].time)*100 <= 80) {
         for (let i in notes) {
             if (!notes[i].errorWhenNotClicking && !notes.find(n => n.errorWhenNotClicking) || notes[i].errorWhenNotClicking) noteClick(notes[i])
         }
     } else {
         let note = notes.sort((a, b) => a.hitNote < b.hitNote)[0]
         if (note) noteClick(note)
+        else if (notes[0]) noteClick(notes[0])
     }
 
     

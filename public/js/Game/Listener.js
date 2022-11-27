@@ -8,12 +8,14 @@ export default function createListener(socket) {
             y: NaN,
             mouseOnHover: false,
             mouseInfoType: 'percent',
+            lastMoveTime: 0
         }
     }
 
     require('./ListenerFunctions/addButtons').default(state)
 
     document.onmousemove = (event) => {
+        state.mouseInfo.lastMoveTime = +new Date()
         state.mouseInfo.x = event.pageX/window.innerWidth
         state.mouseInfo.y = event.pageY/window.window.innerHeight
 
@@ -118,7 +120,17 @@ export default function createListener(socket) {
 
         if (keyPressed == 'Enter' && state.game.state.gameStage == 'dead' && !state.game.state.musicMenu?.src.includes('gameOverEnd') && state.game.state.gameStageTime+2000 < +new Date()) {
             state.game.state.playSong('Sounds/gameOverEnd.ogg', { musicMenu: true })
+            state.game.state.selectMusicMenu.musicSelect = -1
             setTimeout(() => state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu'), 1500)
+        }
+
+        if (state.game.state.gameStage == 'score' && on) {
+            switch (keyPressed) {
+                case 'Enter':
+                    state.game.state.selectMusicMenu.musicSelect = -1
+                    state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu')
+                    break
+            }
         }
 
         if (state.game.state.gameStage == 'selectMusic' && on) {
@@ -251,7 +263,7 @@ export default function createListener(socket) {
                             currentConfig.content = currentConfig.content ? false : true
                             break
                         case 'KeyBind':
-                            state.onChangeKeyBind = true
+                            state.f = true
                             break
                     }
                     

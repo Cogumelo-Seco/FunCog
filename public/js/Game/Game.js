@@ -3,11 +3,12 @@ function createGame(Listener, canvas, socket) {
         speed: 1,
         fps: '0-0',
         renderType: 'limited',
-        online: true,
+        online: false,
         waiting: true,
         serverId: null,
         serverInfo: {},
         gameLoopFPSControlTime: 0,
+        gameLoopFPSControlTime2: 0,
         rainbowColor: 0,
         debug: false,
         gameStage: 'loading',
@@ -120,8 +121,20 @@ function createGame(Listener, canvas, socket) {
         musicVoice: null,
         musicEventListener: () => null,
         notesImageDir: null,
-        musicInfo: {},
-        musicInfoOpponent: {},
+        musicInfo: {
+            name: 'Test',
+            menuColor: 'purple',
+            difficulty: {
+                name: 'Mania',
+                fileNameDifficulty: 'hard',
+                color: 'rgb(255, 43, 234)',
+                lifeDrain: 1
+            },
+            judgements: {}
+        },
+        musicInfoOpponent: {
+            judgements: {}
+        },
         countdown: 4,
 
         arrowsInfo: {},
@@ -373,7 +386,7 @@ function createGame(Listener, canvas, socket) {
                 state.music = null
                 state.smallFunctions.resetScreen()
                 if (state.online) state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
-                else state.smallFunctions.redirectGameStage('selectMusic', 'menu')
+                else state.smallFunctions.redirectGameStage('score', 'menu')
             }
 
             for (let i in state.musicChangeBPM) {
@@ -435,6 +448,12 @@ function createGame(Listener, canvas, socket) {
 
 
             /* !!!!!!! FPS LIMITADO !!!!!!! */
+
+            if (state.gameLoopFPSControlTime2+1000 <= +new Date()) {
+                state.gameLoopFPSControlTime2 = +new Date()
+                
+                if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) state.musicInfo.linearAccuracyMedia.push(state.musicInfo.accuracy || 1)
+            }
 
             if (state.gameLoopFPSControlTime+30 <= +new Date()) {
                 state.gameLoopFPSControlTime = +new Date()

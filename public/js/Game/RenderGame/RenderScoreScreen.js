@@ -1,9 +1,17 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
-    ctx.fillStyle = 'rgb(255, 255, 255)'
+    /*ctx.fillStyle = 'rgb(255, 255, 255)'
     ctx.font = `bold ${(canvas.width+canvas.height)*0.04}px Arial`
-    ctx.fillText('You Won', canvas.width/2-(ctx.measureText('You Won').width/2), 80);
+    ctx.fillText('You Won', canvas.width/2-(ctx.measureText('You Won').width/2), 80);*/
+
+    ctx.font = `bold ${(canvas.width+canvas.height)*0.03}px Arial`
+
+    ctx.fillStyle = game.state.musicInfo.menuColor || 'white'
+    ctx.fillText(game.state.musicInfo.name, canvas.width/2-((ctx.measureText(game.state.musicInfo.name).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2), 80);
+
+    ctx.fillStyle = game.state.musicInfo.difficulty.color || 'white'
+    ctx.fillText(`(${game.state.musicInfo.difficulty.name})`, 10+canvas.width/2+((ctx.measureText(game.state.musicInfo.name).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2-(ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)), 80);
 
     let musicInfoPopupWidth = canvas.width/4
     let musicInfoPopupHeight = musicInfoPopupWidth//canvas.height-(120/1.5*2)
@@ -13,7 +21,7 @@ export default async (canvas, game, Listener) => {
     ctx.font = `bold ${musicInfoPopupWidth*0.1}px Arial`
     ctx.fillStyle = 'rgb(50, 150, 40)'
     if (game.state.online) ctx.fillText('Your Results', musicInfoPopupX+(musicInfoPopupWidth/2)-(ctx.measureText('Your Results').width/2), musicInfoPopupY-5);
-    ctx.fillStyle = 'rgb(130, 200, 120)'
+    ctx.fillStyle = game.state.online ? 'rgb(130, 200, 120)' : 'rgb(200, 200, 200)'
     ctx.fillRect(musicInfoPopupX, musicInfoPopupY, musicInfoPopupWidth, musicInfoPopupHeight)
 
     let msgArr = [
@@ -22,23 +30,23 @@ export default async (canvas, game, Listener) => {
             type: 'title'
         },
         {
-            msg: 'Score',
+            msg: 'Score:',
             msg2: (game.state.musicInfo.score || 0),
             type: 'stats'
         },
         {
-            msg: 'Misses',
+            msg: 'Misses:',
             msg2: (game.state.musicInfo.misses || 0),
             type: 'stats'
         },
         {
-            msg: 'Best Combo',
+            msg: 'Best Combo:',
             msg2: (game.state.musicInfo.bestCombo || 0),
             type: 'stats'
         },
         {
-            msg: 'Accuracy',
-            msg2: (game.state.musicInfo.accuracy || 0),
+            msg: 'Accuracy:',
+            msg2: (game.state.musicInfo.accuracy?.toFixed(2)+'%' || '0%'),
             type: 'stats'
         },
         {
@@ -46,13 +54,13 @@ export default async (canvas, game, Listener) => {
             type: 'title'
         },
         {
-            msg: 'shit',
-            msg2: 'good',
+            msg: 'sick',
+            msg2: 'bad',
             type: 'judgements'
         },
         {
-            msg: 'sick',
-            msg2: 'sick',
+            msg: 'good',
+            msg2: 'shit',
             type: 'judgements'
         },
     ]
@@ -111,8 +119,6 @@ export default async (canvas, game, Listener) => {
         }
     }
 
-    let accuracyMedia = game.state.musicInfo.accuracyMedia//[100,100,90,90,0,0,100,90,0,90,0,100]
-
     let graphicWidth = canvas.width/4
     let graphicHeight = graphicWidth/2
     let graphicX = canvas.width-(canvas.width/12)-graphicWidth
@@ -120,34 +126,35 @@ export default async (canvas, game, Listener) => {
     
 
     ctx.strokeStyle = 'rgb(200, 200, 200)'
-    ctx.lineWidth = 8
+    ctx.lineWidth = 5
     ctx.rect(graphicX, graphicY, graphicWidth, graphicHeight)
     ctx.stroke()
     //ctx.fillStyle = 'rgb(100, 100, 100)'
-    //ctx.fillRect(graphicX, graphicY, graphicWidth, graphicHeight)
+    //ctx.fillRect(graphicX, graphicY, graphicWidth, graphicHeight)*
 
     graphicX += 10
     graphicY += 10
     graphicHeight -= 20
     graphicWidth -= 20
 
-    ctx.lineWidth = 4
-    let lastGraphicPos = { x: graphicX,  y: graphicY }
-    for (let i in accuracyMedia) {
-        ctx.strokeStyle = accuracyMedia[i] <= 50 ? 'red' : 'green'
+    function renderGraphic(graphicData, color) {
+        ctx.lineWidth = 1
+        let lastGraphicInfo = { x: graphicX,  y: graphicY }
+        for (let i in graphicData) {
+            ctx.strokeStyle = color
 
-        let x = graphicX+(graphicWidth*(i/(accuracyMedia.length-1)))-ctx.lineWidth
-        let y = graphicY+(graphicHeight-graphicHeight*((accuracyMedia[i] || 1)/100))
+            let x = graphicX+(graphicWidth*(i/(graphicData.length-1)))-ctx.lineWidth
+            let y = graphicY+(graphicHeight-graphicHeight*((graphicData[i] || 1)/100))
 
-        ctx.beginPath();
-        ctx.moveTo(lastGraphicPos.x, lastGraphicPos.y);
-        ctx.lineTo(x, y);
-        ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(lastGraphicInfo.x, lastGraphicInfo.y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
 
-        lastGraphicPos = { x, y }
-        
-        //ctx.fillRect(graphicX+(graphicWidth*(i/(accuracyMedia.length-1))), graphicY+(graphicHeight-graphicHeight*((accuracyMedia[i] || 1)/100)), 10, 10)
+            lastGraphicInfo = { x, y }
+        }
     }
-    //graphic
-
+    
+    renderGraphic(game.state.musicInfo.accuracyMedia, 'green')
+    renderGraphic(game.state.musicInfo.linearAccuracyMedia, 'cyan')
 }
