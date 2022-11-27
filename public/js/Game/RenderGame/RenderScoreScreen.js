@@ -14,7 +14,7 @@ export default async (canvas, game, Listener) => {
     ctx.fillText(`(${game.state.musicInfo.difficulty.name})`, 10+canvas.width/2+((ctx.measureText(game.state.musicInfo.name).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2-(ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)), 80);
 
     let musicInfoPopupWidth = canvas.width/4
-    let musicInfoPopupHeight = musicInfoPopupWidth//canvas.height-(120/1.5*2)
+    let musicInfoPopupHeight = musicInfoPopupWidth
     let musicInfoPopupX = canvas.width/12
     let musicInfoPopupY = 120+((canvas.height-120)/2-(musicInfoPopupHeight/2))
 
@@ -26,7 +26,7 @@ export default async (canvas, game, Listener) => {
 
     let msgArr = [
         {
-            msg: 'Stats',
+            msg: game.state.botPlay ? 'Bongo Cat' : 'Stats',
             type: 'title'
         },
         {
@@ -66,7 +66,7 @@ export default async (canvas, game, Listener) => {
     ]
 
     let resizeMsg = 0.07
-    let msgY = musicInfoPopupY+(musicInfoPopupWidth*resizeMsg*1.5)//-((msgArr.length-1)*(musicInfoPopupWidth*resizeMsg)/2)
+    let msgY = musicInfoPopupY+(musicInfoPopupWidth*resizeMsg*1.5)
     for (let i in msgArr) {
         resizeMsg = 0.07
         let msg = msgArr[i]
@@ -129,8 +129,6 @@ export default async (canvas, game, Listener) => {
     ctx.lineWidth = 5
     ctx.rect(graphicX, graphicY, graphicWidth, graphicHeight)
     ctx.stroke()
-    //ctx.fillStyle = 'rgb(100, 100, 100)'
-    //ctx.fillRect(graphicX, graphicY, graphicWidth, graphicHeight)*
 
     graphicX += 10
     graphicY += 10
