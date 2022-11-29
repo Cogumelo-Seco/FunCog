@@ -59,7 +59,8 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				oldBeat: 0,
 				noteAlpha: 1,
 				addAlpha: true,
-				pauseAlpha: false
+				pauseAlpha: false,
+				FPSControlTime: 0
 			}
 			break
 		case 'gameLoop':
@@ -68,9 +69,13 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			let beat = state.musicBeat
 			let currentTime = state.music?.currentTime
 
-			if (beat >= 48 && beat <= 272 || beat >= 376 && beat <= 568) {
-				state.screenXMovement = Number.parseInt(Math.random()*4)-2
-				state.screenYMovement = Number.parseInt(Math.random()*4)-2
+			if (variables.FPSControlTime+60 <= +new Date()) {
+				variables.FPSControlTime = +new Date()
+
+				if (beat >= 48 && beat <= 272 || beat >= 376 && beat <= 568) {
+					state.screenXMovement = Number.parseInt(Math.random()*4)-2
+					state.screenYMovement = Number.parseInt(Math.random()*4)-2
+				}
 			}
 
 			if (state.screenZoom < 10 && state.camZooming) {

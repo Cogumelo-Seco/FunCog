@@ -84,7 +84,12 @@ export default function createListener(socket) {
         }
 
         if (state.game.state.gameStage == 'game') {
-            if (keyPressed == 'KeyR' && on && !state.game.state.online && !state.game.state.smallFunctions.getConfig('botPlay')) state.game.state.musicInfo.health = -100
+            if (keyPressed == 'KeyR' && on && !state.game.state.online) {
+                let botPlay = state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content
+                state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
+                state.game.state.musicInfo.health = -100
+                setTimeout(() => state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = botPlay, 500)
+            }
 
             if (keyPressed == 'Enter' && on && document.getElementById('gameVideo').src && state.game.state.music.currentTime <= 0) document.getElementById('gameVideo').currentTime = document.getElementById('gameVideo').duration
 

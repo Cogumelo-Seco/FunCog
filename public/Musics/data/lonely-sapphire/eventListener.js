@@ -13,15 +13,20 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				state.arrowsInfo[i].shadowColor = '#d20ef1'
 				state.arrowsInfo[i].noteShadowColor = '#d20ef1'
 			}
-			break
-        case 'started':
-			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content = true
 
 			state.musicInfo.variables = {
 				noteAlpha: 1,
 				addAlpha: true,
-				pauseAlpha: false
+				pauseAlpha: false,
+				MiddleScroll: state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content
 			}
+
+			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content = true
+			break
+        case 'started':
+			break
+		case 'end':
+			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content = state.musicInfo.variables.MiddleScroll
 			break
 		case 'gameLoop':
 			let variables = state.musicInfo.variables

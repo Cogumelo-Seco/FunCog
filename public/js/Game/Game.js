@@ -294,6 +294,7 @@ function createGame(Listener, canvas, socket) {
                 state.waiting = true
                 state.serverId = null
                 state.serverInfo = {}
+                state.musicEventListener('end', {}, state)
                 state.smallFunctions.redirectGameStage('onlineServerList')
                 state.smallFunctions.resetScreen()
                 state.music?.pause()
@@ -380,6 +381,7 @@ function createGame(Listener, canvas, socket) {
             state.musicVoice?.pause()
             state.music.currentTime = 0
             state.animations.BFDead.frame = 0
+            state.musicEventListener('end', {}, state)
             state.smallFunctions.redirectGameStage('dead')
             state.smallFunctions.resetScreen()
             state.waiting = true
@@ -410,6 +412,7 @@ function createGame(Listener, canvas, socket) {
             state.musicOpponentNotes = []
             state.music = null
             state.smallFunctions.resetScreen()
+            state.musicEventListener('end', {}, state)
             if (state.online) state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
             else state.smallFunctions.redirectGameStage('score', 'menu')
         }
