@@ -38,7 +38,7 @@ export default async({ arrowID, listenerState, bot }, state) => {
 
         let rating = state.calculateRating(bestNote.hitNote)
         state.animations.ratingImage.frame = 0
-        state.musicInfo.accuracyMedia.push((rating.media < 100 ? rating.media+((bestNote.hitNote*-1)/10) : rating.media))
+        state.musicInfo.accuracyMedia.push((rating.media < 100 ? rating.media+((bestNote.hitNote*-1)/9) : rating.media))
         state.musicInfo.hitNote = bestNote.hitNote*-1
         state.musicInfo.score += Number((100*(rating.media/100)).toFixed(0))
         state.musicInfo.judgements[rating.name] += 1
@@ -75,8 +75,8 @@ export default async({ arrowID, listenerState, bot }, state) => {
         noteClick(bestNote)
     }
 
-    
-    if (!notes[0] && state.musicNotes.filter((n) => !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(state.arrowsSize**state.resizeNote*3))[0]) {
+    state.smallFunctions.getConfig('GhostTapping')
+    if (!notes[0] && (state.smallFunctions.getConfig('GhostTapping') ? state.musicNotes.filter((n) => !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(state.arrowsSize**state.resizeNote*3))[0] : true)) {
         state.musicInfo.accuracyMedia.push(1)
         state.musicInfo.misses += 1
         state.musicInfo.score -= 50

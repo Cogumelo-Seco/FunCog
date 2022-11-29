@@ -1,0 +1,24 @@
+export default async (type, { noteClickAuthor, note, notes, listenerState, difficulty, events }, state) => {
+    switch (type) {
+		case 'started':
+			state.musicInfo.variables = {
+				oladBeat: 0,
+			}
+			break
+        case 'gameLoop':
+			let beat = state.musicBeat
+
+			if (state.screenZoom < 20 && state.camZooming) {
+				if (state.musicInfo.variables.oladBeat != beat && beat%4 == 0) state.screenZoom = 20
+			} else if (state.screenZoom <= 0) {
+				state.screenZoom = 0
+				state.camZooming = true
+			} else {
+				state.camZooming = false
+				state.screenZoom -= 2
+			}
+
+			state.musicInfo.variables.oladBeat = beat
+            break
+    }
+}

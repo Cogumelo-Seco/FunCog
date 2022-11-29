@@ -71,8 +71,8 @@ function createGame(Listener, canvas, socket) {
                     content: true
                 },
                 {
-                    name: 'Game Info',
-                    id: 'GameInfo',
+                    name: 'Ghost Tapping',
+                    id: 'GhostTapping',
                     type: 'Boolean',
                     content: true
                 },
@@ -82,20 +82,28 @@ function createGame(Listener, canvas, socket) {
                     type: 'Boolean',
                     content: true
                 },
-                
-                {
-                    name: 'Higher FPS in menus',
-                    id: 'menuFPSUnlimit',
-                    type: 'Boolean',
-                    content: true
-                },
                 {
                     name: 'Bongo Cat',
                     id: 'botPlay',
                     type: 'Boolean',
                     content: false
                 },
-                
+                {
+                    name: 'Game',
+                    type: 'ConfigTitle'
+                },
+                {
+                    name: 'Game Info',
+                    id: 'GameInfo',
+                    type: 'Boolean',
+                    content: true
+                },
+                {
+                    name: 'Higher FPS in menus',
+                    id: 'menuFPSUnlimit',
+                    type: 'Boolean',
+                    content: true
+                },
             ],
             settingsSelect: 0
         },
@@ -367,7 +375,7 @@ function createGame(Listener, canvas, socket) {
             }
         }
 
-        if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.smallFunctions.getConfig('botPlay') && !state.debug && state.music?.currentTime > 3) {
+        if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.smallFunctions.getConfig('botPlay') && !state.debug && state.music?.currentTime > 1) {
             state.music?.pause()
             state.musicVoice?.pause()
             state.music.currentTime = 0
@@ -395,7 +403,7 @@ function createGame(Listener, canvas, socket) {
         let musicDuration = state.music?.duration
         let musicCurrentTime = state.music?.currentTime
 
-        if (musicCurrentTime > 3 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
+        if (musicCurrentTime > 1 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
             state.waiting = true
             state.musicInfo.health = 50
             state.musicNotes = []

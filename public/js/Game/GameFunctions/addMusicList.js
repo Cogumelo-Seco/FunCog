@@ -1129,11 +1129,10 @@ export default async (state) => {
         },
         {
             name: 'VS Chira',
-            menuColor: 'rgb(86, 76, 74)',
             musics: [
                 {
                     name: 'Molly-Howdy',
-                    menuColor: null,
+                    menuColor: 'rgb(86, 76, 74)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/VSChira/',
                     backgroundImage: 'backgrounds/VSChira.jpg',
@@ -1147,7 +1146,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Goody-Two-Shoes',
-                    menuColor: null,
+                    menuColor: 'rgb(86, 76, 74)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/VSChira/',
                     backgroundImage: 'backgrounds/VSChira.jpg',
@@ -1161,7 +1160,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Cab-Calloway',
-                    menuColor: null,
+                    menuColor: 'rgb(86, 76, 74)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/VSChira/',
                     backgroundImage: 'backgrounds/VSChira.jpg',
@@ -1171,6 +1170,105 @@ export default async (state) => {
                         { dir: 'Arrows/VSChira/Arrows.png', animationConfigDir: 'Arrows/VSChira/Arrows.json' },
                         { dir: 'Musics/musics/cab-calloway/Inst.ogg' },
                         { dir: 'Musics/musics/cab-calloway/Voices.ogg' },
+                    ]
+                },
+            ]
+        },
+        {
+            name: 'VS Kapi',
+            musics: [
+                {
+                    name: 'Wocky',
+                    menuColor: '#7b8191',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/VSKapi/',
+                    backgroundImage: 'backgrounds/VSKapi.jpg',
+                    mod: 'VSKapi',
+                    toLoad: [
+                        { dir: 'Arrows/VSKapi/Arrows.png', animationConfigDir: 'Arrows/VSKapi/Arrows.json' },
+                        { dir: 'Musics/musics/wocky/Inst.ogg' },
+                        { dir: 'Musics/musics/wocky/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Beathoven',
+                    menuColor: '#7b8191',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/VSKapi/',
+                    backgroundImage: 'backgrounds/VSKapi.jpg',
+                    mod: 'VSKapi',
+                    toLoad: [
+                        { dir: 'Arrows/VSKapi/Arrows.png', animationConfigDir: 'Arrows/VSKapi/Arrows.json' },
+                        { dir: 'Musics/musics/beathoven/Inst.ogg' },
+                        { dir: 'Musics/musics/beathoven/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Hairball',
+                    menuColor: '#7b8191',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/VSKapi/',
+                    backgroundImage: 'backgrounds/VSKapi.jpg',
+                    mod: 'VSKapi',
+                    toLoad: [
+                        { dir: 'Arrows/VSKapi/Arrows.png', animationConfigDir: 'Arrows/VSKapi/Arrows.json' },
+                        { dir: 'Musics/musics/hairball/Inst.ogg' },
+                        { dir: 'Musics/musics/hairball/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Nyaw',
+                    menuColor: '#7b8191',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/VSKapi/',
+                    backgroundImage: 'backgrounds/VSKapi.jpg',
+                    mod: 'VSKapi',
+                    toLoad: [
+                        { dir: 'Arrows/VSKapi/Arrows.png', animationConfigDir: 'Arrows/VSKapi/Arrows.json' },
+                        { dir: 'Musics/musics/nyaw/Inst.ogg' },
+                        { dir: 'Musics/musics/nyaw/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Flatzone',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/VSKapi/',
+                    backgroundImage: 'backgrounds/VSKapi.jpg',
+                    mod: 'VSKapi',
+                    toLoad: [
+                        { dir: 'Arrows/VSKapi/Arrows.png', animationConfigDir: 'Arrows/VSKapi/Arrows.json' },
+                        { dir: 'Musics/musics/flatzone/Inst.ogg' },
+                        { dir: 'Musics/musics/flatzone/Voices.ogg' },
+                    ]
+                },
+            ]
+        },
+        {
+            name: 'VS Zardy',
+            musics: [
+                {
+                    name: 'Foolhardy',
+                    menuColor: '#ff8e3e',
+                    difficulties: [ 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/VSZardy.jpg',
+                    mod: 'VSZardy',
+                    toLoad: [
+                        { dir: 'Musics/musics/foolhardy/Inst.ogg' },
+                        { dir: 'Musics/musics/foolhardy/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Bushwhack',
+                    menuColor: '#ff8e3e',
+                    difficulties: [ 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/VSZardy.jpg',
+                    mod: 'VSZardy',
+                    toLoad: [
+                        { dir: 'Musics/musics/bushwhack/Inst.ogg' },
+                        { dir: 'Musics/musics/bushwhack/Voices.ogg' },
                     ]
                 },
             ]
