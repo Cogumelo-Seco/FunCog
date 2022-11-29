@@ -64,14 +64,15 @@ export default async (canvas, game, Listener) => {
     ctx.font = `bold 15px Arial`
     ctx.fillText(mod.musics.length, canvas.width/2-(ctx.measureText(mod.musics.length).width/2), 130);
 
-    ctx.font = `bold 20px Arial`
     ctx.globalAlpha = 0.5
     if (modPrevious) {
+        ctx.font = `bold 20px Arial`
         ctx.fillText(modPrevious.name, canvas.width/6-(ctx.measureText(modPrevious.name).width/2), 110);
         ctx.font = `bold 10px Arial`
         ctx.fillText(modPrevious.musics.length, canvas.width/6-(ctx.measureText(modPrevious.musics.length).width/2), 125);
     }
     if (modNext) {
+        ctx.font = `bold 20px Arial`
         ctx.fillText(modNext.name, (canvas.width-canvas.width/6)-(ctx.measureText(modNext.name).width/2), 110);
         ctx.font = `bold 10px Arial`
         ctx.fillText(modNext.musics.length, (canvas.width-canvas.width/6)-(ctx.measureText(modNext.musics.length).width/2), 125);

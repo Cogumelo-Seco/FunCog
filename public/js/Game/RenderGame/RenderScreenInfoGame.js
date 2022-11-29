@@ -14,9 +14,15 @@ export default async (canvas, game, Listener) => {
     ctx.fillText(`Difficulty: ${game.state.musicInfo.difficulty.name}`, 2, canvas.height-5);
     ctx.fillText(`Beat: ${game.state.musicBeat}`, 2, canvas.height-15);
     ctx.fillText(`Step: ${game.state.musicStep}`, 2, canvas.height-25); 
-    if (game.state.musicInfo.dev) {
+
+    let alertImage = game.state.images[`imgs/alert.png`]?.image
+    if (game.state.musicInfo.dev && alertImage) {
+        let X = canvas.width/2+canvas.width*0.25/2
+        let Y = 30
+        ctx.font = `bold 15px Arial`
         ctx.fillStyle = 'rgb(255, 0, 0)'
-        ctx.fillText(`In development`, 2, canvas.height-35); 
+        ctx.drawImage(alertImage, X+5, Y-28, 30, 30)
+        ctx.fillText('In development', X+35, Y-(15/2));
     }
     
     let introImage = game.state.images[`intro/${game.state.countdown}.png`]

@@ -15,42 +15,51 @@ export default async function renderGame(canvas, game, Listener) {
     canvas.height = window.innerHeight+(game.state.screenZoom/2)
     canvas.style.backgroundImage = 'none'
     const ctx = canvas.getContext('2d')
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = `hsl(${360-game.state.rainbowColor}, 100%, 1%)`
 
     await game.gameLoop()
 
     switch (game.state.gameStage) {
         case 'game':
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
             require('./RenderScreenGame').default(canvas, game, Listener)
             require('./RenderArrows').default(canvas, game, Listener)
             require('./RenderNotes').default(canvas, game, Listener)
             require('./RenderBongoCat').default(canvas, game, Listener)
-            require('./RenderBars').default(canvas, game, Listener)
             require('./RenderScreenInfoGame').default(canvas, game, Listener)
+            require('./RenderBars').default(canvas, game, Listener)
             require('./RenderPopUps').default(canvas, game, Listener)
             break
         case 'menu':
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
             require('./RenderMenuScreen').default(canvas, game, Listener)
             break
         case 'settings':
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
             require('./RenderSettingsScreen').default(canvas, game, Listener)
             break
         case 'onlineServerList':
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
             require('./RenderOnlineServerListScreen').default(canvas, game, Listener)
             break
         case 'selectMusic':
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
             require('./RenderMusicSelectScreen').default(canvas, game, Listener)
             break
         case 'dead':
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
             require('./RenderDeadScreen').default(canvas, game, Listener)
             break
         case 'loading':
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
             await require('./RenderLoadingScreen').default(canvas, game, Listener)
             break
         case 'score':
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
             require('./RenderScoreScreen').default(canvas, game, Listener)
             break
         case 'test':
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
             require('./RenderTestScreen').default(canvas, game, Listener)
             break
     }
