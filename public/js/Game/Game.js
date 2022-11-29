@@ -309,6 +309,7 @@ function createGame(Listener, canvas, socket) {
 
             socket.emit('updateGame', {
                 serverId: state.serverId,
+
                 data: state.musicInfo
             })
         }
@@ -447,7 +448,7 @@ function createGame(Listener, canvas, socket) {
 
             if ((state.smallFunctions.getConfig('botPlay') || Listener.state.arrows[note.arrowID].inAutoClick) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**state.resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
             if ((state.smallFunctions.getConfig('botPlay') || note.autoClick) && (note.errorWhenNotClicking || note.autoClick) && newNoteY >= -10 && newNoteY <= (state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight*2)) {
-                Listener.state.arrows[note.arrowID].inAutoClick = note.arrowID.autoClick
+                Listener.state.arrows[note.arrowID].inAutoClick = note.autoClick
                 Listener.state.arrows[note.arrowID].state = 'onNote'
                 Listener.state.arrows[note.arrowID].click = true
                 Listener.state.arrows[note.arrowID].lastNoteClicked = note

@@ -75,7 +75,6 @@ export default async({ arrowID, listenerState, bot }, state) => {
         noteClick(bestNote)
     }
 
-    state.smallFunctions.getConfig('GhostTapping')
     if (!notes[0] && (state.smallFunctions.getConfig('GhostTapping') ? state.musicNotes.filter((n) => !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(state.arrowsSize**state.resizeNote*3))[0] : true)) {
         state.musicInfo.accuracyMedia.push(1)
         state.musicInfo.misses += 1
