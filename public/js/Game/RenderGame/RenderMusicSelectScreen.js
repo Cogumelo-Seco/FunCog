@@ -5,7 +5,10 @@ export default async (canvas, game, Listener) => {
     let musicSelect = game.state.selectMusicMenu.musicSelect
     let musicSelectFiltered = (musicSelect < 0 ? 0 : musicSelect)
 
+     
+    let modPrevious = game.state.musics[modSelect-1] || game.state.musics[game.state.musics.length-1]
     let mod = game.state.musics[modSelect]
+    let modNext = game.state.musics[modSelect+1] || game.state.musics[0]
 
     let startY = canvas.height/2-(50/2)
     let endY = canvas.height-50
@@ -51,11 +54,27 @@ export default async (canvas, game, Listener) => {
         game.state.selectMusicMenu.difficultySelected = game.state.selectMusicMenu.difficultySelected < 0 ? selectMusicInfo.difficulties.length-1 : game.state.selectMusicMenu.difficultySelected
     }
 
-    ctx.fillStyle = 'black'
-    ctx.fillRect(0, 0, canvas.width, 175);
+    ctx.fillStyle = 'rgb(30, 30, 30)'
+    ctx.fillRect(0, 0, canvas.width, 180);
 
-    ctx.fillStyle = /*mod.menuColor ||*/ 'rgb(255, 255, 255)'
+    ctx.fillStyle = 'rgb(255, 255, 255)'
     ctx.font = `bold 30px Arial`
     let modNameTxt = `${musicSelect == -1 ? '<' : ''}  ${mod.name}  ${musicSelect == -1 ? '>' : ''}`
-    ctx.fillText(modNameTxt, canvas.width/2-(ctx.measureText(modNameTxt).width/2), 150);
+    ctx.fillText(modNameTxt, canvas.width/2-(ctx.measureText(modNameTxt).width/2), 110);
+    ctx.font = `bold 15px Arial`
+    ctx.fillText(mod.musics.length, canvas.width/2-(ctx.measureText(mod.musics.length).width/2), 130);
+
+    ctx.font = `bold 20px Arial`
+    ctx.globalAlpha = 0.5
+    if (modPrevious) {
+        ctx.fillText(modPrevious.name, canvas.width/6-(ctx.measureText(modPrevious.name).width/2), 110);
+        ctx.font = `bold 10px Arial`
+        ctx.fillText(modPrevious.musics.length, canvas.width/6-(ctx.measureText(modPrevious.musics.length).width/2), 125);
+    }
+    if (modNext) {
+        ctx.fillText(modNext.name, (canvas.width-canvas.width/6)-(ctx.measureText(modNext.name).width/2), 110);
+        ctx.font = `bold 10px Arial`
+        ctx.fillText(modNext.musics.length, (canvas.width-canvas.width/6)-(ctx.measureText(modNext.musics.length).width/2), 125);
+    }
+    ctx.globalAlpha = 1
 }
