@@ -3,6 +3,7 @@ function createGame(Listener, canvas, socket) {
         speed: 1,
         fps: '0-0',
         renderType: 'limited',
+        changeRenderTypeCount: 0,
         online: false,
         waiting: true,
         serverId: null,
@@ -58,29 +59,43 @@ function createGame(Listener, canvas, socket) {
                     type: 'ConfigTitle'
                 },
                 {
-                    name: 'DownScroll',
+                    name: 'Down Scroll',
                     id: 'DownScroll',
                     type: 'Boolean',
                     content: true
                 },
                 {
-                    name: 'MiddleScroll',
+                    name: 'Middle Scroll',
                     id: 'MiddleScroll',
                     type: 'Boolean',
                     content: true
                 },
                 {
-                    name: 'GameInfo',
+                    name: 'Game Info',
                     id: 'GameInfo',
                     type: 'Boolean',
                     content: true
                 },
                 {
-                    name: 'LifeDrain',
+                    name: 'Life Drain',
                     id: 'LifeDrain',
                     type: 'Boolean',
                     content: true
                 },
+                
+                {
+                    name: 'Higher FPS in menus',
+                    id: 'menuFPSUnlimit',
+                    type: 'Boolean',
+                    content: true
+                },
+                {
+                    name: 'Bongo Cat',
+                    id: 'botPlay',
+                    type: 'Boolean',
+                    content: false
+                },
+                
             ],
             settingsSelect: 0
         },
@@ -106,7 +121,6 @@ function createGame(Listener, canvas, socket) {
         arrowsYLineOpponent: 0,
         amountOfArrowsOpponent: 3,
         amountOfArrows: 3,
-        botPlay: false,
         musicChangeBPM: {},
         oldChangeBPM: 0,
         musicNotes: [],
@@ -261,227 +275,236 @@ function createGame(Listener, canvas, socket) {
     }
 
     async function gameLoop(command) {
-        /*function gameLoop() {*/
-            document.title = `Cogu - ${state.gameStage}`
+        document.title = `Cogu - ${state.gameStage}`
 
-            if (state.online && state.serverId) {
-                if (state.serverInfo.end == true) {
-                    state.waiting = true
-                    state.serverId = null
-                    state.serverInfo = {}
-                    state.smallFunctions.redirectGameStage('onlineServerList')
-                    state.smallFunctions.resetScreen()
-                    state.music?.pause()
-                    state.musicVoice?.pause()
-                    state.music.currentTime = 0
-                    state.musicInfo.health = 50
-                    state.musicNotes = []
-                    state.musicOpponentNotes = []
-                }
+        if (state.gameStage == 'game') state.renderType = 'limited'
+        else if (smallFunctions.getConfig('menuFPSUnlimit')) state.renderType = 'unlimited'
+        else state.renderType = 'limited'
 
-                state.musicInfo.arrows = Listener.state.arrows
-
-                socket.emit('updateGame', {
-                    serverId: state.serverId,
-                    data: state.musicInfo
-                })
-            }
-
-            state.musicBeat = Number.parseInt(state.music?.currentTime*(state.musicBPM/60))
-            state.musicStep = Number.parseInt(state.music?.currentTime*(state.musicBPM/60)*4)
-
-            if (state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.09) state.musicVoice.currentTime = state.music.currentTime
-
-            if (!state.arrowsInfoOpponent[0]) {
-                for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {
-                    if (!state.opponentArrows[arrowID]) state.opponentArrows[arrowID] = { click: false }
-                    if (!state.arrowsInfoOpponent[arrowID]) state.arrowsInfoOpponent[arrowID] = { 
-                        X: null,
-                        Y: null,
-                        defaultX: null,
-                        defaultY: null,
-                        resetX: true,
-                        resetY: true,
-                        resetEnable: true,
-                        alpha: 1,
-                        noteAlpha: 1,
-                        rotation: 0
-                    }
-                }
-            }
-
-            if (!state.arrowsInfo[0]) {
-                for (let arrowID = 0;arrowID <= state.amountOfArrows;arrowID++) {
-                    if (!state.arrowsInfo[arrowID]) state.arrowsInfo[arrowID] = { 
-                        X: null,
-                        Y: null,
-                        defaultX: null,
-                        defaultY: null,
-                        resetX: true,
-                        resetY: true,
-                        resetEnable: true,
-                        alpha: 1,
-                        noteAlpha: 1,
-                        rotation: 0
-                    }
-                }
-            }
-
-            let lastResizeNoteOpponent = state.resizeNoteOpponent
-            let lastArrowsYLineOpponent = state.arrowsYLineOpponent
-            let lastArrowsYLine = state.arrowsYLine
-
-            state.arrowsYLine = state.smallFunctions.getConfig('DownScroll') ? canvas.height-state.arrowsYLineMargin-state.arrowsSize**state.resizeNote : state.arrowsYLineMargin
-            state.arrowsYLineOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.smallFunctions.getConfig('DownScroll') ? canvas.height*0.60 : canvas.height*0.40 : state.arrowsYLine
-            state.resizeNoteOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
-
-            if (state.arrowsYLineOpponent != lastArrowsYLineOpponent || state.arrowsYLine != lastArrowsYLine || state.resizeNoteOpponent != lastResizeNoteOpponent) {
-                for (let i in state.arrowsInfo) {
-                    if (state.arrowsInfo[i].resetEnable) {
-                        state.arrowsInfo[i].resetX = true
-                        state.arrowsInfo[i].resetY = true
-                    }
-                }
-                for (let i in state.arrowsInfoOpponent) {
-                    if (state.arrowsInfoOpponent[i].resetEnable) {
-                        state.arrowsInfoOpponent[i].resetX = true
-                        state.arrowsInfoOpponent[i].resetY = true
-                    }
-                }
-            }
-
-            if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.botPlay && !state.debug && state.music?.currentTime > 3) {
+        if (state.online && state.serverId) {
+            if (state.serverInfo.end == true) {
+                state.waiting = true
+                state.serverId = null
+                state.serverInfo = {}
+                state.smallFunctions.redirectGameStage('onlineServerList')
+                state.smallFunctions.resetScreen()
                 state.music?.pause()
                 state.musicVoice?.pause()
                 state.music.currentTime = 0
-                state.animations.BFDead.frame = 0
-                state.smallFunctions.redirectGameStage('dead')
-                state.smallFunctions.resetScreen()
-                state.waiting = true
                 state.musicInfo.health = 50
                 state.musicNotes = []
                 state.musicOpponentNotes = []
-                state.gameStageTime = +new Date()
-
-                if (state.online && state.serverId) {
-                    socket.emit('deadPlayer', { 
-                        serverId: state.serverId
-                     })
-                } else {
-                    playSong('Sounds/fnf_loss_sfx.ogg')
-                    setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
-                }
-            }
-            else if (state.musicInfo.health > 100) state.musicInfo.health = 100
-            else if (state.musicInfo.health < 0) state.musicInfo.health = 0
-
-            let musicDuration = state.music?.duration
-            let musicCurrentTime = state.music?.currentTime
-
-            if (musicCurrentTime > 3 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
-                state.waiting = true
-                state.musicInfo.health = 50
-                state.musicNotes = []
-                state.musicOpponentNotes = []
-                state.music = null
-                state.smallFunctions.resetScreen()
-                if (state.online) state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
-                else state.smallFunctions.redirectGameStage('score', 'menu')
             }
 
-            for (let i in state.musicChangeBPM) {
-                if (Number(i)/1000 <= musicCurrentTime && state.musicChangeBPM[i] != state.oldChangeBPM) {
-                    changeBPM(state.musicChangeBPM[i], true)
-                    state.oldChangeBPM = state.musicChangeBPM[i]
-                }
-            }
+            state.musicInfo.arrows = Listener.state.arrows
 
-            function changeBPM(bpm, newBPM) {
-                if (state.musicChangeBPMNew && newBPM) state.musicBPM = state.musicChangeBPMNew
-                clearTimeout(state.changeBPMTimeout)
-
-                //if (state.musicBPM > bpm-2 && state.musicBPM < bpm+2) state.musicBPM = bpm
-                if (state.musicBPM != bpm) {
-                    state.musicBPM = state.musicBPM > bpm ? state.musicBPM-1 : state.musicBPM+1
-                    state.musicChangeBPMNew = bpm
-                    state.changeBPMTimeout = setTimeout(() => changeBPM(bpm), 1000/30)
-                }
-            }
-
-            for (let i in state.musicNotes) {
-                let newNoteY = -((state.musicNotes[i].time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM))
-                let oldNoteY = state.musicNotes[i].oldY || -musicDuration*1000
-                if (newNoteY >= oldNoteY) {
-                    state.musicNotes[i].Y = newNoteY
-                    state.musicNotes[i].oldY = newNoteY
-                }
-
-                if (state.musicNotes[i].errorWhenNotClicking && !state.botPlay && state.musicNotes[i].arrowID >= 0 && state.musicNotes[i].arrowID <= state.amountOfArrows && state.musicNotes[i].Y > (state.arrowsSize**state.resizeNote) && !state.musicNotes[i].disabled && !state.musicNotes[i].clicked) {
-                    state.musicNotes[i].disabled = true
-                    state.musicInfo.misses += 1
-                    state.musicInfo.score -= 50
-                    state.musicInfo.health -= 2.5
-                    state.musicInfo.combo = 0
-                    state.musicInfo.accuracyMedia.push(1)
-                    state.musicEventListener('passedNote', { note: state.musicNotes[i], listenerState: Listener.state }, state)
-                }
-            }
-
-            for (let i in state.musicOpponentNotes) {
-                let newNoteY = -((state.musicOpponentNotes[i].time-musicCurrentTime)*((5**state.resizeNoteOpponent)*state.musicBPM))
-                let oldNoteY = state.musicOpponentNotes[i].oldY || -musicDuration*1000
-                if (newNoteY >= oldNoteY) {
-                    state.musicOpponentNotes[i].Y = newNoteY
-                    state.musicOpponentNotes[i].oldY = newNoteY
-                }
-
-                if (newNoteY >= 0 && !state.musicOpponentNotes[i].clicked && !state.musicOpponentNotes[i].disabled && (state.musicOpponentNotes[i].errorWhenNotClicking || state.musicOpponentNotes[i].autoClick)) {
-                    state.musicEventListener('noteClick', { noteClickAuthor: 'opponent' }, state)
-                    state.musicOpponentNotes[i].clicked = true
-                    if ((state.online || state.smallFunctions.getConfig('LifeDrain')) && state.musicInfo.health > 5 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
-                }
-            }
-
-            state.musicInfo.accuracy = 0
-            for (let i in state.musicInfo.accuracyMedia) state.musicInfo.accuracy += state.musicInfo.accuracyMedia[i]
-            state.musicInfo.accuracy = state.musicInfo.accuracy/state.musicInfo.accuracyMedia?.length || 0
-
-
-            /* !!!!!!! FPS LIMITADO !!!!!!! */
-
-            if (state.gameLoopFPSControlTime2+1000 <= +new Date()) {
-                state.gameLoopFPSControlTime2 = +new Date()
-                
-                if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) state.musicInfo.linearAccuracyMedia.push(state.musicInfo.accuracy || 1)
-            }
-
-            if (state.gameLoopFPSControlTime+30 <= +new Date()) {
-                state.gameLoopFPSControlTime = +new Date()
-
-                if (state.music?.currentTime > 0) state.musicEventListener('gameLoop', { listenerState: Listener.state }, state)
-
-                for (let i in state.animations) {
-                    let animation = state.animations[i]
-
-                    if (animation.dalay <= +new Date() && !animation.paused) {
-                        animation.frame += animation.boomerang ? animation.boomerangForward ? 1 : -1 : 1
-                        if (animation.frame > animation.endFrame) {
-                            if (!animation.boomerang) animation.frame = animation.loop ? animation.startFrame : animation.endFrame
-                            else animation.boomerangForward = animation.boomerangForward ? false : true
-                        } else if (animation.frame < animation.startFrame) {
-                            animation.boomerangForward = animation.boomerangForward ? false : true
-                            animation.frame = animation.startFrame
-                        }
-                        animation.dalay = +new Date()+animation.totalDalay
-                    }
-                }
-
-                state.rainbowColor = state.rainbowColor >= 360 ? 0 : state.rainbowColor+1
-            }
-
-            /*setTimeout(() => gameLoop(), 1000/40)
+            socket.emit('updateGame', {
+                serverId: state.serverId,
+                data: state.musicInfo
+            })
         }
-        gameLoop()*/
+
+        state.musicBeat = Number.parseInt(state.music?.currentTime*(state.musicBPM/60))
+        state.musicStep = Number.parseInt(state.music?.currentTime*(state.musicBPM/60)*4)
+
+        if (state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.09) state.musicVoice.currentTime = state.music.currentTime
+
+        if (!state.arrowsInfoOpponent[0]) {
+            for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {
+                if (!state.opponentArrows[arrowID]) state.opponentArrows[arrowID] = { click: false }
+                if (!state.arrowsInfoOpponent[arrowID]) state.arrowsInfoOpponent[arrowID] = { 
+                    X: null,
+                    Y: null,
+                    defaultX: null,
+                    defaultY: null,
+                    resetX: true,
+                    resetY: true,
+                    resetEnable: true,
+                    alpha: 1,
+                    noteAlpha: 1,
+                    rotation: 0
+                }
+            }
+        }
+
+        if (!state.arrowsInfo[0]) {
+            for (let arrowID = 0;arrowID <= state.amountOfArrows;arrowID++) {
+                if (!state.arrowsInfo[arrowID]) state.arrowsInfo[arrowID] = { 
+                    X: null,
+                    Y: null,
+                    defaultX: null,
+                    defaultY: null,
+                    resetX: true,
+                    resetY: true,
+                    resetEnable: true,
+                    alpha: 1,
+                    noteAlpha: 1,
+                    rotation: 0
+                }
+            }
+        }
+
+        let lastResizeNoteOpponent = state.resizeNoteOpponent
+        let lastArrowsYLineOpponent = state.arrowsYLineOpponent
+        let lastArrowsYLine = state.arrowsYLine
+
+        state.arrowsYLine = state.smallFunctions.getConfig('DownScroll') ? canvas.height-state.arrowsYLineMargin-state.arrowsSize**state.resizeNote : state.arrowsYLineMargin
+        state.arrowsYLineOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.smallFunctions.getConfig('DownScroll') ? canvas.height*0.60 : canvas.height*0.40 : state.arrowsYLine
+        state.resizeNoteOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
+
+        if (state.arrowsYLineOpponent != lastArrowsYLineOpponent || state.arrowsYLine != lastArrowsYLine || state.resizeNoteOpponent != lastResizeNoteOpponent) {
+            for (let i in state.arrowsInfo) {
+                if (state.arrowsInfo[i].resetEnable) {
+                    state.arrowsInfo[i].resetX = true
+                    state.arrowsInfo[i].resetY = true
+                }
+            }
+            for (let i in state.arrowsInfoOpponent) {
+                if (state.arrowsInfoOpponent[i].resetEnable) {
+                    state.arrowsInfoOpponent[i].resetX = true
+                    state.arrowsInfoOpponent[i].resetY = true
+                }
+            }
+        }
+
+        if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.smallFunctions.getConfig('botPlay') && !state.debug && state.music?.currentTime > 3) {
+            state.music?.pause()
+            state.musicVoice?.pause()
+            state.music.currentTime = 0
+            state.animations.BFDead.frame = 0
+            state.smallFunctions.redirectGameStage('dead')
+            state.smallFunctions.resetScreen()
+            state.waiting = true
+            state.musicInfo.health = 50
+            state.musicNotes = []
+            state.musicOpponentNotes = []
+            state.gameStageTime = +new Date()
+
+            if (state.online && state.serverId) {
+                socket.emit('deadPlayer', { 
+                    serverId: state.serverId
+                    })
+            } else {
+                playSong('Sounds/fnf_loss_sfx.ogg')
+                setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
+            }
+        }
+        else if (state.musicInfo.health > 100) state.musicInfo.health = 100
+        else if (state.musicInfo.health < 0) state.musicInfo.health = 0
+
+        let musicDuration = state.music?.duration
+        let musicCurrentTime = state.music?.currentTime
+
+        if (musicCurrentTime > 3 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
+            state.waiting = true
+            state.musicInfo.health = 50
+            state.musicNotes = []
+            state.musicOpponentNotes = []
+            state.music = null
+            state.smallFunctions.resetScreen()
+            if (state.online) state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
+            else state.smallFunctions.redirectGameStage('score', 'menu')
+        }
+
+        for (let i in state.musicChangeBPM) {
+            if (Number(i)/1000 <= musicCurrentTime && state.musicChangeBPM[i] != state.oldChangeBPM) {
+                changeBPM(state.musicChangeBPM[i], true)
+                state.oldChangeBPM = state.musicChangeBPM[i]
+            }
+        }
+
+        function changeBPM(bpm, newBPM) {
+            if (state.musicChangeBPMNew && newBPM) state.musicBPM = state.musicChangeBPMNew
+            clearTimeout(state.changeBPMTimeout)
+
+            //if (state.musicBPM > bpm-2 && state.musicBPM < bpm+2) state.musicBPM = bpm
+            if (state.musicBPM != bpm) {
+                state.musicBPM = state.musicBPM > bpm ? state.musicBPM-1 : state.musicBPM+1
+                state.musicChangeBPMNew = bpm
+                state.changeBPMTimeout = setTimeout(() => changeBPM(bpm), 1000/30)
+            }
+        }
+
+        for (let i in state.musicNotes) {
+            let note = state.musicNotes[i]
+            let newNoteY = -((note.time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM))
+            let oldNoteY = note.oldY || -musicDuration*1000
+            if (newNoteY >= oldNoteY) {
+                note.Y = newNoteY
+                note.oldY = newNoteY
+            }
+
+            if ((state.smallFunctions.getConfig('botPlay') || Listener.state.arrows[note.arrowID].inAutoClick) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**state.resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
+            if ((state.smallFunctions.getConfig('botPlay') || note.autoClick) && (note.errorWhenNotClicking || note.autoClick) && newNoteY >= -10 && newNoteY <= (state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight*2)) {
+                Listener.state.arrows[note.arrowID].inAutoClick = note.arrowID.autoClick
+                Listener.state.arrows[note.arrowID].state = 'onNote'
+                Listener.state.arrows[note.arrowID].click = true
+                Listener.state.arrows[note.arrowID].lastNoteClicked = note
+                if (!note.clicked && !note.disabled) verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, bot: true })
+            }
+
+            if (note.errorWhenNotClicking && !state.smallFunctions.getConfig('botPlay') && note.arrowID >= 0 && note.arrowID <= state.amountOfArrows && note.Y > (state.arrowsSize**state.resizeNote) && !note.disabled && !note.clicked) {
+                note.disabled = true
+                state.musicInfo.misses += 1
+                state.musicInfo.score -= 50
+                state.musicInfo.health -= 2.5
+                state.musicInfo.combo = 0
+                state.musicInfo.accuracyMedia.push(1)
+                state.musicEventListener('passedNote', { note: note, listenerState: Listener.state }, state)
+            }
+        }
+
+        for (let i in state.musicOpponentNotes) {
+            let newNoteY = -((state.musicOpponentNotes[i].time-musicCurrentTime)*((5**state.resizeNoteOpponent)*state.musicBPM))
+            let oldNoteY = state.musicOpponentNotes[i].oldY || -musicDuration*1000
+            if (newNoteY >= oldNoteY) {
+                state.musicOpponentNotes[i].Y = newNoteY
+                state.musicOpponentNotes[i].oldY = newNoteY
+            }
+
+            if (newNoteY >= 0 && !state.musicOpponentNotes[i].clicked && !state.musicOpponentNotes[i].disabled && (state.musicOpponentNotes[i].errorWhenNotClicking || state.musicOpponentNotes[i].autoClick)) {
+                state.musicEventListener('noteClick', { noteClickAuthor: 'opponent' }, state)
+                state.musicOpponentNotes[i].clicked = true
+                if ((state.online || state.smallFunctions.getConfig('LifeDrain')) && state.musicInfo.health > 5 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
+            }
+        }
+
+        state.musicInfo.accuracy = 0
+        for (let i in state.musicInfo.accuracyMedia) state.musicInfo.accuracy += state.musicInfo.accuracyMedia[i]
+        state.musicInfo.accuracy = state.musicInfo.accuracy/state.musicInfo.accuracyMedia?.length || 0
+
+
+        /* !!!!!!! FPS LIMITADO !!!!!!! */
+
+        if (state.gameLoopFPSControlTime2+1000 <= +new Date()) {
+            state.gameLoopFPSControlTime2 = +new Date()
+            
+            if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) state.musicInfo.linearAccuracyMedia.push(state.musicInfo.accuracy || 1)
+        }
+
+        if (state.gameLoopFPSControlTime+30 <= +new Date()) {
+            state.gameLoopFPSControlTime = +new Date()
+
+            if (state.music?.currentTime > 0) state.musicEventListener('gameLoop', { listenerState: Listener.state }, state)
+
+            for (let i in state.animations) {
+                let animation = state.animations[i]
+
+                if (animation.dalay <= +new Date() && !animation.paused) {
+                    animation.frame += animation.boomerang ? animation.boomerangForward ? 1 : -1 : 1
+                    if (animation.frame > animation.endFrame) {
+                        if (!animation.boomerang) animation.frame = animation.loop ? animation.startFrame : animation.endFrame
+                        else animation.boomerangForward = animation.boomerangForward ? false : true
+                    } else if (animation.frame < animation.startFrame) {
+                        animation.boomerangForward = animation.boomerangForward ? false : true
+                        animation.frame = animation.startFrame
+                    }
+                    animation.dalay = +new Date()+animation.totalDalay
+                }
+            }
+
+            state.rainbowColor = state.rainbowColor >= 360 ? 0 : state.rainbowColor+1
+        }
     }
 
     async function loading(command) {

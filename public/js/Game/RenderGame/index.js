@@ -1,5 +1,6 @@
 export default async function renderGame(canvas, game, Listener) {
     if (+new Date()-game.state.fps.split('-')[1] > 1000) {
+        game.state.changeRenderTypeCount += 1
         game.state.fpsDisplay = game.state.fps.split('-')[0]
         game.state.fps = `0-${+new Date()}`
     }
@@ -15,6 +16,8 @@ export default async function renderGame(canvas, game, Listener) {
     canvas.style.backgroundImage = 'none'
     const ctx = canvas.getContext('2d')
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    await game.gameLoop()
 
     switch (game.state.gameStage) {
         case 'game':
@@ -54,11 +57,6 @@ export default async function renderGame(canvas, game, Listener) {
 
     require('./RenderScreenInformation').default(canvas, game, Listener)
 
-    let renderFunction = () => {
-        game.gameLoop()
-        renderGame(canvas, game, Listener) 
-    }
-
-    if (game.state.renderType == 'limited') window.requestAnimationFrame(renderFunction)
-    else setTimeout(renderFunction, 0)
+    if (game.state.renderType == 'limited') window.requestAnimationFrame(() => renderGame(canvas, game, Listener) )
+    else setTimeout(() => renderGame(canvas, game, Listener) , 0)
 }

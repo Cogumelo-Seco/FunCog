@@ -23,7 +23,7 @@ export default (state) => {
             state.game.state.debug = state.game.state.debug ? false : true
         }
     }
-
+/*
     state.buttons['BotPlayButton'] = {
         minX: 0,
         maxX: 80,
@@ -47,7 +47,7 @@ export default (state) => {
             state.game.state.renderType = state.game.state.renderType == 'limited' ? 'unlimited' : 'limited'
         }
     }
-
+*/
     state.buttons['DevWaterMarkButton'] = {
         minX: 932,
         maxX: 1000,

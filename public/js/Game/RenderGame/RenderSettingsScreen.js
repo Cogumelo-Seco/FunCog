@@ -12,7 +12,7 @@ export default async (canvas, game, Listener) => {
             ctx.fillRect(0, Y-50, canvas.width, 60)
         }
 
-        ctx.font = `bold ${settingsSelect == i ? 60 : 50}px Arial`
+        ctx.font = `bold ${settingsSelect == i ? 50 : 40}px Arial`
         if (game.state.selectSettingsOption.settingsOptions[i].type == 'ConfigTitle') {
             ctx.font = `bold 80px Arial`
             ctx.fillStyle = settingsSelect == i ? 'rgb(40, 40, 90)' : 'rgb(50, 50, 50)'

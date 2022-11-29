@@ -26,7 +26,7 @@ export default async (canvas, game, Listener) => {
 
     let msgArr = [
         {
-            msg: game.state.botPlay ? 'Bongo Cat' : 'Stats',
+            msg: game.state.smallFunctions.getConfig('botPlay') ? 'Bongo Cat' : 'Stats',
             type: 'title'
         },
         {
@@ -41,7 +41,7 @@ export default async (canvas, game, Listener) => {
         },
         {
             msg: 'Best Combo:',
-            msg2: (game.state.musicInfo.bestCombo || 0),
+            msg2: (game.state.musicInfo.bestCombo || 0)+(game.state.musicInfo.misses == 0 ? ' (FC)' : ''),
             type: 'stats'
         },
         {

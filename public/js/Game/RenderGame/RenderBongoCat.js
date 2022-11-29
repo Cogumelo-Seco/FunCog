@@ -1,5 +1,5 @@
 export default async (canvas, game, Listener) => {
-    if (!game.state.botPlay) return
+    if (!game.state.smallFunctions.getConfig('botPlay')) return
 
     const ctx = canvas.getContext('2d')
 

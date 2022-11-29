@@ -73,13 +73,9 @@ export default function createListener(socket) {
         for (let arrowID = 0;arrowID <= state.game.state.amountOfArrows;arrowID++) {
             if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote',  click: false }
 
-            /*if (
-                !state.game?.state.botPlay && state.keyBindings[arrowID](keyPressed) && on && !state.arrows[arrowID].click || 
-                !state.game?.state.botPlay && state.keyBindings[arrowID](keyPressed) && !on && state.arrows[arrowID].click
-            ) {*/
             if (
-                !state.game?.state.botPlay && state.game.state.smallFunctions.getConfig(`Arrow-${arrowID}`) == keyPressed && on && !state.arrows[arrowID].click || 
-                !state.game?.state.botPlay && state.game.state.smallFunctions.getConfig(`Arrow-${arrowID}`) == keyPressed && !on && state.arrows[arrowID].click
+                !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getConfig(`Arrow-${arrowID}`) == keyPressed && on && !state.arrows[arrowID].click || 
+                !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getConfig(`Arrow-${arrowID}`) == keyPressed && !on && state.arrows[arrowID].click
             ) {
                 if (on) state.game.verifyClick({ arrowID, listenerState: state })
                 else state.arrows[arrowID].state = 'noNote'
@@ -88,11 +84,7 @@ export default function createListener(socket) {
         }
 
         if (state.game.state.gameStage == 'game') {
-            //if (keyPressed == 'KeyT' && on) state.game.state.speed += 0.2
-            //if (keyPressed == 'KeyQ' && on) state.game.state.smallFunctions.getConfig('DownScroll') = state.game.state.smallFunctions.getConfig('DownScroll') ? false : true
-            //if (keyPressed == 'KeyW' && on) state.game.state.middleScroll = state.game.state.middleScroll ? false : true
-
-            if (keyPressed == 'KeyR' && on && !state.game.state.online && !state.game.state.botPlay) state.game.state.musicInfo.health = -100
+            if (keyPressed == 'KeyR' && on && !state.game.state.online && !state.game.state.smallFunctions.getConfig('botPlay')) state.game.state.musicInfo.health = -100
 
             if (keyPressed == 'Enter' && on && document.getElementById('gameVideo').src && state.game.state.music.currentTime <= 0) document.getElementById('gameVideo').currentTime = document.getElementById('gameVideo').duration
 

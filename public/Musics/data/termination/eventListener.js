@@ -194,13 +194,13 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 								break
 							case 'KB_AttackFire':
 								state.playSong('Sounds/attack.ogg')
-								if (!state.botPlay) setTimeout(() => {
+								if (!state.smallFunctions.getConfig('botPlay')) setTimeout(() => {
 									if (!listenerState.keys['Space'] || listenerState.keys['Space']?.lastClickTime && listenerState.keys['Space']?.time-listenerState.keys['Space']?.lastClickTime <= 100 || listenerState.keys['Space']?.time+220 < +new Date()) state.musicInfo.health = -100
 								}, 145)
 								break
 							case 'KB_AttackFireDOUBLE':
 								state.playSong('Sounds/attack-double.ogg')
-								if (!state.botPlay) setTimeout(() => {
+								if (!state.smallFunctions.getConfig('botPlay')) setTimeout(() => {
 									if (!listenerState.keys['Space'] || listenerState.keys['Space']?.time+220 < +new Date()) state.musicInfo.health = -100
 								}, 145)
 								break

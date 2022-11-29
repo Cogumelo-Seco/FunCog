@@ -7,6 +7,16 @@ export default async({ arrowID, listenerState, bot }, state) => {
     })
 
     function noteClick(note) {
+        if (!note) return
+        let bestNote = null
+        for (let i in notes) {
+            let rating = state.calculateRating(notes[i].hitNote)
+            if (!bestNote || rating.media >= bestNote.ratingMedia) {
+                bestNote = notes[i]
+                bestNote.ratingMedia = rating.media
+            }
+        }
+
         state.musicEventListener('noteClick', { noteClickAuthor: 'player', note, listenerState }, state)
 
         note.clicked = true
@@ -26,10 +36,10 @@ export default async({ arrowID, listenerState, bot }, state) => {
             state.arrowsInfo[note.arrowID].splashDir = state.personalizedNotes[note.type].splashDir || state.musicInfo.splashDir
         } else state.arrowsInfo[note.arrowID].splashDir = state.musicInfo.splashDir
 
-        let rating = state.calculateRating(note.hitNote)
+        let rating = state.calculateRating(bestNote.hitNote)
         state.animations.ratingImage.frame = 0
-        state.musicInfo.accuracyMedia.push((rating.media < 100 ? rating.media+((note.hitNote*-1)/10) : rating.media))
-        state.musicInfo.hitNote = note.hitNote*-1
+        state.musicInfo.accuracyMedia.push((rating.media < 100 ? rating.media+((bestNote.hitNote*-1)/10) : rating.media))
+        state.musicInfo.hitNote = bestNote.hitNote*-1
         state.musicInfo.score += Number((100*(rating.media/100)).toFixed(0))
         state.musicInfo.judgements[rating.name] += 1
 
@@ -38,7 +48,7 @@ export default async({ arrowID, listenerState, bot }, state) => {
                 if (!listenerState.arrows[arrowID].click || note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
                     note.disabled = true
                     clearInterval(loop)
-                } else {
+                } else if (!state.music.paused) {
                     state.musicEventListener('noteClick', { noteClickAuthor: 'player', note, listenerState }, state)
                     state.musicInfo.health += 0.2
                     state.musicInfo.score += Number((20*(rating.media/100)).toFixed(0))
@@ -47,14 +57,22 @@ export default async({ arrowID, listenerState, bot }, state) => {
         }
     }
 
-    if (notes.length >= 3 || notes.length == 2 && Math.abs(notes[0].time-notes[1].time)*100 <= 80) {
+    if (notes.length >= 3 || notes.length == 2 && Math.abs(notes[0].time-notes[1].time)*10000 <= 84) {
         for (let i in notes) {
             if (!notes[i].errorWhenNotClicking && !notes.find(n => n.errorWhenNotClicking) || notes[i].errorWhenNotClicking) noteClick(notes[i])
         }
     } else {
-        let note = notes.sort((a, b) => a.hitNote < b.hitNote)[0]
-        if (note) noteClick(note)
-        else if (notes[0]) noteClick(notes[0])
+        let bestNote = null
+        let filtredNotes = notes.filter(n => n.errorWhenNotClicking)
+        if (!filtredNotes[0]) filtredNotes = notes
+        for (let i in filtredNotes) {
+            let rating = state.calculateRating(filtredNotes[i].hitNote)
+            if (!bestNote || rating.media >= bestNote.ratingMedia) {
+                bestNote = filtredNotes[i]
+                bestNote.ratingMedia = rating.media
+            }
+        }
+        noteClick(bestNote)
     }
 
     

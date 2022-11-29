@@ -29,24 +29,8 @@ export default async (canvas, game, Listener) => {
             arrowInfo.splashTime = +new Date()
         }
 
-        let autoClickNote = game.state.musicNotes.find(n => 
-            (game.state.botPlay || n.autoClick) && (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2)
-        )
-
-        if (game.state.botPlay || Listener.state.arrows[arrowID].inAutoClick) Listener.state.arrows[arrowID].click = false
-        if (Listener.state.arrows[arrowID]?.click || autoClickNote) {
-            if (game.state.botPlay || autoClickNote) {
-                Listener.state.arrows[arrowID].inAutoClick = autoClickNote.autoClick
-                if (!autoClickNote.clicked) {
-                    if (game.state.debug) {
-                        setTimeout(() => game.verifyClick({ arrowID, listenerState: Listener.state, bot: true }), Math.floor(Math.random()*120))
-                        autoClickNote.clicked = true
-                    } else game.verifyClick({ arrowID, listenerState: Listener.state, bot: true })
-                }
-                Listener.state.arrows[arrowID].state = 'onNote'
-                Listener.state.arrows[arrowID].click = true
-            }
-            let onNote = Listener.state.arrows[arrowID]?.state == 'onNote' || autoClickNote
+        if (Listener.state.arrows[arrowID]?.click) {
+            let onNote = Listener.state.arrows[arrowID]?.state == 'onNote'
 
             if (onNote || Listener.state.arrows[arrowID]?.state == 'noNote') arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}${onNote ? '' : '-no'}`]
             else {

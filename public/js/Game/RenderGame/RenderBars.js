@@ -84,7 +84,7 @@ export default async (canvas, game, Listener) => {
         ctx.restore();
     }
 
-    drawIcon({ dir: game.state.botPlay ? 'icons/BongoCat.png' : 'icons/icon-bf.png', pos: healthPercent >= 0.80 ? 2 : 1, flipY: true })
+    drawIcon({ dir: game.state.smallFunctions.getConfig('botPlay') ? 'icons/BongoCat.png' : 'icons/icon-bf.png', pos: healthPercent >= 0.80 ? 2 : 1, flipY: true })
     drawIcon({ dir: 'icons/icon-face.png', pos: healthPercent <= 0.20 ? 2 : 1 })
     
     function formatTime(time) {
