@@ -2,6 +2,7 @@ export default async (state) => {
     state.musics = [
         {
             name: 'FNFDefault',
+            menuColor: null,
             musics: [
                 {
                     name: 'Tutorial',
@@ -318,6 +319,7 @@ export default async (state) => {
         },
         {
             name: 'VS Tricky',
+            menuColor: 'green',
             musics: [
                 {
                     name: 'Improbable-outset',
@@ -377,6 +379,7 @@ export default async (state) => {
         },
         {
             name: 'Mid Fight Masses',
+            menuColor: 'rgb(255, 43, 234)',
             musics: [
                 {
                     name: 'Sarvente-Tutorial-Remix',
@@ -455,6 +458,7 @@ export default async (state) => {
         },
         {
             name: 'Suicide Mouse',
+            menuColor: 'rgb(60, 60, 60)',
             musics: [
                 {
                     name: 'Unhappy',
@@ -528,6 +532,7 @@ export default async (state) => {
         },
         {
             name: 'Dusk Till Dawn',
+            menuColor:  'rgb(196, 0, 244)',
             musics: [
                 {
                     name: 'Dusk-Till-Dawn',
@@ -551,6 +556,7 @@ export default async (state) => {
         },
         {
             name: 'VS Bob',
+            menuColor: null,
             musics: [
                 {
                     name: 'Sunshine',
@@ -666,6 +672,7 @@ export default async (state) => {
         },
         {
             name: 'QT',
+            menuColor: 'rgb(251, 150, 183)',
             musics: [
                 {
                     name: 'Carefree',
@@ -750,6 +757,7 @@ export default async (state) => {
         },
         {
             name: 'SonicEXE',
+            menuColor: 'rgb(0, 0, 110)',
             musics: [
                 {
                     name: 'Too-Slow',
@@ -952,6 +960,7 @@ export default async (state) => {
         },
         {
             name: 'Late Night City Tale',
+            menuColor: 'rgb(138, 12, 162)',
             musics: [
                 {
                     name: 'Azure-Encounter',
@@ -1082,6 +1091,7 @@ export default async (state) => {
         },
         {
             name: 'VS Withered Freddy',
+            menuColor: null,
             musics: [
                 {
                     name: 'Nightshift',
@@ -1129,6 +1139,7 @@ export default async (state) => {
         },
         {
             name: 'VS Chira',
+            menuColor: 'rgb(86, 76, 74)',
             musics: [
                 {
                     name: 'Molly-Howdy',
@@ -1176,6 +1187,7 @@ export default async (state) => {
         },
         {
             name: 'VS Kapi',
+            menuColor: '#7b8191',
             musics: [
                 {
                     name: 'Wocky',
@@ -1246,6 +1258,7 @@ export default async (state) => {
         },
         {
             name: 'VS Zardy',
+            menuColor: '#ff8e3e',
             musics: [
                 {
                     name: 'Foolhardy',

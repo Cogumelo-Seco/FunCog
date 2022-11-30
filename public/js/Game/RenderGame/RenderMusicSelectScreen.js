@@ -57,23 +57,30 @@ export default async (canvas, game, Listener) => {
     ctx.fillStyle = 'rgb(30, 30, 30)'
     ctx.fillRect(0, 0, canvas.width, 180);
 
-    ctx.fillStyle = 'rgb(255, 255, 255)'
+    ctx.fillStyle = mod.menuColor || 'white'
     ctx.font = `bold 30px Arial`
     let modNameTxt = `${musicSelect == -1 ? '<' : ''}  ${mod.name}  ${musicSelect == -1 ? '>' : ''}`
     ctx.fillText(modNameTxt, canvas.width/2-(ctx.measureText(modNameTxt).width/2), 110);
+    ctx.fillStyle = 'white'
     ctx.font = `bold 15px Arial`
     ctx.fillText(mod.musics.length, canvas.width/2-(ctx.measureText(mod.musics.length).width/2), 130);
 
     ctx.globalAlpha = 0.5
     if (modPrevious) {
+        ctx.fillStyle = modPrevious.menuColor || 'white'
         ctx.font = `bold 20px Arial`
         ctx.fillText(modPrevious.name, canvas.width/6-(ctx.measureText(modPrevious.name).width/2), 110);
+        
+        ctx.fillStyle = 'white'
         ctx.font = `bold 10px Arial`
         ctx.fillText(modPrevious.musics.length, canvas.width/6-(ctx.measureText(modPrevious.musics.length).width/2), 125);
     }
     if (modNext) {
+        ctx.fillStyle = modNext.menuColor || 'white'
         ctx.font = `bold 20px Arial`
         ctx.fillText(modNext.name, (canvas.width-canvas.width/6)-(ctx.measureText(modNext.name).width/2), 110);
+        
+        ctx.fillStyle = 'white'
         ctx.font = `bold 10px Arial`
         ctx.fillText(modNext.musics.length, (canvas.width-canvas.width/6)-(ctx.measureText(modNext.musics.length).width/2), 125);
     }
