@@ -25,7 +25,7 @@ export default async (canvas, game, Listener) => {
         ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'
         if (i == musicSelect) ctx.fillRect(X-4, (Y-(30/1.2))-4, ctx.measureText(music.name).width+8, 30+8);
 
-        ctx.fillStyle = music.menuColor || mod.menuColor || 'rgb(255, 255, 255)'
+        ctx.fillStyle = music.menuColor || 'rgb(255, 255, 255)'
         ctx.fillText(music.name.replace(/-/g, ' '), X, Y);
 
         let alertImage = game.state.images[`imgs/alert.png`]?.image
