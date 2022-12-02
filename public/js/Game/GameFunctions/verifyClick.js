@@ -41,7 +41,8 @@ export default async({ arrowID, listenerState, bot }, state) => {
 
         let rating = state.calculateRating(bestNote.hitNote)
         state.animations.ratingImage.frame = 0
-        state.musicInfo.accuracyMedia.push((rating.media < 100 ? rating.media+((bestNote.hitNote*-1)/9) : rating.media))
+        let media = (rating.media < 100 ? rating.media+((bestNote.hitNote*-1)/9) : rating.media)
+        state.musicInfo.accuracyMedia.push(media > 0 ? media : 1)
         state.musicInfo.hitNote = bestNote.hitNote*-1
         state.musicInfo.score += Number((100*(rating.media/100)).toFixed(0))
         state.musicInfo.judgements[rating.name] += 1
