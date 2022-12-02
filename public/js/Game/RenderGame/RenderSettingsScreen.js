@@ -30,10 +30,13 @@ export default async (canvas, game, Listener) => {
         ctx.fillStyle = 'white'
         ctx.font = `bold 50px Arial`
         if (config.content != undefined) {
+            let configContent = config.content
+            if (config.type == 'Boolean') configContent = configContent ? 'On' : 'Off'
+
             if (settingsSelect == i && config.type == 'Number') {
-                ctx.fillText('< '+config.content.toString()+' >', canvas.width-ctx.measureText('< '+config.content.toString()+' >').width-X, Y);
+                ctx.fillText('< '+configContent.toString()+' >', canvas.width-ctx.measureText('< '+configContent.toString()+' >').width-X, Y);
             } else {
-                ctx.fillText(config.content.toString(), canvas.width-ctx.measureText(config.content.toString()).width-X, Y);
+                ctx.fillText(configContent.toString(), canvas.width-ctx.measureText(configContent.toString()).width-X, Y);
             }
         }
         
