@@ -1,9 +1,12 @@
 export default async({ arrowID, listenerState, bot }, state) => {
+    let scrollSpeed = state.smallFunctions.getConfig('ScrollSpeed')
+    let hitBoxSize = scrollSpeed > 1 ? state.arrowsSize**state.resizeNote*scrollSpeed*(state.musicBPM/150 > 1 ? state.musicBPM/150 : 1) : state.arrowsSize**state.resizeNote*(state.musicBPM/150 > 1 ? state.musicBPM/150 : 1)
+
     let notes = state.musicNotes.filter((n) => {
         n.hitNote = (n.time-state.music?.currentTime)*1000
         return n.arrowID == arrowID && !n.disabled &&
-        n.Y >= -(state.arrowsSize**state.resizeNote) &&
-        n.Y <= (state.arrowsSize**state.resizeNote)
+        n.Y >= -(hitBoxSize) &&
+        n.Y <= (hitBoxSize)
     })
 
     function noteClick(note) {
@@ -57,7 +60,7 @@ export default async({ arrowID, listenerState, bot }, state) => {
         }
     }
 
-    if (notes.length >= 3 || notes.length == 2 && Math.abs(notes[0].time-notes[1].time)*10000 <= 84) {
+    if (notes.length >= Number.parseInt(3*scrollSpeed) || notes.length == Number.parseInt(2*scrollSpeed) && Math.abs(notes[0].time-notes[1].time)*10000 <= 84) {
         for (let i in notes) {
             if (!notes[i].errorWhenNotClicking && !notes.find(n => n.errorWhenNotClicking) || notes[i].errorWhenNotClicking) noteClick(notes[i])
         }
@@ -75,7 +78,7 @@ export default async({ arrowID, listenerState, bot }, state) => {
         noteClick(bestNote)
     }
 
-    if (!notes[0] && (state.smallFunctions.getConfig('GhostTapping') ? state.musicNotes.filter((n) => !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(state.arrowsSize**state.resizeNote*3))[0] : true)) {
+    if (!notes[0] && (state.smallFunctions.getConfig('GhostTapping') ? state.musicNotes.filter((n) => !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(hitBoxSize*3))[0] : true)) {
         state.musicInfo.accuracyMedia.push(1)
         state.musicInfo.misses += 1
         state.musicInfo.score -= 50

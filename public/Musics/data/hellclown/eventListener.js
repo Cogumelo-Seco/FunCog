@@ -39,6 +39,9 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
             state.musicInfo.variables = {
 				oldBeat: 0,
 			}
+        case 'end':
+            delete state.animations['fireNote']
+            break
 		case 'gameLoop':
 			let beat = state.musicBeat
 
@@ -53,7 +56,6 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 			}
 
 			state.musicInfo.variables.oldBeat = beat
-            if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') delete state.animations['fireNote']
             break
     }
 }

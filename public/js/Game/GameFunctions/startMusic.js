@@ -192,7 +192,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
 
                         state.musicEventListener('started', { difficulty, listenerState }, state)
                     } else {
-                        setTimeout(() => startMusic(), 900-(musicData.song.bpm*2))
+                        setTimeout(() => startMusic(), 900-(state.musicBPM*state.smallFunctions.getConfig('ScrollSpeed')*2))
                         state.playSong(`Sounds/intro${state.countdown}.ogg`)
                     }
                 }
@@ -305,7 +305,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
 
         return {
             Y: NaN,
-            hold: Number.parseInt(note[2]) * (musicData.song.bpm/200),
+            hold: Number.parseInt(note[2]) * (state.musicBPM*state.smallFunctions.getConfig('ScrollSpeed')/200),
             time: Math.abs(note[0]/1000), 
             arrowID,
             clicked: false,

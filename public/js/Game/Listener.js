@@ -91,7 +91,11 @@ export default function createListener(socket) {
                 setTimeout(() => state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = botPlay, 500)
             }
 
-            if (keyPressed == 'Enter' && on && document.getElementById('gameVideo').src && state.game.state.music.currentTime <= 0) document.getElementById('gameVideo').currentTime = document.getElementById('gameVideo').duration
+            if (keyPressed == 'Enter' && on && document.getElementById('gameVideo').src && state.game.state.music.currentTime <= 0) {
+                let gameVideoElement = document.getElementById('gameVideo')
+                gameVideoElement.currentTime = gameVideoElement.duration
+                gameVideoElement.style.display = 'none'
+            }
 
             if (keyPressed == 'Escape' && on && !state.game.state.online && state.game.state.countdown <= -1) {
                 if (state.game.state.music.paused) {
@@ -238,8 +242,10 @@ export default function createListener(socket) {
         }
 
         if (state.game.state.gameStage == 'settings' && on) {
+            let currentConfig = state.game.state.selectSettingsOption.settingsOptions[state.game.state.selectSettingsOption.settingsSelect]
+
             if (state.onChangeKeyBind) {
-                if (keyPressed != 'Escape') state.game.state.selectSettingsOption.settingsOptions[state.game.state.selectSettingsOption.settingsSelect].content = keyPressed
+                if (keyPressed != 'Escape') currentConfig.content = keyPressed
                 state.onChangeKeyBind = false
             } else switch (keyPressed) {
                 case 'ArrowUp':
@@ -250,17 +256,29 @@ export default function createListener(socket) {
                     state.game.state.selectSettingsOption.settingsSelect = state.game.state.selectSettingsOption.settingsSelect >= state.game.state.selectSettingsOption.settingsOptions.length-1 ? 0 : state.game.state.selectSettingsOption.settingsSelect+1
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
+                case 'ArrowLeft':
+                    console.log(currentConfig.content)
+                    if (currentConfig.type == 'Number' && currentConfig.content > currentConfig.min) {
+                        currentConfig.content = Number((currentConfig.content-currentConfig.add).toFixed(1))
+                        state.game.playSong('Sounds/scrollMenu.ogg')
+                    }
+                    break
+                case 'ArrowRight':
+                    console.log(currentConfig.content)
+                    if (currentConfig.type == 'Number' && currentConfig.content < currentConfig.max) {
+                        currentConfig.content = Number((currentConfig.content+currentConfig.add).toFixed(1))
+                        state.game.playSong('Sounds/scrollMenu.ogg')
+                    }
+                    break
                 case 'Enter':
-                    let currentConfig = state.game.state.selectSettingsOption.settingsOptions[state.game.state.selectSettingsOption.settingsSelect]
-
-                    if (currentConfig.type != 'ConfigTitle') state.game.playSong('Sounds/scrollMenu.ogg')
-
                     switch (currentConfig.type) {
                         case 'Boolean':
                             currentConfig.content = currentConfig.content ? false : true
+                            state.game.playSong('Sounds/scrollMenu.ogg')
                             break
                         case 'KeyBind':
-                            state.f = true
+                            state.onChangeKeyBind = true
+                            state.game.playSong('Sounds/scrollMenu.ogg')
                             break
                     }
                     

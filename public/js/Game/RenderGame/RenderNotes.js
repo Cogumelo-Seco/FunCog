@@ -59,10 +59,10 @@ export default async (canvas, game, Listener) => {
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage && arrowImagePos) {
                 ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : arrowInfo.noteAlpha
 
-                let arrowWidth = arrowImagePos.width**resizeNote
-                let arrowHeight = arrowImagePos.height**resizeNote
-                let currentArrowX = arrowInfo.X-((arrowImagePos.width**resizeNote-arrowsSize**resizeNote)/2)
-                let currentArrowY = noteY-((arrowImagePos.height**resizeNote-arrowsSize**resizeNote)/2)
+                let arrowWidth = arrowImagePos?.width**resizeNote
+                let arrowHeight = arrowImagePos?.height**resizeNote
+                let currentArrowX = arrowInfo.X-((arrowWidth-arrowsSize**resizeNote)/2)
+                let currentArrowY = noteY-((arrowHeight-arrowsSize**resizeNote)/2)
 
                 ctx.save()
                 ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
@@ -133,16 +133,16 @@ export default async (canvas, game, Listener) => {
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage && arrowImagePos) {
                 ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : arrowInfo.noteAlpha
                 
-                let arrowWidth = arrowImagePos.width**resizeNoteOpponent
-                let arrowHeight = arrowImagePos.height**resizeNoteOpponent
-                let currentArrowX = arrowInfo.X-((arrowImagePos.width**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)
-                let currentArrowY = noteY-((arrowImagePos.height**resizeNoteOpponent-arrowsSize**resizeNoteOpponent)/2)
+                let arrowWidth = arrowImagePos?.width**resizeNoteOpponent
+                let arrowHeight = arrowImagePos?.height**resizeNoteOpponent
+                let currentArrowX = arrowInfo.X-((arrowWidth-arrowsSize**resizeNoteOpponent)/2)
+                let currentArrowY = noteY-((arrowHeight-arrowsSize**resizeNoteOpponent)/2)
 
                 ctx.save()
                 ctx.translate(currentArrowX+(arrowWidth/2), currentArrowY+(arrowHeight/2));
                 ctx.rotate((arrowInfo.rotation)*Math.PI/180);
                 
-                ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
+                ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos?.width, arrowImagePos?.height, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
 
                 ctx.restore()
             }

@@ -1,6 +1,5 @@
 function createGame(Listener, canvas, socket) {
     const state = {
-        speed: 1,
         fps: '0-0',
         renderType: 'limited',
         changeRenderTypeCount: 0,
@@ -71,6 +70,12 @@ function createGame(Listener, canvas, socket) {
                     content: true
                 },
                 {
+                    name: 'Splashes',
+                    id: 'Splashes',
+                    type: 'Boolean',
+                    content: true
+                },
+                {
                     name: 'Ghost Tapping',
                     id: 'GhostTapping',
                     type: 'Boolean',
@@ -81,6 +86,15 @@ function createGame(Listener, canvas, socket) {
                     id: 'LifeDrain',
                     type: 'Boolean',
                     content: true
+                },
+                {
+                    name: 'Scroll Speed',
+                    id: 'ScrollSpeed',
+                    type: 'Number',
+                    add: 0.1,
+                    max: 2,
+                    min: 0.1,
+                    content: 1
                 },
                 {
                     name: 'Bongo Cat',
@@ -141,6 +155,7 @@ function createGame(Listener, canvas, socket) {
         musicBeat: 0,
         music: null,
         musicVoice: null,
+        musicData: {},
         musicEventListener: () => null,
         notesImageDir: null,
         musicInfo: {
@@ -176,14 +191,6 @@ function createGame(Listener, canvas, socket) {
                 totalDalay: 0,
                 dalay: 0,
                 paused: true,
-            },
-            icons: {
-                frame: 0,
-                startFrame: 0,
-                endFrame: 10,
-                totalDalay: 20,
-                dalay: 0,
-                loop: true,
             },
             ratingImage: {
                 frame: 0,
@@ -314,6 +321,13 @@ function createGame(Listener, canvas, socket) {
             })
         }
 
+        if (state.music?.buffered.length) {
+            let loaded = state.music?.buffered.end(0) / state.music.duration;
+            let played = state.music.currentTime / state.music.duration;
+            state.musicData.loaded = loaded//.toFixed(2);
+            state.musicData.played = played//.toFixed(2);
+        }
+
         state.musicBeat = Number.parseInt(state.music?.currentTime*(state.musicBPM/60))
         state.musicStep = Number.parseInt(state.music?.currentTime*(state.musicBPM/60)*4)
 
@@ -439,7 +453,7 @@ function createGame(Listener, canvas, socket) {
 
         for (let i in state.musicNotes) {
             let note = state.musicNotes[i]
-            let newNoteY = -((note.time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM))
+            let newNoteY = -((note.time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM)*smallFunctions.getConfig('ScrollSpeed'))
             let oldNoteY = note.oldY || -musicDuration*1000
             if (newNoteY >= oldNoteY) {
                 note.Y = newNoteY
@@ -467,7 +481,7 @@ function createGame(Listener, canvas, socket) {
         }
 
         for (let i in state.musicOpponentNotes) {
-            let newNoteY = -((state.musicOpponentNotes[i].time-musicCurrentTime)*((5**state.resizeNoteOpponent)*state.musicBPM))
+            let newNoteY = -((state.musicOpponentNotes[i].time-musicCurrentTime)*((5**state.resizeNoteOpponent)*state.musicBPM)*smallFunctions.getConfig('ScrollSpeed'))
             let oldNoteY = state.musicOpponentNotes[i].oldY || -musicDuration*1000
             if (newNoteY >= oldNoteY) {
                 state.musicOpponentNotes[i].Y = newNoteY

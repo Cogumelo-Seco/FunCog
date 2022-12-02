@@ -13,9 +13,21 @@ export default async (type, { noteClickAuthor, note }, state) => {
             }
             break
         case 'started':
+            state.animations['fireNote'] = {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 11,
+                totalDalay: 40,
+                dalay: 0,
+                loop: true
+            }
+            
             state.musicInfo.variables = {
                 oldBeat: 0,
             }
+        case 'end':
+            delete state.animations['fireNote']
+            break
         case 'gameLoop':
             let beat = state.musicBeat
 

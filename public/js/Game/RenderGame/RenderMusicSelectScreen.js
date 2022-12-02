@@ -15,6 +15,10 @@ export default async (canvas, game, Listener) => {
     let Y = startY+((endY-startY)*(musicSelectFiltered/(game.state.musics[modSelect].musics.length)))-(musicSelectFiltered*50)
     if (startY+(50*game.state.musics[modSelect].musics.length) < endY) Y = startY
 
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.8)'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    canvas.style.backgroundImage = null
     for (let i in game.state.musics[modSelect].musics) {
         let music = game.state.musics[modSelect].musics[i]
 
@@ -22,20 +26,29 @@ export default async (canvas, game, Listener) => {
 
         ctx.font = `bold 30px Arial`
 
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'
-        if (i == musicSelect) ctx.fillRect(X-4, (Y-(30/1.2))-4, ctx.measureText(music.name).width+8, 30+8);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)'
+        if (i == musicSelect) {
+            ctx.fillRect(X-4, (Y-(30/1.2))-4, ctx.measureText(music.name).width+8, 30+8);
+            canvas.style.backgroundImage = `url(https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${music.backgroundImage})`
+        }
 
-        ctx.fillStyle = music.menuColor || 'rgb(255, 255, 255)'
-        ctx.fillText(music.name.replace(/-/g, ' '), X, Y);
+        if (Y >= 200) {
+            ctx.fillStyle = music.menuColor || 'rgb(255, 255, 255)'
+            ctx.fillText(music.name.replace(/-/g, ' '), X, Y);
 
-        let alertImage = game.state.images[`imgs/alert.png`]?.image
-        if (music.dev && alertImage) {
-            let txtWidth = ctx.measureText(music.name).width
-            ctx.font = `bold 10px Arial`
-            ctx.fillStyle = 'rgb(255, 66, 66)'
+            ctx.lineWidth = 0.5
+            ctx.strokeStyle  = 'black'
+            ctx.strokeText(music.name.replace(/-/g, ' '), X, Y);
 
-            ctx.drawImage(alertImage, X+txtWidth+5, Y-28, 30, 30)
-            ctx.fillText('In development', X+txtWidth+30, Y-(30/2));
+            let alertImage = game.state.images[`imgs/alert.png`]?.image
+            if (music.dev && alertImage) {
+                let txtWidth = ctx.measureText(music.name).width
+                ctx.font = `bold 10px Arial`
+                ctx.fillStyle = 'rgb(255, 66, 66)'
+
+                ctx.drawImage(alertImage, X+txtWidth+5, Y-28, 30, 30)
+                ctx.fillText('In development', X+txtWidth+30, Y-(30/2));
+            }
         }
 
         Y += 50
@@ -54,13 +67,18 @@ export default async (canvas, game, Listener) => {
         game.state.selectMusicMenu.difficultySelected = game.state.selectMusicMenu.difficultySelected < 0 ? selectMusicInfo.difficulties.length-1 : game.state.selectMusicMenu.difficultySelected
     }
 
-    ctx.fillStyle = 'rgb(30, 30, 30)'
+    ctx.fillStyle = 'rgb(30, 30, 30, 0.6)'
     ctx.fillRect(0, 0, canvas.width, 180);
 
     ctx.fillStyle = mod.menuColor || 'white'
     ctx.font = `bold 30px Arial`
     let modNameTxt = `${musicSelect == -1 ? '<' : ''}  ${mod.name}  ${musicSelect == -1 ? '>' : ''}`
     ctx.fillText(modNameTxt, canvas.width/2-(ctx.measureText(modNameTxt).width/2), 110);
+
+    ctx.lineWidth = 0.5
+    ctx.strokeStyle  = 'black'
+    ctx.strokeText(modNameTxt, canvas.width/2-(ctx.measureText(modNameTxt).width/2), 110);
+
     ctx.fillStyle = 'white'
     ctx.font = `bold 15px Arial`
     ctx.fillText(mod.musics.length, canvas.width/2-(ctx.measureText(mod.musics.length).width/2), 130);

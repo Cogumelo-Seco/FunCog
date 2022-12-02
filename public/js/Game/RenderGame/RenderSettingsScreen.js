@@ -6,30 +6,36 @@ export default async (canvas, game, Listener) => {
 
     for (let i in game.state.selectSettingsOption.settingsOptions) {
         let X = 20//canvas.width*0.2//-(Math.abs(canvas.height/2-Y))
+        let config = game.state.selectSettingsOption.settingsOptions[i]
 
-        if (settingsSelect == i && game.state.selectSettingsOption.settingsOptions[i].type != 'ConfigTitle') {
+        if (settingsSelect == i && config.type != 'ConfigTitle') {
             ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'
             ctx.fillRect(0, Y-50, canvas.width, 60)
         }
 
         ctx.font = `bold ${settingsSelect == i ? 50 : 40}px Arial`
-        if (game.state.selectSettingsOption.settingsOptions[i].type == 'ConfigTitle') {
+        if (config.type == 'ConfigTitle') {
             ctx.font = `bold 80px Arial`
             ctx.fillStyle = settingsSelect == i ? 'rgb(40, 40, 90)' : 'rgb(50, 50, 50)'
-            ctx.fillText(game.state.selectSettingsOption.settingsOptions[i].name, canvas.width/2-(ctx.measureText(game.state.selectSettingsOption.settingsOptions[i].name).width/2), Y);
+            ctx.fillText(config.name, canvas.width/2-(ctx.measureText(config.name).width/2), Y);
 
             ctx.lineWidth = 4
             ctx.strokeStyle  = 'white'
-            ctx.strokeText(game.state.selectSettingsOption.settingsOptions[i].name, canvas.width/2-(ctx.measureText(game.state.selectSettingsOption.settingsOptions[i].name).width/2), Y);
+            ctx.strokeText(config.name, canvas.width/2-(ctx.measureText(config.name).width/2), Y);
         } else {
             ctx.fillStyle = 'white'
-            ctx.fillText(game.state.selectSettingsOption.settingsOptions[i].name, (settingsSelect == i ? 20 : 0)+X, Y);
+            ctx.fillText(config.name, (settingsSelect == i ? 20 : 0)+X, Y);
         }
 
         ctx.fillStyle = 'white'
         ctx.font = `bold 50px Arial`
-        if (game.state.selectSettingsOption.settingsOptions[i].content != undefined) 
-            ctx.fillText(game.state.selectSettingsOption.settingsOptions[i].content.toString(), canvas.width-ctx.measureText(game.state.selectSettingsOption.settingsOptions[i].content.toString()).width-X, Y);
+        if (config.content != undefined) {
+            if (settingsSelect == i && config.type == 'Number') {
+                ctx.fillText('< '+config.content.toString()+' >', canvas.width-ctx.measureText('< '+config.content.toString()+' >').width-X, Y);
+            } else {
+                ctx.fillText(config.content.toString(), canvas.width-ctx.measureText(config.content.toString()).width-X, Y);
+            }
+        }
         
         Y += 80
     }

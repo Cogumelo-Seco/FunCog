@@ -19,12 +19,15 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
                 signs: {},
                 currentSignId: 0
             }
+        case 'end':
+            delete  state.animations['hitKillNote']
+            break
         case 'gameLoop':
             if (state.musicInfo.difficulty.name == 'Mania') return
 
             let variables = state.musicInfo.variables
             let step = state.musicStep
-
+/*
             for (let i in variables.signs) {
                 let resize = 0.6
                 let signInfo = variables.signs[i]
@@ -81,7 +84,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
                         }
                         break
                 }
-            }
+            }*/
 
             function doStopSign(sign, fuck, load) {
                 variables.currentSignId += 1
@@ -228,7 +231,6 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 
 
             variables.oldStep = step
-            if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') delete state.animations['hitKillNote']
             break
     }
 }

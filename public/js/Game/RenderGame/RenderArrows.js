@@ -8,7 +8,7 @@ export default async (canvas, game, Listener) => {
     if (!game.state.arrowsSize) return game.state.arrowsSize = game.state.images[`Arrows/Arrows.png`]?.animationConfig['Arrow-0']['Arrow-0'].width
     let arrowX = game.state.smallFunctions.getConfig('MiddleScroll') ? canvas.width/2-((arrowsSize**resizeNote+spaceBetweenArrows)*(amountOfArrows+1)/2) : canvas.width-((arrowsSize**resizeNote+spaceBetweenArrows)*(amountOfArrows+2))
     let arrowY = game.state.arrowsYLine
-    
+    let onNotesSplashes = game.state.smallFunctions.getConfig('Splashes')
 
     if (game.state.musicInfo.notesImageDir) for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
         let arrowInfo = game.state.arrowsInfo[arrowID]
@@ -69,9 +69,14 @@ export default async (canvas, game, Listener) => {
             ctx.rotate((arrowInfo.rotation)*Math.PI/180);
             
             ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
-            if (splashImage && splashImagePos) ctx.drawImage(splashImage, splashImagePos.x, splashImagePos.y, splashImagePos.width, splashImagePos.height, -((arrowWidth*game.state.musicInfo.splashResize)/2), -((arrowHeight*game.state.musicInfo.splashResize)/2), arrowWidth*game.state.musicInfo.splashResize, arrowHeight*game.state.musicInfo.splashResize)
+            if (splashImage && splashImagePos && onNotesSplashes) ctx.drawImage(splashImage, splashImagePos.x, splashImagePos.y, splashImagePos.width, splashImagePos.height, -((arrowWidth*game.state.musicInfo.splashResize)/2), -((arrowHeight*game.state.musicInfo.splashResize)/2), arrowWidth*game.state.musicInfo.splashResize, arrowHeight*game.state.musicInfo.splashResize)
+
+            /*let size = game.state.smallFunctions.getConfig('ScrollSpeed') > 1 ? game.state.arrowsSize**game.state.resizeNote*game.state.smallFunctions.getConfig('ScrollSpeed')*(game.state.musicBPM/150 > 1 ? game.state.musicBPM/150 : 1) : game.state.arrowsSize**game.state.resizeNote*(game.state.musicBPM/150 > 1 ? game.state.musicBPM/150 : 1)
+            ctx.fillStyle = 'rgba(255, 0, 0, 0.5)'
+            ctx.fillRect(-(arrowWidth/2), -(size/2), arrowWidth, size)*/
 
             ctx.restore()
+
             ctx.globalAlpha = 1
         }
 

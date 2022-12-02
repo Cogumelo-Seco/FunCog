@@ -9,11 +9,23 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, event
             }
             break
         case 'started':
+            state.animations['VSChiraMarsh'] = {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 12,
+                totalDalay: 40,
+                dalay: 0,
+                loop: true
+            }
+
 			for (let i in events) {
 				let change = events[i]
 
 				state.musicChangeBPM[change.startTime] = state.musicBPM*(change.multiplier+0.3)
 			}
+            break
+        case 'end':
+            delete state.animations['VSChiraMarsh']
             break
         case 'gameLoop':
             for (let i in state.arrowsInfo) {
