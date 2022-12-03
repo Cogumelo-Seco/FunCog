@@ -7,23 +7,14 @@ export default async (canvas, game, Listener) => {
     let musicInfoTxt = `SCORE: ${game.state.musicInfo.score} | MISSES: ${game.state.musicInfo.misses} | COMBO: ${game.state.musicInfo.combo} (${game.state.musicInfo.misses <= 0 ? 'FC' : game.state.musicInfo.bestCombo}) | ACCURANCY: ${game.state.musicInfo.accuracy?.toFixed(2)}%`
     let musicInfoTxtOpponent = `SCORE: ${game.state.musicInfoOpponent.score || 0} | MISSES: ${game.state.musicInfoOpponent.misses || 0} | COMBO: ${game.state.musicInfoOpponent.combo || 0} (${game.state.musicInfoOpponent.combo ? game.state.musicInfoOpponent.misses <= 0 ? 'FC' : game.state.musicInfoOpponent.bestCombo : 'FC'}) ${game.state.musicInfoOpponent.misses <= 0 ? '(FC)' : ''} | ACCURANCY: ${(game.state.musicInfoOpponent.accuracy || 0)?.toFixed(2)}%`
 
-    ctx.fillText(musicInfoTxt, game.state.online ? (canvas.width-canvas.width/4)-(ctx.measureText(musicInfoTxt).width/2) : canvas.width/2-(ctx.measureText(musicInfoTxt).width/2), canvas.height-20);
-    if (game.state.online) ctx.fillText(musicInfoTxtOpponent, canvas.width/4-(ctx.measureText(musicInfoTxtOpponent).width/2), canvas.height-20);
+    let musicInfoY = game.state.smallFunctions.getConfig('DownScroll') ? canvas.height-20 : 33
+    ctx.fillText(musicInfoTxt, game.state.online ? (canvas.width-canvas.width/4)-(ctx.measureText(musicInfoTxt).width/2) : canvas.width/2-(ctx.measureText(musicInfoTxt).width/2), musicInfoY);
+    if (game.state.online) ctx.fillText(musicInfoTxtOpponent, canvas.width/4-(ctx.measureText(musicInfoTxtOpponent).width/2), musicInfoY);
 
     ctx.font = `bold 10px Arial`
     ctx.fillText(`Difficulty: ${game.state.musicInfo.difficulty.name}`, 2, canvas.height-5);
     ctx.fillText(`Beat: ${game.state.musicBeat}`, 2, canvas.height-15);
-    ctx.fillText(`Step: ${game.state.musicStep}`, 2, canvas.height-25); 
-
-    let alertImage = game.state.images[`imgs/alert.png`]?.image
-    if (game.state.musicInfo.dev && alertImage) {
-        let X = canvas.width/2+canvas.width*0.25/2
-        let Y = 30
-        ctx.font = `bold 15px Arial`
-        ctx.fillStyle = 'rgb(255, 0, 0)'
-        ctx.drawImage(alertImage, X+5, Y-28, 30, 30)
-        ctx.fillText('In development', X+35, Y-(15/2));
-    }
+    ctx.fillText(`Step: ${game.state.musicStep}`, 2, canvas.height-25);
     
     let introImage = game.state.images[`intro/${game.state.countdown}.png`]
     if (game.state.countdown >= 0 && introImage) {
@@ -32,19 +23,24 @@ export default async (canvas, game, Listener) => {
         ctx.drawImage(introImage.image, canvas.width/2-(introWidth/2), canvas.height/2-(introHeight/2), introWidth, introHeight);
     }
 
-    ctx.font = `bold 13px Arial`
-    ctx.globalAlpha = game.state.animations.ratingImage.frame > 15 ? (5-(game.state.animations.ratingImage.frame-15))/5 : 1
-    let ratingImage = game.state.images[`ratings/${game.state.musicInfo.rating?.name}.png`]
-    if (ratingImage) {
-        let ratingImageWidth = ratingImage.image.width*0.25
-        let ratingImageHeight = ratingImage.image.height*0.25
-        let ratingImageY = (game.state.arrowsYLine+(game.state.arrowsSize**game.state.resizeNote/2)-(ratingImage.image.height*0.3/2))-50*((game.state.animations.ratingImage.frame/20))
-        let ratingImageX = game.state.arrowsInfo[0]?.defaultX-ratingImageWidth-game.state.spaceBetweenArrows
+    for (let i in game.state.ratings) {
+        let rating = game.state.ratings[game.state.ratings.length-1-i]
+        let ratingImage = game.state.images[`ratings/${rating.rating.name}.png`]
+        let percent = (+new Date()-rating.time)/400 < 1 ? (+new Date()-rating.time)/400 : 1
+        ctx.globalAlpha = percent > 0.5 ? 1-(percent-0.5)/0.5 : 1
 
-        ctx.drawImage(ratingImage.image, ratingImageX, ratingImageY, ratingImageWidth, ratingImageHeight);
+        if (ratingImage) {
+            let ratingImageWidth = ratingImage.image.width*0.25
+            let ratingImageHeight = ratingImage.image.height*0.25
+            let ratingImageY = (game.state.arrowsYLine+(game.state.arrowsSize**game.state.resizeNote*0.75)-(ratingImage.image.height*0.3/2))-50*percent
+            let ratingImageX = game.state.arrowsInfo[0]?.defaultX-50-game.state.smallFunctions.getConfig('SpaceBetweenArrows')-(ratingImageWidth/2)
 
-        ctx.fillStyle = game.state.musicInfo.rating?.media >= 80 ? 'rgb(19, 189, 0)' : 'rgb(220, 50, 50)'
-        ctx.fillText(game.state.musicInfo.hitNote?.toFixed(2)+'ms', ratingImageX+ratingImageWidth-(ctx.measureText(game.state.musicInfo.hitNote?.toFixed(2)+'ms').width), ratingImageY+ratingImageHeight+8);
+            ctx.drawImage(ratingImage.image, ratingImageX, ratingImageY, ratingImageWidth, ratingImageHeight);
+
+            ctx.font = `bold 13px Arial`
+            ctx.fillStyle = rating.rating.media >= 80 ? 'rgb(19, 189, 0)' : 'rgb(220, 50, 50)'
+            ctx.fillText(rating.hitNote?.toFixed(2)+'ms', ratingImageX+ratingImageWidth-(ctx.measureText(rating.hitNote?.toFixed(2)+'ms').width), ratingImageY+ratingImageHeight+9);
+        }
     }
     ctx.globalAlpha = 1
 

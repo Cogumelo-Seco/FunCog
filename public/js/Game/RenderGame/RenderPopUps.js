@@ -7,7 +7,7 @@ export default async (canvas, game, Listener) => {
         let imagePos = null
         if (popup.animationDir && popup.image && popup.frame != undefined) imagePos = game.state.images[popup.image]?.animationConfig[popup.animationDir][popup.frame.replace ? popup.frame.replace(/{{frame}}/g, game.state.animations[popup.animation]?.frame) : popup.frame] 
 
-        if (image && game.state.images[popup.image]?.animationConfig && imagePos || image) {
+        if ((!i.toLowerCase().includes('jumpscare') || game.state.smallFunctions.getConfig('Jumpscare')) && image && game.state.images[popup.image]?.animationConfig && imagePos || (!i.toLowerCase().includes('jumpscare') || game.state.smallFunctions.getConfig('Jumpscare')) && image) {
             let popupWidth = (popup.width || imagePos?.width || image.width)*(popup.resize || 1)
             let popupHeight = (popup.height || imagePos?.height || image.height)*(popup.resize || 1)
             let popupX = popup.x

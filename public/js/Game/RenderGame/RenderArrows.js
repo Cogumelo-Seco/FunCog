@@ -2,7 +2,7 @@ export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
     let amountOfArrows = game.state.amountOfArrows
-    let spaceBetweenArrows = game.state.spaceBetweenArrows
+    let spaceBetweenArrows = game.state.smallFunctions.getConfig('SpaceBetweenArrows')
     let resizeNote = game.state.resizeNote
     let arrowsSize = game.state.arrowsSize || 100
     if (!game.state.arrowsSize) return game.state.arrowsSize = game.state.images[`Arrows/Arrows.png`]?.animationConfig['Arrow-0']['Arrow-0'].width
@@ -88,7 +88,7 @@ export default async (canvas, game, Listener) => {
     let arrowXOpponent = game.state.smallFunctions.getConfig('MiddleScroll') ? canvas.width/6-((arrowsSize**resizeNoteOpponent+spaceBetweenArrows)*(amountOfArrowsOpponent+1)/2) : arrowsSize**resizeNoteOpponent+spaceBetweenArrows
     let arrowYOpponent = game.state.arrowsYLineOpponent
 
-    if (game.state.musicInfo.notesImageDir) for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
+    if (game.state.musicInfo.notesImageDir && game.state.smallFunctions.getConfig('OpponentNotes')) for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
         let arrowImageData = game.state.images[`${game.state.musicInfo.notesImageDir}Arrows.png`]
         let arrowImage = arrowImageData?.image
         let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]

@@ -38,4 +38,11 @@ export default async (canvas, game, Listener) => {
 
     let cursorImage = game.state.images[`imgs/cursor${Listener.state.mouseInfo.mouseOnHover ? '-hover' : ''}.png`]
     if (cursorImage && Listener.state.mouseInfo.lastMoveTime+3000 >= +new Date()) ctx.drawImage(cursorImage.image, cursorX, cursorY, 30, 30)
+
+    let transitionAnimation = game.state.animations.transition
+
+    ctx.globalAlpha = 1-transitionAnimation.frame/10
+    ctx.fillStyle = `black`
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.globalAlpha = 1
 }

@@ -14,8 +14,9 @@ export default async (canvas, game, Listener) => {
     }
     ctx.globalAlpha = 1
     
-    canvas.style.backgroundImage = `url(https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${game.state.musicInfo.backgroundImage})`
-
+    if (game.state.smallFunctions.getConfig('ShowBackground')) canvas.style.backgroundImage = `url(https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${game.state.musicInfo.backgroundImage})`
+    else canvas.style.backgroundImage = null
+    
     ctx.fillStyle = `rgba(0, 0, 0, 0.7)`
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 }

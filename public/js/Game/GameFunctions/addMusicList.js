@@ -1285,6 +1285,64 @@ export default async (state) => {
                     ]
                 },
             ]
+        },
+        {
+            name: 'VS Hypno\'s Lullaby',
+            menuColor: null,
+            musics: [
+                {
+                    dev: true,
+                    name: 'Safety-Lullaby',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/safety-lullaby/Inst.ogg' },
+                        { dir: 'Musics/musics/safety-lullaby/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Left-Unchecked',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/left-unchecked/Inst.ogg' },
+                        { dir: 'Musics/musics/left-unchecked/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Monochrome',
+                    menuColor: null,
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/monochrome/Inst.ogg' },
+                        { dir: 'Musics/musics/monochrome/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Missingno',
+                    menuColor: null,
+                    difficulties: [ 0, 1, 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/missingno/Inst.ogg' },
+                        { dir: 'Musics/musics/missingno/Voices.ogg' },
+                    ]
+                },
+            ]
         }
     ]
     

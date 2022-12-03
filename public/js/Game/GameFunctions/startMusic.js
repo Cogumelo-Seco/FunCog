@@ -192,7 +192,9 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
 
                         state.musicEventListener('started', { difficulty, listenerState }, state)
                     } else {
-                        setTimeout(() => startMusic(), 900-(state.musicBPM*state.smallFunctions.getConfig('ScrollSpeed')*2))
+                        let countdownSpeed = 900-(state.musicBPM*state.smallFunctions.getConfig('ScrollSpeed')*2)
+                        if (countdownSpeed < 150) countdownSpeed = 150
+                        setTimeout(() => startMusic(), countdownSpeed)
                         state.playSong(`Sounds/intro${state.countdown}.ogg`)
                     }
                 }

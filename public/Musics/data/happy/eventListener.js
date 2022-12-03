@@ -24,7 +24,6 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 
                 if (variables.oldCurrentTime*1000 <= event[0] && currentTime*1000 >= event[0]) {
                     let current = 0
-                    console.log(event)
                     let interval = setInterval(() => {
                         if (current >= 10) {
                             state.screenXMovement = 0

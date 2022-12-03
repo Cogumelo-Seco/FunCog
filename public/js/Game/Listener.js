@@ -67,7 +67,7 @@ export default function createListener(socket) {
 
         if (state.game && !state.onChangeKeyBind) for (let i in state.buttons) {
             let button = state.buttons[i]
-            if (button && on && button.gameStage?.includes(state.game.state.gameStage) && button.keyPress == keyPressed) button.onClick()
+            if (button && on && button.gameStage?.includes(state.game.state.gameStage) && button.keyPress.includes(keyPressed)) button.onClick()
         }
 
         for (let arrowID = 0;arrowID <= state.game.state.amountOfArrows;arrowID++) {

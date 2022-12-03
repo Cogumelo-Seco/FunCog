@@ -1,6 +1,7 @@
 export default (state) => {
     return {
         redirectGameStage: async (newStage, oldStage) => {
+            state.animations.transition.frame = 0
             state.oldGameStage = oldStage || state.gameStage
             state.gameStage = newStage
         },

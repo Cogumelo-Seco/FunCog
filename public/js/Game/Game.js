@@ -24,101 +24,7 @@ function createGame(Listener, canvas, socket) {
             menuSelect: 0
         },
         selectSettingsOption: {
-            settingsOptions: [
-                {
-                    name: 'KeyBind',
-                    type: 'ConfigTitle'
-                },
-                {
-                    name: 'Arrow Left',
-                    id: 'Arrow-0',
-                    type: 'KeyBind',
-                    content: 'KeyD'
-                },
-                {
-                    name: 'Arrow Down',
-                    id: 'Arrow-1',
-                    type: 'KeyBind',
-                    content: 'KeyF'
-                },
-                {
-                    name: 'Arrow Up',
-                    id: 'Arrow-2',
-                    type: 'KeyBind',
-                    content: 'KeyJ'
-                },
-                {
-                    name: 'Arrow Right',
-                    id: 'Arrow-3',
-                    type: 'KeyBind',
-                    content: 'KeyK'
-                },
-                {
-                    name: 'Gameplay',
-                    type: 'ConfigTitle'
-                },
-                {
-                    name: 'Down Scroll',
-                    id: 'DownScroll',
-                    type: 'Boolean',
-                    content: true
-                },
-                {
-                    name: 'Middle Scroll',
-                    id: 'MiddleScroll',
-                    type: 'Boolean',
-                    content: true
-                },
-                {
-                    name: 'Splashes',
-                    id: 'Splashes',
-                    type: 'Boolean',
-                    content: true
-                },
-                {
-                    name: 'Ghost Tapping',
-                    id: 'GhostTapping',
-                    type: 'Boolean',
-                    content: true
-                },
-                {
-                    name: 'Life Drain',
-                    id: 'LifeDrain',
-                    type: 'Boolean',
-                    content: true
-                },
-                {
-                    name: 'Scroll Speed',
-                    id: 'ScrollSpeed',
-                    type: 'Number',
-                    add: 0.1,
-                    max: 2,
-                    min: 0.1,
-                    content: 1
-                },
-                {
-                    name: 'Bongo Cat',
-                    id: 'botPlay',
-                    type: 'Boolean',
-                    content: false
-                },
-                {
-                    name: 'Game',
-                    type: 'ConfigTitle'
-                },
-                {
-                    name: 'Game Info',
-                    id: 'GameInfo',
-                    type: 'Boolean',
-                    content: true
-                },
-                {
-                    name: 'Higher FPS in menus',
-                    id: 'menuFPSUnlimit',
-                    type: 'Boolean',
-                    content: true
-                },
-            ],
+            settingsOptions: [],
             settingsSelect: 0
         },
         selectServerOption: {
@@ -133,7 +39,6 @@ function createGame(Listener, canvas, socket) {
         musics: [],
         difficulties: [],
         opponentArrows: [],
-        spaceBetweenArrows: 10,
         resizeNote: 0.9,
         resizeNoteOpponent: 0,
         resizeNoteOpponentInMiddleScroll: 0.75,
@@ -183,6 +88,8 @@ function createGame(Listener, canvas, socket) {
         screenZooming: false,
         screenRotation: 0,
 
+        ratings: [],
+
         animations: {
             loadingLogo: {
                 frame: 0,
@@ -191,14 +98,6 @@ function createGame(Listener, canvas, socket) {
                 totalDalay: 0,
                 dalay: 0,
                 paused: true,
-            },
-            ratingImage: {
-                frame: 0,
-                startFrame: 0,
-                endFrame: 20,
-                totalDalay: 2,
-                dalay: 0,
-                loop: false
             },
             BFDead: {
                 frame: 0,
@@ -223,30 +122,13 @@ function createGame(Listener, canvas, socket) {
                 dalay: 0,
                 loop: true
             },
-            hitKillNote: {
-                frame: 0,
-                startFrame: 1,
-                endFrame: 6,
-                totalDalay: 40,
-                dalay: 0,
-                loop: true
-            },
-            fireNote: {
-                frame: 0,
+            transition: {
+                frame: 10,
                 startFrame: 0,
-                endFrame: 11,
-                totalDalay: 40,
+                endFrame: 10,
+                totalDalay: 0,
                 dalay: 0,
-                loop: true
-            },
-            VSChiraMarsh: {
-                frame: 0,
-                startFrame: 0,
-                endFrame: 12,
-                totalDalay: 40,
-                dalay: 0,
-                loop: true
-            },
+            }
         },
         loading: {
             loaded: 0,
@@ -264,6 +146,7 @@ function createGame(Listener, canvas, socket) {
     const addMusicList = (command) => require('./GameFunctions/addMusicList').default(state)
     const addDifficulties = (command) => require('./GameFunctions/addDifficulties').default(state)
     const addPersonalizedNotes = (command) => require('./GameFunctions/addPersonalizedNotes').default(state)
+    const addSettings = (command) => require('./GameFunctions/addSettings').default(state)
 
     const playSong = (type, command) => require('./GameFunctions/playSong').default(type, command, state)
     const calculateRating = (command) => require('./GameFunctions/calculateRating').default(command, state)
@@ -460,13 +343,19 @@ function createGame(Listener, canvas, socket) {
                 note.oldY = newNoteY
             }
 
-            if ((state.smallFunctions.getConfig('botPlay') || Listener.state.arrows[note.arrowID].inAutoClick) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**state.resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
-            if ((state.smallFunctions.getConfig('botPlay') || note.autoClick) && (note.errorWhenNotClicking || note.autoClick) && newNoteY >= -10 && newNoteY <= (state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight*2)) {
-                Listener.state.arrows[note.arrowID].inAutoClick = note.autoClick
-                Listener.state.arrows[note.arrowID].state = 'onNote'
-                Listener.state.arrows[note.arrowID].click = true
-                Listener.state.arrows[note.arrowID].lastNoteClicked = note
-                if (!note.clicked && !note.disabled) verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, bot: true })
+            if (Listener.state.arrows[note.arrowID]) {
+                if ((state.smallFunctions.getConfig('botPlay') || Listener.state.arrows[note.arrowID].inAutoClick) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**state.resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
+                if ((state.smallFunctions.getConfig('botPlay') || note.autoClick) && (note.errorWhenNotClicking || note.autoClick) && newNoteY >= -10 && newNoteY <= (state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight*2)) {
+                    Listener.state.arrows[note.arrowID].inAutoClick = note.autoClick
+                    Listener.state.arrows[note.arrowID].state = 'onNote'
+                    Listener.state.arrows[note.arrowID].click = true
+                    Listener.state.arrows[note.arrowID].lastNoteClicked = note
+                    if (!note.clicked && !note.disabled) {
+                        note.clicked = true
+                        //setTimeout(() => verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, bot: true }), Math.floor(Math.random()*150))
+                        verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, bot: true })
+                    }
+                }
             }
 
             if (note.errorWhenNotClicking && !state.smallFunctions.getConfig('botPlay') && note.arrowID >= 0 && note.arrowID <= state.amountOfArrows && note.Y > (state.arrowsSize**state.resizeNote) && !note.disabled && !note.clicked) {
@@ -541,6 +430,7 @@ function createGame(Listener, canvas, socket) {
         addMusicList()
         addDifficulties()
         addPersonalizedNotes()
+        addSettings()
 
         let toLoad = state.images.concat(state.sounds)
 

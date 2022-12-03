@@ -81,7 +81,7 @@ export default async (canvas, game, Listener) => {
     let arrowYOpponent = game.state.arrowsYLineOpponent
     let resizeNoteOpponent = game.state.resizeNoteOpponent
 
-    for (let i in game.state.musicOpponentNotes) {
+    if (game.state.smallFunctions.getConfig('OpponentNotes')) for (let i in game.state.musicOpponentNotes) {
         let note = game.state.musicOpponentNotes[i]
         let arrowInfo = game.state.arrowsInfoOpponent[note.arrowID]
         
