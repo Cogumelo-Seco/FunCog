@@ -18,7 +18,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				noteAlpha: 1,
 				addAlpha: true,
 				pauseAlpha: false,
-				MiddleScroll: state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content
+				MiddleScroll: JSON.parse(JSON.stringify(state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll'))).content
 			}
 
 			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content = true

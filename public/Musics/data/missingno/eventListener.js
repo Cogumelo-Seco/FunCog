@@ -5,8 +5,8 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				noteAlpha: 1,
 				addAlpha: true,
 				pauseAlpha: false,
-				ScrollSpeed: state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content,
-				DownScroll: state.selectSettingsOption.settingsOptions.find((g) => g.id == 'DownScroll').content
+				ScrollSpeed: JSON.parse(JSON.stringify(state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed'))).content,
+				DownScroll: JSON.parse(JSON.stringify(state.selectSettingsOption.settingsOptions.find((g) => g.id == 'DownScroll'))).content
 			}
 
 			//state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content = true
@@ -60,11 +60,21 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize/2) : 0)
 								state.arrowsInfo[i].X = (arrowSize/2)+Math.floor(Math.random()*(width*0.25))+(width*0.25*3)
 							}
+
+							let bongoImageData = state.images['BongoCat/BongoCat.png']
+							let bongoWidth = bongoImageData.animationConfig.bg.width*0.5
+    						let bongoHeight = bongoImageData.animationConfig.bg.height*0.5
+							state.customBongPosition = {
+								X: (bongoWidth/2)+Math.floor(Math.random()*(state.canvas.width-bongoWidth)),
+								Y: (bongoHeight/2)+Math.floor(Math.random()*(state.canvas.height-bongoHeight))
+							}
 						}
 			
 						for (let i in state.arrowsInfoOpponent) {
 							state.arrowsInfoOpponent[i].alpha = 0
 							state.arrowsInfoOpponent[i].noteAlpha = 0
+							state.arrowsInfoOpponent[i].resetEnable = false
+							state.arrowsInfoOpponent[i].X = -500
 						}
 					}
 

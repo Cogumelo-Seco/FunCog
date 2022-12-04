@@ -9,6 +9,7 @@ export default (state) => {
             return (state.selectSettingsOption.settingsOptions.find((g) => g.id == id))?.content
         },
         resetScreen: () => {
+            state.musicEventListener('end', {}, state)
             state.musicEventListener = () => null
             state.screenZoom = 0
             state.screenRotation = 0
