@@ -1,5 +1,31 @@
 {
 	"song": {
+		"events": [
+			[
+				66652.5687932229,
+				"Change Scroll Speed",
+				"1.09",
+				"0.001"
+			],
+			[
+				129085.001225655,
+				"Change Scroll Speed",
+				"1.03",
+				"0.001"
+			],
+			[
+				149679.59582025,
+				"Change Scroll Speed",
+				"1.09",
+				"0.001"
+			],
+			[
+				174503.920144574,
+				"Change Scroll Speed",
+				"1.05",
+				"0.001"
+			]
+		],
 		"player1": "bf-pixel",
 		"sectionLengths": [],
 		"player2": "missingno",

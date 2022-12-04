@@ -2,7 +2,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 	const hurtFunction = (hurt) => {
 		state.musicInfo.variables.hurtLevel += 1
 
-		state.musicInfo.popups.sonicEXEHitStatic = {
+		state.musicInfo.popupsBackground.broken = {
 			image: `imgs/LateNightCityTale/Broken.png`,
 			x: 0,
 			y: 0,

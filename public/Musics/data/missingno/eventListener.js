@@ -1,6 +1,47 @@
 export default async (type, { noteClickAuthor, note, click, listenerState, difficulty, events, gameState }, state) => {
     switch (type) {
-		case 'noteClick':
+		case 'loaded':
+			state.musicInfo.variables = {
+				noteAlpha: 1,
+				addAlpha: true,
+				pauseAlpha: false,
+				ScrollSpeed: state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content
+			}
+
+			//state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content = true
+			break
+        case 'started':
+			state.musicInfo.variables = {
+				oldBeat: 0,
+				oldStep: 0,
+				oldCurrentTime: 0
+			}
+			break
+		case 'end':
+			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content = state.musicInfo.variables.ScrollSpeed
+			break
+		case 'gameLoop':
+			var variables = state.musicInfo.variables
+			let beat = state.musicBeat
+			let step = state.musicStep
+			let currentTime = state.music?.currentTime
+
+			let events = state.musicInfo.events
+			for (let i in events) {
+                let event = events[i]
+
+                if (variables.oldCurrentTime*1000 <= event[0] && currentTime*1000 >= event[0]) {
+					if (event[1] == 'Change Scroll Speed') {
+						state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content = Number(event[2])
+					}
+				}
+			}
+
+			variables.oldBeat = beat
+			variables.oldStep = step
+			variables.oldCurrentTime = currentTime
+			break
+		/*case 'noteClick':
 			if (noteClickAuthor == 'opponent') {
 				state.musicInfo.variables.animation = 'idle'
 
@@ -134,16 +175,6 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			let beat = state.musicBeat
 			let step = state.musicStep
 			let currentTime = state.music?.currentTime
-
-			if (state.screenZoom < 10 && state.camZooming) {
-				if (variables.oladBeat != beat && beat%4 == 0 && currentTime > 13 && currentTime < 144) state.screenZoom = 10
-			} else if (state.screenZoom <= 0) {
-				state.screenZoom = 0
-				state.camZooming = true
-			} else {
-				state.camZooming = false
-				state.screenZoom -= 1
-			}
 
 			let imageSpawn = state.images['imgs/VSLullaby/silver.png'].animationConfig['spawn'][state.animations['SilverSpawn'].frame]
 			state.musicInfo.popupsBackground.Silver = {
@@ -371,7 +402,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					listenerState.pauseGameKeys = false
 				}
 			}
-			break
+			break*/
     }
 }
 
