@@ -34,7 +34,7 @@ export default async (canvas, game, Listener) => {
                 for (let i = 0;i <= note.hold;i += holdImagePos?.height) {
                     holdY = game.state.smallFunctions.getConfig('DownScroll') ? holdY-(holdImagePos.height**resizeNote) : holdY+(holdImagePos.height**resizeNote)
                     holdYInRelationToTheLine = game.state.smallFunctions.getConfig('DownScroll') ? holdY-arrowY : (arrowY+(arrowImagePos.height**resizeNote/2))-holdY
-                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : arrowInfo.noteAlpha
+                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.noteAlpha : arrowInfo.noteAlpha == 1 ? game.state.alphaHUD : 0
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
                         if (i+holdImagePos?.height >= note.hold) {
@@ -57,7 +57,7 @@ export default async (canvas, game, Listener) => {
             }
 
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage && arrowImagePos) {
-                ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : arrowInfo.noteAlpha
+                ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.noteAlpha : arrowInfo.noteAlpha == 1 ? game.state.alphaHUD : 0
 
                 let arrowWidth = arrowImagePos?.width**resizeNote
                 let arrowHeight = arrowImagePos?.height**resizeNote
@@ -73,7 +73,7 @@ export default async (canvas, game, Listener) => {
                 ctx.restore()
             }
 
-            ctx.globalAlpha = 1
+            ctx.globalAlpha = game.state.alphaHUD
             ctx.shadowBlur = 0
         }
     }
@@ -110,7 +110,7 @@ export default async (canvas, game, Listener) => {
                 for (let i = 0;i <= note.hold;i += holdImagePos?.height) {
                     holdY = game.state.smallFunctions.getConfig('DownScroll') ? holdY-(holdImagePos.height**resizeNoteOpponent) : holdY+holdImagePos.height**resizeNoteOpponent
                     holdYInRelationToTheLine = game.state.smallFunctions.getConfig('DownScroll') ? holdY-arrowYOpponent : (arrowYOpponent+(arrowImagePos.height**resizeNoteOpponent/2))-holdY
-                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : arrowInfo.noteAlpha
+                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.noteAlpha : arrowInfo.noteAlpha == 1 ? game.state.alphaHUD : 0
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
                         if (i+holdImagePos?.height >= note.hold) {
@@ -131,7 +131,7 @@ export default async (canvas, game, Listener) => {
             }
 
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage && arrowImagePos) {
-                ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : arrowInfo.noteAlpha
+                ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.noteAlpha : arrowInfo.noteAlpha == 1 ? game.state.alphaHUD : 0
                 
                 let arrowWidth = arrowImagePos?.width**resizeNoteOpponent
                 let arrowHeight = arrowImagePos?.height**resizeNoteOpponent

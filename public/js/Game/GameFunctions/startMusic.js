@@ -41,6 +41,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
             rating: {},
             health: 50,
             popups: [],
+            popupsBackground: [],
             lastPopupTime: 0,
             variables: {},
             playerId: opponentPlayer ? 2 : 1,

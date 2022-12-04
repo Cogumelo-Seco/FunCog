@@ -43,7 +43,7 @@ export default async (canvas, game, Listener) => {
         }
 
         if (arrowImage && arrowImagePos && arrowInfo) {
-            ctx.globalAlpha = arrowInfo.alpha > 1 ? 1 : arrowInfo.alpha < 0 ? 0 : arrowInfo.alpha
+            ctx.globalAlpha = arrowInfo.alpha > 1 ? 1 : arrowInfo.alpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.alpha : arrowInfo.alpha == 1 ? game.state.alphaHUD : 0
             ctx.shadowColor = arrowInfo.shadowColor
             ctx.shadowBlur = arrowInfo.shadowBlur
 
@@ -69,7 +69,10 @@ export default async (canvas, game, Listener) => {
             ctx.rotate((arrowInfo.rotation)*Math.PI/180);
             
             ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
-            if (splashImage && splashImagePos && onNotesSplashes) ctx.drawImage(splashImage, splashImagePos.x, splashImagePos.y, splashImagePos.width, splashImagePos.height, -((arrowWidth*game.state.musicInfo.splashResize)/2), -((arrowHeight*game.state.musicInfo.splashResize)/2), arrowWidth*game.state.musicInfo.splashResize, arrowHeight*game.state.musicInfo.splashResize)
+            if (splashImage && splashImagePos && onNotesSplashes) {
+                ctx.globalAlpha = game.state.alphaHUD == 1 ? arrowInfo.splashAlpha : arrowInfo.splashAlpha == 1 ? game.state.alphaHUD : 0
+                ctx.drawImage(splashImage, splashImagePos.x, splashImagePos.y, splashImagePos.width, splashImagePos.height, -((arrowWidth*game.state.musicInfo.splashResize)/2), -((arrowHeight*game.state.musicInfo.splashResize)/2), arrowWidth*game.state.musicInfo.splashResize, arrowHeight*game.state.musicInfo.splashResize)
+            }
 
             /*let size = game.state.smallFunctions.getConfig('ScrollSpeed') > 1 ? game.state.arrowsSize**game.state.resizeNote*game.state.smallFunctions.getConfig('ScrollSpeed')*(game.state.musicBPM/150 > 1 ? game.state.musicBPM/150 : 1) : game.state.arrowsSize**game.state.resizeNote*(game.state.musicBPM/150 > 1 ? game.state.musicBPM/150 : 1)
             ctx.fillStyle = 'rgba(255, 0, 0, 0.5)'
@@ -77,7 +80,7 @@ export default async (canvas, game, Listener) => {
 
             ctx.restore()
 
-            ctx.globalAlpha = 1
+            ctx.globalAlpha = game.state.alphaHUD
         }
 
         arrowX += arrowsSize**resizeNote+spaceBetweenArrows
@@ -110,7 +113,7 @@ export default async (canvas, game, Listener) => {
         }
 
         if (arrowImage && arrowInfo) {
-            ctx.globalAlpha = arrowInfo.alpha > 1 ? 1 : arrowInfo.alpha < 0 ? 0 : arrowInfo.alpha
+            ctx.globalAlpha = arrowInfo.alpha > 1 ? 1 : arrowInfo.alpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.alpha : arrowInfo.alpha == 1 ? game.state.alphaHUD : 0
             ctx.shadowColor = arrowInfo.shadowColor
             ctx.shadowBlur = arrowInfo.shadowBlur
 
@@ -138,11 +141,12 @@ export default async (canvas, game, Listener) => {
             ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
 
             ctx.restore()
-            ctx.globalAlpha = 1
+            ctx.globalAlpha = game.state.alphaHUD
         }
 
         arrowXOpponent += arrowsSize**resizeNoteOpponent+spaceBetweenArrows
     }
 
     ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1
 }

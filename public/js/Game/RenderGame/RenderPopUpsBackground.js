@@ -1,8 +1,8 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
-    for (let i in game.state.musicInfo.popups) {
-        let popup = game.state.musicInfo.popups[i]
+    for (let i in game.state.musicInfo.popupsBackground) {
+        let popup = game.state.musicInfo.popupsBackground[i]
         let image = game.state.images[popup.image]?.image
         let imagePos = null
         if (popup.animationDir && popup.image && popup.frame != undefined) imagePos = game.state.images[popup.image]?.animationConfig[popup.animationDir][typeof(popup.frame) == 'number' ? popup.frame : popup.frame.replace(/{{frame}}/g, game.state.animations[popup.animation]?.frame)]
@@ -13,9 +13,9 @@ export default async (canvas, game, Listener) => {
             let popupX = popup.x
             let popupY = popup.y
 
-            if (popup.alphaRandom && game.state.alphaHUD == 1) {
-                ctx.globalAlpha = (Math.random()*(Number(popup.alpha.split('-')[1])-Number(popup.alpha.split('-')[0])))+Number(popup.alpha.split('-')[0])
-            } else ctx.globalAlpha = popup.alpha == undefined ? game.state.alphaHUD : popup.alpha == 1 ? game.state.alphaHUD : popup.alpha
+            if (popup.alphaRandom) {
+                ctx.globalAlpha =  (Math.random()*(Number(popup.alpha.split('-')[1])-Number(popup.alpha.split('-')[0])))+Number(popup.alpha.split('-')[0])
+            } else ctx.globalAlpha = popup.alpha == undefined ? 1 : popup.alpha
             
             let scaleH = popup.flipY ? -1 : 1
             let scaleV = popup.flipX ? -1 : 1

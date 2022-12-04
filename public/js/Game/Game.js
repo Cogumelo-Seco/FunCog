@@ -2,7 +2,7 @@ function createGame(Listener, canvas, socket) {
     const state = {
         fps: '0-0',
         renderType: 'limited',
-        changeRenderTypeCount: 0,
+        customBongPosition: { X: null, Y: null },
         online: false,
         waiting: true,
         serverId: null,
@@ -44,6 +44,7 @@ function createGame(Listener, canvas, socket) {
         resizeNoteOpponentInMiddleScroll: 0.75,
         arrowsYLineMargin: 50,
         arrowsYLine: 0,
+        alphaHUD: 1,
         
         arrowsYLineOpponent: 0,
         amountOfArrowsOpponent: 3,
@@ -229,6 +230,7 @@ function createGame(Listener, canvas, socket) {
                     resetEnable: true,
                     alpha: 1,
                     noteAlpha: 1,
+                    splashAlpha: 1,
                     rotation: 0
                 }
             }
@@ -246,6 +248,7 @@ function createGame(Listener, canvas, socket) {
                     resetEnable: true,
                     alpha: 1,
                     noteAlpha: 1,
+                    splashAlpha: 1,
                     rotation: 0
                 }
             }
@@ -378,7 +381,7 @@ function createGame(Listener, canvas, socket) {
             }
 
             if (newNoteY >= 0 && !state.musicOpponentNotes[i].clicked && !state.musicOpponentNotes[i].disabled && (state.musicOpponentNotes[i].errorWhenNotClicking || state.musicOpponentNotes[i].autoClick)) {
-                state.musicEventListener('noteClick', { noteClickAuthor: 'opponent' }, state)
+                state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note: state.musicOpponentNotes[i], click: !state.musicOpponentNotes[i].clicked }, state)
                 state.musicOpponentNotes[i].clicked = true
                 if ((state.online || state.smallFunctions.getConfig('LifeDrain')) && state.musicInfo.health > 5 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
             }
@@ -397,7 +400,7 @@ function createGame(Listener, canvas, socket) {
             if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) state.musicInfo.linearAccuracyMedia.push(state.musicInfo.accuracy || 1)
         }
 
-        if (state.gameLoopFPSControlTime+30 <= +new Date()) {
+        if (state.gameLoopFPSControlTime+20 <= +new Date()) {
             state.gameLoopFPSControlTime = +new Date()
 
             if (state.music?.currentTime > 0) state.musicEventListener('gameLoop', { listenerState: Listener.state }, state)

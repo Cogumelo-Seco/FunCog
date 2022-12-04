@@ -1,5 +1,6 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
+    ctx.globalAlpha = game.state.alphaHUD
 
     let loadingBarWidth = canvas.width*0.25
     let loadingBarHeight = 20
@@ -60,7 +61,7 @@ export default async (canvas, game, Listener) => {
     let alertImage = game.state.images[`imgs/alert.png`]?.image
     if (game.state.musicInfo.dev && alertImage) {
         let X = canvas.width/2+musicBarWidth/2
-        let Y = 30
+        let Y = musicBarY+20
         ctx.font = `bold 15px Arial`
         ctx.fillStyle = 'rgb(255, 0, 0)'
         ctx.drawImage(alertImage, X+5, Y-28, 30, 30)
@@ -122,4 +123,6 @@ export default async (canvas, game, Listener) => {
         if (!timeText) timeText = '00:00'
         return timeText
     }
+
+    ctx.globalAlpha = 1
 }

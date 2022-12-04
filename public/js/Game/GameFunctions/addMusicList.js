@@ -1288,12 +1288,12 @@ export default async (state) => {
         },
         {
             name: 'VS Hypno\'s Lullaby',
-            menuColor: null,
+            menuColor: 'rgb(154, 129, 0)',
             musics: [
                 {
                     dev: true,
                     name: 'Safety-Lullaby',
-                    menuColor: null,
+                    menuColor: 'rgb(154, 129, 0)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -1306,7 +1306,7 @@ export default async (state) => {
                 {
                     dev: true,
                     name: 'Left-Unchecked',
-                    menuColor: null,
+                    menuColor: 'rgb(154, 129, 0)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
@@ -1319,12 +1319,18 @@ export default async (state) => {
                 {
                     dev: true,
                     name: 'Monochrome',
-                    menuColor: null,
+                    menuColor: 'rgb(120, 20, 20)',
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
+                        { dir: 'jumpscares/SilverJumpscare.png' },
+                        { dir: 'imgs/Monochrome/redFilter.png' },
+                        { dir: 'imgs/Monochrome/silver.png', animationConfigDir: 'imgs/Monochrome/silver.json' },
+                        { dir: 'imgs/Monochrome/celebi.png', animationConfigDir: 'imgs/Monochrome/celebi.json' },
                         { dir: 'Musics/musics/monochrome/Inst.ogg' },
                         { dir: 'Musics/musics/monochrome/Voices.ogg' },
                     ]
@@ -1332,7 +1338,7 @@ export default async (state) => {
                 {
                     dev: true,
                     name: 'Missingno',
-                    menuColor: null,
+                    menuColor: 'rgb(240, 176, 136)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,

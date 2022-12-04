@@ -1,6 +1,7 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
+    ctx.globalAlpha = game.state.alphaHUD
     ctx.fillStyle = 'rgb(200, 200, 200)'
     ctx.font = `bold 13px Arial`
 
@@ -27,7 +28,7 @@ export default async (canvas, game, Listener) => {
         let rating = game.state.ratings[game.state.ratings.length-1-i]
         let ratingImage = game.state.images[`ratings/${rating.rating.name}.png`]
         let percent = (+new Date()-rating.time)/400 < 1 ? (+new Date()-rating.time)/400 : 1
-        ctx.globalAlpha = percent > 0.5 ? 1-(percent-0.5)/0.5 : 1
+        ctx.globalAlpha = percent > 0.5 ? 1-(percent-0.5)/0.5 : game.state.alphaHUD
 
         if (ratingImage) {
             let ratingImageWidth = ratingImage.image.width*0.25
