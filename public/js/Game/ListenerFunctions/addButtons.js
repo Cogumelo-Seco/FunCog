@@ -11,7 +11,7 @@ export default (state) => {
             else state.mouseInfo.mouseInfoType = 'percent'
         }
     }
-
+/*
     state.buttons['DebugButton'] = {
         minX: 0,
         maxX: 80,
@@ -23,7 +23,7 @@ export default (state) => {
             state.game.state.debug = state.game.state.debug ? false : true
         }
     }
-/*
+
     state.buttons['BotPlayButton'] = {
         minX: 0,
         maxX: 80,
