@@ -5,7 +5,8 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				noteAlpha: 1,
 				addAlpha: true,
 				pauseAlpha: false,
-				ScrollSpeed: state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content
+				ScrollSpeed: state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content,
+				DownScroll: state.selectSettingsOption.settingsOptions.find((g) => g.id == 'DownScroll').content
 			}
 
 			//state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content = true
@@ -19,6 +20,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			break
 		case 'end':
 			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content = state.musicInfo.variables.ScrollSpeed
+			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'DownScroll').content = state.musicInfo.variables.DownScroll
 			break
 		case 'gameLoop':
 			var variables = state.musicInfo.variables
@@ -31,6 +33,42 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
                 let event = events[i]
 
                 if (variables.oldCurrentTime*1000 <= event[0] && currentTime*1000 >= event[0]) {
+					if (event[2] == 'Missingno' && state.musicInfo.difficulty.name != 'Mania') {
+						let downScrool = Math.floor(Math.random()*100) > 50 ? true : false
+						state.selectSettingsOption.settingsOptions.find((g) => g.id == 'DownScroll').content = downScrool
+						let arrowSize = state.arrowsSize
+						let width = state.canvas.width-arrowSize
+						let height = state.canvas.height-arrowSize
+
+						for (let i in state.arrowsInfo) {
+							state.arrowsInfo[i].resetEnable = false
+							state.arrowsInfo[i].rotation = Math.floor(Math.random()*360)
+
+							if (i == 0) {
+								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize/2) : 0)
+								state.arrowsInfo[i].X = arrowSize+Math.floor(Math.random()*(arrowSize-width*0.25))
+							}
+							if (i == 1) {
+								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize/2) : 0)
+								state.arrowsInfo[i].X = Math.floor(Math.random()*(300-width*0.25))+(arrowSize+width*0.25)
+							}
+							if (i == 2) {
+								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize/2) : 0)
+								state.arrowsInfo[i].X = Math.floor(Math.random()*(300-width*0.25))+(arrowSize+width*0.25*2)
+							}
+							if (i == 3) {
+								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize/2) : 0)
+								state.arrowsInfo[i].X = (arrowSize/2)+Math.floor(Math.random()*(width*0.25))+(width*0.25*3)
+							}
+						}
+			
+						for (let i in state.arrowsInfoOpponent) {
+							state.arrowsInfoOpponent[i].alpha = 0
+							state.arrowsInfoOpponent[i].noteAlpha = 0
+						}
+					}
+
+
 					if (event[1] == 'Change Scroll Speed') {
 						state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content = Number(event[2])
 					}

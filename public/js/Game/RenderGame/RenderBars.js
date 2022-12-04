@@ -7,7 +7,7 @@ export default async (canvas, game, Listener) => {
     let loadingPercent = game.state.loadingSong.loaded/game.state.loadingSong.total
 
     if (game.state.countdown > 3) {
-        ctx.fillStyle = `hsl(${360-game.state.rainbowColor}, 100%, 1%)`
+        ctx.fillStyle = 'black'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
 
         ctx.fillStyle = 'rgb(100, 100, 100)'

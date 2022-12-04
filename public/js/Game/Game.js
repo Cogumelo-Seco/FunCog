@@ -10,7 +10,7 @@ function createGame(Listener, canvas, socket) {
         gameLoopFPSControlTime: 0,
         gameLoopFPSControlTime2: 0,
         rainbowColor: 0,
-        debug: true,
+        debug: false,
         gameStage: 'loading',
         gameStageTime: 0,
         musicMenu: null,
@@ -39,9 +39,9 @@ function createGame(Listener, canvas, socket) {
         musics: [],
         difficulties: [],
         opponentArrows: [],
-        resizeNote: 0.9,
+        resizeNote: 0.885,
         resizeNoteOpponent: 0,
-        resizeNoteOpponentInMiddleScroll: 0.75,
+        resizeNoteOpponentInMiddleScroll: 0.735,
         arrowsYLineMargin: 50,
         arrowsYLine: 0,
         alphaHUD: 1,
@@ -384,7 +384,7 @@ function createGame(Listener, canvas, socket) {
             if (newNoteY >= 0 && !state.musicOpponentNotes[i].clicked && !state.musicOpponentNotes[i].disabled && (state.musicOpponentNotes[i].errorWhenNotClicking || state.musicOpponentNotes[i].autoClick)) {
                 state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note: state.musicOpponentNotes[i], click: !state.musicOpponentNotes[i].clicked }, state)
                 state.musicOpponentNotes[i].clicked = true
-                if ((state.online || state.smallFunctions.getConfig('LifeDrain')) && state.musicInfo.health > 5 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
+                if ((state.online || state.smallFunctions.getConfig('LifeDrain')) && state.musicInfo.health > 10 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
             }
         }
 

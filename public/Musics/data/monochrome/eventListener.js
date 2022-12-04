@@ -215,9 +215,9 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			let events = state.musicInfo.events
 			for (let i in events) {
                 let event = events[i]
-
+				
                 if (variables.oldCurrentTime*1000 <= event[0] && currentTime*1000 >= event[0]) {
-					if (event[2] == 'Jumpscare' && (event[4] == '10' || Math.random()*100 > 20)) {
+					if (event[2] == 'Jumpscare' && (event[4] == '10' || Math.floor(Math.random()*10) <= Number(event[4]))) {
 						let time = +new Date()
 						let interval = setInterval(() => {
 							if (+new Date()-time >= 450) {

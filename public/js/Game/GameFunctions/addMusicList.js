@@ -1335,14 +1335,14 @@ export default async (state) => {
                     ]
                 },
                 {
-                    dev: true,
                     name: 'Missingno',
                     menuColor: 'rgb(240, 176, 136)',
                     difficulties: [ 0, 1, 2, 3 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: null,
+                    notesImageDir: 'Arrows/Pixel/',
+                    backgroundImage: 'backgrounds/missingno.jpg',
                     mod: 'VSLullaby',
                     toLoad: [
+                        { dir: 'Arrows/Pixel/Arrows.png', animationConfigDir: 'Arrows/Pixel/Arrows.json' },
                         { dir: 'Musics/musics/missingno/Inst.ogg' },
                         { dir: 'Musics/musics/missingno/Voices.ogg' },
                     ]
