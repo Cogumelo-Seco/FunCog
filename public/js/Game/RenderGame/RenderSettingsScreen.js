@@ -23,11 +23,11 @@ export default async (canvas, game, Listener) => {
             ctx.strokeStyle  = 'white'
             ctx.strokeText(config.name, canvas.width/2-(ctx.measureText(config.name).width/2), Y);
         } else {
-            ctx.fillStyle = 'white'
+            ctx.fillStyle = config.menuColor || 'white'
             ctx.fillText(config.name, (settingsSelect == i ? 20 : 0)+X, Y);
         }
 
-        ctx.fillStyle = 'white'
+        ctx.fillStyle = config.menuColor || 'white'
         ctx.font = `bold 50px Arial`
         if (config.content != undefined) {
             let configContent = config.content

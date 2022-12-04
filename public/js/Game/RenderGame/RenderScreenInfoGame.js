@@ -1,6 +1,8 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
+    let performanceMode = game.state.smallFunctions.getConfig('PerformanceMode')
+
     ctx.globalAlpha = game.state.alphaHUD
     ctx.fillStyle = 'rgb(200, 200, 200)'
     ctx.font = `bold 13px Arial`
@@ -24,7 +26,7 @@ export default async (canvas, game, Listener) => {
         ctx.drawImage(introImage.image, canvas.width/2-(introWidth/2), canvas.height/2-(introHeight/2), introWidth, introHeight);
     }
 
-    for (let i in game.state.ratings) {
+    if (!performanceMode) for (let i in game.state.ratings) {
         let rating = game.state.ratings[game.state.ratings.length-1-i]
         let ratingImage = game.state.images[`ratings/${rating.rating.name}.png`]
         let percent = (+new Date()-rating.time)/400 < 1 ? (+new Date()-rating.time)/400 : 1

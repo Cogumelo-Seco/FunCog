@@ -1,6 +1,8 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
+    let performanceMode = game.state.smallFunctions.getConfig('PerformanceMode')
+
     if (!game.state.holdHeight) game.state.holdHeight = game.state.images[`Arrows/Arrows.png`]?.animationConfig['Arrow-0']['Arrow-0-hold-piece']?.height
     let arrowsSize = game.state.arrowsSize || 100
     let resizeNote = game.state.resizeNote
@@ -81,7 +83,7 @@ export default async (canvas, game, Listener) => {
     let arrowYOpponent = game.state.arrowsYLineOpponent
     let resizeNoteOpponent = game.state.resizeNoteOpponent
 
-    if (game.state.smallFunctions.getConfig('OpponentNotes')) for (let i in game.state.musicOpponentNotes) {
+    if (game.state.smallFunctions.getConfig('OpponentNotes') && !performanceMode) for (let i in game.state.musicOpponentNotes) {
         let note = game.state.musicOpponentNotes[i]
         let arrowInfo = game.state.arrowsInfoOpponent[note.arrowID]
         

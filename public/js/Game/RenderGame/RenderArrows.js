@@ -1,6 +1,8 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
+    let performanceMode = game.state.smallFunctions.getConfig('PerformanceMode')
+
     let amountOfArrows = game.state.amountOfArrows
     let spaceBetweenArrows = game.state.smallFunctions.getConfig('SpaceBetweenArrows')
     let resizeNote = game.state.resizeNote
@@ -69,14 +71,16 @@ export default async (canvas, game, Listener) => {
             ctx.rotate((arrowInfo.rotation)*Math.PI/180);
             
             ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(arrowWidth/2), -(arrowHeight/2), arrowWidth, arrowHeight)
-            if (splashImage && splashImagePos && onNotesSplashes) {
+            if (splashImage && splashImagePos && onNotesSplashes && !performanceMode) {
                 ctx.globalAlpha = game.state.alphaHUD == 1 ? arrowInfo.splashAlpha : arrowInfo.splashAlpha == 1 ? game.state.alphaHUD : 0
                 ctx.drawImage(splashImage, splashImagePos.x, splashImagePos.y, splashImagePos.width, splashImagePos.height, -((arrowWidth*game.state.musicInfo.splashResize)/2), -((arrowHeight*game.state.musicInfo.splashResize)/2), arrowWidth*game.state.musicInfo.splashResize, arrowHeight*game.state.musicInfo.splashResize)
             }
 
-            /*let size = game.state.smallFunctions.getConfig('ScrollSpeed') > 1 ? game.state.arrowsSize**game.state.resizeNote*game.state.smallFunctions.getConfig('ScrollSpeed')*(game.state.musicBPM/150 > 1 ? game.state.musicBPM/150 : 1) : game.state.arrowsSize**game.state.resizeNote*(game.state.musicBPM/150 > 1 ? game.state.musicBPM/150 : 1)
-            ctx.fillStyle = 'rgba(255, 0, 0, 0.5)'
-            ctx.fillRect(-(arrowWidth/2), -(size/2), arrowWidth, size)*/
+            if (game.state.smallFunctions.getConfig('ShowHitBox')) {
+                let size = game.state.smallFunctions.getConfig('ScrollSpeed') > 1 ? arrowsSize**resizeNote*game.state.smallFunctions.getConfig('ScrollSpeed')*(game.state.musicBPM/150 > 1 ? game.state.musicBPM/150 : 1) : arrowsSize**resizeNote*(game.state.musicBPM/150 > 1 ? game.state.musicBPM/150 : 1)
+                ctx.fillStyle = 'rgba(255, 0, 0, 0.5)'
+                ctx.fillRect(-(arrowsSize**resizeNote/2), -(size/2), arrowsSize**resizeNote, size)
+            }
 
             ctx.restore()
 
@@ -91,7 +95,7 @@ export default async (canvas, game, Listener) => {
     let arrowXOpponent = game.state.smallFunctions.getConfig('MiddleScroll') ? canvas.width/6-((arrowsSize**resizeNoteOpponent+spaceBetweenArrows)*(amountOfArrowsOpponent+1)/2) : arrowsSize**resizeNoteOpponent+spaceBetweenArrows
     let arrowYOpponent = game.state.arrowsYLineOpponent
 
-    if (game.state.musicInfo.notesImageDir && game.state.smallFunctions.getConfig('OpponentNotes')) for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
+    if (game.state.musicInfo.notesImageDir && game.state.smallFunctions.getConfig('OpponentNotes') && !performanceMode) for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
         let arrowImageData = game.state.images[`${game.state.musicInfo.notesImageDir}Arrows.png`]
         let arrowImage = arrowImageData?.image
         let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]

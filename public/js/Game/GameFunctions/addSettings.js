@@ -106,8 +106,21 @@ export default async (state) => {
             content: true
         },
         {
+            name: 'Show Hit Box',
+            id: 'ShowHitBox',
+            type: 'Boolean',
+            content: false
+        },
+        {
             name: 'Game',
             type: 'ConfigTitle'
+        },
+        {
+            name: 'Performance Mode',
+            id: 'PerformanceMode',
+            menuColor: 'rgb(255, 50, 50)',
+            type: 'Boolean',
+            content: true
         },
         {
             name: 'Game Info',

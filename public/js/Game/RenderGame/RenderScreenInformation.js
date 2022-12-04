@@ -1,6 +1,14 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
+    let performanceMode = game.state.smallFunctions.getConfig('PerformanceMode')
+    if (performanceMode) {
+        ctx.globalAlpha = 1
+        ctx.fillStyle = 'red'
+        ctx.font = `bold 15px Arial`
+        ctx.fillText(`Performance Mode`, 2, 35)
+    }
+
     ctx.globalAlpha = game.state.alphaHUD
     ctx.fillStyle = `hsl(${game.state.rainbowColor+4912}, 100%, 40%)`//'rgb(200, 200, 200)'
     ctx.font = `bold 10px Arial`

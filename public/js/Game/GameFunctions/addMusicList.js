@@ -1340,8 +1340,11 @@ export default async (state) => {
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/Pixel/',
                     backgroundImage: 'backgrounds/missingno.jpg',
+                    splashDir: 'Arrows/Pixel/splash.png',
+                    splashResize: 2,
                     mod: 'VSLullaby',
                     toLoad: [
+                        { dir: 'Arrows/Pixel/splash.png', animationConfigDir: 'Arrows/Pixel/splash.json' },
                         { dir: 'Arrows/Pixel/Arrows.png', animationConfigDir: 'Arrows/Pixel/Arrows.json' },
                         { dir: 'Musics/musics/missingno/Inst.ogg' },
                         { dir: 'Musics/musics/missingno/Voices.ogg' },
@@ -1392,7 +1395,7 @@ export default async (state) => {
                 {
                     name: 'Through-The-Fire-And-Flames',
                     menuColor: 'RAINBOW-439',
-                    difficulties: [ 2 ],
+                    difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
                     mod: 'Shitpost',

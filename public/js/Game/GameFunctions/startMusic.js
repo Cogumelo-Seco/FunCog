@@ -1,5 +1,7 @@
 export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, state) => {
     try {
+        let performanceMode = state.smallFunctions.getConfig('PerformanceMode')
+
         state.music = null
         state.musicChangeBPM = {}
         state.arrowsInfo = {}
@@ -161,7 +163,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
         }
 
         async function loaded() {
-            state.musicEventListener('loaded', {}, state)
+            if (!performanceMode) state.musicEventListener('loaded', {}, state)
 
             if (state.musicOpponentNotes.length <= 0 && state.online) {
                 state.musicOpponentNotes = JSON.parse(JSON.stringify(state.musicNotes));
@@ -191,7 +193,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
 
                         if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
 
-                        state.musicEventListener('started', { difficulty, listenerState }, state)
+                        if (!performanceMode) state.musicEventListener('started', { difficulty, listenerState }, state)
                     } else {
                         let countdownSpeed = 900-(state.musicBPM*state.smallFunctions.getConfig('ScrollSpeed')*2)
                         if (countdownSpeed < 150) countdownSpeed = 150
@@ -217,7 +219,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
             if (note[1] > 3) {
                 note[2] = 0
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 errorWhenNotClicking = false
                 type = 'hitKillNote'
             } 
@@ -226,7 +228,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
             if (note[1] > 3) {
                 note[2] = 0
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 errorWhenNotClicking = false
                 type = 'fireNote'
             }
@@ -234,7 +236,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
         if (musicInfo.mod == 'SuicideMouse') {
             if (note[3] && note[1] != -1) {
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 errorWhenNotClicking = false
                 type = 'hurtNoteSuicidemouse'
             }
@@ -251,12 +253,12 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
         if (musicInfo.mod == 'SonicEXE') {
             if (note[3] == 2) {
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 //errorWhenNotClicking = false
                 type = 'sonicEXEStaticNote'
             } else if (note[3]) {
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 errorWhenNotClicking = false
                 type = 'sonicEXEphantomNote'
             }
@@ -264,44 +266,44 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
 
         if (musicInfo.mod == 'LateNightCityTale') {
             if (note[3] == 'black') {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 errorWhenNotClicking = false
                 type = 'LNCTBlack'
             }
             if (note[3] == 'white') {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 type = 'LNCTWhite'
             }
             if (note[3] == 'red') {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 type = 'LNCTRed'
             }
         }
         if (musicInfo.mod == 'WitheredFreddy') {
             if (note[3] == 3) {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 errorWhenNotClicking = false
                 type = 'WitheredFreddyDanger'
             }
             if (note[3] == 4) {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 errorWhenNotClicking = false
                 type = 'WitheredFreddyCharge'
             }
             if (note[3] == 2) {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 errorWhenNotClicking = false
                 type = 'WitheredFreddyRemnant'
             }
             if (note[3] == 5) {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 errorWhenNotClicking = false
                 type = 'WitheredFreddyLoose'
             }
         }
         if (musicInfo.mod == 'VSChira') {
             if (note[3] == 'chiraNote') {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 type = 'VSChiraMarsh'
             }
         }

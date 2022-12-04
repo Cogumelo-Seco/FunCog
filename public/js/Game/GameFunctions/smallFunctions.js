@@ -1,7 +1,8 @@
 export default (state) => {
     return {
         redirectGameStage: async (newStage, oldStage) => {
-            state.animations.transition.frame = 0
+            if (state.smallFunctions.getConfig('PerformanceMode')) state.animations.transition.frame = state.animations.transition.endFrame
+            else state.animations.transition.frame = 0
             state.oldGameStage = oldStage || state.gameStage
             state.gameStage = newStage
         },
