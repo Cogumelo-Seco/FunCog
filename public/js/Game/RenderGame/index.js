@@ -21,14 +21,12 @@ export default async function renderGame(canvas, game, Listener) {
         case 'game':
             require('./RenderScreenGame').default(canvas, game, Listener)
             require('./RenderPopUpsBackground').default(canvas, game, Listener)
-            //if (game.state.HUD) {
-                require('./RenderArrows').default(canvas, game, Listener)
-                require('./RenderNotes').default(canvas, game, Listener)
-                require('./RenderBongoCat').default(canvas, game, Listener)
-                require('./RenderScreenInfoGame').default(canvas, game, Listener)
-                require('./RenderBars').default(canvas, game, Listener)
-                require('./RenderPopUps').default(canvas, game, Listener)
-            //}
+            require('./RenderArrows').default(canvas, game, Listener)
+            require('./RenderNotes').default(canvas, game, Listener)
+            require('./RenderBongoCat').default(canvas, game, Listener)
+            require('./RenderScreenInfoGame').default(canvas, game, Listener)
+            require('./RenderBars').default(canvas, game, Listener)
+            require('./RenderPopUps').default(canvas, game, Listener)
             break
         case 'menu':
             require('./RenderMenuScreen').default(canvas, game, Listener)

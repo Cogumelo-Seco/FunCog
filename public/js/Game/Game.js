@@ -91,7 +91,7 @@ function createGame(Listener, canvas, socket) {
 
         ratings: [],
 
-        animations: {
+        defaultAnimations: {
             loadingLogo: {
                 frame: 0,
                 startFrame: 0,
@@ -131,6 +131,7 @@ function createGame(Listener, canvas, socket) {
                 dalay: 0,
             }
         },
+        animations: {},
         loading: {
             loaded: 0,
             total: 0,
@@ -361,7 +362,7 @@ function createGame(Listener, canvas, socket) {
                 }
             }
 
-            if (note.errorWhenNotClicking && !state.smallFunctions.getConfig('botPlay') && note.arrowID >= 0 && note.arrowID <= state.amountOfArrows && note.Y > (state.arrowsSize**state.resizeNote) && !note.disabled && !note.clicked) {
+            if (!Listener.state.pauseGameKeys && note.errorWhenNotClicking && !state.smallFunctions.getConfig('botPlay') && note.arrowID >= 0 && note.arrowID <= state.amountOfArrows && note.Y > (state.arrowsSize**state.resizeNote) && !note.disabled && !note.clicked) {
                 note.disabled = true
                 state.musicInfo.misses += 1
                 state.musicInfo.score -= 50
@@ -400,6 +401,7 @@ function createGame(Listener, canvas, socket) {
             if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) state.musicInfo.linearAccuracyMedia.push(state.musicInfo.accuracy || 1)
         }
 
+        if (state.music?.currentTime > 0) state.musicEventListener('gameLoopFullFPS', { listenerState: Listener.state }, state)
         if (state.gameLoopFPSControlTime+20 <= +new Date()) {
             state.gameLoopFPSControlTime = +new Date()
 
@@ -426,6 +428,7 @@ function createGame(Listener, canvas, socket) {
     }
 
     async function loading(command) {
+        state.animations = state.defaultAnimations
         let loadingImagesTotal = await addImages()
         let loadingSoundsTotal = await addSounds()
         state.loading.total = loadingImagesTotal

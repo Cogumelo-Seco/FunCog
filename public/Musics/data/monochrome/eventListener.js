@@ -1,4 +1,4 @@
-export default async (type, { noteClickAuthor, note, click, listenerState, difficulty, events }, state) => {
+export default async (type, { noteClickAuthor, note, click, listenerState, difficulty, events, gameState }, state) => {
     switch (type) {
 		case 'noteClick':
 			if (noteClickAuthor == 'opponent') {
@@ -28,7 +28,6 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 
 				clearTimeout(state.musicInfo.variables.timeout)
 				state.musicInfo.variables.timeout = setTimeout(() => {
-					//state.musicInfo.variables.animation = 'idle'
 					state.musicInfo.variables.outro = true
 					state.animations['SilverNoteIntroOutro'].frame = 0
 				}, 500)
@@ -103,7 +102,19 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				loop: true
             }
 
+			state.animations['AlphaBet'] = {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 5,
+                totalDalay: 10,
+                dalay: 0,
+				loop: true
+            }
+
 			state.musicInfo.variables = {
+				oldBeat: 0,
+				oldStep: 0,
+				oldCurrentTime: 0,
 				animation: 'idle',
 				outro: false,
 				HUDFade: false,
@@ -111,18 +122,22 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				animationCelebi: 'spawn',
 				timeIdleCelebi: 0,
 				onWriting: false,
-				onWritingEndTime: 0
+				onWritingEndTime: 0,
+				pastLetters: 0,
+				keys: {},
+				botOnNote: null,
 			}
 			break
 		case 'gameLoop':
-			let variables = state.musicInfo.variables
+			var variables = state.musicInfo.variables
 
 			let beat = state.musicBeat
+			let step = state.musicStep
 			let currentTime = state.music?.currentTime
 
-			let imageSpawn = state.images['imgs/Monochrome/silver.png'].animationConfig['spawn'][state.animations['SilverSpawn'].frame]
+			let imageSpawn = state.images['imgs/VSLullaby/silver.png'].animationConfig['spawn'][state.animations['SilverSpawn'].frame]
 			state.musicInfo.popupsBackground.Silver = {
-				image: `imgs/Monochrome/silver.png`,
+				image: `imgs/VSLullaby/silver.png`,
 				animationDir: 'spawn',
 				frame: state.animations['SilverSpawn'].frame,
 				x: state.canvas.width/2-imageSpawn.width/2,
@@ -140,7 +155,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 							variables.outro = false
 						}
 					}
-					let imageInfo = JSON.parse(JSON.stringify(state.images['imgs/Monochrome/silver.png'].animationConfig[variables.animation][frame]))
+					let imageInfo = JSON.parse(JSON.stringify(state.images['imgs/VSLullaby/silver.png'].animationConfig[variables.animation][frame]))
 
 					switch (variables.animation) {
 						case 'left':
@@ -152,7 +167,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					}
 
 					if (imageInfo?.name) state.musicInfo.popupsBackground.Silver = {
-						image: `imgs/Monochrome/silver.png`,
+						image: `imgs/VSLullaby/silver.png`,
 						animationDir: variables.animation,
 						frame,
 						x: state.canvas.width/2-imageInfo.width/2+(imageInfo.frameX),
@@ -161,10 +176,10 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						height: imageInfo.frameHeight
 					}
 				} else {
-					let imageInfo = state.images['imgs/Monochrome/silver.png'].animationConfig['idle'][state.animations['SilverIdle'].frame]
+					let imageInfo = state.images['imgs/VSLullaby/silver.png'].animationConfig['idle'][state.animations['SilverIdle'].frame]
 
 					if (imageInfo?.name) state.musicInfo.popupsBackground['Silver'] = {
-						image: `imgs/Monochrome/silver.png`,
+						image: `imgs/VSLullaby/silver.png`,
 						animationDir: 'idle',
 						frame: state.animations['SilverIdle'].frame,
 						x: state.canvas.width/2-imageInfo.width/2,
@@ -190,11 +205,10 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
                 let event = events[i]
 
                 if (variables.oldCurrentTime*1000 <= event[0] && currentTime*1000 >= event[0]) {
-					if (event[2] == 'Jumpscare' && (Math.random()*100 > 25 || event[4] == '32')) {
-						let count = 0
+					if (event[2] == 'Jumpscare' && (event[4] == '10' || Math.random()*100 > 20)) {
+						let time = +new Date()
 						let interval = setInterval(() => {
-							count += 1
-							if (count >= 15) {
+							if (+new Date()-time >= 450) {
 								clearInterval(interval)
 								delete state.musicInfo.popups['SilverJumpscare']
 							} else {
@@ -211,9 +225,21 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						}, 1000/30)
 					}
 
-					if (event[2] == 'Unown') {
+					if (event[2] == 'Unown' && state.musicInfo.difficulty.name != 'Mania') {
+						let percent = Math.floor(Math.random()*100)
+						let letters = monochromeTexts.words
+						if (percent >= 70 && percent < 85) letters = monochromeTexts.rareWords
+						if (percent >= 85 && percent < 96) letters = monochromeTexts.harderWords
+						if (percent >= 96) letters = monochromeTexts.impossibleWords
+						variables.monochromeText = letters[Math.floor(Math.random()*letters.length)]
+
+						variables.pastLetters = 0
 						variables.onWriting = true
-						variables.onWritingEndTime = +new Date()+4000
+						variables.onWritingEndTime = +new Date()+5000
+
+						if(event[4] == 'NO MORE') variables.onWritingTroll = true
+
+						listenerState.pauseGameKeys = true
 					}
 
 					if (event[2] == 'Celebi') {
@@ -245,13 +271,20 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				if (variables.animationCelebi == 'outro') frame = spawnAnimation.endFrame-spawnAnimation.frame
 
 				state.musicInfo.popupsBackground['Celebi'] = {
-					image: 'imgs/Monochrome/celebi.png',
+					image: 'imgs/VSLullaby/celebi.png',
 					animationDir: variables.animationCelebi == 'idle' ? 'idle' : 'spawn',
 					frame,
 					x: 0,
 					y: 0
 				}
 			} else delete state.musicInfo.popupsBackground['Celebi']
+
+			variables.oldBeat = beat
+			variables.oldStep = step
+			variables.oldCurrentTime = currentTime
+            break
+		case 'gameLoopFullFPS':
+			var variables = state.musicInfo.variables
 
 			if (variables.onWriting) {
 				let canvas = state.canvas
@@ -262,14 +295,147 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				ctx.fillRect(0, 0, canvas.width, canvas.height)
 
 				ctx.fillStyle = 'white'
-				ctx.font = `bold 20px Arial`
-				ctx.fillText(time, canvas.width/2-(ctx.measureText(time).width/2), canvas.height/2)
+				ctx.font = `bold 25px Arial`
+				ctx.fillText(time, canvas.width/2-(ctx.measureText(time).width/2), canvas.height*0.75)
 
-				if (variables.onWritingEndTime < +new Date()) variables.onWriting = false
+				let text = variables.monochromeText?.toLowerCase() || '??????????????'
+
+				if (text[variables.pastLetters] == ' ') variables.pastLetters += 1
+
+				let key = Object.values(listenerState.keys).find(k => k.key.toLowerCase() == text[variables.pastLetters])
+
+				if (key && !key.clicked && variables.keys[key.code]) variables.keys[key.code] = false
+				if (key && key.clicked && !variables.keys[key.code]) {
+					variables.pastLetters += 1
+					variables.keys[key.code] = true
+				}
+
+				if (variables.botOnNote != null) listenerState.arrows[variables.botOnNote].click = true
+				if (state.smallFunctions.getConfig('botPlay') && state.musicStep != variables.oldStep && !variables.keys['bot']) {
+					variables.botOnNote = Math.floor(Math.random()*4)
+					variables.keys['bot'] = true
+					variables.pastLetters += 1
+				}
+				if (state.smallFunctions.getConfig('botPlay') && state.musicStep == variables.oldStep && state.musicStep%2 == 0) {
+					variables.botOnNote = null
+					variables.keys['bot'] = false
+				}
+
+				let phraseWidth = 0
+				let letterResize = (canvas.width/text.length)/250 < 0.4 ? (canvas.width/text.length)/250 : 0.4
+				let letterSpace = 50*letterResize
+				let spaceWidth = 90*letterResize
+				
+				for (let i in text) {
+					let imageData = state.images['imgs/VSLullaby/alphabet.png']
+					if (imageData.animationConfig[text[i]]) phraseWidth += (imageData.animationConfig[text[i]][state.animations['AlphaBet'].frame].width*letterResize)+letterSpace
+					else phraseWidth += spaceWidth+letterSpace
+				}
+
+				let X = canvas.width/2-(phraseWidth/2)
+				for (let i in text) {
+					let letter = text[i]
+					let imageData = state.images['imgs/VSLullaby/alphabet.png']
+					let image = imageData.image
+
+					if (imageData.animationConfig[letter]) {
+						let imagePos = imageData.animationConfig[letter][state.animations['AlphaBet'].frame]
+						let letterWidth = imagePos.width*letterResize
+						let letterHeight = imagePos.height*letterResize
+
+						if (Number(i)+1 > variables.pastLetters) {
+							ctx.drawImage(image, imagePos.x, imagePos.y, imagePos.width, imagePos.height, X, canvas.height*0.2, letterWidth, letterHeight)
+
+							ctx.fillStyle = 'black'
+							ctx.fillRect(X, canvas.height*0.9, letterWidth, 5)
+						}
+
+						X += letterWidth+letterSpace
+					} else X += spaceWidth+letterSpace
+				}
+
+				if (variables.onWritingEndTime < +new Date() || text.length-1 < variables.pastLetters) {
+					if (text.length-1 >= variables.pastLetters && !state.smallFunctions.getConfig('botPlay') && !variables.onWritingTroll) state.musicInfo.health = -100
+					variables.onWriting = false
+					variables.onWritingTroll = false
+					listenerState.pauseGameKeys = false
+				}
 			}
-
-			variables.oldBeat = beat
-			variables.oldCurrentTime = currentTime
-            break
+			break
     }
+}
+
+let monochromeTexts = {
+	words: [
+		"IM DEAD",
+		"EERIE NOISE",
+		"LEAVE HURRY",
+		"HE DIED",
+		"DYING",
+		"PERISH SONG",
+		"GOLD",
+		"SILVER",
+		"DONT BELONG",
+		"ABANDONED",
+		"BOO!",
+		"UNOWN",
+		"NOT WANTED",
+		"TIRESOME",
+		"USELESS",
+		"GRUESOME",
+		"NIGHTMARE",
+		"GET OUT",
+		"HOPELESS",
+		"RUN",
+		"NOT WELCOME",
+		"CAN YOU SEE?",
+		"WHERE?",
+		"HELP",
+		"RELIVE",
+		"XXXXX",
+		"GOODBYE",
+		"CELEBI DIED",
+		"IT FAILED",
+		"AGONY",
+		"I SEE YOU"
+	],
+	rareWords: [
+		"NICE COCK",
+		"SUS AF",
+		"BOOB LOL",
+		"LMAO GOTTEM",
+		"RUN STREAMER",
+		"FUN STREAMER",
+		"RATIO",
+		"GOO!",
+		"POGGERS!",
+		"BUSSY"
+	],
+	impossibleWords: [
+		"WANNA WORK ON MY FNF MOD?",
+		"IM IN A FUCKING WHEEL CHAIR",
+		"BUT DURING THE STONE AGE",
+		"HIS MOUTH IS NOT A PUSSY",
+		"FEAR OF THE UNOWN",
+		"HAIL TO THE KING"
+	],
+	harderWords: [
+		"FERALIGATR",
+		"CYNDAQUIL",
+		"TYPHLOSION",
+		"HIPPOPOTAMUS",
+		"FORGOTTEN",
+		"FRUSTRATION",
+		"DECAPITATION",
+		"NOT YOUR FATE",
+		"HOLLOWED AND EMPTY",
+		"POSSESSION",
+		"MELANCHOLY",
+		"MONOTONY",
+		"TOMBSTONE",
+		"THE END OF ALL THINGS",
+		"DEATH TO GLORY",
+		"LOST MEMORIES",
+		"ASPHYXIATION"
+	]
 }

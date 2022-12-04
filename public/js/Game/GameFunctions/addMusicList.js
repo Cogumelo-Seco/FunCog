@@ -1317,7 +1317,6 @@ export default async (state) => {
                     ]
                 },
                 {
-                    dev: true,
                     name: 'Monochrome',
                     menuColor: 'rgb(120, 20, 20)',
                     difficulties: [ 2, 3 ],
@@ -1328,9 +1327,9 @@ export default async (state) => {
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'jumpscares/SilverJumpscare.png' },
-                        { dir: 'imgs/Monochrome/redFilter.png' },
-                        { dir: 'imgs/Monochrome/silver.png', animationConfigDir: 'imgs/Monochrome/silver.json' },
-                        { dir: 'imgs/Monochrome/celebi.png', animationConfigDir: 'imgs/Monochrome/celebi.json' },
+                        { dir: 'imgs/VSLullaby/alphabet.png', animationConfigDir: 'imgs/VSLullaby/alphabet.json' },
+                        { dir: 'imgs/VSLullaby/silver.png', animationConfigDir: 'imgs/VSLullaby/silver.json' },
+                        { dir: 'imgs/VSLullaby/celebi.png', animationConfigDir: 'imgs/VSLullaby/celebi.json' },
                         { dir: 'Musics/musics/monochrome/Inst.ogg' },
                         { dir: 'Musics/musics/monochrome/Voices.ogg' },
                     ]

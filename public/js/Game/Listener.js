@@ -3,6 +3,7 @@ export default function createListener(socket) {
         buttons: {},
         keys: {},
         arrows: {},
+        pauseGameKeys: false,
         mouseInfo: {
             x: NaN,
             y: NaN,
@@ -60,6 +61,8 @@ export default function createListener(socket) {
         let keyPressed = event.code
         let lastClick = state.keys[keyPressed]
         state.keys[keyPressed] = {
+            key: event.key,
+            code: keyPressed,
             clicked: on,
             time: +new Date(),
             lastClickTime: lastClick?.time || null
@@ -83,7 +86,7 @@ export default function createListener(socket) {
             }
         }
 
-        if (state.game.state.gameStage == 'game') {
+        if (state.game.state.gameStage == 'game' && !state.pauseGameKeys) {
             if (keyPressed == 'KeyR' && on && !state.game.state.online) {
                 let botPlay = state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content
                 state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
@@ -106,16 +109,16 @@ export default function createListener(socket) {
                     state.game.state.musicVoice.pause()
                 }
             }
-        }
-        
-        if (state.game.state.debug && on) {
-            if (keyPressed == 'KeyO' && state.game.state.music) {
-                state.game.state.music.currentTime -= 10
-                state.game.state.musicVoice.currentTime -= 10
-            } 
-            if (keyPressed == 'KeyP' && state.game.state.music) {
-                state.game.state.music.currentTime += 10
-                state.game.state.musicVoice.currentTime += 10
+
+            if (state.game.state.debug && on) {
+                if (keyPressed == 'KeyO' && state.game.state.music) {
+                    state.game.state.music.currentTime -= 10
+                    state.game.state.musicVoice.currentTime -= 10
+                } 
+                if (keyPressed == 'KeyP' && state.game.state.music) {
+                    state.game.state.music.currentTime += 10
+                    state.game.state.musicVoice.currentTime += 10
+                }
             }
         }
 
