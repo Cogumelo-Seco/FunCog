@@ -120,7 +120,7 @@ export default async (state) => {
             id: 'PerformanceMode',
             menuColor: 'rgb(255, 50, 50)',
             type: 'Boolean',
-            content: true
+            content: false
         },
         {
             name: 'Game Info',
