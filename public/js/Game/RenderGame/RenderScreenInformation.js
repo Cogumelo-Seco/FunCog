@@ -2,7 +2,7 @@ export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
     ctx.globalAlpha = game.state.alphaHUD
-    ctx.fillStyle = `hsl(${game.state.rainbowColor}, 100%, 40%)`//'rgb(200, 200, 200)'
+    ctx.fillStyle = `hsl(${game.state.rainbowColor+4912}, 100%, 40%)`//'rgb(200, 200, 200)'
     ctx.font = `bold 10px Arial`
     ctx.fillText('Created by: Cogu', canvas.width-ctx.measureText('Created by: Cogu').width-5, canvas.height-5);
 

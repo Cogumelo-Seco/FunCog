@@ -33,7 +33,7 @@ export default async (canvas, game, Listener) => {
         }
 
         if (Y >= 200) {
-            ctx.fillStyle = music.menuColor || 'rgb(255, 255, 255)'
+            ctx.fillStyle = music.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(music.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : music.menuColor || 'white'
             ctx.fillText(music.name.replace(/-/g, ' '), X, Y);
 
             ctx.lineWidth = 0.5
@@ -70,7 +70,7 @@ export default async (canvas, game, Listener) => {
     ctx.fillStyle = 'rgb(30, 30, 30, 0.6)'
     ctx.fillRect(0, 0, canvas.width, 180);
 
-    ctx.fillStyle = mod.menuColor || 'white'
+    ctx.fillStyle = mod.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(mod.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : mod.menuColor || 'white'
     ctx.font = `bold 30px Arial`
     let modNameTxt = `${musicSelect == -1 ? '<' : ''}  ${mod.name}  ${musicSelect == -1 ? '>' : ''}`
     ctx.fillText(modNameTxt, canvas.width/2-(ctx.measureText(modNameTxt).width/2), 110);
@@ -85,7 +85,7 @@ export default async (canvas, game, Listener) => {
 
     ctx.globalAlpha = 0.5
     if (modPrevious) {
-        ctx.fillStyle = modPrevious.menuColor || 'white'
+        ctx.fillStyle = modPrevious.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(modPrevious.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : modPrevious.menuColor || 'white'
         ctx.font = `bold 20px Arial`
         ctx.fillText(modPrevious.name, canvas.width/6-(ctx.measureText(modPrevious.name).width/2), 110);
         
@@ -94,7 +94,7 @@ export default async (canvas, game, Listener) => {
         ctx.fillText(modPrevious.musics.length, canvas.width/6-(ctx.measureText(modPrevious.musics.length).width/2), 125);
     }
     if (modNext) {
-        ctx.fillStyle = modNext.menuColor || 'white'
+        ctx.fillStyle = modNext.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(modNext.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : modNext.menuColor || 'white'
         ctx.font = `bold 20px Arial`
         ctx.fillText(modNext.name, (canvas.width-canvas.width/6)-(ctx.measureText(modNext.name).width/2), 110);
         

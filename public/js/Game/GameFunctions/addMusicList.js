@@ -1323,7 +1323,7 @@ export default async (state) => {
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.5,
-                    backgroundImage: null,
+                    backgroundImage: 'backgrounds/monochrome.png',
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'jumpscares/SilverJumpscare.png' },
@@ -1345,6 +1345,60 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Musics/musics/missingno/Inst.ogg' },
                         { dir: 'Musics/musics/missingno/Voices.ogg' },
+                    ]
+                },
+            ]
+        },
+        {
+            name: 'Shitpost',
+            menuColor: 'RAINBOW-7890',
+            musics: [
+                {
+                    name: 'Missingcraft',
+                    menuColor: 'RAINBOW-597',
+                    difficulties: [ 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shitpost',
+                    toLoad: [
+                        { dir: 'Musics/musics/missingcraft/Inst.ogg' },
+                        { dir: 'Musics/musics/missingcraft/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Rednecks',
+                    menuColor: 'RAINBOW-7',
+                    difficulties: [ 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shitpost',
+                    toLoad: [
+                        { dir: 'Musics/musics/rednecks/Inst.ogg' },
+                        { dir: 'Musics/musics/rednecks/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Sansno',
+                    menuColor: 'RAINBOW-7453',
+                    difficulties: [ 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shitpost',
+                    toLoad: [
+                        { dir: 'Musics/musics/sansno/Inst.ogg' },
+                        { dir: 'Musics/musics/sansno/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Through-The-Fire-And-Flames',
+                    menuColor: 'RAINBOW-439',
+                    difficulties: [ 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shitpost',
+                    toLoad: [
+                        { dir: 'Musics/musics/through-the-fire-and-flames/Inst.ogg' },
+                        { dir: 'Musics/musics/through-the-fire-and-flames/Voices.ogg' },
                     ]
                 },
             ]

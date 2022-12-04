@@ -32,9 +32,10 @@ export default async (canvas, game, Listener) => {
     let musicPercent = game.state.musicData?.played || 0
     let musicLoadedPercent = game.state.musicData?.loaded || 0
 
+    ctx.font = `bold 15px Arial`
     let infoTxt = `${game.state.musicInfo.name.replace(/-/g, ' ')} - (${formatTime(musicCurrentTime)} / ${formatTime(musicDuration)}) - ${(musicPercent*100).toFixed(2)}%`
 
-    let musicBarWidth = canvas.width*0.25 > ctx.measureText(infoTxt).width*1.5+10 ? canvas.width*0.25 : ctx.measureText(infoTxt).width*1.5+10
+    let musicBarWidth = canvas.width*0.25 > ctx.measureText(infoTxt).width+10 ? canvas.width*0.25 : ctx.measureText(infoTxt).width+10
     let musicBarHeight = 20
     let musicBarY = game.state.smallFunctions.getConfig('DownScroll') ? 10 : canvas.height-30
 
@@ -47,7 +48,6 @@ export default async (canvas, game, Listener) => {
     ctx.fillStyle = `hsl(${musicPercent*720}, 100%, 40%)`//'rgb(19, 189, 0)'
     ctx.fillRect(canvas.width/2-musicBarWidth/2, musicBarY, musicBarWidth*musicPercent, musicBarHeight)
 
-    ctx.font = `bold 15px Arial`
     ctx.fillStyle = 'white'
     ctx.fillText(infoTxt, canvas.width/2-(ctx.measureText(infoTxt).width/2), musicBarY+15);
 

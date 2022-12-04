@@ -34,6 +34,8 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			}
 			break
 		case 'loaded':
+			state.musicInfo.backgroundImage = null
+			
 			if (!state.smallFunctions.getConfig('MiddleScroll')) {
 				state.customBongPosition = {
 					X: state.canvas.width*0.15,
