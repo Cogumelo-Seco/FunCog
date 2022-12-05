@@ -1353,7 +1353,7 @@ export default async (state) => {
             ]
         },
         {
-            name: 'Shitpost',
+            name: 'Undefined',
             menuColor: 'RAINBOW-7890',
             musics: [
                 {
@@ -1362,7 +1362,7 @@ export default async (state) => {
                     difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
-                    mod: 'Shitpost',
+                    mod: 'Undefined',
                     toLoad: [
                         { dir: 'Musics/musics/missingcraft/Inst.ogg' },
                         { dir: 'Musics/musics/missingcraft/Voices.ogg' },
@@ -1374,7 +1374,7 @@ export default async (state) => {
                     difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
-                    mod: 'Shitpost',
+                    mod: 'Undefined',
                     toLoad: [
                         { dir: 'Musics/musics/rednecks/Inst.ogg' },
                         { dir: 'Musics/musics/rednecks/Voices.ogg' },
@@ -1386,7 +1386,7 @@ export default async (state) => {
                     difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
-                    mod: 'Shitpost',
+                    mod: 'Undefined',
                     toLoad: [
                         { dir: 'Musics/musics/sansno/Inst.ogg' },
                         { dir: 'Musics/musics/sansno/Voices.ogg' },
@@ -1398,7 +1398,7 @@ export default async (state) => {
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
-                    mod: 'Shitpost',
+                    mod: 'Undefined',
                     toLoad: [
                         { dir: 'Musics/musics/through-the-fire-and-flames/Inst.ogg' },
                         { dir: 'Musics/musics/through-the-fire-and-flames/Voices.ogg' },
