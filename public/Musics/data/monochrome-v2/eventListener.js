@@ -199,7 +199,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					newTxt += randomLetter
 					if (newTxt.length == musicName.length) {
 						variables.anagramMusicNameLoop = true
-						state.musicInfo.name = newTxt
+						if (state.music?.currentTime < state.music?.duration) state.musicInfo.name = newTxt
 					} else setTimeout(() => loop(arr), 0)
 				}
 				loop(txtArr)
