@@ -1326,12 +1326,34 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/monochrome.png',
                     mod: 'VSLullaby',
                     toLoad: [
-                        { dir: 'jumpscares/SilverJumpscare.png' },
+                        { dir: 'jumpscares/GoldJumpscare.png' },
                         { dir: 'imgs/VSLullaby/alphabet.png', animationConfigDir: 'imgs/VSLullaby/alphabet.json' },
-                        { dir: 'imgs/VSLullaby/silver.png', animationConfigDir: 'imgs/VSLullaby/silver.json' },
+                        { dir: 'imgs/VSLullaby/gold.png', animationConfigDir: 'imgs/VSLullaby/gold.json' },
                         { dir: 'imgs/VSLullaby/celebi.png', animationConfigDir: 'imgs/VSLullaby/celebi.json' },
                         { dir: 'Musics/musics/monochrome/Inst.ogg' },
                         { dir: 'Musics/musics/monochrome/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Monochrome-V2',
+                    menuColor: 'rgb(120, 20, 20)',
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: 'backgrounds/monochrome.png',
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'jumpscares/GoldJumpscare.png' },
+                        { dir: 'jumpscares/GoldAltJumpscare.png' },
+                        { dir: 'imgs/VSLullaby/alphabet.png', animationConfigDir: 'imgs/VSLullaby/alphabet.json' },
+                        { dir: 'imgs/VSLullaby/goldHeadSheet.png', animationConfigDir: 'imgs/VSLullaby/goldHeadSheet.json' },
+                        { dir: 'imgs/VSLullaby/goldHeadRip.png', animationConfigDir: 'imgs/VSLullaby/goldHeadRip.json' },
+                        { dir: 'imgs/VSLullaby/goldNoMore.png', animationConfigDir: 'imgs/VSLullaby/goldNoMore.json' },
+                        { dir: 'imgs/VSLullaby/gold.png', animationConfigDir: 'imgs/VSLullaby/gold.json' },
+                        { dir: 'imgs/VSLullaby/celebi.png', animationConfigDir: 'imgs/VSLullaby/celebi.json' },
+                        { dir: 'Musics/musics/monochrome-v2/Inst.ogg' },
+                        { dir: 'Musics/musics/monochrome-v2/Voices.ogg' },
                     ]
                 },
                 {

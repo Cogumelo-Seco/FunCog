@@ -53,6 +53,31 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 
 			break
         case 'started':
+			state.animations['GoldHeadRip'] = {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 69,
+                totalDalay: 0,
+                dalay: 0
+            }
+
+			state.animations['GoldNoMore'] = {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 61,
+                totalDalay: 5,
+                dalay: 0
+            }
+
+			state.animations['GoldIdleHeadSheet'] = {
+                frame: 0,
+                startFrame: 10,
+                endFrame: 63,
+                totalDalay: 0,
+                dalay: 0,
+				loop: true
+            }
+
 			state.animations['GoldIdle'] = {
                 frame: 0,
                 startFrame: 0,
@@ -68,6 +93,15 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
                 endFrame: 16,
                 totalDalay: 20,
                 dalay: 0
+            }
+
+			state.animations['GoldNoteHeadSheet'] = {
+                frame: 0,
+                startFrame: 10,
+                endFrame: 24,
+                totalDalay: 0,
+                dalay: 0,
+				loop: true
             }
 
 			state.animations['GoldNote'] = {
@@ -118,8 +152,10 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				oldStep: 0,
 				oldCurrentTime: 0,
 				animation: 'idle',
+				goldAnimtionState: 'normal',
 				outro: false,
 				HUDFade: false,
+				HUDFadeOut: false,
 				onCelebi: false,
 				animationCelebi: 'spawn',
 				timeIdleCelebi: 0,
@@ -128,7 +164,13 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				pastLetters: 0,
 				keys: {},
 				botOnNote: null,
+				defaultMusicName: state.musicInfo.name,
+				anagramMusicName: false,
+				anagramMusicNameLoop: true
 			}
+			break
+		case 'end':
+			state.musicInfo.name = state.musicInfo.variables.defaultMusicName
 			break
 		case 'gameLoop':
 			var variables = state.musicInfo.variables
@@ -147,6 +189,22 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				state.screenZoom -= 1
 			}
 
+			let musicName = variables.defaultMusicName.replace('-V2', '')
+			if (variables.anagramMusicName && variables.anagramMusicNameLoop) {
+				variables.anagramMusicNameLoop = false
+				let txtArr = musicName.split('')
+				let newTxt = ''
+				let loop = (arr) => {
+					let randomLetter = arr.splice(Math.floor(Math.random()*arr.length), 1)//]
+					newTxt += randomLetter
+					if (newTxt.length == musicName.length) {
+						variables.anagramMusicNameLoop = true
+						state.musicInfo.name = newTxt
+					} else setTimeout(() => loop(arr), 0)
+				}
+				loop(txtArr)
+			} else state.musicInfo.name = musicName
+
 			let imageSpawn = state.images['imgs/VSLullaby/gold.png'].animationConfig['spawn'][state.animations['GoldSpawn'].frame]
 			let Xpint = state.canvas.width*0.49
 			let Ypoint = state.canvas.height/2-(imageSpawn.height/2)+imageSpawn.height
@@ -159,8 +217,49 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			}
 
 			if (state.animations['GoldSpawn'].frame == state.animations['GoldSpawn'].endFrame) {
-				if (variables.animation != 'idle') {
-					let animation = state.animations['GoldNoteIntroOutro'].frame == state.animations['GoldNoteIntroOutro'].endFrame ? state.animations['GoldNote'] : state.animations['GoldNoteIntroOutro']
+				if (variables.animation == 'idle') {
+					let imageInfo = state.images[variables.goldAnimtionState == 'normal' ? 'imgs/VSLullaby/gold.png' : 'imgs/VSLullaby/goldHeadSheet.png'].animationConfig['idle'][state.animations[variables.goldAnimtionState == 'normal' ? 'GoldIdle' : 'GoldIdleHeadSheet'].frame]
+
+					if (imageInfo?.name) state.musicInfo.popupsBackground['Gold'] = {
+						image: variables.goldAnimtionState == 'normal' ? 'imgs/VSLullaby/gold.png' : 'imgs/VSLullaby/goldHeadSheet.png',
+						animationDir: 'idle',
+						frame: state.animations[variables.goldAnimtionState == 'normal' ? 'GoldIdle' : 'GoldIdleHeadSheet'].frame,
+						x: Xpint-imageInfo.width/2,
+						y: Ypoint-imageInfo.height,
+						width: imageInfo.frameWidth,
+						height: imageInfo.frameHeight
+					}
+				} else if (variables.animation == 'goldHeadRip') {
+					if (state.animations['GoldHeadRip'].frame >= state.animations['GoldHeadRip'].endFrame) variables.animation = 'idle'
+					let imageInfo = state.images['imgs/VSLullaby/goldHeadRip.png'].animationConfig.frames[state.animations['GoldHeadRip'].frame]
+
+					if (imageInfo?.name) state.musicInfo.popupsBackground['Gold'] = {
+						image: `imgs/VSLullaby/goldHeadRip.png`,
+						animationDir: 'frames',
+						frame: state.animations['GoldHeadRip'].frame,
+						x: Xpint-imageInfo.width/2,
+						y: Ypoint-imageInfo.height,
+						//width: imageInfo.frameWidth,
+						//height: imageInfo.frameHeight
+					}
+				} else if (variables.animation == 'noMore') {
+					if (state.animations['GoldNoMore'].frame >= state.animations['GoldNoMore'].endFrame) {
+						state.animations['GoldHeadRip'].frame = 0
+						variables.animation = 'goldHeadRip'
+					}
+					let imageInfo = state.images['imgs/VSLullaby/goldNoMore.png'].animationConfig.frames[state.animations['GoldNoMore'].frame]
+
+					if (imageInfo?.name) state.musicInfo.popupsBackground['Gold'] = {
+						image: `imgs/VSLullaby/goldNoMore.png`,
+						animationDir: 'frames',
+						frame: state.animations['GoldNoMore'].frame,
+						x: Xpint-imageInfo.width/2,
+						y: Ypoint-imageInfo.height,
+						width: imageInfo.frameWidth,
+						height: imageInfo.frameHeight
+					}
+				} else {
+					let animation = state.animations['GoldNoteIntroOutro'].frame == state.animations['GoldNoteIntroOutro'].endFrame ? state.animations[variables.goldAnimtionState == 'normal' ? 'GoldNote' : 'GoldNoteHeadSheet'] : state.animations['GoldNoteIntroOutro']
 					let frame = animation.frame
 					if (variables.outro) {
 						frame = state.animations['GoldNoteIntroOutro'].endFrame-state.animations['GoldNoteIntroOutro'].frame
@@ -169,7 +268,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 							variables.outro = false
 						}
 					}
-					let imageInfo = JSON.parse(JSON.stringify(state.images['imgs/VSLullaby/gold.png'].animationConfig[variables.animation][frame]))
+					let imageInfo = JSON.parse(JSON.stringify(state.images[variables.goldAnimtionState == 'normal' ? 'imgs/VSLullaby/gold.png' : 'imgs/VSLullaby/goldHeadSheet.png'].animationConfig[variables.animation][frame]))
 
 					switch (variables.animation) {
 						case 'left':
@@ -181,7 +280,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					}
 
 					if (imageInfo?.name) state.musicInfo.popupsBackground.Gold = {
-						image: `imgs/VSLullaby/gold.png`,
+						image: variables.goldAnimtionState == 'normal' ? 'imgs/VSLullaby/gold.png' : 'imgs/VSLullaby/goldHeadSheet.png',
 						animationDir: variables.animation,
 						frame,
 						x: Xpint-imageInfo.width/2+(imageInfo.frameX),
@@ -189,24 +288,16 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						width: imageInfo.frameWidth,
 						height: imageInfo.frameHeight
 					}
-				} else {
-					let imageInfo = state.images['imgs/VSLullaby/gold.png'].animationConfig['idle'][state.animations['GoldIdle'].frame]
-
-					if (imageInfo?.name) state.musicInfo.popupsBackground['Gold'] = {
-						image: `imgs/VSLullaby/gold.png`,
-						animationDir: 'idle',
-						frame: state.animations['GoldIdle'].frame,
-						x: Xpint-imageInfo.width/2,
-						y: Ypoint-imageInfo.height,
-						width: imageInfo.frameWidth,
-						height: imageInfo.frameHeight
-					}
 				}
 			}
 
-			state.alphaHUD = state.alphaHUD > 1 ? 1 : state.alphaHUD
+			state.alphaHUD = state.alphaHUD > 1 ? 1 : state.alphaHUD <= 0 ? 0 : state.alphaHUD
+			if (variables.HUDFadeOut && state.alphaHUD > 0) state.alphaHUD -= 0.02
+			else if (state.alphaHUD == 0) variables.HUDFadeOut = false
 			if (variables.HUDFade && state.alphaHUD < 1) state.alphaHUD += 0.02
 			else if (state.alphaHUD == 1) variables.HUDFade = false
+			state.alphaHUD = state.alphaHUD > 1 ? 1 : state.alphaHUD <= 0 ? 0 : state.alphaHUD
+
 			if (state.alphaHUD == 1 && state.arrowsInfo[0].alpha == 1) {
 				for (let i in state.arrowsInfo) {
 					state.arrowsInfo[i].alpha = 0.8
@@ -241,6 +332,13 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						}, 1000/30)
 					}
 
+					if (event[2] == 'Monochrome No More') {
+						variables.goldAnimtionState = 'goldHeadSheet'
+						variables.animation = 'noMore'
+						variables.anagramMusicName = true
+						state.animations['GoldNoMore'].frame = 0
+					}
+
 					if (event[2] == 'Unown' && state.musicInfo.difficulty.name != 'Mania') {
 						let percent = Math.floor(Math.random()*100)
 						let letters = monochromeTexts.words
@@ -263,7 +361,11 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						variables.onCelebi = true
 					}
 
-					if (event[2] == 'HUD Fade') variables.HUDFade = true
+					if (event[2] == 'HUD Fade' || (event[2] == 'HUD Fade Mid Song' && state.alphaHUD < 1)) variables.HUDFade = true
+					if (event[2] == 'HUD Fade Mid Song' && state.alphaHUD >= 1) {
+						for (let i in state.arrowsInfo) state.arrowsInfo[i].alpha = 1
+						variables.HUDFadeOut = true
+					}
                 }
             }
 
@@ -299,6 +401,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				}
 			} else delete state.musicInfo.popupsBackground['Celebi']
 
+
 			variables.oldBeat = beat
 			variables.oldStep = step
 			variables.oldCurrentTime = currentTime
@@ -308,6 +411,43 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 
 			let canvas = state.canvas
 			let ctx = canvas.getContext('2d')
+
+			for (let i in lyrics) {
+				let step = state.musicStep
+				let lyric = lyrics[i]
+
+				/*if (lyric.time && +new Date()-lyric.time <= 2000) {
+					ctx.fillStyle = 'red'
+					ctx.font = `bold 20px Arial`
+					ctx.fillText(lyric.curString, , canvas.height*0.75)
+				}*/
+				if (lyric.onState != undefined) {
+					let textArr = lyric.curString.split('/')
+					//let totalTextWidth = ctx.measureText(lyric.curString).width
+					let X = canvas.width*0.5-(ctx.measureText(textArr.join(' ')).width)
+
+					for (let i in textArr) {
+						let txt = textArr[i]
+
+						ctx.fillStyle = lyric.onState == Number(i) ? 'red' : 'white'
+						ctx.font = `bold 22px Arial`
+						ctx.fillText(txt, X, canvas.height*0.75)
+
+						ctx.lineWidth = 1
+                		ctx.strokeStyle = 'black'
+						ctx.strokeText(txt, X, canvas.height*0.75)
+
+						X += ctx.measureText(txt).width
+					}
+				}
+				
+				for (let a in lyric.steps) {
+					if (lyric.steps[a] >= variables.oldStep && lyric.steps[a] <= step) {
+						if (Number(a) == 2) lyric.onState = undefined
+						else lyric.onState = Number(a)
+					}
+				}
+			}
 
 			if (variables.onWriting) {
 				let time = Number.parseInt((variables.onWritingEndTime-+new Date())/1000*4)
@@ -385,6 +525,21 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			break
     }
 }
+
+let lyrics = [
+	{
+		steps: [368, 376, 384],
+		curString: "I'M/ DEAD!"
+	},
+	{
+		steps: [1144, 1152, 1160],
+		curString: "I'M/ DEAD!"
+	},
+	{
+		steps: [1608, 1616, 1632],
+		curString: "NO/ MORE."
+	}
+]
 
 let monochromeTexts = {
 	words: [

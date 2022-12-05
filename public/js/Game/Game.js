@@ -378,11 +378,11 @@ function createGame(Listener, canvas, socket) {
             if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) state.musicInfo.linearAccuracyMedia.push(state.musicInfo.accuracy || 1)
         }
 
-        if (state.music?.currentTime > 0 && !performanceMode) state.musicEventListener('gameLoopFullFPS', { listenerState: Listener.state }, state)
+        if (state.music?.currentTime > 0 && state.music?.currentTime < state.music?.duration && !performanceMode) state.musicEventListener('gameLoopFullFPS', { listenerState: Listener.state }, state)
         if (state.gameLoopFPSControlTime+(performanceMode ? 40 : 20) <= +new Date()) {
             state.gameLoopFPSControlTime = +new Date()
 
-            if (state.music?.currentTime > 0 && !performanceMode) state.musicEventListener('gameLoop', { listenerState: Listener.state }, state)
+            if (state.music?.currentTime > 0 && state.music?.currentTime < state.music?.duration && !performanceMode) state.musicEventListener('gameLoop', { listenerState: Listener.state }, state)
 
             for (let i in state.animations) {
                 let animation = state.animations[i]

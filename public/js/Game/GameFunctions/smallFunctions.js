@@ -10,7 +10,7 @@ export default (state) => {
             return (state.selectSettingsOption.settingsOptions.find((g) => g.id == id))?.content
         },
         resetGame: () => {
-            state.musicEventListener('end', {}, state)
+            if (!state.smallFunctions.getConfig('PerformanceMode')) state.musicEventListener('end', {}, state)
             state.musicEventListener = () => null
             state.waiting = true
             state.serverId = null

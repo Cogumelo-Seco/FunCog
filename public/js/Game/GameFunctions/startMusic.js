@@ -1,5 +1,5 @@
 export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, state) => {
-    try {
+    //try {
         let performanceMode = state.smallFunctions.getConfig('PerformanceMode')
 
         state.music = null
@@ -203,9 +203,9 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
                 }
             }
         }
-    } catch (err) {
+    /*} catch (err) {
         console.error(err)
-    }
+    }*/
 
     async function getNoteinfo(note, difficulty, musicData) {
         let name = musicInfo.name.toLowerCase()
