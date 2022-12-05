@@ -8,10 +8,10 @@ export default async (canvas, game, Listener) => {
     ctx.font = `bold ${(canvas.width+canvas.height)*0.03}px Arial`
 
     ctx.fillStyle = game.state.musicInfo.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(game.state.musicInfo.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : game.state.musicInfo.menuColor || 'white'
-    ctx.fillText(game.state.musicInfo.name.replace('-', ' '), canvas.width/2-((ctx.measureText(game.state.musicInfo.name.replace('-', ' ')).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2), 80);
+    ctx.fillText(game.state.musicInfo.name.replace(/[-]/g, ' '), canvas.width/2-((ctx.measureText(game.state.musicInfo.name.replace(/[-]/g, ' ')).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2), 80);
 
     ctx.fillStyle = game.state.musicInfo.difficulty.color || 'white'
-    ctx.fillText(`(${game.state.musicInfo.difficulty.name})`, 10+canvas.width/2+((ctx.measureText(game.state.musicInfo.name.replace('-', ' ')).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2-(ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)), 80);
+    ctx.fillText(`(${game.state.musicInfo.difficulty.name})`, 10+canvas.width/2+((ctx.measureText(game.state.musicInfo.name.replace(/[-]/g, ' ')).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2-(ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)), 80);
 
     let musicInfoPopupWidth = canvas.width/4
     let musicInfoPopupHeight = musicInfoPopupWidth
