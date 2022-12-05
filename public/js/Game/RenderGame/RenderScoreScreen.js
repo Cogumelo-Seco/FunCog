@@ -7,7 +7,7 @@ export default async (canvas, game, Listener) => {
 
     ctx.font = `bold ${(canvas.width+canvas.height)*0.03}px Arial`
 
-    ctx.fillStyle = game.state.musicInfo.menuColor || 'white'
+    ctx.fillStyle = game.state.musicInfo.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(game.state.musicInfo.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : game.state.musicInfo.menuColor || 'white'
     ctx.fillText(game.state.musicInfo.name, canvas.width/2-((ctx.measureText(game.state.musicInfo.name).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2), 80);
 
     ctx.fillStyle = game.state.musicInfo.difficulty.color || 'white'
