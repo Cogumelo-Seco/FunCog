@@ -66,11 +66,11 @@ export default async({ arrowID, listenerState, bot }, state) => {
         }
     }
 
-    if (notes.length >= Number.parseInt(3*scrollSpeed) || notes.length == Number.parseInt(2*scrollSpeed) && Math.abs(notes[0].time-notes[1].time)*10000 <= 84) {
+    //if (notes.length >= Number.parseInt(3*scrollSpeed) || notes.length == Number.parseInt(2*scrollSpeed) && Math.abs(notes[0].time-notes[1].time)*10000 <= 84) {
         for (let i in notes) {
             if (!notes[i].errorWhenNotClicking && !notes.find(n => n.errorWhenNotClicking) || notes[i].errorWhenNotClicking) noteClick(notes[i])
         }
-    } else {
+    /*} else {
         let bestNote = null
         let filtredNotes = notes.filter(n => n.errorWhenNotClicking)
         if (!filtredNotes[0]) filtredNotes = notes
@@ -82,7 +82,7 @@ export default async({ arrowID, listenerState, bot }, state) => {
             }
         }
         noteClick(bestNote)
-    }
+    }*/
 
     if (!listenerState.pauseGameKeys && !notes[0] && (state.smallFunctions.getConfig('GhostTapping') ? state.musicNotes.filter((n) => !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(hitBoxSize*3))[0] : true)) {
         state.musicInfo.accuracyMedia.push(1)

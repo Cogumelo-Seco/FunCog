@@ -195,7 +195,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				let txtArr = musicName.split('')
 				let newTxt = ''
 				let loop = (arr) => {
-					let randomLetter = arr.splice(Math.floor(Math.random()*arr.length), 1)//]
+					let randomLetter = arr.splice(Math.floor(Math.random()*arr.length), 1)
 					newTxt += randomLetter
 					if (newTxt.length == musicName.length) {
 						variables.anagramMusicNameLoop = true
@@ -238,9 +238,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						animationDir: 'frames',
 						frame: state.animations['GoldHeadRip'].frame,
 						x: Xpint-imageInfo.width/2,
-						y: Ypoint-imageInfo.height,
-						//width: imageInfo.frameWidth,
-						//height: imageInfo.frameHeight
+						y: Ypoint-imageInfo.height
 					}
 				} else if (variables.animation == 'noMore') {
 					if (state.animations['GoldNoMore'].frame >= state.animations['GoldNoMore'].endFrame) {
