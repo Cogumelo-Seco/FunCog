@@ -246,7 +246,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						let letters = monochromeTexts.words
 						if (percent >= 70 && percent < 85) letters = monochromeTexts.rareWords
 						if (percent >= 85 && percent < 96) letters = monochromeTexts.harderWords
-						if (percent >= 96) letters = monochromeTexts.impossibleWords
+						if (percent >= 97) letters = monochromeTexts.impossibleWords
 						variables.monochromeText = letters[Math.floor(Math.random()*letters.length)]
 
 						variables.pastLetters = 0

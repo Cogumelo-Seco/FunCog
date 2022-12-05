@@ -342,7 +342,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						let letters = monochromeTexts.words
 						if (percent >= 70 && percent < 85) letters = monochromeTexts.rareWords
 						if (percent >= 85 && percent < 96) letters = monochromeTexts.harderWords
-						if (percent >= 96) letters = monochromeTexts.impossibleWords
+						if (percent >= 97) letters = monochromeTexts.impossibleWords
 						variables.monochromeText = letters[Math.floor(Math.random()*letters.length)]
 
 						variables.pastLetters = 0
@@ -413,25 +413,19 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			for (let i in lyrics) {
 				let step = state.musicStep
 				let lyric = lyrics[i]
-
-				/*if (lyric.time && +new Date()-lyric.time <= 2000) {
-					ctx.fillStyle = 'red'
-					ctx.font = `bold 20px Arial`
-					ctx.fillText(lyric.curString, , canvas.height*0.75)
-				}*/
+				
 				if (lyric.onState != undefined) {
 					let textArr = lyric.curString.split('/')
-					//let totalTextWidth = ctx.measureText(lyric.curString).width
 					let X = canvas.width*0.5-(ctx.measureText(textArr.join(' ')).width)
 
 					for (let i in textArr) {
 						let txt = textArr[i]
 
 						ctx.fillStyle = lyric.onState == Number(i) ? 'red' : 'white'
-						ctx.font = `bold 22px Arial`
+						ctx.font = `bold ${lyric.onState == Number(i) ? '26px': '20px'} Arial`
 						ctx.fillText(txt, X, canvas.height*0.75)
 
-						ctx.lineWidth = 1
+						ctx.lineWidth = 1.5
                 		ctx.strokeStyle = 'black'
 						ctx.strokeText(txt, X, canvas.height*0.75)
 

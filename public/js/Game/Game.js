@@ -139,7 +139,8 @@ function createGame(Listener, canvas, socket) {
         },
         loadingSong: {
             loaded: 0,
-            total: 0
+            total: 0,
+            msg: 'Loading...'
         },
     }
 
@@ -452,7 +453,8 @@ function createGame(Listener, canvas, socket) {
                 let sound = new Audio()
                 sound.addEventListener('loadeddata', (e) => {
                     loaded = true
-                    newLoad(e.path[0].src)
+                    //newLoad(e.path[0].src)
+                    newLoad(dir)
                 })
                 sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
                 sound.src = dir.split('/')[0] == 'Sounds' ? `/${dir}` : link
@@ -464,10 +466,11 @@ function createGame(Listener, canvas, socket) {
                 let img = new Image()
                 img.addEventListener('load', (e) => {
                     loaded = true
-                    newLoad(e.path[0].src)
+                    //newLoad(e.path[0].src)
+                    newLoad(dir)
                 })
                 img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
-                img.src = link//`/imgs/${dir}`
+                img.src = link
                 img.id = dir
                 state.images[dir] = {
                     image: img,

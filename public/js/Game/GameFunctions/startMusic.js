@@ -100,7 +100,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
         }
 
         function newLoad(msg) {
-            if (msg) console.log(msg)
+            state.loadingSong.msg = `(${state.loadingSong.loaded}/${state.loadingSong.total}) - ${msg}`
             state.loadingSong.loaded += 1
 
             if (state.loadingSong.loaded >= state.loadingSong.total && !state.music)
@@ -129,7 +129,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
                         }
 
                         loaded = true
-                        newLoad()
+                        newLoad(dir)
                     })
                     sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
                     sound.src = dir.split('/')[0] == 'Sounds' ? `/${dir}` : link
@@ -149,7 +149,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
                         }
 
                         loaded = true
-                        newLoad()
+                        newLoad(dir)
                     })
                     img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
                     img.src = link//`/imgs/${dir}`

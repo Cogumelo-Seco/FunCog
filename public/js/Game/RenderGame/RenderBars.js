@@ -18,11 +18,15 @@ export default async (canvas, game, Listener) => {
 
         ctx.font = `bold 15px Arial`
         ctx.fillStyle = 'white'
-        ctx.fillText((loadingPercent*100).toFixed(2)+'%', canvas.width/2-(ctx.measureText((loadingPercent*100).toFixed(2)+'%').width/2), canvas.height/2-loadingBarHeight/2+15);
+        ctx.fillText((loadingPercent*100)+'%', canvas.width/2-(ctx.measureText((loadingPercent*100)+'%').width/2), canvas.height/2-loadingBarHeight/2+15);
 
         ctx.lineWidth = 2.5
         ctx.strokeStyle = 'black'
         ctx.strokeRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-loadingBarHeight/2, loadingBarWidth, loadingBarHeight)
+
+        ctx.font = `bold 10px Arial`
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'
+        ctx.fillText(game.state.loadingSong.msg, canvas.width/2-(ctx.measureText(game.state.loadingSong.msg).width/2), canvas.height/2+loadingBarHeight+5)
 
         return
     }
