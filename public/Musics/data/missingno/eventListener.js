@@ -1,22 +1,22 @@
 export default async (type, { noteClickAuthor, note, click, listenerState, difficulty, events, gameState }, state) => {
     switch (type) {
 		case 'loaded':
+			let options = JSON.parse(JSON.stringify(state.selectSettingsOption.settingsOptions))
+			
 			state.musicInfo.variables = {
+				oldBeat: 0,
+				oldStep: 0,
+				oldCurrentTime: 0,
 				noteAlpha: 1,
 				addAlpha: true,
 				pauseAlpha: false,
-				ScrollSpeed: JSON.parse(JSON.stringify(state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed'))).content,
-				DownScroll: JSON.parse(JSON.stringify(state.selectSettingsOption.settingsOptions.find((g) => g.id == 'DownScroll'))).content
+				ScrollSpeed: options.find((g) => g.id == 'ScrollSpeed').content,
+				DownScroll: options.find((g) => g.id == 'DownScroll').content
 			}
 
 			//state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content = true
 			break
         case 'started':
-			state.musicInfo.variables = {
-				oldBeat: 0,
-				oldStep: 0,
-				oldCurrentTime: 0
-			}
 			break
 		case 'end':
 			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'ScrollSpeed').content = state.musicInfo.variables.ScrollSpeed

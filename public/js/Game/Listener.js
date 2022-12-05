@@ -260,14 +260,12 @@ export default function createListener(socket) {
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
                 case 'ArrowLeft':
-                    console.log(currentConfig.content)
                     if (currentConfig.type == 'Number' && currentConfig.content > currentConfig.min) {
                         currentConfig.content = Number((currentConfig.content-currentConfig.add).toFixed(1))
                         state.game.playSong('Sounds/scrollMenu.ogg')
                     }
                     break
                 case 'ArrowRight':
-                    console.log(currentConfig.content)
                     if (currentConfig.type == 'Number' && currentConfig.content < currentConfig.max) {
                         currentConfig.content = Number((currentConfig.content+currentConfig.add).toFixed(1))
                         state.game.playSong('Sounds/scrollMenu.ogg')

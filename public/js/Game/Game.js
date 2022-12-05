@@ -184,17 +184,8 @@ function createGame(Listener, canvas, socket) {
 
         if (state.online && state.serverId) {
             if (state.serverInfo.end == true) {
-                state.waiting = true
-                state.serverId = null
-                state.serverInfo = {}
                 state.smallFunctions.redirectGameStage('onlineServerList')
-                state.smallFunctions.resetScreen()
-                state.music?.pause()
-                state.musicVoice?.pause()
-                state.music.currentTime = 0
-                state.musicInfo.health = 50
-                state.musicNotes = []
-                state.musicOpponentNotes = []
+                state.smallFunctions.resetGame()
             }
 
             state.musicInfo.arrows = Listener.state.arrows
@@ -279,16 +270,9 @@ function createGame(Listener, canvas, socket) {
         }
 
         if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.smallFunctions.getConfig('botPlay') && !state.debug && state.music?.currentTime > 1) {
-            state.music?.pause()
-            state.musicVoice?.pause()
-            state.music.currentTime = 0
             state.animations.BFDead.frame = 0
             state.smallFunctions.redirectGameStage('dead')
-            state.smallFunctions.resetScreen()
-            state.waiting = true
-            state.musicInfo.health = 50
-            state.musicNotes = []
-            state.musicOpponentNotes = []
+            state.smallFunctions.resetGame()
             state.gameStageTime = +new Date()
 
             if (state.online && state.serverId) {
@@ -307,12 +291,7 @@ function createGame(Listener, canvas, socket) {
         let musicCurrentTime = state.music?.currentTime
 
         if (musicCurrentTime > 1 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
-            state.waiting = true
-            state.musicInfo.health = 50
-            state.musicNotes = []
-            state.musicOpponentNotes = []
-            state.music = null
-            state.smallFunctions.resetScreen()
+            state.smallFunctions.resetGame()
             if (state.online) state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
             else state.smallFunctions.redirectGameStage('score', 'menu')
         }

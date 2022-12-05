@@ -9,9 +9,19 @@ export default (state) => {
         getConfig: (id) => {
             return (state.selectSettingsOption.settingsOptions.find((g) => g.id == id))?.content
         },
-        resetScreen: () => {
+        resetGame: () => {
             state.musicEventListener('end', {}, state)
             state.musicEventListener = () => null
+            state.waiting = true
+            state.serverId = null
+            state.music?.pause()
+            state.musicVoice?.pause()
+            state.music = null
+            state.musicVoice = null
+            state.musicInfo.health = 50
+            state.musicNotes = []
+            state.musicOpponentNotes = []
+            state.serverInfo = {}
             state.screenZoom = 0
             state.screenRotation = 0
             state.screenXMovement = 0
