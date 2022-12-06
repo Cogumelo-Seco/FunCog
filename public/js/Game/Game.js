@@ -1,6 +1,6 @@
 function createGame(Listener, canvas, socket) {
     const state = {
-        debug: true,
+        debug: false,
         fps: '0-0',
         renderType: 'limited',
         customBongPosition: { X: null, Y: null },
