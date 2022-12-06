@@ -18,7 +18,7 @@ export default async (canvas, game, Listener) => {
 
         ctx.font = `bold 15px Arial`
         ctx.fillStyle = 'white'
-        ctx.fillText((loadingPercent*100)+'%', canvas.width/2-(ctx.measureText((loadingPercent*100)+'%').width/2), canvas.height/2-loadingBarHeight/2+15);
+        ctx.fillText((Number.parseInt(loadingPercent*100))+'%', canvas.width/2-(ctx.measureText((Number.parseInt(loadingPercent*100))+'%').width/2), canvas.height/2-loadingBarHeight/2+15);
 
         ctx.lineWidth = 2.5
         ctx.strokeStyle = 'black'

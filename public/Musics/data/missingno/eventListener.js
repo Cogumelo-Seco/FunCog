@@ -37,36 +37,28 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						let downScrool = Math.floor(Math.random()*100) > 50 ? true : false
 						state.selectSettingsOption.settingsOptions.find((g) => g.id == 'DownScroll').content = downScrool
 						let arrowSize = state.arrowsSize
-						let width = state.canvas.width-arrowSize
-						let height = state.canvas.height-arrowSize
+						let width = state.canvas.width
+						let height = state.canvas.height
 
 						for (let i in state.arrowsInfo) {
 							state.arrowsInfo[i].resetEnable = false
 							state.arrowsInfo[i].rotation = Math.floor(Math.random()*360)
 
 							if (i == 0) {
-								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize/2) : 0)
-								state.arrowsInfo[i].X = arrowSize+Math.floor(Math.random()*(arrowSize-width*0.25))
+								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
+								state.arrowsInfo[i].X = Math.floor(Math.random()*(width*0.24))
 							}
 							if (i == 1) {
-								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize/2) : 0)
-								state.arrowsInfo[i].X = Math.floor(Math.random()*(300-width*0.25))+(arrowSize+width*0.25)
+								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
+								state.arrowsInfo[i].X = width/2-Math.floor(Math.random()*(width*0.24))
 							}
 							if (i == 2) {
-								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize/2) : 0)
-								state.arrowsInfo[i].X = Math.floor(Math.random()*(300-width*0.25))+(arrowSize+width*0.25*2)
+								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
+								state.arrowsInfo[i].X = width/2+Math.floor(Math.random()*(width*0.24))
 							}
 							if (i == 3) {
-								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize/2) : 0)
-								state.arrowsInfo[i].X = (arrowSize/2)+Math.floor(Math.random()*(width*0.25))+(width*0.25*3)
-							}
-
-							let bongoImageData = state.images['BongoCat/BongoCat.png']
-							let bongoWidth = bongoImageData.animationConfig.bg.width*0.5
-    						let bongoHeight = bongoImageData.animationConfig.bg.height*0.5
-							state.customBongPosition = {
-								X: (bongoWidth/2)+Math.floor(Math.random()*(state.canvas.width-bongoWidth)),
-								Y: (bongoHeight/2)+Math.floor(Math.random()*(state.canvas.height-bongoHeight))
+								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
+								state.arrowsInfo[i].X = width-Math.floor(Math.random()*(width*0.24))-arrowSize
 							}
 						}
 			
@@ -75,6 +67,14 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 							state.arrowsInfoOpponent[i].noteAlpha = 0
 							state.arrowsInfoOpponent[i].resetEnable = false
 							state.arrowsInfoOpponent[i].X = -500
+						}
+
+						let bongoImageData = state.images['BongoCat/BongoCat.png']
+						let bongoWidth = bongoImageData.animationConfig.bg.width*0.5
+						let bongoHeight = bongoImageData.animationConfig.bg.height*0.5
+						state.customBongPosition = {
+							X: (bongoWidth/2)+Math.floor(Math.random()*(state.canvas.width-bongoWidth)),
+							Y: (bongoHeight/2)+Math.floor(Math.random()*(state.canvas.height-bongoHeight))
 						}
 					}
 
