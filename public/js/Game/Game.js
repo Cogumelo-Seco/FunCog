@@ -1,6 +1,6 @@
 function createGame(Listener, canvas, socket) {
     const state = {
-        debug: false,
+        debug: true,
         fps: '0-0',
         renderType: 'limited',
         customBongPosition: { X: null, Y: null },
@@ -129,6 +129,13 @@ function createGame(Listener, canvas, socket) {
                 endFrame: 10,
                 totalDalay: 0,
                 dalay: 0,
+            },
+            code: {
+                frame: 100,
+                startFrame: 0,
+                endFrame: 100,
+                totalDalay: 30,
+                dalay: 0,
             }
         },
         animations: {},
@@ -154,6 +161,7 @@ function createGame(Listener, canvas, socket) {
     const playSong = (type, command) => require('./GameFunctions/playSong').default(type, command, state)
     const calculateRating = (command) => require('./GameFunctions/calculateRating').default(command, state)
     const smallFunctions = require('./GameFunctions/smallFunctions').default(state)
+    const codes = require('./GameFunctions/codes').default(state)
     state.smallFunctions = smallFunctions
     state.calculateRating = calculateRating
     state.playSong = playSong
@@ -370,6 +378,14 @@ function createGame(Listener, canvas, socket) {
         for (let i in state.musicInfo.accuracyMedia) state.musicInfo.accuracy += state.musicInfo.accuracyMedia[i]
         state.musicInfo.accuracy = state.musicInfo.accuracy/state.musicInfo.accuracyMedia?.length || 0
 
+        for (let i in codes) {
+            if (Listener.state.codeText.toLowerCase().includes(i)) {          
+                Listener.state.codeText = ''
+                let code = codes[i]()
+                state.animations.code.frame = 0
+                state.animations.code.on = code
+            }
+        }
 
         /* !!!!!!! FPS LIMITADO !!!!!!! */
 

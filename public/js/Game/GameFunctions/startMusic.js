@@ -140,6 +140,8 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
                 else {*/
                     let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+dir
                     let animationConfig = animationConfigDir ? JSON.parse(await fetch('https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+animationConfigDir).then(r => r.text())) : null
+
+                    console.log(animationConfig)
     
                     let img = new Image()
                     img.addEventListener('load', (e) => {

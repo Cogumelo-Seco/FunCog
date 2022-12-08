@@ -1,26 +1,26 @@
 export default async (type, { noteClickAuthor, note, notes, listenerState }, state) => {
+    if (!state.animations['hitKillNote']) state.animations['hitKillNote'] = {
+        frame: 0,
+        startFrame: 1,
+        endFrame: 6,
+        totalDalay: 40,
+        dalay: 0,
+        loop: true
+    }
+
     switch (type) {
         case 'noteClick':
             if (noteClickAuthor == 'player' && note?.type == 'hitKillNote' && !notes?.find(n => n.errorWhenNotClicking))
                 state.musicInfo.health = -100
             break
         case 'started':
-            state.animations['hitKillNote'] = {
-                frame: 0,
-                startFrame: 1,
-                endFrame: 6,
-                totalDalay: 40,
-                dalay: 0,
-                loop: true
-            }
-
             state.musicInfo.variables = {
                 oldStep: 0,
                 signs: {},
                 currentSignId: 0
             }
         case 'end':
-            delete  state.animations['hitKillNote']
+            delete state.animations['hitKillNote']
             break
         case 'gameLoop':
             if (state.musicInfo.difficulty.name == 'Mania') return

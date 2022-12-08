@@ -4,6 +4,7 @@ export default function createListener(socket) {
         keys: {},
         arrows: {},
         pauseGameKeys: false,
+        codeText: '',
         mouseInfo: {
             x: NaN,
             y: NaN,
@@ -67,6 +68,7 @@ export default function createListener(socket) {
             time: +new Date(),
             lastClickTime: lastClick?.time || null
         }
+        if (on) state.codeText += event.key
 
         if (state.game && !state.onChangeKeyBind) for (let i in state.buttons) {
             let button = state.buttons[i]

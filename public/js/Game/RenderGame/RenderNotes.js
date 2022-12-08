@@ -96,7 +96,7 @@ export default async (canvas, game, Listener) => {
             let arrowFrames = arrowImageData?.animationConfig[`Arrow-${note.arrowID}`]
             if (!arrowFrames) return
             let arrowImagePos = arrowFrames[`Arrow-${note.arrowID}-note${game.state.animations[note.type] ? '-'+game.state.animations[note.type]?.frame : ''}`]
-            
+            console.log(note.type, game.state.animations[note.type])
             let holdImagePos = arrowFrames[`Arrow-${note.arrowID}-hold-piece`]
             let holdEndImagePos = arrowFrames[`Arrow-${note.arrowID}-hold-end`]
 

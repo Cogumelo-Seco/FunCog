@@ -19,6 +19,10 @@ export default async (canvas, game, Listener) => {
         ctx.fillText(`${game.state.ping}Ping`, (canvas.width-5)-ctx.measureText(`${game.state.ping}Ping`).width, 30);
 
         ctx.fillText(`Mouse: X: ${Listener.state.mouseInfo.mouseInfoType == 'percent' ? Number.parseInt(Listener.state.mouseInfo.x*100)+'%' : Number.parseInt(Listener.state.mouseInfo.x*1000)} Y: ${Listener.state.mouseInfo.mouseInfoType == 'percent' ? Number.parseInt(Listener.state.mouseInfo.y*100)+'%' : Number.parseInt(Listener.state.mouseInfo.y*1000)}`, 2, 15)
+
+        ctx.globalAlpha = (game.state.animations.code.frame/game.state.animations.code.endFrame) > 0.5 ? 1-((game.state.animations.code.frame/game.state.animations.code.endFrame)-0.5)/0.5 : game.state.alphaHUD
+        ctx.fillText(`Code Detected - ${game.state.animations.code.on ? 'ON' : 'OFF'}`, 2, 30)
+        ctx.globalAlpha = 1
         /*ctx.fillText(`Debug: ${game.state.debug}`, 2, 30)
         ctx.fillText(`BotPlay: ${game.state.botPlay}`, 2, 45)
         ctx.fillText(`RenderType: ${game.state.renderType}`, 2, 60)*/

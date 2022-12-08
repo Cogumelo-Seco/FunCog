@@ -26,7 +26,7 @@ export default (state) => {
             state.screenRotation = 0
             state.screenXMovement = 0
             state.screenYMovement = 0
-            state.HUD = true
+            state.alphaHUD = 1
             state.customBongPosition = { X: null, Y: null }
             state.animations = state.defaultAnimations
         }
