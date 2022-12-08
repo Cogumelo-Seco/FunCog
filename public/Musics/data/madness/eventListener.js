@@ -1,5 +1,5 @@
 export default async (type, { noteClickAuthor, note }, state) => {
-    if (state.animations['fireNote']) state.animations['fireNote'] = {
+    if (!state.animations['fireNote']) state.animations['fireNote'] = {
         frame: 0,
         startFrame: 0,
         endFrame: 11,
@@ -7,7 +7,7 @@ export default async (type, { noteClickAuthor, note }, state) => {
         dalay: 0,
         loop: true
     }
-    
+
     switch (type) {
 		case 'noteClick':
             if (noteClickAuthor == 'player' && note?.type == 'fireNote' && !notes?.find(n => n.errorWhenNotClicking)) {

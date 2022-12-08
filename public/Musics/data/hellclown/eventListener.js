@@ -1,5 +1,5 @@
 export default async (type, { noteClickAuthor, note, notes, listenerState }, state) => {
-    if (state.animations['fireNote']) state.animations['fireNote'] = {
+    if (!state.animations['fireNote']) state.animations['fireNote'] = {
         frame: 0,
         startFrame: 0,
         endFrame: 11,
