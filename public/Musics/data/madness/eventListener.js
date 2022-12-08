@@ -1,4 +1,13 @@
 export default async (type, { noteClickAuthor, note }, state) => {
+    if (state.animations['fireNote']) state.animations['fireNote'] = {
+        frame: 0,
+        startFrame: 0,
+        endFrame: 11,
+        totalDalay: 40,
+        dalay: 0,
+        loop: true
+    }
+    
     switch (type) {
 		case 'noteClick':
             if (noteClickAuthor == 'player' && note?.type == 'fireNote' && !notes?.find(n => n.errorWhenNotClicking)) {
@@ -13,15 +22,6 @@ export default async (type, { noteClickAuthor, note }, state) => {
             }
             break
         case 'started':
-            state.animations['fireNote'] = {
-                frame: 0,
-                startFrame: 0,
-                endFrame: 11,
-                totalDalay: 40,
-                dalay: 0,
-                loop: true
-            }
-            
             state.musicInfo.variables = {
                 oldBeat: 0,
             }
