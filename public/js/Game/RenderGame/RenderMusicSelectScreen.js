@@ -59,9 +59,8 @@ export default async (canvas, game, Listener) => {
                 pointer: true,
                 over: false,
                 onClick: () => {
-                    let start = game.state.selectMusicMenu.musicSelect >= 0
-                    game.state.selectMusicMenu.musicSelect = i
-                    if (start) Listener.handleKeys({ event: { code: 'Enter' }, on: true })
+                    if (game.state.selectMusicMenu.musicSelect == i) Listener.handleKeys({ event: { code: 'Enter' }, on: true })
+                    else game.state.selectMusicMenu.musicSelect = i
                 }
             }
         }
