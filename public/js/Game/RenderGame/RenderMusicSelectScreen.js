@@ -148,7 +148,7 @@ export default async (canvas, game, Listener) => {
         Listener.state.buttons[`SelectMusic-ModNext`] = {
             gameStage: [ 'selectMusic' ],
             minX: X/canvas.width*1000,
-            maxX: (X+ctx.measureText(modPrevious.name).width)/canvas.width*1000,
+            maxX: (X+ctx.measureText(modNext.name).width)/canvas.width*1000,
             minY: (Y-30)/canvas.height*1000,
             maxY: Y/canvas.height*1000,
             pointer: true,
