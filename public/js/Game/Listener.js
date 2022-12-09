@@ -14,7 +14,7 @@ export default function createListener(socket) {
         }
     }
 
-    require('./ListenerFunctions/addButtons').default(state)
+    require('./ListenerFunctions/addButtons').default(state, handleKeys)
 
     document.onmousemove = (event) => {
         state.mouseInfo.lastMoveTime = +new Date()
@@ -43,6 +43,8 @@ export default function createListener(socket) {
     }
 
     document.addEventListener('click', (event) => {
+        handleKeys({ event: { code: 'MouseClick' }, on: true })
+
         let X = Math.floor(event.pageX/window.innerWidth*1000)
         let Y = Math.floor(event.pageY/window.window.innerHeight*1000)
 
@@ -54,6 +56,11 @@ export default function createListener(socket) {
             ) button.onClick()
         }
     })
+
+    document.getElementById('body').onwheel = (event) => {
+        if (event.deltaY < 0) handleKeys({ event: { code: 'WheelUp' }, on: true })
+        else handleKeys({ event: { code: 'WheelDown' }, on: true })
+    }
 
     document.addEventListener('keydown', (event) => handleKeys({ event, on: true }))
     document.addEventListener('keyup', (event) => handleKeys({ event, on: false }))
@@ -68,11 +75,11 @@ export default function createListener(socket) {
             time: +new Date(),
             lastClickTime: lastClick?.time || null
         }
-        if (on) state.codeText += event.key
+        if (on && event.key) state.codeText += event.key
 
         if (state.game && !state.onChangeKeyBind) for (let i in state.buttons) {
             let button = state.buttons[i]
-            if (button && on && button.gameStage?.includes(state.game.state.gameStage) && button.keyPress.includes(keyPressed)) button.onClick()
+            if (button && on && button.gameStage?.includes(state.game.state.gameStage) && button.keyPress?.includes(keyPressed)) button.onClick()
         }
 
         for (let arrowID = 0;arrowID <= state.game.state.amountOfArrows;arrowID++) {
@@ -131,15 +138,15 @@ export default function createListener(socket) {
         }
 
         if (state.game.state.gameStage == 'score' && on) {
-            switch (keyPressed) {
-                case 'Enter':
-                    state.game.state.selectMusicMenu.musicSelect = -1
-                    state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu')
-                    break
+            if (![ 'F11', 'PrintScreen' ].includes(keyPressed)) {
+                state.game.state.selectMusicMenu.musicSelect = -1
+                state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu')
             }
         }
 
         if (state.game.state.gameStage == 'selectMusic' && on) {
+            keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
+
             switch (keyPressed) {
                 case 'ArrowUp':
                     state.game.state.selectMusicMenu.musicSelect = state.game.state.selectMusicMenu.musicSelect-1 < -1 ? state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics.length-1 : state.game.state.selectMusicMenu.musicSelect-1
@@ -199,6 +206,8 @@ export default function createListener(socket) {
         }
 
         if (state.game.state.gameStage == 'onlineServerList' && on) {
+            keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
+
             switch (keyPressed) {
                 case 'ArrowUp':
                     state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect <= 0 ? (state.game.state.selectServerOption.listServers.filter(s => s.open)).length-1 : state.game.state.selectServerOption.serverSelect-1
@@ -247,6 +256,7 @@ export default function createListener(socket) {
         }
 
         if (state.game.state.gameStage == 'settings' && on) {
+            keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
             let currentConfig = state.game.state.selectSettingsOption.settingsOptions[state.game.state.selectSettingsOption.settingsSelect]
 
             if (state.onChangeKeyBind) {
@@ -290,6 +300,8 @@ export default function createListener(socket) {
         }
 
         if (state.game.state.gameStage == 'menu' && on) {
+            keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
+            
             switch (keyPressed) {
                 case 'ArrowUp':
                     state.game.state.selectMenuOption.menuSelect = state.game.state.selectMenuOption.menuSelect <= 0 ? state.game.state.selectMenuOption.menuOptions.length-1 : state.game.state.selectMenuOption.menuSelect-1
@@ -318,6 +330,7 @@ export default function createListener(socket) {
     }
 
     return {
-        state
+        state,
+        handleKeys
     }
 }

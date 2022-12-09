@@ -1,4 +1,4 @@
-export default (state) => {
+export default (state, handleKeys) => {
     state.buttons['MouseInfoButton'] = {
         minX: 0,
         maxX: 80,

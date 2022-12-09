@@ -4,8 +4,8 @@ export default async (canvas, game, Listener) => {
     let performanceMode = game.state.smallFunctions.getConfig('PerformanceMode')
 
     let amountOfArrows = game.state.amountOfArrows
-    let spaceBetweenArrows = game.state.smallFunctions.getConfig('SpaceBetweenArrows')
     let resizeNote = game.state.resizeNote
+    let spaceBetweenArrows = game.state.smallFunctions.getConfig('SpaceBetweenArrows')**resizeNote
     let arrowsSize = game.state.arrowsSize || 100
     if (!game.state.arrowsSize) return game.state.arrowsSize = game.state.images[`Arrows/Arrows.png`]?.animationConfig['Arrow-0']['Arrow-0'].width
     let arrowX = game.state.smallFunctions.getConfig('MiddleScroll') ? canvas.width/2-((arrowsSize**resizeNote+spaceBetweenArrows)*(amountOfArrows+1)/2) : canvas.width-((arrowsSize**resizeNote+spaceBetweenArrows)*(amountOfArrows+2))
@@ -92,7 +92,8 @@ export default async (canvas, game, Listener) => {
 
     let amountOfArrowsOpponent = game.state.amountOfArrowsOpponent
     let resizeNoteOpponent = game.state.resizeNoteOpponent
-    let arrowXOpponent = game.state.smallFunctions.getConfig('MiddleScroll') ? canvas.width/6-((arrowsSize**resizeNoteOpponent+spaceBetweenArrows)*(amountOfArrowsOpponent+1)/2) : arrowsSize**resizeNoteOpponent+spaceBetweenArrows
+    let spaceBetweenArrowsOpponent = game.state.smallFunctions.getConfig('SpaceBetweenArrows')**resizeNoteOpponent
+    let arrowXOpponent = game.state.smallFunctions.getConfig('MiddleScroll') ? canvas.width/6-((arrowsSize**resizeNoteOpponent+spaceBetweenArrowsOpponent)*(amountOfArrowsOpponent+1)/2) : arrowsSize**resizeNoteOpponent+spaceBetweenArrowsOpponent
     let arrowYOpponent = game.state.arrowsYLineOpponent
 
     if (game.state.musicInfo.notesImageDir && game.state.smallFunctions.getConfig('OpponentNotes') && !performanceMode) for (let arrowID = 0;arrowID <= amountOfArrowsOpponent;arrowID++) {
@@ -148,7 +149,7 @@ export default async (canvas, game, Listener) => {
             ctx.globalAlpha = game.state.alphaHUD
         }
 
-        arrowXOpponent += arrowsSize**resizeNoteOpponent+spaceBetweenArrows
+        arrowXOpponent += arrowsSize**resizeNoteOpponent+spaceBetweenArrowsOpponent
     }
 
     ctx.shadowBlur = 0;

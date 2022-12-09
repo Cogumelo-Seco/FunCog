@@ -56,7 +56,7 @@ export default async (state) => {
             type: 'Boolean',
             type: 'Number',
             add: 1,
-            max: 30,
+            max: 50,
             min: 0,
             content: 10
         },

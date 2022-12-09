@@ -25,6 +25,20 @@ export default async (canvas, game, Listener) => {
         } else {
             ctx.fillStyle = config.menuColor || 'white'
             ctx.fillText(config.name, (settingsSelect == i ? 20 : 0)+X, Y);
+
+            Listener.state.buttons[`settings-${i}`] = {
+                gameStage: [ 'settings' ],
+                minX: 0,
+                maxX: 1000,
+                minY: (Y-30)/canvas.height*1000,
+                maxY: Y/canvas.height*1000,
+                pointer: true,
+                over: false,
+                onClick: () => {
+                    game.state.selectSettingsOption.settingsSelect = i
+                    Listener.handleKeys({ event: { code: 'Enter' }, on: true })
+                }
+            }
         }
 
         ctx.fillStyle = config.menuColor || 'white'

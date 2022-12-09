@@ -49,6 +49,21 @@ export default async (canvas, game, Listener) => {
                 ctx.drawImage(alertImage, X+txtWidth+5, Y-28, 30, 30)
                 ctx.fillText('In development', X+txtWidth+30, Y-(30/2));
             }
+
+            Listener.state.buttons[`SelectMusic-${i}`] = {
+                gameStage: [ 'selectMusic' ],
+                minX: X/canvas.width*1000,
+                maxX: (X+ctx.measureText(music.name.replace(/-/g, ' ')).width)/canvas.width*1000,
+                minY: (Y-30)/canvas.height*1000,
+                maxY: Y/canvas.height*1000,
+                pointer: true,
+                over: false,
+                onClick: () => {
+                    let start = game.state.selectMusicMenu.musicSelect >= 0
+                    game.state.selectMusicMenu.musicSelect = i
+                    if (start) Listener.handleKeys({ event: { code: 'Enter' }, on: true })
+                }
+            }
         }
 
         Y += 50
@@ -60,12 +75,28 @@ export default async (canvas, game, Listener) => {
             ctx.font = `bold 30px Arial`
             ctx.fillStyle = game.state.difficulties[selectMusicInfo.difficulties[game.state.selectMusicMenu.difficultySelected]].color
             let difficultyName = game.state.difficulties[selectMusicInfo.difficulties[game.state.selectMusicMenu.difficultySelected]].name
-            ctx.fillText(`<  ${difficultyName}  >`, canvas.width*0.8-(ctx.measureText(`<  ${difficultyName}  >`).width), canvas.height/2-(70/2)+47);
+
+            let X = canvas.width*0.8-(ctx.measureText(`<  ${difficultyName}  >`).width)
+            let Y = canvas.height/2-(70/2)+47
+            ctx.fillText(`<  ${difficultyName}  >`, X, Y);
+
+            Listener.state.buttons[`SelectMusic-Difficulty`] = {
+                gameStage: [ 'selectMusic' ],
+                minX: X/canvas.width*1000,
+                maxX: (X+ctx.measureText(`<  ${difficultyName}  >`).width)/canvas.width*1000,
+                minY: (Y-30)/canvas.height*1000,
+                maxY: Y/canvas.height*1000,
+                pointer: true,
+                over: false,
+                onClick: () => {
+                    Listener.handleKeys({ event: { code: 'ArrowLeft' }, on: true })
+                }
+            }
         }
 
         game.state.selectMusicMenu.difficultySelected = game.state.selectMusicMenu.difficultySelected > selectMusicInfo.difficulties.length-1 ? 0 : game.state.selectMusicMenu.difficultySelected
         game.state.selectMusicMenu.difficultySelected = game.state.selectMusicMenu.difficultySelected < 0 ? selectMusicInfo.difficulties.length-1 : game.state.selectMusicMenu.difficultySelected
-    }
+    } else delete Listener.state.buttons[`SelectMusic-Difficulty`]
 
     ctx.fillStyle = 'rgb(30, 30, 30, 0.6)'
     ctx.fillRect(0, 0, canvas.width, 180);
@@ -85,18 +116,48 @@ export default async (canvas, game, Listener) => {
 
     ctx.globalAlpha = 0.5
     if (modPrevious) {
-        ctx.fillStyle = modPrevious.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(modPrevious.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : modPrevious.menuColor || 'white'
         ctx.font = `bold 20px Arial`
-        ctx.fillText(modPrevious.name, canvas.width/6-(ctx.measureText(modPrevious.name).width/2), 110);
+        ctx.fillStyle = modPrevious.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(modPrevious.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : modPrevious.menuColor || 'white'
+        let X = canvas.width/6-(ctx.measureText(modPrevious.name).width/2)
+        let Y = 110
+        ctx.fillText(modPrevious.name, X, Y);
+
+        Listener.state.buttons[`SelectMusic-ModPrevious`] = {
+            gameStage: [ 'selectMusic' ],
+            minX: X/canvas.width*1000,
+            maxX: (X+ctx.measureText(modPrevious.name).width)/canvas.width*1000,
+            minY: (Y-30)/canvas.height*1000,
+            maxY: Y/canvas.height*1000,
+            pointer: true,
+            over: false,
+            onClick: () => {
+                game.state.selectMusicMenu.modSelect = game.state.musics[game.state.selectMusicMenu.modSelect-1] ? game.state.selectMusicMenu.modSelect-1 : game.state.musics.length-1
+            }
+        }
         
         ctx.fillStyle = 'white'
         ctx.font = `bold 10px Arial`
         ctx.fillText(modPrevious.musics.length, canvas.width/6-(ctx.measureText(modPrevious.musics.length).width/2), 125);
     }
     if (modNext) {
-        ctx.fillStyle = modNext.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(modNext.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : modNext.menuColor || 'white'
         ctx.font = `bold 20px Arial`
-        ctx.fillText(modNext.name, (canvas.width-canvas.width/6)-(ctx.measureText(modNext.name).width/2), 110);
+        ctx.fillStyle = modNext.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(modNext.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : modNext.menuColor || 'white'
+        let X = (canvas.width-canvas.width/6)-(ctx.measureText(modNext.name).width/2)
+        let Y = 110
+        ctx.fillText(modNext.name, X, Y);
+
+        Listener.state.buttons[`SelectMusic-ModNext`] = {
+            gameStage: [ 'selectMusic' ],
+            minX: X/canvas.width*1000,
+            maxX: (X+ctx.measureText(modPrevious.name).width)/canvas.width*1000,
+            minY: (Y-30)/canvas.height*1000,
+            maxY: Y/canvas.height*1000,
+            pointer: true,
+            over: false,
+            onClick: () => {
+                game.state.selectMusicMenu.modSelect = game.state.musics[game.state.selectMusicMenu.modSelect+1] ? game.state.selectMusicMenu.modSelect+1 : 0
+            }
+        }
         
         ctx.fillStyle = 'white'
         ctx.font = `bold 10px Arial`

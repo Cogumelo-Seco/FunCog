@@ -14,6 +14,20 @@ export default async (canvas, game, Listener) => {
         ctx.lineWidth = 4
         ctx.strokeStyle  = menuSelect == i ? 'white' : 'black'
         ctx.strokeText(game.state.selectMenuOption.menuOptions[i], (menuSelect == i ? 20 : 0)+X, Y);
+
+        Listener.state.buttons[`Menu-${i}`] = {
+            gameStage: [ 'menu' ],
+            minX: X/canvas.width*1000,
+            maxX: (X+ctx.measureText(game.state.selectMenuOption.menuOptions[i]).width)/canvas.width*1000,
+            minY: (Y-(menuSelect == i ? 110 : 100))/canvas.height*1000,
+            maxY: Y/canvas.height*1000,
+            pointer: true,
+            over: false,
+            onClick: () => {
+                game.state.selectMenuOption.menuSelect = i
+                Listener.handleKeys({ event: { code: 'Enter' }, on: true })
+            }
+        }
         
         Y += 150
     }
