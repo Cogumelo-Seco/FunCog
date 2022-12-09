@@ -53,7 +53,12 @@ export default function createListener(socket) {
             if (
                 button.gameStage && button.gameStage.includes(state.game.state.gameStage) && X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.onClick ||
                 !button.gameStage && X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.onClick
-            ) button.onClick()
+            ) {
+                if (button.songClick) {
+                    state.game.playSong(button.songClick)
+                }
+                button.onClick()
+            }
         }
     })
 

@@ -87,6 +87,7 @@ export default async (canvas, game, Listener) => {
                 maxY: Y/canvas.height*1000,
                 pointer: true,
                 over: false,
+                songClick: 'Sounds/scrollMenu.ogg',
                 onClick: () => {
                     Listener.handleKeys({ event: { code: 'ArrowLeft' }, on: true })
                 }
@@ -129,6 +130,7 @@ export default async (canvas, game, Listener) => {
             maxY: Y/canvas.height*1000,
             pointer: true,
             over: false,
+            songClick: 'Sounds/scrollMenu.ogg',
             onClick: () => {
                 game.state.selectMusicMenu.modSelect = game.state.musics[game.state.selectMusicMenu.modSelect-1] ? game.state.selectMusicMenu.modSelect-1 : game.state.musics.length-1
             }
@@ -153,6 +155,7 @@ export default async (canvas, game, Listener) => {
             maxY: Y/canvas.height*1000,
             pointer: true,
             over: false,
+            songClick: 'Sounds/scrollMenu.ogg',
             onClick: () => {
                 game.state.selectMusicMenu.modSelect = game.state.musics[game.state.selectMusicMenu.modSelect+1] ? game.state.selectMusicMenu.modSelect+1 : 0
             }

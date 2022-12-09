@@ -34,6 +34,7 @@ export default async (canvas, game, Listener) => {
                 maxY: Y/canvas.height*1000,
                 pointer: true,
                 over: false,
+                songClick: 'Sounds/scrollMenu.ogg',
                 onClick: () => {
                     game.state.selectSettingsOption.settingsSelect = i
                     Listener.handleKeys({ event: { code: 'Enter' }, on: true })
