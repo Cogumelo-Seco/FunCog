@@ -56,7 +56,7 @@ export default async function renderGame(canvas, game, Listener) {
             break
     }
 
-    require('./RenderChat').default(canvas, game, Listener)
+    //require('./RenderChat').default(canvas, game, Listener)
     require('./RenderScreenInformation').default(canvas, game, Listener)
 
     await game.gameLoop()

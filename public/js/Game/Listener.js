@@ -7,6 +7,7 @@ export default function createListener(socket) {
         arrows: {},
         pauseGameKeys: false,
         codeText: '',
+        onChat: 'off',
         mouseInfo: {
             x: NaN,
             y: NaN,
@@ -86,7 +87,7 @@ export default function createListener(socket) {
             lastClickTime: lastClick?.time || null
         }
         if (on) chatFunctions.keyPressed(keyPressed)
-        if (document.activeElement == document.getElementById('message-box')) return
+        if (state.onChat != 'off') return
         if (on && event.key) state.codeText += event.key
 
         if (state.game && !state.onChangeKeyBind) for (let i in state.buttons) {
@@ -152,7 +153,8 @@ export default function createListener(socket) {
         if (state.game.state.gameStage == 'score' && on) {
             if (![ 'F11', 'PrintScreen' ].includes(keyPressed)) {
                 state.game.state.selectMusicMenu.musicSelect = -1
-                state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu')
+                if (state.game.state.online) state.game.state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
+                else state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu')
             }
         }
 
@@ -200,7 +202,8 @@ export default function createListener(socket) {
                         state.game.startMusic({ 
                             musicInfo,
                             difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
-                            listenerState: state
+                            listenerState: state,
+                            socket
                         })
                     } else {
                         state.musicMenu?.pause()
@@ -210,7 +213,8 @@ export default function createListener(socket) {
                         state.game.startMusic({ 
                             musicInfo,
                             difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
-                            listenerState: state
+                            listenerState: state,
+                            socket
                         })
                     }
                     break
@@ -222,12 +226,16 @@ export default function createListener(socket) {
 
             switch (keyPressed) {
                 case 'ArrowUp':
-                    state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect <= 0 ? (state.game.state.selectServerOption.listServers.filter(s => s.open)).length-1 : state.game.state.selectServerOption.serverSelect-1
-                    state.game.playSong('Sounds/scrollMenu.ogg')
+                    if (!state.game.state.selectServerOption.createServer) {
+                        state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect <= 0 ? (state.game.state.selectServerOption.listServers.filter(s => s.open)).length-1 : state.game.state.selectServerOption.serverSelect-1
+                        state.game.playSong('Sounds/scrollMenu.ogg')
+                    }
                     break
                 case 'ArrowDown':
-                    state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect >= (state.game.state.selectServerOption.listServers.filter(s => s.open)).length-1 ? 0 : state.game.state.selectServerOption.serverSelect+1
-                    state.game.playSong('Sounds/scrollMenu.ogg')
+                    if (!state.game.state.selectServerOption.createServer) {
+                        state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect >= (state.game.state.selectServerOption.listServers.filter(s => s.open)).length-1 ? 0 : state.game.state.selectServerOption.serverSelect+1
+                        state.game.playSong('Sounds/scrollMenu.ogg')
+                    }
                     break
                 case 'ArrowLeft':
                     state.game.state.selectServerOption.createServer = true
@@ -239,7 +247,7 @@ export default function createListener(socket) {
                     break
                 case 'Enter':
                     let filtredServers = state.game.state.selectServerOption.listServers.filter(s => s.open)
-                    state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
+                    //state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
 
                     if (state.game.state.selectServerOption.createServer) {
                         state.game.state.smallFunctions.redirectGameStage('selectMusic')
@@ -332,9 +340,11 @@ export default function createListener(socket) {
                         state.game.state.online = false
                         state.game.state.smallFunctions.redirectGameStage('selectMusic')
                     } else if (state.game.state.selectMenuOption.menuOptions[state.game.state.selectMenuOption.menuSelect] == 'Multiplayer') {
-                        state.game.state.online = true
-                        state.game.state.smallFunctions.redirectGameStage('onlineServerList')
-                        socket.emit('getListServers')
+                        if (state.game.state.ping) {
+                            state.game.state.online = true
+                            state.game.state.smallFunctions.redirectGameStage('onlineServerList')
+                            socket.emit('getListServers')
+                        } else alert('No connection to the server!')
                     } else {
                         state.game.state.online = true
                         state.game.state.smallFunctions.redirectGameStage('settings')

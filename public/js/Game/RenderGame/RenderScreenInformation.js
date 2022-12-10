@@ -16,7 +16,7 @@ export default async (canvas, game, Listener) => {
 
     if (game.state.smallFunctions.getConfig('GameInfo')) {
         ctx.fillText(`${game.state.fpsDisplay}FPS`, (canvas.width-5)-ctx.measureText(`${game.state.fpsDisplay}FPS`).width, 15);
-        ctx.fillText(`${game.state.ping}Ping`, (canvas.width-5)-ctx.measureText(`${game.state.ping}Ping`).width, 30);
+        ctx.fillText(`${game.state.ping || '???'}Ping`, (canvas.width-5)-ctx.measureText(`${game.state.ping}Ping`).width, 30);
 
         ctx.globalAlpha = (game.state.animations.code.frame/game.state.animations.code.endFrame) > 0.5 ? 1-((game.state.animations.code.frame/game.state.animations.code.endFrame)-0.5)/0.5 : game.state.alphaHUD
         ctx.fillText(`Code Detected - ${game.state.animations.code.on ? 'ON' : 'OFF'}`, 5, 60)

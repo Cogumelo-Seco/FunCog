@@ -14,9 +14,12 @@ export default function codesFunction(state, socket) {
 
     socket.on('messageHistory', (command) => {
         state.messages = command || []
+        require('../RenderGame/RenderChat').default(document.getElementById('gameCanvas'), state, 'historyMessage')
     })
 
     socket.on('message', (command) => {
-        state.messages.push(command)
+        state.messages.unshift(command)
+        require('../RenderGame/RenderChat').default(document.getElementById('gameCanvas'), state, 'newMessage')
+        //require('../RenderGame/RenderChat').default(canvas, state)
     })
 }

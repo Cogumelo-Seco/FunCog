@@ -47,6 +47,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             lastPopupTime: 0,
             variables: {},
             playerId: opponentPlayer ? 2 : 1,
+            playerServerId: socket.id,
             judgements: {
                 shit: 0,
                 bad: 0,
@@ -163,7 +164,8 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
         }
 
         async function loaded() {
-            if (opponentPlayer) socket.emit('startMusic', { serverId: state.serverId })
+            if (opponentPlayer && state.online) socket.emit('startMusic', { serverId: state.serverId })
+            if (!opponentPlayer && state.online) socket.emit('openServer', { serverId: state.serverId })
             if (!performanceMode) state.musicEventListener('loaded', {}, state)
 
             if (state.musicOpponentNotes.length <= 0 && state.online) {
@@ -176,7 +178,6 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             }
 
             state.scoreToAdd = 200*(state.musicOpponentNotes.length/(state.musicOpponentNotes.length+state.musicNotes.length))
-            console.log(state.scoreToAdd)
 
             state.music = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
             state.musicVoice = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
@@ -199,6 +200,18 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
 
                         if (!performanceMode) state.musicEventListener('started', { difficulty, listenerState }, state)
                     } else {
+                        state.musicInfo.bestCombo = 0
+                        state.musicInfo.combo = 0
+                        state.musicInfo.misses = 0
+                        state.musicInfo.score = 0
+                        state.musicInfo.accuracyMedia = []
+                        state.musicInfo.judgements = {
+                            shit: 0,
+                            bad: 0,
+                            good: 0,
+                            sick: 0,
+                        }
+
                         let countdownSpeed = 900-(state.musicBPM*state.smallFunctions.getConfig('ScrollSpeed')*2)
                         if (countdownSpeed < 150) countdownSpeed = 150
                         setTimeout(() => startMusic(), countdownSpeed)

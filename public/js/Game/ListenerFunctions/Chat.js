@@ -3,29 +3,14 @@ export default function chat(state, socket) {
     
     const chatContent = document.getElementById('chat-content')
 
-    const chatButton = document.getElementById('chat-button')
-    const unreadMessageCounter = document.getElementById('unreadMessageCounter')
     const messageBox = document.getElementById('message-box')
-    const sendButton = document.getElementById('send-button')
     const chat = document.getElementById('chat')   
+    const gameCanvas = document.getElementById('gameCanvas')
     
-    function focusin(event) {        
-        if (state.game) {
-            for (let i in state.game.state.messages) {
-                if (!state.game.state.messages[i].read) {
-                    state.game.state.messages[i].read = true
-                    chatContent.scrollTop = chatContent.scrollHeight
-                }                
-            }
-            state.game.state.unreadMessages = 0
-        }
-        unreadMessageCounter.style.display = 'none'
-        chatButton.style.background = 'rgba(0, 0, 0, 0.658) url(/imgs/chat/chat.png) no-repeat center 0px / 100%'
-
-        chat.style.backgroundColor = 'rgba(50, 50, 50, 0.8)'
-        chat.style.borderColor = 'black'
-        messageBox.style.backgroundColor = 'rgba(10, 10, 10, 1)'
-        sendButton.style.backgroundColor = 'rgb(34, 170, 0)'//'rgba(0, 150, 200, 1)'
+    function focusin(event) {
+        chat.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
+        chat.style.borderColor = 'rgb(50, 50, 50)'
+        messageBox.style.backgroundColor = 'rgba(80, 80, 80, 1)'
 
         if (event.type == 'mouseover') state.onChat = 'over'
         else state.onChat = 'on'
@@ -33,20 +18,15 @@ export default function chat(state, socket) {
 
     function focusout(event) {
         if (!document.activeElement || document.activeElement.id != 'message-box') {
-            chat.style.backgroundColor = 'rgba(50, 50, 50, 0.2)'
+            chat.style.backgroundColor = 'rgba(0, 0, 0, 0.2)'
             chat.style.borderColor = 'transparent'
-            messageBox.style.backgroundColor = 'rgba(10, 10, 10, 0.4)'
-            sendButton.style.backgroundColor = 'rgba(34, 170, 0, 0.3)'//'rgba(0, 150, 200, 0.3)'
+            messageBox.style.backgroundColor = 'rgba(80, 80, 80, 0.4)'
             state.onChat = 'off'
         }
     }
 
-    messageBox.addEventListener('focusin', focusin);
-    messageBox.addEventListener('focusout', focusout);
-    chat.addEventListener('mouseover', focusin)
-    chat.addEventListener('mouseout', focusout)
-
-    sendButton.addEventListener('click', send);
+    gameCanvas.addEventListener('mouseover', focusout)
+    gameCanvas.addEventListener('mouseout', focusin)
 
     function openCloseChat() {
         if (chat.style.display == 'none' || chat.style.display == '') {
@@ -54,11 +34,14 @@ export default function chat(state, socket) {
             messageBox.focus()
             setTimeout(() => messageBox.value = '', 50)
         } else chat.style.display = 'none'
+
+        chatContent.scrollTop = chatContent.scrollHeight
+        require('../RenderGame/RenderChat').default(document.getElementById('gameCanvas'), state.game.state)
     }
 
     function send() {
         let content = messageBox.value
-        if (!content) return;        
+        if (!content) return;
 
         socket.emit('message', {
             author: {
@@ -70,14 +53,15 @@ export default function chat(state, socket) {
             content,
         })
         messageBox.value = ''
+        chatContent.scrollTop = chatContent.scrollHeight
     }
 
     function keyPressed(keyPressed) {
         // Enviar mensagem com enter
         if (document.activeElement.id == 'message-box' && keyPressed == 'Enter' && messageBox.value.trim()) send()
 
-        // Abrir chat com /
-        if (document.activeElement.id != 'message-box' && keyPressed == '/') {
+        // Abrir chat com click no teclado
+        if (document.activeElement.id != 'message-box' &&(keyPressed == 'NumpadDivide' || keyPressed == 'KeyT')) {
             chat.style.display = 'block'
             messageBox.focus()
             setTimeout(() => messageBox.value = '', 50)
