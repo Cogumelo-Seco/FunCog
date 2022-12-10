@@ -1,3 +1,5 @@
+import chat from './ListenerFunctions/Chat.js';
+
 export default function createListener(socket) {
     const state = {
         buttons: {},
@@ -14,6 +16,7 @@ export default function createListener(socket) {
         }
     }
 
+    const chatFunctions = chat(state, socket)
     require('./ListenerFunctions/addButtons').default(state, handleKeys)
 
     document.onmousemove = (event) => {
@@ -43,21 +46,23 @@ export default function createListener(socket) {
     }
 
     document.addEventListener('click', (event) => {
-        handleKeys({ event: { code: 'MouseClick' }, on: true })
+        if (event.target?.id == 'gameCanvas') {
+            handleKeys({ event: { code: 'MouseClick' }, on: true })
 
-        let X = Math.floor(event.pageX/window.innerWidth*1000)
-        let Y = Math.floor(event.pageY/window.window.innerHeight*1000)
+            let X = Math.floor(event.pageX/window.innerWidth*1000)
+            let Y = Math.floor(event.pageY/window.window.innerHeight*1000)
 
-        if (state.game && !state.onChangeKeyBind) for (let i in state.buttons) {
-            let button = state.buttons[i]
-            if (
-                button.gameStage && button.gameStage.includes(state.game.state.gameStage) && X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.onClick ||
-                !button.gameStage && X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.onClick
-            ) {
-                if (button.songClick) {
-                    state.game.playSong(button.songClick)
+            if (state.game && !state.onChangeKeyBind) for (let i in state.buttons) {
+                let button = state.buttons[i]
+                if (
+                    button.gameStage && button.gameStage.includes(state.game.state.gameStage) && X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.onClick ||
+                    !button.gameStage && X > button.minX && X < button.maxX && Y > button.minY && Y < button.maxY && button.onClick
+                ) {
+                    if (button.songClick) {
+                        state.game.playSong(button.songClick)
+                    }
+                    button.onClick()
                 }
-                button.onClick()
             }
         }
     })
@@ -74,12 +79,14 @@ export default function createListener(socket) {
         let keyPressed = event.code
         let lastClick = state.keys[keyPressed]
         state.keys[keyPressed] = {
-            key: event.key,
-            code: keyPressed,
+            key: event.key || '',
+            code: keyPressed || '',
             clicked: on,
             time: +new Date(),
             lastClickTime: lastClick?.time || null
         }
+        if (on) chatFunctions.keyPressed(keyPressed)
+        if (document.activeElement == document.getElementById('message-box')) return
         if (on && event.key) state.codeText += event.key
 
         if (state.game && !state.onChangeKeyBind) for (let i in state.buttons) {
@@ -231,26 +238,30 @@ export default function createListener(socket) {
                     state.game.playSong('Sounds/scrollMenu.ogg')
                     break
                 case 'Enter':
+                    let filtredServers = state.game.state.selectServerOption.listServers.filter(s => s.open)
+                    state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
+
                     if (state.game.state.selectServerOption.createServer) {
                         state.game.state.smallFunctions.redirectGameStage('selectMusic')
 
                         state.game.state.serverId = socket.id
                     } else if (state.game.state.selectServerOption.listServers[0]) {
-                        let server = state.game.state.selectServerOption.listServers[state.game.state.selectServerOption.serverSelect]
+                        let server = filtredServers[state.game.state.selectServerOption.serverSelect]
                         state.game.state.serverId = server.id
 
                         if (state.game.state.serverId) {
                             let musicInfo = state.game.state.musics[server.mod].musics[server.music]
+
+                            socket.emit('connectServer', {
+                                serverId: state.game.state.serverId
+                            })
 
                             state.game.startMusic({ 
                                 musicInfo,
                                 difficulty: state.game.state.difficulties[musicInfo.difficulties[server.difficulty]],
                                 listenerState: state,
                                 opponentPlayer: true,
-                            })
-
-                            socket.emit('connectServer', {
-                                serverId: state.game.state.serverId
+                                socket
                             })
 
                             state.game.state.smallFunctions.redirectGameStage('game')

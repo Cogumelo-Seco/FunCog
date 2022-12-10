@@ -1,4 +1,4 @@
-export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, state) => {
+export default async({ musicInfo, difficulty, listenerState, opponentPlayer, socket }, state) => {
     //try {
         let performanceMode = state.smallFunctions.getConfig('PerformanceMode')
 
@@ -141,8 +141,6 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
                     let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+dir
                     let animationConfig = animationConfigDir ? JSON.parse(await fetch('https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+animationConfigDir).then(r => r.text())) : null
 
-                    console.log(animationConfig)
-    
                     let img = new Image()
                     img.addEventListener('load', (e) => {
                         state.toLoadInScreen[dir] = {
@@ -165,6 +163,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
         }
 
         async function loaded() {
+            if (opponentPlayer) socket.emit('startMusic', { serverId: state.serverId })
             if (!performanceMode) state.musicEventListener('loaded', {}, state)
 
             if (state.musicOpponentNotes.length <= 0 && state.online) {
@@ -175,6 +174,9 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
                 state.musicNotes = JSON.parse(JSON.stringify(state.musicOpponentNotes));
                 state.musicOriginalNotes = JSON.parse(JSON.stringify(state.musicOriginalOpponentNotes));
             }
+
+            state.scoreToAdd = 200*(state.musicOpponentNotes.length/(state.musicOpponentNotes.length+state.musicNotes.length))
+            console.log(state.scoreToAdd)
 
             state.music = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
             state.musicVoice = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
@@ -187,7 +189,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
             } else startMusic()
             
             async function startMusic() {
-                if (state.online && !state.waiting || !state.online) {
+                if (state.online && state.serverInfo.start || !state.online) {
                     state.countdown -= 1
                     if (state.countdown <= -1) {
                         state.music?.play()
@@ -202,7 +204,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer }, s
                         setTimeout(() => startMusic(), countdownSpeed)
                         state.playSong(`Sounds/intro${state.countdown}.ogg`)
                     }
-                }
+                } else setTimeout(() => startMusic(), 0)
             }
         }
     /*} catch (err) {

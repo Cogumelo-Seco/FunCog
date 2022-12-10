@@ -1,8 +1,10 @@
-@keyframes codeMessage {
+@keyframes openChat {
     from {
-        top: -50px;
-    }
+        transform: translateY(-100%);
+        opacity: 0;
+    } 
     to {
-        top: 10px;
+        transform: translateY(0);
+        opacity: 1;
     }
 }

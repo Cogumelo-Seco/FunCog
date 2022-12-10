@@ -40,9 +40,8 @@ export default async({ arrowID, listenerState, bot }, state) => {
         } else state.arrowsInfo[note.arrowID].splashDir = state.musicInfo.splashDir
 
         let rating = state.calculateRating(bestNote.hitNote)
-        let media = (rating.media < 100 ? rating.media+((bestNote.hitNote*-1)/9) : rating.media)
-        state.musicInfo.accuracyMedia.push(media > 0 ? media : 1)
-        state.musicInfo.score += Number((100*(rating.media/100)).toFixed(0))
+        state.musicInfo.accuracyMedia.push(rating.media)
+        state.musicInfo.score += Number.parseInt(state.scoreToAdd*(rating.media/100))
         state.musicInfo.judgements[rating.name] += 1
 
         state.ratings.unshift({
@@ -60,7 +59,7 @@ export default async({ arrowID, listenerState, bot }, state) => {
                 } else if (!state.music.paused) {
                     state.musicEventListener('noteClick', { noteClickAuthor: 'player', note, listenerState }, state)
                     state.musicInfo.health += 0.2
-                    state.musicInfo.score += Number((20*(rating.media/100)).toFixed(0))
+                    state.musicInfo.score += Number.parseInt((state.scoreToAdd/2)*(rating.media/100))
                 }
             }, 1000/5)
         }

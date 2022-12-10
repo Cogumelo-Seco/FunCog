@@ -2,8 +2,14 @@ function createGame(Listener, canvas, socket) {
     const state = {
         debug: false,
         fps: '0-0',
+        ping: '???',
         renderType: 'limited',
         customBongPosition: { X: null, Y: null },
+        myMessageConfig: {
+            colorName: null,
+            colorContent: null
+        },
+        messages: [],
         online: false,
         waiting: true,
         serverId: null,
@@ -45,6 +51,7 @@ function createGame(Listener, canvas, socket) {
         arrowsYLineMargin: 50,
         arrowsYLine: 0,
         alphaHUD: 1,
+        scoreToAdd: 200,
         
         arrowsYLineOpponent: 0,
         amountOfArrowsOpponent: 3,
@@ -170,6 +177,8 @@ function createGame(Listener, canvas, socket) {
     const startMusic = (command) => require('./GameFunctions/startMusic').default(command, state)
     const verifyClick = (command) => require('./GameFunctions/verifyClick').default(command, state)
 
+    require('./GameFunctions/socketEvent').default(state, socket)
+
     async function start() {
         let videoElement = document.getElementById('gameVideo')
 
@@ -190,21 +199,6 @@ function createGame(Listener, canvas, socket) {
         if (state.gameStage == 'game') state.renderType = 'limited'
         else if (smallFunctions.getConfig('menuFPSUnlimit')) state.renderType = 'unlimited'
         else state.renderType = 'limited'
-
-        if (state.online && state.serverId) {
-            if (state.serverInfo.end == true) {
-                state.smallFunctions.redirectGameStage('onlineServerList')
-                state.smallFunctions.resetGame()
-            }
-
-            state.musicInfo.arrows = Listener.state.arrows
-
-            socket.emit('updateGame', {
-                serverId: state.serverId,
-
-                data: state.musicInfo
-            })
-        }
 
         if (state.music?.buffered.length) {
             let loaded = state.music?.buffered.end(0) / state.music.duration;
@@ -301,8 +295,9 @@ function createGame(Listener, canvas, socket) {
 
         if (musicCurrentTime > 1 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
             state.smallFunctions.resetGame()
+            state.smallFunctions.redirectGameStage('score', 'menu')/*
             if (state.online) state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
-            else state.smallFunctions.redirectGameStage('score', 'menu')
+            else state.smallFunctions.redirectGameStage('score', 'menu')*/
         }
 
         for (let i in state.musicChangeBPM) {
@@ -334,7 +329,7 @@ function createGame(Listener, canvas, socket) {
             }
 
             if (Listener.state.arrows[note.arrowID]) {
-                if ((state.smallFunctions.getConfig('botPlay') || Listener.state.arrows[note.arrowID].inAutoClick) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**state.resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
+                if (((state.smallFunctions.getConfig('botPlay') || note.autoClick) || Listener.state.arrows[note.arrowID].inAutoClick) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**state.resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
                 if ((state.smallFunctions.getConfig('botPlay') || note.autoClick) && (note.errorWhenNotClicking || note.autoClick) && newNoteY >= -10 && newNoteY <= (state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight*2)) {
                     Listener.state.arrows[note.arrowID].inAutoClick = note.autoClick
                     Listener.state.arrows[note.arrowID].state = 'onNote'
@@ -397,6 +392,22 @@ function createGame(Listener, canvas, socket) {
 
         if (state.music?.currentTime > 0 && state.music?.currentTime < state.music?.duration && !performanceMode) state.musicEventListener('gameLoopFullFPS', { listenerState: Listener.state }, state)
         if (state.gameLoopFPSControlTime+(performanceMode ? 40 : 20) <= +new Date()) {
+            if (state.online && state.serverId) {
+                if (state.serverInfo.end == true) {
+                    //state.smallFunctions.redirectGameStage('onlineServerList')
+                    state.smallFunctions.redirectGameStage('score', 'menu')
+                    state.smallFunctions.resetGame()
+                }
+    
+                state.musicInfo.arrows = Listener.state.arrows
+    
+                socket.emit('updateGame', {
+                    serverId: state.serverId,
+    
+                    data: state.musicInfo
+                })
+            }
+
             state.gameLoopFPSControlTime = +new Date()
 
             if (state.music?.currentTime > 0 && state.music?.currentTime < state.music?.duration && !performanceMode) state.musicEventListener('gameLoop', { listenerState: Listener.state }, state)

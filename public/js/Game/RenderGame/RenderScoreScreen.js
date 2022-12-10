@@ -13,146 +13,178 @@ export default async (canvas, game, Listener) => {
     ctx.fillStyle = game.state.musicInfo.difficulty.color || 'white'
     ctx.fillText(`(${game.state.musicInfo.difficulty.name})`, 10+canvas.width/2+((ctx.measureText(game.state.musicInfo.name.replace(/[-]/g, ' ')).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2-(ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)), 80);
 
-    let musicInfoPopupWidth = canvas.width/4
-    let musicInfoPopupHeight = musicInfoPopupWidth
-    let musicInfoPopupX = canvas.width/12
-    let musicInfoPopupY = 120+((canvas.height-120)/2-(musicInfoPopupHeight/2))
+    let playerWin = game.state.musicInfoOpponent.score == game.state.musicInfo.score ? 'draw' : game.state.musicInfo.score > game.state.musicInfoOpponent.score ? true : false
 
-    ctx.font = `bold ${musicInfoPopupWidth*0.1}px Arial`
-    ctx.fillStyle = 'rgb(50, 150, 40)'
-    if (game.state.online) ctx.fillText('Your Results', musicInfoPopupX+(musicInfoPopupWidth/2)-(ctx.measureText('Your Results').width/2), musicInfoPopupY-5);
-    ctx.fillStyle = game.state.online ? 'rgb(130, 200, 120)' : 'rgb(200, 200, 200)'
-    ctx.fillRect(musicInfoPopupX, musicInfoPopupY, musicInfoPopupWidth, musicInfoPopupHeight)
+    if (game.state.online) {
+        drawBox({
+            playerId: 2,
+            popupColor: playerWin == 'draw' ? 'rgb(255, 150, 100)' : playerWin ? 'rgb(255, 100, 100)' : 'rgb(130, 200, 120)',
+            playerMusicInfo: game.state.musicInfoOpponent,
+            musicInfoPopupWidth: canvas.width/4,
+            musicInfoPopupHeight: canvas.width/4,
+            musicInfoPopupX: canvas.width/12,
+            musicInfoPopupY: 120+((canvas.height-120)/2-(canvas.width/4/2))
+        })
+        drawBox({
+            playerId: 1,
+            popupColor: playerWin == 'draw' ? 'rgb(255, 150, 100)' : playerWin ? 'rgb(130, 200, 120)' : 'rgb(255, 100, 100)',
+            playerMusicInfo: game.state.musicInfo,
+            musicInfoPopupWidth: canvas.width/4,
+            musicInfoPopupHeight: canvas.width/4,
+            musicInfoPopupX: canvas.width-canvas.width/4-canvas.width/12,
+            musicInfoPopupY: 120+((canvas.height-120)/2-(canvas.width/4/2))
+        })
+    } else drawBox({
+        popupColor: 'rgb(200, 200, 200)',
+        playerMusicInfo: game.state.musicInfo,
+        musicInfoPopupWidth: canvas.width/4,
+        musicInfoPopupHeight: canvas.width/4,
+        musicInfoPopupX: canvas.width/12,
+        musicInfoPopupY: 120+((canvas.height-120)/2-(canvas.width/4/2))
+    })
 
-    let msgArr = [
-        {
-            msg: game.state.smallFunctions.getConfig('botPlay') ? 'Bongo Cat' : 'Stats',
-            type: 'title'
-        },
-        {
-            msg: 'Score:',
-            msg2: (game.state.musicInfo.score || 0),
-            type: 'stats'
-        },
-        {
-            msg: 'Misses:',
-            msg2: (game.state.musicInfo.misses || 0),
-            type: 'stats'
-        },
-        {
-            msg: 'Best Combo:',
-            msg2: (game.state.musicInfo.bestCombo || 0)+(game.state.musicInfo.misses == 0 ? ' (FC)' : ''),
-            type: 'stats'
-        },
-        {
-            msg: 'Accuracy:',
-            msg2: (game.state.musicInfo.accuracy?.toFixed(2)+'%' || '0%'),
-            type: 'stats'
-        },
-        {
-            msg: 'Judgements',
-            type: 'title'
-        },
-        {
-            msg: 'sick',
-            msg2: 'bad',
-            type: 'judgements'
-        },
-        {
-            msg: 'good',
-            msg2: 'shit',
-            type: 'judgements'
-        },
-    ]
+    function drawBox({ musicInfoPopupWidth, musicInfoPopupHeight, musicInfoPopupX, musicInfoPopupY, playerMusicInfo, popupColor, playerId }) {
+        ctx.font = `bold ${musicInfoPopupWidth*0.1}px Arial`
+        ctx.fillStyle = 'white'//'rgb(50, 150, 40)'
+        if (game.state.online) {
+            let txt = playerId == 1 ? 'Your Results' : 'Opponent Results'
+            ctx.fillText(txt, musicInfoPopupX+(musicInfoPopupWidth/2)-(ctx.measureText(txt).width/2), musicInfoPopupY-7);
+        }
+        ctx.fillStyle = popupColor
+        ctx.fillRect(musicInfoPopupX, musicInfoPopupY, musicInfoPopupWidth, musicInfoPopupHeight)
 
-    let resizeMsg = 0.07
-    let msgY = musicInfoPopupY+(musicInfoPopupWidth*resizeMsg*1.5)
-    for (let i in msgArr) {
-        resizeMsg = 0.07
-        let msg = msgArr[i]
+        let msgArr = [
+            {
+                msg: game.state.smallFunctions.getConfig('botPlay') ? 'Bongo Cat' : 'Stats',
+                type: 'title'
+            },
+            {
+                msg: 'Score:',
+                msg2: (playerMusicInfo.score || 0),
+                type: 'stats'
+            },
+            {
+                msg: 'Misses:',
+                msg2: (playerMusicInfo.misses || 0),
+                type: 'stats'
+            },
+            {
+                msg: 'Best Combo:',
+                msg2: (playerMusicInfo.bestCombo || 0)+(playerMusicInfo.misses == 0 ? ' (FC)' : ''),
+                type: 'stats'
+            },
+            {
+                msg: 'Accuracy:',
+                msg2: (playerMusicInfo.accuracy?.toFixed(2)+'%' || '0%'),
+                type: 'stats'
+            },
+            {
+                msg: 'Judgements',
+                type: 'title'
+            },
+            {
+                msg: 'sick',
+                msg2: 'bad',
+                type: 'judgements'
+            },
+            {
+                msg: 'good',
+                msg2: 'shit',
+                type: 'judgements'
+            },
+        ]
 
-        switch (msg.type) {
-            case 'stats':
-                ctx.fillStyle = 'black'//'rgb(0, 150, 0)'
-                ctx.font = `bold ${musicInfoPopupWidth*resizeMsg}px Arial`
-                ctx.fillText(msg.msg, musicInfoPopupX+(musicInfoPopupWidth*0.03), msgY);
-    
-                ctx.fillStyle = 'black'//'rgb(0, 150, 0)'
-                ctx.font = `bold ${musicInfoPopupWidth*resizeMsg}px Arial`
-                ctx.fillText(msg.msg2, (musicInfoPopupX+musicInfoPopupWidth)-(musicInfoPopupWidth*0.03)-ctx.measureText(msg.msg2).width, msgY);
-    
-                msgY += musicInfoPopupWidth*resizeMsg
-                break
-            case 'title':
-                resizeMsg *= 1.5
-                msgY += (musicInfoPopupWidth*resizeMsg*1.5)-(musicInfoPopupWidth*resizeMsg)
+        let resizeMsg = 0.07
+        let msgY = musicInfoPopupY+(musicInfoPopupWidth*resizeMsg*1.5)
+        for (let i in msgArr) {
+            resizeMsg = 0.07
+            let msg = msgArr[i]
 
-                ctx.lineWidth = 2
-                ctx.strokeStyle = 'black'//'rgb(0, 100, 0)'
-                ctx.font = `bold ${musicInfoPopupWidth*resizeMsg}px Arial`
-                ctx.strokeText(msg.msg, musicInfoPopupX+(musicInfoPopupWidth/2)-(ctx.measureText(msg.msg).width/2), msgY);
+            switch (msg.type) {
+                case 'stats':
+                    ctx.fillStyle = 'black'//'rgb(0, 150, 0)'
+                    ctx.font = `bold ${musicInfoPopupWidth*resizeMsg}px Arial`
+                    ctx.fillText(msg.msg, musicInfoPopupX+(musicInfoPopupWidth*0.03), msgY);
+        
+                    ctx.fillStyle = 'black'//'rgb(0, 150, 0)'
+                    ctx.font = `bold ${musicInfoPopupWidth*resizeMsg}px Arial`
+                    ctx.fillText(msg.msg2, (musicInfoPopupX+musicInfoPopupWidth)-(musicInfoPopupWidth*0.03)-ctx.measureText(msg.msg2).width, msgY);
+        
+                    msgY += musicInfoPopupWidth*resizeMsg
+                    break
+                case 'title':
+                    resizeMsg *= 1.5
+                    msgY += (musicInfoPopupWidth*resizeMsg*1.5)-(musicInfoPopupWidth*resizeMsg)
 
-                msgY += musicInfoPopupWidth*resizeMsg
-                break
-            case 'judgements':
-                function drawRating(judgement, type) {
-                    let ratingImage = game.state.images[`ratings/${judgement}.png`]
-                    if (ratingImage) {
-                        let judgementScore = game.state.musicInfo.judgements[judgement] || 0
-                        let ratingImageWidth = ratingImage.image.width*2.5*(resizeMsg*1.2)
-                        let ratingImageHeight = ratingImage.image.height*2.5*(resizeMsg*1.2)
-                        let ratingImageY = msgY
-                        let ratingImageX = type == 1 ? musicInfoPopupX : (musicInfoPopupX+musicInfoPopupWidth)-ratingImageWidth-ctx.measureText('X'+judgementScore).width-3
+                    ctx.lineWidth = 2
+                    ctx.strokeStyle = 'black'//'rgb(0, 100, 0)'
+                    ctx.font = `bold ${musicInfoPopupWidth*resizeMsg}px Arial`
+                    ctx.strokeText(msg.msg, musicInfoPopupX+(musicInfoPopupWidth/2)-(ctx.measureText(msg.msg).width/2), msgY);
 
-                        ctx.fillStyle = 'black'//'rgb(0, 150, 0)'
-                        ctx.font = `bold ${musicInfoPopupWidth*resizeMsg}px Arial`
-                        ctx.fillText('X'+judgementScore, ratingImageX+ratingImageWidth, ratingImageY+(musicInfoPopupWidth*resizeMsg));
+                    msgY += musicInfoPopupWidth*resizeMsg
+                    break
+                case 'judgements':
+                    function drawRating(judgement, type) {
+                        let ratingImage = game.state.images[`ratings/${judgement}.png`]
+                        if (ratingImage) {
+                            let judgementScore = playerMusicInfo.judgements[judgement] || 0
+                            let ratingImageWidth = ratingImage.image.width*2.5*(resizeMsg*1.2)
+                            let ratingImageHeight = ratingImage.image.height*2.5*(resizeMsg*1.2)
+                            let ratingImageY = msgY
+                            let ratingImageX = type == 1 ? musicInfoPopupX : (musicInfoPopupX+musicInfoPopupWidth)-ratingImageWidth-ctx.measureText('X'+judgementScore).width-3
 
-                        ctx.drawImage(ratingImage.image, ratingImageX, ratingImageY, ratingImageWidth, ratingImageHeight);
+                            ctx.fillStyle = 'black'//'rgb(0, 150, 0)'
+                            ctx.font = `bold ${musicInfoPopupWidth*resizeMsg}px Arial`
+                            ctx.fillText('X'+judgementScore, ratingImageX+ratingImageWidth, ratingImageY+(musicInfoPopupWidth*resizeMsg));
+
+                            ctx.drawImage(ratingImage.image, ratingImageX, ratingImageY, ratingImageWidth, ratingImageHeight);
+                        }
                     }
-                }
 
-                drawRating(msg.msg, 1)
-                drawRating(msg.msg2, 2)
-                msgY += musicInfoPopupWidth*(resizeMsg*1.5)
-                break
+                    drawRating(msg.msg, 1)
+                    drawRating(msg.msg2, 2)
+                    msgY += musicInfoPopupWidth*(resizeMsg*1.5)
+                    break
+            }
         }
     }
 
-    let graphicWidth = canvas.width/4
-    let graphicHeight = graphicWidth/2
-    let graphicX = canvas.width-(canvas.width/12)-graphicWidth
-    let graphicY = 120+((canvas.height-120)/2-(musicInfoPopupHeight/2))
-    
+    if (!game.state.online) {
+        let graphicWidth = canvas.width/4
+        let graphicHeight = graphicWidth/2
+        let graphicX = canvas.width-(canvas.width/12)-graphicWidth
+        let graphicY = 120+((canvas.height-120)/2-(musicInfoPopupHeight/2))
+        
 
-    ctx.strokeStyle = 'rgb(200, 200, 200)'
-    ctx.lineWidth = 5
-    ctx.rect(graphicX, graphicY, graphicWidth, graphicHeight)
-    ctx.stroke()
+        ctx.strokeStyle = 'rgb(200, 200, 200)'
+        ctx.lineWidth = 5
+        ctx.rect(graphicX, graphicY, graphicWidth, graphicHeight)
+        ctx.stroke()
 
-    graphicX += 10
-    graphicY += 10
-    graphicHeight -= 20
-    graphicWidth -= 20
+        graphicX += 10
+        graphicY += 10
+        graphicHeight -= 20
+        graphicWidth -= 20
 
-    function renderGraphic(graphicData, color) {
-        ctx.lineWidth = 1
-        let lastGraphicInfo = { x: graphicX,  y: graphicY }
-        for (let i in graphicData) {
-            ctx.strokeStyle = color
+        function renderGraphic(graphicData, color) {
+            ctx.lineWidth = 1
+            let lastGraphicInfo = { x: graphicX,  y: graphicY }
+            for (let i in graphicData) {
+                ctx.strokeStyle = color
 
-            let x = graphicX+(graphicWidth*(i/(graphicData.length-1)))-ctx.lineWidth
-            let y = graphicY+(graphicHeight-graphicHeight*((graphicData[i] || 1)/100))
+                let x = graphicX+(graphicWidth*(i/(graphicData.length-1)))-ctx.lineWidth
+                let y = graphicY+(graphicHeight-graphicHeight*((graphicData[i] || 1)/100))
 
-            ctx.beginPath();
-            ctx.moveTo(lastGraphicInfo.x, lastGraphicInfo.y);
-            ctx.lineTo(x, y);
-            ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(lastGraphicInfo.x, lastGraphicInfo.y);
+                ctx.lineTo(x, y);
+                ctx.stroke();
 
-            lastGraphicInfo = { x, y }
+                lastGraphicInfo = { x, y }
+            }
         }
+        
+        renderGraphic(game.state.musicInfo.accuracyMedia, 'green')
+        renderGraphic(game.state.musicInfo.linearAccuracyMedia, 'cyan')
     }
-    
-    renderGraphic(game.state.musicInfo.accuracyMedia, 'green')
-    renderGraphic(game.state.musicInfo.linearAccuracyMedia, 'cyan')
 }

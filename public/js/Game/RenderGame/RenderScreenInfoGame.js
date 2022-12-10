@@ -47,11 +47,18 @@ export default async (canvas, game, Listener) => {
     }
     ctx.globalAlpha = 1
 
-    if (game.state.online && game.state.waiting) {
-        ctx.font = 'bold 30px Arial'
-        ctx.fillStyle = `rgba(50, 50, 50, 0.5)`
+    if (game.state.online && !game.state.serverInfo.start) {
+        ctx.fillStyle = `rgba(255, 50, 50, 0.7)`
         ctx.fillRect(0, canvas.height/2-20, canvas.width, 40)
+
+        let txt = game.state.waiting ? 'Waiting for player' : 'Waiting for player to load files'
+
+        ctx.font = 'bold 30px Arial'
         ctx.fillStyle = `white`
-        ctx.fillText('Waiting for player', canvas.width/2-(ctx.measureText('Waiting for player').width/2), canvas.height/2+10)
+        ctx.fillText(txt, canvas.width/2-(ctx.measureText(txt).width/2), canvas.height/2+10)
+
+        ctx.lineWidth = 1
+        ctx.strokeStyle  = 'black'
+        ctx.strokeText(txt, canvas.width/2-(ctx.measureText(txt).width/2), canvas.height/2+10)
     }
 }

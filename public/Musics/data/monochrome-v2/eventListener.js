@@ -1,7 +1,7 @@
 export default async (type, { noteClickAuthor, note, click, listenerState, difficulty, events }, state) => {
     switch (type) {
 		case 'noteClick':
-			if (noteClickAuthor == 'opponent') {
+			if (state.musicInfo.playerId == 2 && noteClickAuthor == 'player' || state.musicInfo.playerId == 1 && noteClickAuthor == 'opponent') {
 				state.musicInfo.variables.animation = 'idle'
 
 				let animation = 'idle'
