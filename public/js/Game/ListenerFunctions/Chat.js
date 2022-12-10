@@ -12,7 +12,7 @@ export default function chat(state, socket) {
         chat.style.borderColor = 'rgb(50, 50, 50)'
         messageBox.style.backgroundColor = 'rgba(80, 80, 80, 1)'
 
-        if (event.type == 'mouseover') state.onChat = 'over'
+        if (event?.type == 'mouseover') state.onChat = 'over'
         else state.onChat = 'on'
     }
 
@@ -35,6 +35,7 @@ export default function chat(state, socket) {
             setTimeout(() => messageBox.value = '', 50)
         } else chat.style.display = 'none'
 
+        focusin()
         chatContent.scrollTop = chatContent.scrollHeight
         require('../RenderGame/RenderChat').default(document.getElementById('gameCanvas'), state.game.state)
     }
@@ -61,11 +62,7 @@ export default function chat(state, socket) {
         if (document.activeElement.id == 'message-box' && keyPressed == 'Enter' && messageBox.value.trim()) send()
 
         // Abrir chat com click no teclado
-        if (document.activeElement.id != 'message-box' &&(keyPressed == 'NumpadDivide' || keyPressed == 'KeyT')) {
-            chat.style.display = 'block'
-            messageBox.focus()
-            setTimeout(() => messageBox.value = '', 50)
-        }
+        if (document.activeElement.id != 'message-box' &&(keyPressed == 'NumpadDivide' || keyPressed == 'KeyT')) openCloseChat()
 
         // Fechar chat aberto com ESC
         if(document.activeElement.id == 'message-box' && keyPressed == 'Escape') openCloseChat()
