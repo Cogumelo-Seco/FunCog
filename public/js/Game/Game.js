@@ -177,6 +177,7 @@ function createGame(Listener, canvas, socket) {
     state.calculateRating = calculateRating
     state.playSong = playSong
     state.canvas = canvas
+    state.socket = socket
 
     const startMusic = (command) => require('./GameFunctions/startMusic').default(command, state)
     const verifyClick = (command) => require('./GameFunctions/verifyClick').default(command, state)
@@ -277,19 +278,21 @@ function createGame(Listener, canvas, socket) {
         }
 
         if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.smallFunctions.getConfig('botPlay') && !state.debug && state.music?.currentTime > 1) {
-            state.animations.BFDead.frame = 0
-            state.smallFunctions.redirectGameStage('dead')
-            state.smallFunctions.resetGame()
-            state.gameStageTime = +new Date()
-
+            console.log(state.serverId)
             if (state.online && state.serverId) {
                 socket.emit('deadPlayer', { 
                     serverId: state.serverId
-                    })
+                })
+                state.smallFunctions.redirectGameStage('score')
             } else {
                 playSong('Sounds/fnf_loss_sfx.ogg')
                 setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
+                state.smallFunctions.redirectGameStage('dead')
             }
+
+            state.animations.BFDead.frame = 0
+            state.smallFunctions.resetGame()
+            state.gameStageTime = +new Date()
         }
         else if (state.musicInfo.health > 100) state.musicInfo.health = 100
         else if (state.musicInfo.health < 0) state.musicInfo.health = 0

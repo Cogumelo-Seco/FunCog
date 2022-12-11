@@ -12,14 +12,15 @@ export default async (canvas, state, command) => {
     for (let i in messages)  {
         let message = messages[messages.length-1-i]
         let lastMessage = messages[messages.length-i] || null
-        if (message.unread) {
+
+        if (message.loadTo == 'all' || message.loadTo == state.socket.id) {
             if (chat.style.display == 'block') {
                 if (command == 'newMessage' && chatContent.scrollTop < chatContent.scrollHeight-500) autoScroll = false
 
                 if (lastMessage && (lastMessage.author.id != message.author.id || lastMessage.timestamp+120000 <= message.timestamp) || !lastMessage) {
                     let headerElement = document.createElement('p')
                     headerElement.id = 'Header'
-                    headerElement.style = `color: ${message.colorName?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp}, 100%, 50%)` : message.colorName || 'rgb(0, 229, 255)'} ${message.nameAdditionalCSS ? ';'+message.nameAdditionalCSS : ''}`
+                    headerElement.style = `color: ${message.colorName?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp+(Number(message.colorName.split('-')[1]) || 0)}, 100%, 50%)` : message.colorName || 'rgb(0, 229, 255)'} ${message.nameAdditionalCSS ? ';'+message.nameAdditionalCSS : ''}`
                     headerElement.innerText = `${message.author.name} ${message.emoji || '' } `
 
                     let timestampElement = document.createElement('span')
@@ -32,13 +33,14 @@ export default async (canvas, state, command) => {
 
                 let contentElement = document.createElement('p')
                 contentElement.id = 'Content'
-                contentElement.style = `color: ${message.colorContent?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp}, 100%, 50%)` : message.colorContent || 'white'} ${message.messageAdditionalCSS ? ';'+message.messageAdditionalCSS : ''}`
+                contentElement.style = `color: ${message.colorContent?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp+(Number(message.colorContent.split('-')[1]) || 0)}, 100%, 50%)` : message.colorContent || 'white'} ${message.messageAdditionalCSS ? ';'+message.messageAdditionalCSS : ''}`
                 contentElement.innerText = message.content
                 chatContent.appendChild(contentElement)
 
                 if (autoScroll) chatContent.scrollTop = chatContent.scrollHeight
+                message.loadTo = 'none'
                 message.unread = false
-            } else unreadMessages += 1
+            } else if (message.unread) unreadMessages += 1
         }
     }
 

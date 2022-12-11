@@ -247,7 +247,7 @@ export default function createListener(socket) {
                     break
                 case 'Enter':
                     let filtredServers = state.game.state.selectServerOption.listServers.filter(s => s.open)
-                    state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
+                    if (!state.game.state.debug) state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
 
                     if (state.game.state.selectServerOption.createServer) {
                         state.game.state.smallFunctions.redirectGameStage('selectMusic')

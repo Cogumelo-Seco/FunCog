@@ -10,8 +10,8 @@ export default function codesFunction(state) {
                 state.myMessageConfig.emoji = null
                 state.myMessageConfig.author.name = null
             } else {
-                state.myMessageConfig.colorName = `RAINBOW`
-                state.myMessageConfig.colorContent = `RAINBOW`
+                state.myMessageConfig.colorName = `RAINBOW-${Math.floor(Math.random()*100000)}`
+                state.myMessageConfig.colorContent = `RAINBOW-${Math.floor(Math.random()*100000)}`
                 state.myMessageConfig.emoji = '👑'
                 state.myMessageConfig.author.name = 'Cogu'
             }
