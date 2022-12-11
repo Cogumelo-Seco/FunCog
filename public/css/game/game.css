@@ -119,6 +119,8 @@ div#chat-content p#Content {
     vertical-align: baseline;
     margin: 0;
     margin-left: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 input#message-box {
