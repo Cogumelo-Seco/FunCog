@@ -46,7 +46,7 @@ export default function chat(state, socket) {
 
     function send() {
         let content = messageBox.value
-        if (!content) return;
+        if (!content || !socket.connected) return;
 
         socket.emit('message', {
             author: {
