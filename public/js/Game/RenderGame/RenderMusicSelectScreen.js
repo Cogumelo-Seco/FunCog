@@ -25,7 +25,6 @@ export default async (canvas, game, Listener) => {
         let X = canvas.width*0.2
 
         ctx.font = `bold 30px Arial`
-
         ctx.fillStyle = 'rgba(255, 255, 255, 0.2)'
         if (i == musicSelect) {
             ctx.fillRect(X-4, (Y-(30/1.2))-4, ctx.measureText(music.name).width+8, 30+8);
@@ -40,16 +39,6 @@ export default async (canvas, game, Listener) => {
             ctx.strokeStyle  = 'black'
             ctx.strokeText(music.name.replace(/-/g, ' '), X, Y);
 
-            let alertImage = game.state.images[`imgs/alert.png`]?.image
-            if (music.dev && alertImage) {
-                let txtWidth = ctx.measureText(music.name).width
-                ctx.font = `bold 10px Arial`
-                ctx.fillStyle = 'rgb(255, 66, 66)'
-
-                ctx.drawImage(alertImage, X+txtWidth+5, Y-28, 30, 30)
-                ctx.fillText('In development', X+txtWidth+30, Y-(30/2));
-            }
-
             Listener.state.buttons[`SelectMusic-${i}`] = {
                 gameStage: [ 'selectMusic' ],
                 minX: X/canvas.width*1000,
@@ -63,7 +52,17 @@ export default async (canvas, game, Listener) => {
                     else game.state.selectMusicMenu.musicSelect = i
                 }
             }
-        }
+
+            let alertImage = game.state.images[`imgs/alert.png`]?.image
+            if (music.dev && alertImage) {
+                let txtWidth = ctx.measureText(music.name).width
+                ctx.font = `bold 10px Arial`
+                ctx.fillStyle = 'rgb(255, 66, 66)'
+
+                ctx.drawImage(alertImage, X+txtWidth+5, Y-28, 30, 30)
+                ctx.fillText('In development', X+txtWidth+30, Y-(30/2));
+            }
+        } else delete Listener.state.buttons[`SelectMusic-${i}`] 
 
         Y += 50
     }
