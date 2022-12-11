@@ -93,20 +93,32 @@ div#chat-content {
     max-height: 86%;
 }
 
-div#chat-content p#Content {
-    vertical-align: baseline;
-    margin: 0;
-}
-
 div#chat-content p#Header {
     vertical-align: baseline;
     margin: 0; 
-    margin-top: 15px;
+    margin-top: 20px;
+    margin-bottom: 4px;
+    margin-left: 40px;
 }
 
 div#chat-content p#Header span#Timestamp {
     font-size: 10px;
     color: rgb(150, 150, 150);
+}
+
+div#chat-content img#Avatar {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    float: left;
+    margin-top: 20px;
+    border-radius: 100%;
+}
+
+div#chat-content p#Content {
+    vertical-align: baseline;
+    margin: 0;
+    margin-left: 40px;
 }
 
 input#message-box {

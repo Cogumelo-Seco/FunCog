@@ -12,8 +12,7 @@ export default function chat(state, socket) {
         chat.style.borderColor = 'rgb(50, 50, 50)'
         messageBox.style.backgroundColor = 'rgba(80, 80, 80, 1)'
 
-        if (event?.type == 'mouseover') state.onChat = 'over'
-        else state.onChat = 'on'
+        state.onChat = 'on'
     }
 
     function focusout(event) {
@@ -30,12 +29,17 @@ export default function chat(state, socket) {
 
     function openCloseChat() {
         if (chat.style.display == 'none' || chat.style.display == '') {
+            focusin()
             chat.style.display = 'block'
             messageBox.focus()
             setTimeout(() => messageBox.value = '', 50)
-        } else chat.style.display = 'none'
-
-        focusin()
+        } else {
+            focusout()
+            gameCanvas.focus()
+            state.onChat = 'off'
+            chat.style.display = 'none'
+        }
+        
         chatContent.scrollTop = chatContent.scrollHeight
         require('../RenderGame/RenderChat').default(document.getElementById('gameCanvas'), state.game.state)
     }
@@ -47,6 +51,7 @@ export default function chat(state, socket) {
         socket.emit('message', {
             author: {
                 name: state.game.state.myMessageConfig.author.name || socket.id.slice(0, 20),
+                avatar: state.game.state.myMessageConfig.author.avatar || null,
                 id: socket.id
             },
             colorName: state.game.state.myMessageConfig.colorName || null,
@@ -64,7 +69,7 @@ export default function chat(state, socket) {
         if (document.activeElement.id == 'message-box' && keyPressed == 'Enter' && messageBox.value.trim()) send()
 
         // Abrir chat com click no teclado
-        if (document.activeElement.id != 'message-box' &&(keyPressed == 'NumpadDivide' || keyPressed == 'KeyT')) openCloseChat()
+        if (document.activeElement.id != 'message-box' && (keyPressed == 'NumpadDivide' || keyPressed == 'KeyT')) openCloseChat()
 
         // Fechar chat aberto com ESC
         if(document.activeElement.id == 'message-box' && keyPressed == 'Escape') openCloseChat()

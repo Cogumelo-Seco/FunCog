@@ -23,10 +23,15 @@ export default async (canvas, state, command) => {
                     headerElement.style = `color: ${message.colorName?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp+(Number(message.colorName.split('-')[1]) || 0)}, 100%, 50%)` : message.colorName || 'rgb(0, 229, 255)'} ${message.nameAdditionalCSS ? ';'+message.nameAdditionalCSS : ''}`
                     headerElement.innerText = `${message.author.name} ${message.emoji || '' } `
 
+                    let avatarElement = document.createElement('img')
+                    avatarElement.id = 'Avatar'
+                    avatarElement.src = message.author.avatar || './imgs/sticker-sla.png'
+
                     let timestampElement = document.createElement('span')
                     timestampElement.id = 'Timestamp'
                     timestampElement.innerText = `${new Date(message.timestamp).toLocaleDateString()} - ${new Date(message.timestamp).toLocaleTimeString()}`
 
+                    chatContent.appendChild(avatarElement)
                     headerElement.appendChild(timestampElement)
                     chatContent.appendChild(headerElement)
                 }
