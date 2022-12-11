@@ -26,7 +26,7 @@ export default async (canvas, game, Listener) => {
         let splashFrames = splashImageData?.animationConfig[`Arrow-${arrowID}`]
         let splashImagePos = splashFrames ? splashFrames[`Arrow-${arrowID}-splash-${arrowInfo.splashFrame}`] : null
 
-        if (arrowInfo && splashFrames && arrowInfo.splashFrame <= Object.keys(splashFrames).length && arrowInfo.splashTime+30 <= +new Date()) {
+        if (arrowInfo && splashFrames && arrowInfo.splashFrame <= Object.keys(splashFrames).length && arrowInfo.splashTime+(40-Object.keys(splashFrames).length < 20 ? 20 : 40-Object.keys(splashFrames).length) <= +new Date()) {
             arrowInfo.splashFrame += 1
             arrowInfo.splashTime = +new Date()
         }

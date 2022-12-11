@@ -1374,6 +1374,54 @@ export default async (state) => {
                 },
             ]
         },
+
+        {
+            name: 'VS Tabi',
+            menuColor: 'rgb(72, 100, 120)',
+            musics: [
+                {
+                    name: 'My-Battle',
+                    menuColor: 'rgb(72, 100, 120)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/VSTabi.jpg',
+                    mod: 'VSTabi',
+                    toLoad: [
+                        { dir: 'Musics/musics/my-battle/Inst.ogg' },
+                        { dir: 'Musics/musics/my-battle/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Last-Chance',
+                    menuColor: 'rgb(72, 100, 120)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/VSTabi.jpg',
+                    mod: 'VSTabi',
+                    toLoad: [
+                        { dir: 'Musics/musics/last-chance/Inst.ogg' },
+                        { dir: 'Musics/musics/last-chance/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Genocide',
+                    menuColor: 'rgb(72, 100, 120)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/VSTabi/',
+                    splashDir: 'Arrows/VSTabi/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: 'backgrounds/VSTabi.jpg',
+                    mod: 'VSTabi',
+                    toLoad: [
+                        { dir: 'Arrows/VSTabi/splash.png', animationConfigDir: 'Arrows/VSTabi/splash.json' },
+                        { dir: 'Arrows/VSTabi/Arrows.png', animationConfigDir: 'Arrows/VSTabi/Arrows.json' },
+                        { dir: 'Musics/musics/genocide/Inst.ogg' },
+                        { dir: 'Musics/musics/genocide/Voices.ogg' },
+                    ]
+                }
+            ]
+        },
+
         {
             name: 'Undefined',
             menuColor: 'RAINBOW-7890',

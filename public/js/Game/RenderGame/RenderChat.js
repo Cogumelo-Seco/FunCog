@@ -16,7 +16,7 @@ export default async (canvas, state, command) => {
             if (chat.style.display == 'block') {
                 if (command == 'newMessage' && chatContent.scrollTop < chatContent.scrollHeight-500) autoScroll = false
 
-                if (lastMessage && lastMessage.author.id != message.author.id || !lastMessage) {
+                if (lastMessage && (lastMessage.author.id != message.author.id || lastMessage.timestamp+120000 <= message.timestamp) || !lastMessage) {
                     let headerElement = document.createElement('p')
                     headerElement.id = 'Header'
                     headerElement.style = `color: ${message.colorName?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp}, 100%, 50%)` : message.colorName || 'rgb(0, 229, 255)'} ${message.nameAdditionalCSS ? ';'+message.nameAdditionalCSS : ''}`
