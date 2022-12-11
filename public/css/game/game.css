@@ -93,20 +93,20 @@ div#chat-content {
     max-height: 86%;
 }
 
-div#chat-content p#Message {
+div#chat-content p#Content {
     vertical-align: baseline;
     margin: 0;
 }
 
-div#chat-content p#Name {
+div#chat-content p#Header {
     vertical-align: baseline;
     margin: 0; 
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
-div#chat-content p#Name span#Timestamp {
+div#chat-content p#Header span#Timestamp {
     font-size: 10px;
-    color: rgb(100, 100, 100);
+    color: rgb(150, 150, 150);
 }
 
 input#message-box {

@@ -7,7 +7,8 @@ function createGame(Listener, canvas, socket) {
         customBongPosition: { X: null, Y: null },
         myMessageConfig: {
             colorName: null,
-            colorContent: null
+            colorContent: null,
+            emoji: null
         },
         messages: [],
         online: false,

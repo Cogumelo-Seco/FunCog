@@ -3,13 +3,15 @@ export default function codesFunction(state) {
         debug: () => {
             return state.debug = state.debug ? false : true
         },
-        rainbow: () => {
+        adm13: () => {
             if (state.myMessageConfig.colorName?.includes('RAINBOW')) {
                 state.myMessageConfig.colorName = null
                 state.myMessageConfig.colorContent = null
+                state.myMessageConfig.emoji = null
             } else {
-                state.myMessageConfig.colorName = `RAINBOW-${Math.random()*94964}`
-                state.myMessageConfig.colorContent = `RAINBOW-${Math.random()*94964}`
+                state.myMessageConfig.colorName = `RAINBOW`
+                state.myMessageConfig.colorContent = `RAINBOW`
+                state.myMessageConfig.emoji = '👑'
             }
 
             return state.myMessageConfig.colorName?.includes('RAINBOW')

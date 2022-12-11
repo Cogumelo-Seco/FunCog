@@ -49,8 +49,9 @@ export default function chat(state, socket) {
                 name: socket.id.slice(0, 20),
                 id: socket.id
             },
-            colorName: state.game.state.myMessageConfig.colorName,
-            colorContent: state.game.state.myMessageConfig.colorContent,
+            colorName: state.game.state.myMessageConfig.colorName || null,
+            colorContent: state.game.state.myMessageConfig.colorContent || null,
+            emoji: state.game.state.myMessageConfig.emoji || null,
             content,
         })
         messageBox.value = ''
