@@ -8,7 +8,7 @@ export default function chat(state, socket) {
     const gameCanvas = document.getElementById('gameCanvas')
     
     function focusin(event) {
-        chat.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
+        chat.style.backgroundColor = 'rgba(0, 0, 0, 0.9)'
         chat.style.borderColor = 'rgb(50, 50, 50)'
         messageBox.style.backgroundColor = 'rgba(80, 80, 80, 1)'
 
