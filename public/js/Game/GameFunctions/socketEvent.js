@@ -12,6 +12,10 @@ export default function codesFunction(state, socket) {
         }
     })
 
+    socket.on('connect', () => {
+        socket.emit('playerConnected', state.myMessageConfig)
+    })
+
     socket.on('messageHistory', (command) => {
         state.messages = command || []
         require('../RenderGame/RenderChat').default(document.getElementById('gameCanvas'), state, 'historyMessage')

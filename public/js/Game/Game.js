@@ -7,7 +7,7 @@ function createGame(Listener, canvas, socket) {
         customBongPosition: { X: null, Y: null },
         myMessageConfig: {
             author: {
-                name: null,
+                name: `Guest${Math.floor(Math.random()*1000)}`,
                 avatar: null
             },
             colorName: null,

@@ -8,7 +8,7 @@ export default function chat(state, socket) {
     const gameCanvas = document.getElementById('gameCanvas')
     
     function focusin(event) {
-        chat.style.backgroundColor = 'rgba(0, 0, 0, 0.9)'
+        chat.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
         chat.style.borderColor = 'rgb(50, 50, 50)'
         messageBox.style.backgroundColor = 'rgba(80, 80, 80, 1)'
 
@@ -50,7 +50,7 @@ export default function chat(state, socket) {
 
         socket.emit('message', {
             author: {
-                name: state.game.state.myMessageConfig.author.name || `Guest${Math.floor(Math.random()*1000)}`,
+                name: state.game.state.myMessageConfig.author.name || socket.id.slice(0, 20),
                 avatar: state.game.state.myMessageConfig.author.avatar || null,
                 id: socket.id
             },
