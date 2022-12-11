@@ -46,7 +46,7 @@ export default function chat(state, socket) {
 
         socket.emit('message', {
             author: {
-                name: socket.id.slice(0, 20),
+                name: state.game.state.myMessageConfig.author.name || socket.id.slice(0, 20),
                 id: socket.id
             },
             colorName: state.game.state.myMessageConfig.colorName || null,

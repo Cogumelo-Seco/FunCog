@@ -6,6 +6,9 @@ function createGame(Listener, canvas, socket) {
         renderType: 'limited',
         customBongPosition: { X: null, Y: null },
         myMessageConfig: {
+            author: {
+                name: null
+            },
             colorName: null,
             colorContent: null,
             emoji: null
