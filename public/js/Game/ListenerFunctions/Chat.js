@@ -50,7 +50,7 @@ export default function chat(state, socket) {
 
         socket.emit('message', {
             author: {
-                name: state.game.state.myMessageConfig.author.name || socket.id.slice(0, 20),
+                name: state.game.state.myMessageConfig.author.name || `Guest${Math.floor(Math.random()*1000)}`,
                 avatar: state.game.state.myMessageConfig.author.avatar || null,
                 id: socket.id
             },
