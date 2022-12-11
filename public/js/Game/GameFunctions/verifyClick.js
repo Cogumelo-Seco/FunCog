@@ -86,7 +86,7 @@ export default async({ arrowID, listenerState, bot }, state) => {
     if (!listenerState.pauseGameKeys && !notes[0] && (state.smallFunctions.getConfig('GhostTapping') ? state.musicNotes.filter((n) => !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(hitBoxSize*3))[0] : true)) {
         state.musicInfo.accuracyMedia.push(1)
         state.musicInfo.misses += 1
-        state.musicInfo.score -= 50
+        state.musicInfo.score -= Number.parseInt(state.scoreToAdd/2)
         state.musicInfo.health -= 3
         state.musicInfo.combo = 0
     }

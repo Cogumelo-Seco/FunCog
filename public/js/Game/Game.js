@@ -347,7 +347,7 @@ function createGame(Listener, canvas, socket) {
             if (!Listener.state.pauseGameKeys && note.errorWhenNotClicking && !state.smallFunctions.getConfig('botPlay') && note.arrowID >= 0 && note.arrowID <= state.amountOfArrows && note.Y > (state.arrowsSize**state.resizeNote) && !note.disabled && !note.clicked) {
                 note.disabled = true
                 state.musicInfo.misses += 1
-                state.musicInfo.score -= 50
+                state.musicInfo.score -= Number.parseInt(state.scoreToAdd/2)
                 state.musicInfo.health -= 2.5
                 state.musicInfo.combo = 0
                 state.musicInfo.accuracyMedia.push(1)
