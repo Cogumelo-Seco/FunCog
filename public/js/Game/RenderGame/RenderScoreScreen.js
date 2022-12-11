@@ -153,7 +153,7 @@ export default async (canvas, game, Listener) => {
         let graphicWidth = canvas.width/4
         let graphicHeight = graphicWidth/2
         let graphicX = canvas.width-(canvas.width/12)-graphicWidth
-        let graphicY = 120+((canvas.height-120)/2-(musicInfoPopupHeight/2))
+        let graphicY = 120+((canvas.height-120)/2-(canvas.width/4/2))
         
 
         ctx.strokeStyle = 'rgb(200, 200, 200)'
@@ -183,7 +183,6 @@ export default async (canvas, game, Listener) => {
                 lastGraphicInfo = { x, y }
             }
         }
-        
         renderGraphic(game.state.musicInfo.accuracyMedia, 'green')
         renderGraphic(game.state.musicInfo.linearAccuracyMedia, 'cyan')
     }
