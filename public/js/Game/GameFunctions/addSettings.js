@@ -8,13 +8,13 @@ export default async (state) => {
             name: 'Arrow Left',
             id: 'Arrow-0',
             type: 'KeyBind',
-            content: 'KeyD'
+            content: 'KeyS'
         },
         {
             name: 'Arrow Down',
             id: 'Arrow-1',
             type: 'KeyBind',
-            content: 'KeyF'
+            content: 'KeyD'
         },
         {
             name: 'Arrow Up',
