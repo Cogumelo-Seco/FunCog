@@ -74,6 +74,7 @@ export default async (canvas, state, stateListener, command) => {
                     headerElement.style = `color: ${message.colorName?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp+(Number(message.colorName.split('-')[1]) || 0)}, 100%, 50%)` : message.colorName || 'rgb(0, 229, 255)'} ${message.nameAdditionalCSS ? ';'+message.nameAdditionalCSS : ''}`
 
                     let nameElement = document.createElement('span')
+                    nameElement.id = 'Name'
                     nameElement.innerText = `${message.author.name} ${message.emoji || '' } `
 
                     let avatarElement = document.createElement('img')

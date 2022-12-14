@@ -104,6 +104,10 @@ div#chat-content p#Header {
     margin-left: 40px;
 }
 
+div#chat-content p#Header span#Name:hover {
+    text-decoration: underline;
+}
+
 div#chat-content p#Header span#Timestamp {
     cursor: text;
     font-size: 10px;
