@@ -76,12 +76,10 @@ export default function chat(state, socket) {
     }
 
     function keyPressed(event) {
-        if (event.code == 'NumpadDivide' || event.code == 'KeyT') return openCloseChat({ pointerType: 'mouse' })
+        if ((event.code == 'NumpadDivide' || event.code == 'KeyT') && state.onChat == 'off') return openCloseChat({ pointerType: 'mouse' })
         if (event.code == 'Escape' && state.onChat == 'on') return openCloseChat({ pointerType: 'mouse' })
         if (!event.key || state.onChat != 'on') return
         if (event.code == 'Enter') send()
-
-        const messageBox = document.getElementById('message-box')
 
         if (event.code == 'ArrowRight') state.writingPosition += 1
         if (event.code == 'ArrowLeft') state.writingPosition -= 1
