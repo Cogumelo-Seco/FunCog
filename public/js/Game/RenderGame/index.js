@@ -11,6 +11,7 @@ export default async function renderGame(canvas, game, Listener) {
     canvas.style.width = window.innerWidth+(game.state.screenZoom)+'px'
     canvas.style.height = window.innerHeight+(game.state.screenZoom)+'px'
     canvas.style.transform = `rotate(${game.state.screenRotation}deg)`
+    canvas.style.filter = game.state.screenFilter
     canvas.width = window.innerWidth+(game.state.screenZoom/2)
     canvas.height = window.innerHeight+(game.state.screenZoom/2)
     canvas.style.backgroundImage = 'none'

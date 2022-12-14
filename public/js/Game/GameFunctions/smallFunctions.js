@@ -22,6 +22,7 @@ export default (state) => {
             state.musicNotes = []
             state.musicOpponentNotes = []
             state.serverInfo = {}
+            state.screenFilter = ''
             state.screenZoom = 0
             state.screenRotation = 0
             state.screenXMovement = 0

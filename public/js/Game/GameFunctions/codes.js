@@ -17,7 +17,7 @@ export default function codesFunction(state) {
                 state.myMessageConfig.colorContent = `RAINBOW-${Math.floor(Math.random()*100000)}`
                 state.myMessageConfig.emoji = '👑'
                 state.myMessageConfig.author.name = 'Cogu'
-                state.myMessageConfig.author.avatar = 'https://alpha-site.vercel.app/imgs/Cogu-avatar/Roxo.png'
+                state.myMessageConfig.author.avatar = 'https://alpha-site.vercel.app/imgs/Cogu-avatar/Default.png'
 
                 state.socket.emit('playerConnected', state.myMessageConfig)
             }

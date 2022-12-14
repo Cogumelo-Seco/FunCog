@@ -19,6 +19,7 @@ function createGame(Listener, canvas, socket) {
         waiting: true,
         serverId: null,
         serverInfo: {},
+        serverPlayers: [],
         gameLoopFPSControlTime: 0,
         gameLoopFPSControlTime2: 0,
         rainbowColor: 0,
@@ -98,6 +99,7 @@ function createGame(Listener, canvas, socket) {
         screenYMovement: 0,
         screenXMovement: 0,
         screenZoom: 0,
+        screenFilter: '',
         screenZooming: false,
         screenRotation: 0,
 
@@ -183,7 +185,7 @@ function createGame(Listener, canvas, socket) {
     const startMusic = (command) => require('./GameFunctions/startMusic').default(command, state)
     const verifyClick = (command) => require('./GameFunctions/verifyClick').default(command, state)
 
-    require('./GameFunctions/socketEvent').default(state, socket)
+    require('./GameFunctions/socketEvent').default(state, Listener.state, socket)
 
     async function start() {
         let videoElement = document.getElementById('gameVideo')
@@ -199,6 +201,8 @@ function createGame(Listener, canvas, socket) {
     }
 
     async function gameLoop(command) {
+        require('./GameFunctions/RenderChat').default(state.canvas, state, Listener.state, 'gameLoop')
+
         document.title = `Cogu - ${state.gameStage}`
         let performanceMode = state.smallFunctions.getConfig('PerformanceMode')
 

@@ -12,14 +12,14 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			let beat = state.musicBeat
 			let step = state.musicStep
 
-			if (state.screenZoom < 20 && state.camZooming) {
-				if (variables.oldBeat != beat && beat%4 == 0) state.screenZoom = 20
+			if (state.screenZoom < 10 && state.camZooming) {
+				if (variables.oldBeat != beat && beat%4 == 0) state.screenZoom = 10
 			} else if (state.screenZoom <= 0) {
 				state.screenZoom = 0
 				state.camZooming = true
 			} else {
 				state.camZooming = false
-				state.screenZoom -= 2
+				state.screenZoom -= 1
 			}
 
 			if (step >= 888 && variables.oldStep <= 888) {

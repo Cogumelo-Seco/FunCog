@@ -47,7 +47,9 @@ const Game = (props) => {
 
                 <div id="chat">
                     <div id="chat-content" />
-                    <input id="message-box" maxLength="200" placeholder="Send Message" />
+                    <div id="message-box" maxLength="200" placeholder="Send Message">
+                        <div id="message-box-content" />
+                    </div>
                 </div>
             </body>
         </html>
