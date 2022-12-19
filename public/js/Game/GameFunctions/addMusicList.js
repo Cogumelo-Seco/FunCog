@@ -1427,6 +1427,17 @@ export default async (state) => {
             menuColor: 'RAINBOW-7890',
             musics: [
                 {
+                    name: 'RUSH-E',
+                    menuColor: 'RAINBOW-941',
+                    difficulties: [ 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/rush-e.jpg',
+                    mod: 'Undefined',
+                    toLoad: [
+                        { dir: 'Musics/musics/rush-e/Inst.ogg' }
+                    ]
+                },
+                {
                     name: 'Missingcraft',
                     menuColor: 'RAINBOW-597',
                     difficulties: [ 2 ],

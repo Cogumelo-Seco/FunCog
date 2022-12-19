@@ -128,22 +128,22 @@ export default function createListener(socket) {
 
                 if (keyPressed == 'Escape' && on && !state.game.state.online && state.game.state.countdown <= -1) {
                     if (state.game.state.music.paused) {
-                        state.game.state.music.play()
-                        state.game.state.musicVoice.play()
+                        if (state.game.state.music) state.game.state.music.play()
+                        if (state.game.state.musicVoice) state.game.state.musicVoice.play()
                     } else {
-                        state.game.state.music.pause()
-                        state.game.state.musicVoice.pause()
+                        if (state.game.state.music) state.game.state.music.pause()
+                        if (state.game.state.musicVoice) state.game.state.musicVoice.pause()
                     }
                 }
 
                 if (state.game.state.debug && on) {
                     if (keyPressed == 'KeyO' && state.game.state.music) {
-                        state.game.state.music.currentTime -= 10
-                        state.game.state.musicVoice.currentTime -= 10
+                        if (state.game.state.music) state.game.state.music.currentTime -= 10
+                        if (state.game.state.musicVoice) state.game.state.musicVoice.currentTime -= 10
                     } 
                     if (keyPressed == 'KeyP' && state.game.state.music) {
-                        state.game.state.music.currentTime += 10
-                        state.game.state.musicVoice.currentTime += 10
+                        if (state.game.state.music) state.game.state.music.currentTime += 10
+                        if (state.game.state.musicVoice) state.game.state.musicVoice.currentTime += 10
                     }
                 }
             }

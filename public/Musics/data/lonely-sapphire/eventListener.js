@@ -47,11 +47,6 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					state.arrowsInfo[i].noteAlpha = variables.noteAlpha
 				}
 			}
-
-			if (state.music?.duration <= state.music?.currentTime || state.gameStage != 'game') {
-				clearInterval(loop)
-				state.screenZoom = 0
-			}
             break
     }
 }
