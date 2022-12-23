@@ -21,28 +21,29 @@ export default async (canvas, game, Listener) => {
     canvas.style.backgroundImage = null
     for (let i in game.state.musics[modSelect].musics) {
         let music = game.state.musics[modSelect].musics[i]
+        let musicName = music.name.replace(/-/g, ' ')+(music.crown ? ' 👑' : '')
 
         let X = canvas.width*0.2
 
         ctx.font = `bold 30px Arial`
         ctx.fillStyle = 'rgba(255, 255, 255, 0.2)'
         if (i == musicSelect) {
-            ctx.fillRect(X-4, (Y-(30/1.2))-4, ctx.measureText(music.name).width+8, 30+8);
+            ctx.fillRect(X-4, (Y-(30/1.2))-4, ctx.measureText(musicName).width+8, 30+8);
             canvas.style.backgroundImage = `url(https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${music.backgroundImage})`
         }
 
         if (Y >= 200) {
             ctx.fillStyle = music.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(music.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : music.menuColor || 'white'
-            ctx.fillText(music.name.replace(/-/g, ' '), X, Y);
+            ctx.fillText(musicName, X, Y);
 
             ctx.lineWidth = 0.5
             ctx.strokeStyle  = 'black'
-            ctx.strokeText(music.name.replace(/-/g, ' '), X, Y);
+            ctx.strokeText(musicName.replace(/-/g, ' '), X, Y);
 
             Listener.state.buttons[`SelectMusic-${i}`] = {
                 gameStage: [ 'selectMusic' ],
                 minX: X/canvas.width*1000,
-                maxX: (X+ctx.measureText(music.name.replace(/-/g, ' ')).width)/canvas.width*1000,
+                maxX: (X+ctx.measureText(musicName).width)/canvas.width*1000,
                 minY: (Y-30)/canvas.height*1000,
                 maxY: Y/canvas.height*1000,
                 pointer: true,
@@ -55,7 +56,7 @@ export default async (canvas, game, Listener) => {
 
             let alertImage = game.state.images[`imgs/alert.png`]?.image
             if (music.dev && alertImage) {
-                let txtWidth = ctx.measureText(music.name).width
+                let txtWidth = ctx.measureText(musicName).width
                 ctx.font = `bold 10px Arial`
                 ctx.fillStyle = 'rgb(255, 66, 66)'
 

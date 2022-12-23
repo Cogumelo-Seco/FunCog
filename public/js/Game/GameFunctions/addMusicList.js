@@ -1318,6 +1318,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Monochrome',
+                    crown: true,
                     menuColor: 'rgb(120, 20, 20)',
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
@@ -1336,6 +1337,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Monochrome-V2',
+                    crown: true,
                     menuColor: 'rgb(120, 20, 20)',
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
