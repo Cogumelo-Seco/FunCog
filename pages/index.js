@@ -34,6 +34,7 @@ const Game = (props) => {
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 
+                <link rel="stylesheet" href="/css/fonts.css" />
                 <link rel="stylesheet" href="/css/game/animations.css" />
                 <link rel="stylesheet" href="/css/game/game.css" />
                 <link rel="stylesheet" href="/css/game/resizable.css" />

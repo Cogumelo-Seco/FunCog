@@ -1288,56 +1288,88 @@ export default async (state) => {
         },
         {
             name: 'VS Hypno\'s Lullaby',
+            special: true,
             menuColor: 'rgb(154, 129, 0)',
             musics: [
                 {
-                    dev: true,
                     name: 'Safety-Lullaby',
                     menuColor: 'rgb(154, 129, 0)',
-                    difficulties: [ 0, 1, 2, 3 ],
+                    difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
-                    backgroundImage: null,
+                    backgroundImage: 'backgrounds/Lullaby.jpeg',
                     mod: 'VSLullaby',
                     toLoad: [
+                        { dir: 'Sounds/Lullaby/TranceStatic.ogg' },
+                        { dir: 'Sounds/Lullaby/Psyshock.ogg' },
+                        { dir: 'imgs/VSLullaby/StaticHypno.png', animationConfigDir: 'imgs/VSLullaby/StaticHypno.json' },
+                        { dir: 'imgs/VSLullaby/Pendelum.png' },
                         { dir: 'Musics/musics/safety-lullaby/Inst.ogg' },
                         { dir: 'Musics/musics/safety-lullaby/Voices.ogg' },
                     ]
                 },
                 {
-                    dev: true,
                     name: 'Left-Unchecked',
                     menuColor: 'rgb(154, 129, 0)',
-                    difficulties: [ 0, 1, 2, 3 ],
+                    difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
-                    backgroundImage: null,
+                    backgroundImage: 'backgrounds/Lullaby.jpeg',
                     mod: 'VSLullaby',
                     toLoad: [
+                        { dir: 'Sounds/Lullaby/TranceStatic.ogg' },
+                        { dir: 'Sounds/Lullaby/Psyshock.ogg' },
+                        { dir: 'imgs/VSLullaby/StaticHypno.png', animationConfigDir: 'imgs/VSLullaby/StaticHypno.json' },
+                        { dir: 'imgs/VSLullaby/Pendelum.png' },
                         { dir: 'Musics/musics/left-unchecked/Inst.ogg' },
                         { dir: 'Musics/musics/left-unchecked/Voices.ogg' },
                     ]
                 },
                 {
-                    name: 'Monochrome',
-                    crown: true,
-                    menuColor: 'rgb(120, 20, 20)',
+                    dev: true,
+                    name: 'Lost-Cause',
+                    menuColor: null,
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.5,
-                    backgroundImage: 'backgrounds/monochrome.png',
+                    backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
-                        { dir: 'jumpscares/GoldJumpscare.png' },
-                        { dir: 'imgs/VSLullaby/alphabet.png', animationConfigDir: 'imgs/VSLullaby/alphabet.json' },
-                        { dir: 'imgs/VSLullaby/gold.png', animationConfigDir: 'imgs/VSLullaby/gold.json' },
-                        { dir: 'imgs/VSLullaby/celebi.png', animationConfigDir: 'imgs/VSLullaby/celebi.json' },
-                        { dir: 'Musics/musics/monochrome/Inst.ogg' },
-                        { dir: 'Musics/musics/monochrome/Voices.ogg' },
+                        { dir: 'Musics/musics/lost-cause/Inst.ogg' },
+                        { dir: 'Musics/musics/lost-cause/Voices.ogg' },
                     ]
                 },
                 {
-                    name: 'Monochrome-V2',
-                    crown: true,
+                    dev: true,
+                    name: 'Frostbite',
+                    menuColor: null,
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/frostbite/Inst.ogg' },
+                        { dir: 'Musics/musics/frostbite/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Insomnia',
+                    menuColor: null,
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/insomnia/Inst.ogg' },
+                        { dir: 'Musics/musics/insomnia/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Monochrome',
                     menuColor: 'rgb(120, 20, 20)',
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
@@ -1354,14 +1386,152 @@ export default async (state) => {
                         { dir: 'imgs/VSLullaby/goldNoMore.png', animationConfigDir: 'imgs/VSLullaby/goldNoMore.json' },
                         { dir: 'imgs/VSLullaby/gold.png', animationConfigDir: 'imgs/VSLullaby/gold.json' },
                         { dir: 'imgs/VSLullaby/celebi.png', animationConfigDir: 'imgs/VSLullaby/celebi.json' },
-                        { dir: 'Musics/musics/monochrome-v2/Inst.ogg' },
-                        { dir: 'Musics/musics/monochrome-v2/Voices.ogg' },
+                        { dir: 'Musics/musics/monochrome/Inst.ogg' },
+                        { dir: 'Musics/musics/monochrome/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Monochrome-V1',
+                    menuColor: 'rgb(120, 20, 20)',
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: 'backgrounds/monochrome.png',
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'jumpscares/GoldJumpscare.png' },
+                        { dir: 'imgs/VSLullaby/alphabet.png', animationConfigDir: 'imgs/VSLullaby/alphabet.json' },
+                        { dir: 'imgs/VSLullaby/gold.png', animationConfigDir: 'imgs/VSLullaby/gold.json' },
+                        { dir: 'imgs/VSLullaby/celebi.png', animationConfigDir: 'imgs/VSLullaby/celebi.json' },
+                        { dir: 'Musics/musics/monochrome-v1/Inst.ogg' },
+                        { dir: 'Musics/musics/monochrome-v1/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Isotope',
+                    menuColor: null,
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/isotope/Inst.ogg' },
+                        { dir: 'Musics/musics/isotope/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Dissension',
+                    menuColor: null,
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/dissension/Inst.ogg' },
+                        { dir: 'Musics/musics/dissension/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Death-Toll',
+                    menuColor: null,
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/death-toll/Inst.ogg' },
+                        { dir: 'Musics/musics/death-toll/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Amusia',
+                    menuColor: '#1d1d4c',
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/amusia/Inst.ogg' },
+                        { dir: 'Musics/musics/amusia/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Pasta-Night',
+                    menuColor: null,
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/pasta-night/Inst.ogg' },
+                        { dir: 'Musics/musics/pasta-night/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Bygone-Purpose',
+                    menuColor: '#1d1d4c',
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/bygone-purpose/Inst.ogg' },
+                        { dir: 'Musics/musics/bygone-purpose/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Shinto',
+                    menuColor: null,
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/shinto/Inst.ogg' },
+                        { dir: 'Musics/musics/shinto/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Shitno',
+                    menuColor: null,
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/shitno/Inst.ogg' },
+                        { dir: 'Musics/musics/shitno/Voices.ogg' },
                     ]
                 },
                 {
                     name: 'Missingno',
                     menuColor: 'rgb(240, 176, 136)',
-                    difficulties: [ 0, 1, 2, 3 ],
+                    difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/Pixel/',
                     backgroundImage: 'backgrounds/missingno.jpg',
                     splashDir: 'Arrows/Pixel/splash.png',
@@ -1374,6 +1544,38 @@ export default async (state) => {
                         { dir: 'Musics/musics/missingno/Voices.ogg' },
                     ]
                 },
+                {
+                    dev: true,
+                    name: 'Brimstone',
+                    menuColor: null,
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/brimstone/Inst.ogg' },
+                        { dir: 'Musics/musics/brimstone/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Purin',
+                    menuColor: 'grey',
+                    difficulties: [ 2, 3 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'VSLullaby',
+                    toLoad: [
+                        { dir: 'Musics/musics/purin/Inst.ogg' },
+                        { dir: 'Musics/musics/purin/Voices.ogg' },
+                    ]
+                },
+                
+                
             ]
         },
 

@@ -1,6 +1,6 @@
 function createGame(Listener, canvas, socket) {
     const state = {
-        debug: false,
+        debug: true,
         fps: '0-0',
         ping: null,
         renderType: 'limited',
@@ -349,7 +349,7 @@ function createGame(Listener, canvas, socket) {
                     Listener.state.arrows[note.arrowID].lastNoteClicked = note
                     if (!note.clicked && !note.disabled) {
                         note.clicked = true
-                        //setTimeout(() => verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, bot: true }), Math.floor(Math.random()*150))
+                        //setTimeout(() => verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, bot: true }), Math.floor(Math.random()*200))
                         verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, bot: true })
                     }
                 }
