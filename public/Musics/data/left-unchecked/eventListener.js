@@ -17,8 +17,8 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			state.animations['Pendelum'] = {
                 frame: 0,
                 startFrame: 0,
-                endFrame: 16,
-				angle: 50,
+                endFrame: 20,
+				angle: 55,
                 totalDalay: 0,
                 dalay: 0,
 				boomerang: true,
@@ -66,71 +66,73 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				state.screenZoom -= 1
 			}
 
-			let pendelumAnimation = state.animations['Pendelum']
-			let pendelumImageData = state.images['imgs/VSLullaby/Pendelum.png']
+			if (state.musicInfo.difficulty.name != 'Mania') {
+				let pendelumAnimation = state.animations['Pendelum']
+				let pendelumImageData = state.images['imgs/VSLullaby/Pendelum.png']
 
- 			if (state.musicInfo.popupsBackground['PendelumGhost']) 
-				state.musicInfo.popupsBackground['PendelumGhost'].alpha = state.musicInfo.popupsBackground['PendelumGhost'].alpha-0.1 <= 0 ? 0 : state.musicInfo.popupsBackground['PendelumGhost'].alpha-0.1
+				if (state.musicInfo.popupsBackground['PendelumGhost']) 
+					state.musicInfo.popupsBackground['PendelumGhost'].alpha = state.musicInfo.popupsBackground['PendelumGhost'].alpha-0.1 <= 0 ? 0 : state.musicInfo.popupsBackground['PendelumGhost'].alpha-0.1
 
-			let key = listenerState.keys['Space']
-			if (key && !key.clicked && variables.keys[key.code]) variables.keys[key.code] = false
-			if (key && key.clicked && !variables.keys[key.code] && currentTime <= 185) {
-				if (pendelumAnimation && pendelumAnimation.frame >= pendelumAnimation.endFrame/5 && pendelumAnimation.frame <= pendelumAnimation.endFrame-pendelumAnimation.endFrame/5) {
-					variables.hypnotizationLevel -= variables.hypnotizationLevelMax*0.12
-					variables.pendelumTime = +new Date()
-					variables.keys[key.code] = true
+				let key = listenerState.keys['Space']
+				if (key && !key.clicked && variables.keys[key.code]) variables.keys[key.code] = false
+				if (key && key.clicked && !variables.keys[key.code] && currentTime <= 185) {
+					if (pendelumAnimation && pendelumAnimation.frame >= pendelumAnimation.endFrame/5 && pendelumAnimation.frame <= pendelumAnimation.endFrame-pendelumAnimation.endFrame/5) {
+						variables.hypnotizationLevel -= variables.hypnotizationLevelMax*0.12
+						variables.pendelumTime = +new Date()
+						variables.keys[key.code] = true
 
-					if (pendelumImageData && pendelumImageData.image?.width) {
-						let endFrame = pendelumAnimation.endFrame*1.5
-						let frame = pendelumAnimation.frame*1.5
-		
-						state.musicInfo.popupsBackground['PendelumGhost'].alpha = 1
-						state.musicInfo.popupsBackground['PendelumGhost'].rotation = -(endFrame/2-endFrame+frame)
-					}
-				} else if (!botPlay) {
-					variables.pendelumTime = +new Date()+2000
-					variables.hypnotizationLevel += variables.hypnotizationLevelMax*0.05
-				}
-			}
-
-			if (currentTime >= 185 && variables.oldCurrentTime <= 185 || step >= 300 && variables.oldStep != step && (step%65 == 0 || variables.oldStep%65 == 0)) {
-				if (state.sounds['Sounds/Lullaby/Psyshock.ogg']?.paused && variables.hypnotizationLevel <= variables.hypnotizationLevelMax*0.2) {
-					state.sounds['Sounds/Lullaby/Psyshock.ogg'].volume = 1
-					state.sounds['Sounds/Lullaby/Psyshock.ogg'].play()
-
-					variables.hypnotizationLevel += currentTime >= 185 ? variables.hypnotizationLevelMax : variables.hypnotizationLevelMax*0.35
-				}
-			}
+						if (pendelumImageData && pendelumImageData.image?.width) {
+							let endFrame = pendelumAnimation.endFrame*1.5
+							let frame = pendelumAnimation.frame*1.5
 			
-			if (!botPlay && variables.pendelumTime+1000 <= +new Date()) {
-				variables.hypnotizationLevel += 0.5
-			}
-			if (botPlay && currentTime <= 185) {
-				variables.hypnotizationLevel -= variables.hypnotizationLevelMax*0.02
-			}
-
-			if (pendelumImageData && pendelumImageData.image?.width && pendelumAnimation) {
-				let endFrame = pendelumAnimation.endFrame*(pendelumAnimation.angle/pendelumAnimation.endFrame)
-				let frame = pendelumAnimation.frame*(pendelumAnimation.angle/pendelumAnimation.endFrame)
-
-				if (!state.musicInfo.popupsBackground['PendelumGhost']) state.musicInfo.popupsBackground['PendelumGhost'] = {
-					image: `imgs/VSLullaby/Pendelum.png`,
-					x: state.canvas.width/2-pendelumImageData.image.width/2,
-					y: -(pendelumImageData.image.height/2),
-					rotation: -(endFrame/2-endFrame+frame),
-					alpha: 0
+							state.musicInfo.popupsBackground['PendelumGhost'].alpha = 1
+							state.musicInfo.popupsBackground['PendelumGhost'].rotation = -(endFrame/2-endFrame+frame)
+						}
+					} else if (!botPlay) {
+						variables.pendelumTime = +new Date()+2000
+						variables.hypnotizationLevel += variables.hypnotizationLevelMax*0.05
+					}
 				}
 
-				state.musicInfo.popupsBackground['Pendelum'] = {
-					image: `imgs/VSLullaby/Pendelum.png`,
-					x: state.canvas.width/2-pendelumImageData.image.width/2,
-					y: -(pendelumImageData.image.height/2),
-					rotation: -(endFrame/2-endFrame+frame)
-				}
-			}
+				if (currentTime >= 185 && variables.oldCurrentTime <= 185 || step >= 300 && variables.oldStep != step && (step%65 == 0 || variables.oldStep%65 == 0)) {
+					if (state.sounds['Sounds/Lullaby/Psyshock.ogg']?.paused && variables.hypnotizationLevel <= variables.hypnotizationLevelMax*0.2) {
+						state.sounds['Sounds/Lullaby/Psyshock.ogg'].volume = 1
+						state.sounds['Sounds/Lullaby/Psyshock.ogg'].play()
 
-			if (variables.hypnotizationLevel >= variables.hypnotizationLevelMax && currentTime <= 185) state.musicInfo.health = -100
-			variables.hypnotizationLevel = variables.hypnotizationLevel <= 0 ? 0 : variables.hypnotizationLevel >= variables.hypnotizationLevelMax ? variables.hypnotizationLevelMax : variables.hypnotizationLevel
+						variables.hypnotizationLevel += currentTime >= 185 ? variables.hypnotizationLevelMax : variables.hypnotizationLevelMax*0.35
+					}
+				}
+				
+				if (!botPlay && variables.pendelumTime+1000 <= +new Date()) {
+					variables.hypnotizationLevel += 0.5
+				}
+				if (botPlay && currentTime <= 185) {
+					variables.hypnotizationLevel -= variables.hypnotizationLevelMax*0.02
+				}
+
+				if (pendelumImageData && pendelumImageData.image?.width && pendelumAnimation) {
+					let endFrame = pendelumAnimation.endFrame*(pendelumAnimation.angle/pendelumAnimation.endFrame)
+					let frame = pendelumAnimation.frame*(pendelumAnimation.angle/pendelumAnimation.endFrame)
+
+					if (!state.musicInfo.popupsBackground['PendelumGhost']) state.musicInfo.popupsBackground['PendelumGhost'] = {
+						image: `imgs/VSLullaby/Pendelum.png`,
+						x: state.canvas.width/2-pendelumImageData.image.width/2,
+						y: -(pendelumImageData.image.height/2),
+						rotation: -(endFrame/2-endFrame+frame),
+						alpha: 0
+					}
+
+					state.musicInfo.popupsBackground['Pendelum'] = {
+						image: `imgs/VSLullaby/Pendelum.png`,
+						x: state.canvas.width/2-pendelumImageData.image.width/2,
+						y: -(pendelumImageData.image.height/2),
+						rotation: -(endFrame/2-endFrame+frame)
+					}
+				}
+
+				if (variables.hypnotizationLevel >= variables.hypnotizationLevelMax && currentTime <= 185) state.musicInfo.health = -100
+				variables.hypnotizationLevel = variables.hypnotizationLevel <= 0 ? 0 : variables.hypnotizationLevel >= variables.hypnotizationLevelMax ? variables.hypnotizationLevelMax : variables.hypnotizationLevel
+			}
 
 			variables.oldBeat = beat
 			variables.oldStep = step

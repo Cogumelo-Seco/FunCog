@@ -326,6 +326,13 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             }
         }
 
+        if (name == 'death-toll') {
+            if (note[1] == -1) {
+                //arrowID = 8
+                type = 'Bronzong'
+            }
+        }
+
         return {
             Y: NaN,
             hold: Number.parseInt(note[2]) * (state.musicBPM*state.smallFunctions.getConfig('ScrollSpeed')/200),

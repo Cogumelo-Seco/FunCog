@@ -3,21 +3,17 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 		case 'noteClick':
 			break
 		case 'loaded':
-			for (let i in state.arrowsInfo) {
-				state.arrowsInfo[i].alpha = 0.8
-				state.arrowsInfo[i].noteAlpha = 0.8
-				state.arrowsInfo[i].splashAlpha = 0.7
-
-				state.arrowsInfoOpponent[i].alpha = 0.8
-				state.arrowsInfoOpponent[i].noteAlpha = 0.8
-				state.arrowsInfoOpponent[i].splashAlpha = 0.7
+			for (let i in state.arrowsInfoOpponent) {
+				state.arrowsInfoOpponent[i].alpha = 0
+				state.arrowsInfoOpponent[i].noteAlpha = 0
+				state.arrowsInfoOpponent[i].splashAlpha = 0
 			}
 			break
         case 'started':
 			state.animations['Pendelum'] = {
                 frame: 0,
                 startFrame: 0,
-                endFrame: 30,
+                endFrame: 20,
 				angle: 55,
                 totalDalay: 0,
                 dalay: 0,
@@ -66,7 +62,15 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				state.screenZoom -= 1
 			}
 
-			if (state.musicInfo.difficulty.name != 'Mania') {
+			if (step >= 316 && variables.oldBeat <= 316) {
+				for (let i in state.arrowsInfoOpponent) {
+					state.arrowsInfoOpponent[i].alpha = 1
+					state.arrowsInfoOpponent[i].noteAlpha = 1
+					state.arrowsInfoOpponent[i].splashAlpha = 1
+				}
+			}
+
+			if (state.musicInfo.difficulty.name != 'Mania' && step >= 316) {
 				let pendelumAnimation = state.animations['Pendelum']
 				let pendelumImageData = state.images['imgs/VSLullaby/Pendelum.png']
 
@@ -94,7 +98,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					}
 				}
 
-				if (step >= 10 && variables.oldStep != step && (step%65 == 0 || variables.oldStep%65 == 0)) {
+				if (step >= 300 && variables.oldStep != step && (step%65 == 0 || variables.oldStep%65 == 0)) {
 					if (state.sounds['Sounds/Lullaby/Psyshock.ogg']?.paused && variables.hypnotizationLevel <= variables.hypnotizationLevelMax*0.2) {
 						state.sounds['Sounds/Lullaby/Psyshock.ogg'].volume = 1
 						state.sounds['Sounds/Lullaby/Psyshock.ogg'].play()
@@ -103,14 +107,14 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					}
 				}
 				
-				if (!botPlay && variables.pendelumTime+2000 <= +new Date()) {
+				if (!botPlay && variables.pendelumTime+1000 <= +new Date()) {
 					variables.hypnotizationLevel += 0.5
 				}
 				if (botPlay) {
 					variables.hypnotizationLevel -= variables.hypnotizationLevelMax*0.02
 				}
 
-				if (pendelumImageData && pendelumImageData.image?.width && pendelumAnimation) {
+				if (pendelumAnimation && pendelumImageData && pendelumImageData.image?.width) {
 					let endFrame = pendelumAnimation.endFrame*(pendelumAnimation.angle/pendelumAnimation.endFrame)
 					let frame = pendelumAnimation.frame*(pendelumAnimation.angle/pendelumAnimation.endFrame)
 
@@ -144,39 +148,6 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			let canvas = state.canvas
 			let ctx = canvas.getContext('2d')
 
-			for (let i in lyrics) {
-				let step = state.musicStep
-				let lyric = lyrics[i]
-				let textArr = lyric.curString.split('/')
-				
-				if (lyric.onState != undefined) {
-					ctx.font = `18px pok`
-
-					let X = canvas.width*0.5-(ctx.measureText(textArr.join('')).width/2)
-
-					for (let i in textArr) {
-						let txt = textArr[i]
-
-						ctx.fillStyle = 'black'
-						ctx.fillText(txt, X+1, canvas.height*0.75-(lyric.onState == Number(i) ? 5 : 0)+1)
-
-						ctx.fillStyle = lyric.onState == Number(i) ? 'red' : 'white'
-						ctx.fillText(txt, X, canvas.height*0.75-(lyric.onState == Number(i) ? 5 : 0))
-
-						X += ctx.measureText(txt).width
-					}
-				}
-				
-				for (let a in lyric.steps) {
-					if (lyric.steps.length <= textArr.length) lyric.steps.push(lyric.steps[lyric.steps.length-1]+4)
-					
-					if (lyric.steps[a] >= variables.oldStep && lyric.steps[a] <= step) {
-						if (Number(a) == lyric.steps.length-1) lyric.onState = undefined
-						else lyric.onState = Number(a)
-					}
-				}
-			}
-
 			let soundTranceStatic = state.sounds['Sounds/Lullaby/TranceStatic.ogg']
 			if (variables.hypnotizationLevel/variables.hypnotizationLevelMax >= 0) {
 				soundTranceStatic.volume = variables.hypnotizationLevel/variables.hypnotizationLevelMax
@@ -199,94 +170,3 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			break
     }
 }
-
-let lyrics = [
-	{
-		"steps": [0],
-		"curString": ""
-	},
-	{
-		"steps": [64, 68, 72, 76],
-		"curString": "Come, /little /Girl/friend..."
-	},
-	{
-		"steps": [80, 84, 88, 94],
-		"curString": "Come /with/ me..."
-	},
-	{
-		"steps": [95, 98, 101, 104, 107, 111, 115, 119, 126],
-		"curString": "Boy/friend /is /wai/ting /stea/di/ly!" 
-	},
-	{
-		"steps": [190, 192, 196, 200, 204, 208, 210, 216],
-		"curString": "A/lone /at /night, /now /let /us /run..." 
-	},
-	{
-		"steps": [222, 224, 228, 232, 236, 240, 244, 248, 256],
-		"curString": "With/ Hyp/no,/ you'll/ have/ so/ much/ fun!" 
-	},
-	{
-		"steps": [320, 324, 328, 332, 336, 340, 344],
-		"curString": "Oh/ little/ Girl/friend,/ please/ don't/ cry!" 
-	},
-	{
-		"steps": [352, 356, 360, 367, 373, 376, 384],
-		"curString": "Hyp/no/ wouldn't/ hurt/ a/ fly!" 
-	},
-	{
-		"steps": [446, 448, 452, 455, 460, 464, 470],
-		"curString": "Your/ fath/er/ clear/ly/ doesn't/ get..."
-	},
-	{
-		"steps": [480, 484, 486, 488, 492, 496, 500, 504, 512],
-		"curString": "Deep/ in/ the/ fore/st,/ BF/ I/ met!" 
-	},
-	{
-		"steps": [576, 580, 583, 587, 592, 596, 600],
-		"curString": "Oh/ little/ Girl/friend,/ please/ don't/ squirm!" 
-	},
-	{
-		"steps": [606, 608, 612, 614, 620, 624, 628, 632],
-		"curString": "Those/ ropes/ I/ know/ will/ hold/ you/ firm..." 
-	},
-	{
-		"steps": [640, 644, 648, 652, 656, 658, 663],
-		"curString": "Hyp/no/ tells/ you/ this/ is/ true..." 
-	},
-	{
-		"steps": [670, 672, 676, 680, 685, 688, 694, 696],
-		"curString": "But/ sadly,/ Hyp/no/ lied/ to/ you!" 
-	},
-	{
-		"steps": [832, 836, 840, 844, 846, 848, 852, 855],
-		"curString": "Oh/ little/ Girl/friend,/ you/ shall/ not/ leave..." 
-	},
-	{
-		"steps": [862, 864, 867, 869, 872, 877, 880, 886, 896],
-		"curString": "Your/ fath/er/ for/ you/ will/ never/ grieve!" 
-	},
-	{
-		"steps": [958, 960, 964, 968, 976, 978, 982],
-		"curString": "And/ minds/ un/ravel/ at/ the/ seams..." 
-	},
-	{
-		"steps": [990, 999, 1004, 1006, 1012, 1016, 1024],
-		"curString": "Allowing/ me/ to/ haunt/ their/ dreams!" 
-	},
-	{
-		"steps": [1088, 1094, 1096, 1103, 1107, 1111],
-		"curString": "Sure/ly/ now,/ you/ must/ know..." 
-	},
-	{
-		"steps": [1119, 1121, 1123, 1126, 1132, 1136, 1140, 1144, 1152],
-		"curString": "That/ it/ is/ time/ for/ you/ to/ go!" 
-	},
-	{
-		"steps": [1216, 1222, 1225, 1229, 1231, 1233, 1240],
-		"curString": "Oh/ little/ Girl/friend,/ you/ weren't/ clever..." 
-	},
-	{
-		"steps": [1248, 1250, 1253, 1258, 1263, 1267, 1271, 1275, 1286],
-		"curString": "Re/sist/ing/ me,/ only/ MAKES/ ME/ BITTER." 
-	}
-]

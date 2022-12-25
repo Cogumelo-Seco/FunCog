@@ -15,7 +15,7 @@ export default async (canvas, game, Listener) => {
     if (game.state.musicInfo.notesImageDir) for (let arrowID = 0;arrowID <= amountOfArrows;arrowID++) {
         let arrowInfo = game.state.arrowsInfo[arrowID]
 
-        let arrowImageData = game.state.images[`${game.state.musicInfo.notesImageDir}Arrows.png`]
+        let arrowImageData = game.state.images[arrowInfo.imageDir || `${game.state.musicInfo.notesImageDir}Arrows.png`]
         let arrowImage = arrowImageData?.image
         let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
         if (!arrowFrames) return

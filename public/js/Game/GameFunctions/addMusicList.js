@@ -1324,37 +1324,40 @@ export default async (state) => {
                     ]
                 },
                 {
-                    dev: true,
                     name: 'Lost-Cause',
-                    menuColor: null,
+                    menuColor: 'rgb(154, 129, 0)',
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.5,
-                    backgroundImage: null,
+                    backgroundImage: 'backgrounds/Lullaby.jpeg',
                     mod: 'VSLullaby',
                     toLoad: [
+                        { dir: 'Sounds/Lullaby/TranceStatic.ogg' },
+                        { dir: 'Sounds/Lullaby/Psyshock.ogg' },
+                        { dir: 'imgs/VSLullaby/StaticHypno.png', animationConfigDir: 'imgs/VSLullaby/StaticHypno.json' },
+                        { dir: 'imgs/VSLullaby/Pendelum.png' },
                         { dir: 'Musics/musics/lost-cause/Inst.ogg' },
                         { dir: 'Musics/musics/lost-cause/Voices.ogg' },
                     ]
                 },
                 {
-                    dev: true,
                     name: 'Frostbite',
                     menuColor: null,
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.5,
-                    backgroundImage: null,
+                    backgroundImage: 'backgrounds/Frostbite.jpeg',
                     mod: 'VSLullaby',
                     toLoad: [
+                        { dir: 'imgs/VSLullaby/TyphlosionVit.png', animationConfigDir: 'imgs/VSLullaby/TyphlosionVit.json' },
+                        { dir: 'imgs/VSLullaby/Thermostat.png', animationConfigDir: 'imgs/VSLullaby/Thermostat.json' },
                         { dir: 'Musics/musics/frostbite/Inst.ogg' },
                         { dir: 'Musics/musics/frostbite/Voices.ogg' },
                     ]
                 },
                 {
-                    dev: true,
                     name: 'Insomnia',
                     menuColor: null,
                     difficulties: [ 2, 3 ],
@@ -1369,6 +1372,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    crown: true,
                     name: 'Monochrome',
                     menuColor: 'rgb(120, 20, 20)',
                     difficulties: [ 2, 3 ],
@@ -1391,6 +1395,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    crown: true,
                     name: 'Monochrome-V1',
                     menuColor: 'rgb(120, 20, 20)',
                     difficulties: [ 2, 3 ],
@@ -1409,9 +1414,8 @@ export default async (state) => {
                     ]
                 },
                 {
-                    dev: true,
                     name: 'Isotope',
-                    menuColor: null,
+                    menuColor: '#d71840',
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
@@ -1424,9 +1428,8 @@ export default async (state) => {
                     ]
                 },
                 {
-                    dev: true,
                     name: 'Dissension',
-                    menuColor: null,
+                    menuColor: 'grey',
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
@@ -1441,7 +1444,7 @@ export default async (state) => {
                 {
                     dev: true,
                     name: 'Death-Toll',
-                    menuColor: null,
+                    menuColor: '#572108',
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
@@ -1449,6 +1452,7 @@ export default async (state) => {
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
+                        { dir: 'Arrows/Bronzong/Arrows.png', animationConfigDir: 'Arrows/Bronzong/Arrows.json' },
                         { dir: 'Musics/musics/death-toll/Inst.ogg' },
                         { dir: 'Musics/musics/death-toll/Voices.ogg' },
                     ]
