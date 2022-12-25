@@ -76,6 +76,8 @@ export default function chat(state, socket) {
     }
 
     function keyPressed(event) {
+        if (state.pauseGameKeys) return;
+        
         if ((event.code == 'NumpadDivide' || event.code == 'KeyT') && state.onChat == 'off') return openCloseChat({ pointerType: 'mouse' })
         if (event.code == 'Escape' && state.onChat == 'on') return openCloseChat({ pointerType: 'mouse' })
         if (!event.key || state.onChat != 'on') return
