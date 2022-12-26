@@ -40,8 +40,8 @@ const Game = (props) => {
                 <link rel="stylesheet" href="/css/game/resizable.css" />
             </Head>
             <body id="body">
-                <canvas id="gameCanvas" />
-                <video label="720p" id="gameVideo" />
+                <canvas id="gameCanvas"/>
+                <video preload="auto" id="gameVideo" />
 
                 <button id="chat-button" />
                 <div id="unreadMessageCounter" />

@@ -99,7 +99,9 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                 }
 
                 if (state.musicNotes.length+state.musicOpponentNotes.length >= musicNotesTotal) {
-                    videoElement.src = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/'+musicInfo.cutscene
+                    videoElement.innerHTML = `
+                        <source label="720p" preload src="https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/${musicInfo.cutscene}" type="video/mp4" />
+                    `
                     load(musicInfo.toLoad[0])
                 }
             }
@@ -139,6 +141,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                     })
                     sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
                     sound.src = dir.split('/')[0] == 'Sounds' ? `/${dir}` : link
+                    sound.preload = 'auto'
                     state.sounds[dir] = sound
                 //}
             } else {
@@ -188,12 +191,10 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             state.music = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
             state.musicVoice = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
 
-            
-
             if (musicInfo.cutscene && !state.online) {
+                videoElement.style.display = 'block'
                 videoElement.onended = () => startMusic()
                 videoElement.play()
-                videoElement.style.display = 'block'
             } else startMusic()
             
             async function startMusic() {

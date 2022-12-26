@@ -501,6 +501,7 @@ function createGame(Listener, canvas, socket) {
                 })
                 sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
                 sound.src = dir.split('/')[0] == 'Sounds' ? `/${dir}` : link
+                sound.preload = 'auto'
                 state.sounds[dir] = sound
             } else {
                 let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+dir
