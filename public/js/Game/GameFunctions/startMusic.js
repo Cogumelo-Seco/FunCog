@@ -86,9 +86,9 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                     mustHitSection = mustHitSection ? false : true
                 }
 
-                let newNoteInfo = await getNoteinfo(noteInfo, difficulty, musicData)
+                let newNoteInfo = await getNoteinfo(noteInfo, difficulty, musicData, mustHitSection)
 
-                if (mustHitSection) {
+                if (newNoteInfo.mustHitSection) {
                     state.musicOriginalNotes.push(noteInfo)
                     state.musicNotes.push(newNoteInfo)
                 } else {
@@ -225,7 +225,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
         console.error(err)
     }*/
 
-    async function getNoteinfo(note, difficulty, musicData) {
+    async function getNoteinfo(note, difficulty, musicData, mustHitSection) {
         let name = musicInfo.name.toLowerCase()
         let arrowID = note[1]
         let type = 'normal'
@@ -327,9 +327,10 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
         }
 
         if (name == 'death-toll') {
-            if (note[1] == -1) {
-                //arrowID = 8
+            if (note[1] == 8) {
+                arrowID = 4
                 type = 'Bronzong'
+                mustHitSection = true       
             }
         }
 
@@ -343,6 +344,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             defaultDisabled: disabled,
             errorWhenNotClicking,
             autoClick,
+            mustHitSection,
             type
         }
     }

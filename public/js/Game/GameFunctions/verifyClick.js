@@ -1,12 +1,12 @@
 export default async({ arrowID, listenerState, bot }, state) => {
     let scrollSpeed = state.smallFunctions.getConfig('ScrollSpeed')
-    let hitBoxSize = scrollSpeed > 1 ? state.arrowsSize**state.resizeNote*scrollSpeed*(state.musicBPM/150 > 1 ? state.musicBPM/150 : 1) : state.arrowsSize**state.resizeNote*(state.musicBPM/150 > 1 ? state.musicBPM/150 : 1)
+    const getHitBoxSize = (arrowID) => scrollSpeed > 1 ? state.arrowsInfo[arrowID]?.height**state.resizeNote*scrollSpeed*(state.musicBPM/150 > 1 ? state.musicBPM/150 : 1) : state.arrowsInfo[arrowID]?.height**state.resizeNote*(state.musicBPM/150 > 1 ? state.musicBPM/150 : 1)
 
     let notes = state.musicNotes.filter((n) => {
         n.hitNote = (n.time-state.music?.currentTime)*1000
         return n.arrowID == arrowID && !n.disabled &&
-        n.Y >= -(hitBoxSize) &&
-        n.Y <= (hitBoxSize)
+        n.Y >= -(getHitBoxSize(n.arrowID)) &&
+        n.Y <= (getHitBoxSize(n.arrowID))
     })
 
     function noteClick(note) {
@@ -83,7 +83,7 @@ export default async({ arrowID, listenerState, bot }, state) => {
         noteClick(bestNote)
     }*/
 
-    if (!listenerState.pauseGameKeys && !notes[0] && (state.smallFunctions.getConfig('GhostTapping') ? state.musicNotes.filter((n) => !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(hitBoxSize*3))[0] : true)) {
+    if (!listenerState.pauseGameKeys && !notes[0] && (state.smallFunctions.getConfig('GhostTapping') ? state.musicNotes.filter((n) => !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(getHitBoxSize(n.arrowID)*3))[0] : true)) {
         state.musicInfo.accuracyMedia.push(1)
         state.musicInfo.misses += 1
         state.musicInfo.score -= Number.parseInt(state.scoreToAdd/2)

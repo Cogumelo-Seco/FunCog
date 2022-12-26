@@ -17,6 +17,12 @@ export default async (state) => {
             content: 'KeyD'
         },
         {
+            name: 'Arrow Middle',
+            id: 'Arrow-4',
+            type: 'KeyBind',
+            content: 'Space'
+        },
+        {
             name: 'Arrow Up',
             id: 'Arrow-2',
             type: 'KeyBind',
@@ -36,7 +42,7 @@ export default async (state) => {
             name: 'Bongo Cat',
             id: 'botPlay',
             type: 'Boolean',
-            content: false
+            content: true
         },
         {
             name: 'Down Scroll',
@@ -104,12 +110,6 @@ export default async (state) => {
             id: 'ShowBackground',
             type: 'Boolean',
             content: true
-        },
-        {
-            name: 'Show Hit Box',
-            id: 'ShowHitBox',
-            type: 'Boolean',
-            content: false
         },
         {
             name: 'Game',

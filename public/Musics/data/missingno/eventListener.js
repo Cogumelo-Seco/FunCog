@@ -29,6 +29,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			let currentTime = state.music?.currentTime
 
 			let events = state.musicInfo.events
+			console.log(events)
 			for (let i in events) {
                 let event = events[i]
 

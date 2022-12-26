@@ -5,14 +5,19 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 		case 'loaded':
 			state.amountOfArrows = 4
 
+			let height = state.images['Arrows/Bronzong/Arrows.png'].animationConfig['Arrow-4']['Arrow-4'].height
+
 			state.arrowsInfo[4] = {
+				arrowID: 4,
+				pos: 2,
+                defaultPos: 4,
 				imageDir: 'Arrows/Bronzong/Arrows.png',
 				X: 0,
 				Y: 0,
 				defaultX: 0,
 				defaultY: 0,
-				resetX: true,
-				resetY: true,
+				fitX: 0,
+				fitY: 0/*-(height/2)*/,
 				resetEnable: true,
 				alpha: 1,
 				noteAlpha: 1,
@@ -20,8 +25,23 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				rotation: 0
 			}
 
+			state.arrowsInfo[2].pos = 3
+			state.arrowsInfo[3].pos = 4
+
+			for (let i in state.arrowsInfo) {
+				state.arrowsInfo[i].resetX = true
+				state.arrowsInfo[i].resetY = true
+			}
+
 			break
         case 'started':
+			/*state.arrowsInfo[2].X = state.arrowsInfo[3].defaultX
+			state.arrowsInfo[2].Y = state.arrowsInfo[3].defaultY
+			state.arrowsInfo[3].X = state.arrowsInfo[4].defaultX
+			state.arrowsInfo[3].Y = state.arrowsInfo[4].defaultY
+			state.arrowsInfo[4].X = state.arrowsInfo[2].defaultX
+			state.arrowsInfo[4].Y = state.arrowsInfo[2].defaultY*/
+
 			state.musicInfo.variables = {
 				oldBeat: 0,
 				oldStep: 0,

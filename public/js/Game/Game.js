@@ -1,6 +1,6 @@
 function createGame(Listener, canvas, socket) {
     const state = {
-        debug: false,
+        debug: true,
         fps: '0-0',
         ping: null,
         renderType: 'limited',
@@ -51,10 +51,12 @@ function createGame(Listener, canvas, socket) {
         musics: [],
         difficulties: [],
         opponentArrows: [],
-        resizeNote: 0.885,
+        arrowsWidth: 0,
+        arrowsWidthOpponent: 0,
+        resizeNote: 0.85,
         resizeNoteOpponent: 0,
-        resizeNoteOpponentInMiddleScroll: 0.735,
-        arrowsYLineMargin: 50,
+        resizeNoteOpponentInMiddleScroll: 0.7,
+        arrowsYLineMargin: 80,
         arrowsYLine: 0,
         alphaHUD: 1,
         scoreToAdd: 200,
@@ -225,11 +227,17 @@ function createGame(Listener, canvas, socket) {
         if (!state.arrowsInfoOpponent[0]) {
             for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {
                 if (!state.opponentArrows[arrowID]) state.opponentArrows[arrowID] = { click: false }
-                if (!state.arrowsInfoOpponent[arrowID]) state.arrowsInfoOpponent[arrowID] = { 
+                if (!state.arrowsInfoOpponent[arrowID]) state.arrowsInfoOpponent[arrowID] = {
+                    arrowID,
+                    imageDir: null,
+                    pos: arrowID,
+                    defaultPos: arrowID,
                     X: null,
                     Y: null,
                     defaultX: null,
                     defaultY: null,
+                    fitX: 0,
+                    fitY: 0,
                     resetX: true,
                     resetY: true,
                     resetEnable: true,
@@ -243,11 +251,17 @@ function createGame(Listener, canvas, socket) {
 
         if (!state.arrowsInfo[0]) {
             for (let arrowID = 0;arrowID <= state.amountOfArrows;arrowID++) {
-                if (!state.arrowsInfo[arrowID]) state.arrowsInfo[arrowID] = { 
+                if (!state.arrowsInfo[arrowID]) state.arrowsInfo[arrowID] = {
+                    arrowID,
+                    imageDir: null,
+                    pos: arrowID,
+                    defaultPos: arrowID,
                     X: null,
                     Y: null,
                     defaultX: null,
                     defaultY: null,
+                    fitX: 0,
+                    fitY: 0,
                     resetX: true,
                     resetY: true,
                     resetEnable: true,
@@ -263,11 +277,9 @@ function createGame(Listener, canvas, socket) {
         let lastArrowsYLineOpponent = state.arrowsYLineOpponent
         let lastArrowsYLine = state.arrowsYLine
 
-        state.arrowsYLine = state.smallFunctions.getConfig('DownScroll') ? canvas.height-state.arrowsYLineMargin-state.arrowsSize**state.resizeNote : state.arrowsYLineMargin
-        state.arrowsYLineOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.smallFunctions.getConfig('DownScroll') ? canvas.height*0.60 : canvas.height*0.40 : state.arrowsYLine
         state.resizeNoteOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
 
-        if (state.arrowsYLineOpponent != lastArrowsYLineOpponent || state.arrowsYLine != lastArrowsYLine || state.resizeNoteOpponent != lastResizeNoteOpponent) {
+        /*if (state.arrowsYLineOpponent != lastArrowsYLineOpponent || state.arrowsYLine != lastArrowsYLine || state.resizeNoteOpponent != lastResizeNoteOpponent) {
             for (let i in state.arrowsInfo) {
                 if (state.arrowsInfo[i].resetEnable) {
                     state.arrowsInfo[i].resetX = true
@@ -280,7 +292,7 @@ function createGame(Listener, canvas, socket) {
                     state.arrowsInfoOpponent[i].resetY = true
                 }
             }
-        }
+        }*/
 
         if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.smallFunctions.getConfig('botPlay') && !state.debug && state.music?.currentTime > 1) {
             console.log(state.serverId)
@@ -355,7 +367,8 @@ function createGame(Listener, canvas, socket) {
                 }
             }
 
-            if (!Listener.state.pauseGameKeys && note.errorWhenNotClicking && !state.smallFunctions.getConfig('botPlay') && note.arrowID >= 0 && note.arrowID <= state.amountOfArrows && note.Y > (state.arrowsSize**state.resizeNote) && !note.disabled && !note.clicked) {
+            //const getHitBoxSize = (arrowID) => scrollSpeed > 1 ? state.arrowsInfo[arrowID].height**state.resizeNote*scrollSpeed*(state.musicBPM/150 > 1 ? state.musicBPM/150 : 1) : state.arrowsInfo[arrowID].height**state.resizeNote*(state.musicBPM/150 > 1 ? state.musicBPM/150 : 1)
+            if (!Listener.state.pauseGameKeys && note.errorWhenNotClicking && !state.smallFunctions.getConfig('botPlay') && note.arrowID >= 0 && note.arrowID <= state.amountOfArrows && note.Y > (state.arrowsInfo[note.arrowID].height**state.resizeNote) && !note.disabled && !note.clicked) {
                 note.disabled = true
                 state.musicInfo.misses += 1
                 state.musicInfo.score -= Number.parseInt(state.scoreToAdd/2)

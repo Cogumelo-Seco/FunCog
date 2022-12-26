@@ -26,6 +26,7 @@ export default async (canvas, game, Listener) => {
         ctx.drawImage(introImage.image, canvas.width/2-(introWidth/2), canvas.height/2-(introHeight/2), introWidth, introHeight);
     }
 
+    let arrowsInfo = Object.values(game.state.arrowsInfo).sort((a, b) => a.pos-b.pos)
     if (!performanceMode) for (let i in game.state.ratings) {
         let rating = game.state.ratings[game.state.ratings.length-1-i]
         let ratingImage = game.state.images[`ratings/${rating.rating.name}.png`]
@@ -33,10 +34,11 @@ export default async (canvas, game, Listener) => {
         ctx.globalAlpha = percent > 0.5 ? 1-(percent-0.5)/0.5 : game.state.alphaHUD
 
         if (ratingImage) {
+            //console.log()
             let ratingImageWidth = ratingImage.image.width*0.25
             let ratingImageHeight = ratingImage.image.height*0.25
-            let ratingImageY = (game.state.arrowsYLine+(game.state.arrowsSize**game.state.resizeNote*0.75)-(ratingImage.image.height*0.3/2))-50*percent
-            let ratingImageX = game.state.arrowsInfo[0]?.defaultX-50-game.state.smallFunctions.getConfig('SpaceBetweenArrows')-(ratingImageWidth/2)
+            let ratingImageY = (arrowsInfo[0].Y+(arrowsInfo[0].height**game.state.resizeNote*0.2)-(ratingImage.image.height*0.3/2))-50*percent
+            let ratingImageX = arrowsInfo[0]?.defaultX-50-game.state.smallFunctions.getConfig('SpaceBetweenArrows')-(ratingImageWidth/2)
 
             ctx.drawImage(ratingImage.image, ratingImageX, ratingImageY, ratingImageWidth, ratingImageHeight);
 
