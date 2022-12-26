@@ -80,7 +80,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				let key = listenerState.keys['Space']
 				if (key && !key.clicked && variables.keys[key.code]) variables.keys[key.code] = false
 				if (key && key.clicked && !variables.keys[key.code]) {
-					if (pendelumAnimation && pendelumAnimation.frame >= pendelumAnimation.endFrame/5 && pendelumAnimation.frame <= pendelumAnimation.endFrame-pendelumAnimation.endFrame/5) {
+					if (pendelumAnimation && pendelumAnimation.frame >= pendelumAnimation.endFrame/3 && pendelumAnimation.frame <= pendelumAnimation.endFrame-pendelumAnimation.endFrame/3) {
 						variables.hypnotizationLevel -= variables.hypnotizationLevelMax*0.12
 						variables.pendelumTime = +new Date()
 						variables.keys[key.code] = true
