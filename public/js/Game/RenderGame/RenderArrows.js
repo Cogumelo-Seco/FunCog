@@ -100,7 +100,7 @@ export default async (canvas, game, Listener) => {
     game.state.arrowsWidthOpponent = 0
 
     let arrowsInfoOpponent = Object.values(game.state.arrowsInfoOpponent).sort((a, b) => a.pos-b.pos)
-    if (game.state.musicInfo.notesImageDir) for (let i in arrowsInfoOpponent) {
+    if (game.state.musicInfo.notesImageDir && !performanceMode && game.state.smallFunctions.getConfig('OpponentNotes')) for (let i in arrowsInfoOpponent) {
         let arrowID = arrowsInfoOpponent[i].arrowID
         let arrowInfo = arrowsInfoOpponent[i]
 

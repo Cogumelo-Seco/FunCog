@@ -53,17 +53,15 @@ function createGame(Listener, canvas, socket) {
         opponentArrows: [],
         arrowsWidth: 0,
         arrowsWidthOpponent: 0,
-        resizeNote: 0.85,
+        resizeNote: 0.86,
         resizeNoteOpponent: 0,
-        resizeNoteOpponentInMiddleScroll: 0.7,
+        resizeNoteOpponentInMiddleScroll: 0.72,
         arrowsYLineMargin: 80,
         arrowsYLine: 0,
         alphaHUD: 1,
         scoreToAdd: 200,
         
         arrowsYLineOpponent: 0,
-        amountOfArrowsOpponent: 3,
-        amountOfArrows: 3,
         musicChangeBPM: {},
         oldChangeBPM: 0,
         musicNotes: [],
@@ -192,10 +190,10 @@ function createGame(Listener, canvas, socket) {
     async function start() {
         let videoElement = document.getElementById('gameVideo')
 
-        videoElement.addEventListener('loadeddata', () => {
+        /*videoElement.addEventListener('loadeddata', () => {
             videoElement.style.display = 'block'
-            videoElement.play()
-        })
+            setTimeout(() => videoElement.play(), 1000)
+        })*/
 
         videoElement.addEventListener('ended', () => {
             videoElement.style.display = 'none'
@@ -215,8 +213,8 @@ function createGame(Listener, canvas, socket) {
         if (state.music?.buffered.length) {
             let loaded = state.music?.buffered.end(0) / state.music.duration;
             let played = state.music.currentTime / state.music.duration;
-            state.musicData.loaded = loaded//.toFixed(2);
-            state.musicData.played = played//.toFixed(2);
+            state.musicData.loaded = loaded
+            state.musicData.played = played
         }
 
         state.musicBeat = Number.parseInt(state.music?.currentTime*(state.musicBPM/60))
@@ -225,7 +223,7 @@ function createGame(Listener, canvas, socket) {
         if (state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.09) state.musicVoice.currentTime = state.music.currentTime
 
         if (!state.arrowsInfoOpponent[0]) {
-            for (let arrowID = 0;arrowID <= state.amountOfArrowsOpponent;arrowID++) {
+            for (let arrowID = 0;arrowID <= 3;arrowID++) {
                 if (!state.opponentArrows[arrowID]) state.opponentArrows[arrowID] = { click: false }
                 if (!state.arrowsInfoOpponent[arrowID]) state.arrowsInfoOpponent[arrowID] = {
                     arrowID,
@@ -250,7 +248,7 @@ function createGame(Listener, canvas, socket) {
         }
 
         if (!state.arrowsInfo[0]) {
-            for (let arrowID = 0;arrowID <= state.amountOfArrows;arrowID++) {
+            for (let arrowID = 0;arrowID <= 3;arrowID++) {
                 if (!state.arrowsInfo[arrowID]) state.arrowsInfo[arrowID] = {
                     arrowID,
                     imageDir: null,
@@ -272,10 +270,6 @@ function createGame(Listener, canvas, socket) {
                 }
             }
         }
-
-        let lastResizeNoteOpponent = state.resizeNoteOpponent
-        let lastArrowsYLineOpponent = state.arrowsYLineOpponent
-        let lastArrowsYLine = state.arrowsYLine
 
         state.resizeNoteOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
 
@@ -319,9 +313,7 @@ function createGame(Listener, canvas, socket) {
 
         if (musicCurrentTime > 1 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
             state.smallFunctions.resetGame()
-            state.smallFunctions.redirectGameStage('score', 'menu')/*
-            if (state.online) state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
-            else state.smallFunctions.redirectGameStage('score', 'menu')*/
+            state.smallFunctions.redirectGameStage('score', 'menu')
         }
 
         for (let i in state.musicChangeBPM) {
@@ -367,8 +359,7 @@ function createGame(Listener, canvas, socket) {
                 }
             }
 
-            //const getHitBoxSize = (arrowID) => scrollSpeed > 1 ? state.arrowsInfo[arrowID].height**state.resizeNote*scrollSpeed*(state.musicBPM/150 > 1 ? state.musicBPM/150 : 1) : state.arrowsInfo[arrowID].height**state.resizeNote*(state.musicBPM/150 > 1 ? state.musicBPM/150 : 1)
-            if (!Listener.state.pauseGameKeys && note.errorWhenNotClicking && !state.smallFunctions.getConfig('botPlay') && note.arrowID >= 0 && note.arrowID <= state.amountOfArrows && note.Y > (state.arrowsInfo[note.arrowID].height**state.resizeNote) && !note.disabled && !note.clicked) {
+            if (!Listener.state.pauseGameKeys && note.errorWhenNotClicking && !state.smallFunctions.getConfig('botPlay') && state.arrowsInfo[note.arrowID] && note.Y > (state.arrowsInfo[note.arrowID]?.height**state.resizeNote) && !note.disabled && !note.clicked) {
                 note.disabled = true
                 state.musicInfo.misses += 1
                 state.musicInfo.score -= Number.parseInt(state.scoreToAdd/2)

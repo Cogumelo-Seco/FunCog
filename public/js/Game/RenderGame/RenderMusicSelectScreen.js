@@ -54,14 +54,22 @@ export default async (canvas, game, Listener) => {
                 }
             }
 
+            let txtWidth = ctx.measureText(musicName).width
+            let additionalX = 0
+            if (music.amountOfArrows) {
+                additionalX += ctx.measureText(music.amountOfArrows).width
+
+                ctx.fillStyle = 'rgb(245, 50, 50)'
+                ctx.fillText(music.amountOfArrows, X+txtWidth+5, Y);
+            }
+
             let alertImage = game.state.images[`imgs/alert.png`]?.image
             if (music.dev && alertImage) {
-                let txtWidth = ctx.measureText(musicName).width
                 ctx.font = `bold 10px Arial`
                 ctx.fillStyle = 'rgb(255, 66, 66)'
 
-                ctx.drawImage(alertImage, X+txtWidth+5, Y-28, 30, 30)
-                ctx.fillText('In development', X+txtWidth+30, Y-(30/2));
+                ctx.drawImage(alertImage, X+additionalX+txtWidth+5, Y-28, 30, 30)
+                ctx.fillText('In development', X+additionalX+txtWidth+30, Y-(30/2));
             }
         } else delete Listener.state.buttons[`SelectMusic-${i}`] 
 

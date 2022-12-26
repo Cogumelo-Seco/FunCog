@@ -7,11 +7,12 @@ export default async (canvas, game, Listener) => {
 
     ctx.font = `bold ${(canvas.width+canvas.height)*0.03}px Arial`
 
+    let musicName = game.state.musicInfo.name.replace(/[-]/g, ' ')+(game.state.musicInfo.amountOfArrows ? ` ${game.state.musicInfo.amountOfArrows}` : '')
     ctx.fillStyle = game.state.musicInfo.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(game.state.musicInfo.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : game.state.musicInfo.menuColor || 'white'
-    ctx.fillText(game.state.musicInfo.name.replace(/[-]/g, ' '), canvas.width/2-((ctx.measureText(game.state.musicInfo.name.replace(/[-]/g, ' ')).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2), 80);
+    ctx.fillText(musicName, canvas.width/2-((ctx.measureText(musicName).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2), 80);
 
     ctx.fillStyle = game.state.musicInfo.difficulty.color || 'white'
-    ctx.fillText(`(${game.state.musicInfo.difficulty.name})`, 10+canvas.width/2+((ctx.measureText(game.state.musicInfo.name.replace(/[-]/g, ' ')).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2-(ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)), 80);
+    ctx.fillText(`(${game.state.musicInfo.difficulty.name})`, 10+canvas.width/2+((ctx.measureText(musicName).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2-(ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)), 80);
 
     let playerWin = game.state.musicInfoOpponent.score == game.state.musicInfo.score ? 'draw' : game.state.musicInfo.score > game.state.musicInfoOpponent.score ? true : false
 

@@ -99,12 +99,17 @@ export default function createListener(socket) {
                 if (button && on && button.gameStage?.includes(state.game.state.gameStage) && button.keyPress?.includes(keyPressed)) button.onClick()
             }
 
-            for (let arrowID = 0;arrowID <= state.game.state.amountOfArrows;arrowID++) {
+            for (let arrowID in state.game.state.arrowsInfo) {
                 if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote',  click: false }
 
+                let getKey = (arrowID) => {
+                    let arrowsKey = (state.game.state.selectSettingsOption.settingsOptions.find(c => c[Object.keys(state.game.state.arrowsInfo).length+'K']))[Object.keys(state.game.state.arrowsInfo).length+'K']
+                    return (arrowsKey.find(c => c.id == 'Arrow-'+arrowID))?.content
+                }
+
                 if (
-                    !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getConfig(`Arrow-${arrowID}`) == keyPressed && on && !state.arrows[arrowID].click || 
-                    !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getConfig(`Arrow-${arrowID}`) == keyPressed && !on && state.arrows[arrowID].click
+                    !state.game?.state.smallFunctions.getConfig('botPlay') && getKey(arrowID) == keyPressed && on && !state.arrows[arrowID].click || 
+                    !state.game?.state.smallFunctions.getConfig('botPlay') && getKey(arrowID) == keyPressed && !on && state.arrows[arrowID].click
                 ) {
                     if (on) state.game.verifyClick({ arrowID, listenerState: state })
                     else state.arrows[arrowID].state = 'noNote'
@@ -285,18 +290,18 @@ export default function createListener(socket) {
 
             if (state.game.state.gameStage == 'settings' && on) {
                 keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
-                let currentConfig = state.game.state.selectSettingsOption.settingsOptions[state.game.state.selectSettingsOption.settingsSelect]
+                let currentConfig = state.game.state.selectSettingsOption.settingsOptionsFiltered[state.game.state.selectSettingsOption.settingsSelect]
 
                 if (state.onChangeKeyBind) {
                     if (keyPressed != 'Escape') currentConfig.content = keyPressed
                     state.onChangeKeyBind = false
                 } else switch (keyPressed) {
                     case 'ArrowUp':
-                        state.game.state.selectSettingsOption.settingsSelect = state.game.state.selectSettingsOption.settingsSelect <= 0 ? state.game.state.selectSettingsOption.settingsOptions.length-1 : state.game.state.selectSettingsOption.settingsSelect-1
+                        state.game.state.selectSettingsOption.settingsSelect = state.game.state.selectSettingsOption.settingsSelect <= 0 ? state.game.state.selectSettingsOption.settingsOptionsFiltered.length-1 : state.game.state.selectSettingsOption.settingsSelect-1
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
                     case 'ArrowDown':
-                        state.game.state.selectSettingsOption.settingsSelect = state.game.state.selectSettingsOption.settingsSelect >= state.game.state.selectSettingsOption.settingsOptions.length-1 ? 0 : state.game.state.selectSettingsOption.settingsSelect+1
+                        state.game.state.selectSettingsOption.settingsSelect = state.game.state.selectSettingsOption.settingsSelect >= state.game.state.selectSettingsOption.settingsOptionsFiltered.length-1 ? 0 : state.game.state.selectSettingsOption.settingsSelect+1
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
                     case 'ArrowLeft':
@@ -313,6 +318,13 @@ export default function createListener(socket) {
                         break
                     case 'Enter':
                         switch (currentConfig.type) {
+                            case 'ConfigTitle':
+                                if (currentConfig.content) {
+                                    currentConfig.currentOption = currentConfig.currentOption >= currentConfig.options.length-1 ? 0 : currentConfig.currentOption+1 
+                                    currentConfig.content = currentConfig.options[currentConfig.currentOption]
+                                    state.game.playSong('Sounds/scrollMenu.ogg')
+                                }
+                                break
                             case 'Boolean':
                                 currentConfig.content = currentConfig.content ? false : true
                                 state.game.playSong('Sounds/scrollMenu.ogg')

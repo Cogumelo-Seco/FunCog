@@ -2,37 +2,73 @@ export default async (state) => {
     state.selectSettingsOption.settingsOptions = [
         {
             name: 'KeyBind',
-            type: 'ConfigTitle'
+            type: 'ConfigTitle',
+            content: '4K',
+            currentOption: 0,
+            options: [
+                '4K',
+                '5K'
+            ]
         },
         {
-            name: 'Arrow Left',
-            id: 'Arrow-0',
-            type: 'KeyBind',
-            content: 'KeyS'
-        },
-        {
-            name: 'Arrow Down',
-            id: 'Arrow-1',
-            type: 'KeyBind',
-            content: 'KeyD'
-        },
-        {
-            name: 'Arrow Middle',
-            id: 'Arrow-4',
-            type: 'KeyBind',
-            content: 'Space'
-        },
-        {
-            name: 'Arrow Up',
-            id: 'Arrow-2',
-            type: 'KeyBind',
-            content: 'KeyJ'
-        },
-        {
-            name: 'Arrow Right',
-            id: 'Arrow-3',
-            type: 'KeyBind',
-            content: 'KeyK'
+            "4K": [
+                {
+                    name: 'Arrow Left',
+                    id: 'Arrow-0',
+                    type: 'KeyBind',
+                    content: 'KeyS'
+                },
+                {
+                    name: 'Arrow Down',
+                    id: 'Arrow-1',
+                    type: 'KeyBind',
+                    content: 'KeyD'
+                },
+                {
+                    name: 'Arrow Up',
+                    id: 'Arrow-2',
+                    type: 'KeyBind',
+                    content: 'KeyJ'
+                },
+                {
+                    name: 'Arrow Right',
+                    id: 'Arrow-3',
+                    type: 'KeyBind',
+                    content: 'KeyK'
+                }
+            ],
+            "5K": [
+                {
+                    name: 'Arrow Left',
+                    id: 'Arrow-0',
+                    type: 'KeyBind',
+                    content: 'KeyS'
+                },
+                {
+                    name: 'Arrow Down',
+                    id: 'Arrow-1',
+                    type: 'KeyBind',
+                    content: 'KeyD'
+                },
+                {
+                    name: 'Arrow Middle',
+                    id: 'Arrow-4',
+                    type: 'KeyBind',
+                    content: 'Space'
+                },
+                {
+                    name: 'Arrow Up',
+                    id: 'Arrow-2',
+                    type: 'KeyBind',
+                    content: 'KeyJ'
+                },
+                {
+                    name: 'Arrow Right',
+                    id: 'Arrow-3',
+                    type: 'KeyBind',
+                    content: 'KeyK'
+                }
+            ],
         },
         {
             name: 'Gameplay',

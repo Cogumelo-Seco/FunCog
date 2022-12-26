@@ -6,7 +6,7 @@ export default async (canvas, game, Listener) => {
         ctx.globalAlpha = 1
         ctx.fillStyle = 'red'
         ctx.font = `bold 15px Arial`
-        ctx.fillText(`Performance Mode`, 2, 35)
+        ctx.fillText(`Performance Mode`, 50, 17)
     }
 
     ctx.globalAlpha = game.state.alphaHUD

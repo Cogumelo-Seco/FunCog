@@ -1,6 +1,6 @@
 export default async({ arrowID, listenerState, bot }, state) => {
     let scrollSpeed = state.smallFunctions.getConfig('ScrollSpeed')
-    const getHitBoxSize = (arrowID) => scrollSpeed > 1 ? state.arrowsInfo[arrowID]?.height**state.resizeNote*scrollSpeed*(state.musicBPM/150 > 1 ? state.musicBPM/150 : 1) : state.arrowsInfo[arrowID]?.height**state.resizeNote*(state.musicBPM/150 > 1 ? state.musicBPM/150 : 1)
+    const getHitBoxSize = (arrowID) => state.arrowsInfo[arrowID]?.height**state.resizeNote*(scrollSpeed > 1 ? scrollSpeed : 1)*(state.musicBPM/130 > 1 ? state.musicBPM/130 : 1)
 
     let notes = state.musicNotes.filter((n) => {
         n.hitNote = (n.time-state.music?.currentTime)*1000

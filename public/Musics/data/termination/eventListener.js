@@ -42,13 +42,13 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 			break
 		case 'gameLoop':
 			let variables = state.musicInfo.variables
+			let arrowsSize = state.arrowsInfo[0]?.height
 
 			function intro_outro(player, arrowID, add) {
 				arrowMove({ speed: 3, Y: state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].defaultY, arrowID, opponent: player ? false : true })
 				setTimeout(() => state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].resetEnable = true, 2000)
 
 				let introLoop = setInterval(() => {
-
 					if (add > 0) {
 						state.screenXMovement = Number.parseInt(Math.random()*10)-5
                         state.screenYMovement = Number.parseInt(Math.random()*10)-5
@@ -68,21 +68,23 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 				
 				clearInterval(variables.pincerPrepareIntervals[arrowID])
 				variables.pincerPrepareIntervals[arrowID] = setInterval(() => {
-					if (state.smallFunctions.getConfig('DownScroll') ? goAway ? state.musicInfo.popups[arrowID]?.y >= state.canvas.height+100 : state.musicInfo.popups[arrowID]?.y <= arrow.Y+(state.arrowsSize**state.resizeNote/2) : goAway ? state.musicInfo.popups[arrowID]?.y <= -((image.height*1.5)**state.resizeNote)-100 : state.musicInfo.popups[arrowID]?.y >= arrow.Y+(state.arrowsSize**state.resizeNote/2)-((image.height*1.5)**state.resizeNote)) {
+					if (state.smallFunctions.getConfig('DownScroll') ? goAway ? state.musicInfo.popups[arrowID]?.y >= state.canvas.height+100 : state.musicInfo.popups[arrowID]?.y <= arrow.Y : goAway ? state.musicInfo.popups[arrowID]?.y <= -((image.height*1.5)**state.resizeNote)-100 : state.musicInfo.popups[arrowID]?.y >= arrow.Y) {
 						clearInterval(variables.pincerPrepareIntervals[arrowID])
 						state.musicInfo.popups[arrowID].image = `imgs/QT/pincer-close.png`
 						if (goAway) setTimeout(() => delete state.musicInfo.popups[arrowID], 1000)
 					} else {
 						let y = state.musicInfo.popups[arrowID]?.y+(state.smallFunctions.getConfig('DownScroll') ? goAway ? 20 : -20 : goAway ? -20 : 20)
-						if (!y) y = state.smallFunctions.getConfig('DownScroll') ? goAway ? arrow.Y+((image.height*1.5)**state.resizeNote/2) : state.canvas.height+50 : goAway ? arrow.Y+(state.arrowsSize**state.resizeNote/2)-((image.height*1.5)**state.resizeNote) : -((image.height*1.5)**state.resizeNote)-100
+						if (!y) y = state.smallFunctions.getConfig('DownScroll') ? goAway ? arrow.Y : state.canvas.height+50 : goAway ? arrow.Y : -((image.height*1.5)**state.resizeNote)-100
+						let width = (image.width*1.5)**state.resizeNote
+						let height = (image.height*1.5)**state.resizeNote
 
 						state.musicInfo.popups[arrowID] = {
 							image: `imgs/QT/pincer-open.png`,
-							x: arrow.X-(image.width**state.resizeNote/2)-(state.smallFunctions.getConfig('DownScroll') ? 5 : 25),
+							x: arrow.X+(arrow.width**state.resizeNote/2)-(width/2)+(13**state.resizeNote),
 							y,
 							rotation: state.smallFunctions.getConfig('DownScroll') ? -90 : 90,
-							width: (image.width*1.5)**state.resizeNote,
-							height: (image.height*1.5)**state.resizeNote,
+							width,
+							height,
 						}
 					}
 				}, 1000/40)
@@ -114,14 +116,16 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 							clearInterval(variables.arrowMoveIntervals[arrowID])
 						} else if (pincer) {
 							let image = state.images['imgs/QT/pincer-close.png'].image
+							let width = (image.width*1.5)**state.resizeNote
+							let height = (image.height*1.5)**state.resizeNote
 
 							state.musicInfo.popups[arrowID] = {
 								image: `imgs/QT/pincer-close.png`,
-								x: arrow.X-(image.width**state.resizeNote/2)-(state.smallFunctions.getConfig('DownScroll') ? 5 : 25),//+(state.arrowsSize**state.resizeNote/2),//+(state.arrowsSize*state.resizeNote/2)-(image.width*state.resizeNote/2)+(state.smallFunctions.getConfig('DownScroll') ? 10 : 35),
-								y: arrow.Y+(state.arrowsSize**state.resizeNote/2)-(state.smallFunctions.getConfig('DownScroll') ? 0 : (image.height*1.5)**state.resizeNote),
+								x: arrow.X+(arrow.width**state.resizeNote/2)-(width/2)+(13**state.resizeNote),
+								y: arrow.Y,
 								rotation: state.smallFunctions.getConfig('DownScroll') ? -90 : 90,
-								width: (image.width*1.5)**state.resizeNote,
-								height: (image.height*1.5)**state.resizeNote,
+								width,
+								height,
 							}
 						}
 					}, 1000/40)

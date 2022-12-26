@@ -37,7 +37,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					if (event[2] == 'Missingno' && state.musicInfo.difficulty.name != 'Mania') {
 						let downScrool = Math.floor(Math.random()*100) > 50 ? true : false
 						state.selectSettingsOption.settingsOptions.find((g) => g.id == 'DownScroll').content = downScrool
-						let arrowSize = state.arrowsSize
+						let arrowSize = state.arrowsInfo[0]?.height
 						let width = state.canvas.width
 						let height = state.canvas.height
 

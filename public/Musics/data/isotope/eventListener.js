@@ -21,13 +21,10 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			}
 			break
 		case 'end':
-			state.sounds['Sounds/Lullaby/Psyshock.ogg'].pause()
-			state.sounds['Sounds/Lullaby/TranceStatic.ogg'].pause()
 			break
 		case 'gameLoop':
 			var variables = state.musicInfo.variables
 
-			let botPlay = state.smallFunctions.getConfig('botPlay')
 			let beat = state.musicBeat
 			let step = state.musicStep
 			let currentTime = state.music?.currentTime

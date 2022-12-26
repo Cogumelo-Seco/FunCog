@@ -84,7 +84,7 @@ export default async (canvas, game, Listener) => {
     
     let arrowYOpponent = game.state.smallFunctions.getConfig('DownScroll') ? (canvas.height-canvas.height/3) : canvas.height/3
 
-    for (let i in game.state.musicOpponentNotes) {
+    if (!performanceMode && game.state.smallFunctions.getConfig('OpponentNotes')) for (let i in game.state.musicOpponentNotes) {
         let note = game.state.musicOpponentNotes[i]
         let arrowInfo = game.state.arrowsInfoOpponent[note.arrowID]
 

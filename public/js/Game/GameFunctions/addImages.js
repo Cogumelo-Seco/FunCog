@@ -2,11 +2,12 @@ export default async (state) => {
     state.images = [
         { dir: 'imgs/logo.png' },
         { dir: 'imgs/alert.png' },
+        { dir: 'imgs/check.png', animationConfigDir: 'imgs/check.json' },
         
         /* ---- */
 
         { dir: 'BongoCat/BongoCat.png', animationConfigDir: 'BongoCat/BongoCat.json' },
-
+        
         /* ---- */
 
         { dir: 'imgs/cursor.png' },

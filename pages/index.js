@@ -41,7 +41,7 @@ const Game = (props) => {
             </Head>
             <body id="body">
                 <canvas id="gameCanvas" />
-                <video id="gameVideo" />
+                <video label="720p" id="gameVideo" />
 
                 <button id="chat-button" />
                 <div id="unreadMessageCounter" />

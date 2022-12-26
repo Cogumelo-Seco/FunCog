@@ -1,5 +1,6 @@
 export default async({ musicInfo, difficulty, listenerState, opponentPlayer, socket }, state) => {
     //try {
+        let videoElement = document.getElementById('gameVideo')
         let performanceMode = state.smallFunctions.getConfig('PerformanceMode')
 
         state.music = null
@@ -28,6 +29,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             notesImageDir: musicInfo.notesImageDir,
             backgroundImage: musicInfo.backgroundImage,
             menuColor: musicInfo.menuColor,
+            amountOfArrows: musicInfo.amountOfArrows,
             lifeDrain: difficulty.lifeDrain || 0,
             dev: musicInfo.dev,
             defaultBackgroundImage: musicInfo.backgroundImage,
@@ -96,7 +98,10 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                     state.musicOpponentNotes.push(newNoteInfo)
                 }
 
-                if (state.musicNotes.length+state.musicOpponentNotes.length >= musicNotesTotal) load(musicInfo.toLoad[0])
+                if (state.musicNotes.length+state.musicOpponentNotes.length >= musicNotesTotal) {
+                    videoElement.src = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/'+musicInfo.cutscene
+                    load(musicInfo.toLoad[0])
+                }
             }
         }
 
@@ -183,11 +188,12 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             state.music = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
             state.musicVoice = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
 
-            let videoElement = document.getElementById('gameVideo')
+            
 
             if (musicInfo.cutscene && !state.online) {
                 videoElement.onended = () => startMusic()
-                videoElement.src = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/'+musicInfo.cutscene
+                videoElement.play()
+                videoElement.style.display = 'block'
             } else startMusic()
             
             async function startMusic() {
@@ -328,6 +334,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
 
         if (name == 'death-toll') {
             if (note[1] == 8) {
+                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
                 arrowID = 4
                 type = 'Bronzong'
                 mustHitSection = true       

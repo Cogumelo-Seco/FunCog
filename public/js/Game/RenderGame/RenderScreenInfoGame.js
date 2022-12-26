@@ -37,7 +37,7 @@ export default async (canvas, game, Listener) => {
             //console.log()
             let ratingImageWidth = ratingImage.image.width*0.25
             let ratingImageHeight = ratingImage.image.height*0.25
-            let ratingImageY = (arrowsInfo[0].Y+(arrowsInfo[0].height**game.state.resizeNote*0.2)-(ratingImage.image.height*0.3/2))-50*percent
+            let ratingImageY = (arrowsInfo[0]?.Y+(arrowsInfo[0]?.height**game.state.resizeNote*0.2)-(ratingImage.image.height*0.3/2))-50*percent
             let ratingImageX = arrowsInfo[0]?.defaultX-50-game.state.smallFunctions.getConfig('SpaceBetweenArrows')-(ratingImageWidth/2)
 
             ctx.drawImage(ratingImage.image, ratingImageX, ratingImageY, ratingImageWidth, ratingImageHeight);

@@ -12,7 +12,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/tutorial/Inst.ogg' },
                         { dir: 'Musics/musics/tutorial/Voices.ogg' },
@@ -26,7 +26,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/bopeebo/Inst.ogg' },
                         { dir: 'Musics/musics/bopeebo/Voices.ogg' },
@@ -40,7 +40,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/fresh/Inst.ogg' },
                         { dir: 'Musics/musics/fresh/Voices.ogg' },
@@ -54,7 +54,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/dadbattle/Inst.ogg' },
                         { dir: 'Musics/musics/dadbattle/Voices.ogg' },
@@ -68,7 +68,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/spookeez/Inst.ogg' },
                         { dir: 'Musics/musics/spookeez/Voices.ogg' },
@@ -82,7 +82,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/south/Inst.ogg' },
                         { dir: 'Musics/musics/south/Voices.ogg' },
@@ -96,7 +96,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/monster/Inst.ogg' },
                         { dir: 'Musics/musics/monster/Voices.ogg' },
@@ -110,7 +110,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/pico/Inst.ogg' },
                         { dir: 'Musics/musics/pico/Voices.ogg' },
@@ -124,7 +124,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/philly/Inst.ogg' },
                         { dir: 'Musics/musics/philly/Voices.ogg' },
@@ -138,7 +138,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/blammed/Inst.ogg' },
                         { dir: 'Musics/musics/blammed/Voices.ogg' },
@@ -152,7 +152,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/satin-panties/Inst.ogg' },
                         { dir: 'Musics/musics/satin-panties/Voices.ogg' },
@@ -166,7 +166,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/high/Inst.ogg' },
                         { dir: 'Musics/musics/high/Voices.ogg' },
@@ -180,7 +180,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/milf/Inst.ogg' },
                         { dir: 'Musics/musics/milf/Voices.ogg' },
@@ -194,7 +194,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/cocoa/Inst.ogg' },
                         { dir: 'Musics/musics/cocoa/Voices.ogg' },
@@ -208,7 +208,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/eggnog/Inst.ogg' },
                         { dir: 'Musics/musics/eggnog/Voices.ogg' },
@@ -222,7 +222,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/winter-horrorland/Inst.ogg' },
                         { dir: 'Musics/musics/winter-horrorland/Voices.ogg' },
@@ -236,7 +236,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/senpai/Inst.ogg' },
                         { dir: 'Musics/musics/senpai/Voices.ogg' },
@@ -250,7 +250,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/roses/Inst.ogg' },
                         { dir: 'Musics/musics/roses/Voices.ogg' },
@@ -264,7 +264,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/FNFDefault.png',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/thorns/Inst.ogg' },
                         { dir: 'Musics/musics/thorns/Voices.ogg' },
@@ -279,7 +279,7 @@ export default async (state) => {
                     cutscene: 'week7/ughCutscene.mp4',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/ugh/Inst.mp3' },
                         { dir: 'Musics/musics/ugh/Voices.mp3' },
@@ -294,7 +294,7 @@ export default async (state) => {
                     cutscene: 'week7/gunsCutscene.mp4',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/guns/Inst.mp3' },
                         { dir: 'Musics/musics/guns/Voices.mp3' },
@@ -309,7 +309,7 @@ export default async (state) => {
                     cutscene: 'week7/stressCutscene.mp4',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     toLoad: [
                         { dir: 'Musics/musics/stress/Inst.mp3' },
                         { dir: 'Musics/musics/stress/Voices.mp3' },
@@ -1329,7 +1329,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: 'backgrounds/Lullaby.jpeg',
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1347,7 +1347,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: 'backgrounds/Frostbite.jpeg',
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1363,7 +1363,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1378,7 +1378,8 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
+                    cutscene: 'Lullaby/Monochrome.mp4',
                     backgroundImage: 'backgrounds/monochrome.png',
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1401,7 +1402,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: 'backgrounds/monochrome.png',
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1419,7 +1420,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1433,7 +1434,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1443,12 +1444,13 @@ export default async (state) => {
                 },
                 {
                     dev: true,
+                    amountOfArrows: '5K',
                     name: 'Death-Toll',
                     menuColor: '#572108',
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1464,7 +1466,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1479,7 +1481,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1494,7 +1496,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1509,8 +1511,9 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: null,
+                    cutscene: 'Lullaby/Shinto.mp4',
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'Musics/musics/shinto/Inst.ogg' },
@@ -1524,7 +1527,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1555,7 +1558,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1570,7 +1573,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1617,7 +1620,7 @@ export default async (state) => {
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/VSTabi/',
                     splashDir: 'Arrows/VSTabi/splash.png',
-                    splashResize: 1.5,
+                    splashResize: 1.4,
                     backgroundImage: 'backgrounds/VSTabi.jpg',
                     mod: 'VSTabi',
                     toLoad: [
