@@ -84,6 +84,7 @@ export default async (canvas, game, Listener) => {
             ctx.restore()
 
             ctx.globalAlpha = game.state.alphaHUD
+            ctx.shadowBlur = 0
         }
 
         game.state.arrowsWidth += arrowWidth**resizeNote+spaceBetweenArrows
@@ -155,6 +156,7 @@ export default async (canvas, game, Listener) => {
             ctx.restore()
 
             ctx.globalAlpha = game.state.alphaHUD
+            ctx.shadowBlur = 0
         }
 
         game.state.arrowsWidthOpponent += arrowWidth**resizeNoteOpponent+spaceBetweenArrowsOpponent
