@@ -1297,7 +1297,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: 'backgrounds/Lullaby.jpeg',
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1316,7 +1316,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: 'backgrounds/Lullaby.jpeg',
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1335,7 +1335,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: 'backgrounds/Lullaby.jpeg',
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1354,7 +1354,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: 'backgrounds/Frostbite.jpeg',
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1371,7 +1371,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1387,7 +1387,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     cutscene: 'Lullaby/Monochrome.mp4',
                     backgroundImage: 'backgrounds/monochrome.png',
                     mod: 'VSLullaby',
@@ -1412,7 +1412,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: 'backgrounds/monochrome.png',
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1431,7 +1431,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1446,7 +1446,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1463,7 +1463,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1480,7 +1480,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1496,7 +1496,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1512,7 +1512,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1528,7 +1528,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: null,
                     cutscene: 'Lullaby/Shinto.mp4',
                     mod: 'VSLullaby',
@@ -1545,7 +1545,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1577,7 +1577,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1593,7 +1593,7 @@ export default async (state) => {
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.4,
+                    splashResize: 1.5,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1606,7 +1606,6 @@ export default async (state) => {
                 
             ]
         },
-
         {
             name: 'VS Tabi',
             menuColor: 'rgb(72, 100, 120)',

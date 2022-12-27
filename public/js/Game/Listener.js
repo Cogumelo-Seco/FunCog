@@ -125,8 +125,8 @@ export default function createListener(socket) {
                     setTimeout(() => state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = botPlay, 500)
                 }
 
-                if (keyPressed == 'Enter' && on && document.getElementById('gameVideo').src && state.game.state.music.currentTime <= 0) {
-                    let gameVideoElement = document.getElementById('gameVideo')
+                let gameVideoElement = document.getElementById('gameVideo')
+                if (keyPressed == 'Enter' && on && gameVideoElement.duration >= 6 && state.game.state.music.currentTime <= 0) {
                     gameVideoElement.currentTime = gameVideoElement.duration
                     gameVideoElement.style.display = 'none'
                 }

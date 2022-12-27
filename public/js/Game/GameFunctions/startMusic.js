@@ -100,7 +100,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
 
                 if (state.musicNotes.length+state.musicOpponentNotes.length >= musicNotesTotal) {
                     videoElement.innerHTML = `
-                        <source label="720p" preload src="https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/${musicInfo.cutscene}" type="video/mp4" />
+                        <source label="720p" id="gameVideoSource" src="https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/${musicInfo.cutscene}" type="video/mp4" />
                     `
                     load(musicInfo.toLoad[0])
                 }
