@@ -3,7 +3,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 		case 'loaded':
 			let options = JSON.parse(JSON.stringify(state.selectSettingsOption.settingsOptions))
 
-			for (let i in state.arrowsInfoOpponent) {
+			if (!state.online) for (let i in state.arrowsInfoOpponent) {
 				state.arrowsInfoOpponent[i].alpha = 0
 				state.arrowsInfoOpponent[i].noteAlpha = 0
 			}
@@ -11,9 +11,13 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			for (let i in state.arrowsInfo) {
 				state.arrowsInfo[i].shadowBlur = 15
 				state.arrowsInfo[i].noteShadowBlur = 15
+				state.arrowsInfoOpponent[i].shadowBlur = 15
+				state.arrowsInfoOpponent[i].noteShadowBlur = 15
 				
 				state.arrowsInfo[i].shadowColor = '#d20ef1'
 				state.arrowsInfo[i].noteShadowColor = '#d20ef1'
+				state.arrowsInfoOpponent[i].shadowColor = '#d20ef1'
+				state.arrowsInfoOpponent[i].noteShadowColor = '#d20ef1'
 			}
 
 			state.musicInfo.variables = {
@@ -23,7 +27,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				MiddleScroll: options.find((g) => g.id == 'MiddleScroll').content
 			}
 
-			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content = true
+			if (!state.online) state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content = true
 			break
         case 'started':
 			break
@@ -45,6 +49,8 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				if (!variables.pauseAlpha) {
 					state.arrowsInfo[i].alpha = variables.noteAlpha
 					state.arrowsInfo[i].noteAlpha = variables.noteAlpha
+					state.arrowsInfoOpponent[i].alpha = variables.noteAlpha
+					state.arrowsInfoOpponent[i].noteAlpha = variables.noteAlpha
 				}
 			}
             break

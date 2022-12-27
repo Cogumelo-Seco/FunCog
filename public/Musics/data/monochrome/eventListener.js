@@ -46,9 +46,9 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			state.countdown = 0
 			state.alphaHUD = 0
 
-			for (let i in state.arrowsInfoOpponent) {
-				state.arrowsInfoOpponent[i].alpha = 0
-				state.arrowsInfoOpponent[i].noteAlpha = 0
+			for (let i in state[state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent']) {
+				state[state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent'][i].alpha = 0
+				state[state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent'][i].noteAlpha = 0
 			}
 
 			break

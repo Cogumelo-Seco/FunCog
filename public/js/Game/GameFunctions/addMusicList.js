@@ -1456,7 +1456,6 @@ export default async (state) => {
                     ]
                 },
                 {
-                    dev: true,
                     amountOfArrows: '5K',
                     name: 'Death-Toll',
                     menuColor: '#572108',

@@ -9,6 +9,14 @@ export default function codesFunction(state, stateListener, socket) {
         if (server && server.playerData2) {
             state.waiting = false
             state.musicInfoOpponent = state.musicInfo.playerId == 1 ? server.playerData2 : server.playerData1
+            /*for (let i in state.musicInfoOpponent.rating) {
+                state.musicInfoOpponent.rating[i].time += 500
+                /*let rating = state.musicInfoOpponent.rating[i]
+                if (!state.opponentRatingLoaded[rating.time]) {
+                    state.opponentRatingLoaded[rating.time] = true
+                    rating.time = +new Date()
+                }
+            }*/
         }
     })
 

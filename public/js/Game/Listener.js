@@ -99,7 +99,7 @@ export default function createListener(socket) {
                 if (button && on && button.gameStage?.includes(state.game.state.gameStage) && button.keyPress?.includes(keyPressed)) button.onClick()
             }
 
-            for (let arrowID in state.game.state.arrowsInfo) {
+            if (!state.pauseGameKeys) for (let arrowID in state.game.state.arrowsInfo) {
                 if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote',  click: false }
 
                 let getKey = (arrowID) => {
@@ -256,7 +256,7 @@ export default function createListener(socket) {
                         break
                     case 'Enter':
                         let filtredServers = state.game.state.selectServerOption.listServers.filter(s => s.open)
-                        if (!state.game.state.debug) state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
+                        //if (!state.game.state.debug) state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
 
                         if (state.game.state.selectServerOption.createServer) {
                             state.game.state.smallFunctions.redirectGameStage('selectMusic')

@@ -50,6 +50,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             variables: {},
             playerId: opponentPlayer ? 2 : 1,
             playerServerId: socket.id,
+            ratings: [],
             judgements: {
                 shit: 0,
                 bad: 0,
@@ -81,7 +82,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             for (let a in musicNotes[i].sectionNotes) {
                 let noteInfo = musicNotes[i].sectionNotes[a]
                 let mustHitSection = musicNotes[i].mustHitSection
-                mustHitSection = opponentPlayer ? mustHitSection ? false : true : mustHitSection
+                //mustHitSection = opponentPlayer ? mustHitSection ? false : true : mustHitSection
 
                 if (noteInfo[1] > 3 && noteInfo[1] < 8) {
                     noteInfo[1] = noteInfo[1]%4

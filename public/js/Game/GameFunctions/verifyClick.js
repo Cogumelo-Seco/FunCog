@@ -1,8 +1,12 @@
 export default async({ arrowID, listenerState, bot }, state) => {
     let scrollSpeed = state.smallFunctions.getConfig('ScrollSpeed')
-    const getHitBoxSize = (arrowID) => state.arrowsInfo[arrowID]?.height**state.resizeNote*(scrollSpeed > 1 ? scrollSpeed : 1)*(state.musicBPM/130 > 1 ? state.musicBPM/130 : 1)
 
-    let notes = state.musicNotes.filter((n) => {
+    let arrowsInfo = state[state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo']
+    let musicNotes = state[state.musicInfo.playerId == 2 ? 'musicOpponentNotes' : 'musicNotes']
+
+    const getHitBoxSize = (arrowID) => arrowsInfo[arrowID]?.height**state.resizeNote*(scrollSpeed > 1 ? scrollSpeed : 1)*(state.musicBPM/130 > 1 ? state.musicBPM/130 : 1)
+
+    let notes = musicNotes.filter((n) => {
         n.hitNote = (n.time-state.music?.currentTime)*1000
         return n.arrowID == arrowID && !n.disabled &&
         n.Y >= -(getHitBoxSize(n.arrowID)) &&
@@ -23,8 +27,8 @@ export default async({ arrowID, listenerState, bot }, state) => {
         state.musicEventListener('noteClick', { noteClickAuthor: 'player', note, listenerState }, state)
 
         note.clicked = true
-        state.arrowsInfo[note.arrowID].splashTime = +new Date()
-        state.arrowsInfo[note.arrowID].splashFrame = 0
+        arrowsInfo[note.arrowID].splashTime = +new Date()
+        arrowsInfo[note.arrowID].splashFrame = 0
 
         if (note.errorWhenNotClicking) {
             state.musicInfo.health += 2
@@ -36,20 +40,21 @@ export default async({ arrowID, listenerState, bot }, state) => {
         if (state.personalizedNotes[note.type]) {
             let pressImage = state.personalizedNotes[note.type].pressImage
             listenerState.arrows[arrowID].state = pressImage || 'onNote'
-            state.arrowsInfo[note.arrowID].splashDir = state.personalizedNotes[note.type].splashDir || state.musicInfo.splashDir
-        } else state.arrowsInfo[note.arrowID].splashDir = state.musicInfo.splashDir
+            arrowsInfo[note.arrowID].splashDir = state.personalizedNotes[note.type].splashDir || state.musicInfo.splashDir
+        } else arrowsInfo[note.arrowID].splashDir = state.musicInfo.splashDir
 
         let rating = state.calculateRating(bestNote.hitNote)
         state.musicInfo.accuracyMedia.push(rating.media)
         state.musicInfo.score += Number.parseInt(state.scoreToAdd*(rating.media/100))
         state.musicInfo.judgements[rating.name] += 1
 
-        state.ratings.unshift({
+        state.musicInfo.ratings.unshift({
             rating,
             hitNote: bestNote.hitNote*-1,
-            time: +new Date()
+            time: +new Date(),
+            defaultTime: +new Date(),
         })
-        state.ratings.splice(10)
+        state.musicInfo.ratings.splice(10)
 
         if (note.hold > 0) {
             let loop = setInterval(() => {
@@ -83,7 +88,7 @@ export default async({ arrowID, listenerState, bot }, state) => {
         noteClick(bestNote)
     }*/
 
-    if (!listenerState.pauseGameKeys && !notes[0] && (state.smallFunctions.getConfig('GhostTapping') ? state.musicNotes.filter((n) => !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(getHitBoxSize(n.arrowID)*3))[0] : true)) {
+    if (!listenerState.pauseGameKeys && !notes[0] && (state.smallFunctions.getConfig('GhostTapping') ? musicNotes.filter((n) => !n.clicked && !n.disabled && n.Y <= 0 && n.Y >= -(getHitBoxSize(n.arrowID)*3))[0] : true)) {
         state.musicInfo.accuracyMedia.push(1)
         state.musicInfo.misses += 1
         state.musicInfo.score -= Number.parseInt(state.scoreToAdd/2)

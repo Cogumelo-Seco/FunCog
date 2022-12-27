@@ -3,7 +3,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 		case 'loaded':
 			let options = JSON.parse(JSON.stringify(state.selectSettingsOption.settingsOptions))
 
-			for (let i in state.arrowsInfoOpponent) {
+			if (!state.online) for (let i in state.arrowsInfoOpponent) {
 				state.arrowsInfoOpponent[i].alpha = 0
 				state.arrowsInfoOpponent[i].noteAlpha = 0
 			}
@@ -13,7 +13,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				MiddleScroll: options.find((g) => g.id == 'MiddleScroll').content
 			}
 
-			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content = true
+			if (!state.online) state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content = true
 			break
 		case 'end':
 			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content = state.musicInfo.variables.MiddleScroll

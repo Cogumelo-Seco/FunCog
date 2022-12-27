@@ -1,19 +1,36 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
+    let invertArrowPos = game.state.musicInfo.playerId == 2 ? game.state.invertArrowPos ? false : true : game.state.invertArrowPos
+
     let performanceMode = game.state.smallFunctions.getConfig('PerformanceMode')
     let onNotesSplashes = game.state.smallFunctions.getConfig('Splashes')
+    let downScroll = game.state.smallFunctions.getConfig('DownScroll')
+    let middleScroll = game.state.smallFunctions.getConfig('MiddleScroll')
 
     let resizeNote = game.state.resizeNote
     let spaceBetweenArrows = game.state.smallFunctions.getConfig('SpaceBetweenArrows')**resizeNote
     let arrowsWidth = game.state.arrowsWidth
 
-    let arrowX = game.state.smallFunctions.getConfig('MiddleScroll') ? canvas.width/2-(arrowsWidth/2) : canvas.width-(arrowsWidth+(arrowsSize**resizeNote+spaceBetweenArrows))
-    let arrowY = game.state.smallFunctions.getConfig('DownScroll') ? canvas.height-game.state.arrowsYLineMargin : game.state.arrowsYLineMargin
+    let arrowX = middleScroll ? canvas.width/2-(arrowsWidth/2) : invertArrowPos ? canvas.width/4-arrowsWidth/2 : canvas.width-(arrowsWidth+(canvas.width/4-arrowsWidth/2))
+    let arrowY = downScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin
 
     game.state.arrowsWidth = 0
 
-    let arrowsInfo = Object.values(game.state.arrowsInfo).sort((a, b) => a.pos-b.pos)
+    let resizeNoteOpponent = game.state.resizeNoteOpponent
+    let spaceBetweenArrowsOpponent = game.state.smallFunctions.getConfig('SpaceBetweenArrows')**resizeNoteOpponent
+    let arrowsWidthOpponent = game.state.arrowsWidthOpponent
+
+    let arrowXOpponent = middleScroll ? invertArrowPos ? canvas.width-canvas.width/6-(arrowsWidthOpponent/2) : canvas.width/6-(arrowsWidthOpponent/2) : invertArrowPos ? canvas.width-(arrowsWidthOpponent+(canvas.width/4-arrowsWidthOpponent/2)) : canvas.width/4-arrowsWidthOpponent/2
+    let arrowYOpponent = middleScroll ? downScroll ? (canvas.height-canvas.height/3) : canvas.height/3 : downScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin
+
+    game.state.arrowsWidthOpponent = 0
+
+    let arrowsInfo = Object.values(game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo']).sort((a, b) => a.pos-b.pos)
+    let arrowsInfoOpponent = Object.values(game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent']).sort((a, b) => a.pos-b.pos)
+    let musicNotes = game.state[game.state.musicInfo.playerId == 2 ? 'musicOpponentNotes' : 'musicNotes']
+    let musicOpponentNotes = game.state[game.state.musicInfo.playerId == 2 ? 'musicNotes' : 'musicOpponentNotes']
+
     if (game.state.musicInfo.notesImageDir) for (let i in arrowsInfo) {
         let arrowID = arrowsInfo[i].arrowID
         let arrowInfo = arrowsInfo[i]
@@ -40,7 +57,7 @@ export default async (canvas, game, Listener) => {
         }
 
         if (Listener.state.arrows[arrowID]?.click) {
-            let note = game.state.musicNotes.find(n => (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.arrowID == arrowID && n.Y >= -(arrowHeight**game.state.resizeNote) && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
+            let note = musicNotes.find(n => (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.arrowID == arrowID && n.Y >= -(arrowHeight**game.state.resizeNote) && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
             let onNote = Listener.state.arrows[arrowID]?.state == 'onNote' && note ? true : false
 
             if (Listener.state.arrows[arrowID]?.state == 'onNote' || Listener.state.arrows[arrowID]?.state == 'noNote') arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}${onNote ? '' : '-no'}`]
@@ -91,16 +108,6 @@ export default async (canvas, game, Listener) => {
         arrowX += arrowWidth**resizeNote+spaceBetweenArrows
     }
 
-    let resizeNoteOpponent = game.state.resizeNoteOpponent
-    let spaceBetweenArrowsOpponent = game.state.smallFunctions.getConfig('SpaceBetweenArrows')**resizeNoteOpponent
-    let arrowsWidthOpponent = game.state.arrowsWidthOpponent
-
-    let arrowXOpponent = game.state.smallFunctions.getConfig('MiddleScroll') ? canvas.width/6-(arrowsWidthOpponent/2) : arrowsSize**resizeNoteOpponent+spaceBetweenArrowsOpponent
-    let arrowYOpponent = game.state.smallFunctions.getConfig('DownScroll') ? (canvas.height-canvas.height/3) : canvas.height/3
-
-    game.state.arrowsWidthOpponent = 0
-
-    let arrowsInfoOpponent = Object.values(game.state.arrowsInfoOpponent).sort((a, b) => a.pos-b.pos)
     if (game.state.musicInfo.notesImageDir && !performanceMode && game.state.smallFunctions.getConfig('OpponentNotes')) for (let i in arrowsInfoOpponent) {
         let arrowID = arrowsInfoOpponent[i].arrowID
         let arrowInfo = arrowsInfoOpponent[i]
@@ -116,7 +123,7 @@ export default async (canvas, game, Listener) => {
         arrowInfo.width = arrowWidth
         arrowInfo.height = arrowHeight
 
-        let note = game.state.musicOpponentNotes.find(n => (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
+        let note = musicOpponentNotes.find(n => (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
         let onClickNoteOpponent = game.state.musicInfoOpponent.arrows && game.state.musicInfoOpponent.arrows[arrowID]?.click
         if (note || onClickNoteOpponent) {
             let pressImage = game.state.personalizedNotes[note?.type]?.pressImage
