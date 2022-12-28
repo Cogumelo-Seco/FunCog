@@ -102,9 +102,9 @@ export default async (canvas, game, Listener) => {
 
             ctx.restore()
 
-            let key = game.state.smallFunctions.getKey(arrowID).replace(/Key/g, '')
+            let key = game.state.smallFunctions.getKey(arrowID).replace(/Key/g, '').replace(/Arrow/g, '')
 
-            ctx.font = 'bold 20px Arial'
+            ctx.font = 'bold 15px Arial'
 
             let percent = game.state.animations.arrowKeys.frame/game.state.animations.arrowKeys.endFrame
             if (percent < 1) {
@@ -112,10 +112,10 @@ export default async (canvas, game, Listener) => {
                 ctx.globalAlpha = arrowKeysAlpha <= game.state.alphaHUD ? arrowKeysAlpha : game.state.alphaHUD
 
                 ctx.fillStyle = 'black'
-                ctx.fillText(key, arrowInfo.X+(arrowInfo.width**resizeNote)/2-(ctx.measureText(key).width/2)+2, arrowInfo.Y+(downScroll ? -(arrowInfo.height**resizeNote/2)-20 : (arrowInfo.height**resizeNote/2)+30)+2)
+                ctx.fillText(key, arrowInfo.X+(arrowInfo.width**resizeNote)/2-(ctx.measureText(key).width/2)+2, arrowInfo.Y+(downScroll ? -(arrowInfo.height**resizeNote/2)-20 : (arrowInfo.height**resizeNote/2)+25)+2)
 
                 ctx.fillStyle = 'white'
-                ctx.fillText(key, arrowInfo.X+(arrowInfo.width**resizeNote)/2-(ctx.measureText(key).width/2), arrowInfo.Y+(downScroll ? -(arrowInfo.height**resizeNote/2)-20 : (arrowInfo.height**resizeNote/2)+30))
+                ctx.fillText(key, arrowInfo.X+(arrowInfo.width**resizeNote)/2-(ctx.measureText(key).width/2), arrowInfo.Y+(downScroll ? -(arrowInfo.height**resizeNote/2)-20 : (arrowInfo.height**resizeNote/2)+25))
             }
 
             ctx.globalAlpha = game.state.alphaHUD

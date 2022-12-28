@@ -46,7 +46,6 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 			break
 		case 'gameLoop':
 			let variables = state.musicInfo.variables
-			let arrowsSize = arrowsInfo[0]?.height
 
 			function intro_outro(player, arrowID, add) {
 				arrowMove({ speed: 3, Y: state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].defaultY, arrowID, opponent: player ? false : true })
