@@ -150,8 +150,8 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 								variables.scenary2 = true
 								state.backgroundInfo = {
 									zoom: 500,
-									defaultMovementX: -100,
-									defaultMovementY: 0,
+									defaultMovementX: 20,
+									defaultMovementY: 20,
 									movementX: 20,
 									movementY: 20,
 									rotation: 0

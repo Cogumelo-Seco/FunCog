@@ -78,7 +78,7 @@ export default async (state) => {
             name: 'Bongo Cat',
             id: 'botPlay',
             type: 'Boolean',
-            content: false
+            content: true
         },
         {
             name: 'Down Scroll',

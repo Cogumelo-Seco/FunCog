@@ -1,6 +1,6 @@
 function createGame(Listener, canvas, socket) {
     const state = {
-        debug: false,
+        debug: true,
         fps: '0-0',
         ping: null,
         renderType: 'limited',
