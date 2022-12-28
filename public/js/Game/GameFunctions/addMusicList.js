@@ -1511,7 +1511,7 @@ export default async (state) => {
                     crown: true,
                     name: 'Bygone-Purpose',
                     menuColor: '#4e4732',
-                    difficulties: [ 2, 3 ],
+                    difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
