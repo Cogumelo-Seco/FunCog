@@ -14,9 +14,20 @@ export default async (canvas, game, Listener) => {
     }
     ctx.globalAlpha = 1
     
-    if (game.state.smallFunctions.getConfig('ShowBackground')) canvas.style.backgroundImage = `url(https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${game.state.musicInfo.backgroundImage})`
-    else canvas.style.backgroundImage = null
+    let gameBackground = document.getElementById('gameBackground')
+    gameBackground.style.display = 'none'
+    if (game.state.smallFunctions.getConfig('ShowBackground') && (game.state.musicInfo.backgroundImage || game.state.musicInfo.dynamicBackgroundImage)) {
+        if (game.state.musicInfo.dynamicBackgroundImage) {
+            gameBackground.style.display = 'block'
+            gameBackground.style.left = game.state.backgroundInfo.movementX-(game.state.backgroundInfo.zoom/2)+'px'
+            gameBackground.style.top = game.state.backgroundInfo.movementY-(game.state.backgroundInfo.zoom/2)+'px'
+            gameBackground.style.width = window.innerWidth+(game.state.backgroundInfo.zoom)+'px'
+            gameBackground.style.height = window.innerHeight+(game.state.backgroundInfo.zoom)+'px'
+            gameBackground.style.transform = `rotate(${game.state.backgroundInfo.rotation}deg)`
+            gameBackground.src = `https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${game.state.musicInfo.dynamicBackgroundImage}`
+        } canvas.style.backgroundImage = `url(https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${game.state.musicInfo.backgroundImage})`
+    } else canvas.style.backgroundImage = null
     
-    ctx.fillStyle = `rgba(0, 0, 0, 0.7)`
+    ctx.fillStyle = `rgba(0, 0, 0, ${game.state.gameBackgroundOfuscation})`
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 }

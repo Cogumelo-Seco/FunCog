@@ -206,13 +206,13 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			} else state.musicInfo.name = musicName
 
 			let imageSpawn = state.images['imgs/VSLullaby/gold.png'].animationConfig['spawn'][state.animations['GoldSpawn'].frame]
-			let Xpint = state.canvas.width*0.49
+			let Xpoint = state.canvas.width*0.49
 			let Ypoint = state.canvas.height/2-(imageSpawn.height/2)+imageSpawn.height
 			state.musicInfo.popupsBackground.Gold = {
 				image: `imgs/VSLullaby/gold.png`,
 				animationDir: 'spawn',
 				frame: state.animations['GoldSpawn'].frame,
-				x: Xpint-imageSpawn.width/2,
+				x: Xpoint-imageSpawn.width/2,
 				y: Ypoint-imageSpawn.height,
 			}
 
@@ -224,7 +224,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						image: variables.goldAnimtionState == 'normal' ? 'imgs/VSLullaby/gold.png' : 'imgs/VSLullaby/goldHeadSheet.png',
 						animationDir: 'idle',
 						frame: state.animations[variables.goldAnimtionState == 'normal' ? 'GoldIdle' : 'GoldIdleHeadSheet'].frame,
-						x: Xpint-imageInfo.width/2,
+						x: Xpoint-imageInfo.width/2,
 						y: Ypoint-imageInfo.height,
 						width: imageInfo.frameWidth,
 						height: imageInfo.frameHeight
@@ -237,7 +237,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						image: `imgs/VSLullaby/goldHeadRip.png`,
 						animationDir: 'frames',
 						frame: state.animations['GoldHeadRip'].frame,
-						x: Xpint-imageInfo.width/2,
+						x: Xpoint-imageInfo.width/2,
 						y: Ypoint-imageInfo.height
 					}
 				} else if (variables.animation == 'noMore') {
@@ -251,7 +251,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						image: `imgs/VSLullaby/goldNoMore.png`,
 						animationDir: 'frames',
 						frame: state.animations['GoldNoMore'].frame,
-						x: Xpint-imageInfo.width/2,
+						x: Xpoint-imageInfo.width/2,
 						y: Ypoint-imageInfo.height,
 						width: imageInfo.frameWidth,
 						height: imageInfo.frameHeight
@@ -281,7 +281,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						image: variables.goldAnimtionState == 'normal' ? 'imgs/VSLullaby/gold.png' : 'imgs/VSLullaby/goldHeadSheet.png',
 						animationDir: variables.animation,
 						frame,
-						x: Xpint-imageInfo.width/2+(imageInfo.frameX),
+						x: Xpoint-imageInfo.width/2+(imageInfo.frameX),
 						y: Ypoint-imageInfo.height+(imageInfo.frameY),
 						width: imageInfo.frameWidth,
 						height: imageInfo.frameHeight

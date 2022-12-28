@@ -62,7 +62,7 @@ export default async({ arrowID, listenerState, bot }, state) => {
                     note.disabled = true
                     clearInterval(loop)
                 } else if (!state.music.paused) {
-                    state.musicEventListener('noteClick', { noteClickAuthor: 'player', note, listenerState }, state)
+                    state.musicEventListener('noteClick', { noteClickAuthor: 'player', note, listenerState, hold: true }, state)
                     state.musicInfo.health += 0.2
                     state.musicInfo.score += Number.parseInt((state.scoreToAdd/2)*(rating.media/100))
                 }

@@ -46,9 +46,9 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			state.countdown = 0
 			state.alphaHUD = 0
 
-			for (let i in state.arrowsInfoOpponent) {
-				state.arrowsInfoOpponent[i].alpha = 0
-				state.arrowsInfoOpponent[i].noteAlpha = 0
+			for (let i in state[state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent']) {
+				state[state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent'][i].alpha = 0
+				state[state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent'][i].noteAlpha = 0
 			}
 
 			break
@@ -148,13 +148,13 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			}
 
 			let imageSpawn = state.images['imgs/VSLullaby/gold.png'].animationConfig['spawn'][state.animations['GoldSpawn'].frame]
-			let Xpint = state.canvas.width*0.49
+			let Xpoint = state.canvas.width*0.49
 			let Ypoint = state.canvas.height/2-(imageSpawn.height/2)+imageSpawn.height
 			state.musicInfo.popupsBackground.Gold = {
 				image: `imgs/VSLullaby/gold.png`,
 				animationDir: 'spawn',
 				frame: state.animations['GoldSpawn'].frame,
-				x: Xpint-imageSpawn.width/2,
+				x: Xpoint-imageSpawn.width/2,
 				y: Ypoint-imageSpawn.height,
 			}
 
@@ -184,7 +184,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						image: `imgs/VSLullaby/gold.png`,
 						animationDir: variables.animation,
 						frame,
-						x: Xpint-imageInfo.width/2+(imageInfo.frameX),
+						x: Xpoint-imageInfo.width/2+(imageInfo.frameX),
 						y: Ypoint-imageInfo.height+(imageInfo.frameY),
 						width: imageInfo.frameWidth,
 						height: imageInfo.frameHeight
@@ -196,7 +196,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						image: `imgs/VSLullaby/gold.png`,
 						animationDir: 'idle',
 						frame: state.animations['GoldIdle'].frame,
-						x: Xpint-imageInfo.width/2,
+						x: Xpoint-imageInfo.width/2,
 						y: Ypoint-imageInfo.height,
 						width: imageInfo.frameWidth,
 						height: imageInfo.frameHeight

@@ -1406,7 +1406,6 @@ export default async (state) => {
                     ]
                 },
                 {
-                    crown: true,
                     name: 'Monochrome-V1',
                     menuColor: 'rgb(120, 20, 20)',
                     difficulties: [ 2, 3 ],
@@ -1505,16 +1504,27 @@ export default async (state) => {
                     ]
                 },
                 {
-                    dev: true,
+                    crown: true,
                     name: 'Bygone-Purpose',
-                    menuColor: '#1d1d4c',
+                    menuColor: '#4e4732',
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
-                    backgroundImage: null,
+                    dynamicBackgroundImage: 'imgs/VSLullaby/Bygone/Background.png',
+                    backgroundImage: 'backgrounds/Bygone.png',
                     mod: 'VSLullaby',
                     toLoad: [
+                        { dir: 'imgs/VSLullaby/Bygone/BigHypno.png' },
+                        { dir: 'imgs/VSLullaby/Bygone/AlexisTransition.png' },
+                        { dir: 'imgs/VSLullaby/Bygone/Bridge.png' },
+                        { dir: 'imgs/VSLullaby/Bygone/Bridge2.png' },
+                        { dir: 'imgs/VSLullaby/Bygone/BridgeRope.png' },
+                        { dir: 'imgs/VSLullaby/Bygone/BridgeRope2.png' },
+                        { dir: 'imgs/VSLullaby/Bygone/HeavensGate.png', animationConfigDir: 'imgs/VSLullaby/Bygone/HeavensGate.json' },
+                        { dir: 'imgs/VSLullaby/Bygone/AlexisPassing.png', animationConfigDir: 'imgs/VSLullaby/Bygone/AlexisPassing.json' },
+                        { dir: 'imgs/VSLullaby/Bygone/Alexis.png', animationConfigDir: 'imgs/VSLullaby/Bygone/Alexis.json' },
+                        { dir: 'imgs/VSLullaby/Bygone/smolHypno.png', animationConfigDir: 'imgs/VSLullaby/Bygone/smolHypno.json' },
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
                         { dir: 'Musics/musics/bygone-purpose/Inst.ogg' },
                         { dir: 'Musics/musics/bygone-purpose/Voices.ogg' },
@@ -1529,7 +1539,6 @@ export default async (state) => {
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
                     backgroundImage: null,
-                    cutscene: 'Lullaby/Shinto.mp4',
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
@@ -1546,6 +1555,7 @@ export default async (state) => {
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
                     backgroundImage: null,
+                    cutscene: 'Lullaby/Shinto.mp4',
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },

@@ -40,6 +40,7 @@ const Game = (props) => {
                 <link rel="stylesheet" href="/css/game/resizable.css" />
             </Head>
             <body id="body">
+                <img id="gameBackground" src="https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/imgs/VSLullaby/Bygone/Background2.png" />
                 <canvas id="gameCanvas"/>
                 <video preload="auto" id="gameVideo" />
 

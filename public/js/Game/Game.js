@@ -5,6 +5,7 @@ function createGame(Listener, canvas, socket) {
         ping: null,
         renderType: 'limited',
         customBongPosition: { X: null, Y: null },
+        gameBackgroundOfuscation: 0.7,
         myMessageConfig: {
             author: {
                 name: `Guest${Math.floor(Math.random()*1000)}`,
@@ -59,6 +60,7 @@ function createGame(Listener, canvas, socket) {
         arrowsMargin: 80,
         arrowsYLine: 0,
         alphaHUD: 1,
+        speed: 1,
         scoreToAdd: 200,
         invertArrowPos: false,
         
@@ -91,6 +93,14 @@ function createGame(Listener, canvas, socket) {
         },
         musicInfoOpponent: {
             judgements: {}
+        },
+        backgroundInfo: {
+            zoom: 500,
+            defaultMovementX: -100,
+            defaultMovementY: 0,
+            movementX: 20,
+            movementY: 20,
+            rotation: 0
         },
         countdown: 4,
 
@@ -323,7 +333,7 @@ function createGame(Listener, canvas, socket) {
         }
 
         function moveNote(note, playerId, opponent) {
-            let newNoteY = -((note.time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM)*smallFunctions.getConfig('ScrollSpeed'))
+            let newNoteY = -((note.time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM)*smallFunctions.getConfig('ScrollSpeed')*state.speed)
             let oldNoteY = note.oldY || -musicDuration*1000
             if (newNoteY >= oldNoteY) {
                 note.Y = newNoteY
@@ -395,7 +405,6 @@ function createGame(Listener, canvas, socket) {
             if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) state.musicInfo.linearAccuracyMedia.push(state.musicInfo.accuracy || 1)
         }
 
-        if (state.music?.currentTime > 0 && state.music?.currentTime < state.music?.duration && !performanceMode) state.musicEventListener('gameLoopFullFPS', { listenerState: Listener.state }, state)
         if (state.gameLoopFPSControlTime+(performanceMode ? 40 : 20) <= +new Date()) {
             if (state.online && state.serverId) {
                 if (state.serverInfo.end == true) {

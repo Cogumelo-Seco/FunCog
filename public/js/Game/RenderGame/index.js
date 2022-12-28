@@ -20,6 +20,8 @@ export default async function renderGame(canvas, game, Listener) {
 
     let performanceMode = game.state.smallFunctions.getConfig('PerformanceMode')
 
+    if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration && !performanceMode) game.state.musicEventListener('gameLoopFullFPSBackground', { listenerState: Listener.state }, game.state)
+    //require('./RenderScreenGame').default(canvas, game, Listener)
     switch (game.state.gameStage) {
         case 'game':
             require('./RenderScreenGame').default(canvas, game, Listener)
@@ -61,6 +63,7 @@ export default async function renderGame(canvas, game, Listener) {
     require('./RenderScreenInformation').default(canvas, game, Listener)
 
     await game.gameLoop()
+    if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration && !performanceMode) game.state.musicEventListener('gameLoopFullFPS', { listenerState: Listener.state }, game.state)
 
     if (game.state.renderType == 'limited' || performanceMode) window.requestAnimationFrame(() => renderGame(canvas, game, Listener) )
     else setTimeout(() => renderGame(canvas, game, Listener) , 0)

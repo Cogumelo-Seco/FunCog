@@ -25,6 +25,15 @@ canvas#gameCanvas {
     background-size: cover;
 }
 
+img#gameBackground {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
 video#gameVideo {
     position: fixed;
     left: 0;
@@ -38,6 +47,7 @@ video#gameVideo {
 /* Chat */
 
 button#chat-button {
+    display: none;
     position: absolute;
     top: 5px;
     left: 5px;
