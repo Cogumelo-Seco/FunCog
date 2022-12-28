@@ -71,7 +71,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			state.alphaHUD = 0
 			state.gameBackgroundOfuscation = 0
 			state.countdown = 0
-			state.invertArrowPos = true
+			state.invertArrowPos = state.musicInfo.playerId == 2 ? false : true
 			state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content = false
 			break
 		case 'end':
@@ -127,7 +127,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			else if (state.alphaHUD == 0) variables.HUDFadeOut = false
 			if (variables.HUDFade && state.alphaHUD < 1) state.alphaHUD += 0.02
 			else if (state.alphaHUD == 1) variables.HUDFade = false
-			state.alphaHUD = state.alphaHUD > 1 ? 1 : state.alphaHUD <= 0 ? 0 : state.alphaHUD
+			state.alphaHUD = state.alphaHUD >= 1 ? 1 : state.alphaHUD <= 0 ? 0 : state.alphaHUD
 
 			let events = state.musicInfo.events
 			for (let i in events) {
@@ -194,7 +194,6 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 
 					if (event[2] == 'HUD Fade' || (event[2] == 'HUD Fade Mid Song' && state.alphaHUD < 1)) variables.HUDFade = true
 					if (event[2] == 'HUD Fade Mid Song' && state.alphaHUD >= 1) {
-						for (let i in state.arrowsInfo) state.arrowsInfo[i].alpha = 1
 						variables.HUDFadeOut = true
 					}
 				}

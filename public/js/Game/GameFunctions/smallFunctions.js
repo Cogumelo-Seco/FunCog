@@ -1,8 +1,13 @@
-export default (state) => {
+export default (state, Listener) => {
     return {
+        getKey: (arrowID) => {
+            let arrowsKey = (state.selectSettingsOption.settingsOptions.find(c => c[Object.keys(state.arrowsInfo).length+'K']))[Object.keys(state.arrowsInfo).length+'K']
+            return (arrowsKey.find(c => c.id == 'Arrow-'+arrowID))?.content
+        },
         redirectGameStage: async (newStage, oldStage) => {
             if (state.smallFunctions.getConfig('PerformanceMode')) state.animations.transition.frame = state.animations.transition.endFrame
             else state.animations.transition.frame = 0
+            state.gameStageTime = +new Date()
             state.oldGameStage = oldStage || state.gameStage
             state.gameStage = newStage
         },

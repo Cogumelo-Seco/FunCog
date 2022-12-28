@@ -1,4 +1,8 @@
 export default async (type, { noteClickAuthor, note, click, listenerState, difficulty, events }, state) => {
+	let resizeNote = state[state.musicInfo.playerId == 2 ? 'resizeNoteOpponent' : 'resizeNote']
+	let arrowsInfo = state[state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo']
+	let arrowsInfoOpponent = state[state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent']
+
     switch (type) {
 		case 'loaded':
 			let options = JSON.parse(JSON.stringify(state.selectSettingsOption.settingsOptions))
@@ -29,7 +33,6 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			let currentTime = state.music?.currentTime
 
 			let events = state.musicInfo.events
-			console.log(events)
 			for (let i in events) {
                 let event = events[i]
 
@@ -37,37 +40,38 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					if (event[2] == 'Missingno' && state.musicInfo.difficulty.name != 'Mania') {
 						let downScrool = Math.floor(Math.random()*100) > 50 ? true : false
 						state.selectSettingsOption.settingsOptions.find((g) => g.id == 'DownScroll').content = downScrool
-						let arrowSize = state.arrowsInfo[0]?.height
+						let arrowSize = arrowsInfo[0]?.height**resizeNote
 						let width = state.canvas.width
 						let height = state.canvas.height
 
-						for (let i in state.arrowsInfo) {
-							state.arrowsInfo[i].resetEnable = false
-							state.arrowsInfo[i].rotation = Math.floor(Math.random()*360)
+						for (let i in arrowsInfo) {
+							arrowsInfo[i].resetEnable = false
+							arrowsInfo[i].rotation = Math.floor(Math.random()*360)
+							arrowsInfo[i].noteRotation = arrowsInfo[i].rotation
 
 							if (i == 0) {
-								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
-								state.arrowsInfo[i].X = Math.floor(Math.random()*(width*0.24))
+								arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
+								arrowsInfo[i].X = Math.floor(Math.random()*(width*0.24))
 							}
 							if (i == 1) {
-								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
-								state.arrowsInfo[i].X = width/2-Math.floor(Math.random()*(width*0.24))
+								arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
+								arrowsInfo[i].X = width/2-Math.floor(Math.random()*(width*0.24))
 							}
 							if (i == 2) {
-								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
-								state.arrowsInfo[i].X = width/2+Math.floor(Math.random()*(width*0.24))
+								arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
+								arrowsInfo[i].X = width/2+Math.floor(Math.random()*(width*0.24))
 							}
 							if (i == 3) {
-								state.arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
-								state.arrowsInfo[i].X = width-Math.floor(Math.random()*(width*0.24))-arrowSize
+								arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
+								arrowsInfo[i].X = width-Math.floor(Math.random()*(width*0.24))-arrowSize
 							}
 						}
 			
-						for (let i in state.arrowsInfoOpponent) {
-							state.arrowsInfoOpponent[i].alpha = 0
-							state.arrowsInfoOpponent[i].noteAlpha = 0
-							state.arrowsInfoOpponent[i].resetEnable = false
-							state.arrowsInfoOpponent[i].X = -500
+						for (let i in arrowsInfoOpponent) {
+							arrowsInfoOpponent[i].alpha = 0
+							arrowsInfoOpponent[i].noteAlpha = 0
+							arrowsInfoOpponent[i].resetEnable = false
+							arrowsInfoOpponent[i].X = -500
 						}
 
 						let bongoImageData = state.images['BongoCat/BongoCat.png']

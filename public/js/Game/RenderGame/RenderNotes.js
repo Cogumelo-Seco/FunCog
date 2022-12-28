@@ -45,7 +45,10 @@ export default async (canvas, game, Listener) => {
                 for (let i = 0;i <= note.hold;i += holdImagePos?.height) {
                     holdY = downScroll ? holdY-(holdImagePos.height**resizeNote) : holdY+(holdImagePos.height**resizeNote)
                     holdYInRelationToTheLine = downScroll ? (holdY+(holdImagePos.height/2))-arrowInfo?.Y : arrowInfo?.Y-holdY
-                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.noteAlpha : arrowInfo.noteAlpha == 1 ? game.state.alphaHUD : 0
+
+                    let alphaHUD = game.state.alphaHUD >= 1 ? 1 : game.state.alphaHUD <= 0 ? 0 : game.state.alphaHUD
+                    let noteAlpha = arrowInfo.alpha >= 1 ? 1 : arrowInfo.alpha <= 0 ? 0 : arrowInfo.alpha
+                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : noteAlpha <= alphaHUD ? noteAlpha : alphaHUD
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
                         if (i+holdImagePos?.height >= note.hold) {
@@ -68,7 +71,9 @@ export default async (canvas, game, Listener) => {
             }
 
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage && arrowImagePos) {
-                ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.noteAlpha : arrowInfo.noteAlpha == 1 ? game.state.alphaHUD : 0
+                let alphaHUD = game.state.alphaHUD >= 1 ? 1 : game.state.alphaHUD <= 0 ? 0 : game.state.alphaHUD
+                let noteAlpha = arrowInfo.noteAlpha >= 1 ? 1 : arrowInfo.noteAlpha <= 0 ? 0 : arrowInfo.noteAlpha
+                ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : noteAlpha <= alphaHUD ? noteAlpha : alphaHUD
 
                 let currentArrowWidth = arrowImagePos?.width**resizeNote
                 let currentArrowHeight = arrowImagePos?.height**resizeNote
@@ -77,7 +82,7 @@ export default async (canvas, game, Listener) => {
 
                 ctx.save()
                 ctx.translate(currentArrowX+(currentArrowWidth/2), currentArrowY+(currentArrowHeight/2));
-                ctx.rotate((arrowInfo.rotation)*Math.PI/180);
+                ctx.rotate((arrowInfo.noteRotation)*Math.PI/180);
                 
                 ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(currentArrowWidth/2), -(currentArrowHeight/2), currentArrowWidth, currentArrowHeight)
 
@@ -117,7 +122,10 @@ export default async (canvas, game, Listener) => {
                 for (let i = 0;i <= note.hold;i += holdImagePos?.height) {
                     holdY = downScroll ? holdY-(holdImagePos.height**resizeNoteOpponent) : holdY+(holdImagePos.height**resizeNoteOpponent)
                     holdYInRelationToTheLine = downScroll ? (holdY+(holdImagePos.height/2))-arrowInfo?.Y : arrowInfo?.Y-holdY
-                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.noteAlpha : arrowInfo.noteAlpha == 1 ? game.state.alphaHUD : 0
+                    
+                    let alphaHUD = game.state.alphaHUD >= 1 ? 1 : game.state.alphaHUD <= 0 ? 0 : game.state.alphaHUD
+                    let noteAlpha = arrowInfo.noteAlpha >= 1 ? 1 : arrowInfo.noteAlpha <= 0 ? 0 : arrowInfo.noteAlpha
+                    ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : noteAlpha <= alphaHUD ? noteAlpha : alphaHUD
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
                         if (i+holdImagePos?.height >= note.hold) {
@@ -140,7 +148,9 @@ export default async (canvas, game, Listener) => {
             }
 
             if (!note.clicked && arrowImage || note.clicked && note.Y <= 0 && arrowImage && arrowImagePos) {
-                ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : arrowInfo.noteAlpha > 1 ? 1 : arrowInfo.noteAlpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.noteAlpha : arrowInfo.noteAlpha == 1 ? game.state.alphaHUD : 0
+                let alphaHUD = game.state.alphaHUD >= 1 ? 1 : game.state.alphaHUD <= 0 ? 0 : game.state.alphaHUD
+                let noteAlpha = arrowInfo.noteAlpha >= 1 ? 1 : arrowInfo.noteAlpha <= 0 ? 0 : arrowInfo.noteAlpha
+                ctx.globalAlpha = note.Y > 0 || note.disabled ? 0.2 : noteAlpha <= alphaHUD ? noteAlpha : alphaHUD
 
                 let currentArrowWidth = arrowImagePos?.width**resizeNoteOpponent
                 let currentArrowHeight = arrowImagePos?.height**resizeNoteOpponent
@@ -149,7 +159,7 @@ export default async (canvas, game, Listener) => {
 
                 ctx.save()
                 ctx.translate(currentArrowX+(currentArrowWidth/2), currentArrowY+(currentArrowHeight/2));
-                ctx.rotate((arrowInfo.rotation)*Math.PI/180);
+                ctx.rotate((arrowInfo.noteRotation)*Math.PI/180);
                 
                 ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(currentArrowWidth/2), -(currentArrowHeight/2), currentArrowWidth, currentArrowHeight)
 

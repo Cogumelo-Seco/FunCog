@@ -1,15 +1,19 @@
 export default async (type, { noteClickAuthor, note, notes, listenerState }, state) => {
+	let resizeNote = state[state.musicInfo.playerId == 2 ? 'resizeNoteOpponent' : 'resizeNote']
+	let arrowsInfo = state.arrowsInfo
+	let arrowsInfoOpponent = state.arrowsInfoOpponent
+	
     switch (type) {
 		case 'loaded':
-			for (let i in state.arrowsInfo) {
-				state.arrowsInfo[i].alpha = 0
-				state.arrowsInfo[i].resetEnable = false
-				state.arrowsInfo[i].Y = state.arrowsInfo[i].defaultY+(state.smallFunctions.getConfig('DownScroll') ? 50 : -50)
+			for (let i in arrowsInfo) {
+				arrowsInfo[i].alpha = 0
+				arrowsInfo[i].resetEnable = false
+				arrowsInfo[i].Y = arrowsInfo[i].defaultY+(state.smallFunctions.getConfig('DownScroll') ? 50 : -50)
 			}
-			for (let i in state.arrowsInfoOpponent) {
-				state.arrowsInfoOpponent[i].alpha = 0
-				state.arrowsInfoOpponent[i].resetEnable = false
-				state.arrowsInfoOpponent[i].Y = state.arrowsInfoOpponent[i].defaultY+(state.smallFunctions.getConfig('DownScroll') ? 50 : -50)
+			for (let i in arrowsInfoOpponent) {
+				arrowsInfoOpponent[i].alpha = 0
+				arrowsInfoOpponent[i].resetEnable = false
+				arrowsInfoOpponent[i].Y = arrowsInfoOpponent[i].defaultY+(state.smallFunctions.getConfig('DownScroll') ? 50 : -50)
 			}
 			break
         case 'started':
@@ -42,7 +46,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 			break
 		case 'gameLoop':
 			let variables = state.musicInfo.variables
-			let arrowsSize = state.arrowsInfo[0]?.height
+			let arrowsSize = arrowsInfo[0]?.height
 
 			function intro_outro(player, arrowID, add) {
 				arrowMove({ speed: 3, Y: state[player ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID].defaultY, arrowID, opponent: player ? false : true })
@@ -63,24 +67,24 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 			}
 
 			function pincerPrepare({ arrowID, goAway, opponent }) {
-				let arrow = state[opponent ? 'arrowsInfoOpponent' : 'arrowsInfo'][arrowID]
+				let arrow = state[state.musicInfo.playerId == 2 ? opponent ? 'arrowsInfoOpponent' : 'arrowsInfo' : opponent ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID]
 				let image = state.images['imgs/QT/pincer-open.png'].image
 				
 				clearInterval(variables.pincerPrepareIntervals[arrowID])
 				variables.pincerPrepareIntervals[arrowID] = setInterval(() => {
-					if (state.smallFunctions.getConfig('DownScroll') ? goAway ? state.musicInfo.popups[arrowID]?.y >= state.canvas.height+100 : state.musicInfo.popups[arrowID]?.y <= arrow.Y : goAway ? state.musicInfo.popups[arrowID]?.y <= -((image.height*1.5)**state.resizeNote)-100 : state.musicInfo.popups[arrowID]?.y >= arrow.Y) {
+					if (state.smallFunctions.getConfig('DownScroll') ? goAway ? state.musicInfo.popups[arrowID]?.y >= state.canvas.height+100 : state.musicInfo.popups[arrowID]?.y <= arrow.Y : goAway ? state.musicInfo.popups[arrowID]?.y <= -((image.height*1.5)**resizeNote)-100 : state.musicInfo.popups[arrowID]?.y >= arrow.Y) {
 						clearInterval(variables.pincerPrepareIntervals[arrowID])
 						state.musicInfo.popups[arrowID].image = `imgs/QT/pincer-close.png`
 						if (goAway) setTimeout(() => delete state.musicInfo.popups[arrowID], 1000)
 					} else {
 						let y = state.musicInfo.popups[arrowID]?.y+(state.smallFunctions.getConfig('DownScroll') ? goAway ? 20 : -20 : goAway ? -20 : 20)
-						if (!y) y = state.smallFunctions.getConfig('DownScroll') ? goAway ? arrow.Y : state.canvas.height+50 : goAway ? arrow.Y : -((image.height*1.5)**state.resizeNote)-100
-						let width = (image.width*1.5)**state.resizeNote
-						let height = (image.height*1.5)**state.resizeNote
+						if (!y) y = state.smallFunctions.getConfig('DownScroll') ? goAway ? arrow.Y : state.canvas.height+50 : goAway ? arrow.Y : -((image.height*1.5)**resizeNote)-100
+						let width = (image.width*1.5)**resizeNote
+						let height = (image.height*1.5)**resizeNote
 
 						state.musicInfo.popups[arrowID] = {
 							image: `imgs/QT/pincer-open.png`,
-							x: arrow.X+(arrow.width**state.resizeNote/2)-(width/2)+(13**state.resizeNote),
+							x: arrow.X+(arrow.width**resizeNote/2)-(width/2)+(13**resizeNote),
 							y,
 							rotation: state.smallFunctions.getConfig('DownScroll') ? -90 : 90,
 							width,
@@ -91,7 +95,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 			}
 
 			function arrowMove({ X, Y, rotation, arrowID, pincer, speed, opponent }) {
-				let arrow = state[opponent ? 'arrowsInfoOpponent' : 'arrowsInfo'][arrowID]
+				let arrow = state[state.musicInfo.playerId == 2 ? opponent ? 'arrowsInfoOpponent' : 'arrowsInfo' : opponent ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID]
 
 				let directionX = X ? X < arrow.X ? '-' : '+' : null
 				let directionY = Y ? Y < arrow.Y ? '-' : '+' : null
@@ -116,12 +120,12 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 							clearInterval(variables.arrowMoveIntervals[arrowID])
 						} else if (pincer) {
 							let image = state.images['imgs/QT/pincer-close.png'].image
-							let width = (image.width*1.5)**state.resizeNote
-							let height = (image.height*1.5)**state.resizeNote
+							let width = (image.width*1.5)**resizeNote
+							let height = (image.height*1.5)**resizeNote
 
 							state.musicInfo.popups[arrowID] = {
 								image: `imgs/QT/pincer-close.png`,
-								x: arrow.X+(arrow.width**state.resizeNote/2)-(width/2)+(13**state.resizeNote),
+								x: arrow.X+(arrow.width**resizeNote/2)-(width/2)+(13**resizeNote),
 								y: arrow.Y,
 								rotation: state.smallFunctions.getConfig('DownScroll') ? -90 : 90,
 								width,
@@ -218,8 +222,9 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 										pincerPrepare({ arrowID: 2, goAway: false })
 									},
 									1: () => {
-										for (let i in state.arrowsInfo) state.arrowsInfo[i].resetEnable = false
-										arrowMove({ Y: state.arrowsInfo[2].defaultY+(state.smallFunctions.getConfig('DownScroll') ? -70 : 70), pincer: true, arrowID: 2 })
+										for (let i in arrowsInfo) arrowsInfo[i].resetEnable = false
+										for (let i in arrowsInfoOpponent) arrowsInfoOpponent[i].resetEnable = false
+										arrowMove({ Y: arrowsInfo[2].defaultY+(state.smallFunctions.getConfig('DownScroll') ? -70 : 70), pincer: true, arrowID: 2 })
 									},
 									2: () => {
 										pincerPrepare({ arrowID: 2, goAway: true })
@@ -229,8 +234,8 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 										pincerPrepare({ arrowID: 0, goAway: false })
 									},
 									4: () => {
-										arrowMove({ Y: state.arrowsInfo[2].defaultY, pincer: true, arrowID: 2 })
-										arrowMove({ Y: state.arrowsInfo[0].defaultY+(state.smallFunctions.getConfig('DownScroll') ? -70 : 70), X: state.arrowsInfo[0].defaultX-20, pincer: true, arrowID: 0 })
+										arrowMove({ Y: arrowsInfo[2].defaultY, pincer: true, arrowID: 2 })
+										arrowMove({ Y: arrowsInfo[0].defaultY+(state.smallFunctions.getConfig('DownScroll') ? -70 : 70), X: arrowsInfo[0].defaultX-20, pincer: true, arrowID: 0 })
 									},
 									5: () => {
 										pincerPrepare({ arrowID: 2, goAway: true })
@@ -242,9 +247,9 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 										pincerPrepare({ arrowID: 3, goAway: false })
 									},
 									7: () => {
-										arrowMove({ Y: state.arrowsInfo[0].defaultY, X: state.arrowsInfo[0].defaultX, pincer: true, arrowID: 0 })
-										arrowMove({ Y: state.arrowsInfo[3].defaultY+(state.smallFunctions.getConfig('DownScroll') ? -50 : 50), X: state.arrowsInfo[3].defaultX+40, pincer: true, arrowID: 3 })
-										arrowMove({ Y: state.arrowsInfo[1].defaultY+(state.smallFunctions.getConfig('DownScroll') ? -70 : 70), X: state.arrowsInfo[1].defaultX+11, pincer: true, arrowID: 1 })
+										arrowMove({ Y: arrowsInfo[0].defaultY, X: arrowsInfo[0].defaultX, pincer: true, arrowID: 0 })
+										arrowMove({ Y: arrowsInfo[3].defaultY+(state.smallFunctions.getConfig('DownScroll') ? -50 : 50), X: arrowsInfo[3].defaultX+40, pincer: true, arrowID: 3 })
+										arrowMove({ Y: arrowsInfo[1].defaultY+(state.smallFunctions.getConfig('DownScroll') ? -70 : 70), X: arrowsInfo[1].defaultX+11, pincer: true, arrowID: 1 })
 									},
 									8: () => {
 										pincerPrepare({ arrowID: 3, goAway: true })
@@ -258,10 +263,10 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 										pincerPrepare({ arrowID: 3, goAway: false })
 									},
 									10: () => {
-										arrowMove({ Y: state.arrowsInfo[3].defaultY, X: state.arrowsInfo[3].defaultX, pincer: true, arrowID: 3 })
-										arrowMove({ Y: state.arrowsInfo[1].defaultY, X: state.arrowsInfo[1].defaultX, pincer: true, arrowID: 1 })
-										arrowMove({ Y: state.arrowsInfo[3].defaultY+(state.smallFunctions.getConfig('DownScroll') ? -70 : 70), X: state.arrowsInfo[3].defaultX, pincer: true, rotation: state.smallFunctions.getConfig('DownScroll') ? -45 : 45, arrowID: 3 })
-										arrowMove({ Y: state.arrowsInfo[0].defaultY+(state.smallFunctions.getConfig('DownScroll') ? -70 : 70), X: state.arrowsInfo[0].defaultX, pincer: true, rotation: state.smallFunctions.getConfig('DownScroll') ? 45 : -45, arrowID: 0 })
+										arrowMove({ Y: arrowsInfo[3].defaultY, X: arrowsInfo[3].defaultX, pincer: true, arrowID: 3 })
+										arrowMove({ Y: arrowsInfo[1].defaultY, X: arrowsInfo[1].defaultX, pincer: true, arrowID: 1 })
+										arrowMove({ Y: arrowsInfo[3].defaultY+(state.smallFunctions.getConfig('DownScroll') ? -70 : 70), X: arrowsInfo[3].defaultX, pincer: true, rotation: state.smallFunctions.getConfig('DownScroll') ? -45 : 45, arrowID: 3 })
+										arrowMove({ Y: arrowsInfo[0].defaultY+(state.smallFunctions.getConfig('DownScroll') ? -70 : 70), X: arrowsInfo[0].defaultX, pincer: true, rotation: state.smallFunctions.getConfig('DownScroll') ? 45 : -45, arrowID: 0 })
 									},
 									11: () => {
 										pincerPrepare({ arrowID: 0, goAway: true })
@@ -274,16 +279,16 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 										pincerPrepare({ arrowID: 0, goAway: false })
 									},
 									13: () => {
-										arrowMove({ Y: state.arrowsInfo[3].defaultY+80, pincer: true, arrowID: 3 })
-										arrowMove({ Y: state.arrowsInfo[0].defaultY-80, pincer: true, arrowID: 0 })
+										arrowMove({ Y: arrowsInfo[3].defaultY+80, pincer: true, arrowID: 3 })
+										arrowMove({ Y: arrowsInfo[0].defaultY-80, pincer: true, arrowID: 0 })
 									},
 									14: () => {
-										arrowMove({ X: state.arrowsInfo[0].defaultX, pincer: true, speed: 20, arrowID: 3 })
-										arrowMove({ X: state.arrowsInfo[3].defaultX, pincer: true, speed: 20, arrowID: 0 })
+										arrowMove({ X: arrowsInfo[0].defaultX, pincer: true, speed: 20, arrowID: 3 })
+										arrowMove({ X: arrowsInfo[3].defaultX, pincer: true, speed: 20, arrowID: 0 })
 									},
 									15: () => {
-										arrowMove({ Y: state.arrowsInfo[3].defaultY, X: state.arrowsInfo[0].defaultX, rotation: 0, pincer: true, arrowID: 3 })
-										arrowMove({ Y: state.arrowsInfo[0].defaultY, X: state.arrowsInfo[3].defaultX, rotation: 0, pincer: true, arrowID: 0 })
+										arrowMove({ Y: arrowsInfo[3].defaultY, X: arrowsInfo[0].defaultX, rotation: 0, pincer: true, arrowID: 3 })
+										arrowMove({ Y: arrowsInfo[0].defaultY, X: arrowsInfo[3].defaultX, rotation: 0, pincer: true, arrowID: 0 })
 									},
 									16: () => {
 										pincerPrepare({ arrowID: 3, goAway: true })
@@ -292,25 +297,25 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 										pincerPrepare({ arrowID: 1, goAway: false })
 									},
 									17: () => {
-										arrowMove({ Y: state.arrowsInfo[2].defaultY+80, pincer: true, arrowID: 2 })
-										arrowMove({ Y: state.arrowsInfo[1].defaultY-80, pincer: true, arrowID: 1 })
+										arrowMove({ Y: arrowsInfo[2].defaultY+80, pincer: true, arrowID: 2 })
+										arrowMove({ Y: arrowsInfo[1].defaultY-80, pincer: true, arrowID: 1 })
 									},
 									18: () => {
-										arrowMove({ X: state.arrowsInfo[1].defaultX, pincer: true, arrowID: 2 })
-										arrowMove({ X: state.arrowsInfo[2].defaultX, pincer: true, arrowID: 1 })
+										arrowMove({ X: arrowsInfo[1].defaultX, pincer: true, arrowID: 2 })
+										arrowMove({ X: arrowsInfo[2].defaultX, pincer: true, arrowID: 1 })
 									},
 									19: () => {
-										arrowMove({ Y: state.arrowsInfo[2].defaultY, X: state.arrowsInfo[1].defaultX, pincer: true, arrowID: 2 })
-										arrowMove({ Y: state.arrowsInfo[1].defaultY, X: state.arrowsInfo[2].defaultX, pincer: true,  arrowID: 1 })
+										arrowMove({ Y: arrowsInfo[2].defaultY, X: arrowsInfo[1].defaultX, pincer: true, arrowID: 2 })
+										arrowMove({ Y: arrowsInfo[1].defaultY, X: arrowsInfo[2].defaultX, pincer: true,  arrowID: 1 })
 									},
 									20: () => {
 										pincerPrepare({ arrowID: 2, goAway: true })
 										pincerPrepare({ arrowID: 1, goAway: true })
 									},
 									21: () => {
-										for (let i in state.arrowsInfo) {
-											arrowMove({ /*Y: state.arrowsInfo[i].defaultY,*/ X: state.arrowsInfo[i].defaultX, rotation: 0, speed: 20, arrowID: i})
-											setTimeout(() => state.arrowsInfo[i].resetEnable = true, 2000)
+										for (let i in arrowsInfo) {
+											arrowMove({ /*Y: arrowsInfo[i].defaultY,*/ X: arrowsInfo[i].defaultX, rotation: 0, speed: 20, arrowID: i})
+											setTimeout(() => arrowsInfo[i].resetEnable = true, 2000)
 										}
 									},
 									22: () => {

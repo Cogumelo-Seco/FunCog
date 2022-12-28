@@ -201,6 +201,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             
             async function startMusic() {
                 if (state.online && state.serverInfo.start || !state.online) {
+                    state.animations.arrowKeys.frame = 0
                     state.countdown -= 1
                     if (state.countdown <= -1) {
                         state.music?.play()

@@ -1,6 +1,119 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
+    ctx.fillStyle = 'rgb(0, 0, 0, 0.95)'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    let modSelect = game.state.selectMusicMenu.modSelect
+    let musicSelect = game.state.selectMusicMenu.musicSelect
+    let difficultySelected = game.state.selectMusicMenu.difficultySelected
+    let currentSelection = game.state.selectMusicMenu.currentSelection
+
+     
+    let modPrevious = game.state.musics[modSelect-1] || game.state.musics[game.state.musics.length-1]
+    let modCurrent = game.state.musics[modSelect]
+    let modNext = game.state.musics[modSelect+1] || game.state.musics[0]
+    if (!modCurrent) return
+
+    let startModsY = 100//canvas.height/2-(50/2)
+    let endModsY = canvas.height
+    let modsY = startModsY+((endModsY-startModsY)*(modSelect/(game.state.musics.length)))-(modSelect*40)
+    if (startModsY+(40*game.state.musics.length) < endModsY) modsY = startModsY
+    //startModsY+((endModsY-startModsY)*(musicSelectFiltered/(game.state.musics[modSelect].musics.length)))-(musicSelectFiltered*50)
+
+    let contentWidth = canvas.width/3
+
+    for (let i in game.state.musics) {
+        let mod = game.state.musics[i]
+        let modNameTxt = `${mod.special ? '👑' : ''} ${mod.name} ${mod.special ? '👑' : ''}`
+
+        ctx.fillStyle = mod.special ? `rgba(200, 150, 00, ${currentSelection == 0 ? 0.6 : 0.3})` : `rgba(130, 130, 130, ${currentSelection == 0 ? 0.6 : 0.3})`
+        ctx.fillRect(20, modsY-20, contentWidth-40, 30);
+
+        if (i == modSelect) {
+            ctx.fillStyle = 'rgba(40, 40, 255, 0.5)'
+            ctx.fillRect(20, modsY-20, contentWidth-40, 30);
+        }
+
+        ctx.font = 'bold 20px Arial'
+
+        ctx.fillStyle = 'black'
+        ctx.fillText(modNameTxt, contentWidth/2-(ctx.measureText(modNameTxt).width/2)+2, modsY+2);
+
+        ctx.fillStyle = mod.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(mod.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : mod.menuColor || 'white'
+        ctx.fillText(modNameTxt, contentWidth/2-(ctx.measureText(modNameTxt).width/2), modsY);
+
+        modsY += 40
+    }
+
+    let startMusicY = 100
+    let endMusicY = canvas.height
+    let musicY = startMusicY+((endMusicY-startMusicY)*(musicSelect/(game.state.musics[modSelect].musics.length)))-(musicSelect*50)
+    if (startMusicY+(50*game.state.musics[modSelect].musics.length) < endMusicY) musicY = startMusicY
+
+    for (let i in game.state.musics[modSelect]?.musics) {
+        let music = game.state.musics[modSelect].musics[i]
+        let musicName = music.name.replace(/-/g, ' ')+(music.crown ? ' 👑' : '')
+
+        ctx.fillStyle = `rgba(130, 130, 130, ${currentSelection == 1 ? 0.6 : 0.3})`
+        ctx.fillRect(contentWidth+20, musicY-20, contentWidth-40, 30);
+
+        if (i == musicSelect) {
+            ctx.fillStyle = 'rgba(40, 40, 255, 0.5)'
+            ctx.fillRect(contentWidth+20, musicY-20, contentWidth-40, 30);
+            canvas.style.backgroundImage = `url(https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${music.backgroundImage})`
+        }
+
+        ctx.font = 'bold 20px Arial'
+
+        ctx.fillStyle = 'black'
+        ctx.fillText(musicName, contentWidth+contentWidth/2-(ctx.measureText(musicName).width/2)+2, musicY+2);
+
+        ctx.fillStyle = music.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(music.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : music.menuColor || 'white'
+        ctx.fillText(musicName, contentWidth+contentWidth/2-(ctx.measureText(musicName).width/2), musicY);
+
+        let txtWidth = ctx.measureText(musicName).width
+        let alertImage = game.state.images[`imgs/alert.png`]?.image
+        if (music.dev && alertImage) {
+            ctx.font = `bold 10px Arial`
+            ctx.fillStyle = 'rgb(255, 66, 66)'
+            let X = (contentWidth+contentWidth/2+txtWidth/2)
+
+            ctx.drawImage(alertImage, X+5, musicY-22, 30, 30)
+            ctx.fillText('In development', X+30, musicY-10);
+        }
+
+        musicY += 40
+    }
+
+    let selectMusicInfo = game.state.musics[modSelect]?.musics[musicSelect]
+    let difficultyY = canvas.height/2-(difficultySelected*40)
+    for (let i in selectMusicInfo?.difficulties) {
+        let difficulty = game.state.difficulties[selectMusicInfo.difficulties[i]]
+        let difficultyName = difficulty.name+(selectMusicInfo.difficultyAlert && selectMusicInfo.difficultyAlert[selectMusicInfo.difficulties[i]] ? ` ${selectMusicInfo.difficultyAlert[selectMusicInfo.difficulties[i]]}` : '')
+
+        ctx.fillStyle = `rgba(130, 130, 130, ${currentSelection == 2 ? 0.6 : 0.3})`
+        ctx.fillRect(contentWidth*2+20, difficultyY-20, contentWidth-40, 30);
+
+        if (i == difficultySelected) {
+            ctx.fillStyle = 'rgba(40, 40, 255, 0.5)'
+            ctx.fillRect(contentWidth*2+20, difficultyY-20, contentWidth-40, 30);
+        }
+
+        ctx.font = 'bold 20px Arial'
+
+        ctx.fillStyle = 'black'
+        ctx.fillText(difficultyName, (contentWidth*2)+contentWidth/2-(ctx.measureText(difficultyName).width/2)+2, difficultyY+2);
+
+        ctx.fillStyle = difficulty.color
+        ctx.fillText(difficultyName, (contentWidth*2)+contentWidth/2-(ctx.measureText(difficultyName).width/2), difficultyY);
+
+        difficultyY += 40
+        
+        game.state.selectMusicMenu.difficultySelected = game.state.selectMusicMenu.difficultySelected > selectMusicInfo.difficulties.length-1 ? 0 : game.state.selectMusicMenu.difficultySelected
+        game.state.selectMusicMenu.difficultySelected = game.state.selectMusicMenu.difficultySelected < 0 ? selectMusicInfo.difficulties.length-1 : game.state.selectMusicMenu.difficultySelected
+    }
+/*
     let modSelect = game.state.selectMusicMenu.modSelect
     let musicSelect = game.state.selectMusicMenu.musicSelect
     let musicSelectFiltered = (musicSelect < 0 ? 0 : musicSelect)
@@ -9,6 +122,7 @@ export default async (canvas, game, Listener) => {
     let modPrevious = game.state.musics[modSelect-1] || game.state.musics[game.state.musics.length-1]
     let mod = game.state.musics[modSelect]
     let modNext = game.state.musics[modSelect+1] || game.state.musics[0]
+    if (!mod) return
     
     let startY = canvas.height/2-(50/2)
     let endY = canvas.height-50
@@ -173,5 +287,5 @@ export default async (canvas, game, Listener) => {
         ctx.font = `bold 10px Arial`
         ctx.fillText(modNext.musics.length, (canvas.width-canvas.width/6)-(ctx.measureText(modNext.musics.length).width/2), 125);
     }
-    ctx.globalAlpha = 1
+    ctx.globalAlpha = 1*/
 }

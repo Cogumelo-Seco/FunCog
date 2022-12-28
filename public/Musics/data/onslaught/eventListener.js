@@ -54,11 +54,24 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 					for (let i in state.arrowsInfoOpponent) state.arrowsInfoOpponent[i].alpha = 1
 					state.playSong('Sounds/woeM.ogg')
 					state.IsNoteSpinning = false
-					for (let i in state.arrowsInfo) state.arrowsInfo[i].rotation = 0
-					for (let i in state.arrowsInfoOpponent) state.arrowsInfoOpponent[i].rotation = 0
+					for (let i in state.arrowsInfo) {
+						state.arrowsInfo[i].rotation = 0
+						state.arrowsInfo[i].noteRotation = 0
+
+						state.arrowsInfoOpponent[i].rotation = 0
+						state.arrowsInfoOpponent[i].noteRotation = 0
+					}
 				}
 
-				if (state.IsNoteSpinning) for (let i in state.arrowsInfo) state.arrowsInfo[i].rotation += 1
+				if (state.IsNoteSpinning) {
+					for (let i in state.arrowsInfo) {
+						state.arrowsInfo[i].rotation += 1
+						state.arrowsInfo[i].noteRotation += 1
+
+						state.arrowsInfoOpponent[i].rotation += 1
+						state.arrowsInfoOpponent[i].noteRotation += 1
+					}
+				}
 			}
 
 			variables.oldBeat = beat

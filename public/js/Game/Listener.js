@@ -102,14 +102,9 @@ export default function createListener(socket) {
             if (!state.pauseGameKeys) for (let arrowID in state.game.state.arrowsInfo) {
                 if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote',  click: false }
 
-                let getKey = (arrowID) => {
-                    let arrowsKey = (state.game.state.selectSettingsOption.settingsOptions.find(c => c[Object.keys(state.game.state.arrowsInfo).length+'K']))[Object.keys(state.game.state.arrowsInfo).length+'K']
-                    return (arrowsKey.find(c => c.id == 'Arrow-'+arrowID))?.content
-                }
-
                 if (
-                    !state.game?.state.smallFunctions.getConfig('botPlay') && getKey(arrowID) == keyPressed && on && !state.arrows[arrowID].click || 
-                    !state.game?.state.smallFunctions.getConfig('botPlay') && getKey(arrowID) == keyPressed && !on && state.arrows[arrowID].click
+                    !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getKey(arrowID) == keyPressed && on && !state.arrows[arrowID].click || 
+                    !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getKey(arrowID) == keyPressed && !on && state.arrows[arrowID].click
                 ) {
                     if (on) state.game.verifyClick({ arrowID, listenerState: state })
                     else state.arrows[arrowID].state = 'noNote'
@@ -155,13 +150,13 @@ export default function createListener(socket) {
 
             if (keyPressed == 'Enter' && state.game.state.gameStage == 'dead' && !state.game.state.musicMenu?.src.includes('gameOverEnd') && state.game.state.gameStageTime+2000 < +new Date()) {
                 state.game.state.playSong('Sounds/gameOverEnd.ogg', { musicMenu: true })
-                state.game.state.selectMusicMenu.musicSelect = -1
+                //state.game.state.selectMusicMenu.musicSelect = -1
                 setTimeout(() => state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu'), 1500)
             }
 
             if (state.game.state.gameStage == 'score' && on) {
                 if (![ 'F11', 'PrintScreen' ].includes(keyPressed)) {
-                    state.game.state.selectMusicMenu.musicSelect = -1
+                    //state.game.state.selectMusicMenu.musicSelect = -1
                     if (state.game.state.online) state.game.state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
                     else state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu')
                 }
@@ -169,9 +164,78 @@ export default function createListener(socket) {
 
             if (state.game.state.gameStage == 'selectMusic' && on) {
                 keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
+                let selectMusicMenu = state.game.state.selectMusicMenu
 
-                switch (keyPressed) {
+                console.log(state.game.state.gameStageTime)
+                if (state.game.state.gameStageTime != 0 && state.game.state.gameStageTime+500 <= +new Date()) switch (keyPressed) {
+                    case 'ArrowRight':
+                        selectMusicMenu.currentSelection = selectMusicMenu.currentSelection+1 >= 3 ? 0 : selectMusicMenu.currentSelection+1
+                        state.game.playSong('Sounds/scrollMenu.ogg')
+                        break
+                    case 'ArrowLeft':
+                        selectMusicMenu.currentSelection = selectMusicMenu.currentSelection-1 <= -1 ? 2 : selectMusicMenu.currentSelection-1
+                        state.game.playSong('Sounds/scrollMenu.ogg')
+                        break
+                    case 'ArrowDown':
+                        switch(selectMusicMenu.currentSelection) {
+                            case 0:
+                                selectMusicMenu.modSelect = selectMusicMenu.modSelect >= state.game.state.musics.length-1 ? 0 : selectMusicMenu.modSelect+1
+                                break
+                            case 1:
+                                selectMusicMenu.musicSelect = selectMusicMenu.musicSelect >= state.game.state.musics[selectMusicMenu.modSelect].musics.length-1 ? 0 : selectMusicMenu.musicSelect+1
+                                break
+                            case 2:
+                                selectMusicMenu.difficultySelected += 1
+                                break
+                        }
+                        state.game.playSong('Sounds/scrollMenu.ogg')
+                        break
                     case 'ArrowUp':
+                        switch(selectMusicMenu.currentSelection) {
+                            case 0:
+                                selectMusicMenu.modSelect = selectMusicMenu.modSelect <= 0 ? state.game.state.musics.length-1 : selectMusicMenu.modSelect-1
+                                break
+                            case 1:
+                                selectMusicMenu.musicSelect = selectMusicMenu.musicSelect <= 0 ? state.game.state.musics[selectMusicMenu.modSelect].musics.length-1 : selectMusicMenu.musicSelect-1
+                                break
+                            case 2:
+                                selectMusicMenu.difficultySelected -= 1
+                                break
+                        }
+                        state.game.playSong('Sounds/scrollMenu.ogg')
+                        break
+                    case 'Enter':
+                        let musicInfo = state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics[state.game.state.selectMusicMenu.musicSelect]
+
+                        if (musicInfo && state.game.state.online) {
+                            state.musicMenu?.pause()
+                            state.game.state.smallFunctions.redirectGameStage('game')
+                            socket.emit('newServer', {
+                                difficulty: state.game.state.selectMusicMenu.difficultySelected,
+                                mod: state.game.state.selectMusicMenu.modSelect,
+                                music: state.game.state.selectMusicMenu.musicSelect
+                            })
+
+                            state.game.startMusic({ 
+                                musicInfo,
+                                difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
+                                listenerState: state,
+                                socket
+                            })
+                        } else if (musicInfo) {
+                            state.musicMenu?.pause()
+                            state.game.playSong('Sounds/confirmMenu.ogg')
+                            state.game.state.smallFunctions.redirectGameStage('game')
+
+                            state.game.startMusic({ 
+                                musicInfo,
+                                difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
+                                listenerState: state,
+                                socket
+                            })
+                        }
+                        break
+                    /*case 'ArrowUp':
                         state.game.state.selectMusicMenu.musicSelect = state.game.state.selectMusicMenu.musicSelect-1 < -1 ? state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics.length-1 : state.game.state.selectMusicMenu.musicSelect-1
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
@@ -226,7 +290,7 @@ export default function createListener(socket) {
                                 socket
                             })
                         }
-                        break
+                        break*/
                 }
             }
 

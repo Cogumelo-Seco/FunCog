@@ -70,7 +70,9 @@ export default async (canvas, game, Listener) => {
         }
 
         if (arrowImage && arrowImagePos && arrowInfo) {
-            ctx.globalAlpha = arrowInfo.alpha > 1 ? 1 : arrowInfo.alpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.alpha : arrowInfo.alpha == 1 ? game.state.alphaHUD : 0
+            let alphaHUD = game.state.alphaHUD >= 1 ? 1 : game.state.alphaHUD <= 0 ? 0 : game.state.alphaHUD
+            let arrowAlpha = arrowInfo.alpha >= 1 ? 1 : arrowInfo.alpha <= 0 ? 0 : arrowInfo.alpha
+            ctx.globalAlpha = arrowAlpha <= alphaHUD ? arrowAlpha : alphaHUD//arrowInfo.alpha > 1 ? 1 : arrowInfo.alpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.alpha : arrowInfo.alpha == 1 ? game.state.alphaHUD : 0
             ctx.shadowColor = arrowInfo.shadowColor
             ctx.shadowBlur = arrowInfo.shadowBlur
 
@@ -91,7 +93,7 @@ export default async (canvas, game, Listener) => {
 
             ctx.translate(currentArrowX+(currentArrowWidth/2), currentArrowY+(currentArrowHeight/2));
             ctx.rotate((arrowInfo.rotation)*Math.PI/180);
-            
+
             ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(currentArrowWidth/2), -(currentArrowHeight/2), currentArrowWidth, currentArrowHeight)
             if (splashImage && splashImagePos && onNotesSplashes && !performanceMode) {
                 ctx.globalAlpha = game.state.alphaHUD == 1 ? arrowInfo.splashAlpha : arrowInfo.splashAlpha == 1 ? game.state.alphaHUD : 0
@@ -99,6 +101,20 @@ export default async (canvas, game, Listener) => {
             }
 
             ctx.restore()
+
+            let key = game.state.smallFunctions.getKey(arrowID).replace(/Key/g, '')
+
+            ctx.font = 'bold 20px Arial'
+
+            let percent = game.state.animations.arrowKeys.frame/game.state.animations.arrowKeys.endFrame
+            let arrowKeysAlpha = percent > 0.5 ? 1-(percent-0.5)/0.5 : game.state.alphaHUD
+            ctx.globalAlpha = arrowKeysAlpha <= game.state.alphaHUD ? arrowKeysAlpha : game.state.alphaHUD
+
+            ctx.fillStyle = 'black'
+            ctx.fillText(key, currentArrowX+currentArrowWidth/2-(ctx.measureText(key).width/2)+2, currentArrowY-20+2)
+
+            ctx.fillStyle = 'white'
+            ctx.fillText(key, currentArrowX+currentArrowWidth/2-(ctx.measureText(key).width/2), currentArrowY-20)
 
             ctx.globalAlpha = game.state.alphaHUD
             ctx.shadowBlur = 0
@@ -136,7 +152,9 @@ export default async (canvas, game, Listener) => {
         }
 
         if (arrowImage && arrowImagePos && arrowInfo) {
-            ctx.globalAlpha = arrowInfo.alpha > 1 ? 1 : arrowInfo.alpha < 0 ? 0 : game.state.alphaHUD == 1 ? arrowInfo.alpha : arrowInfo.alpha == 1 ? game.state.alphaHUD : 0
+            let alphaHUD = game.state.alphaHUD >= 1 ? 1 : game.state.alphaHUD <= 0 ? 0 : game.state.alphaHUD
+            let arrowAlpha = arrowInfo.alpha >= 1 ? 1 : arrowInfo.alpha <= 0 ? 0 : arrowInfo.alpha
+            ctx.globalAlpha = arrowAlpha <= alphaHUD ? arrowAlpha : alphaHUD
             ctx.shadowColor = arrowInfo.shadowColor
             ctx.shadowBlur = arrowInfo.shadowBlur
 

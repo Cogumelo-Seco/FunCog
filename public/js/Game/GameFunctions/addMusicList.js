@@ -1406,6 +1406,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    crown: true,
                     name: 'Monochrome-V1',
                     menuColor: 'rgb(120, 20, 20)',
                     difficulties: [ 2, 3 ],
@@ -1459,6 +1460,9 @@ export default async (state) => {
                     name: 'Death-Toll',
                     menuColor: '#572108',
                     difficulties: [ 2, 3 ],
+                    difficultyAlert: {
+                        2: '5k'
+                    },
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,

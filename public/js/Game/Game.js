@@ -28,9 +28,10 @@ function createGame(Listener, canvas, socket) {
         gameStageTime: 0,
         musicMenu: null,
         selectMusicMenu: {
-            musicSelect: -1,
+            musicSelect: 0,
             modSelect: 0,
             difficultySelected: 0,
+            currentSelection: 0
         },
         selectMenuOption: {
             menuOptions: [ 'Singleplayer', 'Multiplayer', 'Settings' ],
@@ -117,6 +118,13 @@ function createGame(Listener, canvas, socket) {
         opponentRatingLoaded: {},
 
         defaultAnimations: {
+            arrowKeys: {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 100,
+                totalDalay: 0,
+                dalay: 0
+            },
             loadingLogo: {
                 frame: 0,
                 startFrame: 0,
@@ -185,7 +193,7 @@ function createGame(Listener, canvas, socket) {
 
     const playSong = (type, command) => require('./GameFunctions/playSong').default(type, command, state)
     const calculateRating = (command) => require('./GameFunctions/calculateRating').default(command, state)
-    const smallFunctions = require('./GameFunctions/smallFunctions').default(state)
+    const smallFunctions = require('./GameFunctions/smallFunctions').default(state, Listener)
     const codes = require('./GameFunctions/codes').default(state)
     state.smallFunctions = smallFunctions
     state.calculateRating = calculateRating
@@ -254,7 +262,8 @@ function createGame(Listener, canvas, socket) {
                     alpha: 1,
                     noteAlpha: 1,
                     splashAlpha: 1,
-                    rotation: 0
+                    rotation: 0,
+                    noteRotation: 0
                 }
             }
         }
@@ -278,7 +287,8 @@ function createGame(Listener, canvas, socket) {
                     alpha: 1,
                     noteAlpha: 1,
                     splashAlpha: 1,
-                    rotation: 0
+                    rotation: 0,
+                    noteRotation: 0
                 }
             }
         }
@@ -300,7 +310,7 @@ function createGame(Listener, canvas, socket) {
 
             state.animations.BFDead.frame = 0
             state.smallFunctions.resetGame()
-            state.gameStageTime = +new Date()
+            //state.gameStageTime = +new Date()
         }
         else if (state.musicInfo.health > 100) state.musicInfo.health = 100
         else if (state.musicInfo.health < 0) state.musicInfo.health = 0
@@ -367,7 +377,20 @@ function createGame(Listener, canvas, socket) {
 
             if ((state.musicInfo.playerId == 1 && opponent || state.musicInfo.playerId == 2 && !opponent)) {
                 if (newNoteY >= 0 && !note.clicked && !note.disabled && (note.errorWhenNotClicking || note.autoClick)) {
-                    if (!performanceMode) state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, click: !note.clicked }, state)
+                    if (!performanceMode) {
+                        state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, hold: false }, state)
+
+                        if (note.hold > 0) {
+                            let loop = setInterval(() => {
+                                if (note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
+                                    note.disabled = true
+                                    clearInterval(loop)
+                                } else if (!state.music.paused) {
+                                    state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, hold: true }, state)
+                                }
+                            }, 1000/5)
+                        }
+                    }
                     note.clicked = true
                     if ((state.online || state.smallFunctions.getConfig('LifeDrain')) && state.musicInfo.health > 10 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
                 }

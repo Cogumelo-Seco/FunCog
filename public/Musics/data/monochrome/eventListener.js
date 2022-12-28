@@ -1,4 +1,4 @@
-export default async (type, { noteClickAuthor, note, click, listenerState, difficulty, events }, state) => {
+export default async (type, { noteClickAuthor, note, click, listenerState, difficulty, hold }, state) => {
     switch (type) {
 		case 'noteClick':
 			if (state.musicInfo.playerId == 2 && noteClickAuthor == 'player' || state.musicInfo.playerId == 1 && noteClickAuthor == 'opponent') {
@@ -49,6 +49,10 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			for (let i in state[state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent']) {
 				state[state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent'][i].alpha = 0
 				state[state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent'][i].noteAlpha = 0
+
+				state[state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo'][i].alpha = 0.8
+				state[state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo'][i].noteAlpha = 0.8
+				state[state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo'][i].splashAlpha = 0.7
 			}
 
 			break
@@ -296,14 +300,6 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			else if (state.alphaHUD == 1) variables.HUDFade = false
 			state.alphaHUD = state.alphaHUD > 1 ? 1 : state.alphaHUD <= 0 ? 0 : state.alphaHUD
 
-			if (state.alphaHUD == 1 && state.arrowsInfo[0].alpha == 1) {
-				for (let i in state.arrowsInfo) {
-					state.arrowsInfo[i].alpha = 0.8
-					state.arrowsInfo[i].noteAlpha = 0.8
-					state.arrowsInfo[i].splashAlpha = 0.7
-				}
-			}
-
 			let events = state.musicInfo.events
 			for (let i in events) {
                 let event = events[i]
@@ -368,7 +364,6 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 
 					if (event[2] == 'HUD Fade' || (event[2] == 'HUD Fade Mid Song' && state.alphaHUD < 1)) variables.HUDFade = true
 					if (event[2] == 'HUD Fade Mid Song' && state.alphaHUD >= 1) {
-						for (let i in state.arrowsInfo) state.arrowsInfo[i].alpha = 1
 						variables.HUDFadeOut = true
 					}
                 }
