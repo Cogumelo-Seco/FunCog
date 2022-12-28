@@ -49,7 +49,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             popupsBackground: [],
             lastPopupTime: 0,
             variables: {},
-            playerId: opponentPlayer ? 2 : 1,
+            playerId: 2,//opponentPlayer ? 2 : 1,
             playerServerId: socket.id,
             ratings: [],
             judgements: {
@@ -200,10 +200,14 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             } else startMusic()
             
             async function startMusic() {
+                state.animations.arrowKeys.paused = true
+                state.animations.arrowKeys.frame = 0
+
                 if (state.online && state.serverInfo.start || !state.online) {
-                    state.animations.arrowKeys.frame = 0
                     state.countdown -= 1
                     if (state.countdown <= -1) {
+                        state.animations.arrowKeys.paused = false
+
                         state.music?.play()
                         state.musicVoice?.play()
 

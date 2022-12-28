@@ -67,7 +67,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 			}
 
 			function pincerPrepare({ arrowID, goAway, opponent }) {
-				let arrow = state[state.musicInfo.playerId == 2 ? opponent ? 'arrowsInfoOpponent' : 'arrowsInfo' : opponent ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID]
+				let arrow = state[opponent ? 'arrowsInfoOpponent' : 'arrowsInfo'][arrowID]
 				let image = state.images['imgs/QT/pincer-open.png'].image
 				
 				clearInterval(variables.pincerPrepareIntervals[arrowID])
@@ -95,7 +95,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 			}
 
 			function arrowMove({ X, Y, rotation, arrowID, pincer, speed, opponent }) {
-				let arrow = state[state.musicInfo.playerId == 2 ? opponent ? 'arrowsInfoOpponent' : 'arrowsInfo' : opponent ? 'arrowsInfo' : 'arrowsInfoOpponent'][arrowID]
+				let arrow = state[opponent ? 'arrowsInfoOpponent' : 'arrowsInfo'][arrowID]
 
 				let directionX = X ? X < arrow.X ? '-' : '+' : null
 				let directionY = Y ? Y < arrow.Y ? '-' : '+' : null

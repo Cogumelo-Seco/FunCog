@@ -121,9 +121,10 @@ function createGame(Listener, canvas, socket) {
             arrowKeys: {
                 frame: 0,
                 startFrame: 0,
-                endFrame: 100,
+                endFrame: 50,
                 totalDalay: 0,
-                dalay: 0
+                dalay: 0,
+                paused: true,
             },
             loadingLogo: {
                 frame: 0,
@@ -296,7 +297,6 @@ function createGame(Listener, canvas, socket) {
         state.resizeNoteOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
 
         if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.smallFunctions.getConfig('botPlay') && !state.debug && state.music?.currentTime > 1) {
-            console.log(state.serverId)
             if (state.online && state.serverId) {
                 socket.emit('deadPlayer', { 
                     serverId: state.serverId

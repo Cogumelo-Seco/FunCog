@@ -107,14 +107,16 @@ export default async (canvas, game, Listener) => {
             ctx.font = 'bold 20px Arial'
 
             let percent = game.state.animations.arrowKeys.frame/game.state.animations.arrowKeys.endFrame
-            let arrowKeysAlpha = percent > 0.5 ? 1-(percent-0.5)/0.5 : game.state.alphaHUD
-            ctx.globalAlpha = arrowKeysAlpha <= game.state.alphaHUD ? arrowKeysAlpha : game.state.alphaHUD
+            if (percent < 1) {
+                let arrowKeysAlpha = percent > 0.5 ? 1-(percent-0.5)/0.5 : game.state.alphaHUD
+                ctx.globalAlpha = arrowKeysAlpha <= game.state.alphaHUD ? arrowKeysAlpha : game.state.alphaHUD
 
-            ctx.fillStyle = 'black'
-            ctx.fillText(key, currentArrowX+currentArrowWidth/2-(ctx.measureText(key).width/2)+2, currentArrowY-20+2)
+                ctx.fillStyle = 'black'
+                ctx.fillText(key, arrowInfo.X+(arrowInfo.width**resizeNote)/2-(ctx.measureText(key).width/2)+2, arrowInfo.Y+(downScroll ? -(arrowInfo.height**resizeNote/2)-20 : (arrowInfo.height**resizeNote/2)+30)+2)
 
-            ctx.fillStyle = 'white'
-            ctx.fillText(key, currentArrowX+currentArrowWidth/2-(ctx.measureText(key).width/2), currentArrowY-20)
+                ctx.fillStyle = 'white'
+                ctx.fillText(key, arrowInfo.X+(arrowInfo.width**resizeNote)/2-(ctx.measureText(key).width/2), arrowInfo.Y+(downScroll ? -(arrowInfo.height**resizeNote/2)-20 : (arrowInfo.height**resizeNote/2)+30))
+            }
 
             ctx.globalAlpha = game.state.alphaHUD
             ctx.shadowBlur = 0
