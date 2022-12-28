@@ -49,7 +49,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             popupsBackground: [],
             lastPopupTime: 0,
             variables: {},
-            playerId: 2,//opponentPlayer ? 2 : 1,
+            playerId: opponentPlayer ? 2 : 1,
             playerServerId: socket.id,
             ratings: [],
             judgements: {
