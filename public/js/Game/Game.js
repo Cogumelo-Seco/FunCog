@@ -406,7 +406,7 @@ function createGame(Listener, canvas, socket) {
 
         for (let i in state.musicOpponentNotes) {
             let note = state.musicOpponentNotes[i]
-            /*if (note.time >= 0 && note.time <= musicCurrentTime+1)*/ moveNote(note, state.musicInfo.playerId, true)
+           /*if (note.time >= 0 && note.time <= musicCurrentTime+1)*/ moveNote(note, state.musicInfo.playerId, true)
         }
 
         state.musicInfo.accuracy = 0
