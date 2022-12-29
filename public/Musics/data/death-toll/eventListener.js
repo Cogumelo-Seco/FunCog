@@ -6,6 +6,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			if (state.musicInfo.difficulty.name != 'Mania') {
 				state.arrowsInfo[4] = {
 					arrowID: 4,
+					arrowFrameID: 4,
 					pos: 2,
 					defaultPos: 4,
 					imageDir: 'Arrows/Bronzong/Arrows.png',
@@ -24,11 +25,6 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 
 				state.arrowsInfo[2].pos = 3
 				state.arrowsInfo[3].pos = 4
-
-				for (let i in state.arrowsInfo) {
-					state.arrowsInfo[i].resetX = true
-					state.arrowsInfo[i].resetY = true
-				}
 			}
 			break
         case 'started':

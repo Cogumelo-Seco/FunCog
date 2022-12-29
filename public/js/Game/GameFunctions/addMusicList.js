@@ -1671,6 +1671,27 @@ export default async (state) => {
             menuColor: 'RAINBOW-7890',
             musics: [
                 {
+                    name: 'Thunderstorm',
+                    menuColor: 'RAINBOW-4894',
+                    difficulties: [ 0, 1, 2 ],
+                    filterNotes: {
+                        1: 6,
+                        2: 26,
+                    },
+                    difficultyAlert: {
+                        1: '6k',
+                        2: '26k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Undefined',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/thunderstorm/Inst.ogg' },
+                        { dir: 'Musics/musics/thunderstorm/Voices.ogg' },
+                    ]
+                },
+                {
                     name: 'RUSH-E',
                     menuColor: 'RAINBOW-941',
                     difficulties: [ 2 ],

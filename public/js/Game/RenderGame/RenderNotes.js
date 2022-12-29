@@ -26,12 +26,12 @@ export default async (canvas, game, Listener) => {
         if (arrowInfo && noteY-(note.hold) < canvas.height && noteY+(note.hold) > -arrowInfo.height) {
             let arrowImageData = game.state.personalizedNotes[note.type] ? game.state.images[game.state.personalizedNotes[note.type].newArrowImage] : game.state.images[arrowInfo.imageDir || `${game.state.musicInfo.notesImageDir}Arrows.png`]
             let arrowImage = arrowImageData?.image
-            let arrowFrames = arrowImageData?.animationConfig[`Arrow-${note.arrowID}`]
+            let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowInfo.arrowFrameID}`]
             if (!arrowFrames) return
-            let arrowImagePos = arrowFrames[`Arrow-${note.arrowID}-note${game.state.animations[note.type] ? '-'+game.state.animations[note.type]?.frame : ''}`]
+            let arrowImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}-note${game.state.animations[note.type] ? '-'+game.state.animations[note.type]?.frame : ''}`]
 
-            let holdImagePos = arrowFrames[`Arrow-${note.arrowID}-hold-piece`]
-            let holdEndImagePos = arrowFrames[`Arrow-${note.arrowID}-hold-end`]
+            let holdImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}-hold-piece`]
+            let holdEndImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}-hold-end`]
 
             ctx.shadowColor = game.state.personalizedNotes[note.type]?.noteShadowColor || arrowInfo.noteShadowColor
             ctx.shadowBlur = game.state.personalizedNotes[note.type]?.noteShadowBlur || arrowInfo.noteShadowBlur
@@ -103,12 +103,12 @@ export default async (canvas, game, Listener) => {
         if (arrowInfo && noteY-(note.hold) < canvas.height && noteY+(note.hold) > -arrowInfo.height) {
             let arrowImageData = game.state.personalizedNotes[note.type] ? game.state.images[game.state.personalizedNotes[note.type].newArrowImage] : game.state.images[arrowInfo.imageDir || `${game.state.musicInfo.notesImageDir}Arrows.png`]
             let arrowImage = arrowImageData?.image
-            let arrowFrames = arrowImageData?.animationConfig[`Arrow-${note.arrowID}`]
+            let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowInfo.arrowFrameID}`]
             if (!arrowFrames) return
-            let arrowImagePos = arrowFrames[`Arrow-${note.arrowID}-note${game.state.animations[note.type] ? '-'+game.state.animations[note.type]?.frame : ''}`]
+            let arrowImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}-note${game.state.animations[note.type] ? '-'+game.state.animations[note.type]?.frame : ''}`]
 
-            let holdImagePos = arrowFrames[`Arrow-${note.arrowID}-hold-piece`]
-            let holdEndImagePos = arrowFrames[`Arrow-${note.arrowID}-hold-end`]
+            let holdImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}-hold-piece`]
+            let holdEndImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}-hold-end`]
 
             ctx.shadowColor = game.state.personalizedNotes[note.type]?.noteShadowColor || arrowInfo.noteShadowColor
             ctx.shadowBlur = game.state.personalizedNotes[note.type]?.noteShadowBlur || arrowInfo.noteShadowBlur

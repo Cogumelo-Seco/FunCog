@@ -37,9 +37,9 @@ export default async (canvas, game, Listener) => {
 
         let arrowImageData = game.state.images[arrowInfo.imageDir || `${game.state.musicInfo.notesImageDir}Arrows.png`]
         let arrowImage = arrowImageData?.image
-        let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
+        let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowInfo.arrowFrameID}`]
         if (!arrowFrames) return
-        let arrowImagePos = arrowFrames[`Arrow-${arrowID}`]
+        let arrowImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}`]
 
         let arrowWidth = arrowImagePos?.width
         let arrowHeight = arrowImagePos?.height
@@ -48,8 +48,8 @@ export default async (canvas, game, Listener) => {
 
         let splashImageData = game.state.images[arrowInfo?.splashDir]
         let splashImage = splashImageData?.image
-        let splashFrames = splashImageData?.animationConfig[`Arrow-${arrowID}`]
-        let splashImagePos = splashFrames ? splashFrames[`Arrow-${arrowID}-splash-${arrowInfo.splashFrame}`] : null
+        let splashFrames = splashImageData?.animationConfig[`Arrow-${arrowInfo.arrowFrameID}`]
+        let splashImagePos = splashFrames ? splashFrames[`Arrow-${arrowInfo.arrowFrameID}-splash-${arrowInfo.splashFrame}`] : null
 
         if (arrowInfo && splashFrames && arrowInfo.splashFrame <= Object.keys(splashFrames).length && arrowInfo.splashTime+(35-Object.keys(splashFrames).length < 15 ? 15 : 35-Object.keys(splashFrames).length) <= +new Date()) {
             arrowInfo.splashFrame += 1
@@ -60,12 +60,12 @@ export default async (canvas, game, Listener) => {
             let note = musicNotes.find(n => (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.arrowID == arrowID && n.Y >= -(arrowHeight**game.state.resizeNote) && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
             let onNote = Listener.state.arrows[arrowID]?.state == 'onNote' && note ? true : false
 
-            if (Listener.state.arrows[arrowID]?.state == 'onNote' || Listener.state.arrows[arrowID]?.state == 'noNote') arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}${onNote ? '' : '-no'}`]
+            if (Listener.state.arrows[arrowID]?.state == 'onNote' || Listener.state.arrows[arrowID]?.state == 'noNote') arrowImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}-press-${game.state.animations.arrows.frame}${onNote ? '' : '-no'}`]
             else {
                 arrowImageData = game.state.images[Listener.state.arrows[arrowID]?.state]
                 arrowImage = arrowImageData?.image
-                arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
-                arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}`] || arrowImagePos
+                arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowInfo.arrowFrameID}`]
+                arrowImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}-press-${game.state.animations.arrows.frame}`] || arrowImagePos
             }
         }
 
@@ -104,7 +104,7 @@ export default async (canvas, game, Listener) => {
 
             let key = game.state.smallFunctions.getKey(arrowID).replace(/Key/g, '').replace(/Arrow/g, '')
 
-            ctx.font = 'bold 15px Arial'
+            ctx.font = `bold ${30**resizeNote}px Arial`
 
             let percent = game.state.animations.arrowKeys.frame/game.state.animations.arrowKeys.endFrame
             if (percent < 1) {
@@ -132,9 +132,9 @@ export default async (canvas, game, Listener) => {
 
         let arrowImageData = game.state.images[arrowInfo.imageDir || `${game.state.musicInfo.notesImageDir}Arrows.png`]
         let arrowImage = arrowImageData?.image
-        let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
+        let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowInfo.arrowFrameID}`]
         if (!arrowFrames) return
-        let arrowImagePos = arrowFrames[`Arrow-${arrowID}`]
+        let arrowImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}`]
 
         let arrowWidth = arrowImagePos?.width
         let arrowHeight = arrowImagePos?.height
@@ -148,9 +148,9 @@ export default async (canvas, game, Listener) => {
             if (pressImage) {
                 arrowImageData = game.state.images[Listener.state.arrows[arrowID]?.state]
                 arrowImage = arrowImageData?.image
-                arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowID}`]
-                arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}`] || arrowImagePos
-            } else arrowImagePos = arrowFrames[`Arrow-${arrowID}-press-${game.state.animations.arrows.frame}${onClickNoteOpponent ? '-no' : ''}`]
+                arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowInfo.arrowFrameID}`]
+                arrowImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}-press-${game.state.animations.arrows.frame}`] || arrowImagePos
+            } else arrowImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}-press-${game.state.animations.arrows.frame}${onClickNoteOpponent ? '-no' : ''}`]
         }
 
         if (arrowImage && arrowImagePos && arrowInfo) {

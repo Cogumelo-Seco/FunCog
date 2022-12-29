@@ -16,19 +16,19 @@ export default async (canvas, game, Listener) => {
 
     let arrowsInfoOpponent = Object.values(game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent']).sort((a, b) => a.pos-b.pos)
     if (game.state.online) {
-        ctx.font = `bold ${20**game.state.resizeNoteOpponent}px Arial`
+        ctx.font = `bold ${game.state.resizeNoteOpponent != game.state.resizeNote ? 20**game.state.resizeNoteOpponent : 13}px Arial`
         let musicInfoYOpponent = middleScroll ? downScroll ? arrowsInfoOpponent[0]?.defaultY+(arrowsInfoOpponent[0]?.height**game.state.resizeNoteOpponent) : arrowsInfoOpponent[0]?.defaultY-(arrowsInfoOpponent[0]?.height**game.state.resizeNoteOpponent) : downScroll ? canvas.height-20 : 33
         let musicInfoXOpponent = middleScroll ? invertArrowPos ? canvas.width-canvas.width/6-ctx.measureText(musicInfoTxtOpponent).width/2 : canvas.width/6-ctx.measureText(musicInfoTxtOpponent).width/2 : invertArrowPos ? canvas.width-canvas.width/4-(ctx.measureText(musicInfoTxtOpponent).width/2) : canvas.width/4-(ctx.measureText(musicInfoTxtOpponent).width/2)
 
         ctx.fillText(musicInfoTxtOpponent, musicInfoXOpponent, musicInfoYOpponent);
 
-        ctx.font = `bold ${20**game.state.resizeNote}px Arial`
+        ctx.font = `bold 13px Arial`
         let musicInfoY = downScroll ? canvas.height-20 : 33
         let musicInfoX = middleScroll ? canvas.width/2-(ctx.measureText(musicInfoTxt).width/2) : invertArrowPos ? canvas.width/4-(ctx.measureText(musicInfoTxt).width/2) : (canvas.width-canvas.width/4)-(ctx.measureText(musicInfoTxt).width/2)
 
         ctx.fillText(musicInfoTxt, musicInfoX, musicInfoY);
     } else {
-        ctx.font = `bold ${20**game.state.resizeNote}px Arial`
+        ctx.font = `bold 13px Arial`
         ctx.fillText(musicInfoTxt, canvas.width/2-(ctx.measureText(musicInfoTxt).width/2),  downScroll ? canvas.height-20 : 33);
     }
 

@@ -113,7 +113,7 @@ export default function createListener(socket) {
             }
 
             if (state.game.state.gameStage == 'game' && !state.pauseGameKeys) {
-                if (keyPressed == 'KeyR' && on && !state.game.state.online) {
+                if (keyPressed == 'Escape' && event.repeat && on && !state.game.state.online && state.game.state.music.currentTime >= 1) {
                     let botPlay = state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content
                     state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
                     state.game.state.musicInfo.health = -100
@@ -166,8 +166,7 @@ export default function createListener(socket) {
                 keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
                 let selectMusicMenu = state.game.state.selectMusicMenu
 
-                console.log(state.game.state.gameStageTime)
-                if (state.game.state.gameStageTime != 0 && state.game.state.gameStageTime+500 <= +new Date()) switch (keyPressed) {
+                if (state.game.state.gameStageTime != 0 && state.game.state.gameStageTime+100 <= +new Date()) switch (keyPressed) {
                     case 'ArrowRight':
                         selectMusicMenu.currentSelection = selectMusicMenu.currentSelection+1 >= 3 ? 0 : selectMusicMenu.currentSelection+1
                         state.game.playSong('Sounds/scrollMenu.ogg')

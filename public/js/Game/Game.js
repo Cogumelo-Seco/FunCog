@@ -248,6 +248,7 @@ function createGame(Listener, canvas, socket) {
                 if (!state.opponentArrows[arrowID]) state.opponentArrows[arrowID] = { click: false }
                 if (!state.arrowsInfoOpponent[arrowID]) state.arrowsInfoOpponent[arrowID] = {
                     arrowID,
+                    arrowFrameID: arrowID,
                     imageDir: null,
                     pos: arrowID,
                     defaultPos: arrowID,
@@ -273,6 +274,7 @@ function createGame(Listener, canvas, socket) {
             for (let arrowID = 0;arrowID <= 3;arrowID++) {
                 if (!state.arrowsInfo[arrowID]) state.arrowsInfo[arrowID] = {
                     arrowID,
+                    arrowFrameID: arrowID,
                     imageDir: null,
                     pos: arrowID,
                     defaultPos: arrowID,
@@ -365,7 +367,7 @@ function createGame(Listener, canvas, socket) {
                 }
             }
             
-            if ((state.musicInfo.playerId == 1 && !opponent || state.musicInfo.playerId == 2 && opponent) && !Listener.state.pauseGameKeys && note.errorWhenNotClicking && !state.smallFunctions.getConfig('botPlay') && state.arrowsInfo[note.arrowID] && note.Y > (state.arrowsInfo[note.arrowID]?.height**state.resizeNote) && !note.disabled && !note.clicked) {
+            if ((state.musicInfo.playerId == 1 && !opponent || state.musicInfo.playerId == 2 && opponent) && !Listener.state.pauseGameKeys && note.errorWhenNotClicking && (state.online || !state.smallFunctions.getConfig('botPlay')) && state.arrowsInfo[note.arrowID] && note.Y > (state.arrowsInfo[note.arrowID]?.height**state.resizeNote) && !note.disabled && !note.clicked) {
                 note.disabled = true
                 state.musicInfo.misses += 1
                 state.musicInfo.score -= Number.parseInt(state.scoreToAdd/2)
@@ -385,7 +387,7 @@ function createGame(Listener, canvas, socket) {
                                 if (note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
                                     note.disabled = true
                                     clearInterval(loop)
-                                } else if (!state.music.paused) {
+                                } else if (!state.music?.paused) {
                                     state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, hold: true }, state)
                                 }
                             }, 1000/5)

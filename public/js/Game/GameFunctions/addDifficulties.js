@@ -1,36 +1,42 @@
 export default async (state) => {
     state.difficulties = [
-        {// 0
+        {
+            id: 0,
             name: 'Easy',
             fileNameDifficulty: 'easy',
             color: 'rgb(1, 255, 1)',
             lifeDrain: 0.1
         },
-        {// 1
+        {
+            id: 1,
             name: 'Normal',
             fileNameDifficulty: '',
             color: 'rgb(255, 255, 10)',
             lifeDrain: 0.3
         },
-        {// 2
+        {
+            id: 2,
             name: 'Hard',
             fileNameDifficulty: 'hard',
             color: 'rgb(254, 7, 7)',
             lifeDrain: 0.8
         },
-        {// 3
+        {
+            id: 3,
             name: 'Mania',
             fileNameDifficulty: 'hard',
             color: 'rgb(255, 43, 234)',
             lifeDrain: 1
         },
-        {// 4
+        {
+            id: 4,
             name: 'Alt',
             fileNameDifficulty: 'alt',
             color: 'rgb(232, 105, 236)',
             lifeDrain: 1.2
         },
-        {// 5
+        {
+            id: 5,
             name: 'Harder',
             fileNameDifficulty: 'harder',
             color: 'rgb(255, 0, 0)',

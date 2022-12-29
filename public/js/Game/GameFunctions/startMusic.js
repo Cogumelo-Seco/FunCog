@@ -83,10 +83,10 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             for (let a in musicNotes[i].sectionNotes) {
                 let noteInfo = musicNotes[i].sectionNotes[a]
                 let mustHitSection = musicNotes[i].mustHitSection
-                //mustHitSection = opponentPlayer ? mustHitSection ? false : true : mustHitSection
+                let filterNotes = musicInfo.filterNotes ? musicInfo.filterNotes[difficulty.id] || 4 : 4
 
-                if (noteInfo[1] > 3 && noteInfo[1] < 8) {
-                    noteInfo[1] = noteInfo[1]%4
+                if (noteInfo[1] > filterNotes-1 && noteInfo[1] < filterNotes*2) {
+                    noteInfo[1] = noteInfo[1]%filterNotes
                     mustHitSection = mustHitSection ? false : true
                 }
 
@@ -176,7 +176,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
         async function loaded() {
             if (opponentPlayer && state.online) socket.emit('startMusic', { serverId: state.serverId })
             if (!opponentPlayer && state.online) socket.emit('openServer', { serverId: state.serverId })
-            if (!performanceMode) state.musicEventListener('loaded', {}, state)
+            if (!performanceMode) state.musicEventListener('loaded', { difficulty, listenerState }, state)
 
             if (state.musicOpponentNotes.length <= 0 && state.online) {
                 state.musicOpponentNotes = JSON.parse(JSON.stringify(state.musicNotes));

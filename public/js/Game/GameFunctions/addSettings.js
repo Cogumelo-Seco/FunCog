@@ -7,7 +7,9 @@ export default async (state) => {
             currentOption: 0,
             options: [
                 '4K',
-                '5K'
+                '5K',
+                '6K',
+                '26K'
             ]
         },
         {
@@ -68,6 +70,202 @@ export default async (state) => {
                     type: 'KeyBind',
                     content: 'KeyK'
                 }
+            ],
+            "6K": [
+                {
+                    name: 'Arrow 1',
+                    id: 'Arrow-0',
+                    type: 'KeyBind',
+                    content: 'KeyS'
+                },
+                {
+                    name: 'Arrow 2',
+                    id: 'Arrow-1',
+                    type: 'KeyBind',
+                    content: 'KeyD'
+                },
+                {
+                    name: 'Arrow 3',
+                    id: 'Arrow-2',
+                    type: 'KeyBind',
+                    content: 'KeyF'
+                },
+                {
+                    name: 'Arrow 4',
+                    id: 'Arrow-3',
+                    type: 'KeyBind',
+                    content: 'KeyJ'
+                },
+                {
+                    name: 'Arrow 5',
+                    id: 'Arrow-4',
+                    type: 'KeyBind',
+                    content: 'KeyK'
+                },
+                {
+                    name: 'Arrow 6',
+                    id: 'Arrow-5',
+                    type: 'KeyBind',
+                    content: 'KeyL'
+                }
+            ],
+            "26K": [
+                {
+                    name: 'Arrow 1',
+                    id: 'Arrow-0',
+                    type: 'KeyBind',
+                    content: 'KeyQ'
+                },
+                {
+                    name: 'Arrow 2',
+                    id: 'Arrow-1',
+                    type: 'KeyBind',
+                    content: 'KeyW'
+                },
+                {
+                    name: 'Arrow 3',
+                    id: 'Arrow-2',
+                    type: 'KeyBind',
+                    content: 'KeyE'
+                },
+                {
+                    name: 'Arrow 4',
+                    id: 'Arrow-3',
+                    type: 'KeyBind',
+                    content: 'KeyR'
+                },
+                {
+                    name: 'Arrow 5',
+                    id: 'Arrow-4',
+                    type: 'KeyBind',
+                    content: 'KeyT'
+                },
+                {
+                    name: 'Arrow 6',
+                    id: 'Arrow-5',
+                    type: 'KeyBind',
+                    content: 'KeyU'
+                },
+                {
+                    name: 'Arrow 7',
+                    id: 'Arrow-6',
+                    type: 'KeyBind',
+                    content: 'KeyI'
+                },
+                {
+                    name: 'Arrow 8',
+                    id: 'Arrow-7',
+                    type: 'KeyBind',
+                    content: 'KeyO'
+                },
+                {
+                    name: 'Arrow 9',
+                    id: 'Arrow-8',
+                    type: 'KeyBind',
+                    content: 'KeyP'
+                },
+                {
+                    name: 'Arrow 10',
+                    id: 'Arrow-9',
+                    type: 'KeyBind',
+                    content: 'KeyA'
+                },
+                {
+                    name: 'Arrow 11',
+                    id: 'Arrow-10',
+                    type: 'KeyBind',
+                    content: 'KeyS'
+                },
+                {
+                    name: 'Arrow 12',
+                    id: 'Arrow-11',
+                    type: 'KeyBind',
+                    content: 'KeyD'
+                },
+                {
+                    name: 'Arrow 13',
+                    id: 'Arrow-12',
+                    type: 'KeyBind',
+                    content: 'KeyF'
+                },
+                {
+                    name: 'Arrow 14',
+                    id: 'Arrow-13',
+                    type: 'KeyBind',
+                    content: 'KeyG'
+                },
+                {
+                    name: 'Arrow 15',
+                    id: 'Arrow-14',
+                    type: 'KeyBind',
+                    content: 'KeyH'
+                },
+                {
+                    name: 'Arrow 16',
+                    id: 'Arrow-15',
+                    type: 'KeyBind',
+                    content: 'KeyJ'
+                },
+                {
+                    name: 'Arrow 17',
+                    id: 'Arrow-16',
+                    type: 'KeyBind',
+                    content: 'KeyK'
+                },
+                {
+                    name: 'Arrow 18',
+                    id: 'Arrow-17',
+                    type: 'KeyBind',
+                    content: 'KeyL'
+                },
+                {
+                    name: 'Arrow 19',
+                    id: 'Arrow-18',
+                    type: 'KeyBind',
+                    content: 'Semicolon'
+                },
+                {
+                    name: 'Arrow 20',
+                    id: 'Arrow-19',
+                    type: 'KeyBind',
+                    content: 'KeyZ'
+                },
+                {
+                    name: 'Arrow 21',
+                    id: 'Arrow-20',
+                    type: 'KeyBind',
+                    content: 'KeyX'
+                },
+                {
+                    name: 'Arrow 22',
+                    id: 'Arrow-21',
+                    type: 'KeyBind',
+                    content: 'KeyC'
+                },
+                {
+                    name: 'Arrow 23',
+                    id: 'Arrow-22',
+                    type: 'KeyBind',
+                    content: 'KeyV'
+                },
+                {
+                    name: 'Arrow 24',
+                    id: 'Arrow-23',
+                    type: 'KeyBind',
+                    content: 'KeyB'
+                },
+                {
+                    name: 'Arrow 25',
+                    id: 'Arrow-24',
+                    type: 'KeyBind',
+                    content: 'KeyN'
+                },
+                {
+                    name: 'Arrow 26',
+                    id: 'Arrow-25',
+                    type: 'KeyBind',
+                    content: 'KeyM'
+                },
             ],
         },
         {
