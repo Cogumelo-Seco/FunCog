@@ -403,13 +403,13 @@ function createGame(Listener, canvas, socket) {
         if (state.gameStage == 'game') for (let i in state.musicNotes) {
             let note = state.musicNotes[i]
             let newNoteY = -((note.time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM)*ScrollSpeed*state.speed)
-            if (note.time >= 0 && newNoteY >= -state.canvas.height && newNoteY <= state.canvas.height/2+note.hold) moveNote(note, state.musicInfo.playerId, false, state.resizeNote)
+            if (note.time >= 0 && newNoteY >= -state.canvas.height && (note.Y <= state.canvas.height/2+note.hold || newNoteY <= state.canvas.height/2+note.hold)) moveNote(note, state.musicInfo.playerId, false, state.resizeNote)
         }
 
         if (state.gameStage == 'game') for (let i in state.musicOpponentNotes) {
             let note = state.musicOpponentNotes[i]
             let newNoteY = -((note.time-musicCurrentTime)*((5**state.resizeNoteOpponent)*state.musicBPM)*ScrollSpeed*state.speed)
-            if (note.time >= 0 && newNoteY >= -state.canvas.height && newNoteY <= state.canvas.height/2+note.hold) moveNote(note, state.musicInfo.playerId, true, state.resizeNoteOpponent)
+            if (note.time >= 0 && newNoteY >= -state.canvas.height && (note.Y <= state.canvas.height/2+note.hold || newNoteY <= state.canvas.height/2+note.hold)) moveNote(note, state.musicInfo.playerId, true, state.resizeNoteOpponent)
         }
 
         state.musicInfo.accuracy = 0
