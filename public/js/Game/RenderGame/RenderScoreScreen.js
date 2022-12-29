@@ -1,18 +1,16 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
-    /*ctx.fillStyle = 'rgb(255, 255, 255)'
-    ctx.font = `bold ${(canvas.width+canvas.height)*0.04}px Arial`
-    ctx.fillText('You Won', canvas.width/2-(ctx.measureText('You Won').width/2), 80);*/
-
     ctx.font = `bold ${(canvas.width+canvas.height)*0.03}px Arial`
 
-    let musicName = game.state.musicInfo.name.replace(/[-]/g, ' ')+(game.state.musicInfo.amountOfArrows ? ` ${game.state.musicInfo.amountOfArrows}` : '')
+    let musicName = game.state.musicInfo.name.replace(/[-]/g, ' ')
+    let difficultyName = game.state.musicInfo.difficulty.name+(game.state.musicInfo.difficultyAlert && game.state.musicInfo.difficultyAlert[game.state.musicInfo.difficulty.id] ? ` ${game.state.musicInfo.difficultyAlert[game.state.musicInfo.difficulty.id]}` : '')
+
     ctx.fillStyle = game.state.musicInfo.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(game.state.musicInfo.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : game.state.musicInfo.menuColor || 'white'
-    ctx.fillText(musicName, canvas.width/2-((ctx.measureText(musicName).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2), 80);
+    ctx.fillText(musicName, canvas.width/2-((ctx.measureText(musicName).width+ctx.measureText(`(${difficultyName})`).width)/2), 80);
 
     ctx.fillStyle = game.state.musicInfo.difficulty.color || 'white'
-    ctx.fillText(`(${game.state.musicInfo.difficulty.name})`, 10+canvas.width/2+((ctx.measureText(musicName).width+ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)/2-(ctx.measureText(`(${game.state.musicInfo.difficulty.name})`).width)), 80);
+    ctx.fillText(`(${difficultyName})`, 10+canvas.width/2+((ctx.measureText(musicName).width+ctx.measureText(`(${difficultyName})`).width)/2-(ctx.measureText(`(${difficultyName})`).width)), 80);
 
     let playerWin = game.state.musicInfoOpponent.score == game.state.musicInfo.score ? 'draw' : game.state.musicInfo.score > game.state.musicInfoOpponent.score ? true : false
 

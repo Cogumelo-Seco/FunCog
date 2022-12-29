@@ -24,7 +24,7 @@ function createGame(Listener, canvas, socket) {
         gameLoopFPSControlTime: 0,
         gameLoopFPSControlTime2: 0,
         rainbowColor: 0,
-        gameStage: 'loading',
+        gameStage: 'score',
         gameStageTime: 0,
         musicMenu: null,
         selectMusicMenu: {
@@ -84,7 +84,11 @@ function createGame(Listener, canvas, socket) {
         musicInfo: {
             name: 'Test',
             menuColor: 'purple',
+            difficultyAlert: {
+                3: '5k'
+            },
             difficulty: {
+                id: 3,
                 name: 'Mania',
                 fileNameDifficulty: 'hard',
                 color: 'rgb(255, 43, 234)',

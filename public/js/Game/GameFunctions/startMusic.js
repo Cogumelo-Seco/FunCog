@@ -35,6 +35,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             lifeDrain: difficulty.lifeDrain || 0,
             dev: musicInfo.dev,
             difficulty,
+            difficultyAlert: musicInfo.difficultyAlert,
             hitNote: 0,
             misses: 0,
             score: 0,
