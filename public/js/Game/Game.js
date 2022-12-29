@@ -24,7 +24,7 @@ function createGame(Listener, canvas, socket) {
         gameLoopFPSControlTime: 0,
         gameLoopFPSControlTime2: 0,
         rainbowColor: 0,
-        gameStage: 'score',
+        gameStage: 'loading',
         gameStageTime: 0,
         musicMenu: null,
         selectMusicMenu: {
