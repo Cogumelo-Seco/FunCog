@@ -144,85 +144,85 @@ export default async (state) => {
                     name: 'Arrow 6',
                     id: 'Arrow-5',
                     type: 'KeyBind',
-                    content: 'KeyU'
+                    content: 'KeyY'
                 },
                 {
                     name: 'Arrow 7',
                     id: 'Arrow-6',
                     type: 'KeyBind',
-                    content: 'KeyI'
+                    content: 'KeyU'
                 },
                 {
                     name: 'Arrow 8',
                     id: 'Arrow-7',
                     type: 'KeyBind',
-                    content: 'KeyO'
+                    content: 'KeyI'
                 },
                 {
                     name: 'Arrow 9',
                     id: 'Arrow-8',
                     type: 'KeyBind',
-                    content: 'KeyP'
+                    content: 'KeyO'
                 },
                 {
                     name: 'Arrow 10',
                     id: 'Arrow-9',
                     type: 'KeyBind',
-                    content: 'KeyA'
+                    content: 'KeyP'
                 },
                 {
                     name: 'Arrow 11',
                     id: 'Arrow-10',
                     type: 'KeyBind',
-                    content: 'KeyS'
+                    content: 'KeyA'
                 },
                 {
                     name: 'Arrow 12',
                     id: 'Arrow-11',
                     type: 'KeyBind',
-                    content: 'KeyD'
+                    content: 'KeyS'
                 },
                 {
                     name: 'Arrow 13',
                     id: 'Arrow-12',
                     type: 'KeyBind',
-                    content: 'KeyF'
+                    content: 'KeyD'
                 },
                 {
                     name: 'Arrow 14',
                     id: 'Arrow-13',
                     type: 'KeyBind',
-                    content: 'KeyG'
+                    content: 'KeyF'
                 },
                 {
                     name: 'Arrow 15',
                     id: 'Arrow-14',
                     type: 'KeyBind',
-                    content: 'KeyH'
+                    content: 'KeyG'
                 },
                 {
                     name: 'Arrow 16',
                     id: 'Arrow-15',
                     type: 'KeyBind',
-                    content: 'KeyJ'
+                    content: 'KeyH'
                 },
                 {
                     name: 'Arrow 17',
                     id: 'Arrow-16',
                     type: 'KeyBind',
-                    content: 'KeyK'
+                    content: 'KeyJ'
                 },
                 {
                     name: 'Arrow 18',
                     id: 'Arrow-17',
                     type: 'KeyBind',
-                    content: 'KeyL'
+                    content: 'KeyK'
                 },
                 {
                     name: 'Arrow 19',
                     id: 'Arrow-18',
                     type: 'KeyBind',
-                    content: 'Semicolon'
+                    content: 'KeyL'
                 },
                 {
                     name: 'Arrow 20',
