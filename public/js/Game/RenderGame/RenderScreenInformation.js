@@ -3,7 +3,7 @@ export default async (canvas, game, Listener) => {
 
     ctx.globalAlpha = game.state.alphaHUD
     ctx.fillStyle = `hsl(${game.state.rainbowColor+4912}, 100%, 40%)`//'rgb(200, 200, 200)'
-    ctx.font = `bold 10px Arial`
+    ctx.font = `bold 11px Arial`
     ctx.fillText('Created by: Cogu', canvas.width-ctx.measureText('Created by: Cogu').width-5, canvas.height-5);
 
     if (game.state.smallFunctions.getConfig('GameInfo')) {

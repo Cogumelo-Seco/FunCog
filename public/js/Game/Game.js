@@ -225,6 +225,10 @@ function createGame(Listener, canvas, socket) {
     }
 
     async function gameLoop(command) {
+        let botPlay = state.smallFunctions.getConfig('botPlay')
+        let LifeDrain = state.smallFunctions.getConfig('LifeDrain')
+        let ScrollSpeed = state.smallFunctions.getConfig('ScrollSpeed')
+        
         require('./GameFunctions/RenderChat').default(state.canvas, state, Listener.state, 'gameLoop')
 
         document.title = `Cogu - ${state.gameStage}`
@@ -300,7 +304,7 @@ function createGame(Listener, canvas, socket) {
 
         state.resizeNoteOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
 
-        if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !state.smallFunctions.getConfig('botPlay') && !state.debug && state.music?.currentTime > 1) {
+        if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !botPlay && !state.debug && state.music?.currentTime > 1) {
             if (state.online && state.serverId) {
                 socket.emit('deadPlayer', { 
                     serverId: state.serverId
@@ -346,8 +350,8 @@ function createGame(Listener, canvas, socket) {
             }
         }
 
-        function moveNote(note, playerId, opponent) {
-            let newNoteY = -((note.time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM)*smallFunctions.getConfig('ScrollSpeed')*state.speed)
+        function moveNote(note, playerId, opponent, resizeNote) {
+            let newNoteY = -((note.time-musicCurrentTime)*((5**resizeNote)*state.musicBPM)*ScrollSpeed*state.speed)
             let oldNoteY = note.oldY || -musicDuration*1000
             if (newNoteY >= oldNoteY) {
                 note.Y = newNoteY
@@ -355,21 +359,20 @@ function createGame(Listener, canvas, socket) {
             }
 
             if ((state.musicInfo.playerId == 1 && !opponent || state.musicInfo.playerId == 2 && opponent) && (state.debug || !state.online) && Listener.state.arrows[note.arrowID]) {
-                if (((state.smallFunctions.getConfig('botPlay') || note.autoClick) || Listener.state.arrows[note.arrowID].inAutoClick) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**state.resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
-                if ((state.smallFunctions.getConfig('botPlay') || note.autoClick) && (note.errorWhenNotClicking || note.autoClick) && newNoteY >= -10 && newNoteY <= (state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight*2)) {
+                if (((botPlay || note.autoClick) || Listener.state.arrows[note.arrowID].inAutoClick) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
+                if (!note.clicked && !note.disabled && (botPlay || note.autoClick) && (note.errorWhenNotClicking || note.autoClick) && newNoteY >= -10 && newNoteY <= (state.holdHeight**resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight*2)) {
                     Listener.state.arrows[note.arrowID].inAutoClick = note.autoClick
                     Listener.state.arrows[note.arrowID].state = 'onNote'
                     Listener.state.arrows[note.arrowID].click = true
                     Listener.state.arrows[note.arrowID].lastNoteClicked = note
-                    if (!note.clicked && !note.disabled) {
-                        note.clicked = true
-                        //setTimeout(() => verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, bot: true }), Math.floor(Math.random()*200))
-                        verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, bot: true })
-                    }
+
+                    note.clicked = true
+                    //setTimeout(() => verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, bot: true }), Math.floor(Math.random()*200))
+                    verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, readyNote: note })
                 }
             }
             
-            if ((state.musicInfo.playerId == 1 && !opponent || state.musicInfo.playerId == 2 && opponent) && !Listener.state.pauseGameKeys && note.errorWhenNotClicking && (state.online || !state.smallFunctions.getConfig('botPlay')) && state.arrowsInfo[note.arrowID] && note.Y > (state.arrowsInfo[note.arrowID]?.height**state.resizeNote) && !note.disabled && !note.clicked) {
+            if ((state.musicInfo.playerId == 1 && !opponent || state.musicInfo.playerId == 2 && opponent) && !Listener.state.pauseGameKeys && note.errorWhenNotClicking && (state.online || !botPlay) && state.arrowsInfo[note.arrowID] && note.Y > (state.arrowsInfo[note.arrowID]?.height**resizeNote) && !note.disabled && !note.clicked) {
                 note.disabled = true
                 state.musicInfo.misses += 1
                 state.musicInfo.score -= Number.parseInt(state.scoreToAdd/2)
@@ -384,34 +387,34 @@ function createGame(Listener, canvas, socket) {
                     state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, hold: false }, state)
 
                     if (note.hold > 0) {
-                        let loop = setInterval(() => {
-                            if (note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
-                                note.disabled = true
-                                clearInterval(loop)
-                            } else if (!state.music?.paused) {
+                        let loop = () => {
+                            if (!state.music?.paused && note.Y <= ((state.holdHeight**resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
                                 state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, hold: true }, state)
+                                setTimeout(() => loop(), 1000/5)
                             }
-                        }, 1000/5)
+                        }
                     }
                     note.clicked = true
-                    if ((state.online || state.smallFunctions.getConfig('LifeDrain')) && state.musicInfo.health > 10 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
+                    if ((state.online || LifeDrain) && state.musicInfo.health > 10 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
                 }
             }
         }
 
-        for (let i in state.musicNotes) {
+        if (state.gameStage == 'game') for (let i in state.musicNotes) {
             let note = state.musicNotes[i]
-            /*if (note.time >= 0 && note.time <= musicCurrentTime+1)*/ moveNote(note, state.musicInfo.playerId, false)
+            let newNoteY = -((note.time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM)*ScrollSpeed*state.speed)
+            if (note.time >= 0 && newNoteY >= -state.canvas.height && newNoteY <= state.canvas.height/2+note.hold) moveNote(note, state.musicInfo.playerId, false, state.resizeNote)
         }
 
-        for (let i in state.musicOpponentNotes) {
+        if (state.gameStage == 'game') for (let i in state.musicOpponentNotes) {
             let note = state.musicOpponentNotes[i]
-           /*if (note.time >= 0 && note.time <= musicCurrentTime+1)*/ moveNote(note, state.musicInfo.playerId, true)
+            let newNoteY = -((note.time-musicCurrentTime)*((5**state.resizeNoteOpponent)*state.musicBPM)*ScrollSpeed*state.speed)
+            if (note.time >= 0 && newNoteY >= -state.canvas.height && newNoteY <= state.canvas.height/2+note.hold) moveNote(note, state.musicInfo.playerId, true, state.resizeNoteOpponent)
         }
 
         state.musicInfo.accuracy = 0
         for (let i in state.musicInfo.accuracyMedia) state.musicInfo.accuracy += state.musicInfo.accuracyMedia[i]
-        state.musicInfo.accuracy = state.musicInfo.accuracy/state.musicInfo.accuracyMedia?.length || 0
+        state.musicInfo.accuracy = state.musicInfo.accuracy/state.musicInfo.accuracyMedia?.length || 100
 
         for (let i in codes) {
             if (Listener.state.codeText.toLowerCase().includes(i)) {          
@@ -427,7 +430,7 @@ function createGame(Listener, canvas, socket) {
         if (state.gameLoopFPSControlTime2+1000 <= +new Date()) {
             state.gameLoopFPSControlTime2 = +new Date()
             
-            if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) state.musicInfo.linearAccuracyMedia.push(state.musicInfo.accuracy || 1)
+            if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) state.musicInfo.linearAccuracyMedia.push(state.musicInfo.accuracy || 100)
         }
 
         if (state.gameLoopFPSControlTime+20 <= +new Date()) {

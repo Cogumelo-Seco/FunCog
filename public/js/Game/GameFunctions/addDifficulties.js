@@ -48,7 +48,14 @@ export default async (state) => {
             fileNameDifficulty: 'god',
             color: '#ffff00',
             lifeDrain: 1.2
-        }
+        },
+        {
+            id: 7,
+            name: 'Mania',
+            fileNameDifficulty: 'mania',
+            color: 'rgb(255, 43, 234)',
+            lifeDrain: 1
+        },
     ]
     
     return state.difficulties

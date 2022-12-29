@@ -168,7 +168,7 @@ export default async (canvas, game, Listener) => {
         function renderGraphic(graphicData, color) {
             ctx.lineWidth = 1
             let lastGraphicInfo = { x: graphicX,  y: graphicY }
-            for (let i in graphicData) {
+            if (graphicData.length <= 5000) for (let i in graphicData) {
                 ctx.strokeStyle = color
 
                 let x = graphicX+(graphicWidth*(i/(graphicData.length-1)))-ctx.lineWidth

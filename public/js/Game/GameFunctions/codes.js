@@ -3,6 +3,10 @@ export default function codesFunction(state) {
         debug: () => {
             return state.debug = state.debug ? false : true
         },
+        botplay: () => {
+            state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content ? false : true
+            return state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content
+        },
         admcogu: () => {
             if (state.myMessageConfig.colorName?.includes('RAINBOW')) {
                 state.myMessageConfig.colorName = null

@@ -1757,11 +1757,15 @@ export default async (state) => {
                 {
                     name: 'Space-Breaker',
                     menuColor: 'RAINBOW-7',
-                    difficulties: [ 6 ],
+                    difficulties: [ 2, 5, 6, 7 ],
                     filterNotes: {
+                        2: 18,
+                        5: 12,
                         6: 18,
                     },
                     difficultyAlert: {
+                        2: '9k',
+                        5: '12k',
                         6: '18k',
                     },
                     notesImageDir: 'Arrows/',

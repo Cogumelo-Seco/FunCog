@@ -13,20 +13,20 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				defaultResizeNote,
 			}
 
-			if (difficulty.name == 'Hard' || difficulty.name == 'Normal') {
+			if (difficulty.id == 2 || difficulty.id == 1) {
 				state.musicInfo.notesImageDir = 'Arrows/Arrows-26K/'
-				if (difficulty.name == 'Hard') {
+				if (difficulty.id == 2) {
 					state.resizeNote = 0.64
 					state.selectSettingsOption.settingsOptions.find((g) => g.id == 'SpaceBetweenArrows').content = 0
 					state.selectSettingsOption.settingsOptions.find((g) => g.id == 'MiddleScroll').content = false
+
+					state.customBongPosition = {
+						X: NaN,
+						Y: NaN
+					}
 				}
 
-				state.customBongPosition = {
-					X: NaN,
-					Y: NaN
-				}
-
-				if (difficulty.name == 'Hard') {
+				if (difficulty.id == 2) {
 					for (let i = 4;i < 26;i++) {
 						state.arrowsInfo[i] = {
 							arrowID: i,

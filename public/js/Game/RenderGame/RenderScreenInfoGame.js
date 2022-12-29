@@ -32,9 +32,16 @@ export default async (canvas, game, Listener) => {
     }
 
     ctx.font = `bold 10px Arial`
+
+    ctx.fillStyle = game.state.musicInfo.difficulty.color
     ctx.fillText(`Difficulty: ${game.state.musicInfo.difficulty.name}`, 2, canvas.height-5);
-    ctx.fillText(`Beat: ${game.state.musicBeat}`, 2, canvas.height-15);
-    ctx.fillText(`Step: ${game.state.musicStep}`, 2, canvas.height-25);
+
+    ctx.fillStyle = 'rgb(200, 200, 200)'
+    ctx.fillText(`ScrollSpeed: ${game.state.smallFunctions.getConfig('ScrollSpeed')}`, 2, canvas.height-15);
+    if (game.state.debug) {
+        ctx.fillText(`Beat: ${game.state.musicBeat}`, 2, canvas.height-25);
+        ctx.fillText(`Step: ${game.state.musicStep}`, 2, canvas.height-35);
+    }
     
     let introImage = game.state.images[`intro/${game.state.countdown}.png`]
     if (game.state.countdown >= 0 && introImage) {
@@ -52,7 +59,7 @@ export default async (canvas, game, Listener) => {
             let ratingImageWidth = ratingImage.image.width**resize*0.55
             let ratingImageHeight = ratingImage.image.height**resize*0.55
             let ratingImageY = (arrowsInfo[0]?.Y+(arrowsInfo[0]?.height**resize*0.2)-(ratingImage.image.height**resize*0.6/2))-(90**resize)*percent
-            let ratingImageX = arrowsInfo[0]?.defaultX-(game.state.smallFunctions.getConfig('SpaceBetweenArrows')**resize+(ratingImageWidth**resize*2))
+            let ratingImageX = arrowsInfo[0]?.defaultX-(ratingImageWidth**resize*2)
 
             ctx.drawImage(ratingImage.image, ratingImageX, ratingImageY, ratingImageWidth, ratingImageHeight);
 

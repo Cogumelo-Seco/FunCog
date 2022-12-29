@@ -22,7 +22,7 @@ export default async (canvas, game, Listener) => {
 
         let noteY = downScroll ? (arrowInfo?.Y || arrowY)+note.Y : (arrowInfo?.Y || arrowY)-note.Y
 
-        if (arrowInfo && noteY-(note.hold) < canvas.height && noteY+(note.hold) > -canvas.height) {
+        if (arrowInfo && noteY-(note.hold) < canvas.height && noteY+(note.hold) > 0) {
             let arrowImageData = game.state.personalizedNotes[note.type] ? game.state.images[game.state.personalizedNotes[note.type].newArrowImage] : game.state.images[arrowInfo.imageDir || `${game.state.musicInfo.notesImageDir}Arrows.png`]
             let arrowImage = arrowImageData?.image
             let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowInfo.arrowFrameID}`]
@@ -99,7 +99,7 @@ export default async (canvas, game, Listener) => {
 
         let noteY = downScroll ? (arrowInfo?.Y || arrowYOpponent)+note.Y : (arrowInfo?.Y || arrowYOpponent)-note.Y
 
-        if (arrowInfo && noteY-(note.hold) < canvas.height && noteY+(note.hold) > -canvas.height) {
+        if (arrowInfo && noteY-(note.hold) < canvas.height && noteY+(note.hold) > 0) {
             let arrowImageData = game.state.personalizedNotes[note.type] ? game.state.images[game.state.personalizedNotes[note.type].newArrowImage] : game.state.images[arrowInfo.imageDir || `${game.state.musicInfo.notesImageDir}Arrows.png`]
             let arrowImage = arrowImageData?.image
             let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowInfo.arrowFrameID}`]
