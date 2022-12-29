@@ -1,7 +1,6 @@
 export default async (canvas, game, Listener) => {
     const ctx = canvas.getContext('2d')
 
-    let performanceMode = game.state.smallFunctions.getConfig('PerformanceMode')
     let downScroll = game.state.smallFunctions.getConfig('DownScroll')
     let middleScroll = game.state.smallFunctions.getConfig('MiddleScroll')
 
@@ -63,14 +62,12 @@ export default async (canvas, game, Listener) => {
         }
     }
 
-    if (!performanceMode) {
-        for (let i in game.state.musicInfo.ratings) renderRatings(game.state.musicInfo.ratings[i], Object.values(game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo']).sort((a, b) => a.pos-b.pos), game.state.resizeNote)
-        
-        for (let i in game.state.musicInfoOpponent.ratings) {
-            let rating = JSON.parse(JSON.stringify(game.state.musicInfoOpponent.ratings[i]))
-            rating.time += 500
-            renderRatings(rating, Object.values(game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent']).sort((a, b) => a.pos-b.pos), game.state.resizeNoteOpponent)
-        }
+    for (let i in game.state.musicInfo.ratings) renderRatings(game.state.musicInfo.ratings[i], Object.values(game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo']).sort((a, b) => a.pos-b.pos), game.state.resizeNote)
+    
+    for (let i in game.state.musicInfoOpponent.ratings) {
+        let rating = JSON.parse(JSON.stringify(game.state.musicInfoOpponent.ratings[i]))
+        rating.time += 500
+        renderRatings(rating, Object.values(game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent']).sort((a, b) => a.pos-b.pos), game.state.resizeNoteOpponent)
     }
 
     ctx.globalAlpha = 1

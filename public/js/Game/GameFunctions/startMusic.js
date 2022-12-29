@@ -1,7 +1,6 @@
 export default async({ musicInfo, difficulty, listenerState, opponentPlayer, socket }, state) => {
     //try {
         let videoElement = document.getElementById('gameVideo')
-        let performanceMode = state.smallFunctions.getConfig('PerformanceMode')
 
         state.music = null
         state.musicChangeBPM = {}
@@ -177,7 +176,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
         async function loaded() {
             if (opponentPlayer && state.online) socket.emit('startMusic', { serverId: state.serverId })
             if (!opponentPlayer && state.online) socket.emit('openServer', { serverId: state.serverId })
-            if (!performanceMode) state.musicEventListener('loaded', { difficulty, listenerState }, state)
+            state.musicEventListener('loaded', { difficulty, listenerState }, state)
 
             if (state.musicOpponentNotes.length <= 0 && state.online) {
                 state.musicOpponentNotes = JSON.parse(JSON.stringify(state.musicNotes));
@@ -214,7 +213,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
 
                         if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
 
-                        if (!performanceMode) state.musicEventListener('started', { difficulty, listenerState }, state)
+                        state.musicEventListener('started', { difficulty, listenerState }, state)
                     } else {
                         state.musicInfo.bestCombo = 0
                         state.musicInfo.combo = 0
@@ -252,7 +251,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             if (note[1] > 3) {
                 note[2] = 0
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'hitKillNote'
             } 
@@ -261,7 +260,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             if (note[1] > 3) {
                 note[2] = 0
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'fireNote'
             }
@@ -269,7 +268,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
         if (musicInfo.mod == 'SuicideMouse') {
             if (note[3] && note[1] != -1) {
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'hurtNoteSuicidemouse'
             }
@@ -286,12 +285,12 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
         if (musicInfo.mod == 'SonicEXE') {
             if (note[3] == 2) {
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 //errorWhenNotClicking = false
                 type = 'sonicEXEStaticNote'
             } else if (note[3]) {
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'sonicEXEphantomNote'
             }
@@ -299,51 +298,51 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
 
         if (musicInfo.mod == 'LateNightCityTale') {
             if (note[3] == 'black') {
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'LNCTBlack'
             }
             if (note[3] == 'white') {
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 type = 'LNCTWhite'
             }
             if (note[3] == 'red') {
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 type = 'LNCTRed'
             }
         }
         if (musicInfo.mod == 'WitheredFreddy') {
             if (note[3] == 3) {
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'WitheredFreddyDanger'
             }
             if (note[3] == 4) {
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'WitheredFreddyCharge'
             }
             if (note[3] == 2) {
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'WitheredFreddyRemnant'
             }
             if (note[3] == 5) {
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = false
                 type = 'WitheredFreddyLoose'
             }
         }
         if (musicInfo.mod == 'VSChira') {
             if (note[3] == 'chiraNote') {
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 type = 'VSChiraMarsh'
             }
         }
 
         if (name == 'death-toll') {
             if (note[1] == 8) {
-                disabled = difficulty.name == 'Mania' || performanceMode ? true : false
+                disabled = difficulty.name == 'Mania' ? true : false
                 arrowID = 4
                 type = 'Bronzong'
                 mustHitSection = true       

@@ -229,8 +229,6 @@ function createGame(Listener, canvas, socket) {
 
         document.title = `Cogu - ${state.gameStage}`
 
-        let performanceMode = state.smallFunctions.getConfig('PerformanceMode')
-
         if (state.gameStage == 'game') state.renderType = 'limited'
         else if (smallFunctions.getConfig('menuFPSUnlimit')) state.renderType = 'unlimited'
         else state.renderType = 'limited'
@@ -378,24 +376,22 @@ function createGame(Listener, canvas, socket) {
                 state.musicInfo.health -= 2.5
                 state.musicInfo.combo = 0
                 state.musicInfo.accuracyMedia.push(1)
-                if (!performanceMode) state.musicEventListener('passedNote', { note: note, listenerState: Listener.state }, state)
+                state.musicEventListener('passedNote', { note: note, listenerState: Listener.state }, state)
             }
 
             if ((state.musicInfo.playerId == 1 && opponent || state.musicInfo.playerId == 2 && !opponent)) {
                 if (newNoteY >= 0 && !note.clicked && !note.disabled && (note.errorWhenNotClicking || note.autoClick)) {
-                    if (!performanceMode) {
-                        state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, hold: false }, state)
+                    state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, hold: false }, state)
 
-                        if (note.hold > 0) {
-                            let loop = setInterval(() => {
-                                if (note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
-                                    note.disabled = true
-                                    clearInterval(loop)
-                                } else if (!state.music?.paused) {
-                                    state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, hold: true }, state)
-                                }
-                            }, 1000/5)
-                        }
+                    if (note.hold > 0) {
+                        let loop = setInterval(() => {
+                            if (note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
+                                note.disabled = true
+                                clearInterval(loop)
+                            } else if (!state.music?.paused) {
+                                state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, hold: true }, state)
+                            }
+                        }, 1000/5)
                     }
                     note.clicked = true
                     if ((state.online || state.smallFunctions.getConfig('LifeDrain')) && state.musicInfo.health > 10 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
@@ -405,12 +401,12 @@ function createGame(Listener, canvas, socket) {
 
         for (let i in state.musicNotes) {
             let note = state.musicNotes[i]
-            moveNote(note, state.musicInfo.playerId, false)
+            /*if (note.time >= 0 && note.time <= musicCurrentTime+1)*/ moveNote(note, state.musicInfo.playerId, false)
         }
 
         for (let i in state.musicOpponentNotes) {
             let note = state.musicOpponentNotes[i]
-            moveNote(note, state.musicInfo.playerId, true)
+            /*if (note.time >= 0 && note.time <= musicCurrentTime+1)*/ moveNote(note, state.musicInfo.playerId, true)
         }
 
         state.musicInfo.accuracy = 0
@@ -434,7 +430,7 @@ function createGame(Listener, canvas, socket) {
             if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) state.musicInfo.linearAccuracyMedia.push(state.musicInfo.accuracy || 1)
         }
 
-        if (state.gameLoopFPSControlTime+(performanceMode ? 40 : 20) <= +new Date()) {
+        if (state.gameLoopFPSControlTime+20 <= +new Date()) {
             if (state.online && state.serverId) {
                 if (state.serverInfo.end == true) {
                     //state.smallFunctions.redirectGameStage('onlineServerList')
@@ -453,7 +449,7 @@ function createGame(Listener, canvas, socket) {
 
             state.gameLoopFPSControlTime = +new Date()
 
-            if (state.music?.currentTime > 0 && state.music?.currentTime < state.music?.duration && !performanceMode) state.musicEventListener('gameLoop', { listenerState: Listener.state }, state)
+            if (state.music?.currentTime > 0 && state.music?.currentTime < state.music?.duration) state.musicEventListener('gameLoop', { listenerState: Listener.state }, state)
 
             for (let i in state.animations) {
                 let animation = state.animations[i]

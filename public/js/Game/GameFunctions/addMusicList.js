@@ -1664,32 +1664,10 @@ export default async (state) => {
                 }
             ]
         },
-
         {
             name: 'Undefined',
             menuColor: 'RAINBOW-7890',
             musics: [
-                {
-                    name: 'Thunderstorm',
-                    menuColor: 'RAINBOW-4894',
-                    difficulties: [ 0, 1, 2 ],
-                    filterNotes: {
-                        1: 6,
-                        2: 26,
-                    },
-                    difficultyAlert: {
-                        1: '6k',
-                        2: '26k',
-                    },
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: null,
-                    mod: 'Undefined',
-                    toLoad: [
-                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
-                        { dir: 'Musics/musics/thunderstorm/Inst.ogg' },
-                        { dir: 'Musics/musics/thunderstorm/Voices.ogg' },
-                    ]
-                },
                 {
                     name: 'RUSH-E',
                     menuColor: 'RAINBOW-941',
@@ -1747,6 +1725,52 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Musics/musics/through-the-fire-and-flames/Inst.ogg' },
                         { dir: 'Musics/musics/through-the-fire-and-flames/Voices.ogg' },
+                    ]
+                },
+            ]
+        },
+        {
+            name: 'Special Songs',
+            menuColor: 'red',
+            musics: [
+                {
+                    name: 'Thunderstorm',
+                    menuColor: 'RAINBOW-4894',
+                    difficulties: [ 0, 1, 2 ],
+                    filterNotes: {
+                        1: 6,
+                        2: 26,
+                    },
+                    difficultyAlert: {
+                        1: '6k',
+                        2: '26k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'SpecialSongs',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/thunderstorm/Inst.ogg' },
+                        { dir: 'Musics/musics/thunderstorm/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Space-Breaker',
+                    menuColor: 'RAINBOW-7',
+                    difficulties: [ 6 ],
+                    filterNotes: {
+                        6: 18,
+                    },
+                    difficultyAlert: {
+                        6: '18k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'SpecialSongs',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/space-breaker/Inst.ogg' },
+                        { dir: 'Musics/musics/space-breaker/Voices.ogg' },
                     ]
                 },
             ]

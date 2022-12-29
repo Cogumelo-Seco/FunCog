@@ -9,6 +9,7 @@ export default async (state) => {
                 '4K',
                 '5K',
                 '6K',
+                '18K',
                 '26K'
             ]
         },
@@ -107,6 +108,116 @@ export default async (state) => {
                     id: 'Arrow-5',
                     type: 'KeyBind',
                     content: 'KeyL'
+                }
+            ],
+            "18K": [
+                {
+                    name: 'Arrow 1',
+                    id: 'Arrow-0',
+                    type: 'KeyBind',
+                    content: 'KeyQ'
+                },
+                {
+                    name: 'Arrow 2',
+                    id: 'Arrow-1',
+                    type: 'KeyBind',
+                    content: 'KeyW'
+                },
+                {
+                    name: 'Arrow 3',
+                    id: 'Arrow-2',
+                    type: 'KeyBind',
+                    content: 'KeyE'
+                },
+                {
+                    name: 'Arrow 4',
+                    id: 'Arrow-3',
+                    type: 'KeyBind',
+                    content: 'KeyR'
+                },
+                {
+                    name: 'Arrow 5',
+                    id: 'Arrow-4',
+                    type: 'KeyBind',
+                    content: 'KeyT'
+                },
+                {
+                    name: 'Arrow 6',
+                    id: 'Arrow-5',
+                    type: 'KeyBind',
+                    content: 'KeyY'
+                },
+                {
+                    name: 'Arrow 7',
+                    id: 'Arrow-6',
+                    type: 'KeyBind',
+                    content: 'KeyU'
+                },
+                {
+                    name: 'Arrow 8',
+                    id: 'Arrow-7',
+                    type: 'KeyBind',
+                    content: 'KeyI'
+                },
+                {
+                    name: 'Arrow 9',
+                    id: 'Arrow-8',
+                    type: 'KeyBind',
+                    content: 'KeyO'
+                },
+                {
+                    name: 'Arrow 10',
+                    id: 'Arrow-9',
+                    type: 'KeyBind',
+                    content: 'KeyP'
+                },
+                {
+                    name: 'Arrow 11',
+                    id: 'Arrow-10',
+                    type: 'KeyBind',
+                    content: 'KeyA'
+                },
+                {
+                    name: 'Arrow 12',
+                    id: 'Arrow-11',
+                    type: 'KeyBind',
+                    content: 'KeyS'
+                },
+                {
+                    name: 'Arrow 13',
+                    id: 'Arrow-12',
+                    type: 'KeyBind',
+                    content: 'KeyD'
+                },
+                {
+                    name: 'Arrow 14',
+                    id: 'Arrow-13',
+                    type: 'KeyBind',
+                    content: 'KeyF'
+                },
+                {
+                    name: 'Arrow 15',
+                    id: 'Arrow-14',
+                    type: 'KeyBind',
+                    content: 'KeyG'
+                },
+                {
+                    name: 'Arrow 16',
+                    id: 'Arrow-15',
+                    type: 'KeyBind',
+                    content: 'KeyH'
+                },
+                {
+                    name: 'Arrow 17',
+                    id: 'Arrow-16',
+                    type: 'KeyBind',
+                    content: 'KeyJ'
+                },
+                {
+                    name: 'Arrow 18',
+                    id: 'Arrow-17',
+                    type: 'KeyBind',
+                    content: 'KeyK'
                 }
             ],
             "26K": [
@@ -348,13 +459,6 @@ export default async (state) => {
         {
             name: 'Game',
             type: 'ConfigTitle'
-        },
-        {
-            name: 'Performance Mode',
-            id: 'PerformanceMode',
-            menuColor: 'rgb(255, 50, 50)',
-            type: 'Boolean',
-            content: false
         },
         {
             name: 'Game Info',

@@ -5,8 +5,7 @@ export default (state, Listener) => {
             return (arrowsKey.find(c => c.id == 'Arrow-'+arrowID))?.content
         },
         redirectGameStage: async (newStage, oldStage) => {
-            if (state.smallFunctions.getConfig('PerformanceMode')) state.animations.transition.frame = state.animations.transition.endFrame
-            else state.animations.transition.frame = 0
+            state.animations.transition.frame = 0
             state.gameStageTime = +new Date()
             state.oldGameStage = oldStage || state.gameStage
             state.gameStage = newStage
@@ -15,7 +14,7 @@ export default (state, Listener) => {
             return (state.selectSettingsOption.settingsOptions.find((g) => g.id == id))?.content
         },
         resetGame: () => {
-            if (!state.smallFunctions.getConfig('PerformanceMode')) state.musicEventListener('end', {}, state)
+            state.musicEventListener('end', {}, state)
             state.musicEventListener = () => null
             state.waiting = true
             state.serverId = null

@@ -3,7 +3,6 @@ export default async (canvas, game, Listener) => {
 
     let invertArrowPos = game.state.musicInfo.playerId == 2 ? game.state.invertArrowPos ? false : true : game.state.invertArrowPos
 
-    let performanceMode = game.state.smallFunctions.getConfig('PerformanceMode')
     let onNotesSplashes = game.state.smallFunctions.getConfig('Splashes')
     let downScroll = game.state.smallFunctions.getConfig('DownScroll')
     let middleScroll = game.state.smallFunctions.getConfig('MiddleScroll')
@@ -95,7 +94,7 @@ export default async (canvas, game, Listener) => {
             ctx.rotate((arrowInfo.rotation)*Math.PI/180);
 
             ctx.drawImage(arrowImage, arrowImagePos.x, arrowImagePos.y, arrowImagePos.width, arrowImagePos.height, -(currentArrowWidth/2), -(currentArrowHeight/2), currentArrowWidth, currentArrowHeight)
-            if (splashImage && splashImagePos && onNotesSplashes && !performanceMode) {
+            if (splashImage && splashImagePos && onNotesSplashes) {
                 ctx.globalAlpha = game.state.alphaHUD == 1 ? arrowInfo.splashAlpha : arrowInfo.splashAlpha == 1 ? game.state.alphaHUD : 0
                 ctx.drawImage(splashImage, splashImagePos.x, splashImagePos.y, splashImagePos.width, splashImagePos.height, -((currentArrowWidth*game.state.musicInfo.splashResize)/2), -((currentArrowHeight*game.state.musicInfo.splashResize)/2), currentArrowWidth*game.state.musicInfo.splashResize, currentArrowHeight*game.state.musicInfo.splashResize)
             }
@@ -126,7 +125,7 @@ export default async (canvas, game, Listener) => {
         arrowX += arrowWidth**resizeNote+spaceBetweenArrows
     }
 
-    if (game.state.musicInfo.notesImageDir && !performanceMode && game.state.smallFunctions.getConfig('OpponentNotes')) for (let i in arrowsInfoOpponent) {
+    if (game.state.musicInfo.notesImageDir && game.state.smallFunctions.getConfig('OpponentNotes')) for (let i in arrowsInfoOpponent) {
         let arrowID = arrowsInfoOpponent[i].arrowID
         let arrowInfo = arrowsInfoOpponent[i]
 

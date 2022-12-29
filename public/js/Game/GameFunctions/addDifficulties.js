@@ -41,6 +41,13 @@ export default async (state) => {
             fileNameDifficulty: 'harder',
             color: 'rgb(255, 0, 0)',
             lifeDrain: 1.2
+        },
+        {
+            id: 6,
+            name: 'God',
+            fileNameDifficulty: 'god',
+            color: '#ffff00',
+            lifeDrain: 1.2
         }
     ]
     
