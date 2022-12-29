@@ -60,9 +60,9 @@ export default async function renderGame(canvas, game, Listener) {
     //require('./RenderChat').default(canvas, game, Listener)
     require('./RenderScreenInformation').default(canvas, game, Listener)
 
-    await game.gameLoop()
+    game.gameLoop()
     if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration) game.state.musicEventListener('gameLoopFullFPS', { listenerState: Listener.state }, game.state)
 
-    if (game.state.renderType == 'limited') window.requestAnimationFrame(() => renderGame(canvas, game, Listener) )
-    else setTimeout(() => renderGame(canvas, game, Listener) , 0)
+    if (game.state.renderType == 'limited') window.requestAnimationFrame(() => renderGame(canvas, game, Listener))
+    else setTimeout(() => renderGame(canvas, game, Listener), 0)
 }

@@ -47,8 +47,8 @@ export default async (canvas, game, Listener) => {
 
         let splashImageData = game.state.images[arrowInfo?.splashDir]
         let splashImage = splashImageData?.image
-        let splashFrames = splashImageData?.animationConfig[`Arrow-${arrowInfo.arrowFrameID}`]
-        let splashImagePos = splashFrames ? splashFrames[`Arrow-${arrowInfo.arrowFrameID}-splash-${arrowInfo.splashFrame}`] : null
+        let splashFrames = splashImageData?.animationConfig[`Arrow-${arrowInfo.splashFrameID}`]
+        let splashImagePos = splashFrames ? splashFrames[`Arrow-${arrowInfo.splashFrameID}-splash-${arrowInfo.splashFrame}`] : null
 
         if (arrowInfo && splashFrames && arrowInfo.splashFrame <= Object.keys(splashFrames).length && arrowInfo.splashTime+(35-Object.keys(splashFrames).length < 15 ? 15 : 35-Object.keys(splashFrames).length) <= +new Date()) {
             arrowInfo.splashFrame += 1

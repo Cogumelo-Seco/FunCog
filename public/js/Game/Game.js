@@ -255,6 +255,7 @@ function createGame(Listener, canvas, socket) {
                 if (!state.arrowsInfoOpponent[arrowID]) state.arrowsInfoOpponent[arrowID] = {
                     arrowID,
                     arrowFrameID: arrowID,
+                    splashFrameID: arrowID,
                     imageDir: null,
                     pos: arrowID,
                     defaultPos: arrowID,
@@ -281,6 +282,7 @@ function createGame(Listener, canvas, socket) {
                 if (!state.arrowsInfo[arrowID]) state.arrowsInfo[arrowID] = {
                     arrowID,
                     arrowFrameID: arrowID,
+                    splashFrameID: arrowID,
                     imageDir: null,
                     pos: arrowID,
                     defaultPos: arrowID,

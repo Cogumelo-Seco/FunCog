@@ -41,6 +41,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						state.arrowsInfo[i] = {
 							arrowID: i,
 							arrowFrameID,
+							splashFrameID: 0,
 							pos: i,
 							defaultPos: i,
 							imageDir: null,
@@ -60,6 +61,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						state.arrowsInfoOpponent[i] = {
 							arrowID: i,
 							arrowFrameID,
+							splashFrameID: 0,
 							pos: i,
 							defaultPos: i,
 							imageDir: null,
@@ -90,6 +92,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						state.arrowsInfo[i] = {
 							arrowID: i,
 							arrowFrameID,
+							splashFrameID: 0,
 							pos: i,
 							defaultPos: i,
 							imageDir: null,
@@ -109,6 +112,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						state.arrowsInfoOpponent[i] = {
 							arrowID: i,
 							arrowFrameID,
+							splashFrameID: 0,
 							pos: i,
 							defaultPos: i,
 							imageDir: null,
@@ -141,6 +145,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						state.arrowsInfo[i] = {
 							arrowID: i,
 							arrowFrameID,
+							splashFrameID: 0,
 							pos: i,
 							defaultPos: i,
 							imageDir: null,
@@ -160,6 +165,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						state.arrowsInfoOpponent[i] = {
 							arrowID: i,
 							arrowFrameID,
+							splashFrameID: 0,
 							pos: i,
 							defaultPos: i,
 							imageDir: null,

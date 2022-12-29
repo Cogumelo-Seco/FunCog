@@ -27,10 +27,11 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				}
 
 				if (difficulty.id == 2) {
-					for (let i = 4;i < 26;i++) {
+					for (let i = 0;i < 26;i++) {
 						state.arrowsInfo[i] = {
 							arrowID: i,
 							arrowFrameID: i,
+							splashFrameID: 0,
 							pos: i,
 							defaultPos: i,
 							imageDir: null,
@@ -50,6 +51,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						state.arrowsInfoOpponent[i] = {
 							arrowID: i,
 							arrowFrameID: i,
+							splashFrameID: 0,
 							pos: i,
 							defaultPos: i,
 							imageDir: null,
@@ -79,6 +81,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						state.arrowsInfo[i] = {
 							arrowID: i,
 							arrowFrameID,
+							splashFrameID: 0,
 							pos: i,
 							defaultPos: i,
 							imageDir: null,
@@ -98,6 +101,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						state.arrowsInfoOpponent[i] = {
 							arrowID: i,
 							arrowFrameID,
+							splashFrameID: 0,
 							pos: i,
 							defaultPos: i,
 							imageDir: null,
