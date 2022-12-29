@@ -72,9 +72,9 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						if (i == 0) arrowFrameID = 3
 						if (i == 1) arrowFrameID = 5
 						if (i == 2) arrowFrameID = 6
-						if (i == 3) arrowFrameID = 3
+						if (i == 3) arrowFrameID = 19
 						if (i == 4) arrowFrameID = 4
-						if (i == 5) arrowFrameID = 6
+						if (i == 5) arrowFrameID = 22
 
 						state.arrowsInfo[i] = {
 							arrowID: i,
