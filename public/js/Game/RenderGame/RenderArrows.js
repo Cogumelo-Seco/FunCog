@@ -107,7 +107,7 @@ export default async (canvas, game, Listener) => {
 
             let percent = game.state.animations.arrowKeys.frame/game.state.animations.arrowKeys.endFrame
             if (percent < 1) {
-                let arrowKeysAlpha = percent > 0.5 ? 1-(percent-0.5)/0.5 : game.state.alphaHUD
+                let arrowKeysAlpha = percent > 0.8 ? 1-(percent-0.8)/0.2 : game.state.alphaHUD
                 ctx.globalAlpha = arrowKeysAlpha <= game.state.alphaHUD ? arrowKeysAlpha : game.state.alphaHUD
 
                 ctx.fillStyle = 'black'

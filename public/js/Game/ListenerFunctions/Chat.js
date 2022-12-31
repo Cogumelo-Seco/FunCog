@@ -59,13 +59,13 @@ export default function chat(state, socket) {
 
         socket.emit('message', {
             author: {
-                name: state.game.state.myMessageConfig.author.name || socket.id.slice(0, 20),
-                avatar: state.game.state.myMessageConfig.author.avatar || null,
+                name: state.game.state.myConfig.author.name || socket.id.slice(0, 20),
+                avatar: state.game.state.myConfig.author.avatar || null,
                 id: socket.id
             },
-            colorName: state.game.state.myMessageConfig.colorName || null,
-            colorContent: state.game.state.myMessageConfig.colorContent || null,
-            emoji: state.game.state.myMessageConfig.emoji || null,
+            colorName: state.game.state.myConfig.colorName || null,
+            colorContent: state.game.state.myConfig.colorContent || null,
+            emoji: state.game.state.myConfig.emoji || null,
             loadTo: 'all',
             content,
         })

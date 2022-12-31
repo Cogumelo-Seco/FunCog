@@ -21,7 +21,7 @@ export default function codesFunction(state, stateListener, socket) {
     })
 
     socket.on('connect', () => {
-        socket.emit('playerConnected', state.myMessageConfig)
+        socket.emit('playerConnected', state.myConfig)
     })
 
     socket.on('messageHistory', (command) => {

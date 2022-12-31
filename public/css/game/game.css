@@ -47,6 +47,7 @@ video#gameVideo {
 /* Chat */
 
 button#chat-button {
+    display: none;
     position: absolute;
     top: 5px;
     left: 5px;
@@ -214,4 +215,108 @@ button#send-button {
     bottom: 0;
     right: 0;
     transition: all 0.5s;
+}
+
+
+/* ---------- */
+
+div#registerContent {
+    display: none;
+} 
+
+div.loginAndRegisterContent {
+    cursor: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    overflow: auto;
+    width: 325px;
+    height: max-content;
+    max-height: 500px;
+    padding: 5px;
+    border-radius: 8px;
+    border: solid #333 2px;
+    background-color: #CCC;
+}
+
+div.loginAndRegisterContent #title {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+}
+
+div.loginAndRegisterContent .description {
+    margin: 0;
+    margin-top: 10px;
+}
+
+div.loginAndRegisterContent .description.margin-top {
+    margin-top: 30px!important
+}
+
+div.loginAndRegisterContent .inputText {
+    width: 80%;
+    padding: 3px;
+    border-radius: 5px;
+    border: solid black 2px;
+    background-color: #AAA;
+    box-shadow: 0px 0px 5px black;
+}
+
+.showPassword {
+    font-size: 13px;
+}
+
+.changeLoginState {
+    cursor: pointer;
+    margin: 10px;
+    color: blue
+}
+.changeLoginState:hover {
+    text-decoration: underline;
+}
+
+div.loginAndRegisterContent #loginButton, 
+div.loginAndRegisterContent #registerButton {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: solid black 2px;
+    box-shadow: 0px 0px 5px black;
+    color: white;
+    background-color: #5865f2;
+}
+
+div.loginAndRegisterContent div#connections {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    padding: 10px;
+}
+
+div.loginAndRegisterContent div#connections .connectionButton {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+#connectionButtonDiscordImg {
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+}
+
+span.contentSeparation {
+    display: block;
+    background-color: black;
+    border-radius: 40%;
+    margin: 0;
+    width: 100%;
+    height: 2px;
+    margin: 10px 0;
 }

@@ -200,7 +200,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             } else startMusic()
             
             async function startMusic() {
-                state.animations.arrowKeys.paused = true
+                state.animations.arrowKeys.paused = false
                 state.animations.arrowKeys.frame = 0
 
                 if (state.online && state.serverInfo.start || !state.online) {

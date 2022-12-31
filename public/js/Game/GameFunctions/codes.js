@@ -8,25 +8,25 @@ export default function codesFunction(state) {
             return state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content
         },
         admcogu: () => {
-            if (state.myMessageConfig.colorName?.includes('RAINBOW')) {
-                state.myMessageConfig.colorName = null
-                state.myMessageConfig.colorContent = null
-                state.myMessageConfig.emoji = null
-                state.myMessageConfig.author.name = null
-                state.myMessageConfig.author.avatar = null
+            if (state.myConfig.colorName?.includes('RAINBOW')) {
+                state.myConfig.colorName = null
+                state.myConfig.colorContent = null
+                state.myConfig.emoji = null
+                state.myConfig.author.name = null
+                state.myConfig.author.avatar = null
 
-                state.socket.emit('playerConnected', state.myMessageConfig)
+                state.socket.emit('playerConnected', state.myConfig)
             } else {
-                state.myMessageConfig.colorName = `RAINBOW-${Math.floor(Math.random()*100000)}`
-                state.myMessageConfig.colorContent = `RAINBOW-${Math.floor(Math.random()*100000)}`
-                state.myMessageConfig.emoji = '👑'
-                state.myMessageConfig.author.name = 'Cogu'
-                state.myMessageConfig.author.avatar = 'https://alpha-site.vercel.app/imgs/Cogu-avatar/Default.png'
+                state.myConfig.colorName = `RAINBOW-${Math.floor(Math.random()*100000)}`
+                state.myConfig.colorContent = `RAINBOW-${Math.floor(Math.random()*100000)}`
+                state.myConfig.emoji = '👑'
+                state.myConfig.author.name = 'Cogu'
+                state.myConfig.author.avatar = 'https://alpha-site.vercel.app/imgs/Cogu-avatar/Default.png'
 
-                state.socket.emit('playerConnected', state.myMessageConfig)
+                state.socket.emit('playerConnected', state.myConfig)
             }
 
-            return state.myMessageConfig.colorName?.includes('RAINBOW')
+            return state.myConfig.colorName?.includes('RAINBOW')
         }
     }
 }

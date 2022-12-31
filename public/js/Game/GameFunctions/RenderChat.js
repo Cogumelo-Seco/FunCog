@@ -1,10 +1,13 @@
 export default async (canvas, state, stateListener, command) => {
+    if ([ 'loading', 'login' ].includes(state.gameStage)) return
+
     const messageBox = document.getElementById('message-box')
     const messageBoxContent = document.getElementById('message-box-content')
     const chatContent = document.getElementById('chat-content')
     const chatButton = document.getElementById('chat-button')
     const unreadMessageCounter = document.getElementById('unreadMessageCounter')
     const chat = document.getElementById('chat')
+    chatButton.style.display = 'block'
 
     if (command == 'gameLoop') {
         if (stateListener.writingPosition != stateListener.writingPositionOld || stateListener.renderChat) {

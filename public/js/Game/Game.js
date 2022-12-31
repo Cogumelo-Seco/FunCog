@@ -6,7 +6,7 @@ function createGame(Listener, canvas, socket) {
         renderType: 'limited',
         customBongPosition: { X: null, Y: null },
         gameBackgroundOfuscation: 0.7,
-        myMessageConfig: {
+        myConfig: {
             author: {
                 name: `Guest${Math.floor(Math.random()*1000)}`,
                 avatar: null
@@ -125,7 +125,7 @@ function createGame(Listener, canvas, socket) {
             arrowKeys: {
                 frame: 0,
                 startFrame: 0,
-                endFrame: 50,
+                endFrame: 150,
                 totalDalay: 0,
                 dalay: 0,
                 paused: true,
@@ -505,7 +505,7 @@ function createGame(Listener, canvas, socket) {
                     if (state.animations.loadingLogo.frame >= state.animations.loadingLogo.endFrame) {
                         clearInterval(interval)
                         state.animations.loadingLogo.paused = true
-                        state.smallFunctions.redirectGameStage('menu')
+                        state.smallFunctions.redirectGameStage('login')
                     }
                 }, 2000)
             }
