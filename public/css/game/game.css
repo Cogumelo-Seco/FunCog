@@ -304,9 +304,8 @@ div.loginAndRegisterContent #withoutAccountButton {
 
 div.loginAndRegisterContent div#connections {
     display: block;
-    margin: 0 auto;
     width: 90%;
-    padding: 10px;
+    padding: 0 10px;
 }
 
 div.loginAndRegisterContent div#connections .connectionButton {
