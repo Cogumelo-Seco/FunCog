@@ -167,10 +167,12 @@ const Game = (props) => {
                     <p class="description margin-top">Password</p>
                     <input class="inputText password" id="passwordInputLogin" type="password" placeholder="Password" />
 
-                    <div class="description">
+                    <div class="description showPasswordContent">
                         <span class="showPassword">Show password:</span>
                         <input class="showPasswordInput" type="checkbox"/>
                     </div>
+
+                    <span className="contentSeparation" />
 
                     <p class="changeLoginState" id="register">I don't have an account</p>
 
@@ -198,11 +200,14 @@ const Game = (props) => {
                     <p className="description" id="repeatPassword">Repeat password</p>
                     <input className="inputText password" id="repeatPasswordInput" type="password" placeholder="Password" />
 
-                    <div className="description">
-                        <span>Show password</span>
+
+                    <div class="description showPasswordContent">
+                        <span class="showPassword">Show password:</span>
                         <input class="showPasswordInput" type="checkbox"/>
                     </div>
 
+                    <span className="contentSeparation" />
+                    
                     <p class="changeLoginState" id="login">I already have an account</p>
 
                     <div class="buttonsContent">

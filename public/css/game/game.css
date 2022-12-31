@@ -264,11 +264,18 @@ div.loginAndRegisterContent .inputText {
     box-shadow: 0px 0px 5px black;
 }
 
+.showPasswordContent {
+    margin: 0!important;
+    padding: 0;
+}
+
 .showPassword {
     font-size: 13px;
+    margin: 0;
 }
 
 .changeLoginState {
+    font-size: 15px;
     cursor: pointer;
     margin: 10px;
     color: blue
@@ -282,8 +289,8 @@ div.loginAndRegisterContent #registerButton,
 div.loginAndRegisterContent #withoutAccountButton {
     display: block;
     margin: 0 auto;
-    margin-top: 20px;
-    padding: 5px 10px;
+    margin-top: 5px;
+    padding: 3px 7px;
     border-radius: 5px;
     border: solid black 2px;
     box-shadow: 0px 0px 5px black;
@@ -293,7 +300,6 @@ div.loginAndRegisterContent #withoutAccountButton {
 
 div.loginAndRegisterContent #withoutAccountButton {
     background-color: #eb3d3d;
-    margin-top: 5px;
 }
 
 div.loginAndRegisterContent div#connections {
