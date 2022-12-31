@@ -50,20 +50,22 @@ const Game = (props) => {
                 }
             })
         }
-       
-        /* 
-        if (showPassword.checked) {
-                    password.type = 'text'
-                    repeatPassword.type = 'text'
-                } else {
-                    password.type = 'password'
-                    repeatPassword.type = 'password'
-                } */
 
         function loop() {
             if ([ 'loading', 'login' ].includes(game.state.gameStage)) {
                 window.requestAnimationFrame(() => loop())
                 
+                const withoutAccountButton = document.getElementById('withoutAccountButton')
+                withoutAccountButton.onclick = (event) => {
+                    alert('Sem uma conta, você terá acesso limitado ao jogo e todo o seu progresso não será salvo.\n\nWithout an account you will have limited access to the game and all your progress will not be saved.')
+
+                    registerContent.style.display = 'none'
+                    loginContent.style.display = 'none'
+    
+                    game.state.inLogin = false
+                    game.state.smallFunctions.redirectGameStage('menu')
+                }
+
                 const username = document.getElementById(`usernameInput${login ? 'Login' : 'Register'}`)
                 const password = document.getElementById(`passwordInput${login ? 'Login' : 'Register'}`)
                 const repeatPassword = document.getElementById(`repeatPasswordInput`)
@@ -85,7 +87,7 @@ const Game = (props) => {
                     else repeatPassword.style.borderColor = '#005500'
 
                     const registerButton = document.getElementById('registerButton')
-                    if (registerButton) registerButton.onclick = () => {
+                    registerButton.onclick = () => {
                         if (!username.value) return alert('You must add a username')
                         if (!password.value || password.value != repeatPassword.value) return alert('Passwords do not match')
                         
@@ -99,7 +101,7 @@ const Game = (props) => {
                     loginContent.style.display = 'block'
 
                     const loginButton = document.getElementById('loginButton')
-                    if (loginButton) loginButton.onclick = () => {
+                    loginButton.onclick = () => {
                         if (!username.value) return alert('You must add a username')
 
                         socket.emit('login', {
@@ -117,22 +119,22 @@ const Game = (props) => {
                 registerContent.style.display = 'none'
                 loginContent.style.display = 'none'
 
+                game.state.inLogin = false
                 game.state.smallFunctions.redirectGameStage('menu')
 
+                game.state.myConfig.logged = true
                 game.state.myConfig.author.name = player.name
                 game.state.myConfig.author.avatar = player.avatar
                 game.state.myConfig.colorName = player.chatColorName
                 game.state.myConfig.colorContent = player.chatColorContent
                 game.state.myConfig.emoji = player.chatEmoji
+
+                socket.emit('setup')
             } else alert('ERROR: No player data')
         })
 
         socket.on('error', (err) => alert(err))
     }, [])
-
-    /*
-    
-                */
 
     return (
         <html lang="pt-BR">
@@ -173,6 +175,7 @@ const Game = (props) => {
                     <p class="changeLoginState" id="register">I don't have an account</p>
 
                     <button id="loginButton">Login</button>
+                    <button id="withoutAccountButton">Enter without account</button>
 
                     <span class="contentSeparation" />
 
@@ -202,7 +205,9 @@ const Game = (props) => {
 
                     <p class="changeLoginState" id="login">I already have an account</p>
 
-                    <button id="registerButton">Register</button>
+                    <div class="buttonsContent">
+                        <button id="registerButton">Register</button>
+                    </div>
 
                     <span className="contentSeparation" />
 

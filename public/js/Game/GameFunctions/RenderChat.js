@@ -1,5 +1,5 @@
 export default async (canvas, state, stateListener, command) => {
-    if ([ 'loading', 'login' ].includes(state.gameStage)) return
+    if ([ 'loading', 'login' ].includes(state.gameStage) || !state.myConfig.logged) return
 
     const messageBox = document.getElementById('message-box')
     const messageBoxContent = document.getElementById('message-box-content')

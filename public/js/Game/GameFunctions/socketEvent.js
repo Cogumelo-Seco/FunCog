@@ -25,13 +25,16 @@ export default function codesFunction(state, stateListener, socket) {
     })
 
     socket.on('messageHistory', (command) => {
-        state.messages = command || []
-        require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'historyMessage')
+        if (state.myConfig.logged) {
+            state.messages = command || []
+            require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'historyMessage')
+        }
     })
 
     socket.on('message', (command) => {
-        state.messages.unshift(command)
-        require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'newMessage')
-        //require('../GameFunctions/RenderChat').default(canvas, state)
+        if (state.myConfig.logged) {
+            state.messages.unshift(command)
+            require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'newMessage')
+        }
     })
 }

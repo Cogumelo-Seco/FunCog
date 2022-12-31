@@ -278,7 +278,8 @@ div.loginAndRegisterContent .inputText {
 }
 
 div.loginAndRegisterContent #loginButton, 
-div.loginAndRegisterContent #registerButton {
+div.loginAndRegisterContent #registerButton,
+div.loginAndRegisterContent #withoutAccountButton {
     display: block;
     margin: 0 auto;
     margin-top: 20px;
@@ -288,6 +289,11 @@ div.loginAndRegisterContent #registerButton {
     box-shadow: 0px 0px 5px black;
     color: white;
     background-color: #5865f2;
+}
+
+div.loginAndRegisterContent #withoutAccountButton {
+    background-color: #eb3d3d;
+    margin-top: 5px;
 }
 
 div.loginAndRegisterContent div#connections {

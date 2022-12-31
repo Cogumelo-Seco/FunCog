@@ -7,6 +7,7 @@ function createGame(Listener, canvas, socket) {
         customBongPosition: { X: null, Y: null },
         gameBackgroundOfuscation: 0.7,
         myConfig: {
+            logged: false,
             author: {
                 name: `Guest${Math.floor(Math.random()*1000)}`,
                 avatar: null
@@ -16,6 +17,7 @@ function createGame(Listener, canvas, socket) {
             emoji: null
         },
         messages: [],
+        inLogin: true,
         online: false,
         waiting: true,
         serverId: null,
@@ -505,7 +507,7 @@ function createGame(Listener, canvas, socket) {
                     if (state.animations.loadingLogo.frame >= state.animations.loadingLogo.endFrame) {
                         clearInterval(interval)
                         state.animations.loadingLogo.paused = true
-                        state.smallFunctions.redirectGameStage('login')
+                        if (state.inLogin) state.smallFunctions.redirectGameStage('login')
                     }
                 }, 2000)
             }
