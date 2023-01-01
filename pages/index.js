@@ -1,3 +1,5 @@
+import data from '../public/js/data.js';
+import cookies from 'next-cookies';
 import { useRouter } from 'next/router';
 import { io } from 'socket.io-client';
 import React, { useEffect } from 'react';
@@ -7,6 +9,7 @@ import createListener from '../public/js/Game/Listener.js';
 import renderGame from '../public/js/Game/RenderGame/index.js';
 
 const Game = (props) => {
+    const cookie = cookies(data)
     const router = useRouter()
 
     useEffect(() => {
@@ -24,6 +27,8 @@ const Game = (props) => {
 
         renderGame(canvas, game, Listener);
 
+        if (cookie.token) socket.emit('login', { token: cookie.token })
+
         let login = true
 
         const registerContent = document.getElementById('registerContent')
@@ -40,7 +45,6 @@ const Game = (props) => {
         const changeLoginState = document.getElementsByClassName('changeLoginState')
         for (let element of changeLoginState) {
             element.addEventListener('click', (event) => {
-                console.log(element.id == 'register' ? false : true)
                 login = element.id == 'register' ? false : true
 
                 for (let element of showPassword) element.checked = false
@@ -52,15 +56,12 @@ const Game = (props) => {
         }
 
         function loop() {
-            if ([ 'loading', 'login' ].includes(game.state.gameStage)) {
+            if (game.state.inLogin/*[ 'loading', 'login' ].includes(game.state.gameStage)*/) {
                 window.requestAnimationFrame(() => loop())
                 
                 const withoutAccountButton = document.getElementById('withoutAccountButton')
                 withoutAccountButton.onclick = (event) => {
                     alert('Sem uma conta, você terá acesso limitado ao jogo e todo o seu progresso não será salvo.\n\nWithout an account you will have limited access to the game and all your progress will not be saved.')
-
-                    registerContent.style.display = 'none'
-                    loginContent.style.display = 'none'
     
                     game.state.inLogin = false
                     game.state.smallFunctions.redirectGameStage('menu')
@@ -110,17 +111,18 @@ const Game = (props) => {
                         })
                     }
                 }
+            } else {
+                registerContent.style.display = 'none'
+                loginContent.style.display = 'none'
             }
         }
         loop()
 
         socket.on('login', (player) => {
-            if (player) {
-                registerContent.style.display = 'none'
-                loginContent.style.display = 'none'
-
+            console.log(player)
+            if (player?.token) {
                 game.state.inLogin = false
-                game.state.smallFunctions.redirectGameStage('menu')
+                game.state.smallFunctions.redirectGameStage('loading')
 
                 game.state.myConfig.logged = true
                 game.state.myConfig.author.name = player.name
@@ -128,6 +130,24 @@ const Game = (props) => {
                 game.state.myConfig.colorName = player.chatColorName
                 game.state.myConfig.colorContent = player.chatColorContent
                 game.state.myConfig.emoji = player.chatEmoji
+                game.state.myConfig.settings = player.settings
+                game.state.myConfig.token = player.token
+
+                let defaultSettingsOptions = game.state.selectSettingsOption.settingsOptions
+                let playerSettingsOptions = player.settings
+                /*for (let i in defaultSettingsOptions) {
+                    if (playerSettingsOptions[i].name == defaultSettingsOptions[i].name) defaultSettingsOptions[i] = playerSettingsOptions[i]
+                    else playerSettingsOptions[i] = defaultSettingsOptions[i]
+                }*/
+                for (let i in playerSettingsOptions) {
+                    if (typeof defaultSettingsOptions[i] == 'object' && typeof playerSettingsOptions[i] == 'object') {
+                        try {
+                            if (defaultSettingsOptions[i]) playerSettingsOptions[i] = Object.assign(defaultSettingsOptions[i], playerSettingsOptions[i])
+                        } catch (e) {}      
+                    } else defaultSettingsOptions[i] = playerSettingsOptions[i]  
+                }
+
+                document.cookie = `token=${player.token}; path=/`;
 
                 socket.emit('setup')
             } else alert('ERROR: No player data')

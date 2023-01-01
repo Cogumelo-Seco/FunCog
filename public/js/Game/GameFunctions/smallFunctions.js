@@ -1,4 +1,4 @@
-export default (state, Listener) => {
+export default (state, Listener, socket) => {
     return {
         getKey: (arrowID) => {
             let arrowsKey = (state.selectSettingsOption.settingsOptions.find(c => c[Object.keys(state.arrowsInfo).length+'K']))[Object.keys(state.arrowsInfo).length+'K']
@@ -9,6 +9,8 @@ export default (state, Listener) => {
             state.gameStageTime = +new Date()
             state.oldGameStage = oldStage || state.gameStage
             state.gameStage = newStage
+
+            socket.emit('updatePlayer', state.myConfig)
         },
         getConfig: (id) => {
             return (state.selectSettingsOption.settingsOptions.find((g) => g.id == id))?.content

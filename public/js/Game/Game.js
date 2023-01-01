@@ -200,7 +200,7 @@ function createGame(Listener, canvas, socket) {
 
     const playSong = (type, command) => require('./GameFunctions/playSong').default(type, command, state)
     const calculateRating = (command) => require('./GameFunctions/calculateRating').default(command, state)
-    const smallFunctions = require('./GameFunctions/smallFunctions').default(state, Listener)
+    const smallFunctions = require('./GameFunctions/smallFunctions').default(state, Listener, socket)
     const codes = require('./GameFunctions/codes').default(state)
     state.smallFunctions = smallFunctions
     state.calculateRating = calculateRating
@@ -226,7 +226,13 @@ function createGame(Listener, canvas, socket) {
         })
     }
 
+    function updateLocalPlayer() {
+        state.myConfig.settings = state.selectSettingsOption.settingsOptions
+    }
+
     async function gameLoop(command) {
+        updateLocalPlayer()
+
         let botPlay = state.smallFunctions.getConfig('botPlay')
         let LifeDrain = state.smallFunctions.getConfig('LifeDrain')
         let ScrollSpeed = state.smallFunctions.getConfig('ScrollSpeed')
@@ -501,15 +507,18 @@ function createGame(Listener, canvas, socket) {
 
         const completeLoading = () => {
             state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
-            state.animations.loadingLogo.paused = false
             if (state.gameStage == 'loading') {
                 let interval = setInterval(() => {
-                    if (state.animations.loadingLogo.frame >= state.animations.loadingLogo.endFrame) {
-                        clearInterval(interval)
-                        state.animations.loadingLogo.paused = true
-                        if (state.inLogin) state.smallFunctions.redirectGameStage('login')
+                    if (!state.inLogin) {
+                        state.animations.loadingLogo.paused = false
+
+                        if (state.animations.loadingLogo.frame >= state.animations.loadingLogo.endFrame) {
+                            clearInterval(interval)
+                            state.animations.loadingLogo.paused = true
+                            state.smallFunctions.redirectGameStage('menu')
+                        }
                     }
-                }, 2000)
+                }, 1000)
             }
         }
 
