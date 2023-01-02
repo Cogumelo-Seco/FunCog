@@ -22,12 +22,15 @@ const Game = (props) => {
         const game = createGame(Listener, canvas, socket);
 
         game.loading({ Listener })
+        game.state.router = router
         Listener.state.game = game
         game.start()
 
         renderGame(canvas, game, Listener);
 
-        if (cookie.token) socket.emit('login', { token: cookie.token })
+        socket.on('connect', () => {
+            if (cookie.token) socket.emit('login', { token: cookie.token })
+        })
 
         let login = true
 
@@ -135,17 +138,17 @@ const Game = (props) => {
 
                 let defaultSettingsOptions = game.state.selectSettingsOption.settingsOptions
                 let playerSettingsOptions = player.settings
-                /*for (let i in defaultSettingsOptions) {
-                    if (playerSettingsOptions[i].name == defaultSettingsOptions[i].name) defaultSettingsOptions[i] = playerSettingsOptions[i]
+                for (let i in defaultSettingsOptions) {
+                    if (playerSettingsOptions[i].name == defaultSettingsOptions[i].name) playerSettingsOptions[i] = Object.assign(defaultSettingsOptions[i], playerSettingsOptions[i])//defaultSettingsOptions[i] = playerSettingsOptions[i]
                     else playerSettingsOptions[i] = defaultSettingsOptions[i]
-                }*/
-                for (let i in playerSettingsOptions) {
+                }
+                /*for (let i in playerSettingsOptions) {
                     if (typeof defaultSettingsOptions[i] == 'object' && typeof playerSettingsOptions[i] == 'object') {
                         try {
                             if (defaultSettingsOptions[i]) playerSettingsOptions[i] = Object.assign(defaultSettingsOptions[i], playerSettingsOptions[i])
                         } catch (e) {}      
                     } else defaultSettingsOptions[i] = playerSettingsOptions[i]  
-                }
+                }*/
 
                 document.cookie = `token=${player.token}; path=/`;
 

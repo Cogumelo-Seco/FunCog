@@ -396,6 +396,10 @@ export default function createListener(socket) {
                                 state.onChangeKeyBind = true
                                 state.game.playSong('Sounds/scrollMenu.ogg')
                                 break
+                            case 'logoff':
+                                document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+                                setTimeout(() => state.game.state.router.push('/logoff'), 500)
+                                break
                         }
                         
                         break

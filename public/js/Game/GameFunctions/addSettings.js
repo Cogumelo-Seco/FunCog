@@ -604,6 +604,12 @@ export default async (state) => {
             type: 'Boolean',
             content: true
         },
+        {
+            menuColor: 'rgb(255, 100, 100)',
+            name: 'Logoff',
+            id: 'logoff',
+            type: 'logoff'
+        },
     ]
     
     return state.selectSettingsOption.settingsOptions

@@ -46,7 +46,7 @@ export default async (canvas, game, Listener) => {
                     holdYInRelationToTheLine = downScroll ? (holdY+(holdImagePos.height/2))-arrowInfo?.Y : arrowInfo?.Y-holdY
 
                     let alphaHUD = game.state.alphaHUD >= 1 ? 1 : game.state.alphaHUD <= 0 ? 0 : game.state.alphaHUD
-                    let noteAlpha = arrowInfo.alpha >= 1 ? 1 : arrowInfo.alpha <= 0 ? 0 : arrowInfo.alpha
+                    let noteAlpha = arrowInfo.noteAlpha >= 1 ? 1 : arrowInfo.noteAlpha <= 0 ? 0 : arrowInfo.noteAlpha
                     ctx.globalAlpha = holdYInRelationToTheLine > 0 || note.disabled ? 0.2 : noteAlpha <= alphaHUD ? noteAlpha : alphaHUD
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
