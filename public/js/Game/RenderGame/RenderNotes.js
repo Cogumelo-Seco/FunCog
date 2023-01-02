@@ -76,7 +76,7 @@ export default async (canvas, game, Listener) => {
 
                 let currentArrowWidth = arrowImagePos?.width**resizeNote
                 let currentArrowHeight = arrowImagePos?.height**resizeNote
-                let currentArrowX = arrowInfo.X
+                let currentArrowX = arrowInfo.X-((arrowImagePos.width**resizeNote-arrowInfo.width**resizeNote)/2)
                 let currentArrowY = noteY-(arrowImagePos.height**resizeNote/2)
 
                 ctx.save()
@@ -153,7 +153,7 @@ export default async (canvas, game, Listener) => {
 
                 let currentArrowWidth = arrowImagePos?.width**resizeNoteOpponent
                 let currentArrowHeight = arrowImagePos?.height**resizeNoteOpponent
-                let currentArrowX = arrowInfo.X
+                let currentArrowX = arrowInfo.X-((arrowImagePos.width**resizeNoteOpponent-arrowInfo.width**resizeNoteOpponent)/2)
                 let currentArrowY = noteY-(arrowImagePos.height**resizeNoteOpponent/2)
 
                 ctx.save()
