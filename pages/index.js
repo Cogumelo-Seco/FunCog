@@ -127,6 +127,8 @@ const Game = (props) => {
                 game.state.inLogin = false
                 game.state.smallFunctions.redirectGameStage('loading')
 
+                document.cookie = `token=${player.token}; path=/`;
+
                 game.state.myConfig.logged = true
                 game.state.myConfig.author.name = player.name
                 game.state.myConfig.author.avatar = player.avatar
@@ -138,7 +140,8 @@ const Game = (props) => {
 
                 let defaultSettingsOptions = game.state.selectSettingsOption.settingsOptions
                 let playerSettingsOptions = player.settings
-                for (let i in defaultSettingsOptions) {
+                playerSettingsOptions = Object.assign(defaultSettingsOptions, playerSettingsOptions)
+                /*for (let i in defaultSettingsOptions) {
                     if (playerSettingsOptions[i].name == defaultSettingsOptions[i].name) playerSettingsOptions[i] = Object.assign(defaultSettingsOptions[i], playerSettingsOptions[i])//defaultSettingsOptions[i] = playerSettingsOptions[i]
                     else playerSettingsOptions[i] = defaultSettingsOptions[i]
                 }
@@ -149,9 +152,7 @@ const Game = (props) => {
                         } catch (e) {}      
                     } else defaultSettingsOptions[i] = playerSettingsOptions[i]  
                 }*/
-
-                document.cookie = `token=${player.token}; path=/`;
-
+                
                 socket.emit('setup')
             } else alert('ERROR: No player data')
         })

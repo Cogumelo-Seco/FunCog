@@ -18,6 +18,8 @@ export default async function renderGame(canvas, game, Listener) {
     const ctx = canvas.getContext('2d')
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
+    ctx.imageSmoothingEnabled = game.state.smallFunctions.getConfig('anti-aliasing')
+
     if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration) game.state.musicEventListener('gameLoopFullFPSBackground', { listenerState: Listener.state }, game.state)
     //require('./RenderScreenGame').default(canvas, game, Listener)
     switch (game.state.gameStage) {

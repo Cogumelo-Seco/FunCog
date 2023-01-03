@@ -21,13 +21,13 @@ export default async (state) => {
                     name: 'Arrow Left',
                     id: 'Arrow-0',
                     type: 'KeyBind',
-                    content: 'KeyS'
+                    content: 'KeyD'
                 },
                 {
                     name: 'Arrow Down',
                     id: 'Arrow-1',
                     type: 'KeyBind',
-                    content: 'KeyD'
+                    content: 'KeyF'
                 },
                 {
                     name: 'Arrow Up',
@@ -585,6 +585,16 @@ export default async (state) => {
         {
             name: 'Show Background',
             id: 'ShowBackground',
+            type: 'Boolean',
+            content: true
+        },
+        {
+            name: 'Screen',
+            type: 'ConfigTitle'
+        },
+        {
+            name: 'Anti-aliasing',
+            id: 'anti-aliasing',
             type: 'Boolean',
             content: true
         },

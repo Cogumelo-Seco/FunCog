@@ -53,9 +53,7 @@ export default (state, Listener, socket) => {
             state.moveBackgroundInterval = setInterval(() => {
                 let clear = [false,false]
 
-                console.log(state.backgroundInfo.defaultMovementX-state.backgroundInfo.movementX, state.backgroundInfo.defaultMovementY-state.backgroundInfo.movementY)
                 if (state.backgroundInfo.defaultMovementY-state.backgroundInfo.movementY >= y-(speed || 1) && state.backgroundInfo.defaultMovementY-state.backgroundInfo.movementY <= y+(speed || 1)) {
-                    //state.backgroundInfo.movementY = state.backgroundInfo.defaultMovementY+y
                     clear[0] = true
                 } else {
                     if (y == 0) {
@@ -68,7 +66,6 @@ export default (state, Listener, socket) => {
                 }
 
                 if (state.backgroundInfo.defaultMovementX-state.backgroundInfo.movementX >= x-(speed || 1) && state.backgroundInfo.defaultMovementX-state.backgroundInfo.movementX <= x+(speed || 1)) {
-                    //state.backgroundInfo.movementX = state.backgroundInfo.defaultMovementX+x
                     clear[1] = true
                 } else {
                     if (x == 0) {
