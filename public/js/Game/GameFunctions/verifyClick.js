@@ -63,13 +63,13 @@ export default async({ arrowID, listenerState, readyNote }, state) => {
         state.musicInfo.score += Number.parseInt(state.scoreToAdd*(rating.media/100))
         state.musicInfo.judgements[rating.name] += 1
 
-        state.musicInfo.ratings.unshift({
+        if (state.musicInfo.ratings.length > 10) state.musicInfo.ratings.shift()
+        state.musicInfo.ratings.push({
             rating,
             hitNote: bestNote.hitNote*-1,
             time: +new Date(),
             defaultTime: +new Date(),
         })
-        state.musicInfo.ratings.splice(10)
 
         if (note.hold > 0) {
             /* let loop = setInterval(() => {
