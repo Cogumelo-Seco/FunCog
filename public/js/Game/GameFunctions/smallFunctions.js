@@ -13,7 +13,7 @@ export default (state, Listener, socket) => {
             socket.emit('updatePlayer', state.myConfig)
         },
         getConfig: (id) => {
-            return (state.selectSettingsOption.settingsOptions.find((g) => g.id == id))?.content
+            return (state.selectSettingsOption.settingsOptions.find((g) => g?.id == id))?.content
         },
         resetGame: () => {
             state.musicEventListener('end', {}, state)

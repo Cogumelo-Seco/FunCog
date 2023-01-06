@@ -138,9 +138,11 @@ const Game = (props) => {
                 game.state.myConfig.settings = player.settings
                 game.state.myConfig.token = player.token
 
-                let defaultSettingsOptions = game.state.selectSettingsOption.settingsOptions
-                let playerSettingsOptions = player.settings
-                playerSettingsOptions = Object.assign(defaultSettingsOptions, playerSettingsOptions)
+                if (player.settings && player.settings[0]) {
+                    let defaultSettingsOptions = game.state.selectSettingsOption.settingsOptions
+                    let playerSettingsOptions = player.settings
+                    playerSettingsOptions = Object.assign(defaultSettingsOptions, playerSettingsOptions)
+                }
                 /*for (let i in defaultSettingsOptions) {
                     if (playerSettingsOptions[i].name == defaultSettingsOptions[i].name) playerSettingsOptions[i] = Object.assign(defaultSettingsOptions[i], playerSettingsOptions[i])//defaultSettingsOptions[i] = playerSettingsOptions[i]
                     else playerSettingsOptions[i] = defaultSettingsOptions[i]
