@@ -444,9 +444,7 @@ function createGame(Listener, canvas, socket) {
             if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) {
                 let media = 0
                 let mediaData = []
-                for (let i = 1; i <= 10;i++) {
-                    mediaData.push(state.musicInfo.accuracyMedia[state.musicInfo.accuracyMedia.length-i])
-                }
+                for (let i = 1; i <= 10;i++) mediaData.push(state.musicInfo.accuracyMedia[state.musicInfo.accuracyMedia.length-i])
                 for (let i in mediaData) media += mediaData[i]
                 state.musicInfo.accuracyMediaLow.push(media/mediaData.length || 100)
 
