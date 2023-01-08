@@ -371,14 +371,15 @@ function createGame(Listener, canvas, socket) {
             if ((state.musicInfo.playerId == 1 && !opponent || state.musicInfo.playerId == 2 && opponent) && (state.debug || !state.online) && Listener.state.arrows[note.arrowID]) {
                 if (((botPlay || note.autoClick) || Listener.state.arrows[note.arrowID].inAutoClick) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
                 if (!note.clicked && !note.disabled && (botPlay || note.autoClick) && (note.errorWhenNotClicking || note.autoClick) && newNoteY >= -10 && newNoteY <= (state.holdHeight**resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight*2)) {
-                    Listener.state.arrows[note.arrowID].inAutoClick = note.autoClick
-                    Listener.state.arrows[note.arrowID].state = 'onNote'
-                    Listener.state.arrows[note.arrowID].click = true
-                    Listener.state.arrows[note.arrowID].lastNoteClicked = note
+                    //if (Math.floor(Math.random()*100) <= 10) {
+                        Listener.state.arrows[note.arrowID].inAutoClick = note.autoClick
+                        Listener.state.arrows[note.arrowID].state = 'onNote'
+                        Listener.state.arrows[note.arrowID].click = true
+                        Listener.state.arrows[note.arrowID].lastNoteClicked = note
 
-                    note.clicked = true
-                    //setTimeout(() => verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, bot: true }), Math.floor(Math.random()*200))
-                    verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, readyNote: note })
+                        note.clicked = true
+                        verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, readyNote: note })
+                    //}
                 }
             }
             
@@ -440,7 +441,17 @@ function createGame(Listener, canvas, socket) {
         if (state.gameLoopFPSControlTime2+1000 <= +new Date()) {
             state.gameLoopFPSControlTime2 = +new Date()
             
-            if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) state.musicInfo.linearAccuracyMedia.push(state.musicInfo.accuracy || 100)
+            if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) {
+                let media = 0
+                let mediaData = []
+                for (let i = 1; i <= 10;i++) {
+                    mediaData.push(state.musicInfo.accuracyMedia[state.musicInfo.accuracyMedia.length-i])
+                }
+                for (let i in mediaData) media += mediaData[i]
+                state.musicInfo.accuracyMediaLow.push(media/mediaData.length || 100)
+
+                state.musicInfo.linearAccuracyMedia.push(state.musicInfo.accuracy || 100)
+            }
         }
 
         if (state.gameLoopFPSControlTime+20 <= +new Date()) {

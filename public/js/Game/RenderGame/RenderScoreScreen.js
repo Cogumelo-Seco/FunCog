@@ -165,14 +165,18 @@ export default async (canvas, game, Listener) => {
         graphicHeight -= 20
         graphicWidth -= 20
 
-        function renderGraphic(graphicData, color) {
-            ctx.lineWidth = 1
+        function renderGraphic(graphicData, color, color2) {
+            ctx.lineWidth = 2
+            ctx.strokeStyle = color
             let lastGraphicInfo = { x: graphicX,  y: graphicY }
             if (graphicData.length <= 5000) for (let i in graphicData) {
-                ctx.strokeStyle = color
+                let percent = (graphicData[i] || 1)/100
+                let percentNext = (graphicData[Number(i)+1] || 1)/100
 
                 let x = graphicX+(graphicWidth*(i/(graphicData.length-1)))-ctx.lineWidth
-                let y = graphicY+(graphicHeight-graphicHeight*((graphicData[i] || 1)/100))
+                let y = graphicY+(graphicHeight-graphicHeight*(percent))
+
+                ctx.strokeStyle = percent <= 0.5 || percentNext <= 0.5 ? color2 || color : color
 
                 ctx.beginPath();
                 ctx.moveTo(lastGraphicInfo.x, lastGraphicInfo.y);
@@ -182,7 +186,8 @@ export default async (canvas, game, Listener) => {
                 lastGraphicInfo = { x, y }
             }
         }
-        renderGraphic(game.state.musicInfo.accuracyMedia, 'green')
+        //renderGraphic(game.state.musicInfo.accuracyMedia, 'rgba(0, 255, 0, 0.5)')
         renderGraphic(game.state.musicInfo.linearAccuracyMedia, 'cyan')
+        renderGraphic(game.state.musicInfo.accuracyMediaLow, 'green', 'red')
     }
 }

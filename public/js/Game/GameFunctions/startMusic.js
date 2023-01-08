@@ -42,6 +42,8 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             bestCombo: 0,
             accuracy: 0,
             accuracyMedia: [],
+            accuracyMediaLowData: [],
+            accuracyMediaLow: [],
             linearAccuracyMedia: [],
             rating: {},
             health: 50,
