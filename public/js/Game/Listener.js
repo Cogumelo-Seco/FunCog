@@ -118,7 +118,7 @@ export default function createListener(socket) {
             }
 
             if (state.game.state.gameStage == 'game' && !state.pauseGameKeys) {
-                if (keyPressed == 'Escape' && event.repeat && on && !state.game.state.online && state.game.state.music.currentTime >= 1) {
+                if (keyPressed == 'Escape' && on && state.keys[keyPressed].time-state.keys[keyPressed].lastClickTime <= 100 && !state.game.state.online && state.game.state.music.currentTime >= 1) {
                     let botPlay = state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content
                     state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
                     state.game.state.musicInfo.health = -100
