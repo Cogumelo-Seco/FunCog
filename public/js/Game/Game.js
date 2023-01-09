@@ -48,6 +48,9 @@ function createGame(Listener, canvas, socket) {
             createServer: false,
             listServers: []
         },
+        modifiers: {
+            speed: 1
+        },
         personalizedNotes: {},
         toLoadInScreen: {},
         images: {},

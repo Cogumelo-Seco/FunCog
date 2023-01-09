@@ -83,9 +83,11 @@ export default function createListener(socket) {
     function handleKeys({ event, on }) {
         let keyPressed = event.code
         let lastClick = state.keys[keyPressed]
+        let oldClicked = state.keys[keyPressed]?.time || null
         state.keys[keyPressed] = {
             key: event.key || '',
             code: keyPressed || '',
+            oldClicked,
             clicked: on,
             time: +new Date(),
             lastClickTime: lastClick?.time || null
@@ -106,7 +108,7 @@ export default function createListener(socket) {
                     !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getKey(arrowID) == keyPressed && on && !state.arrows[arrowID].click || 
                     !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getKey(arrowID) == keyPressed && !on && state.arrows[arrowID].click
                 ) {
-                    if (on) state.game.verifyClick({ arrowID, listenerState: state })
+                    if (on && +new Date()-oldClicked >= 20) state.game.verifyClick({ arrowID, listenerState: state })
                     else state.arrows[arrowID].state = 'noNote'
                     state.arrows[arrowID].click = on
                 }
@@ -178,6 +180,7 @@ export default function createListener(socket) {
                     case 'ArrowDown':
                         switch(selectMusicMenu.currentSelection) {
                             case 0:
+                                selectMusicMenu.musicSelect = 0
                                 selectMusicMenu.modSelect = selectMusicMenu.modSelect >= state.game.state.musics.length-1 ? 0 : selectMusicMenu.modSelect+1
                                 break
                             case 1:
@@ -192,6 +195,7 @@ export default function createListener(socket) {
                     case 'ArrowUp':
                         switch(selectMusicMenu.currentSelection) {
                             case 0:
+                                selectMusicMenu.musicSelect = 0
                                 selectMusicMenu.modSelect = selectMusicMenu.modSelect <= 0 ? state.game.state.musics.length-1 : selectMusicMenu.modSelect-1
                                 break
                             case 1:

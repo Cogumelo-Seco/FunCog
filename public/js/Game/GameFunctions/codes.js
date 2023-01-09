@@ -27,6 +27,10 @@ export default function codesFunction(state) {
             }
 
             return state.myConfig.colorName?.includes('RAINBOW')
+        },
+        speed: () => {
+            state.modifiers.speed = state.modifiers.speed == 1 ? 1.5 : 1
+            return state.modifiers.speed == 1.5
         }
     }
 }

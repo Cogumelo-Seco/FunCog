@@ -210,7 +210,13 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                         state.music?.play()
                         state.musicVoice?.play()
 
-                        if (state.musicVoice) state.musicVoice.currentTime = state.music?.currentTime || 0
+                        state.music.playbackRate = state.modifiers.speed
+
+                        if (state.musicVoice) {
+                            state.musicVoice.currentTime = state.music?.currentTime || 0
+                            
+                            state.musicVoice.playbackRate = state.modifiers.speed
+                        }
 
                         state.musicEventListener('started', { difficulty, listenerState }, state)
                     } else {

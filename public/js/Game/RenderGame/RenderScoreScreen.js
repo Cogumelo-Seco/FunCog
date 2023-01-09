@@ -171,7 +171,7 @@ export default async (canvas, game, Listener) => {
             let lastGraphicInfo = { x: graphicX,  y: graphicY }
             if (graphicData.length <= 5000) for (let i in graphicData) {
                 let percent = (graphicData[i] || 1)/100
-                let percentNext = (graphicData[Number(i)+1] || 1)/100
+                let percentNext = (graphicData[Number(i)+1] || 100)/100
 
                 let x = graphicX+(graphicWidth*(i/(graphicData.length-1)))-ctx.lineWidth
                 let y = graphicY+(graphicHeight-graphicHeight*(percent))

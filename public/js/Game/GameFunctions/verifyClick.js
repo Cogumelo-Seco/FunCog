@@ -1,4 +1,4 @@
-export default async({ arrowID, listenerState, readyNote }, state) => {
+export default async({ arrowID, listenerState, readyNote, event }, state) => {
     let scrollSpeed = state.smallFunctions.getConfig('ScrollSpeed')
 
     let arrowsInfo = state[state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo']
@@ -127,6 +127,7 @@ export default async({ arrowID, listenerState, readyNote }, state) => {
         noteClick(bestNote)
     }*/
 
+    console.log(event)
     if (!readyNote) {
         let notesInScreen = false
         for (let i in musicNotes) {
