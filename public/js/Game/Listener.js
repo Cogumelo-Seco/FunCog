@@ -83,11 +83,11 @@ export default function createListener(socket) {
     function handleKeys({ event, on }) {
         let keyPressed = event.code
         let lastClick = state.keys[keyPressed]
-        let oldClicked = state.keys[keyPressed]?.time || null
+        let hold = !state.keys[keyPressed] || +new Date()-state.keys[keyPressed]?.time <= 20
         state.keys[keyPressed] = {
             key: event.key || '',
             code: keyPressed || '',
-            oldClicked,
+            hold,
             clicked: on,
             time: +new Date(),
             lastClickTime: lastClick?.time || null
@@ -108,8 +108,8 @@ export default function createListener(socket) {
                     !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getKey(arrowID) == keyPressed && on && !state.arrows[arrowID].click || 
                     !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getKey(arrowID) == keyPressed && !on && state.arrows[arrowID].click
                 ) {
-                    if (on && +new Date()-oldClicked >= 20) state.game.verifyClick({ arrowID, listenerState: state })
-                    else state.arrows[arrowID].state = 'noNote'
+                    if (on && !hold) state.game.verifyClick({ arrowID, listenerState: state })
+                    if (!on) state.arrows[arrowID].state = 'noNote'
                     state.arrows[arrowID].click = on
                 }
             }
