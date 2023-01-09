@@ -102,15 +102,18 @@ export default function createListener(socket) {
             }
 
             if (!state.pauseGameKeys) for (let arrowID in state.game.state.arrowsInfo) {
-                if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote',  click: false }
-
+                if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote', click: false }
                 if (
                     !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getKey(arrowID) == keyPressed && on && !state.arrows[arrowID].click || 
                     !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getKey(arrowID) == keyPressed && !on && state.arrows[arrowID].click
                 ) {
                     if (on && !hold) state.game.verifyClick({ arrowID, listenerState: state })
-                    if (!on) state.arrows[arrowID].state = 'noNote'
-                    state.arrows[arrowID].click = on
+
+                    clearTimeout(state.arrows[arrowID].timeout)
+                    if (on) state.arrows[arrowID].click = true
+                    else state.arrows[arrowID].timeout = setTimeout(() => {
+                        if (+new Date()-state.keys[keyPressed]?.time >= 20) state.arrows[arrowID].click = false
+                    }, 40)
                 }
             }
 

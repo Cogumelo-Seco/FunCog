@@ -82,6 +82,7 @@ export default async({ arrowID, listenerState, readyNote, hold }, state) => {
                 }
             }, 1000/5)
  */
+            console.log(listenerState.arrows[arrowID].click)
             let loop = () => {
                 if (!listenerState.arrows[arrowID].click || note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
                     note.disabled = true
