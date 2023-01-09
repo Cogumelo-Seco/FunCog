@@ -365,11 +365,11 @@ function createGame(Listener, canvas, socket) {
 
         function moveNote(note, playerId, opponent, resizeNote) {
             let newNoteY = -((note.time-musicCurrentTime)*((5**resizeNote)*state.musicBPM)*ScrollSpeed*state.speed)
-            let oldNoteY = note.oldY || -musicDuration*1000
-            if (newNoteY >= oldNoteY) {
+            //let oldNoteY = note.oldY || -musicDuration*1000
+            //if (newNoteY >= oldNoteY) {
                 note.Y = newNoteY
-                note.oldY = newNoteY
-            }
+                //note.oldY = newNoteY
+            //}
 
             if ((state.musicInfo.playerId == 1 && !opponent || state.musicInfo.playerId == 2 && opponent) && (state.debug || !state.online) && Listener.state.arrows[note.arrowID]) {
                 if (((botPlay || note.autoClick) || Listener.state.arrows[note.arrowID].inAutoClick) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
