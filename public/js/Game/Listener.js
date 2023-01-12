@@ -102,7 +102,17 @@ export default function createListener(socket) {
             }
 
             if (!state.pauseGameKeys) for (let arrowID in state.game.state.arrowsInfo) {
-                if (!state.arrows[arrowID]) state.arrows[arrowID] = { state: 'noNote', click: false }
+                if (!state.arrows[arrowID]) {
+                    state.arrows[arrowID] = { state: 'noNote', click: false }
+                    state.keys[state.game.state.smallFunctions.getKey(arrowID)] = {
+                        code: state.game.state.smallFunctions.getKey(arrowID) || '',
+                        hold: false,
+                        clicked: false,
+                        time: +new Date(),
+                        lastClickTime: +new Date(),
+                    }
+                }
+
                 if (
                     !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getKey(arrowID) == keyPressed && on && !state.arrows[arrowID].click || 
                     !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getKey(arrowID) == keyPressed && !on && state.arrows[arrowID].click
@@ -390,8 +400,11 @@ export default function createListener(socket) {
                         switch (currentConfig.type) {
                             case 'ConfigTitle':
                                 if (currentConfig.content) {
-                                    currentConfig.currentOption = currentConfig.currentOption >= currentConfig.options.length-1 ? 0 : currentConfig.currentOption+1 
-                                    currentConfig.content = currentConfig.options[currentConfig.currentOption]
+                                    let options = Object.keys(state.game.state.selectSettingsOption.settingsOptions[1])
+                                    console.log(options)
+
+                                    currentConfig.currentOption = currentConfig.currentOption >= options.length-1 ? 0 : currentConfig.currentOption+1 
+                                    currentConfig.content = options[currentConfig.currentOption]
                                     state.game.playSong('Sounds/scrollMenu.ogg')
                                 }
                                 break

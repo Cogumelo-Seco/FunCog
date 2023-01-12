@@ -1,4 +1,4 @@
-export default async (canvas, game, Listener) => {
+export default async (canvas, game, Listener, functions) => {
     const ctx = canvas.getContext('2d')
 
     ctx.fillStyle = 'rgb(0, 0, 0, 0.95)'
@@ -9,10 +9,7 @@ export default async (canvas, game, Listener) => {
     let difficultySelected = game.state.selectMusicMenu.difficultySelected
     let currentSelection = game.state.selectMusicMenu.currentSelection
 
-     
-    let modPrevious = game.state.musics[modSelect-1] || game.state.musics[game.state.musics.length-1]
     let modCurrent = game.state.musics[modSelect]
-    let modNext = game.state.musics[modSelect+1] || game.state.musics[0]
     if (!modCurrent) return
 
     let startModsY = 100//canvas.height/2-(50/2)
@@ -37,11 +34,13 @@ export default async (canvas, game, Listener) => {
 
         ctx.font = 'bold 20px Arial'
 
-        ctx.fillStyle = 'black'
-        ctx.fillText(modNameTxt, contentWidth/2-(ctx.measureText(modNameTxt).width/2)+2, modsY+2);
-
-        ctx.fillStyle = mod.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(mod.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : mod.menuColor || 'white'
-        ctx.fillText(modNameTxt, contentWidth/2-(ctx.measureText(modNameTxt).width/2), modsY);
+        functions.fillText({
+            style: mod.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(mod.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : mod.menuColor || 'white',
+            text: modNameTxt,
+            x: contentWidth/2-(ctx.measureText(modNameTxt).width/2), 
+            y: modsY,
+            add: 2
+        })
 
         modsY += 40
     }
@@ -66,11 +65,13 @@ export default async (canvas, game, Listener) => {
 
         ctx.font = 'bold 20px Arial'
 
-        ctx.fillStyle = 'black'
-        ctx.fillText(musicName, contentWidth+contentWidth/2-(ctx.measureText(musicName).width/2)+2, musicY+2);
-
-        ctx.fillStyle = music.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(music.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : music.menuColor || 'white'
-        ctx.fillText(musicName, contentWidth+contentWidth/2-(ctx.measureText(musicName).width/2), musicY);
+        functions.fillText({
+            style: music.menuColor?.includes('RAINBOW') ? `hsl(${game.state.rainbowColor+(Number(music.menuColor.split('-')[1]) || 0)}, 100%, 50%)` : music.menuColor || 'white',
+            text: musicName,
+            x: contentWidth+contentWidth/2-(ctx.measureText(musicName).width/2), 
+            y: musicY,
+            add: 2
+        })
 
         let txtWidth = ctx.measureText(musicName).width
         let alertImage = game.state.images[`imgs/alert.png`]?.image
@@ -102,11 +103,13 @@ export default async (canvas, game, Listener) => {
 
         ctx.font = 'bold 20px Arial'
 
-        ctx.fillStyle = 'black'
-        ctx.fillText(difficultyName, (contentWidth*2)+contentWidth/2-(ctx.measureText(difficultyName).width/2)+2, difficultyY+2);
-
-        ctx.fillStyle = difficulty.color
-        ctx.fillText(difficultyName, (contentWidth*2)+contentWidth/2-(ctx.measureText(difficultyName).width/2), difficultyY);
+        functions.fillText({
+            style: difficulty.color,
+            text: difficultyName,
+            x: (contentWidth*2)+contentWidth/2-(ctx.measureText(difficultyName).width/2), 
+            y: difficultyY,
+            add: 2
+        })
 
         difficultyY += 40
         

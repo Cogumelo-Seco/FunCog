@@ -1,4 +1,4 @@
-export default async (canvas, game, Listener) => {
+export default async (canvas, game, Listener, functions) => {
     const ctx = canvas.getContext('2d')
 
     let invertArrowPos = game.state.musicInfo.playerId == 2 ? game.state.invertArrowPos ? false : true : game.state.invertArrowPos
@@ -108,13 +108,14 @@ export default async (canvas, game, Listener) => {
             let percent = game.state.animations.arrowKeys.frame/game.state.animations.arrowKeys.endFrame
             if (percent < 1) {
                 let arrowKeysAlpha = percent > 0.8 ? 1-(percent-0.8)/0.2 : game.state.alphaHUD
-                ctx.globalAlpha = arrowKeysAlpha <= game.state.alphaHUD ? arrowKeysAlpha : game.state.alphaHUD
-
-                ctx.fillStyle = 'black'
-                ctx.fillText(key, arrowInfo.X+(arrowInfo.width**resizeNote)/2-(ctx.measureText(key).width/2)+2, arrowInfo.Y+(downScroll ? -(arrowInfo.height**resizeNote/2)-20 : (arrowInfo.height**resizeNote/2)+25)+2)
-
-                ctx.fillStyle = 'white'
-                ctx.fillText(key, arrowInfo.X+(arrowInfo.width**resizeNote)/2-(ctx.measureText(key).width/2), arrowInfo.Y+(downScroll ? -(arrowInfo.height**resizeNote/2)-20 : (arrowInfo.height**resizeNote/2)+25))
+                functions.fillText({
+                    alpha: arrowKeysAlpha <= game.state.alphaHUD ? arrowKeysAlpha : game.state.alphaHUD,
+                    style: `rgb(255, 255, 255)`,
+                    text: key,
+                    x: arrowInfo.X+(arrowInfo.width**resizeNote)/2-(ctx.measureText(key).width/2), 
+                    y: arrowInfo.Y+(downScroll ? -(arrowInfo.height**resizeNote/2)-20 : (arrowInfo.height**resizeNote/2)+25),
+                    add: 2
+                })
             }
 
             ctx.globalAlpha = game.state.alphaHUD

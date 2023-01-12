@@ -4,16 +4,7 @@ export default async (state) => {
             name: 'KeyBind',
             type: 'ConfigTitle',
             content: '4K',
-            currentOption: 0,
-            options: [
-                '4K',
-                '5K',
-                '6K',
-                '9K',
-                '12K',
-                '18K',
-                '26K'
-            ]
+            currentOption: 0
         },
         {
             "4K": [
@@ -522,6 +513,15 @@ export default async (state) => {
             content: false
         },
         {
+            name: 'Bongo Cat response time',
+            id: 'botResponseTime',
+            type: 'Number',
+            add: 5,
+            max: 200,
+            min: 0,
+            content: 0
+        },
+        {
             name: 'Down Scroll',
             id: 'DownScroll',
             type: 'Boolean',
@@ -536,7 +536,6 @@ export default async (state) => {
         {
             name: 'Space Between Arrows',
             id: 'SpaceBetweenArrows',
-            type: 'Boolean',
             type: 'Number',
             add: 1,
             max: 50,

@@ -1,5 +1,6 @@
 export default async({ arrowID, listenerState, readyNote, hold }, state) => {
     let scrollSpeed = state.smallFunctions.getConfig('ScrollSpeed')
+    let botResponseTime = state.smallFunctions.getConfig('botResponseTime')
 
     let arrowsInfo = state[state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo']
     let musicNotes = state[state.musicInfo.playerId == 2 ? 'musicOpponentNotes' : 'musicNotes']
@@ -37,7 +38,7 @@ export default async({ arrowID, listenerState, readyNote, hold }, state) => {
                 bestNote.ratingMedia = rating.media
             }
         }
-        if (isNaN(Number(bestNote.hitNote))) bestNote.hitNote = 0
+        if (isNaN(Number(bestNote.hitNote))) bestNote.hitNote = Math.random()*(botResponseTime*2)-botResponseTime
 
         state.musicEventListener('noteClick', { noteClickAuthor: 'player', note, listenerState }, state)
 
@@ -82,7 +83,6 @@ export default async({ arrowID, listenerState, readyNote, hold }, state) => {
                 }
             }, 1000/5)
  */
-            console.log(listenerState.arrows[arrowID].click)
             let loop = () => {
                 if (!listenerState.arrows[arrowID].click || note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
                     note.disabled = true

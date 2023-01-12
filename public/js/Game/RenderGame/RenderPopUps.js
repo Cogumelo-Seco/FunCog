@@ -1,4 +1,4 @@
-export default async (canvas, game, Listener) => {
+export default async (canvas, game, Listener, functions) => {
     const ctx = canvas.getContext('2d')
 
     for (let i in game.state.musicInfo.popups) {

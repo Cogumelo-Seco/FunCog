@@ -1,4 +1,4 @@
-export default async (canvas, game, Listener) => {
+export default async (canvas, game, Listener, functions) => {
     if (!game.state.smallFunctions.getConfig('botPlay') || game.state.online) return
 
     const ctx = canvas.getContext('2d')

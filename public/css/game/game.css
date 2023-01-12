@@ -262,6 +262,7 @@ div.loginAndRegisterContent .inputText {
     border-radius: 5px;
     border: solid black 2px;
     background-color: #AAA;
+    color: black;
     box-shadow: 0px 0px 5px black;
 }
 

@@ -1,4 +1,4 @@
-export default async (canvas, game, Listener) => {
+export default async (canvas, game, Listener, functions) => {
     const ctx = canvas.getContext('2d')
 
     let downScroll = game.state.smallFunctions.getConfig('DownScroll')
@@ -38,12 +38,11 @@ export default async (canvas, game, Listener) => {
             if (note.hold && arrowImage && holdImagePos && holdEndImagePos && arrowImagePos) {
                 let holdY = noteY-(holdImagePos.height/2)
                 let holdX = (arrowInfo.X)+(arrowImagePos.width**resizeNote/2)-(holdImagePos.width**resizeNote/2)
-                let holdYInRelationToTheLine = null
                 if (!note.holdHeight) note.holdHeight = holdImagePos.height
 
                 for (let i = 0;i <= note.hold;i += holdImagePos?.height) {
                     holdY = downScroll ? holdY-(holdImagePos.height**resizeNote) : holdY+(holdImagePos.height**resizeNote)
-                    holdYInRelationToTheLine = downScroll ? (holdY+(holdImagePos.height/2))-arrowInfo?.Y : arrowInfo?.Y-holdY
+                    let holdYInRelationToTheLine = downScroll ? (holdY+(holdImagePos.height/2))-arrowInfo?.Y : arrowInfo?.Y-holdY
 
                     let alphaHUD = game.state.alphaHUD >= 1 ? 1 : game.state.alphaHUD <= 0 ? 0 : game.state.alphaHUD
                     let noteAlpha = arrowInfo.noteAlpha >= 1 ? 1 : arrowInfo.noteAlpha <= 0 ? 0 : arrowInfo.noteAlpha
@@ -115,12 +114,11 @@ export default async (canvas, game, Listener) => {
             if (note.hold && arrowImage && holdImagePos && holdEndImagePos && arrowImagePos) {
                 let holdY = noteY-(holdImagePos.height/2)
                 let holdX = (arrowInfo.X)+(arrowImagePos.width**resizeNoteOpponent/2)-(holdImagePos.width**resizeNoteOpponent/2)
-                let holdYInRelationToTheLine = null
                 if (!note.holdHeight) note.holdHeight = holdImagePos.height
 
                 for (let i = 0;i <= note.hold;i += holdImagePos?.height) {
                     holdY = downScroll ? holdY-(holdImagePos.height**resizeNoteOpponent) : holdY+(holdImagePos.height**resizeNoteOpponent)
-                    holdYInRelationToTheLine = downScroll ? (holdY+(holdImagePos.height/2))-arrowInfo?.Y : arrowInfo?.Y-holdY
+                    let holdYInRelationToTheLine = downScroll ? (holdY+(holdImagePos.height/2))-arrowInfo?.Y : arrowInfo?.Y-holdY
                     
                     let alphaHUD = game.state.alphaHUD >= 1 ? 1 : game.state.alphaHUD <= 0 ? 0 : game.state.alphaHUD
                     let noteAlpha = arrowInfo.noteAlpha >= 1 ? 1 : arrowInfo.noteAlpha <= 0 ? 0 : arrowInfo.noteAlpha

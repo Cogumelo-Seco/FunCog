@@ -492,7 +492,7 @@ function createGame(Listener, canvas, socket) {
                 }
             }
 
-            state.rainbowColor += 1//state.rainbowColor >= 360 ? 0 : state.rainbowColor+1
+            state.rainbowColor += 1
         }
     }
 

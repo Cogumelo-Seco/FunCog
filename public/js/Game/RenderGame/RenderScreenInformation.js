@@ -1,25 +1,47 @@
-export default async (canvas, game, Listener) => {
+export default async (canvas, game, Listener, functions) => {
     const ctx = canvas.getContext('2d')
 
     ctx.globalAlpha = game.state.alphaHUD
-    ctx.fillStyle = `hsl(${game.state.rainbowColor+4912}, 100%, 40%)`//'rgb(200, 200, 200)'
     ctx.font = `bold 11px Arial`
-    ctx.fillText('Created by: Cogu', canvas.width-ctx.measureText('Created by: Cogu').width-5, canvas.height-5);
+    functions.fillText({
+        style: `hsl(${game.state.rainbowColor}, 100%, 40%)`,
+        style2: `hsl(${game.state.rainbowColor+180}, 100%, 40%)`,
+        text: 'Created by: Cogu',
+        x: canvas.width-ctx.measureText('Created by: Cogu').width-5,
+        y: canvas.height-5,
+        add: 1
+    })
+    /*ctx.fillStyle = `hsl(${game.state.rainbowColor}, 100%, 40%)`
+    ctx.fillText('Created by: Cogu', canvas.width-ctx.measureText('Created by: Cogu').width-5+1, canvas.height-5+1);
+    ctx.fillStyle = `hsl(${game.state.rainbowColor+180}, 100%, 40%)`
+    ctx.fillText('Created by: Cogu', canvas.width-ctx.measureText('Created by: Cogu').width-5, canvas.height-5);*/
 
     if (game.state.smallFunctions.getConfig('GameInfo')) {
-        ctx.fillText(`${game.state.fpsDisplay}FPS`, (canvas.width-5)-ctx.measureText(`${game.state.fpsDisplay}FPS`).width, 15);
-        ctx.fillText(`${game.state.ping || '???'}Ping`, (canvas.width-5)-ctx.measureText(`${game.state.ping}Ping`).width, 30);
+        functions.fillText({
+            style: `hsl(${game.state.rainbowColor}, 100%, 40%)`,
+            style2: `hsl(${game.state.rainbowColor+180}, 100%, 40%)`,
+            text: `${game.state.fpsDisplay}FPS`,
+            x: (canvas.width-5)-ctx.measureText(`${game.state.fpsDisplay}FPS`).width,
+            y: 15,
+            add: 1
+        })
+        functions.fillText({
+            style: `hsl(${game.state.rainbowColor}, 100%, 40%)`,
+            style2: `hsl(${game.state.rainbowColor+180}, 100%, 40%)`,
+            text: `${game.state.ping || '???'}Ping`,
+            x: (canvas.width-5)-ctx.measureText(`${game.state.ping}Ping`).width,
+            y: 30,
+            add: 1
+        })
 
-        ctx.globalAlpha = (game.state.animations.code.frame/game.state.animations.code.endFrame) > 0.5 ? 1-((game.state.animations.code.frame/game.state.animations.code.endFrame)-0.5)/0.5 : game.state.alphaHUD
-        ctx.fillText(`Code Detected - ${game.state.animations.code.on ? 'ON' : 'OFF'}`, 5, 60)
-        ctx.globalAlpha = 1
-
-        /*
-        ctx.fillText(`Mouse: X: ${Listener.state.mouseInfo.mouseInfoType == 'percent' ? Number.parseInt(Listener.state.mouseInfo.x*100)+'%' : Number.parseInt(Listener.state.mouseInfo.x*1000)} Y: ${Listener.state.mouseInfo.mouseInfoType == 'percent' ? Number.parseInt(Listener.state.mouseInfo.y*100)+'%' : Number.parseInt(Listener.state.mouseInfo.y*1000)}`, 2, 15)
-        ctx.fillText(`Debug: ${game.state.debug}`, 2, 30)
-        ctx.fillText(`BotPlay: ${game.state.botPlay}`, 2, 45)
-        ctx.fillText(`RenderType: ${game.state.renderType}`, 2, 60)
-        */
+        functions.fillText({
+            alpha: (game.state.animations.code.frame/game.state.animations.code.endFrame) > 0.5 ? 1-((game.state.animations.code.frame/game.state.animations.code.endFrame)-0.5)/0.5 : game.state.alphaHUD,
+            style: `rgb(255, 255, 255)`,
+            text: `Code Detected - ${game.state.animations.code.on ? 'ON' : 'OFF'}`,
+            x: 5,
+            y: 60,
+            add: 2
+        })
     }
 
     let ReturnPageButton = Listener.state.buttons['ReturnPageButton']

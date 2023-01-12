@@ -26,7 +26,7 @@ export default (time, state) => {
     else if (time <= 115 && time >= 90) rating = ratings[1]
     else if (time <= 90 && time >= 60) rating = ratings[2]
     else rating = ratings[3]
-
+    
     state.musicInfo.rating = rating
     return rating
 }

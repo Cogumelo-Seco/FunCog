@@ -1665,9 +1665,209 @@ export default async (state) => {
             ]
         },
         {
+            name: 'Camellia',
+            menuColor: '#d55f56',
+            musics: [
+                {
+                    name: 'Camellia-Tutorial',
+                    menuColor: '#ff9292',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia-tutorial/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia-tutorial/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Boyfriend',
+                    menuColor: '#ff9292',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/boyfriend/Inst.ogg' },
+                        { dir: 'Musics/musics/boyfriend/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'First-Town',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/first-town/Inst.ogg' },
+                        { dir: 'Musics/musics/first-town/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Liquated',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/liquated/Inst.ogg' },
+                        { dir: 'Musics/musics/liquated/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Why-do-you-hate-me',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/why-do-you-hate-me/Inst.ogg' },
+                        { dir: 'Musics/musics/why-do-you-hate-me/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Quaoar',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/quaoar/Inst.ogg' },
+                        { dir: 'Musics/musics/quaoar/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Crystallized',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/crystallized/Inst.ogg' },
+                        { dir: 'Musics/musics/crystallized/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Nacreous-Snowmelt',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/nacreous-snowmelt/Inst.ogg' },
+                        { dir: 'Musics/musics/nacreous-snowmelt/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Lioness-Pride',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/lioness-pride/Inst.ogg' },
+                        { dir: 'Musics/musics/lioness-pride/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Ghost',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/ghost/Inst.ogg' },
+                        { dir: 'Musics/musics/ghost/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Ghoul',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/ghoul/Inst.ogg' },
+                        { dir: 'Musics/musics/ghoul/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Ghost-Vip',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/ghost-vip/Inst.ogg' },
+                        { dir: 'Musics/musics/ghost-vip/Voices.ogg' },
+                    ]
+                },
+            ]
+        },
+        {
             name: 'Undefined',
             menuColor: 'RAINBOW-7890',
             musics: [
+                {
+                    name: 'Thunderstorm',
+                    menuColor: 'RAINBOW-4894',
+                    difficulties: [ 0, 1, 2 ],
+                    filterNotes: {
+                        1: 6,
+                        2: 26,
+                    },
+                    difficultyAlert: {
+                        1: '6k',
+                        2: '26k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/Arrows-26K/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'Undefined',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/thunderstorm/Inst.ogg' },
+                        { dir: 'Musics/musics/thunderstorm/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Space-Breaker',
+                    menuColor: 'RAINBOW-7',
+                    difficulties: [ 2, 5, 6, 7 ],
+                    filterNotes: {
+                        2: 18,
+                        5: 12,
+                        6: 18,
+                    },
+                    difficultyAlert: {
+                        2: '9k',
+                        5: '12k',
+                        6: '18k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/Arrows-26K/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: null,
+                    mod: 'Undefined',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/space-breaker/Inst.ogg' },
+                        { dir: 'Musics/musics/space-breaker/Voices.ogg' },
+                    ]
+                },
                 {
                     name: 'RUSH-E',
                     menuColor: 'RAINBOW-941',
@@ -1729,62 +1929,6 @@ export default async (state) => {
                 },
             ]
         },
-        {
-            name: 'Special Songs',
-            menuColor: 'red',
-            musics: [
-                {
-                    name: 'Thunderstorm',
-                    menuColor: 'RAINBOW-4894',
-                    difficulties: [ 0, 1, 2 ],
-                    filterNotes: {
-                        1: 6,
-                        2: 26,
-                    },
-                    difficultyAlert: {
-                        1: '6k',
-                        2: '26k',
-                    },
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/Arrows-26K/splash.png',
-                    splashResize: 1.5,
-                    backgroundImage: null,
-                    mod: 'SpecialSongs',
-                    toLoad: [
-                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
-                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
-                        { dir: 'Musics/musics/thunderstorm/Inst.ogg' },
-                        { dir: 'Musics/musics/thunderstorm/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Space-Breaker',
-                    menuColor: 'RAINBOW-7',
-                    difficulties: [ 2, 5, 6, 7 ],
-                    filterNotes: {
-                        2: 18,
-                        5: 12,
-                        6: 18,
-                    },
-                    difficultyAlert: {
-                        2: '9k',
-                        5: '12k',
-                        6: '18k',
-                    },
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/Arrows-26K/splash.png',
-                    splashResize: 1.5,
-                    backgroundImage: null,
-                    mod: 'SpecialSongs',
-                    toLoad: [
-                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
-                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
-                        { dir: 'Musics/musics/space-breaker/Inst.ogg' },
-                        { dir: 'Musics/musics/space-breaker/Voices.ogg' },
-                    ]
-                },
-            ]
-        }
     ]
     
     return state.musics.length

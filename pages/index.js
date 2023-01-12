@@ -138,15 +138,30 @@ const Game = (props) => {
                 game.state.myConfig.settings = player.settings
                 game.state.myConfig.token = player.token
 
-                if (player.settings && player.settings[0]) {
+                /*if (player.settings && player.settings[0]) {
                     let defaultSettingsOptions = game.state.selectSettingsOption.settingsOptions
                     let playerSettingsOptions = player.settings
-                    playerSettingsOptions = Object.assign(defaultSettingsOptions, playerSettingsOptions)
+                    playerSettingsOptions = Object.assign(playerSettingsOptions, defaultSettingsOptions)
+                    game.state.selectSettingsOption.settingsOptions = playerSettingsOptions
+                }*/
+                let defaultSettingsOptions = game.state.selectSettingsOption.settingsOptions
+                let playerSettingsOptions = player.settings
+                let reset = false
+                for (let i in defaultSettingsOptions) {
+                    let option = playerSettingsOptions.find(o => o.id == defaultSettingsOptions[i].id)
+                    if (option) defaultSettingsOptions[i].content = option.content
+                    else reset = true
+                    /*if (
+                        playerSettingsOptions[i].name == defaultSettingsOptions[i].name && 
+                        playerSettingsOptions[i].add == defaultSettingsOptions[i].add &&
+                        playerSettingsOptions[i].name == defaultSettingsOptions[i].name &&
+                        playerSettingsOptions[i].name == defaultSettingsOptions[i].name &&
+                        playerSettingsOptions[i].name == defaultSettingsOptions[i].name &&
+                        playerSettingsOptions[i].name == defaultSettingsOptions[i].name
+                    ) playerSettingsOptions[i] = Object.assign(defaultSettingsOptions[i], playerSettingsOptions[i])//defaultSettingsOptions[i] = playerSettingsOptions[i]
+                    else playerSettingsOptions[i] = defaultSettingsOptions[i]*/
                 }
-                /*for (let i in defaultSettingsOptions) {
-                    if (playerSettingsOptions[i].name == defaultSettingsOptions[i].name) playerSettingsOptions[i] = Object.assign(defaultSettingsOptions[i], playerSettingsOptions[i])//defaultSettingsOptions[i] = playerSettingsOptions[i]
-                    else playerSettingsOptions[i] = defaultSettingsOptions[i]
-                }
+                if (reset) playerSettingsOptions = defaultSettingsOptions
                 /*for (let i in playerSettingsOptions) {
                     if (typeof defaultSettingsOptions[i] == 'object' && typeof playerSettingsOptions[i] == 'object') {
                         try {

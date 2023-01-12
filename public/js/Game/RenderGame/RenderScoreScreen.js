@@ -1,4 +1,4 @@
-export default async (canvas, game, Listener) => {
+export default async (canvas, game, Listener, functions) => {
     const ctx = canvas.getContext('2d')
 
     ctx.font = `bold ${(canvas.width+canvas.height)*0.03}px Arial`

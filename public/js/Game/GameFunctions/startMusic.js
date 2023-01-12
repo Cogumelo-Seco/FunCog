@@ -356,7 +356,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
 
         return {
             Y: NaN,
-            hold: Number.parseInt(note[2]) * (state.musicBPM*state.smallFunctions.getConfig('ScrollSpeed')/200),
+            hold: Number.parseInt(note[2]) * (state.musicBPM*state.smallFunctions.getConfig('ScrollSpeed')/195),
             time: Math.abs(note[0]/1000), 
             arrowID,
             clicked: false,
