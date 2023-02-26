@@ -335,8 +335,8 @@ function createGame(Listener, canvas, socket) {
                 })
                 state.smallFunctions.redirectGameStage('score')
             } else {
-                playSong('Sounds/fnf_loss_sfx.ogg')
-                setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
+                //playSong('Sounds/fnf_loss_sfx.ogg')
+                //setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
                 state.smallFunctions.redirectGameStage('score')
             }
 
