@@ -17,6 +17,7 @@ function createGame(Listener, canvas, socket) {
             emoji: null
         },
         messages: [],
+        gameStage: 'loading',
         inLogin: true,
         online: false,
         waiting: true,
@@ -26,7 +27,6 @@ function createGame(Listener, canvas, socket) {
         gameLoopFPSControlTime: 0,
         gameLoopFPSControlTime2: 0,
         rainbowColor: 0,
-        gameStage: 'loading',
         gameStageTime: 0,
         musicMenu: null,
         selectMusicMenu: {
@@ -47,6 +47,17 @@ function createGame(Listener, canvas, socket) {
             serverSelect: 0,
             createServer: false,
             listServers: []
+        },
+        selectPauseOption: {
+            pauseSelect: 0,
+            pauseOptions: [
+                {
+                    name: 'Resume'
+                },
+                {
+                    name: 'Exit'
+                }
+            ]
         },
         modifiers: {
             speed: 1
@@ -326,7 +337,7 @@ function createGame(Listener, canvas, socket) {
             } else {
                 playSong('Sounds/fnf_loss_sfx.ogg')
                 setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
-                state.smallFunctions.redirectGameStage('dead')
+                state.smallFunctions.redirectGameStage('score')
             }
 
             state.animations.BFDead.frame = 0

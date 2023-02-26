@@ -1,4 +1,5 @@
 export default (state, handleKeys) => {
+/*
     state.buttons['MouseInfoButton'] = {
         minX: 0,
         maxX: 80,
@@ -11,7 +12,7 @@ export default (state, handleKeys) => {
             else state.mouseInfo.mouseInfoType = 'percent'
         }
     }
-/*
+
     state.buttons['DebugButton'] = {
         minX: 0,
         maxX: 80,

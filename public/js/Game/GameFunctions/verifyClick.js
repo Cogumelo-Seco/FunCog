@@ -11,7 +11,7 @@ export default async({ arrowID, listenerState, readyNote, hold }, state) => {
     if (!readyNote) for (let i in musicNotes) {
         let n = musicNotes[i]
         if (
-            n.arrowID == arrowID && !n.disabled &&
+            n.arrowID == arrowID && !n.disabled && !n.clicked &&
             n.time >= 0 && n.time <= state.music?.currentTime+0.5 &&
             n.Y >= -(getHitBoxSize(n.arrowID)) &&
             n.Y <= (getHitBoxSize(n.arrowID))
@@ -86,7 +86,7 @@ export default async({ arrowID, listenerState, readyNote, hold }, state) => {
             let loop = () => {
                 if (!listenerState.arrows[arrowID].click || note && note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
                     note.disabled = true
-                } else if (!state.music.paused) {
+                } else if (!state.music?.paused) {
                     state.musicEventListener('noteClick', { noteClickAuthor: 'player', note, listenerState, hold: true }, state)
                     state.musicInfo.health += 0.2
                     state.musicInfo.score += Number.parseInt((state.scoreToAdd/2)*(rating.media/100))

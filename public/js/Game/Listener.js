@@ -127,13 +127,17 @@ export default function createListener(socket) {
                 }
             }
 
+            if (state.game.state.gameStage == 'test' && !state.pauseGameKeys) {
+                
+            }
+
             if (state.game.state.gameStage == 'game' && !state.pauseGameKeys) {
-                if (keyPressed == 'Escape' && on && state.keys[keyPressed].time-state.keys[keyPressed].lastClickTime <= 100 && !state.game.state.online && state.game.state.music.currentTime >= 1) {
+                /*if (keyPressed == 'Escape' && on && state.keys[keyPressed].time-state.keys[keyPressed].lastClickTime <= 100 && !state.game.state.online && state.game.state.music.currentTime >= 1) {
                     let botPlay = state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content
                     state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
                     state.game.state.musicInfo.health = -100
                     setTimeout(() => state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = botPlay, 500)
-                }
+                }*/
 
                 let gameVideoElement = document.getElementById('gameVideo')
                 if (keyPressed == 'Enter' && on && gameVideoElement.duration >= 6 && state.game.state.music.currentTime <= 0) {
@@ -143,12 +147,54 @@ export default function createListener(socket) {
 
                 if (keyPressed == 'Escape' && on && !state.game.state.online && state.game.state.countdown <= -1) {
                     if (state.game.state.music.paused) {
-                        if (state.game.state.music) state.game.state.music.play()
+                        let count = 0
+                        function loop() {
+                            count += 1
+                            if (count <= 100) {
+                                state.game.state.music.currentTime -= 0.02
+                                if (state.game.state.musicVoice) state.game.state.musicVoice.currentTime -= 0.02
+
+                                setTimeout(loop, 10)
+                            }
+                        }
+                        loop()
+
+                        state.game.state.music.play()
                         if (state.game.state.musicVoice) state.game.state.musicVoice.play()
-                    } else {
-                        if (state.game.state.music) state.game.state.music.pause()
+                    } else if (state.game.state.musicInfo.oldPauseTime < state.game.state.music.currentTime) {
+                        state.game.state.musicInfo.oldPauseTime = state.game.state.music.currentTime
+                        state.game.state.music.pause()
                         if (state.game.state.musicVoice) state.game.state.musicVoice.pause()
                     }
+                }
+
+                keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
+                let selectPauseOption = state.game.state.selectPauseOption
+                if (on) switch (keyPressed) {
+                    case 'ArrowDown':
+                        if (selectPauseOption.pauseSelect < selectPauseOption.pauseOptions.length-1) {
+                            selectPauseOption.pauseSelect += 1
+                            state.game.playSong('Sounds/scrollMenu.ogg')
+                        }
+                        break
+                    case 'ArrowUp':
+                        if (selectPauseOption.pauseSelect > 0) {
+                            selectPauseOption.pauseSelect -= 1
+                            state.game.playSong('Sounds/scrollMenu.ogg')
+                        }
+                        break
+                    case 'Enter':
+                        let option = selectPauseOption.pauseOptions[selectPauseOption.pauseSelect]
+
+                        switch (option.name) {
+                            case 'Resume':
+                                handleKeys({ event: { code: 'Escape' }, on: true })
+                                break
+                            case 'Exit':
+                                state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu')
+                                break
+                        }
+                        break
                 }
 
                 if (state.game.state.debug && on) {

@@ -1,7 +1,7 @@
 export default async (canvas, game, Listener, functions) => {
     const ctx = canvas.getContext('2d')
 
-    ctx.fillStyle = 'rgb(0, 0, 0, 0.5)'
+    ctx.fillStyle = 'rgb(0, 0, 0, 0.7)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     ctx.fillStyle = 'rgb(255, 255, 255)'
@@ -26,7 +26,7 @@ export default async (canvas, game, Listener, functions) => {
         ctx.strokeText(pauseOptions[i].name, pauseSelect == i ? X+5 : X, Y);
 
         Listener.state.buttons[`Pause-${i}`] = {
-            gameStage: [ 'test' ],
+            gameStage: [ 'game' ],
             minX: X/canvas.width*1000,
             maxX: (X+ctx.measureText(pauseOptions[i].name).width)/canvas.width*1000,
             minY: (Y-(pauseSelect == i ? textSize*1.2 : textSize))/canvas.height*1000,
@@ -41,11 +41,4 @@ export default async (canvas, game, Listener, functions) => {
 
         Y += textSize+margin
     }
-
-/*
-    ctx.fillStyle = 'rgb(255, 255, 255)'
-    ctx.font = `bold ${(canvas.width+canvas.height)*0.04}px Arial`
-    ctx.fillText('You Won', canvas.width/2-(ctx.measureText('You Won').width/2), 80);*/
-
-
 }

@@ -34,6 +34,7 @@ export default async function renderGame(canvas, game, Listener) {
             require('./RenderScreenInfoGame').default(canvas, game, Listener, functions)
             require('./RenderBars').default(canvas, game, Listener, functions)
             require('./RenderPopUps').default(canvas, game, Listener, functions)
+            if (game.state.music && game.state.music.paused && game.state.music.currentTime > 0) require('./RenderPause').default(canvas, game, Listener, functions)
             break
         case 'menu':
             require('./RenderMenuScreen').default(canvas, game, Listener, functions)

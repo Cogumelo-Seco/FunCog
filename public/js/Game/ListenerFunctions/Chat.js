@@ -57,7 +57,8 @@ export default function chat(state, socket) {
         let content = state.messageContent.replace(/[\s]+/g, ' ')
         if (!content || !socket.connected) return;
 
-        socket.emit('message', {
+        if (content.split(' ')[0] == '/s') state.game.state.gameStage = content.split(' ')[1]
+        else socket.emit('message', {
             author: {
                 name: state.game.state.myConfig.author.name || socket.id.slice(0, 20),
                 avatar: state.game.state.myConfig.author.avatar || null,

@@ -56,7 +56,7 @@ export default async (canvas, game, Listener, functions) => {
         }
 
         if (Listener.state.arrows[arrowID]?.click) {
-            let note = musicNotes.find(n => (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.arrowID == arrowID && n.Y >= -(arrowHeight**game.state.resizeNote) && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
+            let note = musicNotes.find(n => (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.time >= game.state.musicInfo.oldPauseTime && n.arrowID == arrowID && n.Y >= -(arrowHeight**game.state.resizeNote) && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
             let onNote = Listener.state.arrows[arrowID]?.state == 'onNote' && note ? true : false
 
             if (Listener.state.arrows[arrowID]?.state == 'onNote' || Listener.state.arrows[arrowID]?.state == 'noNote') arrowImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}-press-${game.state.animations.arrows.frame}${onNote ? '' : '-no'}`]
@@ -141,7 +141,7 @@ export default async (canvas, game, Listener, functions) => {
         arrowInfo.width = arrowWidth
         arrowInfo.height = arrowHeight
 
-        let note = musicOpponentNotes.find(n => (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
+        let note = musicOpponentNotes.find(n => (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.time >= game.state.musicInfo.oldPauseTime && n.arrowID == arrowID && n.Y >= 0 && n.Y <= (game.state.holdHeight**resizeNoteOpponent)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
         let onClickNoteOpponent = game.state.musicInfoOpponent.arrows && game.state.musicInfoOpponent.arrows[arrowID]?.click
         if (note || onClickNoteOpponent) {
             let pressImage = game.state.personalizedNotes[note?.type]?.pressImage

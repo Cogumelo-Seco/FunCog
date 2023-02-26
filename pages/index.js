@@ -125,7 +125,7 @@ const Game = (props) => {
             console.log(player)
             if (player?.token) {
                 game.state.inLogin = false
-                game.state.smallFunctions.redirectGameStage('loading')
+                //game.state.smallFunctions.redirectGameStage('loading')
 
                 document.cookie = `token=${player.token}; path=/`;
 
