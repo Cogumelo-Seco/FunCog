@@ -98,13 +98,13 @@ export default async (canvas, game, Listener, functions) => {
             style: `hsl(${110-Math.abs(rating.hitNote)}, 100%, 40%)`,
             text: rating.hitNote?.toFixed(2)+'ms',
             x: ratingInfoX+5, 
-            y: arrowsInfo[0]?.Y-(10**game.state.resizeNote),
+            y: arrowsInfo[arrowsInfo.length-1]?.Y-(10**game.state.resizeNote),
             add: 2
         })
         functions.fillText({
             text: game.state.musicInfo.combo+'X',
             x: ratingInfoX+5, 
-            y: arrowsInfo[0]?.Y+(30**game.state.resizeNote),
+            y: arrowsInfo[arrowsInfo.length-1]?.Y+(30**game.state.resizeNote),
             add: 2
         })
     }
