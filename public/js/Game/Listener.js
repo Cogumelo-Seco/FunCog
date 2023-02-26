@@ -191,7 +191,8 @@ export default function createListener(socket) {
                                 handleKeys({ event: { code: 'Escape' }, on: true })
                                 break
                             case 'Exit':
-                                state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu')
+                                state.game.state.music.currentTime = state.game.state.music.duration
+                                //state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu')
                                 break
                         }
                         break
