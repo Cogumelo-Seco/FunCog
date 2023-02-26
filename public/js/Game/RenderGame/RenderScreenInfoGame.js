@@ -73,7 +73,7 @@ export default async (canvas, game, Listener, functions) => {
             let ratingImageWidth = ratingImage.image.width**resize*0.5
             let ratingImageHeight = ratingImage.image.height**resize*0.5
             let ratingImageY = (arrowsInfo[0]?.Y+(arrowsInfo[0]?.height**resize*0.2)-(ratingImage.image.height**resize*0.6/2))-(90**resize)*percent
-            let ratingImageX = arrowsInfo[0]?.defaultX-(ratingImageWidth**resize*2)
+            let ratingImageX = arrowsInfo[0]?.X-(ratingImageWidth**resize*2)
 
             ctx.drawImage(ratingImage.image, ratingImageX, ratingImageY, ratingImageWidth*((1-percent)/9+1), ratingImageHeight*((1-percent)/9+1));
         }
