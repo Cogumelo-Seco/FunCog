@@ -55,7 +55,7 @@ export default function chat(state, socket) {
 
     function send() {
         let content = state.messageContent.replace(/[\s]+/g, ' ')
-        if (!content || !socket.connected) return;
+        if (!content || !socket.connected || !state.game.state.myConfig.logged) return;
 
         if (content.split(' ')[0] == '/s') state.game.state.gameStage = content.split(' ')[1]
         else socket.emit('message', {
