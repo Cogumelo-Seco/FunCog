@@ -58,9 +58,38 @@ const Game = (props) => {
             })
         }
 
+        let borderGradientDeg = 0
+        let countFrame = 0
         function loop() {
             if (game.state.inLogin/*[ 'loading', 'login' ].includes(game.state.gameStage)*/) {
                 window.requestAnimationFrame(() => loop())
+
+                borderGradientDeg += 1
+                countFrame += 1
+                const loginAndRegisterContents = document.getElementsByClassName('loginAndRegisterContent')
+                const connectingMessages = document.getElementsByClassName('connectingMessage')
+
+                if (countFrame%30 == 0) for (let connectingMessage of connectingMessages) {
+                    if (socket.connected) connectingMessage.style.display = 'none'
+                    else {
+                        connectingMessage.innerText += '.'
+                        if (connectingMessage.innerText.length > 30) connectingMessage.innerText = connectingMessage.innerText.substring(0, 23)
+                    }
+                }
+
+                let contentBackgroundColor = '#acacac'
+                for (let loginAndRegisterContent of loginAndRegisterContents) {
+                    loginAndRegisterContent.style.background = `
+                        radial-gradient(circle at 100% 100%, ${contentBackgroundColor} 0, ${contentBackgroundColor} 6px, transparent 6px) 0% 0%/8px 8px no-repeat,
+                        radial-gradient(circle at 0 100%, ${contentBackgroundColor} 0, ${contentBackgroundColor} 6px, transparent 6px) 100% 0%/8px 8px no-repeat,
+                        radial-gradient(circle at 100% 0, ${contentBackgroundColor} 0, ${contentBackgroundColor} 6px, transparent 6px) 0% 100%/8px 8px no-repeat,
+                        radial-gradient(circle at 0 0, ${contentBackgroundColor} 0, ${contentBackgroundColor} 6px, transparent 6px) 100% 100%/8px 8px no-repeat,
+                        linear-gradient(${contentBackgroundColor}, ${contentBackgroundColor}) 50% 50%/calc(100% - 4px) calc(100% - 16px) no-repeat,
+                        linear-gradient(${contentBackgroundColor}, ${contentBackgroundColor}) 50% 50%/calc(100% - 16px) calc(100% - 4px) no-repeat,
+                        linear-gradient(${borderGradientDeg}deg, #ff0000 0%, #ff00da 23%, #0100ff 43%, #00fff4 63%, rgba(0,255,14,1) 80%, rgba(246,255,0,1) 100%)
+                    `
+                    loginAndRegisterContent.style.boxSizing = 'border-box'
+                }
                 
                 const withoutAccountButton = document.getElementById('withoutAccountButton')
                 withoutAccountButton.onclick = (event) => {
@@ -201,6 +230,7 @@ const Game = (props) => {
                 <div id="unreadMessageCounter" />
 
                 <div id="loginContent" className="loginAndRegisterContent">
+                    <span className="connectingMessage">Connecting to Server...</span>
                     <p id="title">Login</p>
 
                     <p class="description margin-top">Username/id</p>
@@ -231,6 +261,7 @@ const Game = (props) => {
                 </div>
 
                 <div id="registerContent" className="loginAndRegisterContent">
+                    <span className="connectingMessage">Connecting to Server...</span>
                     <p id="title">Register</p>
 
                     <p className="description margin-top">Username/id</p>

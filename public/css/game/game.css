@@ -220,6 +220,16 @@ button#send-button {
 
 /* ---------- */
 
+span.connectingMessage {
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%) translateY(-28px);
+    width: 100%;
+}
+
 div#registerContent,
 div#loginContent {
     display: none;
@@ -231,14 +241,13 @@ div.loginAndRegisterContent {
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
-    overflow: auto;
+    /*overflow: auto;*/
     width: 325px;
     height: max-content;
     max-height: 500px;
     padding: 5px;
     border-radius: 8px;
-    border: solid #333 2px;
-    background-color: #CCC;
+    background-color: #acacac;
 }
 
 div.loginAndRegisterContent #title {
@@ -261,9 +270,13 @@ div.loginAndRegisterContent .inputText {
     padding: 3px;
     border-radius: 5px;
     border: solid black 2px;
-    background-color: #AAA;
+    background-color: #777;
     color: black;
     box-shadow: 0px 0px 5px black;
+}
+
+div.loginAndRegisterContent .inputText::placeholder {
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .showPasswordContent {
@@ -292,16 +305,28 @@ div.loginAndRegisterContent #withoutAccountButton {
     display: block;
     margin: 0 auto;
     margin-top: 5px;
-    padding: 3px 7px;
+    padding: 5px 10px;
     border-radius: 5px;
     border: solid black 2px;
     box-shadow: 0px 0px 5px black;
     color: white;
     background-color: #5865f2;
+    transition: all 0.5s;
+}
+
+div.loginAndRegisterContent #loginButton:hover, 
+div.loginAndRegisterContent #registerButton:hover {
+    background-color: #4651c6;
 }
 
 div.loginAndRegisterContent #withoutAccountButton {
     background-color: #eb3d3d;
+    padding: 1px 4px;
+    text-decoration: line-through;
+}
+
+div.loginAndRegisterContent #withoutAccountButton:hover {
+    background-color: #c93030;
 }
 
 div.loginAndRegisterContent div#connections {
