@@ -68,6 +68,6 @@ export default async function renderGame(canvas, game, Listener) {
     game.gameLoop()
     if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration) game.state.musicEventListener('gameLoopFullFPS', { listenerState: Listener.state }, game.state)
 
-    if (game.state.renderType == 'limited') window.requestAnimationFrame(() => renderGame(canvas, game, Listener))
+    if (game.state.smallFunctions.getConfig('VSync')) window.requestAnimationFrame(() => renderGame(canvas, game, Listener))
     else setTimeout(() => renderGame(canvas, game, Listener), 0)
 }

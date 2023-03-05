@@ -598,18 +598,18 @@ export default async (state) => {
             content: true
         },
         {
+            name: 'VSync',
+            id: 'VSync',
+            type: 'Boolean',
+            content: true
+        },
+        {
             name: 'Game',
             type: 'ConfigTitle'
         },
         {
             name: 'Game Info',
             id: 'GameInfo',
-            type: 'Boolean',
-            content: true
-        },
-        {
-            name: 'Higher FPS in menus',
-            id: 'menuFPSUnlimit',
             type: 'Boolean',
             content: true
         },

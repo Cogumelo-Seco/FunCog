@@ -178,7 +178,7 @@ const Game = (props) => {
                 let playerSettingsOptions = player.settings
                 let reset = false
                 for (let i in defaultSettingsOptions) {
-                    let option = playerSettingsOptions.find(o => o.id == defaultSettingsOptions[i].id)
+                    let option = playerSettingsOptions.find((o, pI) => o.id == defaultSettingsOptions[i].id && i == pI)
                     if (option) defaultSettingsOptions[i].content = option.content
                     else reset = true
                     /*if (

@@ -255,10 +255,6 @@ function createGame(Listener, canvas, socket) {
 
         document.title = `Cogu - ${state.gameStage}`
 
-        if (state.gameStage == 'game') state.renderType = 'limited'
-        else if (smallFunctions.getConfig('menuFPSUnlimit')) state.renderType = 'unlimited'
-        else state.renderType = 'limited'
-
         if (state.music?.buffered.length) {
             let loaded = state.music?.buffered.end(0) / state.music.duration;
             let played = state.music.currentTime / state.music.duration;
