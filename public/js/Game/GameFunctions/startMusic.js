@@ -103,7 +103,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                 }
 
                 if (state.musicNotes.length+state.musicOpponentNotes.length >= musicNotesTotal) {
-                    videoElement.src = `https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/${musicInfo.cutscene}`
+                    if (musicInfo.cutscene) videoElement.src = `https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/${musicInfo.cutscene}`
                     load(musicInfo.toLoad[0])
                 }
             }
@@ -139,12 +139,13 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                         }
 
                         loaded = true
-                        newLoad(dir)
+                        setTimeout(() => newLoad(dir), 100)
                     })
                     sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
                     sound.src = dir.split('/')[0] == 'Sounds' ? `/${dir}` : link
                     sound.preload = 'auto'
                     state.sounds[dir] = sound
+                    console.log(dir)
                 //}
             } else {
                 /*if (state.images[dir]?.image) newLoad()
@@ -160,7 +161,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                         }
 
                         loaded = true
-                        newLoad(dir)
+                        setTimeout(() => newLoad(dir), 50)
                     })
                     img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))
                     img.src = link//`/imgs/${dir}`
@@ -208,10 +209,13 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                     if (state.countdown <= -1) {
                         state.animations.arrowKeys.paused = false
 
-                        state.music?.play()
-                        state.musicVoice?.play()
-
-                        state.music.playbackRate = state.modifiers.speed
+                        function play() {
+                            state.music?.play().catch(() => setTimeout(play, 500))
+                            state.musicVoice?.play()
+    
+                            state.music.playbackRate = state.modifiers.speed
+                        }
+                        play()
 
                         if (state.musicVoice) {
                             state.musicVoice.currentTime = state.music?.currentTime || 0

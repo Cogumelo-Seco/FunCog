@@ -52,7 +52,7 @@ export default async (canvas, game, Listener, functions) => {
 
     for (let i in game.state.musics[modSelect]?.musics) {
         let music = game.state.musics[modSelect].musics[i]
-        let musicName = music.name.replace(/-/g, ' ')+(music.crown ? ' 👑' : '')
+        let musicName = music.name.replace(/-/g, ' ')+(music.suffix ? ' '+music.suffix : '')
 
         ctx.fillStyle = `rgba(130, 130, 130, ${currentSelection == 1 ? 0.6 : 0.3})`
         ctx.fillRect(contentWidth+20, musicY-20, contentWidth-40, 30);

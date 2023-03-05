@@ -170,7 +170,7 @@ export default function createListener(socket) {
 
                 keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
                 let selectPauseOption = state.game.state.selectPauseOption
-                if (on && state.game.state.music.paused) switch (keyPressed) {
+                if (on && state.game.state.music?.paused) switch (keyPressed) {
                     case 'ArrowDown':
                         if (selectPauseOption.pauseSelect < selectPauseOption.pauseOptions.length-1) {
                             selectPauseOption.pauseSelect += 1

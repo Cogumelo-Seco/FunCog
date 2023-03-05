@@ -348,6 +348,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Hellclown',
                     menuColor: 'green',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -362,6 +363,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Expurgation',
                     menuColor: 'red',
                     difficulties: [ 2, 3 ],
@@ -477,6 +479,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Happy',
                     menuColor: 'rgb(60, 60, 60)',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -495,6 +498,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Really-Happy',
                     menuColor: 'rgb(60, 60, 60)',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -535,6 +539,7 @@ export default async (state) => {
             menuColor:  'rgb(196, 0, 244)',
             musics: [
                 {
+                    suffix: '❗',
                     name: 'Dusk-Till-Dawn',
                     menuColor:  'rgb(196, 0, 244)',
                     difficulties: [ 0, 1, 2 ],
@@ -631,6 +636,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Onslaught',
                     menuColor: null,
                     difficulties: [ 0, 1, 2, 3 ],
@@ -711,6 +717,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Termination',
                     menuColor: 'rgb(251, 150, 183)',
                     difficulties: [ 2, 5, 3 ],
@@ -760,6 +767,7 @@ export default async (state) => {
             menuColor: 'rgb(0, 0, 110)',
             musics: [
                 {
+                    suffix: '❗',
                     name: 'Too-Slow',
                     menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -834,6 +842,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Endless',
                     menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 2 ],
@@ -963,6 +972,7 @@ export default async (state) => {
             menuColor: 'rgb(138, 12, 162)',
             musics: [
                 {
+                    suffix: '❗',
                     name: 'Azure-Encounter',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -988,6 +998,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Secret-Marilee',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -1014,6 +1025,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Broken-Heart',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -1037,6 +1049,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Aquaphobia',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -1067,6 +1080,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Lonely-Sapphire',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2 ],
@@ -1142,6 +1156,7 @@ export default async (state) => {
             menuColor: 'rgb(86, 76, 74)',
             musics: [
                 {
+                    suffix: '❗',
                     name: 'Molly-Howdy',
                     menuColor: 'rgb(86, 76, 74)',
                     difficulties: [ 0, 1, 2 ],
@@ -1156,6 +1171,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Goody-Two-Shoes',
                     menuColor: 'rgb(86, 76, 74)',
                     difficulties: [ 0, 1, 2 ],
@@ -1170,6 +1186,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Cab-Calloway',
                     menuColor: 'rgb(86, 76, 74)',
                     difficulties: [ 0, 1, 2 ],
@@ -1292,6 +1309,7 @@ export default async (state) => {
             menuColor: 'rgb(154, 129, 0)',
             musics: [
                 {
+                    suffix: '❗',
                     name: 'Safety-Lullaby',
                     menuColor: 'rgb(154, 129, 0)',
                     difficulties: [ 2, 3 ],
@@ -1311,6 +1329,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Left-Unchecked',
                     menuColor: 'rgb(154, 129, 0)',
                     difficulties: [ 2, 3 ],
@@ -1330,6 +1349,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Lost-Cause',
                     menuColor: 'rgb(154, 129, 0)',
                     difficulties: [ 2, 3 ],
@@ -1349,6 +1369,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Frostbite',
                     menuColor: null,
                     difficulties: [ 2, 3 ],
@@ -1368,7 +1389,7 @@ export default async (state) => {
                 {
                     name: 'Insomnia',
                     menuColor: null,
-                    difficulties: [ 2, 3 ],
+                    difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
@@ -1381,7 +1402,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    crown: true,
+                    suffix: '❗👑',
                     name: 'Monochrome',
                     menuColor: 'rgb(120, 20, 20)',
                     difficulties: [ 2, 3 ],
@@ -1406,7 +1427,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    crown: true,
+                    suffix: '❗👑',
                     name: 'Monochrome-V1',
                     menuColor: 'rgb(120, 20, 20)',
                     difficulties: [ 2, 3 ],
@@ -1428,7 +1449,7 @@ export default async (state) => {
                 {
                     name: 'Isotope',
                     menuColor: '#d71840',
-                    difficulties: [ 2, 3 ],
+                    difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
@@ -1443,7 +1464,7 @@ export default async (state) => {
                 {
                     name: 'Dissension',
                     menuColor: 'grey',
-                    difficulties: [ 2, 3 ],
+                    difficulties: [ 2 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
@@ -1456,6 +1477,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Death-Toll',
                     menuColor: '#572108',
                     difficulties: [ 2, 3 ],
@@ -1475,7 +1497,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    dev: true,
+                    suffix: '❗',
                     name: 'Amusia',
                     menuColor: '#1d1d4c',
                     difficulties: [ 2, 3 ],
@@ -1486,6 +1508,7 @@ export default async (state) => {
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
+                        { dir: 'backgrounds/amusia.png' },
                         { dir: 'Musics/musics/amusia/Inst.ogg' },
                         { dir: 'Musics/musics/amusia/Voices.ogg' },
                     ]
@@ -1507,7 +1530,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    crown: true,
+                    suffix: '❗👑',
                     name: 'Bygone-Purpose',
                     menuColor: '#4e4732',
                     difficulties: [ 2 ],
@@ -1567,6 +1590,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    suffix: '❗',
                     name: 'Missingno',
                     menuColor: 'rgb(240, 176, 136)',
                     difficulties: [ 2, 3 ],
