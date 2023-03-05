@@ -1,7 +1,7 @@
 export default async (canvas, game, Listener, functions) => {
     const ctx = canvas.getContext('2d')
 
-    let invertArrowPos = game.state.musicInfo.playerId == 2 ? game.state.invertArrowPos ? false : true : game.state.invertArrowPos
+    let invertArrowPos = game.state.invertArrowPos
 
     let onNotesSplashes = game.state.smallFunctions.getConfig('Splashes')
     let downScroll = game.state.smallFunctions.getConfig('DownScroll')
@@ -25,10 +25,10 @@ export default async (canvas, game, Listener, functions) => {
 
     game.state.arrowsWidthOpponent = 0
 
-    let arrowsInfo = Object.values(game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo']).sort((a, b) => a.pos-b.pos)
-    let arrowsInfoOpponent = Object.values(game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent']).sort((a, b) => a.pos-b.pos)
-    let musicNotes = game.state[game.state.musicInfo.playerId == 2 ? 'musicOpponentNotes' : 'musicNotes']
-    let musicOpponentNotes = game.state[game.state.musicInfo.playerId == 2 ? 'musicNotes' : 'musicOpponentNotes']
+    let arrowsInfo = Object.values(game.state.arrowsInfo).sort((a, b) => a.pos-b.pos)
+    let arrowsInfoOpponent = Object.values(game.state.arrowsInfoOpponent).sort((a, b) => a.pos-b.pos)
+    let musicNotes = game.state.musicNotes
+    let musicOpponentNotes = game.state.musicOpponentNotes
 
     if (game.state.musicInfo.notesImageDir) for (let i in arrowsInfo) {
         let arrowID = arrowsInfo[i].arrowID

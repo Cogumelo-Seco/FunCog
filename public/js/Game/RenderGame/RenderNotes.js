@@ -11,10 +11,10 @@ export default async (canvas, game, Listener, functions) => {
     let resizeNoteOpponent = game.state.resizeNoteOpponent
     let arrowYOpponent = middleScroll ? downScroll ? (canvas.height-canvas.height/3) : canvas.height/3 : downScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin
 
-    let arrowsInfo = game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo']
-    let arrowsInfoOpponent = game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent']
-    let musicNotes = game.state[game.state.musicInfo.playerId == 2 ? 'musicOpponentNotes' : 'musicNotes']
-    let musicOpponentNotes = game.state[game.state.musicInfo.playerId == 2 ? 'musicNotes' : 'musicOpponentNotes']
+    let arrowsInfo = game.state.arrowsInfo
+    let arrowsInfoOpponent = game.state.arrowsInfoOpponent
+    let musicNotes = game.state.musicNotes
+    let musicOpponentNotes = game.state.musicOpponentNotes
 
     for (let i in musicNotes) {
         let note = musicNotes[i]

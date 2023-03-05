@@ -72,7 +72,7 @@ export default async (canvas, game, Listener, functions) => {
         ctx.fillText('In development', X+35, Y-(15/2));
     }
 
-    let invertArrowPos = game.state.musicInfo.playerId == 2 ? game.state.invertArrowPos ? false : true : game.state.invertArrowPos
+    let invertArrowPos = game.state.invertArrowPos
 
     let healthBarWidth = canvas.width*0.5
     let healthBarHeight = 20

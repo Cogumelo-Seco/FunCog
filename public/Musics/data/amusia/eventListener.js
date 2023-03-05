@@ -22,7 +22,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 		case 'gameLoop':
 			let variables = state.musicInfo.variables
 			let beat = state.musicBeat
-			let currentBeat = state.music.currentTime * (state.musicBPM/60)
+			let currentBeat = state.music.currentTime * (state.musicBPM/60) / 2
 			let arrowsInfo = state.arrowsInfo
 			let arrowsInfoOpponent = state.arrowsInfoOpponent
 			let spinLength = 10

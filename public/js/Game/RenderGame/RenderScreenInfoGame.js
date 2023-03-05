@@ -4,7 +4,7 @@ export default async (canvas, game, Listener, functions) => {
     let downScroll = game.state.smallFunctions.getConfig('DownScroll')
     let middleScroll = game.state.smallFunctions.getConfig('MiddleScroll')
 
-    let invertArrowPos = game.state.musicInfo.playerId == 2 ? game.state.invertArrowPos ? false : true : game.state.invertArrowPos
+    let invertArrowPos = game.state.invertArrowPos
 
     ctx.globalAlpha = game.state.alphaHUD
     ctx.font = `bold 13px Arial`
@@ -12,7 +12,7 @@ export default async (canvas, game, Listener, functions) => {
     let musicInfoTxt = `SCORE: ${game.state.musicInfo.score} | MISSES: ${game.state.musicInfo.misses || 0}${game.state.musicInfo.misses <= 0 ? ' (FC)' : ''} | ACCURANCY: ${game.state.musicInfo.accuracy?.toFixed(2)}%`
     let musicInfoTxtOpponent = `SCORE: ${game.state.musicInfoOpponent.score || 0} | MISSES: ${game.state.musicInfoOpponent.misses || 0}${game.state.musicInfoOpponent.misses <= 0 ? ' (FC)' : ''} | ACCURANCY: ${(game.state.musicInfoOpponent.accuracy || 0)?.toFixed(2)}%`
 
-    let arrowsInfoOpponent = Object.values(game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent']).sort((a, b) => a.pos-b.pos)
+    let arrowsInfoOpponent = Object.values(game.state.arrowsInfoOpponent).sort((a, b) => a.pos-b.pos)
     if (game.state.online) {
         ctx.font = `bold ${game.state.resizeNoteOpponent != game.state.resizeNote ? 20**game.state.resizeNoteOpponent : 13}px Arial`
         let musicInfoYOpponent = middleScroll ? downScroll ? arrowsInfoOpponent[0]?.defaultY+(arrowsInfoOpponent[0]?.height**game.state.resizeNoteOpponent) : arrowsInfoOpponent[0]?.defaultY-(arrowsInfoOpponent[0]?.height**game.state.resizeNoteOpponent) : downScroll ? canvas.height-20 : 33
@@ -79,12 +79,12 @@ export default async (canvas, game, Listener, functions) => {
         }
     }
 
-    let arrowsInfo = Object.values(game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo']).sort((a, b) => a.pos-b.pos)
+    let arrowsInfo = Object.values(game.state.arrowsInfo).sort((a, b) => a.pos-b.pos)
     for (let i in game.state.musicInfo.ratings) renderRatings(game.state.musicInfo.ratings[i], arrowsInfo, game.state.musicInfo, game.state.resizeNote)
     for (let i in game.state.musicInfoOpponent.ratings) {
         let rating = JSON.parse(JSON.stringify(game.state.musicInfoOpponent.ratings[i]))
         rating.time += 500
-        renderRatings(rating, Object.values(game.state[game.state.musicInfo.playerId == 2 ? 'arrowsInfo' : 'arrowsInfoOpponent']).sort((a, b) => a.pos-b.pos), game.state.musicInfoOpponent, game.state.resizeNoteOpponent)
+        renderRatings(rating, Object.values(game.stat.arrowsInfoOpponent).sort((a, b) => a.pos-b.pos), game.state.musicInfoOpponent, game.state.resizeNoteOpponent)
     }
 
     let ratingInfoX = arrowsInfo[arrowsInfo.length-1]?.X+arrowsInfo[arrowsInfo.length-1]?.width**game.state.resizeNote
