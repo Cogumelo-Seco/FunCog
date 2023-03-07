@@ -454,7 +454,7 @@ export default function createListener(socket) {
                                     let options = Object.keys(state.game.state.selectSettingsOption.settingsOptions[1])
                                     console.log(options)
 
-                                    currentConfig.currentOption = currentConfig.currentOption >= options.length-1 ? 0 : currentConfig.currentOption+1 
+                                    currentConfig.currentOption = currentConfig.currentOption >= options.length-2 ? 0 : currentConfig.currentOption+1 
                                     currentConfig.content = options[currentConfig.currentOption]
                                     state.game.playSong('Sounds/scrollMenu.ogg')
                                 }
