@@ -3,6 +3,7 @@ export default (canvas, game, Listener) => {
 
     return {
         fillText: async ({ alpha, style, style2, text, x, y, add, font }) => {
+            let oldAlpha = Number(String(ctx.globalAlpha))
             ctx.globalAlpha = isNaN(Number(alpha)) ? game.state.alphaHUD : alpha
             ctx.font = font
             if (add) {
@@ -11,7 +12,7 @@ export default (canvas, game, Listener) => {
             }
             ctx.fillStyle = style || 'white'
             ctx.fillText(text, x, y);
-            ctx.globalAlpha = 1
+            ctx.globalAlpha = oldAlpha
         }
 /*fillText({
         style: `hsl(${game.state.rainbowColor}, 100%, 40%)`,

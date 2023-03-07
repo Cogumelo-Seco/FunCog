@@ -26,7 +26,7 @@ export default async (state) => {
             name: 'Mania',
             fileNameDifficulty: 'hard',
             color: 'rgb(255, 43, 234)',
-            lifeDrain: 1
+            lifeDrain: 0.8
         },
         {
             id: 4,
@@ -55,6 +55,13 @@ export default async (state) => {
             fileNameDifficulty: 'mania',
             color: 'rgb(255, 43, 234)',
             lifeDrain: 1
+        },
+        {
+            id: 8,
+            name: 'Hard+',
+            fileNameDifficulty: 'hard',
+            color: 'rgb(254, 7, 7)',
+            lifeDrain: 0.8
         },
     ]
     

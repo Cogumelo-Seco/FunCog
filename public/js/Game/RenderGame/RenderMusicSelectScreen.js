@@ -77,7 +77,7 @@ export default async (canvas, game, Listener, functions) => {
         let alertImage = game.state.images[`imgs/alert.png`]?.image
         if (music.dev && alertImage) {
             ctx.font = `bold 10px Arial`
-            ctx.fillStyle = 'rgb(255, 66, 66)'
+            ctx.fillStyle = 'rgb(255, 50, 50)'
             let X = (contentWidth+contentWidth/2+txtWidth/2)
 
             ctx.drawImage(alertImage, X+5, musicY-22, 30, 30)

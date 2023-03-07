@@ -41,40 +41,71 @@ export default async (canvas, game, Listener, functions) => {
 
     let musicBarWidth = canvas.width*0.25 > ctx.measureText(infoTxt).width+10 ? canvas.width*0.25 : ctx.measureText(infoTxt).width+10
     let musicBarHeight = 20
-    let musicBarY = game.state.smallFunctions.getConfig('DownScroll') ? 10 : canvas.height-30
+    let musicBarY = 10//game.state.smallFunctions.getConfig('DownScroll') ? 10 : canvas.height-30
+    let musicBarX = canvas.width-musicBarWidth-canvas.width*0.05
 
     ctx.fillStyle = 'rgb(100, 100, 100)'
-    ctx.fillRect(canvas.width/2-musicBarWidth/2, musicBarY, musicBarWidth, musicBarHeight)
+    ctx.fillRect(musicBarX, musicBarY, musicBarWidth, musicBarHeight)
 
     ctx.fillStyle = 'rgba(0, 0, 0, 0.5)'
-    ctx.fillRect(canvas.width/2-musicBarWidth/2, musicBarY, musicBarWidth*musicLoadedPercent, musicBarHeight)
+    ctx.fillRect(musicBarX, musicBarY, musicBarWidth*musicLoadedPercent, musicBarHeight)
 
-    ctx.fillStyle = `hsl(${musicPercent*720}, 100%, 40%)`//'rgb(19, 189, 0)'
-    ctx.fillRect(canvas.width/2-musicBarWidth/2, musicBarY, musicBarWidth*musicPercent, musicBarHeight)
+    ctx.fillStyle = `hsl(${musicPercent*720}, 100%, 40%)`
+    ctx.fillRect(musicBarX, musicBarY, musicBarWidth*musicPercent, musicBarHeight)
 
     ctx.fillStyle = 'white'
-    ctx.fillText(infoTxt, canvas.width/2-(ctx.measureText(infoTxt).width/2), musicBarY+15);
+    //ctx.fillText(infoTxt, canvas.width/2-(ctx.measureText(infoTxt).width/2), musicBarY+15);
+    functions.fillText({
+        text: infoTxt,
+        x: musicBarX+(musicBarWidth/2)-(ctx.measureText(infoTxt).width/2),
+        y: musicBarY+15,
+        add: 2
+    })
 
     ctx.font = `10px Arial`
-    if ((musicLoadedPercent*100) < 100) ctx.fillText(Number.parseInt(musicLoadedPercent*100)+'%', canvas.width/2-musicBarWidth/2-(ctx.measureText(Number.parseInt(musicLoadedPercent*100)+'%').width)-3, musicBarY+14);
+    if ((musicLoadedPercent*100) < 100) ctx.fillText(Number.parseInt(musicLoadedPercent*100)+'%', musicBarX+musicBarWidth+3, musicBarY+14);
 
     ctx.lineWidth = 2.5
     ctx.strokeStyle = 'black'
-    ctx.strokeRect(canvas.width/2-musicBarWidth/2, musicBarY, musicBarWidth, musicBarHeight)
+    ctx.strokeRect(musicBarX, musicBarY, musicBarWidth, musicBarHeight)
 
     let alertImage = game.state.images[`imgs/alert.png`]?.image
     if (game.state.musicInfo.dev && alertImage) {
-        let X = canvas.width/2+musicBarWidth/2
-        let Y = musicBarY+20
-        ctx.font = `bold 15px Arial`
+        ctx.font = `bold 13px Arial`
         ctx.fillStyle = 'rgb(255, 0, 0)'
-        ctx.drawImage(alertImage, X+5, Y-28, 30, 30)
-        ctx.fillText('In development', X+35, Y-(15/2));
+        let X = 5//musicBarX-ctx.measureText('In development').width-35
+        let Y = 75//musicBarY+20
+        ctx.drawImage(alertImage, X, Y-28, 30, 30)
+        ctx.fillText('In development', X+27, Y-(16/2));
     }
 
-    let invertArrowPos = game.state.invertArrowPos
+    let healthBarWidth = canvas.width*0.25
+    let healthBarHeight = 20
+    let healthBarX = canvas.width*0.05
+    let healthPercent = game.state.musicInfo.health/100
+    healthPercent = healthPercent > 1 ? 1 : healthPercent < 0 ? 0 : healthPercent
 
-    let healthBarWidth = canvas.width*0.5
+    ctx.fillStyle = 'rgb(70, 70, 70)'
+    ctx.fillRect(healthBarX, 10, healthBarWidth, healthBarHeight)
+
+    ctx.fillStyle = `hsl(${healthPercent*100}, 100%, 40%)`//'white'
+    ctx.fillRect(healthBarX, 10, healthBarWidth*healthPercent, healthBarHeight)
+
+    ctx.fillStyle = 'black'
+    //ctx.fillText(Number.parseInt(healthPercent*100)+'%', healthBarX+(healthBarWidth/2)-(ctx.measureText(Number.parseInt(healthPercent*100)+'%').width/2), 10+15);
+    ctx.font = `bold 15px Arial`
+    functions.fillText({
+        text: (healthPercent*100).toFixed(1)+'%',
+        x: healthBarX+(healthBarWidth/2)-(ctx.measureText((healthPercent*100).toFixed(1)+'%').width/2),
+        y: 10+15,
+        add: 2,
+    })
+
+    ctx.lineWidth = 2.5
+    ctx.strokeStyle = 'black'
+    ctx.strokeRect(healthBarX, 10, healthBarWidth, healthBarHeight)
+
+    /*let healthBarWidth = canvas.width*0.5
     let healthBarHeight = 20
     let healthBarY = game.state.smallFunctions.getConfig('DownScroll') ? 40 : canvas.height-60
     let healthPercent = game.state.online ? game.state.musicInfoOpponent.health/(game.state.musicInfo.health+game.state.musicInfoOpponent.health) : 1-(game.state.musicInfo.health/100)
@@ -111,7 +142,7 @@ export default async (canvas, game, Listener, functions) => {
     }
 
     drawIcon({ dir: game.state.smallFunctions.getConfig('botPlay') && !game.state.online ? 'icons/BongoCat.png' : 'icons/icon-bf.png', imageType: healthPercent >= 0.80 ? 2 : 1, flipY: invertArrowPos ? false : true })
-    drawIcon({ dir: game.state.online ? 'icons/icon-bf-red.png' : 'icons/icon-face.png', imageType: healthPercent <= 0.20 ? 2 : 1, flipY: invertArrowPos ? true : false })
+    drawIcon({ dir: game.state.online ? 'icons/icon-bf-red.png' : 'icons/icon-face.png', imageType: healthPercent <= 0.20 ? 2 : 1, flipY: invertArrowPos ? true : false })*/
     
     function formatTime(time) {
         if (!time) time = 0

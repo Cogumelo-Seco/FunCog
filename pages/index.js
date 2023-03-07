@@ -93,11 +93,12 @@ const Game = (props) => {
                 
                 const withoutAccountButton = document.getElementById('withoutAccountButton')
                 withoutAccountButton.onclick = (event) => {
-                    alert('Sem uma conta, você terá acesso limitado ao jogo e todo o seu progresso não será salvo. Limite de 5 Mods e sem permissão ao chat.\n\nWithout an account you will have limited access to the game and all your progress will not be saved. Limit of 5 Mods and no chat permission.')
+                    //alert('Sem uma conta, você terá acesso limitado ao jogo e todo o seu progresso não será salvo. Limite de 5 Mods e sem permissão ao chat.\n\nWithout an account you will have limited access to the game and all your progress will not be saved. Limit of 5 Mods and no chat permission.')
+                    alert('Sem uma conta, você terá acesso limitado ao jogo e todo o seu progresso não será salvo. Sem permissão ao chat.\n\nWithout an account you will have limited access to the game and all your progress will not be saved. No chat permission.')
     
-                    game.state.musics = game.state.musics.splice(0, 5)
+                    //game.state.musics = game.state.musics.splice(0, 5)
                     game.state.inLogin = false
-                    game.state.smallFunctions.redirectGameStage('menu')
+                    //game.state.smallFunctions.redirectGameStage('menu')
                 }
 
                 const username = document.getElementById(`usernameInput${login ? 'Login' : 'Register'}`)

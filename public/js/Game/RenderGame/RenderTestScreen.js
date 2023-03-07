@@ -1,51 +1,26 @@
 export default async (canvas, game, Listener, functions) => {
     const ctx = canvas.getContext('2d')
 
-    ctx.fillStyle = 'rgb(0, 0, 0, 0.5)'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    let a = 3 * (10 ** (-3))
 
-    ctx.fillStyle = 'rgb(255, 255, 255)'
-    ctx.font = `bold ${(canvas.width+canvas.height)*0.03}px Arial`
-    ctx.fillText('Pause', canvas.width/2-ctx.measureText('Pause').width/2, 80)
+    let getNewDistance = (S0, v, t) => S0 + v*t + 0.5 * (a*t)**2
 
-    let pauseOptions = game.state.selectPauseOption.pauseOptions
-    let pauseSelect = game.state.selectPauseOption.pauseSelect
+    let timeGap = +new Date()-game.state.gravity.time
+    game.state.gravity.time = +new Date()
+    game.state.gravity.distance = Math.max(getNewDistance(game.state.gravity.distance, game.state.gravity.v, timeGap), 0)
 
-    let margin = 20
-    let textSize = (canvas.width+canvas.height)*0.02
-    let X = canvas.width/10
-    let Y = canvas.height/2-(pauseOptions.length*(textSize)/2)
+    console.log(game.state.gravity.v, game.state.gravity.distance)
 
-    for (let i in pauseOptions) {
-        ctx.fillStyle = pauseSelect == i ? 'black' : 'white'
-        ctx.font = `bold ${pauseSelect == i ? textSize*1.2 : textSize}px Arial`
-        ctx.fillText(pauseOptions[i].name, pauseSelect == i ? X+5 : X, Y);
+    if (game.state.gravity.distance <= 0) {
+        game.state.gravity.v = game.state.gravity.v > -0.2 ? 0 : (game.state.gravity.v * -1) * (1-game.state.gravity.bounce/200)
+    } else game.state.gravity.v = game.state.gravity.v - (a * timeGap)
 
-        ctx.lineWidth = 2
-        ctx.strokeStyle = pauseSelect == i  ? 'white' : 'black'
-        ctx.strokeText(pauseOptions[i].name, pauseSelect == i ? X+5 : X, Y);
+    let X = canvas.width/2-25
+    let Y = canvas.height-(100)-game.state.gravity.distance
 
-        Listener.state.buttons[`Pause-${i}`] = {
-            gameStage: [ 'test' ],
-            minX: X/canvas.width*1000,
-            maxX: (X+ctx.measureText(pauseOptions[i].name).width)/canvas.width*1000,
-            minY: (Y-(pauseSelect == i ? textSize*1.2 : textSize))/canvas.height*1000,
-            maxY: Y/canvas.height*1000,
-            pointer: true,
-            over: false,
-            onClick: () => {
-                game.state.selectPauseOption.pauseSelect = i
-                Listener.handleKeys({ event: { code: 'Enter' }, on: true })
-            }
-        }
+    ctx.fillStyle = 'yellow'
+    ctx.fillRect(X, Y, 50, 50)
 
-        Y += textSize+margin
-    }
-
-/*
-    ctx.fillStyle = 'rgb(255, 255, 255)'
-    ctx.font = `bold ${(canvas.width+canvas.height)*0.04}px Arial`
-    ctx.fillText('You Won', canvas.width/2-(ctx.measureText('You Won').width/2), 80);*/
-
-
+    ctx.fillStyle = 'red'
+    ctx.fillRect(0, canvas.height-(50), canvas.width, 100)
 }

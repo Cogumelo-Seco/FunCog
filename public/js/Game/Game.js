@@ -1,9 +1,14 @@
 function createGame(Listener, canvas, socket) {
     const state = {
+        gravity: {
+            distance: 300,
+            v: 0,
+            bounce: 50,
+            time: +new Date()
+        },
         debug: false,
         fps: '0-0',
         ping: null,
-        renderType: 'limited',
         customBongPosition: { X: null, Y: null },
         gameBackgroundOfuscation: 0.7,
         myConfig: {
@@ -290,7 +295,9 @@ function createGame(Listener, canvas, socket) {
                     noteAlpha: 1,
                     splashAlpha: 1,
                     rotation: 0,
-                    noteRotation: 0
+                    noteRotation: 0,
+                    forceScroll: false,
+                    forceScrollDown: smallFunctions.getConfig('DownScroll')
                 }
             }
         }
@@ -317,7 +324,9 @@ function createGame(Listener, canvas, socket) {
                     noteAlpha: 1,
                     splashAlpha: 1,
                     rotation: 0,
-                    noteRotation: 0
+                    noteRotation: 0,
+                    forceScroll: false,
+                    forceScrollDown: smallFunctions.getConfig('DownScroll')
                 }
             }
         }
@@ -325,20 +334,21 @@ function createGame(Listener, canvas, socket) {
         state.resizeNoteOpponent = state.smallFunctions.getConfig('MiddleScroll') ? state.resizeNoteOpponentInMiddleScroll : state.resizeNote
 
         if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !botPlay && !state.debug && state.music?.currentTime > 1) {
+            state.gameStageTime = +new Date()
+
             if (state.online && state.serverId) {
                 socket.emit('deadPlayer', { 
                     serverId: state.serverId
                 })
-                state.smallFunctions.redirectGameStage('score')
+                state.smallFunctions.redirectGameStage('score', 'menu')
             } else {
                 //playSong('Sounds/fnf_loss_sfx.ogg')
                 //setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
-                state.smallFunctions.redirectGameStage('score')
+                state.smallFunctions.redirectGameStage('score', 'menu')
             }
 
             state.animations.BFDead.frame = 0
             state.smallFunctions.resetGame()
-            //state.gameStageTime = +new Date()
         }
         else if (state.musicInfo.health > 100) state.musicInfo.health = 100
         else if (state.musicInfo.health < 0) state.musicInfo.health = 0
@@ -347,6 +357,7 @@ function createGame(Listener, canvas, socket) {
         let musicCurrentTime = state.music?.currentTime
 
         if (musicCurrentTime > 1 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
+            state.gameStageTime = +new Date()
             state.smallFunctions.resetGame()
             state.smallFunctions.redirectGameStage('score', 'menu')
         }
@@ -466,6 +477,7 @@ function createGame(Listener, canvas, socket) {
             if (state.online && state.serverId) {
                 if (state.serverInfo.end == true) {
                     //state.smallFunctions.redirectGameStage('onlineServerList')
+                    state.gameStageTime = +new Date()
                     state.smallFunctions.redirectGameStage('score', 'menu')
                     state.smallFunctions.resetGame()
                 }
@@ -499,7 +511,7 @@ function createGame(Listener, canvas, socket) {
                 }
             }
 
-            state.rainbowColor += 1
+            //state.rainbowColor += 1
         }
     }
 

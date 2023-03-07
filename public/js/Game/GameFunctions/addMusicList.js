@@ -636,7 +636,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Onslaught',
                     menuColor: null,
                     difficulties: [ 0, 1, 2, 3 ],
@@ -717,7 +717,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Termination',
                     menuColor: 'rgb(251, 150, 183)',
                     difficulties: [ 2, 5, 3 ],
@@ -1497,7 +1497,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Amusia',
                     menuColor: '#1d1d4c',
                     difficulties: [ 2, 3 ],
@@ -1514,10 +1514,10 @@ export default async (state) => {
                     ]
                 },
                 {
-                    dev: true,
+                    suffix: '❗🔼',
                     name: 'Pasta-Night',
                     menuColor: null,
-                    difficulties: [ 2, 3 ],
+                    difficulties: [ 2, 8, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
@@ -1525,6 +1525,11 @@ export default async (state) => {
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
+                        { dir: 'Sounds/Lullaby/TranceStatic.ogg' },
+                        { dir: 'Sounds/Lullaby/Psyshock.ogg' },
+                        { dir: 'Sounds/Lullaby/POW.ogg' },
+                        { dir: 'imgs/VSLullaby/StaticHypno.png', animationConfigDir: 'imgs/VSLullaby/StaticHypno.json' },
+                        { dir: 'imgs/VSLullaby/Pendelum.png' },
                         { dir: 'Musics/musics/pasta-night/Inst.ogg' },
                         { dir: 'Musics/musics/pasta-night/Voices.ogg' },
                     ]
@@ -1590,7 +1595,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Missingno',
                     menuColor: 'rgb(240, 176, 136)',
                     difficulties: [ 2, 3 ],

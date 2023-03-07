@@ -92,6 +92,11 @@ export default function createListener(socket) {
             time: +new Date(),
             lastClickTime: lastClick?.time || null
         }
+
+        if (on && keyPressed == 'KeyZ') {
+            state.game.state.rainbowColor += 1
+            console.log(state.game.state.rainbowColor)
+        }
         
         if (state.onChat == 'off') {
             if (on && event.key) state.codeText += event.key
@@ -216,7 +221,7 @@ export default function createListener(socket) {
             }
 
             if (state.game.state.gameStage == 'score' && on) {
-                if (![ 'F11', 'PrintScreen' ].includes(keyPressed)) {
+                if (![ 'F11', 'PrintScreen' ].includes(keyPressed) && state.game.state.gameStageTime != 0 && state.game.state.gameStageTime+1000 <= +new Date()) {
                     //state.game.state.selectMusicMenu.musicSelect = -1
                     if (state.game.state.online) state.game.state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
                     else state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu')

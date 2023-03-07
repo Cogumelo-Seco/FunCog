@@ -1,15 +1,15 @@
 export default async (canvas, game, Listener, functions) => {
     const ctx = canvas.getContext('2d')
 
-    let downScroll = game.state.smallFunctions.getConfig('DownScroll')
+    var DownScroll = game.state.smallFunctions.getConfig('DownScroll')
     let middleScroll = game.state.smallFunctions.getConfig('MiddleScroll')
 
     if (!game.state.holdHeight) game.state.holdHeight = game.state.images[`Arrows/Arrows.png`]?.animationConfig['Arrow-0']['Arrow-0-hold-piece']?.height
     let resizeNote = game.state.resizeNote
-    let arrowY = downScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin
+    let arrowY = DownScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin
 
     let resizeNoteOpponent = game.state.resizeNoteOpponent
-    let arrowYOpponent = middleScroll ? downScroll ? (canvas.height-canvas.height/3) : canvas.height/3 : downScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin
+    let arrowYOpponent = middleScroll ? DownScroll ? (canvas.height-canvas.height/3) : canvas.height/3 : DownScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin
 
     let arrowsInfo = game.state.arrowsInfo
     let arrowsInfoOpponent = game.state.arrowsInfoOpponent
@@ -20,6 +20,7 @@ export default async (canvas, game, Listener, functions) => {
         let note = musicNotes[i]
         let arrowInfo = arrowsInfo[note.arrowID]
 
+        let downScroll = arrowInfo?.forceScroll ? arrowInfo?.forceScrollDown : DownScroll
         let noteY = downScroll ? (arrowInfo?.Y || arrowY)+note.Y : (arrowInfo?.Y || arrowY)-note.Y
 
         if (arrowInfo && noteY-(note.hold) < canvas.height && noteY+(note.hold) > 0) {
@@ -96,6 +97,7 @@ export default async (canvas, game, Listener, functions) => {
         let note = musicOpponentNotes[i]
         let arrowInfo = arrowsInfoOpponent[note.arrowID]
 
+        let downScroll = arrowInfo?.forceScroll ? arrowInfo?.forceScrollDown : DownScroll
         let noteY = downScroll ? (arrowInfo?.Y || arrowYOpponent)+note.Y : (arrowInfo?.Y || arrowYOpponent)-note.Y
 
         if (arrowInfo && noteY-(note.hold) < canvas.height && noteY+(note.hold) > 0) {

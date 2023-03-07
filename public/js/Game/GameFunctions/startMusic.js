@@ -359,6 +359,13 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             }
         }
 
+        if (name == 'pasta-night') {
+            if (note[1] >= 8) {
+                arrowID = note[1]-4
+                mustHitSection = false
+            }
+        }
+
         return {
             Y: NaN,
             hold: Number.parseInt(note[2]) * (state.musicBPM*state.smallFunctions.getConfig('ScrollSpeed')/195),
