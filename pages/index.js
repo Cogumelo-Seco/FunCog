@@ -36,6 +36,7 @@ const Game = (props) => {
 
         const registerContent = document.getElementById('registerContent')
         const loginContent = document.getElementById('loginContent')
+        const registerButton = document.getElementById('registerButton')
 
         const passwordInputs = document.getElementsByClassName('password')
         const showPassword = document.getElementsByClassName('showPasswordInput')
@@ -58,11 +59,31 @@ const Game = (props) => {
             })
         }
 
+        let registerButtonMoveSpeed = 20
+        let registerButtonXMovement = 0
+        let left = false
+        let move = false
+        registerButton.addEventListener('mouseover', () => {
+            move = true
+            left = left ? false : true
+        })
+
         let borderGradientDeg = 0
         let countFrame = 0
         function loop() {
             if (game.state.inLogin/*[ 'loading', 'login' ].includes(game.state.gameStage)*/) {
                 window.requestAnimationFrame(() => loop())
+
+                const username = document.getElementById(`usernameInput${login ? 'Login' : 'Register'}`)
+                const password = document.getElementById(`passwordInput${login ? 'Login' : 'Register'}`)
+                const repeatPassword = document.getElementById(`repeatPasswordInput`)
+                const discordButton = document.getElementById(`discordButton${login ? 'Login' : 'Register'}`)
+
+                if (move && (!document.getElementById(`usernameInputRegister`).value || document.getElementById(`passwordInputRegister`).value != repeatPassword.value)) {
+                    if (registerButtonXMovement <= 70 && !left) registerButtonXMovement += registerButtonMoveSpeed
+                    if (registerButtonXMovement >= -70 && left) registerButtonXMovement -= registerButtonMoveSpeed
+                }
+                registerButton.style.transform = `translateX(${registerButtonXMovement}px)`
 
                 borderGradientDeg += 1
                 countFrame += 1
@@ -101,10 +122,7 @@ const Game = (props) => {
                     //game.state.smallFunctions.redirectGameStage('menu')
                 }
 
-                const username = document.getElementById(`usernameInput${login ? 'Login' : 'Register'}`)
-                const password = document.getElementById(`passwordInput${login ? 'Login' : 'Register'}`)
-                const repeatPassword = document.getElementById(`repeatPasswordInput`)
-                const discordButton = document.getElementById(`discordButton${login ? 'Login' : 'Register'}`)
+               
                 discordButton.onclick = (event) => {
                     socket.emit(login ? 'login' : 'register', 'discord')
 
@@ -121,15 +139,16 @@ const Game = (props) => {
                     else if (password.value != repeatPassword.value) repeatPassword.style.borderColor = '#550000'
                     else repeatPassword.style.borderColor = '#005500'
 
-                    const registerButton = document.getElementById('registerButton')
                     registerButton.onclick = () => {
-                        if (!username.value) return alert('You must add a username')
-                        if (!password.value || password.value != repeatPassword.value) return alert('Passwords do not match')
-                        
-                        socket.emit('register', {
-                            usernameID: username.value,
-                            password: password.value
-                        })
+                        //if (!username.value) return alert('You must add a username')
+                        //if (!password.value || password.value != repeatPassword.value) return alert('Passwords do not match')
+                        if (username.value && password.value == repeatPassword.value) {
+                            console.log('p-p')
+                            socket.emit('register', {
+                                usernameID: username.value,
+                                password: password.value
+                            })
+                        }
                     }
                 } else {
                     registerContent.style.display = 'none'
