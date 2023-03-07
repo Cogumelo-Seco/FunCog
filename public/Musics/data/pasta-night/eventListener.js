@@ -146,7 +146,6 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					let arrowInfo = state.arrowsInfo[i]
 
 					arrowInfo.gravity.distance = (state.canvas.height-state.arrowsMargin)-state.arrowsMargin
-					arrowInfo.forceScrollDown = variables.downScroll
 				}
 			}
 
@@ -174,6 +173,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				} else arrowInfo.gravity.v = arrowInfo.gravity.v - (a * timeGap)
 
 				arrowInfo.Y = variables.downScroll ? arrowInfo.Y-arrowInfo.gravity.distance : arrowInfo.Y+arrowInfo.gravity.distance
+				arrowInfo.forceScrollDown = arrowInfo.Y <= state.canvas.height/2 ? false : true
 			}
 			
 
