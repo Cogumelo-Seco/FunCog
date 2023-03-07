@@ -79,7 +79,7 @@ const Game = (props) => {
                 const repeatPassword = document.getElementById(`repeatPasswordInput`)
                 const discordButton = document.getElementById(`discordButton${login ? 'Login' : 'Register'}`)
 
-                if (move && (!document.getElementById(`usernameInputRegister`).value || document.getElementById(`passwordInputRegister`).value != repeatPassword.value)) {
+                if (move && (!document.getElementById(`usernameInputRegister`).value || repeatPassword.value == '' || document.getElementById(`passwordInputRegister`).value != repeatPassword.value)) {
                     if (registerButtonXMovement <= 70 && !left) registerButtonXMovement += registerButtonMoveSpeed
                     if (registerButtonXMovement >= -70 && left) registerButtonXMovement -= registerButtonMoveSpeed
                 }
@@ -142,8 +142,7 @@ const Game = (props) => {
                     registerButton.onclick = () => {
                         //if (!username.value) return alert('You must add a username')
                         //if (!password.value || password.value != repeatPassword.value) return alert('Passwords do not match')
-                        if (username.value && password.value == repeatPassword.value) {
-                            console.log('p-p')
+                        if (username.value && repeatPassword.value != '' && password.value == repeatPassword.value) {
                             socket.emit('register', {
                                 usernameID: username.value,
                                 password: password.value
@@ -198,7 +197,7 @@ const Game = (props) => {
                 let playerSettingsOptions = player.settings
                 let reset = false
                 for (let i in defaultSettingsOptions) {
-                    let option = playerSettingsOptions.find((o, pI) => o.id == defaultSettingsOptions[i].id && i == pI)
+                    let option = playerSettingsOptions.find((o, pI) => o?.id == defaultSettingsOptions[i].id && i == pI)
                     if (option) defaultSettingsOptions[i].content = option.content
                     else reset = true
                     /*if (
