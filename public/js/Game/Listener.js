@@ -93,10 +93,10 @@ export default function createListener(socket) {
             lastClickTime: lastClick?.time || null
         }
 
-        if (on && keyPressed == 'KeyZ') {
+        /*if (on && keyPressed == 'KeyZ') {
             state.game.state.rainbowColor += 1
             console.log(state.game.state.rainbowColor)
-        }
+        }*/
         
         if (state.onChat == 'off') {
             if (on && event.key) state.codeText += event.key
