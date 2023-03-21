@@ -1521,7 +1521,7 @@ export default async (state) => {
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
-                    backgroundImage: null,
+                    backgroundImage: 'backgrounds/Pasta-Night.png',
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },

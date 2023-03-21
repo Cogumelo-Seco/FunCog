@@ -4,8 +4,10 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			break
 		case 'loaded':
 			state.customBongPosition = {
-				X: NaN,
-				Y: NaN
+				forceScroll: true,
+				middleScroll: true
+				/*X: NaN,
+				Y: NaN*/
 			}
 			
 			for (let i = 4;i <= 7;i++) {

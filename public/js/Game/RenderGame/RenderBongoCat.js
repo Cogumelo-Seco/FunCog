@@ -13,7 +13,7 @@ export default async (canvas, game, Listener, functions) => {
     let height = bgConfig.height*0.4    
     let Xpint = game.state.customBongPosition.X != null ? game.state.customBongPosition.X : canvas.width/2
     let Ypoint = game.state.customBongPosition.Y != null ? game.state.customBongPosition.Y : canvas.height/2
-    let X = game.state.smallFunctions.getConfig('MiddleScroll') && game.state.customBongPosition.X == null ? canvas.width-width-20 : Xpint-(width/2)
+    let X = (game.state.customBongPosition.forceScroll ? game.state.customBongPosition.middleScroll : game.state.smallFunctions.getConfig('MiddleScroll')) && game.state.customBongPosition.X == null ? canvas.width-width-20 : Xpint-(width/2)
     let Y = Ypoint-(height/2)
 
     ctx.drawImage(image, bgConfig.x, bgConfig.y, bgConfig.width, bgConfig.height, X, Y, width, height)
