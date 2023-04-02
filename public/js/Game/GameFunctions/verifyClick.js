@@ -11,6 +11,7 @@ export default async({ arrowID, listenerState, readyNote, hold }, state) => {
     if (!readyNote) for (let i in musicNotes) {
         let n = musicNotes[i]
         if (
+            !state.music?.paused &&
             n.arrowID == arrowID && !n.disabled /*&& !n.clicked*/ &&
             n.time >= 0 && n.time <= state.music?.currentTime+0.5 &&
             n.Y >= -(getHitBoxSize(n.arrowID)) &&

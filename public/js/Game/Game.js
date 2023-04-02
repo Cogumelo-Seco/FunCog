@@ -390,10 +390,10 @@ function createGame(Listener, canvas, socket) {
             //}
 
             if ((state.musicInfo.playerId == 1 && !opponent || state.musicInfo.playerId == 2 && opponent) && (state.debug || !state.online) && Listener.state.arrows[note.arrowID]) {
-                if (((botPlay || note.autoClick) || Listener.state.arrows[note.arrowID].inAutoClick) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
+                if (((botPlay || note.autoClick) /*|| Listener.state.arrows[note.arrowID].inAutoClick*/) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
                 if (!note.clicked && !note.disabled && (botPlay || note.autoClick) && (note.errorWhenNotClicking || note.autoClick) && newNoteY >= -10 && newNoteY <= (state.holdHeight**resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight*2)) {
                     //if (Math.floor(Math.random()*100) <= 10) {
-                        Listener.state.arrows[note.arrowID].inAutoClick = note.autoClick
+                        //Listener.state.arrows[note.arrowID].inAutoClick = note.autoClick
                         Listener.state.arrows[note.arrowID].state = 'onNote'
                         Listener.state.arrows[note.arrowID].click = true
                         Listener.state.arrows[note.arrowID].lastNoteClicked = note

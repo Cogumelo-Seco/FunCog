@@ -136,20 +136,21 @@ export default function createListener(socket) {
                 
             }
 
-            if (state.game.state.gameStage == 'game' && !state.pauseGameKeys) {
+            if (state.game.state.gameStage == 'game') {
                 /*if (keyPressed == 'Escape' && on && state.keys[keyPressed].time-state.keys[keyPressed].lastClickTime <= 100 && !state.game.state.online && state.game.state.music.currentTime >= 1) {
                     let botPlay = state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content
                     state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
                     state.game.state.musicInfo.health = -100
                     setTimeout(() => state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = botPlay, 500)
                 }*/
-
                 let gameVideoElement = document.getElementById('gameVideo')
+                
                 if (keyPressed == 'Enter' && on && gameVideoElement.duration >= 6 && state.game.state.music.currentTime <= 0) {
                     gameVideoElement.currentTime = gameVideoElement.duration
                     gameVideoElement.style.display = 'none'
                 }
 
+                if (state.pauseGameKeys) return
                 if (keyPressed == 'Escape' && on && !state.game.state.online && state.game.state.countdown <= -1) {
                     if (state.game.state.music.paused) {
                         let count = 0
