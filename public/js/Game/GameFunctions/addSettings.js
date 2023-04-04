@@ -549,12 +549,6 @@ export default async (state) => {
             content: true
         },
         {
-            name: 'Life Drain',
-            id: 'LifeDrain',
-            type: 'Boolean',
-            content: true
-        },
-        {
             name: 'Scroll Speed',
             id: 'ScrollSpeed',
             type: 'Number',

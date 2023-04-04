@@ -36,32 +36,38 @@ export default async (canvas, game, Listener, functions) => {
         Y += canvas.height*0.18
     }
 
-    ctx.fillStyle = 'rgb(170, 170, 170)'
+    ctx.fillStyle = 'rgb(20, 20, 20)'
     ctx.fillRect(canvas.width/2, 0, canvas.width/2, canvas.height)
 
-    ctx.fillStyle = 'rgb(40, 40, 150)'
-    ctx.fillRect(canvas.width/2-10, 0, 20, canvas.height)
+    ctx.fillStyle = 'rgb(200, 200, 200)'
+    ctx.fillRect(canvas.width/2-5, 0, 10, canvas.height)
 
     ctx.font = `bold ${canvas.width/canvas.height*30}px Arial`
     ctx.fillStyle = 'black'
     ctx.fillText('Atualizações', canvas.width-canvas.width/4-ctx.measureText('Atualizações').width/2, canvas.height*0.18);
     ctx.lineWidth = 3
-    ctx.strokeStyle  = 'white'
+    ctx.strokeStyle  = 'rgb(255, 255, 255)'
     ctx.strokeText('Atualizações', canvas.width-canvas.width/4-ctx.measureText('Atualizações').width/2, canvas.height*0.18);
 
     let resizeMsg = 0.04
     let msgArr = [
-        { msg: '- Menu do jogo atualizado', color: 'rgb(50, 70, 150)' },
-        { msg: '- HUD atualizada', color: 'rgb(50, 70, 150)' },
+        { msg: '- Menu do jogo atualizado', color: 'rgb(0, 150, 255)' },
+        { msg: '- HUD atualizada', color: 'rgb(0, 150, 255)' },
         { msg: '' },
-        { msg: '- Música "Pasta Night" do mod', color: 'rgb(0, 120, 70)' },
-        { msg: '  lullaby terminada', color: 'rgb(0, 120, 70)' },
+        { msg: '- Música "Pasta Night" do mod lullaby', color: 'rgb(0, 255, 0)' },
+        { msg: '  terminada', color: 'rgb(0, 255, 0)' },
+        { msg: '' },
+        { msg: '- Remoção da opção Dreno de Vida', color: 'rgb(255, 0, 0)' },
+        { msg: '' },
+        { msg: '- Multiplayer desligado Temporariamente', color: 'rgb(255, 255, 0)' },
     ]
 
-    //'rgb(50, 70, 150)'
-    //'rgb(150, 70, 50)'
-    //'rgb(150, 50, 50)'
-    //'rgb(0, 120, 70)'
+    //'rgb(0, 150, 255)'
+    //'rgb(0, 255, 0)'
+    //'rgb(255, 0, 0)'
+    //'rgb(255, 0, 0)'
+    //'rgb(255, 255, 0)'
+
 
     let msgX = canvas.width/2+(canvas.width*0.05)
     let msgY = canvas.height/3

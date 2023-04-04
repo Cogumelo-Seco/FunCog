@@ -11,7 +11,6 @@ export default async({ arrowID, listenerState, readyNote, hold }, state) => {
     if (!readyNote) for (let i in musicNotes) {
         let n = musicNotes[i]
         if (
-            !state.music?.paused &&
             n.arrowID == arrowID && !n.disabled /*&& !n.clicked*/ &&
             n.time >= 0 && n.time <= state.music?.currentTime+0.5 &&
             n.Y >= -(getHitBoxSize(n.arrowID)) &&
@@ -74,16 +73,6 @@ export default async({ arrowID, listenerState, readyNote, hold }, state) => {
         })
 
         if (note.hold > 0) {
-            /* let loop = setInterval(() => {
-                if (!listenerState.arrows[arrowID].click || note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
-                    note.disabled = true
-                } else if (!state.music.paused) {
-                    state.musicEventListener('noteClick', { noteClickAuthor: 'player', note, listenerState, hold: true }, state)
-                    state.musicInfo.health += 0.2
-                    state.musicInfo.score += Number.parseInt((state.scoreToAdd/2)*(rating.media/100))
-                }
-            }, 1000/5)
- */
             let loop = () => {
                 if (!listenerState.arrows[arrowID].click || note && note.Y >= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
                     note.disabled = true
@@ -95,15 +84,6 @@ export default async({ arrowID, listenerState, readyNote, hold }, state) => {
                 }
             }
             setTimeout(() => loop(), 1000/5)
-
-            /* let loop = () => {//listenerState.arrows[arrowID].click
-                if (!state.music.paused && note.Y <= ((state.holdHeight**state.resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
-                    state.musicEventListener('noteClick', { noteClickAuthor: 'player', note, listenerState, hold: true }, state)
-                    state.musicInfo.health += 0.2
-                    state.musicInfo.score += Number.parseInt((state.scoreToAdd/2)*(rating.media/100))
-                    setTimeout(() => loop(), 1000/50)
-                } else note.disabled = true
-            } */
         }
     }
 

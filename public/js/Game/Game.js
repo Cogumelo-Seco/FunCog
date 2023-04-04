@@ -253,7 +253,6 @@ function createGame(Listener, canvas, socket) {
         updateLocalPlayer()
 
         let botPlay = state.smallFunctions.getConfig('botPlay')
-        let LifeDrain = state.smallFunctions.getConfig('LifeDrain')
         let ScrollSpeed = state.smallFunctions.getConfig('ScrollSpeed')
         
         require('./GameFunctions/RenderChat').default(state.canvas, state, Listener.state, 'gameLoop')
@@ -344,6 +343,7 @@ function createGame(Listener, canvas, socket) {
             } else {
                 //playSong('Sounds/fnf_loss_sfx.ogg')
                 //setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
+                state.musicInfo.dead = true
                 state.smallFunctions.redirectGameStage('score', 'menu')
             }
 
@@ -414,6 +414,8 @@ function createGame(Listener, canvas, socket) {
                 state.musicEventListener('passedNote', { note: note, listenerState: Listener.state }, state)
             }
 
+            if (note.Y-note.hold > (state.arrowsInfo[note.arrowID]?.height**resizeNote) && !note.disabled) note.disabled = true
+
             if ((state.musicInfo.playerId == 1 && opponent || state.musicInfo.playerId == 2 && !opponent)) {
                 if (newNoteY >= 0 && !note.clicked && !note.disabled && (note.errorWhenNotClicking || note.autoClick)) {
                     state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, hold: false }, state)
@@ -427,7 +429,7 @@ function createGame(Listener, canvas, socket) {
                         }
                     }
                     note.clicked = true
-                    if ((state.online || LifeDrain) && state.musicInfo.health > 10 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
+                    if (state.musicInfo.health > 10 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
                 }
             }
         }

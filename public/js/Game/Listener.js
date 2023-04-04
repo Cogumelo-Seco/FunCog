@@ -495,11 +495,12 @@ export default function createListener(socket) {
                             state.game.state.online = false
                             state.game.state.smallFunctions.redirectGameStage('selectMusic')
                         } else if (state.game.state.selectMenuOption.menuOptions[state.game.state.selectMenuOption.menuSelect] == 'Multiplayer') {
-                            if (state.game.state.ping) {
+                            alert('Multiplayer desligado Temporariamente\n\nMultiplayer Temporarily Off')
+                            /*if (state.game.state.ping) {
                                 state.game.state.online = true
                                 state.game.state.smallFunctions.redirectGameStage('onlineServerList')
                                 socket.emit('getListServers')
-                            } else alert('No connection to the server!')
+                            } else alert('No connection to the server!')*/
                         } else {
                             state.game.state.online = true
                             state.game.state.smallFunctions.redirectGameStage('settings')

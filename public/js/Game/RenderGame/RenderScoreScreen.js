@@ -34,7 +34,7 @@ export default async (canvas, game, Listener, functions) => {
             musicInfoPopupY: 120+((canvas.height-120)/2-(canvas.width/4/2))
         })
     } else drawBox({
-        popupColor: 'rgb(200, 200, 200)',
+        popupColor: game.state.musicInfo.dead ? 'rgb(255, 100, 100)' : 'rgb(200, 200, 200)',
         playerMusicInfo: game.state.musicInfo,
         musicInfoPopupWidth: canvas.width/4,
         musicInfoPopupHeight: canvas.width/4,

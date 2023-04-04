@@ -59,6 +59,7 @@ export default async (canvas, state, stateListener, command) => {
     
     state.messages = state.messages.slice(0, 1000)
     let messages = state.messages
+    let unreadMessagesAlert = false
     let unreadMessages = 0
 
     let autoScroll = true
@@ -129,12 +130,14 @@ export default async (canvas, state, stateListener, command) => {
                 }
 
                 chatContent.appendChild(contentElement)
-                
 
                 if (autoScroll) chatContent.scrollTop = chatContent.scrollHeight
                 message.loadTo = 'none'
                 message.unread = false
-            } else if (message.unread) unreadMessages += 1
+            } else if (message.unread) {
+                if (message.content.includes(`@${state.socket.id}`)) unreadMessagesAlert = true
+                unreadMessages += 1
+            }
         }
     }
 
@@ -148,6 +151,7 @@ export default async (canvas, state, stateListener, command) => {
     if (unreadMessages > 0 || typeof(unreadMessages) == 'string') {
         unreadMessageCounter.style.display = 'flex'
         unreadMessageCounter.innerText = unreadMessages
+        unreadMessageCounter.style.backgroundColor = unreadMessagesAlert ? 'rgb(115, 0, 255)' : 'rgb(40, 40, 40)'
         chatButton.style.background = 'rgba(0, 0, 0, 0.658) url(/imgs/chat/unreadChat.png) no-repeat center 0px / 100%'
     } else {
         unreadMessageCounter.style.display = 'none'

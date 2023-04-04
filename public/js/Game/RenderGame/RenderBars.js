@@ -42,7 +42,7 @@ export default async (canvas, game, Listener, functions) => {
     let musicBarWidth = canvas.width*0.25 > ctx.measureText(infoTxt).width+10 ? canvas.width*0.25 : ctx.measureText(infoTxt).width+10
     let musicBarHeight = 20
     let musicBarY = 10//game.state.smallFunctions.getConfig('DownScroll') ? 10 : canvas.height-30
-    let musicBarX = canvas.width-musicBarWidth-canvas.width*0.05
+    let musicBarX = canvas.width-musicBarWidth-canvas.width*0.06
 
     ctx.fillStyle = 'rgb(100, 100, 100)'
     ctx.fillRect(musicBarX, musicBarY, musicBarWidth, musicBarHeight)
@@ -81,7 +81,7 @@ export default async (canvas, game, Listener, functions) => {
 
     let healthBarWidth = canvas.width*0.25
     let healthBarHeight = 20
-    let healthBarX = canvas.width*0.05
+    let healthBarX = canvas.width*0.06
     let healthPercent = game.state.musicInfo.health/100
     healthPercent = healthPercent > 1 ? 1 : healthPercent < 0 ? 0 : healthPercent
 
