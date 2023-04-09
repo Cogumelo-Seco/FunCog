@@ -80,7 +80,7 @@ export default function createListener(socket) {
     document.addEventListener('keydown', (event) => handleKeys({ event, on: true }))
     document.addEventListener('keyup', (event) => handleKeys({ event, on: false }))
     
-    function handleKeys({ event, on }) {
+    async function handleKeys({ event, on }) {
         let keyPressed = event.code
         let lastClick = state.keys[keyPressed]
         let hold = !state.keys[keyPressed] || +new Date()-state.keys[keyPressed]?.time <= 20
@@ -461,6 +461,19 @@ export default function createListener(socket) {
                                 }
                                 break
                             case 'Boolean':
+                                if (currentConfig.id == 'LightTheme') {
+                                    let gameCanvas = document.getElementById('gameCanvas')
+                                    if (!currentConfig.content) {
+                                        gameCanvas.style.backgroundColor = 'white'
+                                        currentConfig.content = true
+                                        setTimeout(async() => {
+                                            await alert('You are crazy?!')
+                                            currentConfig.content = false
+                                            gameCanvas.style.backgroundColor = 'transparent'
+                                        }, 200)
+                                    }
+                                    return
+                                }
                                 currentConfig.content = currentConfig.content ? false : true
                                 state.game.playSong('Sounds/scrollMenu.ogg')
                                 break

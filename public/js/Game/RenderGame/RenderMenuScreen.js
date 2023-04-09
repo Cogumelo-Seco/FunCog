@@ -59,6 +59,7 @@ export default async (canvas, game, Listener, functions) => {
         { msg: '' },
         { msg: '- Remoção da opção Dreno de Vida', color: 'rgb(255, 0, 0)' },
         { msg: '' },
+        { msg: '- Bug das garras Termination corrigido', color: 'rgb(255, 255, 0)' },
         { msg: '- Multiplayer desligado Temporariamente', color: 'rgb(255, 255, 0)' },
     ]
 

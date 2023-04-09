@@ -608,6 +608,12 @@ export default async (state) => {
             content: true
         },
         {
+            name: 'Light Theme',
+            id: 'LightTheme',
+            type: 'Boolean',
+            content: false
+        },
+        {
             menuColor: 'rgb(255, 100, 100)',
             name: 'Logoff',
             id: 'logoff',
