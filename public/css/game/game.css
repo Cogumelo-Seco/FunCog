@@ -98,22 +98,18 @@ div#chat {
     top: 50px;
     left: 5px; 
     width: 400px;
-    height: 50vh;
+    min-height: 50vh;
     transition: all 0.5s;
     animation: openChat 0.2s ease forwards;
 }
 
 div#chat-content {
+    display: inline-block;
+    position: relative;
     overflow: auto;
-    cursor: auto;
-    word-wrap: break-word;
-    display: block;
     text-align: left;
-    position: fixed;
-    bottom: 34px;
-    padding: 4px;
     width: 98%;
-    max-height: 86%;
+    max-height: 50vh;
 }
 
 div#chat-content p#Header {
@@ -150,6 +146,7 @@ div#chat-content p#Content {
     margin-left: 40px;
     overflow: hidden;
     text-overflow: ellipsis;
+    word-wrap: break-word;
 }
 
 .Mentioned {
@@ -158,64 +155,69 @@ div#chat-content p#Content {
     padding: 1px;
 }
 
+
 div#message-box {
-    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
     font-size: 15px;
-    padding: 0 5px;
-    position: absolute;
-    background-color: rgb(40, 40, 40);
-    height: 28px;
-    width: 96.5%;
-    margin: 2px 50%;
+    padding: 5px 7px;
+    background-color: rgb(30, 30, 30);
+    color: white;
+    min-height: 20px;
+    max-height: 84px;
+    width: 95%;
+    margin: 3px 50%;
     transform: translateX(-50%);
     border-radius: 8px;
-    bottom: 0;
-    left: 0;
-    color: white;
     transition: all 0.5s;
-    align-items: center;
-    justify-content: left;
 }
 
 div#message-box-content {
-    position: relative;
+    display: block;
+    word-break: break-all;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+    min-height: 12px;
+    /*position: relative;
     width: max-content;
     top: 50%;
-    transform: translateY(-50%);
-}
-
-span#messageBoxWritingPosition {
-    height: 13px;
-    width: 2px;
-    transform: translateY(2px);
-    margin: 0 2px;
-    animation: messageBoxWritingPosition 0.9s linear infinite;
+    transform: translateY(-50%);*/
 }
 
 div#message-box .messageBoxText {
     display: inline-block;
+    word-wrap: break-word;
+    white-space: break-spaces!important;
+    word-break: break-all;
+    vertical-align: baseline;
+    min-height: 13px;
+    min-width: 15px;
+    background-color: rgba(0, 0, 0, 0.13);
 }
 
 div#message-box .space {
     width: 5px;
 }
 
-metion {
+.metion {
     font-size: 14px;
     display: inline-block;
     cursor: pointer;
     /*background-color: rgb(0, 128, 135);
     color: rgb(228, 254, 255);
     rgb(113, 108, 0)*/
-    background-color: rgb(0, 128, 135);
+    background-color: rgb(0, 128, 135)!important;
     color: white;
     padding: 1px 2px;
     border-radius: 4px;
     margin: 0 2px;
 }
 
-metion:hover {
-    background-color: rgb(0, 155, 163);
+.metion:hover {
+    background-color: rgb(0, 155, 163)!important;
 }
 
 button#send-button {

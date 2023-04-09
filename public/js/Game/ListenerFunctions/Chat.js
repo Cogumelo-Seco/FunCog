@@ -3,29 +3,29 @@ export default function chat(state, socket) {
     
     const chatContent = document.getElementById('chat-content')
 
-    const messageBoxInput = document.getElementById('message-box-input')
+    const messageBoxContent = document.getElementById('message-box-content')
     const messageBox = document.getElementById('message-box')
     const chat = document.getElementById('chat')   
     const gameCanvas = document.getElementById('gameCanvas')
     
     function focusin(event) {
-        const messageBoxWritingPosition = document.getElementById('messageBoxWritingPosition')
+        //const messageBoxWritingPosition = document.getElementById('messageBoxWritingPosition')
 
         chat.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
         chat.style.borderColor = 'rgb(50, 50, 50)'
         messageBox.style.backgroundColor = 'rgba(80, 80, 80, 1)'
-        if (messageBoxWritingPosition) messageBoxWritingPosition.style.display = 'inline-block'
+        //if (messageBoxWritingPosition) messageBoxWritingPosition.style.display = 'inline-block'
 
         state.onChat = 'on'
     }
 
     function focusout(event) {
-        const messageBoxWritingPosition = document.getElementById('messageBoxWritingPosition')
+        //const messageBoxWritingPosition = document.getElementById('messageBoxWritingPosition')
 
         chat.style.backgroundColor = 'rgba(0, 0, 0, 0.2)'
         chat.style.borderColor = 'transparent'
         messageBox.style.backgroundColor = 'rgba(80, 80, 80, 0.4)'
-        if (messageBoxWritingPosition) messageBoxWritingPosition.style.display = 'none'
+        //if (messageBoxWritingPosition) messageBoxWritingPosition.style.display = 'none'
 
         state.onChat = 'off'
     }
@@ -54,10 +54,33 @@ export default function chat(state, socket) {
     }
 
     function send() {
-        let content = state.messageContent.replace(/[\s]+/g, ' ')
+        let elements = messageBoxContent.querySelectorAll('.messageBoxText')
+        let content = ''
+        for (let i = 0;i <= elements.length;i++) {
+            if (elements[i]) {
+                if (elements[i].id == 'metion') content += '<@'+elements[i].name+'>'
+                else content += elements[i].innerText
+            }
+        }
+        //let content = messageBoxContent.innerText//.replace(/[\s]+/g, ' ')
         if (!content || !socket.connected || !state.game.state.myConfig.logged) return;
 
-        if (content.split(' ')[0] == '/s') state.game.state.gameStage = content.split(' ')[1]
+        socket.emit('message', {
+            author: {
+                name: state.game.state.myConfig.author.name || socket.id.slice(0, 20),
+                avatar: state.game.state.myConfig.author.avatar || null,
+                id: socket.id
+            },
+            colorName: state.game.state.myConfig.colorName || null,
+            colorContent: state.game.state.myConfig.colorContent || null,
+            emoji: state.game.state.myConfig.emoji || null,
+            loadTo: 'all',
+            content,
+        })
+
+        messageBoxContent.innerHTML = '<span className="messageBoxText" contentEditable="true"></span>'
+
+        /*if (content.split(' ')[0] == '/s') state.game.state.gameStage = content.split(' ')[1]
         else socket.emit('message', {
             author: {
                 name: state.game.state.myConfig.author.name || socket.id.slice(0, 20),
@@ -73,7 +96,7 @@ export default function chat(state, socket) {
 
         state.messageContent = ''
         state.renderChat = true
-        chatContent.scrollTop = chatContent.scrollHeight
+        chatContent.scrollTop = chatContent.scrollHeight*/
     }
 
     function keyPressed(event) {
@@ -84,6 +107,14 @@ export default function chat(state, socket) {
         if (!event.key || state.onChat != 'on') return
         if (event.code == 'Enter') send()
 
+        if (event.code == 'Backspace') {
+            let elements = messageBoxContent.querySelectorAll('.messageBoxText')
+            if (elements[elements.length-1].innerText == '' && elements[elements.length-2].id == 'metion') {
+                elements[elements.length-2].remove()
+                elements[elements.length-3].focus()
+            }
+        }
+/*
         if (event.code == 'ArrowRight') state.writingPosition += 1
         if (event.code == 'ArrowLeft') state.writingPosition -= 1
         if (event.code == 'Home') state.writingPosition = 0
@@ -93,7 +124,7 @@ export default function chat(state, socket) {
             state.messageContent = state.messageContent.substring(0, state.writingPosition)+event.key+state.messageContent.substring(state.writingPosition)
             state.writingPosition += 1
         }
-
+/*
         try {
             if (event.code == 'Backspace') {
                 state.messageContent = state.messageContent.substring(0, state.writingPosition-1)+state.messageContent.substring(state.writingPosition)
@@ -158,11 +189,11 @@ export default function chat(state, socket) {
                 /* if (event.code == 'Backspace') {
                         state.messageContent = state.messageContent.substring(0, state.writingPosition-1)+state.messageContent.substring(state.writingPosition)
                         state.writingPosition -= 1
-                    }*/
+                    }
             }
-        } catch (err) { console.warn(err) }
+        } catch (err) { console.warn(err) }*/
 
-        state.writingPosition = state.writingPosition <= 0 ? 0 : state.writingPosition > state.messageContent.length ? state.messageContent.length : state.writingPosition
+        //state.writingPosition = state.writingPosition <= 0 ? 0 : state.writingPosition > state.messageContent.length ? state.messageContent.length : state.writingPosition
 
         //console.log(state.messageContent)
         /*// Enviar mensagem com enter

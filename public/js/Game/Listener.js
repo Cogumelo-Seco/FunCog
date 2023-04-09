@@ -9,8 +9,6 @@ export default function createListener(socket) {
         codeText: '',
         onChat: 'off',
         messageContent: '',
-        writingPosition: Infinity,
-        writingPositionOld: -1,
         renderChat: true,
         mouseInfo: {
             x: NaN,

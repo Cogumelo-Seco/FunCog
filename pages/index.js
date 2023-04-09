@@ -317,14 +317,12 @@ const Game = (props) => {
                     </div>
                 </div>
 
-
-                
-
-
                 <div id="chat">
                     <div id="chat-content" />
-                    <div id="message-box" maxLength="200" placeholder="Send Message">
-                        <div id="message-box-content" />
+                    <div id="message-box" maxLength="200">
+                        <div id="message-box-content">
+                            <span className="messageBoxText" contentEditable="true"></span>
+                        </div>
                     </div>
                 </div>
             </body>

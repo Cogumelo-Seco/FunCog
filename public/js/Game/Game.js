@@ -1,11 +1,5 @@
 function createGame(Listener, canvas, socket) {
     const state = {
-        gravity: {
-            distance: 300,
-            v: 0,
-            bounce: 50,
-            time: +new Date()
-        },
         debug: false,
         fps: '0-0',
         ping: null,
@@ -28,7 +22,9 @@ function createGame(Listener, canvas, socket) {
         waiting: true,
         serverId: null,
         serverInfo: {},
-        serverPlayers: [],
+        serverPlayers: {
+            'B': { name: 'A' }
+        },
         gameLoopFPSControlTime: 0,
         gameLoopFPSControlTime2: 0,
         rainbowColor: 0,
@@ -256,7 +252,7 @@ function createGame(Listener, canvas, socket) {
         let botPlay = state.smallFunctions.getConfig('botPlay')
         let ScrollSpeed = state.smallFunctions.getConfig('ScrollSpeed')
         
-        require('./GameFunctions/RenderChat').default(state.canvas, state, Listener.state, 'gameLoop')
+        
 
         document.title = `Cogu - ${state.gameStage}`
 
@@ -463,6 +459,7 @@ function createGame(Listener, canvas, socket) {
 
         /* !!!!!!! FPS LIMITADO !!!!!!! */
 
+        require('./GameFunctions/RenderChat').default(state.canvas, state, Listener.state, 'gameLoop')
         if (state.gameLoopFPSControlTime2+1000 <= +new Date()) {
             state.gameLoopFPSControlTime2 = +new Date()
             
