@@ -28,6 +28,8 @@ export default async (canvas, game, Listener, functions) => {
         } canvas.style.backgroundImage = `url(https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${game.state.musicInfo.backgroundImage})`
     } else canvas.style.backgroundImage = null
     
-    ctx.fillStyle = `rgba(0, 0, 0, ${game.state.gameBackgroundOfuscation})`
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    if (!game.state.videoBackground) {
+        ctx.fillStyle = `rgba(0, 0, 0, ${game.state.gameBackgroundOfuscation})`
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+    }
 }

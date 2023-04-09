@@ -51,13 +51,10 @@ export default async (canvas, game, Listener, functions) => {
 
     let resizeMsg = 0.04
     let msgArr = [
-        { msg: '- Menu do jogo atualizado', color: 'rgb(0, 150, 255)' },
-        { msg: '- HUD atualizada', color: 'rgb(0, 150, 255)' },
+        { msg: '- Pequena mudança nos bugs da Missingno', color: 'rgb(0, 150, 255)' },
         { msg: '' },
-        { msg: '- Música "Pasta Night" do mod lullaby', color: 'rgb(0, 255, 0)' },
-        { msg: '  terminada', color: 'rgb(0, 255, 0)' },
-        { msg: '' },
-        { msg: '- Remoção da opção Dreno de Vida', color: 'rgb(255, 0, 0)' },
+        { msg: '- Mod "Bad Apple" adicionado!', color: 'rgb(0, 255, 0)' },
+        { msg: '- Tema claro?', color: 'rgb(0, 255, 0)' },
         { msg: '' },
         { msg: '- Bug das garras Termination corrigido', color: 'rgb(255, 255, 0)' },
         { msg: '- Multiplayer desligado Temporariamente', color: 'rgb(255, 255, 0)' },

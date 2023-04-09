@@ -11,7 +11,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
             }
             break
         case 'loaded':
-            state.screenFilter = 'grayscale(100%)'
+            //state.screenFilter = 'grayscale(100%)'
             break
         case 'started':
             state.musicInfo.variables = {

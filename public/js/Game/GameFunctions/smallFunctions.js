@@ -22,8 +22,10 @@ export default (state, Listener, socket) => {
             state.serverId = null
             state.music?.pause()
             state.musicVoice?.pause()
+            state.videoBackground?.pause()
             state.music = null
             state.musicVoice = null
+            state.videoBackground = null
             state.musicInfo.health = 50
             state.arrowsInfo = {}
             state.arrowsInfoOpponent = {}
@@ -41,6 +43,7 @@ export default (state, Listener, socket) => {
             state.invertArrowPos = false
             state.speed = 1
             document.getElementById('gameBackground').style.display = 'none'
+            document.getElementById('gameVideoBackground').style.display = 'none'
             state.backgroundInfo = {
 				zoom: 0,
 				movementX: 0,

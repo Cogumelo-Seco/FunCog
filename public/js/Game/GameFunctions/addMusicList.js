@@ -464,6 +464,7 @@ export default async (state) => {
             musics: [
                 {
                     name: 'Unhappy',
+                    screenFilter: 'grayscale(100%)',
                     menuColor: 'rgb(60, 60, 60)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/suicidemouse/',
@@ -481,6 +482,7 @@ export default async (state) => {
                 {
                     suffix: '❗',
                     name: 'Happy',
+                    screenFilter: 'grayscale(100%)',
                     menuColor: 'rgb(60, 60, 60)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/suicidemouse/',
@@ -500,6 +502,7 @@ export default async (state) => {
                 {
                     suffix: '❗',
                     name: 'Really-Happy',
+                    screenFilter: 'grayscale(100%)',
                     menuColor: 'rgb(60, 60, 60)',
                     difficulties: [ 0, 1, 2, 3 ],
                     notesImageDir: 'Arrows/suicidemouse/',
@@ -518,6 +521,7 @@ export default async (state) => {
                 },
                 {
                     name: 'Smile',
+                    screenFilter: 'grayscale(100%)',
                     menuColor: 'rgb(60, 60, 60)',
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/suicidemouse/',
@@ -1956,6 +1960,25 @@ export default async (state) => {
                         { dir: 'Musics/musics/through-the-fire-and-flames/Voices.ogg' },
                     ]
                 },
+            ]
+        },
+        {
+            name: 'Bad Apple',
+            menuColor: 'white',
+            musics: [
+                {
+                    name: 'Bad-Apple',
+                    menuColor: 'white',
+                    difficulties: [ 1, 9 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundVideo: 'Bad-Apple/Bad-Apple.mp4',
+                    screenFilter: 'contrast(200%) grayscale(100%)',
+                    mod: 'BadApple',
+                    toLoad: [
+                        { dir: 'Musics/musics/bad-apple/Inst.ogg' },
+                        { dir: 'Musics/musics/bad-apple/Voices.ogg' },
+                    ]
+                }
             ]
         },
     ]

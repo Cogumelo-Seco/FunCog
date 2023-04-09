@@ -1,6 +1,7 @@
 export default async({ musicInfo, difficulty, listenerState, opponentPlayer, socket }, state) => {
     //try {
         let videoElement = document.getElementById('gameVideo')
+        let videoElementBackground = document.getElementById('gameVideoBackground')
 
         state.music = null
         state.musicChangeBPM = {}
@@ -104,6 +105,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
 
                 if (state.musicNotes.length+state.musicOpponentNotes.length >= musicNotesTotal) {
                     if (musicInfo.cutscene) videoElement.src = `https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/${musicInfo.cutscene}`
+                    if (musicInfo.backgroundVideo) videoElementBackground.src = `https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/${musicInfo.backgroundVideo}`
                     load(musicInfo.toLoad[0])
                 }
             }
@@ -201,6 +203,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             } else startMusic()
             
             async function startMusic() {
+                state.screenFilter = musicInfo.screenFilter
                 state.animations.arrowKeys.paused = false
                 state.animations.arrowKeys.frame = 0
 
@@ -210,6 +213,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                         state.animations.arrowKeys.paused = false
 
                         function play() {
+                            if (musicInfo.backgroundVideo) videoElementBackground.play()
                             state.music?.play().catch(() => setTimeout(play, 500))
                             state.musicVoice?.play()
     
@@ -219,9 +223,15 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
 
                         if (state.musicVoice) {
                             state.musicVoice.currentTime = state.music?.currentTime || 0
-                            
                             state.musicVoice.playbackRate = state.modifiers.speed
                         }
+                        if (musicInfo.backgroundVideo) {
+                            videoElementBackground.style.display = 'block'
+                            state.videoBackground = videoElementBackground
+                            videoElementBackground.currentTime = state.music?.currentTime || 0
+                            videoElementBackground.playbackRate = state.modifiers.speed
+                            console.log(videoElementBackground)
+                        } else videoElementBackground.style.display = 'none'
 
                         state.musicEventListener('started', { difficulty, listenerState }, state)
                     } else {

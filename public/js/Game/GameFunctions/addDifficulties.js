@@ -33,21 +33,21 @@ export default async (state) => {
             name: 'Alt',
             fileNameDifficulty: 'alt',
             color: 'rgb(232, 105, 236)',
-            lifeDrain: 1.2
+            lifeDrain: 1.1
         },
         {
             id: 5,
             name: 'Harder',
             fileNameDifficulty: 'harder',
             color: 'rgb(255, 0, 0)',
-            lifeDrain: 1.2
+            lifeDrain: 1.1
         },
         {
             id: 6,
             name: 'God',
             fileNameDifficulty: 'god',
             color: '#ffff00',
-            lifeDrain: 1.2
+            lifeDrain: 1.1
         },
         {
             id: 7,
@@ -62,6 +62,13 @@ export default async (state) => {
             fileNameDifficulty: 'hard',
             color: 'rgb(254, 7, 7)',
             lifeDrain: 0.8
+        },
+        {
+            id: 9,
+            name: 'Lunatic',
+            fileNameDifficulty: 'lunatic',
+            color: '#8100e8',
+            lifeDrain: 1.1
         },
     ]
     

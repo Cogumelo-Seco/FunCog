@@ -99,6 +99,7 @@ function createGame(Listener, canvas, socket) {
         musicBeat: 0,
         music: null,
         musicVoice: null,
+        videoBackground: null,
         musicData: {},
         musicEventListener: () => null,
         notesImageDir: null,
@@ -270,6 +271,7 @@ function createGame(Listener, canvas, socket) {
         state.musicStep = Number.parseInt(state.music?.currentTime*(state.musicBPM/60)*4)
 
         if (state.musicVoice && state.music && Math.abs(state.musicVoice.currentTime-state.music.currentTime) > 0.09) state.musicVoice.currentTime = state.music.currentTime
+        if (state.videoBackground && state.music && Math.abs(state.videoBackground.currentTime-state.music.currentTime) > 0.09) state.videoBackground.currentTime = state.music.currentTime
 
         if (!state.arrowsInfoOpponent[0]) {
             for (let arrowID = 0;arrowID <= 3;arrowID++) {

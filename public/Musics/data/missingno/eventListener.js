@@ -48,6 +48,8 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 							arrowsInfo[i].resetEnable = false
 							arrowsInfo[i].rotation = Math.floor(Math.random()*360)
 							arrowsInfo[i].noteRotation = arrowsInfo[i].rotation
+							state.screenFilter = `hue-rotate(${Math.floor(Math.random()*360)}deg)`
+							console.log(state.screenFilter)
 
 							if (i == 0) {
 								arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
@@ -65,6 +67,11 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 								arrowsInfo[i].Y = (arrowSize/2)+Math.floor(Math.random()*(height*0.5))+(downScrool ? height*0.5-(arrowSize) : 0)
 								arrowsInfo[i].X = width-Math.floor(Math.random()*(width*0.24))-arrowSize
 							}
+
+							clearTimeout(variables.bugScreen)
+							variables.bugScreen = setTimeout(() => {
+								state.screenFilter = ''
+							}, 100)
 						}
 			
 						for (let i in arrowsInfoOpponent) {
