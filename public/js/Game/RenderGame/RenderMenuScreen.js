@@ -51,6 +51,8 @@ export default async (canvas, game, Listener, functions) => {
 
     let resizeMsg = 0.04
     let msgArr = [
+        { msg: '- Novo sistema de jumpscare implementado', color: 'rgb(0, 150, 255)' },
+        { msg: ' na monochrome', color: 'rgb(0, 150, 255)' },
         { msg: '- Pequena mudança nos bugs da Missingno', color: 'rgb(0, 150, 255)' },
         { msg: '' },
         { msg: '- Mod "Bad Apple" adicionado!', color: 'rgb(0, 255, 0)' },

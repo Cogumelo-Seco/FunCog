@@ -44,6 +44,7 @@ export default (state, Listener, socket) => {
             state.speed = 1
             document.getElementById('gameBackground').style.display = 'none'
             document.getElementById('gameVideoBackground').style.display = 'none'
+            document.getElementById('jumpscare').style.display = 'none'
             state.backgroundInfo = {
 				zoom: 0,
 				movementX: 0,

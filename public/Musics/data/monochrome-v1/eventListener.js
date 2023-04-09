@@ -118,6 +118,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
             }
 
 			state.musicInfo.variables = {
+				jumpscareTime: 0,
 				oldBeat: 0,
 				oldStep: 0,
 				oldCurrentTime: 0,
@@ -212,37 +213,27 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			if (variables.HUDFade && state.alphaHUD < 1) state.alphaHUD += 0.02
 			else if (state.alphaHUD == 1) variables.HUDFade = false
 
+			let jumpscareElement = document.getElementById('jumpscare')
+			if (+new Date()-variables.jumpscareTime >= 450) jumpscareElement.style.display = 'none'
+			else {
+				let movementX = Math.floor(Math.random()*50)-25
+				let movementY = Math.floor(Math.random()*50)-25
+
+				jumpscareElement.src = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/jumpscares/GoldJumpscare.png'
+				jumpscareElement.style.display = 'block'
+				jumpscareElement.style.transform = `translateX(${movementX}px) translateY(${movementY}px)`
+				jumpscareElement.style.width = '150%'
+				jumpscareElement.style.height = '150%'
+				jumpscareElement.style.left = '-25%'
+				jumpscareElement.style.top = '-25%'
+			}
+
 			let events = state.musicInfo.events
 			for (let i in events) {
                 let event = events[i]
 				
                 if (variables.oldCurrentTime*1000 <= event[0] && currentTime*1000 >= event[0]) {
-					if (event[2] == 'Jumpscare' && Math.floor(Math.random()*10) <= Number(event[4] || 10)) {
-						let time = +new Date()
-						clearInterval(variables.jumpscareInterval)
-						variables.jumpscareInterval = setInterval(() => {
-							if (+new Date()-time >= 450) {
-								clearInterval(variables.jumpscareInterval)
-								state.musicInfo.popups['GoldJumpscare'].x = -964986
-							} else {
-								let movementX = Math.floor(Math.random()*50)-25
-								let movementY = Math.floor(Math.random()*50)-25
-
-								if (state.musicInfo.popups['GoldJumpscare']) {
-									state.musicInfo.popups['GoldJumpscare'].x = -(state.canvas.width*0.5/2)+movementX
-									state.musicInfo.popups['GoldJumpscare'].y = -(state.canvas.height*0.5/2)+movementY
-								} else {
-									state.musicInfo.popups['GoldJumpscare'] = {
-										image: 'jumpscares/GoldJumpscare.png',
-										x: -(state.canvas.width*0.5/2)+movementX,
-										y: -(state.canvas.height*0.5/2)+movementY,
-										width: state.canvas.width*1.5,
-										height: state.canvas.height*1.5,
-									}
-								}
-							}
-						}, 1000/30)
-					}
+					if (event[2] == 'Jumpscare' && Math.floor(Math.random()*10) <= Number(event[4] || 10)) variables.jumpscareTime = +new Date()
 
 					if (event[2] == 'Unown' && state.musicInfo.difficulty.name != 'Mania') {
 						let percent = Math.floor(Math.random()*100)
