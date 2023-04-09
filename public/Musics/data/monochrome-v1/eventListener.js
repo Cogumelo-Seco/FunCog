@@ -250,7 +250,8 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						if (percent >= 70 && percent < 85) letters = monochromeTexts.rareWords
 						if (percent >= 85 && percent < 96) letters = monochromeTexts.harderWords
 						if (percent >= 97) letters = monochromeTexts.impossibleWords
-						variables.monochromeText = letters[Math.floor(Math.random()*letters.length)]
+						//variables.monochromeText = letters[Math.floor(Math.random()*letters.length)]
+						variables.monochromeText = Math.floor(Math.random()*100) <= 2 ? 'GUTO LINDO' : letters[Math.floor(Math.random()*letters.length)]
 
 						variables.pastLetters = 0
 						variables.onWriting = true
@@ -326,7 +327,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 
 				if (text[variables.pastLetters] == ' ') variables.pastLetters += 1
 
-				let key = Object.values(listenerState.keys).find(k => k.key.toLowerCase() == text[variables.pastLetters])
+				let key = Object.values(listenerState.keys).find(k => k.key?.toLowerCase() == text[variables.pastLetters])
 
 				if (key && !key.clicked && variables.keys[key.code]) variables.keys[key.code] = false
 				if (key && key.clicked && !variables.keys[key.code]) {
