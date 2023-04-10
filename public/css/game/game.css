@@ -109,7 +109,7 @@ div#chat-content {
     overflow: auto;
     text-align: left;
     width: 98%;
-    max-height: 50vh;
+    height: 50vh;
 }
 
 div#chat-content p#Header {
