@@ -13,137 +13,193 @@ const Game = (props) => {
     const router = useRouter()
 
     useEffect(() => {
-        const socket = io(props.SERVER, {
-            withCredentials: true,
-        })
-
-        const canvas = document.getElementById('gameCanvas')        
-        const Listener = createListener(socket);
-        const game = createGame(Listener, canvas, socket);
-
-        game.loading({ Listener })
-        game.state.router = router
-        Listener.state.game = game
-        game.start()
-
-        renderGame(canvas, game, Listener);
-
-        socket.on('connect', () => {
-            if (cookie.token) socket.emit('login', { token: cookie.token })
-        })
-
-        let login = true
-
-        const registerContent = document.getElementById('registerContent')
-        const loginContent = document.getElementById('loginContent')
-        const registerButton = document.getElementById('registerButton')
-
-        const passwordInputs = document.getElementsByClassName('password')
-        const showPassword = document.getElementsByClassName('showPasswordInput')
-        for (let element of showPassword) {
-            element.onclick = (event) => {
-                for (let elementPassword of passwordInputs) elementPassword.type = element.checked ? 'text' : 'password'
-            }
+        let skipedConnecting = false
+        const skipConnecting = document.getElementById('skipConnecting')
+        const connectingMessage = document.getElementById('connectingMessage')
+        skipConnecting.onclick = () => {
+            skipedConnecting = true
+            start(io(props.SERVER, {
+                withCredentials: true,
+            }), null, true)
         }
 
-        const changeLoginState = document.getElementsByClassName('changeLoginState')
-        for (let element of changeLoginState) {
-            element.addEventListener('click', (event) => {
-                login = element.id == 'register' ? false : true
-
-                for (let element of showPassword) element.checked = false
-                for (let element of passwordInputs) {
-                    element.type = 'password'
-                    element.value = ''
-                }
+        function tryConnect(SERVER, one) {
+            const socket = io(SERVER, {
+                withCredentials: true,
             })
-        }
 
-        let registerButtonMoveSpeed = 20
-        let registerButtonXMovement = 0
-        let left = false
-        let move = false
-        registerButton.addEventListener('mouseover', () => {
-            move = true
-            left = left ? false : true
-        })
-
-        let borderGradientDeg = 0
-        let countFrame = 0
-        function loop() {
-            if (game.state.inLogin/*[ 'loading', 'login' ].includes(game.state.gameStage)*/) {
-                window.requestAnimationFrame(() => loop())
-
-                const username = document.getElementById(`usernameInput${login ? 'Login' : 'Register'}`)
-                const password = document.getElementById(`passwordInput${login ? 'Login' : 'Register'}`)
-                const repeatPassword = document.getElementById(`repeatPasswordInput`)
-                const discordButton = document.getElementById(`discordButton${login ? 'Login' : 'Register'}`)
-
-                if (move && (!document.getElementById(`usernameInputRegister`).value || repeatPassword.value == '' || document.getElementById(`passwordInputRegister`).value != repeatPassword.value)) {
-                    if (registerButtonXMovement <= 70 && !left) registerButtonXMovement += registerButtonMoveSpeed
-                    if (registerButtonXMovement >= -70 && left) registerButtonXMovement -= registerButtonMoveSpeed
-                }
-                registerButton.style.transform = `translateX(${registerButtonXMovement}px)`
-
-                borderGradientDeg += 1
-                countFrame += 1
-                const loginAndRegisterContents = document.getElementsByClassName('loginAndRegisterContent')
-                const connectingMessages = document.getElementsByClassName('connectingMessage')
-
-                if (countFrame%30 == 0) for (let connectingMessage of connectingMessages) {
-                    if (socket.connected) connectingMessage.style.display = 'none'
-                    else {
-                        connectingMessage.innerText += '.'
-                        if (connectingMessage.innerText.length > 30) connectingMessage.innerText = connectingMessage.innerText.substring(0, 23)
+            let tryConnectOn = false
+            let connect = false
+            let test = false
+            socket.emit('test')
+            socket.on('test', (r) => test = r)
+            socket.on('connect', () => {
+                connect = true
+                connectingMessage.innerText = 'Waiting Response...'
+                setTimeout(() => {
+                    if (!test) {
+                        connectingMessage.innerText = 'Connecting to Server...'
+                        if (!tryConnectOn) tryConnect(one ? props.SERVER2 : props.SERVER, one ? false : true)
+                    } else {
+                        connectingMessage.style.display = 'none'
+                        if (!skipedConnecting) start(socket, SERVER, false)
                     }
-                }
+                }, 2000)
+            })
 
-                let contentBackgroundColor = '#acacac'
-                for (let loginAndRegisterContent of loginAndRegisterContents) {
-                    loginAndRegisterContent.style.background = `
-                        radial-gradient(circle at 100% 100%, ${contentBackgroundColor} 0, ${contentBackgroundColor} 6px, transparent 6px) 0% 0%/8px 8px no-repeat,
-                        radial-gradient(circle at 0 100%, ${contentBackgroundColor} 0, ${contentBackgroundColor} 6px, transparent 6px) 100% 0%/8px 8px no-repeat,
-                        radial-gradient(circle at 100% 0, ${contentBackgroundColor} 0, ${contentBackgroundColor} 6px, transparent 6px) 0% 100%/8px 8px no-repeat,
-                        radial-gradient(circle at 0 0, ${contentBackgroundColor} 0, ${contentBackgroundColor} 6px, transparent 6px) 100% 100%/8px 8px no-repeat,
-                        linear-gradient(${contentBackgroundColor}, ${contentBackgroundColor}) 50% 50%/calc(100% - 4px) calc(100% - 16px) no-repeat,
-                        linear-gradient(${contentBackgroundColor}, ${contentBackgroundColor}) 50% 50%/calc(100% - 16px) calc(100% - 4px) no-repeat,
-                        linear-gradient(${borderGradientDeg}deg, #ff0000 0%, #ff00da 23%, #0100ff 43%, #00fff4 63%, rgba(0,255,14,1) 80%, rgba(246,255,0,1) 100%)
-                    `
-                    loginAndRegisterContent.style.boxSizing = 'border-box'
+            setTimeout(() => {
+                if (!connect) {
+                    tryConnectOn = true
+                    tryConnect(one ? props.SERVER2 : props.SERVER, one ? false : true)
                 }
+            }, 2000)
+        }
+        tryConnect(props.SERVER, true)
+
+        function start(socket, ServerLink, SkipLogin) {
+            document.body.style.cursor = 'none'
+            skipConnecting.style.display = 'none'
+            connectingMessage.style.display = 'none'
+            const canvas = document.getElementById('gameCanvas')        
+            const Listener = createListener(socket);
+            const game = createGame(Listener, canvas, socket);
+            game.state.inLogin = SkipLogin ? false : true
+
+            game.loading({ Listener })
+            game.state.router = router
+            Listener.state.game = game
+            game.start()
+
+            renderGame(canvas, game, Listener);
+
+            let login = true
+            
+            if (!SkipLogin && cookie.token) socket.emit('login', { token: cookie.token })
+
+            const registerContent = document.getElementById('registerContent')
+            const loginContent = document.getElementById('loginContent')
+            const registerButton = document.getElementById('registerButton')
+
+            const passwordInputs = document.getElementsByClassName('password')
+            const showPassword = document.getElementsByClassName('showPasswordInput')
+            for (let element of showPassword) {
+                element.onclick = (event) => {
+                    for (let elementPassword of passwordInputs) elementPassword.type = element.checked ? 'text' : 'password'
+                }
+            }
+
+            const changeLoginState = document.getElementsByClassName('changeLoginState')
+            for (let element of changeLoginState) {
+                element.addEventListener('click', (event) => {
+                    login = element.id == 'register' ? false : true
+
+                    for (let element of showPassword) element.checked = false
+                    for (let element of passwordInputs) {
+                        element.type = 'password'
+                        element.value = ''
+                    }
+                })
+            }
+
+            let registerButtonMoveSpeed = 20
+            let registerButtonXMovement = 0
+            let left = false
+            let move = false
+            registerButton.addEventListener('mouseover', () => {
+                move = true
+                left = left ? false : true
+            })
+
+            let borderGradientDeg = 0
+            let countFrame = 0
+            function loop() {
+                if (game.state.inLogin/*[ 'loading', 'login' ].includes(game.state.gameStage)*/) {
+                    window.requestAnimationFrame(() => loop())
+
+                    const username = document.getElementById(`usernameInput${login ? 'Login' : 'Register'}`)
+                    const password = document.getElementById(`passwordInput${login ? 'Login' : 'Register'}`)
+                    const repeatPassword = document.getElementById(`repeatPasswordInput`)
+                    const discordButton = document.getElementById(`discordButton${login ? 'Login' : 'Register'}`)
+
+                    if (move && (!document.getElementById(`usernameInputRegister`).value || repeatPassword.value == '' || document.getElementById(`passwordInputRegister`).value != repeatPassword.value)) {
+                        if (registerButtonXMovement <= 70 && !left) registerButtonXMovement += registerButtonMoveSpeed
+                        if (registerButtonXMovement >= -70 && left) registerButtonXMovement -= registerButtonMoveSpeed
+                    }
+                    registerButton.style.transform = `translateX(${registerButtonXMovement}px)`
+
+                    borderGradientDeg += 1
+                    countFrame += 1
+                    const loginAndRegisterContents = document.getElementsByClassName('loginAndRegisterContent')
+
+                    /*if (countFrame%30 == 0) for (let connectingMessage of connectingMessages) {
+                        if (connect) connectingMessage.style.display = 'none'
+                        else {
+                            if (inConnecting) connectingMessage.innerText = ''
+                            connectingMessage.innerText += '.'
+                            if (connectingMessage.innerText.length > 30) connectingMessage.innerText = connectingMessage.innerText.substring(0, 23)
+                        }
+                    }*/
+
+                    let contentBackgroundColor = '#acacac'
+                    for (let loginAndRegisterContent of loginAndRegisterContents) {
+                        loginAndRegisterContent.style.background = `
+                            radial-gradient(circle at 100% 100%, ${contentBackgroundColor} 0, ${contentBackgroundColor} 6px, transparent 6px) 0% 0%/8px 8px no-repeat,
+                            radial-gradient(circle at 0 100%, ${contentBackgroundColor} 0, ${contentBackgroundColor} 6px, transparent 6px) 100% 0%/8px 8px no-repeat,
+                            radial-gradient(circle at 100% 0, ${contentBackgroundColor} 0, ${contentBackgroundColor} 6px, transparent 6px) 0% 100%/8px 8px no-repeat,
+                            radial-gradient(circle at 0 0, ${contentBackgroundColor} 0, ${contentBackgroundColor} 6px, transparent 6px) 100% 100%/8px 8px no-repeat,
+                            linear-gradient(${contentBackgroundColor}, ${contentBackgroundColor}) 50% 50%/calc(100% - 4px) calc(100% - 16px) no-repeat,
+                            linear-gradient(${contentBackgroundColor}, ${contentBackgroundColor}) 50% 50%/calc(100% - 16px) calc(100% - 4px) no-repeat,
+                            linear-gradient(${borderGradientDeg}deg, #ff0000 0%, #ff00da 23%, #0100ff 43%, #00fff4 63%, rgba(0,255,14,1) 80%, rgba(246,255,0,1) 100%)
+                        `
+                        loginAndRegisterContent.style.boxSizing = 'border-box'
+                    }
+                    
+                    const withoutAccountButton = document.getElementById('withoutAccountButton')
+                    withoutAccountButton.onclick = (event) => {
+                        //alert('Sem uma conta, você terá acesso limitado ao jogo e todo o seu progresso não será salvo. Limite de 5 Mods e sem permissão ao chat.\n\nWithout an account you will have limited access to the game and all your progress will not be saved. Limit of 5 Mods and no chat permission.')
+                        alert('Sem uma conta, você terá acesso limitado ao jogo e todo o seu progresso não será salvo. Sem permissão ao chat.\n\nWithout an account you will have limited access to the game and all your progress will not be saved. No chat permission.')
+        
+                        //game.state.musics = game.state.musics.splice(0, 5)
+                        game.state.inLogin = false
+                        //game.state.smallFunctions.redirectGameStage('menu')
+                    }
+
                 
-                const withoutAccountButton = document.getElementById('withoutAccountButton')
-                withoutAccountButton.onclick = (event) => {
-                    //alert('Sem uma conta, você terá acesso limitado ao jogo e todo o seu progresso não será salvo. Limite de 5 Mods e sem permissão ao chat.\n\nWithout an account you will have limited access to the game and all your progress will not be saved. Limit of 5 Mods and no chat permission.')
-                    alert('Sem uma conta, você terá acesso limitado ao jogo e todo o seu progresso não será salvo. Sem permissão ao chat.\n\nWithout an account you will have limited access to the game and all your progress will not be saved. No chat permission.')
-    
-                    //game.state.musics = game.state.musics.splice(0, 5)
-                    game.state.inLogin = false
-                    //game.state.smallFunctions.redirectGameStage('menu')
-                }
+                    discordButton.onclick = (event) => {
+                        socket.emit(login ? 'login' : 'register', 'discord')
 
-               
-                discordButton.onclick = (event) => {
-                    socket.emit(login ? 'login' : 'register', 'discord')
+                        window.open(ServerLink+'/api/auth', "discord-auth-window", `width=400px,height=700px,top=30px,left=20pxstatus=yes,scrollbars=yes,resizable=yes`)
+                    }
 
-                    window.open(props.SERVER+'/api/auth', "discord-auth-window", `width=400px,height=700px,top=30px,left=20pxstatus=yes,scrollbars=yes,resizable=yes`)
-                }
+                    username.value = username.value.slice(0, 20).replace(/[^A-Za-z0-9\-\_]/g, '')
+                    
+                    if (!login) {
+                        registerContent.style.display = 'block'
+                        loginContent.style.display = 'none'
 
-                username.value = username.value.slice(0, 20).replace(/[^A-Za-z0-9\-\_]/g, '')
-                
-                if (!login) {
-                    registerContent.style.display = 'block'
-                    loginContent.style.display = 'none'
+                        if (password.value == '') repeatPassword.style.borderColor = '#000000'
+                        else if (password.value != repeatPassword.value) repeatPassword.style.borderColor = '#550000'
+                        else repeatPassword.style.borderColor = '#005500'
 
-                    if (password.value == '') repeatPassword.style.borderColor = '#000000'
-                    else if (password.value != repeatPassword.value) repeatPassword.style.borderColor = '#550000'
-                    else repeatPassword.style.borderColor = '#005500'
+                        registerButton.onclick = () => {
+                            //if (!username.value) return alert('You must add a username')
+                            //if (!password.value || password.value != repeatPassword.value) return alert('Passwords do not match')
+                            if (username.value && repeatPassword.value != '' && password.value == repeatPassword.value) {
+                                socket.emit('register', {
+                                    usernameID: username.value,
+                                    password: password.value
+                                })
+                            }
+                        }
+                    } else {
+                        registerContent.style.display = 'none'
+                        loginContent.style.display = 'block'
 
-                    registerButton.onclick = () => {
-                        //if (!username.value) return alert('You must add a username')
-                        //if (!password.value || password.value != repeatPassword.value) return alert('Passwords do not match')
-                        if (username.value && repeatPassword.value != '' && password.value == repeatPassword.value) {
-                            socket.emit('register', {
+                        const loginButton = document.getElementById('loginButton')
+                        loginButton.onclick = () => {
+                            if (!username.value) return alert('You must add a username')
+
+                            socket.emit('login', {
                                 usernameID: username.value,
                                 password: password.value
                             })
@@ -151,79 +207,66 @@ const Game = (props) => {
                     }
                 } else {
                     registerContent.style.display = 'none'
-                    loginContent.style.display = 'block'
-
-                    const loginButton = document.getElementById('loginButton')
-                    loginButton.onclick = () => {
-                        if (!username.value) return alert('You must add a username')
-
-                        socket.emit('login', {
-                            usernameID: username.value,
-                            password: password.value
-                        })
-                    }
+                    loginContent.style.display = 'none'
                 }
-            } else {
-                registerContent.style.display = 'none'
-                loginContent.style.display = 'none'
             }
-        }
-        loop()
+            loop()
 
-        socket.on('login', (player) => {
-            console.log(player)
-            if (player?.token) {
-                game.state.inLogin = false
-                //game.state.smallFunctions.redirectGameStage('loading')
+            socket.on('login', (player) => {
+                console.log(player)
+                if (player?.token) {
+                    game.state.inLogin = false
+                    //game.state.smallFunctions.redirectGameStage('loading')
 
-                document.cookie = `token=${player.token}; path=/`;
+                    document.cookie = `token=${player.token}; path=/`;
 
-                game.state.myConfig.logged = true
-                game.state.myConfig.author.name = player.name
-                game.state.myConfig.author.avatar = player.avatar
-                game.state.myConfig.colorName = player.chatColorName
-                game.state.myConfig.colorContent = player.chatColorContent
-                game.state.myConfig.emoji = player.chatEmoji
-                game.state.myConfig.settings = player.settings
-                game.state.myConfig.token = player.token
+                    game.state.myConfig.logged = true
+                    game.state.myConfig.author.name = player.name
+                    game.state.myConfig.author.avatar = player.avatar
+                    game.state.myConfig.colorName = player.chatColorName
+                    game.state.myConfig.colorContent = player.chatColorContent
+                    game.state.myConfig.emoji = player.chatEmoji
+                    game.state.myConfig.settings = player.settings
+                    game.state.myConfig.token = player.token
 
-                /*if (player.settings && player.settings[0]) {
+                    /*if (player.settings && player.settings[0]) {
+                        let defaultSettingsOptions = game.state.selectSettingsOption.settingsOptions
+                        let playerSettingsOptions = player.settings
+                        playerSettingsOptions = Object.assign(playerSettingsOptions, defaultSettingsOptions)
+                        game.state.selectSettingsOption.settingsOptions = playerSettingsOptions
+                    }*/
                     let defaultSettingsOptions = game.state.selectSettingsOption.settingsOptions
                     let playerSettingsOptions = player.settings
-                    playerSettingsOptions = Object.assign(playerSettingsOptions, defaultSettingsOptions)
-                    game.state.selectSettingsOption.settingsOptions = playerSettingsOptions
-                }*/
-                let defaultSettingsOptions = game.state.selectSettingsOption.settingsOptions
-                let playerSettingsOptions = player.settings
-                let reset = false
-                for (let i in defaultSettingsOptions) {
-                    let option = playerSettingsOptions.find((o, pI) => o?.id == defaultSettingsOptions[i].id && i == pI)
-                    if (option) defaultSettingsOptions[i].content = option.content
-                    else reset = true
-                    /*if (
-                        playerSettingsOptions[i].name == defaultSettingsOptions[i].name && 
-                        playerSettingsOptions[i].add == defaultSettingsOptions[i].add &&
-                        playerSettingsOptions[i].name == defaultSettingsOptions[i].name &&
-                        playerSettingsOptions[i].name == defaultSettingsOptions[i].name &&
-                        playerSettingsOptions[i].name == defaultSettingsOptions[i].name &&
-                        playerSettingsOptions[i].name == defaultSettingsOptions[i].name
-                    ) playerSettingsOptions[i] = Object.assign(defaultSettingsOptions[i], playerSettingsOptions[i])//defaultSettingsOptions[i] = playerSettingsOptions[i]
-                    else playerSettingsOptions[i] = defaultSettingsOptions[i]*/
-                }
-                if (reset) playerSettingsOptions = defaultSettingsOptions
-                /*for (let i in playerSettingsOptions) {
-                    if (typeof defaultSettingsOptions[i] == 'object' && typeof playerSettingsOptions[i] == 'object') {
-                        try {
-                            if (defaultSettingsOptions[i]) playerSettingsOptions[i] = Object.assign(defaultSettingsOptions[i], playerSettingsOptions[i])
-                        } catch (e) {}      
-                    } else defaultSettingsOptions[i] = playerSettingsOptions[i]  
-                }*/
-                
-                socket.emit('setup')
-            } else alert('ERROR: No player data')
-        })
+                    let reset = false
+                    for (let i in defaultSettingsOptions) {
+                        let option = playerSettingsOptions.find((o, pI) => o?.id == defaultSettingsOptions[i].id && i == pI)
+                        if (option) defaultSettingsOptions[i].content = option.content
+                        else reset = true
+                        /*if (
+                            playerSettingsOptions[i].name == defaultSettingsOptions[i].name && 
+                            playerSettingsOptions[i].add == defaultSettingsOptions[i].add &&
+                            playerSettingsOptions[i].name == defaultSettingsOptions[i].name &&
+                            playerSettingsOptions[i].name == defaultSettingsOptions[i].name &&
+                            playerSettingsOptions[i].name == defaultSettingsOptions[i].name &&
+                            playerSettingsOptions[i].name == defaultSettingsOptions[i].name
+                        ) playerSettingsOptions[i] = Object.assign(defaultSettingsOptions[i], playerSettingsOptions[i])//defaultSettingsOptions[i] = playerSettingsOptions[i]
+                        else playerSettingsOptions[i] = defaultSettingsOptions[i]*/
+                    }
+                    if (reset) playerSettingsOptions = defaultSettingsOptions
+                    /*for (let i in playerSettingsOptions) {
+                        if (typeof defaultSettingsOptions[i] == 'object' && typeof playerSettingsOptions[i] == 'object') {
+                            try {
+                                if (defaultSettingsOptions[i]) playerSettingsOptions[i] = Object.assign(defaultSettingsOptions[i], playerSettingsOptions[i])
+                            } catch (e) {}      
+                        } else defaultSettingsOptions[i] = playerSettingsOptions[i]  
+                    }*/
+                    
+                    socket.emit('setup')
+                } else alert('ERROR: No player data')
+            })
 
-        socket.on('error', (err) => alert(err))
+            socket.on('error', (err) => alert(err))
+        }
     }, [])
 
     return (
@@ -241,6 +284,9 @@ const Game = (props) => {
                 <link rel="stylesheet" href="/css/game/resizable.css" />
             </Head>
             <body id="body">
+                <span id="connectingMessage">Connecting to Server...</span>
+                <button id="skipConnecting">Skip Connecting</button>
+
                 <video preload="auto" id="gameVideoBackground" />
                 <img id="gameBackground" src="https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/imgs/VSLullaby/Bygone/Background2.png" />
                 <canvas id="gameCanvas"/>
@@ -251,7 +297,6 @@ const Game = (props) => {
                 <div id="unreadMessageCounter" />
 
                 <div id="loginContent" className="loginAndRegisterContent">
-                    <span className="connectingMessage">Connecting to Server...</span>
                     <p id="title">Login</p>
 
                     <p class="description margin-top">Username/id</p>
@@ -282,7 +327,6 @@ const Game = (props) => {
                 </div>
 
                 <div id="registerContent" className="loginAndRegisterContent">
-                    <span className="connectingMessage">Connecting to Server...</span>
                     <p id="title">Register</p>
 
                     <p className="description margin-top">Username/id</p>
@@ -332,10 +376,12 @@ const Game = (props) => {
 
 export async function getStaticProps() {
     const SERVER = process.env.SERVER
+    const SERVER2 = process.env.SERVER2
 
     return {
         props: {
             SERVER,
+            SERVER2,
         },
         revalidate: 1800
     }

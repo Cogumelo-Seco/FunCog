@@ -236,14 +236,39 @@ button#send-button {
 
 /* ---------- */
 
-span.connectingMessage {
+span#connectingMessage {
     position: absolute;
     color: white;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
     font-size: 18px;
+    /*font-size: 18px;
     left: 50%;
     top: 0;
     transform: translateX(-50%) translateY(-28px);
-    width: 100%;
+    width: 100%;*/
+}
+
+button#skipConnecting {
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    top: 53%;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 25px;
+    border-radius: 5px;
+    border: solid black 2px;
+    color: white;
+    transition: all 0.5s;
+    background-color: #eb3d3d;
+    padding: 1px 4px;
+    text-decoration: line-through;
+}
+
+button#skipConnecting:hover {
+    background-color: #c93030;
 }
 
 div#registerContent,

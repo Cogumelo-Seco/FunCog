@@ -2,7 +2,7 @@ function createGame(Listener, canvas, socket) {
     const state = {
         debug: false,
         fps: '0-0',
-        ping: null,
+        ping: '???',
         customBongPosition: { X: null, Y: null },
         gameBackgroundOfuscation: 0.7,
         myConfig: {
