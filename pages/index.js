@@ -35,7 +35,7 @@ const Game = (props) => {
             socket.on('connect', () => {
                 connectingMessage.innerText = 'Waiting Response...'
                 setTimeout(() => {
-                    if (!test) {
+                    if (!test && !skipedConnecting) {
                         connectingMessage.innerText = 'Connecting to Server...'
                         if (!tryConnectOn) tryConnect(props.SERVER, one ? false : true)
                     } else {
