@@ -1,6 +1,4 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
-
+export default async (ctx, canvas, game, Listener, functions) => {
     for (let i in game.state.musicInfo.popupsBackground) {
         let popup = game.state.musicInfo.popupsBackground[i]
         let image = game.state.images[popup.image]?.image

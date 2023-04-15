@@ -1,6 +1,4 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
-
+export default async (ctx, canvas, game, Listener, functions) => {
     let loadinPercent = (game.state.loading.loaded)/game.state.loading.total || 0
     let alpha = game.state.animations.loadingLogo.frame/(game.state.animations.loadingLogo.endFrame-game.state.animations.loadingLogo.endFrame*0.25)
     alpha = alpha >= 1 ? 1 : alpha <= 0 ? 0 : alpha

@@ -1,6 +1,4 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
-
+export default async (ctx, canvas, game, Listener, functions) => {
     let menuSelect = game.state.selectMenuOption.menuSelect
     let Y = (canvas.height/2-(70/2)+47)-menuSelect*(70)
 

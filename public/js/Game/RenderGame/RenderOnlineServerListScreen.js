@@ -1,6 +1,4 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
-
+export default async (ctx, canvas, game, Listener, functions) => {
     ctx.font = 'bold 20px Arial'
 
     let createServerButtonWidth = canvas.width*0.15

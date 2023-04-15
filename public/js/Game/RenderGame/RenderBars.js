@@ -1,16 +1,23 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
+export default async (ctx, canvas, game, Listener, functions) => {
     ctx.globalAlpha = game.state.alphaHUD
 
-    let loadingBarWidth = canvas.width*0.25
-    let loadingBarHeight = 20
+    let loadingBarWidth = canvas.width*0.30
+    let loadingBarHeight = 13
+    let loadingBarMarginIn = 2
     let loadingPercent = game.state.loadingSong.loaded/game.state.loadingSong.total
 
     if (loadingPercent < 1) {
         ctx.fillStyle = 'black'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-        ctx.fillStyle = 'rgb(100, 100, 100)'
+        ctx.fillStyle = 'white'
+        ctx.fillRect(canvas.width/2-loadingBarWidth/2+loadingBarMarginIn, canvas.height/2-loadingBarHeight/2+loadingBarMarginIn, loadingBarWidth*loadingPercent-(loadingBarMarginIn*2), loadingBarHeight-(loadingBarMarginIn-2))
+
+        ctx.lineWidth = 2.5
+        ctx.strokeStyle = 'white'
+        ctx.strokeRect(canvas.width/2-loadingBarWidth/2-loadingBarMarginIn, canvas.height/2-loadingBarHeight/2-loadingBarMarginIn, loadingBarWidth+(loadingBarMarginIn*4), loadingBarHeight+(loadingBarMarginIn*4))
+
+        /*ctx.fillStyle = 'rgb(100, 100, 100)'
         ctx.fillRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-loadingBarHeight/2, loadingBarWidth, loadingBarHeight)
 
         ctx.fillStyle = 'rgb(19, 189, 0)'
@@ -22,11 +29,11 @@ export default async (canvas, game, Listener, functions) => {
 
         ctx.lineWidth = 2.5
         ctx.strokeStyle = 'black'
-        ctx.strokeRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-loadingBarHeight/2, loadingBarWidth, loadingBarHeight)
+        ctx.strokeRect(canvas.width/2-loadingBarWidth/2, canvas.height/2-loadingBarHeight/2, loadingBarWidth, loadingBarHeight)*/
 
         ctx.font = `bold 10px Arial`
         ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'
-        ctx.fillText(game.state.loadingSong.msg, canvas.width/2-(ctx.measureText(game.state.loadingSong.msg).width/2), canvas.height/2+loadingBarHeight+5)
+        ctx.fillText(game.state.loadingSong.msg, canvas.width/2-(ctx.measureText(game.state.loadingSong.msg).width/2), canvas.height/2+loadingBarHeight+15)
 
         return
     }

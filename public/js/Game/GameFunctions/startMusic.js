@@ -67,6 +67,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
         let musicNotes = musicData.song.notes
         let musicNotesTotal = ((musicNotes.map(a => a.sectionNotes)).map(a => a.length)).reduce((a, b) => a+b)
 
+        state.loadingSong.msg = 'Loading...'
         state.loadingSong.loaded = 0
         state.loadingSong.total = musicInfo.toLoad.length
 
@@ -112,8 +113,8 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
         }
 
         function newLoad(msg) {
-            state.loadingSong.msg = `(${state.loadingSong.loaded}/${state.loadingSong.total}) - ${msg}`
             state.loadingSong.loaded += 1
+            state.loadingSong.msg = `(${state.loadingSong.loaded}/${state.loadingSong.total}) - ${msg}`
 
             if (state.loadingSong.loaded >= state.loadingSong.total && !state.music)
                 loaded()
@@ -193,6 +194,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             state.scoreToAdd = 200*(state.musicOpponentNotes.length/(state.musicOpponentNotes.length+state.musicNotes.length))
             state.scoreToAdd = state.scoreToAdd < 1 ? 100 : state.scoreToAdd
 
+            state.videoBackground = videoElementBackground
             state.music = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
             state.musicVoice = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
 
@@ -213,7 +215,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                         state.animations.arrowKeys.paused = false
 
                         function play() {
-                            if (musicInfo.backgroundVideo) videoElementBackground.play()
+                            if (musicInfo.backgroundVideo) state.videoBackground.play()
                             state.music?.play().catch(() => setTimeout(play, 500))
                             state.musicVoice?.play()
     
@@ -226,12 +228,10 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                             state.musicVoice.playbackRate = state.modifiers.speed
                         }
                         if (musicInfo.backgroundVideo) {
-                            videoElementBackground.style.display = 'block'
-                            state.videoBackground = videoElementBackground
-                            videoElementBackground.currentTime = state.music?.currentTime || 0
-                            videoElementBackground.playbackRate = state.modifiers.speed
-                            console.log(videoElementBackground)
-                        } else videoElementBackground.style.display = 'none'
+                            state.videoBackground.style.display = 'block'
+                            state.videoBackground.currentTime = state.music?.currentTime || 0
+                            state.videoBackground.playbackRate = state.modifiers.speed
+                        } else state.videoBackground.style.display = 'none'
 
                         state.musicEventListener('started', { difficulty, listenerState }, state)
                     } else {

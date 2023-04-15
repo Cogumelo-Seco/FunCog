@@ -1,6 +1,4 @@
-export default (canvas, game, Listener) => {
-    const ctx = canvas.getContext('2d')
-
+export default (ctx, canvas, game, Listener) => {
     return {
         fillText: async ({ alpha, style, style2, text, x, y, add, font }) => {
             let oldAlpha = Number(String(ctx.globalAlpha))
@@ -14,13 +12,5 @@ export default (canvas, game, Listener) => {
             ctx.fillText(text, x, y);
             ctx.globalAlpha = oldAlpha
         }
-/*fillText({
-        style: `hsl(${game.state.rainbowColor}, 100%, 40%)`,
-        style2: `hsl(${game.state.rainbowColor+180}, 100%, 40%)`,
-        text: 'Created by: Cogu',
-        x: canvas.width-ctx.measureText('Created by: Cogu').width-5,
-        y: canvas.width-ctx.measureText('Created by: Cogu').width-5,
-        add: 1
-    })*/
     }
 }

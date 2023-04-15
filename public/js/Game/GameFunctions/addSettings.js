@@ -602,7 +602,7 @@ export default async (state) => {
             type: 'ConfigTitle'
         },
         {
-            name: 'Game Info',
+            name: 'Show FPS',
             id: 'GameInfo',
             type: 'Boolean',
             content: true

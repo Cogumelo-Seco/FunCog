@@ -81,7 +81,8 @@ export default function createListener(socket) {
     async function handleKeys({ event, on }) {
         let keyPressed = event.code
         let lastClick = state.keys[keyPressed]
-        let hold = !state.keys[keyPressed] || +new Date()-state.keys[keyPressed]?.time <= 20
+        console.log(+new Date()-state.keys[keyPressed]?.time)
+        let hold = !state.keys[keyPressed] || +new Date()-state.keys[keyPressed]?.time <= 50
         state.keys[keyPressed] = {
             key: event.key || '',
             code: keyPressed || '',
@@ -120,13 +121,15 @@ export default function createListener(socket) {
                     !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getKey(arrowID) == keyPressed && on && !state.arrows[arrowID].click || 
                     !state.game?.state.smallFunctions.getConfig('botPlay') && state.game.state.smallFunctions.getKey(arrowID) == keyPressed && !on && state.arrows[arrowID].click
                 ) {
-                    if (on && !hold) state.game.verifyClick({ arrowID, listenerState: state })
+                    if (on /*&& !hold*/) state.game.verifyClick({ arrowID, listenerState: state })
+                    else state.arrows[arrowID].state = 'noNote'
+                    state.arrows[arrowID].click = on
 
-                    clearTimeout(state.arrows[arrowID].timeout)
+                    /*clearTimeout(state.arrows[arrowID].timeout)
                     if (on) state.arrows[arrowID].click = true
                     else state.arrows[arrowID].timeout = setTimeout(() => {
-                        if (+new Date()-state.keys[keyPressed]?.time >= 20) state.arrows[arrowID].click = false
-                    }, 40)
+                        if (+new Date()-state.keys[keyPressed]?.time >= 50) state.arrows[arrowID].click = false
+                    }, 60)*/
                 }
             }
 
@@ -154,27 +157,33 @@ export default function createListener(socket) {
                         let count = 0
                         function loop() {
                             count += 1
-                            if (count <= 100) {
+                            if (count <= 50) {
                                 state.game.state.music.currentTime -= 0.02
-                                if (state.game.state.musicVoice) state.game.state.musicVoice.currentTime -= 0.02
+                                if (state.game.state.musicVoice) state.game.state.musicVoice.currentTime = state.game.state.music.currentTime -= 0.02
+                                if (state.game.state.videoBackground) state.game.state.videoBackground.currentTime = state.game.state.music.currentTime -= 0.02
 
-                                setTimeout(loop, 10)
+                                setTimeout(loop, 1000/30)
+                            } else {
+                                if (state.game.state.musicVoice) state.game.state.musicVoice.currentTime = state.game.state.music.currentTime
+                                if (state.game.state.videoBackground) state.game.state.videoBackground.currentTime = state.game.state.music.currentTime
                             }
                         }
                         loop()
 
                         state.game.state.music.play()
                         if (state.game.state.musicVoice) state.game.state.musicVoice.play()
-                    } else if (state.game.state.musicInfo.oldPauseTime < state.game.state.music.currentTime) {
+                        if (state.game.state.videoBackground) state.game.state.videoBackground.play()
+                    } else if (state.game.state.musicInfo.oldPauseTime+1 < state.game.state.music.currentTime) {
                         state.game.state.musicInfo.oldPauseTime = state.game.state.music.currentTime
                         state.game.state.music.pause()
                         if (state.game.state.musicVoice) state.game.state.musicVoice.pause()
+                        if (state.game.state.videoBackground) state.game.state.videoBackground.pause()
                     }
                 }
 
                 keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
                 let selectPauseOption = state.game.state.selectPauseOption
-                if (on && state.game.state.music?.paused) switch (keyPressed) {
+                if (on && state.game.state.music?.paused && state.game.state.music.currentTime > 0) switch (keyPressed) {
                     case 'ArrowDown':
                         if (selectPauseOption.pauseSelect < selectPauseOption.pauseOptions.length-1) {
                             selectPauseOption.pauseSelect += 1
@@ -195,6 +204,7 @@ export default function createListener(socket) {
                                 handleKeys({ event: { code: 'Escape' }, on: true })
                                 break
                             case 'Exit':
+                                state.game.state.musicInfo.dead = true
                                 state.game.state.music.currentTime = state.game.state.music.duration
                                 break
                         }

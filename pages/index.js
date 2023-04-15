@@ -13,6 +13,7 @@ const Game = (props) => {
     const router = useRouter()
 
     useEffect(() => {
+        let tryTime = 1000
         let skipedConnecting = false
         const skipConnecting = document.getElementById('skipConnecting')
         const connectingMessage = document.getElementById('connectingMessage')
@@ -24,16 +25,18 @@ const Game = (props) => {
         }
 
         function tryConnect(SERVER, one) {
+            skipConnecting.focus()
             const socket = io(SERVER, {
                 withCredentials: true,
             })
 
+            tryTime += 1000
             let tryConnectOn = false
             let test = false
             socket.emit('test')
             socket.on('test', (r) => test = r)
             socket.on('connect', () => {
-                connectingMessage.innerText = 'Waiting Response...'
+                connectingMessage.innerText = `Waiting Response (${(tryTime-1000)/1000}s)...`
                 setTimeout(() => {
                     if (!test && !skipedConnecting) {
                         connectingMessage.innerText = 'Connecting to Server...'
@@ -42,7 +45,7 @@ const Game = (props) => {
                         connectingMessage.style.display = 'none'
                         if (!skipedConnecting) start(socket, SERVER, false)
                     }
-                }, 2000)
+                }, tryTime)
             })
         }
         tryConnect(props.SERVER, true)

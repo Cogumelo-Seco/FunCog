@@ -1,6 +1,4 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
-
+export default async (ctx, canvas, game, Listener, functions) => {
     ctx.font = `bold ${(canvas.width+canvas.height)*0.03}px Arial`
 
     let musicName = game.state.musicInfo.name.replace(/[-]/g, ' ')

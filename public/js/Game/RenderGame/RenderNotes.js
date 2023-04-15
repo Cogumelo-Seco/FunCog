@@ -1,6 +1,4 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
-
+export default async (ctx, canvas, game, Listener, functions) => {
     var DownScroll = game.state.smallFunctions.getConfig('DownScroll')
     let middleScroll = game.state.smallFunctions.getConfig('MiddleScroll')
 

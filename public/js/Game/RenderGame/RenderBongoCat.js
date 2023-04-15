@@ -1,7 +1,6 @@
-export default async (canvas, game, Listener, functions) => {
+export default async (ctx, canvas, game, Listener, functions) => {
     if (!game.state.smallFunctions.getConfig('botPlay') || game.state.online) return
 
-    const ctx = canvas.getContext('2d')
     ctx.globalAlpha = game.state.alphaHUD
 
     let imageData = game.state.images['BongoCat/BongoCat.png']

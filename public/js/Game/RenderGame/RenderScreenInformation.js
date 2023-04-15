@@ -1,6 +1,4 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
-
+export default async (ctx, canvas, game, Listener, functions) => {
     ctx.globalAlpha = game.state.alphaHUD
     ctx.font = `bold 11px Arial`
     functions.fillText({

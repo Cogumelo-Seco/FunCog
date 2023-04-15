@@ -21,49 +21,49 @@ export default async function renderGame(canvas, game, Listener) {
     ctx.imageSmoothingEnabled = game.state.smallFunctions.getConfig('anti-aliasing')
 
     if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration) game.state.musicEventListener('gameLoopFullFPSBackground', { listenerState: Listener.state }, game.state)
-    //require('./RenderScreenGame').default(canvas, game, Listener)
+    //require('./RenderScreenGame').default(ctx, canvas, game, Listener)
 
-    const functions = require('./functions').default(canvas, game, Listener)
+    const functions = require('./functions').default(ctx, canvas, game, Listener)
     switch (game.state.gameStage) {
         case 'game':
-            require('./RenderScreenGame').default(canvas, game, Listener, functions)
-            require('./RenderPopUpsBackground').default(canvas, game, Listener, functions)
-            require('./RenderArrows').default(canvas, game, Listener, functions)
-            require('./RenderNotes').default(canvas, game, Listener, functions)
-            require('./RenderBongoCat').default(canvas, game, Listener, functions)
-            require('./RenderScreenInfoGame').default(canvas, game, Listener, functions)
-            require('./RenderBars').default(canvas, game, Listener, functions)
-            require('./RenderPopUps').default(canvas, game, Listener, functions)
-            if (game.state.music && game.state.music.paused && game.state.music.currentTime > 0) require('./RenderPause').default(canvas, game, Listener, functions)
+            require('./RenderScreenGame').default(ctx, canvas, game, Listener, functions)
+            require('./RenderPopUpsBackground').default(ctx, canvas, game, Listener, functions)
+            require('./RenderArrows').default(ctx, canvas, game, Listener, functions)
+            require('./RenderNotes').default(ctx, canvas, game, Listener, functions)
+            require('./RenderBongoCat').default(ctx, canvas, game, Listener, functions)
+            require('./RenderScreenInfoGame').default(ctx, canvas, game, Listener, functions)
+            require('./RenderBars').default(ctx, canvas, game, Listener, functions)
+            require('./RenderPopUps').default(ctx, canvas, game, Listener, functions)
+            if (game.state.music && game.state.music.paused && game.state.music.currentTime > 0) require('./RenderPause').default(ctx, canvas, game, Listener, functions)
             break
         case 'menu':
-            require('./RenderMenuScreen').default(canvas, game, Listener, functions)
+            require('./RenderMenuScreen').default(ctx, canvas, game, Listener, functions)
             break
         case 'settings':
-            require('./RenderSettingsScreen').default(canvas, game, Listener, functions)
+            require('./RenderSettingsScreen').default(ctx, canvas, game, Listener, functions)
             break
         case 'onlineServerList':
-            require('./RenderOnlineServerListScreen').default(canvas, game, Listener, functions)
+            require('./RenderOnlineServerListScreen').default(ctx, canvas, game, Listener, functions)
             break
         case 'selectMusic':
-            require('./RenderMusicSelectScreen').default(canvas, game, Listener, functions)
+            require('./RenderMusicSelectScreen').default(ctx, canvas, game, Listener, functions)
             break
         case 'dead':
-            require('./RenderDeadScreen').default(canvas, game, Listener, functions)
+            require('./RenderDeadScreen').default(ctx, canvas, game, Listener, functions)
             break
         case 'loading':
-            await require('./RenderLoadingScreen').default(canvas, game, Listener, functions)
+            await require('./RenderLoadingScreen').default(ctx, canvas, game, Listener, functions)
             break
         case 'score':
-            require('./RenderScoreScreen').default(canvas, game, Listener, functions)
+            require('./RenderScoreScreen').default(ctx, canvas, game, Listener, functions)
             break
         case 'test':
-            require('./RenderTestScreen').default(canvas, game, Listener, functions)
+            require('./RenderTestScreen').default(ctx, canvas, game, Listener, functions)
             break
     }
 
-    //require('./RenderChat').default(canvas, game, Listener)
-    require('./RenderScreenInformation').default(canvas, game, Listener, functions)
+    //require('./RenderChat').default(ctx, canvas, game, Listener)
+    require('./RenderScreenInformation').default(ctx, canvas, game, Listener, functions)
 
     game.gameLoop()
     if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration) game.state.musicEventListener('gameLoopFullFPS', { listenerState: Listener.state }, game.state)

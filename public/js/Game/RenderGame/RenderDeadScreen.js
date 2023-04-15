@@ -1,6 +1,4 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
-
+export default async (ctx, canvas, game, Listener, functions) => {
     let BFImageData = game.state.images['imgs/BF/Dead.png']
     let BFImage = BFImageData.image
     let BFImageConfig = BFImageData.animationConfig

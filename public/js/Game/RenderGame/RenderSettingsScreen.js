@@ -1,6 +1,4 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
-
+export default async (ctx, canvas, game, Listener, functions) => {
     let settingsSelect = game.state.selectSettingsOption.settingsSelect
     let Y = (canvas.height/2-(80/2)+47)-settingsSelect*(80)
 

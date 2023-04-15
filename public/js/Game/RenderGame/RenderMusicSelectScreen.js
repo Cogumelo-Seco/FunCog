@@ -1,6 +1,4 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
-
+export default async (ctx, canvas, game, Listener, functions) => {
     ctx.fillStyle = 'rgb(0, 0, 0, 0.95)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 

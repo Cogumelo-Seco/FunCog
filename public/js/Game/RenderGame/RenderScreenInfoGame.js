@@ -1,6 +1,4 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
-
+export default async (ctx, canvas, game, Listener, functions) => {
     let downScroll = game.state.smallFunctions.getConfig('DownScroll')
     let middleScroll = game.state.smallFunctions.getConfig('MiddleScroll')
 
@@ -91,9 +89,9 @@ export default async (canvas, game, Listener, functions) => {
     let rating = game.state.musicInfo.ratings[game.state.musicInfo.ratings.length-1]
     if (rating) {
         let percent = (+new Date()-rating.time)/700 < 1 ? (+new Date()-rating.time)/700 : 1
-        ctx.font = `bold ${15**game.state.resizeNote*((1-percent)/3+1)}px Arial`
 
         functions.fillText({
+            font: `bold ${14**game.state.resizeNote*((1-percent)/3+1)}px Arial`,
             alpha: percent > 0.6 ? 1-(percent-0.4)/0.6 : game.state.alphaHUD,
             style: `hsl(${110-Math.abs(rating.hitNote)}, 100%, 40%)`,
             text: rating.hitNote?.toFixed(2)+'ms',
@@ -101,7 +99,9 @@ export default async (canvas, game, Listener, functions) => {
             y: arrowsInfo[arrowsInfo.length-1]?.Y-(10**game.state.resizeNote),
             add: 2
         })
+
         functions.fillText({
+            font: `bold ${17**game.state.resizeNote*((1-percent)/3+1)}px Arial`,
             text: game.state.musicInfo.combo+'X',
             x: ratingInfoX+5, 
             y: arrowsInfo[arrowsInfo.length-1]?.Y+(30**game.state.resizeNote),

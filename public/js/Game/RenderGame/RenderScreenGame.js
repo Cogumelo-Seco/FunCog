@@ -1,6 +1,4 @@
-export default async (canvas, game, Listener, functions) => {
-    const ctx = canvas.getContext('2d')
-
+export default async (ctx, canvas, game, Listener, functions) => {
     ctx.globalAlpha = 0
     for (let i in game.state.toLoadInScreen) {
         let data = game.state.toLoadInScreen[i]
