@@ -6,7 +6,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     let loadingBarMarginIn = 2
     let loadingPercent = game.state.loadingSong.loaded/game.state.loadingSong.total
 
-    if (loadingPercent < 1) {
+    if (!game.state.loadingSong.complete) {
         ctx.fillStyle = 'black'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
 

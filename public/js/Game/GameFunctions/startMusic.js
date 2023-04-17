@@ -66,7 +66,8 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
         let musicData = JSON.parse(JSON.stringify(require(`../../../Musics/data/${musicInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)))
         let musicNotes = musicData.song.notes
         let musicNotesTotal = ((musicNotes.map(a => a.sectionNotes)).map(a => a.length)).reduce((a, b) => a+b)
-
+        
+        state.loadingSong.complete = false
         state.loadingSong.msg = 'Loading...'
         state.loadingSong.loaded = 0
         state.loadingSong.total = musicInfo.toLoad.length
@@ -116,9 +117,13 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             state.loadingSong.loaded += 1
             state.loadingSong.msg = `(${state.loadingSong.loaded}/${state.loadingSong.total}) - ${msg}`
 
-            if (state.loadingSong.loaded >= state.loadingSong.total && !state.music)
-                loaded()
-            else if (musicInfo.toLoad[state.loadingSong.loaded]) 
+            if (state.loadingSong.loaded >= state.loadingSong.total && !state.music) {
+                state.loadingSong.msg = `(${state.loadingSong.loaded}/${state.loadingSong.total}) - Complete loading`
+                setTimeout(() => {
+                    state.loadingSong.complete = true
+                    loaded()
+                }, 500)
+            } else if (musicInfo.toLoad[state.loadingSong.loaded]) 
                 load(musicInfo.toLoad[state.loadingSong.loaded])
         }
 
@@ -148,7 +153,6 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                     sound.src = dir.split('/')[0] == 'Sounds' ? `/${dir}` : link
                     sound.preload = 'auto'
                     state.sounds[dir] = sound
-                    console.log(dir)
                 //}
             } else {
                 /*if (state.images[dir]?.image) newLoad()

@@ -201,6 +201,7 @@ function createGame(Listener, canvas, socket) {
             msg: 'Loading...'
         },
         loadingSong: {
+            complete: false,
             loaded: 0,
             total: 0,
             msg: 'Loading...'
