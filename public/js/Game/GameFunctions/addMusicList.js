@@ -1294,6 +1294,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    dev: true,
                     name: 'Bushwhack',
                     menuColor: '#ff8e3e',
                     difficulties: [ 2 ],
