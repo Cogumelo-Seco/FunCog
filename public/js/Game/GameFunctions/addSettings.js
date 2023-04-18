@@ -503,6 +503,48 @@ export default async (state) => {
             ],
         },
         {
+            name: 'Up',
+            type: 'KeyBind',
+            id: 'KeyUp',
+            content: 'ArrowUp',
+            menuColor: 'cyan'
+        },
+        {
+            name: 'Down',
+            type: 'KeyBind',
+            id: 'KeyDown',
+            content: 'ArrowDown',
+            menuColor: 'cyan'
+        },
+        {
+            name: 'Left',
+            type: 'KeyBind',
+            id: 'KeyLeft',
+            content: 'ArrowLeft',
+            menuColor: 'cyan'
+        },
+        {
+            name: 'Right',
+            type: 'KeyBind',
+            id: 'KeyRight',
+            content: 'ArrowRight',
+            menuColor: 'cyan'
+        },
+        {
+            name: 'Enter',
+            type: 'KeyBind',
+            id: 'KeyEnter',
+            content: 'Enter',
+            menuColor: 'cyan'
+        },
+        {
+            name: 'Exit',
+            type: 'KeyBind',
+            id: 'KeyExit',
+            content: 'Escape',
+            menuColor: 'cyan'
+        },
+        {
             name: 'Gameplay',
             type: 'ConfigTitle'
         },

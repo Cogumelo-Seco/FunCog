@@ -10,6 +10,8 @@ export default function createListener(socket) {
         onChat: 'off',
         messageContent: '',
         renderChat: true,
+        gamepadLoop: false,
+        gamepadButtons: {},
         mouseInfo: {
             x: NaN,
             y: NaN,
@@ -75,13 +77,85 @@ export default function createListener(socket) {
         else handleKeys({ event: { code: 'WheelDown' }, on: true })
     }
 
+    window.addEventListener("gamepadconnected", (e) => {
+        console.log(
+            "Gamepad connected at index %d: %s. %d buttons, %d axes.",
+            e.gamepad.index,
+            e.gamepad.id,
+            e.gamepad.buttons.length,
+            e.gamepad.axes.length
+        );
+
+        const replaces = (b) => {
+            switch(b) {
+                case '0':
+                    return 'Enter'
+                case '1':
+                    return 'Escape'
+                case '9':
+                    return 'Enter'
+                case '12':
+                    return 'ArrowUp'
+                case '13':
+                    return 'ArrowDown'
+                case '14':
+                    return 'ArrowLeft'
+                case '15':
+                    return 'ArrowRight'
+            }
+            return b
+        }
+        const verifyButtonPressed  = (b) => typeof b === "object" ? b.pressed : b === 1.0
+        const gamepadLoop = () => {
+            const gamepads = navigator.getGamepads();
+            if (!gamepads || !gamepads[0]) return state.gamepadLoop = false
+            state.gamepadLoop = true
+            let gamepad = gamepads[0]
+
+            for (let i in gamepad.buttons) {
+                let buttonId = i
+                let buttonPressed = verifyButtonPressed(gamepad.buttons[i])
+                if (state.gamepadButtons[buttonId] == undefined) state.gamepadButtons[buttonId] = {
+                    pressed: 0,
+                    count: 0
+                }
+
+                if (+new Date()-state.gamepadButtons[buttonId].pressed >= 150 && buttonPressed || state.gamepadButtons[buttonId].pressed && !buttonPressed) {
+                    state.gamepadButtons[buttonId].pressed = buttonPressed ? +new Date() : false
+                    state.gamepadButtons[buttonId].count = buttonPressed ? state.gamepadButtons[buttonId].count+1 : 1
+                    handleKeys({ event: { code: replaces(i), repeat: state.gamepadButtons[buttonId].count >= 3 }, on: buttonPressed })
+
+                    if (buttonPressed) console.log(buttonId)
+                }
+            }
+
+            window.requestAnimationFrame(gamepadLoop)
+        }
+        if (!state.gamepadLoop) gamepadLoop()
+    });
+
+    window.addEventListener("gamepaddisconnected", (e) => {
+        state.game.state.musicInfo.oldPauseTime = state.game.state.music?.currentTime
+        state.game.state.music?.pause()
+        if (state.game.state.musicVoice) state.game.state.musicVoice.pause()
+        if (state.game.state.videoBackground) state.game.state.videoBackground.pause()
+    })
+
     document.addEventListener('keydown', (event) => handleKeys({ event, on: true }))
     document.addEventListener('keyup', (event) => handleKeys({ event, on: false }))
     
     async function handleKeys({ event, on }) {
+        let keys = {
+            KeyUp: state.game?.state.smallFunctions.getConfig('KeyUp'),
+            KeyDown: state.game?.state.smallFunctions.getConfig('KeyDown'),
+            KeyLeft: state.game?.state.smallFunctions.getConfig('KeyLeft'),
+            KeyRight: state.game?.state.smallFunctions.getConfig('KeyRight'),
+            KeyEnter: state.game?.state.smallFunctions.getConfig('KeyEnter'),
+            KeyExit: state.game?.state.smallFunctions.getConfig('KeyExit')
+        }
+
         let keyPressed = event.code
         let lastClick = state.keys[keyPressed]
-        console.log(+new Date()-state.keys[keyPressed]?.time)
         let hold = !state.keys[keyPressed] || +new Date()-state.keys[keyPressed]?.time <= 50
         state.keys[keyPressed] = {
             key: event.key || '',
@@ -105,7 +179,7 @@ export default function createListener(socket) {
                 if (button && on && button.gameStage?.includes(state.game.state.gameStage) && button.keyPress?.includes(keyPressed)) button.onClick()
             }
 
-            if (!state.pauseGameKeys) for (let arrowID in state.game.state.arrowsInfo) {
+            if (!state.pauseGameKeys && !event.repeat) for (let arrowID in state.game.state.arrowsInfo) {
                 if (!state.arrows[arrowID]) {
                     state.arrows[arrowID] = { state: 'noNote', click: false }
                     state.keys[state.game.state.smallFunctions.getKey(arrowID)] = {
@@ -138,7 +212,7 @@ export default function createListener(socket) {
             }
 
             if (state.game.state.gameStage == 'game') {
-                /*if (keyPressed == 'Escape' && on && state.keys[keyPressed].time-state.keys[keyPressed].lastClickTime <= 100 && !state.game.state.online && state.game.state.music.currentTime >= 1) {
+                /*if (keyPressed == keys.KeyExit && on && state.keys[keyPressed].time-state.keys[keyPressed].lastClickTime <= 100 && !state.game.state.online && state.game.state.music.currentTime >= 1) {
                     let botPlay = state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content
                     state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
                     state.game.state.musicInfo.health = -100
@@ -146,13 +220,13 @@ export default function createListener(socket) {
                 }*/
                 let gameVideoElement = document.getElementById('gameVideo')
                 
-                if (keyPressed == 'Enter' && on && gameVideoElement.duration >= 6 && state.game.state.music.currentTime <= 0) {
+                if (keyPressed == keys.KeyEnter && on && gameVideoElement.duration >= 6 && state.game.state.music.currentTime <= 0) {
                     gameVideoElement.currentTime = gameVideoElement.duration
                     gameVideoElement.style.display = 'none'
                 }
 
                 if (state.pauseGameKeys) return
-                if (keyPressed == 'Escape' && on && !state.game.state.online && state.game.state.countdown <= -1) {
+                if (keyPressed == keys.KeyExit && on && !state.game.state.online && state.game.state.countdown <= -1) {
                     if (state.game.state.music.paused) {
                         let count = 0
                         function loop() {
@@ -181,27 +255,27 @@ export default function createListener(socket) {
                     }
                 }
 
-                keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
+                keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
                 let selectPauseOption = state.game.state.selectPauseOption
                 if (on && state.game.state.music?.paused && state.game.state.music.currentTime > 0) switch (keyPressed) {
-                    case 'ArrowDown':
+                    case keys.KeyDown:
                         if (selectPauseOption.pauseSelect < selectPauseOption.pauseOptions.length-1) {
                             selectPauseOption.pauseSelect += 1
                             state.game.playSong('Sounds/scrollMenu.ogg')
                         }
                         break
-                    case 'ArrowUp':
+                    case keys.KeyUp:
                         if (selectPauseOption.pauseSelect > 0) {
                             selectPauseOption.pauseSelect -= 1
                             state.game.playSong('Sounds/scrollMenu.ogg')
                         }
                         break
-                    case 'Enter':
+                    case keys.KeyEnter:
                         let option = selectPauseOption.pauseOptions[selectPauseOption.pauseSelect]
 
                         switch (option.name) {
                             case 'Resume':
-                                handleKeys({ event: { code: 'Escape' }, on: true })
+                                handleKeys({ event: { code: keys.KeyExit }, on: true })
                                 break
                             case 'Exit':
                                 state.game.state.musicInfo.dead = true
@@ -223,7 +297,7 @@ export default function createListener(socket) {
                 }
             }
 
-            if (keyPressed == 'Enter' && state.game.state.gameStage == 'dead' && !state.game.state.musicMenu?.src.includes('gameOverEnd') && state.game.state.gameStageTime+2000 < +new Date()) {
+            if (keyPressed == keys.KeyEnter && state.game.state.gameStage == 'dead' && !state.game.state.musicMenu?.src.includes('gameOverEnd') && state.game.state.gameStageTime+2000 < +new Date()) {
                 state.game.state.playSong('Sounds/gameOverEnd.ogg', { musicMenu: true })
                 //state.game.state.selectMusicMenu.musicSelect = -1
                 setTimeout(() => state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu'), 1500)
@@ -238,19 +312,19 @@ export default function createListener(socket) {
             }
 
             if (state.game.state.gameStage == 'selectMusic' && on) {
-                keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
+                keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
                 let selectMusicMenu = state.game.state.selectMusicMenu
 
                 if (state.game.state.gameStageTime != 0 && state.game.state.gameStageTime+100 <= +new Date()) switch (keyPressed) {
-                    case 'ArrowRight':
+                    case keys.KeyRight:
                         selectMusicMenu.currentSelection = selectMusicMenu.currentSelection+1 >= 3 ? 0 : selectMusicMenu.currentSelection+1
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'ArrowLeft':
+                    case keys.KeyLeft:
                         selectMusicMenu.currentSelection = selectMusicMenu.currentSelection-1 <= -1 ? 2 : selectMusicMenu.currentSelection-1
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'ArrowDown':
+                    case keys.KeyDown:
                         switch(selectMusicMenu.currentSelection) {
                             case 0:
                                 selectMusicMenu.musicSelect = 0
@@ -265,7 +339,7 @@ export default function createListener(socket) {
                         }
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'ArrowUp':
+                    case keys.KeyUp:
                         switch(selectMusicMenu.currentSelection) {
                             case 0:
                                 selectMusicMenu.musicSelect = 0
@@ -280,7 +354,7 @@ export default function createListener(socket) {
                         }
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'Enter':
+                    case keys.KeyEnter:
                         let musicInfo = state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics[state.game.state.selectMusicMenu.musicSelect]
 
                         if (musicInfo && state.game.state.online) {
@@ -311,15 +385,15 @@ export default function createListener(socket) {
                             })
                         }
                         break
-                    /*case 'ArrowUp':
+                    /*case keys.KeyUp:
                         state.game.state.selectMusicMenu.musicSelect = state.game.state.selectMusicMenu.musicSelect-1 < -1 ? state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics.length-1 : state.game.state.selectMusicMenu.musicSelect-1
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'ArrowDown':
+                    case keys.KeyDown:
                         state.game.state.selectMusicMenu.musicSelect = state.game.state.selectMusicMenu.musicSelect+1 > state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics.length-1 ? -1 : state.game.state.selectMusicMenu.musicSelect+1
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'ArrowLeft':
+                    case keys.KeyLeft:
                         if (state.game.state.selectMusicMenu.musicSelect == -1) 
                             state.game.state.selectMusicMenu.modSelect = !state.game.state.musics[state.game.state.selectMusicMenu.modSelect-1] ? state.game.state.musics.length-1 : state.game.state.selectMusicMenu.modSelect-1
                         else 
@@ -327,7 +401,7 @@ export default function createListener(socket) {
 
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'ArrowRight':
+                    case keys.KeyRight:
                         if (state.game.state.selectMusicMenu.musicSelect == -1) 
                             state.game.state.selectMusicMenu.modSelect = !state.game.state.musics[state.game.state.selectMusicMenu.modSelect+1] ? 0 : state.game.state.selectMusicMenu.modSelect+1
                         else 
@@ -335,7 +409,7 @@ export default function createListener(socket) {
 
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'Enter':
+                    case keys.KeyEnter:
                         if (state.game.state.selectMusicMenu.musicSelect < 0) return
                         let musicInfo = state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics[state.game.state.selectMusicMenu.musicSelect]
 
@@ -371,30 +445,30 @@ export default function createListener(socket) {
             }
 
             if (state.game.state.gameStage == 'onlineServerList' && on) {
-                keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
+                keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
 
                 switch (keyPressed) {
-                    case 'ArrowUp':
+                    case keys.KeyUp:
                         if (!state.game.state.selectServerOption.createServer) {
                             state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect <= 0 ? (state.game.state.selectServerOption.listServers.filter(s => s.open)).length-1 : state.game.state.selectServerOption.serverSelect-1
                             state.game.playSong('Sounds/scrollMenu.ogg')
                         }
                         break
-                    case 'ArrowDown':
+                    case keys.KeyDown:
                         if (!state.game.state.selectServerOption.createServer) {
                             state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect >= (state.game.state.selectServerOption.listServers.filter(s => s.open)).length-1 ? 0 : state.game.state.selectServerOption.serverSelect+1
                             state.game.playSong('Sounds/scrollMenu.ogg')
                         }
                         break
-                    case 'ArrowLeft':
+                    case keys.KeyLeft:
                         state.game.state.selectServerOption.createServer = true
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'ArrowRight':
+                    case keys.KeyRight:
                         state.game.state.selectServerOption.createServer = false
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'Enter':
+                    case keys.KeyEnter:
                         let filtredServers = state.game.state.selectServerOption.listServers.filter(s => s.open)
                         //if (!state.game.state.debug) state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
 
@@ -429,41 +503,39 @@ export default function createListener(socket) {
             }
 
             if (state.game.state.gameStage == 'settings' && on) {
-                keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
+                keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
                 let currentConfig = state.game.state.selectSettingsOption.settingsOptionsFiltered[state.game.state.selectSettingsOption.settingsSelect]
 
                 if (state.onChangeKeyBind) {
-                    if (keyPressed != 'Escape') currentConfig.content = keyPressed
+                    if (keyPressed != keys.KeyExit && on) currentConfig.content = keyPressed
                     state.onChangeKeyBind = false
                 } else switch (keyPressed) {
-                    case 'ArrowUp':
+                    case keys.KeyUp:
                         state.game.state.selectSettingsOption.settingsSelect = state.game.state.selectSettingsOption.settingsSelect <= 0 ? state.game.state.selectSettingsOption.settingsOptionsFiltered.length-1 : state.game.state.selectSettingsOption.settingsSelect-1
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'ArrowDown':
+                    case keys.KeyDown:
                         state.game.state.selectSettingsOption.settingsSelect = state.game.state.selectSettingsOption.settingsSelect >= state.game.state.selectSettingsOption.settingsOptionsFiltered.length-1 ? 0 : state.game.state.selectSettingsOption.settingsSelect+1
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'ArrowLeft':
+                    case keys.KeyLeft:
                         if (currentConfig.type == 'Number' && currentConfig.content > currentConfig.min) {
                             currentConfig.content = Number((currentConfig.content-currentConfig.add).toFixed(1))
                             state.game.playSong('Sounds/scrollMenu.ogg')
                         }
                         break
-                    case 'ArrowRight':
+                    case keys.KeyRight:
                         if (currentConfig.type == 'Number' && currentConfig.content < currentConfig.max) {
                             currentConfig.content = Number((currentConfig.content+currentConfig.add).toFixed(1))
                             state.game.playSong('Sounds/scrollMenu.ogg')
                         }
                         break
-                    case 'Enter':
+                    case keys.KeyEnter:
                         switch (currentConfig.type) {
                             case 'ConfigTitle':
                                 if (currentConfig.content) {
                                     let options = Object.keys(state.game.state.selectSettingsOption.settingsOptions[1])
-                                    console.log(options)
-
-                                    currentConfig.currentOption = currentConfig.currentOption >= options.length-2 ? 0 : currentConfig.currentOption+1 
+                                    currentConfig.currentOption = currentConfig.currentOption >= options.length-1 ? 0 : currentConfig.currentOption+1 
                                     currentConfig.content = options[currentConfig.currentOption]
                                     state.game.playSong('Sounds/scrollMenu.ogg')
                                 }
@@ -500,18 +572,18 @@ export default function createListener(socket) {
             }
 
             if (state.game.state.gameStage == 'menu' && on) {
-                keyPressed = keyPressed.replace('WheelUp', 'ArrowUp').replace('WheelDown', 'ArrowDown')
+                keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
                 
                 switch (keyPressed) {
-                    case 'ArrowUp':
+                    case keys.KeyUp:
                         state.game.state.selectMenuOption.menuSelect = state.game.state.selectMenuOption.menuSelect <= 0 ? state.game.state.selectMenuOption.menuOptions.length-1 : state.game.state.selectMenuOption.menuSelect-1
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'ArrowDown':
+                    case keys.KeyDown:
                         state.game.state.selectMenuOption.menuSelect = state.game.state.selectMenuOption.menuSelect >= state.game.state.selectMenuOption.menuOptions.length-1 ? 0 : state.game.state.selectMenuOption.menuSelect+1
                         state.game.playSong('Sounds/scrollMenu.ogg')
                         break
-                    case 'Enter':
+                    case keys.KeyEnter:
                         if (state.game.state.selectMenuOption.menuOptions[state.game.state.selectMenuOption.menuSelect] == 'Singleplayer') {
                             state.game.state.online = false
                             state.game.state.smallFunctions.redirectGameStage('selectMusic')

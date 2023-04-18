@@ -50,15 +50,10 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
     let resizeMsg = 0.04
     let msgArr = [
-        { msg: '- Novo input no chat', color: 'rgb(0, 150, 255)' },
-        { msg: '- Novo sistema de jumpscare implementado', color: 'rgb(0, 150, 255)' },
-        { msg: ' na monochrome', color: 'rgb(0, 150, 255)' },
-        { msg: '- Pequena mudança nos bugs da Missingno', color: 'rgb(0, 150, 255)' },
+        { msg: '- Sistema para controle adicionado!!', color: 'rgb(0, 150, 255)' },
         { msg: '' },
         { msg: '- Mod "Bad Apple" adicionado!', color: 'rgb(0, 255, 0)' },
-        { msg: '- Tema claro?', color: 'rgb(0, 255, 0)' },
         { msg: '' },
-        { msg: '- Bug das garras Termination corrigido', color: 'rgb(255, 255, 0)' },
         { msg: '- Multiplayer desligado Temporariamente', color: 'rgb(255, 255, 0)' },
     ]
 

@@ -252,8 +252,6 @@ function createGame(Listener, canvas, socket) {
 
         let botPlay = state.smallFunctions.getConfig('botPlay')
         let ScrollSpeed = state.smallFunctions.getConfig('ScrollSpeed')
-        
-        
 
         document.title = `Cogu - ${state.gameStage}`
 

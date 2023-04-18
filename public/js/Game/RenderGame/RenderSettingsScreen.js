@@ -11,6 +11,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         if (!config.type && lastTitle) {
             for (let a in options[i][lastTitle.content]) {
                 config = options[i][lastTitle.content][a]
+                config.menuColor = 'yellow'
                 newConfig.push(config)
             }
             options = options.slice(0, 1).concat(newConfig).concat(options.slice(2, options.length))
