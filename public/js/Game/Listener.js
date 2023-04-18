@@ -121,7 +121,7 @@ export default function createListener(socket) {
                 }
 
                 if (+new Date()-state.gamepadButtons[buttonId].pressed >= 150 && buttonPressed || state.gamepadButtons[buttonId].pressed && !buttonPressed) {
-                    state.gamepadButtons[buttonId].pressed = buttonPressed ? +new Date() : false
+                    state.gamepadButtons[buttonId].pressed = buttonPressed ? +new Date() : 0
                     state.gamepadButtons[buttonId].count = buttonPressed ? state.gamepadButtons[buttonId].count+1 : 1
                     handleKeys({ event: { code: replaces(i), repeat: state.gamepadButtons[buttonId].count >= 3 }, on: buttonPressed })
 
