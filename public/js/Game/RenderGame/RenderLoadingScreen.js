@@ -12,7 +12,8 @@ export default async (ctx, canvas, game, Listener, functions) => {
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.arc(canvas.width/2, canvas.height/2, 80, -(Math.PI)*loadinPercent, Math.PI*loadinPercent)
+    //ctx.arc(canvas.width/2, canvas.height/2, 80, -(Math.PI)*loadinPercent, Math.PI*loadinPercent)
+    ctx.arc(canvas.width/2, canvas.height/2, 80, -(Math.PI/2), Math.PI*1.5*loadinPercent, false)
     ctx.strokeStyle = `hsl(${300-loadinPercent*360}, 100%, 40%)`
     ctx.stroke();
 

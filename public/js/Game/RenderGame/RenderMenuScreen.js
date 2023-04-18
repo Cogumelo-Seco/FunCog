@@ -28,6 +28,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             onClick: () => {
                 game.state.selectMenuOption.menuSelect = i
                 Listener.handleKeys({ event: { code: 'Enter' }, on: true })
+                setTimeout(() => game.state.selectMenuOption.menuSelect = 0, 200)
             }
         }
         
