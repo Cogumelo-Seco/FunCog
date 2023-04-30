@@ -2,7 +2,7 @@ export default function codesFunction(state, stateListener, socket) {
     setInterval(() => socket.emit('ping', +new Date()), 1000)
     socket.on('ping', (time) => state.ping = +new Date()-time || '???')
 
-    /*if (state.myConfig.logged)*/ socket.on('listServers', (listServers) => {
+    if (state.myConfig.logged) socket.on('listServers', (listServers) => {
         state.selectServerOption.listServers = listServers
         let server = listServers.find(s => s.id == state.serverId)
         if (server) state.serverInfo = server
@@ -25,16 +25,16 @@ export default function codesFunction(state, stateListener, socket) {
     })
 
     socket.on('messageHistory', (command) => {
-        //if (state.myConfig.logged) {
+        if (state.myConfig.logged) {
             state.messages = command || []
             require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'historyMessage')
-        //}
+        }
     })
 
     socket.on('message', (command) => {
-        //if (state.myConfig.logged) {
+        if (state.myConfig.logged) {
             state.messages.unshift(command)
             require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'newMessage')
-        //}
+        }
     })
 }
