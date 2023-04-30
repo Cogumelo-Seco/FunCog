@@ -1,5 +1,5 @@
 export default async (canvas, state, stateListener, command) => {
-    if ([ 'loading', 'login' ].includes(state.gameStage) || !state.myConfig.logged) return
+    //if ([ 'loading', 'login' ].includes(state.gameStage) || !state.myConfig.logged) return
 
     const messageBox = document.getElementById('message-box')
     const messageBoxContent = document.getElementById('message-box-content')
@@ -8,9 +8,88 @@ export default async (canvas, state, stateListener, command) => {
     const unreadMessageCounter = document.getElementById('unreadMessageCounter')
     const chat = document.getElementById('chat')
     chatButton.style.display = 'block'
+/*function replaces(text, type) {
+                            if (!text) return
+                            if (type == 'color' && text == 'DEFAULT-COLOR') return text = '#000000'
+                            
+                            text = text
+                                .replace(/{guildMemberCount}/g, 13)
+                                .replace(/{guildName}/g, guild.name)
+                                .replace(/{avatar}/g, user.avatarURL || '/imgs/avatar/Default.png')
+                                .replace(/{@member}/g, `<alpha-metion>@${user.username}</alpha-metion>`)
+                                .replace(/{member}/g, user.username)
+                                .replace(/{memberTag}/g, user.tag)
+                                .replace(/{memberId}/g, user.id)
+                                .replace(/{lv}/g, 13)
+            
+                            const re = /<code(?:\s[^>]*)?>[\s\S]*?<\/code>|`{3}([\S\s]*?)`{3}|`{2}([\S\s]*?)`{2}|`([^`]*)`|~~([\S\s]*?)~~|\*{2}([\s\S]*?)\*{2}(?!\*)|\*([^*]*)\*|__([\s\S]*?)__/g;
+                            let tmp = '';
+                            do {
+                                tmp = text;
+                                text = text.replace(re, (match, a, b, c, d, e, f, g) => {
+                                    if (a && type != 'title') return `<code ${type == 'content' ? 'class="content box"' : 'class="box"'}>${a}</code>`
+                                    if (b || c) return `<code ${type == 'content' ? 'class="inline content"' : 'class="inline"'}>${b || c}</code>`
+                                    if (d) return `<s>${d}</s>`
+                                    if (e) return `<b>${e}</b>`
+                                    if (f) return `<i>${f}</i>`
+                                    if (g) return `<u>${g}</u>`
+                                    return match
+                                });
+                            }  while (text != tmp);
+            
+                            return text
+                        }*/
+    function replaces(text, id) {
+        if (!text) return text
+
+        let update = false
+        text = text
+            .replace(/</g, '&lt;')
+            .replace(/&lt;span/g, '<span')
+            .replace(/&lt;\/span/g, '</span')
+        //console.log(text)
+        
+        text = text.replace(/&lt;@([\s\S]*?)&gt;|&lt;@([\s\S]*?)>/g, (match, a, b) => {
+            let metion = a || b
+            if (metion) {
+                update = true
+                if (metion.includes('|')) {
+                    id = metion.split('|')[0]
+                    metion = metion.split('|')[1]
+                }
+                return `<span class="metion" contentEditable="false"${id ? 'id="'+id+'"' : ''}>@${metion}</span> `
+            }
+            return match
+        });
+        return { text, update }
+    }
 
     if (command == 'gameLoop') {
-        let elements = messageBoxContent.querySelectorAll('.messageBoxText')
+        let { text, update } = replaces(messageBoxContent.innerHTML)
+        if (update && messageBoxContent.innerHTML !== text) {
+            messageBoxContent.innerHTML = text
+            let metions = messageBoxContent.getElementsByClassName('metion')
+            document.getSelection().collapse(document.getSelection().focusNode, metions.length*2)
+            /*setTimeout(() => {
+                let sel = document.getSelection();
+                console.log(sel)
+                if (sel.rangeCount > 0) {
+                    //var textNode = sel.focusNode;
+                    //var newOffset = sel.focusOffset + 2;
+                    sel.collapse(sel.focusNode, 2/*Math.min(textNode.length, newOffset));
+                }
+            }, 1000)*/
+            /*if(messageBoxContent.getSelection) {
+                var range = messageBoxContent.getSelection().getRangeAt(0);
+                range.setStart(range.startOffset + distance);
+            } else if (messageBoxContent.document.selection) {
+                var range = messageBoxContent.document.selection.createRange();
+                range.setStart(range.startOffset + distance);
+            }*/
+        }
+
+        return
+        /*let elements = messageBoxContent.querySelectorAll('.messageBoxText')
         let text = ''
         for (let i = 0;i <= elements.length;i++) {
             if (elements[i]) {
@@ -198,7 +277,92 @@ export default async (canvas, state, stateListener, command) => {
                     }
                 }
 
-                chatContent.appendChild(contentElement)*/
+                chatContent.appendChild(contentElement)
+
+                if (autoScroll) chatContent.scrollTop = chatContent.scrollHeight
+                message.loadTo = 'none'
+                message.unread = false
+            } else if (message.unread) {
+                if (message.content.includes(`@${state.socket.id}`)) {
+                    unreadMessagesAlert = true
+                    unreadMessages += 1
+                }
+                if (unreadMessages <= 0) unreadMessages = '.'
+            }
+        }*/
+    }
+
+    /*function metionPlayer(id) {
+        let player = state.serverPlayers[id]
+        if (player) {
+            let element = document.createElement('span')
+            element.className = 'messageBoxText metion'
+            element.id = 'metion'
+            element.contentEditable = false
+            element.innerText = '@'+player.name
+            element.name = id
+
+            messageBoxContent.appendChild(element)
+        }
+    }
+    */
+
+    state.messages = state.messages.slice(0, 1000)
+    let messages = state.messages
+    let unreadMessagesAlert = false
+    let unreadMessages = 0
+
+    let autoScroll = true
+    for (let i in messages)  {
+        let message = messages[messages.length-1-i]
+        let lastMessage = messages[messages.length-i] || null
+
+        if (message.loadTo == 'all' || message.loadTo == state.socket.id) {
+            if (chat.style.display == 'block') {
+                if (command == 'newMessage' && chatContent.scrollTop < chatContent.scrollHeight-500) autoScroll = false
+                state.serverPlayers[message.author.id] = message.author
+
+                if (lastMessage && (lastMessage.author.id != message.author.id || lastMessage.timestamp+120000 <= message.timestamp) || !lastMessage) {
+                    let headerElement = document.createElement('p')
+                    headerElement.id = 'Header'
+                    headerElement.style = `color: ${message.colorName?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp+(Number(message.colorName.split('-')[1]) || 0)}, 100%, 50%)` : message.colorName || 'rgb(0, 229, 255)'} ${message.nameAdditionalCSS ? ';'+message.nameAdditionalCSS : ''}`
+
+                    let nameElement = document.createElement('span')
+                    nameElement.id = 'Name'
+                    nameElement.innerText = `${message.author.name} ${message.emoji || '' } `
+
+                    let avatarElement = document.createElement('img')
+                    avatarElement.id = 'Avatar'
+                    avatarElement.src = message.author.avatar || './imgs/sticker-sla.png'
+
+                    let timestampElement = document.createElement('span')
+                    timestampElement.id = 'Timestamp'
+                    timestampElement.innerText = `${new Date(message.timestamp).toLocaleDateString()} - ${new Date(message.timestamp).toLocaleTimeString()}`
+
+                    chatContent.appendChild(avatarElement)
+                    headerElement.appendChild(nameElement)
+                    headerElement.appendChild(timestampElement)
+                    chatContent.appendChild(headerElement)
+
+                    nameElement.addEventListener('click', () => {
+                        if (message.author.id && !message.author.server) {
+                            metionPlayer(message.author.id)
+                        }
+                    })
+                }
+
+                let contentElement = document.createElement('p')
+                contentElement.id = 'Content'
+                contentElement.style = `color: ${message.colorContent?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp+(Number(message.colorContent.split('-')[1]) || 0)}, 100%, 50%)` : message.colorContent || 'white'} ${message.messageAdditionalCSS ? ';'+message.messageAdditionalCSS : ''}`
+                contentElement.innerHTML = replaces(message.content).text
+                let metionElements = contentElement.getElementsByClassName('metion')
+                for (let element of metionElements) element.onclick = () => {
+                    metionPlayer(element.id)
+                }
+                for (let element of metionElements) {
+                    if (element.id == state.socket.id && !contentElement.className.includes('Mentioned')) contentElement.className += 'Mentioned'
+                }
+                chatContent.appendChild(contentElement)
 
                 if (autoScroll) chatContent.scrollTop = chatContent.scrollHeight
                 message.loadTo = 'none'
@@ -216,14 +380,8 @@ export default async (canvas, state, stateListener, command) => {
     function metionPlayer(id) {
         let player = state.serverPlayers[id]
         if (player) {
-            let element = document.createElement('span')
-            element.className = 'messageBoxText metion'
-            element.id = 'metion'
-            element.contentEditable = false
-            element.innerText = '@'+player.name
-            element.name = id
-
-            messageBoxContent.appendChild(element)
+            messageBoxContent.innerHTML += `<span class="metion" contentEditable="false" id="${player.id || null}">@${player.name || player.id}</span> `
+            messageBoxContent.focus()
         }
     }
 

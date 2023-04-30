@@ -54,7 +54,33 @@ export default function chat(state, socket) {
     }
 
     function send() {
-        let elements = messageBoxContent.querySelectorAll('.messageBoxText')
+        let content = messageBoxContent.innerHTML
+        content = content.replace(/<span([\s\S]*?)>@|<\/span>/g, (match, a, b) => {
+            if (a) {
+                let id = a.split('id=')[1].replace(/"/g, '')
+                return `<@${id}|`
+            }
+            if (b) return `>`
+            return match
+        });
+        
+        if (content.split(' ')[0] == '/s') state.game.state.gameStage = content.split(' ')[1]
+        else socket.emit('message', {
+            author: {
+                name: state.game.state.myConfig.author.name || socket.id.slice(0, 20),
+                avatar: state.game.state.myConfig.author.avatar || null,
+                id: socket.id
+            },
+            colorName: state.game.state.myConfig.colorName || null,
+            colorContent: state.game.state.myConfig.colorContent || null,
+            emoji: state.game.state.myConfig.emoji || null,
+            loadTo: 'all',
+            content,
+        })
+
+        messageBoxContent.innerHTML = ''
+        setTimeout(() => messageBoxContent.innerHTML = '', 100)
+        /*let elements = messageBoxContent.querySelectorAll('.messageBoxText')
         let content = ''
         for (let i = 0;i <= elements.length;i++) {
             if (elements[i]) {
@@ -79,7 +105,7 @@ export default function chat(state, socket) {
             content,
         })
 
-        messageBoxContent.innerHTML = '<span className="messageBoxText" contentEditable="true"></span>'
+        messageBoxContent.innerHTML = '<span className="messageBoxText" contentEditable="true"></span>'*/
 
         /*if (content.split(' ')[0] == '/s') state.game.state.gameStage = content.split(' ')[1]
         else socket.emit('message', {
@@ -102,6 +128,11 @@ export default function chat(state, socket) {
 
     function keyPressed(event) {
         if (state.pauseGameKeys) return;
+        
+        if (event.code == 'Escape' && state.onChat == 'on') return openCloseChat({ pointerType: 'mouse' })
+        if (event.code == 'Enter') send()
+
+        /*
         
         //if ((event.code == 'NumpadDivide' || event.code == 'KeyT') && state.onChat == 'off') return openCloseChat({ pointerType: 'mouse' })
         if (event.code == 'Escape' && state.onChat == 'on') return openCloseChat({ pointerType: 'mouse' })

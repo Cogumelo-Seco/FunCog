@@ -357,10 +357,8 @@ const Game = (props) => {
 
                 <div id="chat">
                     <div id="chat-content" />
-                    <div id="message-box" maxLength="200">
-                        <div id="message-box-content">
-                            <span className="messageBoxText" contentEditable="true"></span>
-                        </div>
+                    <div id="message-box">
+                        <div id="message-box-content" contentEditable="true" />
                     </div>
                 </div>
             </body>
@@ -370,12 +368,10 @@ const Game = (props) => {
 
 export async function getStaticProps() {
     const SERVER = process.env.SERVER
-    const SERVER2 = process.env.SERVER2
 
     return {
         props: {
-            SERVER,
-            SERVER2,
+            SERVER
         },
         revalidate: 1800
     }

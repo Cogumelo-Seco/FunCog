@@ -12,7 +12,7 @@ section {
     height: 100%;
 }
 
-canvas#gameCanvas {
+canvas {
     /*image-rendering: pixelated;
     image-rendering: crisp-edges;
     image-rendering: -moz-crisp-edges;*/
@@ -58,7 +58,7 @@ video#gameVideoBackground {
 /* Chat */
 
 button#chat-button {
-    display: none;
+    display: block;
     position: absolute;
     top: 5px;
     left: 5px;
@@ -186,7 +186,7 @@ div#message-box-content {
     top: 50%;
     transform: translateY(-50%);*/
 }
-
+/*
 div#message-box .messageBoxText {
     display: inline-block;
     word-wrap: break-word;
@@ -196,7 +196,7 @@ div#message-box .messageBoxText {
     min-height: 13px;
     min-width: 15px;
     background-color: rgba(0, 0, 0, 0.13);
-}
+}*/
 
 div#message-box .space {
     width: 5px;
