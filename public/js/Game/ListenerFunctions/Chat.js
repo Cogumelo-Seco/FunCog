@@ -11,9 +11,10 @@ export default function chat(state, socket) {
     function focusin(event) {
         //const messageBoxWritingPosition = document.getElementById('messageBoxWritingPosition')
 
-        chat.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
-        chat.style.borderColor = 'rgb(50, 50, 50)'
-        messageBox.style.backgroundColor = 'rgba(80, 80, 80, 1)'
+        messageBoxContent.focus()
+        chat.style.backgroundColor = 'rgba(60, 60, 60, 1)'//'rgba(0, 0, 0, 0.8)'
+        chat.style.borderColor = 'rgb(40, 40, 40)'
+        messageBox.style.backgroundColor = 'rgba(40, 40, 40, 1)'
         //if (messageBoxWritingPosition) messageBoxWritingPosition.style.display = 'inline-block'
 
         state.onChat = 'on'
@@ -22,9 +23,11 @@ export default function chat(state, socket) {
     function focusout(event) {
         //const messageBoxWritingPosition = document.getElementById('messageBoxWritingPosition')
 
-        chat.style.backgroundColor = 'rgba(0, 0, 0, 0.2)'
+        messageBoxContent.blur()
+        gameCanvas.focus()
+        chat.style.backgroundColor = 'rgba(60, 60, 60, 0.2)'
         chat.style.borderColor = 'transparent'
-        messageBox.style.backgroundColor = 'rgba(80, 80, 80, 0.4)'
+        messageBox.style.backgroundColor = 'rgba(40, 40, 40, 0.4)'
         //if (messageBoxWritingPosition) messageBoxWritingPosition.style.display = 'none'
 
         state.onChat = 'off'
@@ -44,7 +47,6 @@ export default function chat(state, socket) {
             state.renderChat = true
         } else {
             focusout()
-            gameCanvas.focus()
             state.onChat = 'off'
             chat.style.display = 'none'
         }
@@ -55,14 +57,15 @@ export default function chat(state, socket) {
 
     function send() {
         let content = messageBoxContent.innerHTML
-        content = content.replace(/<span([\s\S]*?)>@|<\/span>/g, (match, a, b) => {
+        /*content = content.replace(/<span class="metion"([\s\S]*?)>@|<\/span>|<span class="bold"([\s\S]*?)>/g, (match, a, b, c) => {
             if (a) {
                 let id = a.split('id=')[1].replace(/"/g, '')
                 return `<@${id}|`
             }
             if (b) return `>`
+            if (c) return `**`
             return match
-        });
+        });*/
         
         if (content.split(' ')[0] == '/s') state.game.state.gameStage = content.split(' ')[1]
         else socket.emit('message', {
@@ -79,7 +82,7 @@ export default function chat(state, socket) {
         })
 
         messageBoxContent.innerHTML = ''
-        setTimeout(() => messageBoxContent.innerHTML = '', 100)
+        setTimeout(() => messageBoxContent.innerHTML = '', 10)
         /*let elements = messageBoxContent.querySelectorAll('.messageBoxText')
         let content = ''
         for (let i = 0;i <= elements.length;i++) {
@@ -128,8 +131,9 @@ export default function chat(state, socket) {
 
     function keyPressed(event) {
         if (state.pauseGameKeys) return;
-        
+    
         if (event.code == 'Escape' && state.onChat == 'on') return openCloseChat({ pointerType: 'mouse' })
+        if (!event.key || state.onChat != 'on') return
         if (event.code == 'Enter') send()
 
         /*

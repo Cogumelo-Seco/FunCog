@@ -456,6 +456,10 @@ function createGame(Listener, canvas, socket) {
             }
         }
 
+        const messageBoxContent = document.getElementById('message-box-content')
+        const chatPlaceholder = document.getElementById('placeholder')
+        chatPlaceholder.style.display = messageBoxContent.innerHTML.length >= 1 ? 'none' : 'block'
+
         /* !!!!!!! FPS LIMITADO !!!!!!! */
 
         require('./GameFunctions/RenderChat').default(state.canvas, state, Listener.state, 'gameLoop')

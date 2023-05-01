@@ -358,7 +358,8 @@ const Game = (props) => {
                 <div id="chat">
                     <div id="chat-content" />
                     <div id="message-box">
-                        <div id="message-box-content" contentEditable="true" />
+                        <span id="placeholder" onClick={() => document.getElementById('message-box-content').focus()}>Message</span>
+                        <div id="message-box-content" contentEditable="true"/>
                     </div>
                 </div>
             </body>

@@ -128,7 +128,7 @@ div#chat-content p#Header span#Name:hover {
 div#chat-content p#Header span#Timestamp {
     cursor: text;
     font-size: 10px;
-    color: rgb(150, 150, 150);
+    color: rgb(180, 180, 180);
 }
 
 div#chat-content img#Avatar {
@@ -143,8 +143,9 @@ div#chat-content img#Avatar {
 div#chat-content p#Content {
     vertical-align: baseline;
     margin: 0;
+    margin-bottom: 3px;
     margin-left: 40px;
-    overflow: hidden;
+    /*overflow: hidden;*/
     text-overflow: ellipsis;
     word-wrap: break-word;
 }
@@ -154,7 +155,6 @@ div#chat-content p#Content {
     border-left: solid rgba(115, 0, 255, 1) 2px;
     padding: 1px;
 }
-
 
 div#message-box {
     display: inline-flex;
@@ -186,6 +186,17 @@ div#message-box-content {
     top: 50%;
     transform: translateY(-50%);*/
 }
+
+span#placeholder {
+    position: absolute;
+    -webkit-touch-callout: none;  
+    -webkit-user-select: none;   
+    -khtml-user-select: none;     
+    -moz-user-select: none;   
+    -ms-user-select: none;       
+    user-select: none; 
+    color: rgba(255, 255, 255, 0.2);
+}
 /*
 div#message-box .messageBoxText {
     display: inline-block;
@@ -197,10 +208,6 @@ div#message-box .messageBoxText {
     min-width: 15px;
     background-color: rgba(0, 0, 0, 0.13);
 }*/
-
-div#message-box .space {
-    width: 5px;
-}
 
 .metion {
     font-size: 14px;
@@ -218,6 +225,24 @@ div#message-box .space {
 
 .metion:hover {
     background-color: rgb(0, 155, 163)!important;
+}
+
+.bold {
+    font-weight: bold;
+}
+.italic {
+    font-style: italic;
+}
+.line {
+    text-decoration: line-through;
+}
+.underline {
+    text-decoration: underline;
+}
+.code {
+    padding: 1px 3px;
+    border-radius: 4px;
+    background-color: #17181b;
 }
 
 button#send-button {
