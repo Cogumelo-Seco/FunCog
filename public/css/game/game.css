@@ -162,12 +162,12 @@ div#message-box {
     overflow-y: auto;
     overflow-x: hidden;
     font-size: 15px;
-    padding: 5px 7px;
+    /*padding: 5px 7px;*/
     background-color: rgb(30, 30, 30);
     color: white;
     min-height: 20px;
     max-height: 84px;
-    width: 95%;
+    width: 98%;
     margin: 3px 50%;
     transform: translateX(-50%);
     border-radius: 8px;
@@ -181,6 +181,8 @@ div#message-box-content {
     text-align: left;
     width: 100%;
     min-height: 12px;
+    margin: 7px 9px;
+    margin-right: 0px;
     /*position: relative;
     width: max-content;
     top: 50%;
@@ -196,6 +198,8 @@ span#placeholder {
     -ms-user-select: none;
     user-select: none; 
     color: rgba(255, 255, 255, 0.2);
+    cursor: text;
+    margin-left: 9px;
 }
 /*
 div#message-box .messageBoxText {
@@ -256,14 +260,13 @@ div#message-box .messageBoxText {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; 
-    color: #17181b;
+    color: transparent;
     background-color: #17181b;
     cursor: pointer;
     transition: all 0.2s;
 }
 .is-hidden:hover {
     background-color: #1c1d21;
-    color: #1c1d21;
 }
 #message-box-content .spoiler {
     background-color: #51535d;
@@ -300,15 +303,19 @@ span#openEmojiBoxButton {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    font-size: 100%;
+    font-size: 115%;
+    width: 40px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0;
+    margin: 0px;
     filter: grayscale(100%);
     cursor: pointer;
     transition: all 0.2s;
 }
 
 span#openEmojiBoxButton:hover {
-    font-size: 110%;
-    transform: translateX(5%) translateY(5%);
+    font-size: 130%;
     filter: grayscale(0);
 }
 
@@ -320,7 +327,7 @@ div#emojiBox {
     left: 100%;
     bottom: 0;
     width: 220px;
-    max-height: 400px;
+    max-height: 50vh;
     height: min-content;
     border-radius: 8px;
     padding: 3px;
