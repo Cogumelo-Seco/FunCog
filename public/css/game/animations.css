@@ -9,6 +9,17 @@
     }
 }
 
+@keyframes openEmojiBox {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    } 
+    to {
+        transform: scale(100%);
+        opacity: 1;
+    }
+}
+
 @keyframes messageBoxWritingPosition {
     0% {
         background-color: white;

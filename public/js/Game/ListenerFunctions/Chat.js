@@ -7,12 +7,30 @@ export default function chat(state, socket) {
     const messageBox = document.getElementById('message-box')
     const chat = document.getElementById('chat')   
     const gameCanvas = document.getElementById('gameCanvas')
+    const emojiBoxElement = document.getElementById('emojiBox')
+    const openEmojiBoxButtonElement = document.getElementById('openEmojiBoxButton')
+    let emojiList = '😀-😁-😂-🤣-😃-😄-😅-😆-😉-😊-😋-😎-😍-😘-🥰-😗-😙-😚-🙂-🤗-🤩-🤔-🤨-😐-😑-😶-🙄-😏-😣-😥-😮-🤐-😯-😪-😫-🥱-😴-😌-😛-😜-😝-🤤-😒-😓-😔-😕-🙃-🤑-😲-🙁-😖-😞-😟-😤-😢-😭-😦-😧-😨-😩-🤯-😬-😰-😱-🥵-🥶-😳-🤪-😵-🥴-😠-😡-🤬-😷-🤒-🤕-🤢-🤮-🤧-😇-🥳-🥺-🤠-🤡-🤥-🤫-🤭-🧐-🤓-😈-👿-👹-👺-💀-☠-👻-👽-👾-🤖-💩-🙈-🙉-🙊-🐵-👁-👀-👅-💪-🦵-🦶-👂-🦻-👃-🤏-👈-👉-☝-👆-👇-✌-🤞-🖖-🤘-🤙-🖐-✋-👌-👍-👎-✊-👊-🤛-🤜-🤚-👋-🤟-✍-👏-👐-🙌-🤲-🙏-🤝-💅-❤-🧡-💛-💚-💙-💜-🤎-🖤-🤍-💔-❣-💕-💞-💓-💗-💖-💘-💝-💟-💌-💢-💥-💤-💦-💨-💫-❌-⭕-🚫-🔇-🔕-🚭-🚷-🚯-🚳-🚱-🔞-📵-❗-❕-❓-❔-💯-0️⃣-1️⃣-2️⃣-3️⃣-4️⃣-5️⃣-6️⃣-7️⃣-8️⃣-9️⃣-🔟-🔘-🔴-🟠-🟡-🟢-🔵-🟣-🟤-⚫-⚪-🟥-🟧-🟨-🟩-🟦-🟪-⬛-⬜-🔲-🔳-💭-💬-👁‍🗨-🔶-🔸-🔷-🔹-🔺-🔻'.split('-')
+
+    for (let emoji of emojiList) {
+        if (emoji) {
+            let emojiElement = document.createElement('span')
+            emojiElement.className = 'emoji'
+            emojiElement.innerHTML = emoji
+            emojiBoxElement.appendChild(emojiElement)
+
+            emojiElement.onclick = () => {
+                messageBoxContent.innerHTML += emojiElement.innerText
+            }
+        }
+    }
+
+    openEmojiBoxButtonElement.onclick = () => {
+        emojiBoxElement.style.display = emojiBoxElement.style.display == 'block' ? 'none' : 'block'
+    }
     
     function focusin(event) {
-        //const messageBoxWritingPosition = document.getElementById('messageBoxWritingPosition')
-
         messageBoxContent.focus()
-        chat.style.backgroundColor = 'rgba(60, 60, 60, 1)'//'rgba(0, 0, 0, 0.8)'
+        chat.style.backgroundColor = 'rgba(60, 60, 60, 1)'
         chat.style.borderColor = 'rgb(50, 50, 50)'
         messageBox.style.backgroundColor = 'rgba(50, 50, 50, 1)'
         
@@ -25,6 +43,7 @@ export default function chat(state, socket) {
         chat.style.backgroundColor = 'rgba(60, 60, 60, 0.2)'
         chat.style.borderColor = 'transparent'
         messageBox.style.backgroundColor = 'rgba(50, 50, 50, 0.4)'
+        emojiBoxElement.style.display = 'none'
         state.onChat = 'off'
     }
 
