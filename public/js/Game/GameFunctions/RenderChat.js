@@ -17,7 +17,7 @@ export default async (canvas, state, stateListener, command) => {
             .replace(/&lt;span/g, '<span')
             .replace(/&lt;\/span/g, '</span')
         
-        text = text.replace(/&lt;@([\s\S]*?)&gt;|&lt;@([\s\S]*?)>|\*{2}([\s\S]*?)\*{2}|\*([\s\S]*?)\*|~~([\S\s]*?)~~|__([\S\s]*?)__|`{2}([\S\s]*?)`{2}|`([^`]*)`/g, (match, a, b, c, d, e, f, g, h) => {
+        text = text.replace(/&lt;@([\s\S]*?)&gt;|&lt;@([\s\S]*?)>|\*{2}([\s\S]*?)\*{2}|\*([\s\S]*?)\*|~~([\S\s]*?)~~|__([\S\s]*?)__|`{2}([\S\s]*?)`{2}|`([^`]*)`|\|{2}([\S\s]*?)\|{2}/g, (match, a, b, c, d, e, f, g, h, i) => {
             let metion = a || b
             if (metion) {
                 update = true
@@ -47,6 +47,10 @@ export default async (canvas, state, stateListener, command) => {
                 update = true
                 return `<span class="code" contentEditable="true"${id ? 'id="'+id+'"' : ''}>${g || h}</span>&nbsp;`
             }
+            if (i) {
+                update = true
+                return `<span class="spoiler is-hidden" contentEditable="true"${id ? 'id="'+id+'"' : ''}>${i}</span>&nbsp;`
+            }
             return match
         });
         return { text, update }
@@ -56,6 +60,11 @@ export default async (canvas, state, stateListener, command) => {
         let { text, update } = replaces(messageBoxContent.innerHTML)
         if (messageBoxContent.innerText.length >= 200) messageBoxContent.style.color = 'red'
         else messageBoxContent.style.color = 'white'
+
+        let contentElements = messageBoxContent.getElementsByTagName('span')
+        for (let element of contentElements) {
+            if (element.innerText.replace(/\s+/s, '').replace(/&nbsp;+/s, '') == '') element.remove()
+        }
         if (update && messageBoxContent.innerHTML !== text) {
             messageBoxContent.innerHTML = text
             let metions = messageBoxContent.getElementsByClassName('metion')
@@ -122,18 +131,21 @@ export default async (canvas, state, stateListener, command) => {
                 let contentElement = document.createElement('p')
                 contentElement.id = 'Content'
                 contentElement.style = `color: ${message.colorContent?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp+(Number(message.colorContent.split('-')[1]) || 0)}, 100%, 50%)` : message.colorContent || 'white'} ${message.messageAdditionalCSS ? ';'+message.messageAdditionalCSS : ''}`
-                /*contentElement.innerHTML = replaces(message.content).text
-                let metionElements = contentElement.getElementsByClassName('metion')
-                for (let element of metionElements) element.onclick = () => {
-                    metionPlayer(element.id)
-                }*/
-                contentElement.innerHTML = message.content.replace(/(<div><br><\/div>){2}/g, '')
-                let metionElements = contentElement.getElementsByClassName('metion')
-                for (let element of metionElements) element.onclick = () => {
-                    metionPlayer(element.id)
-                }
-                for (let element of metionElements) {
-                    if (element.id == state.socket.id && !contentElement.className.includes('Mentioned')) contentElement.className += 'Mentioned'
+                contentElement.innerHTML = message.content//.replace(/(<div><br><\/div>){2}/g, '').replace(/(<br>)+/g, '<br><br>')
+                let contentElements = contentElement.getElementsByTagName('span')
+                for (let element of contentElements) {
+                    element.contentEditable = false
+                    if (element.className.includes('metion')) {
+                        element.onclick = () => {
+                            metionPlayer(element.id)
+                        }
+                        if (element.id && state.socket.id && !contentElement.className.includes('Mentioned')) contentElement.className += 'Mentioned'
+                    }
+                    if (element.className.includes('spoiler')) {
+                        element.onclick = () => {
+                            element.className = 'spoiler'
+                        }
+                    }
                 }
                 chatContent.appendChild(contentElement)
 

@@ -189,11 +189,11 @@ div#message-box-content {
 
 span#placeholder {
     position: absolute;
-    -webkit-touch-callout: none;  
-    -webkit-user-select: none;   
-    -khtml-user-select: none;     
-    -moz-user-select: none;   
-    -ms-user-select: none;       
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none; 
     color: rgba(255, 255, 255, 0.2);
 }
@@ -240,9 +240,42 @@ div#message-box .messageBoxText {
     text-decoration: underline;
 }
 .code {
+    padding: 1px;
+    border-radius: 2px;
+    background-color: #232428;
+}
+.spoiler {
     padding: 1px 3px;
     border-radius: 4px;
+    background-color: #51535d;
+}
+.is-hidden {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+    color: #17181b;
     background-color: #17181b;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.is-hidden:hover {
+    background-color: #1c1d21;
+    color: #1c1d21;
+}
+#message-box-content .spoiler {
+    background-color: #51535d;
+}
+#message-box-content .is-hidden {
+    -webkit-touch-callout: auto;
+    -webkit-user-select: auto;
+    -khtml-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+    color: #ffffff;
 }
 
 button#send-button {
