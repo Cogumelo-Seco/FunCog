@@ -58,12 +58,13 @@ export default async (canvas, state, stateListener, command) => {
 
     if (command == 'gameLoop') {
         let { text, update } = replaces(messageBoxContent.innerHTML)
-        if (messageBoxContent.innerText.length >= 200) messageBoxContent.style.color = 'red'
+        if (messageBoxContent.innerText.length >= 400) messageBoxContent.style.color = 'red'
         else messageBoxContent.style.color = 'white'
 
         let contentElements = messageBoxContent.getElementsByTagName('span')
         for (let element of contentElements) {
             if (element.innerText.replace(/\s+/s, '').replace(/&nbsp;+/s, '') == '') element.remove()
+            if (messageBoxContent.innerText.length >= 400) element.style.color = 'red'
         }
         if (update && messageBoxContent.innerHTML !== text) {
             messageBoxContent.innerHTML = text
