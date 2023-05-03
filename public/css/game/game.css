@@ -159,8 +159,7 @@ div#chat-content p#Content {
 div#message-box {
     display: inline-flex;
     align-items: center;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     font-size: 15px;
     /*padding: 5px 7px;*/
     background-color: rgb(30, 30, 30);
@@ -179,10 +178,14 @@ div#message-box-content {
     word-break: break-all;
     align-items: center;
     text-align: left;
-    width: 100%;
-    min-height: 12px;
+    width: 89%;
+    min-height: 17px;
+    max-height: 84px;
+    padding-right: 1px;
     margin: 7px 9px;
     margin-right: 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
     /*position: relative;
     width: max-content;
     top: 50%;
@@ -303,6 +306,9 @@ span#openEmojiBoxButton {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    position: fixed;
+    top: 0;
+    right: 0;
     font-size: 115%;
     width: 40px;
     height: 30px;
@@ -378,6 +384,7 @@ span#connectingMessage {
 
 button#skipConnecting {
     z-index: 1;
+    display: none;
     position: absolute;
     left: 50%;
     top: 53%;

@@ -17,6 +17,10 @@ const Game = (props) => {
         let skipedConnecting = false
         const skipConnecting = document.getElementById('skipConnecting')
         const connectingMessage = document.getElementById('connectingMessage')
+        setTimeout(() => {
+            if (skipConnecting.style.display != 'none') skipConnecting.style.display = 'block'
+        }, 3000)
+
         skipConnecting.onclick = () => {
             skipedConnecting = true
             start(io(props.SERVER, {
@@ -25,7 +29,7 @@ const Game = (props) => {
         }
 
         function tryConnect(SERVER, one) {
-            skipConnecting.focus()
+            if (skipConnecting.style.display == 'block') skipConnecting.focus()
             const socket = io(SERVER, {
                 withCredentials: true,
             })
