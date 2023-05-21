@@ -50,10 +50,12 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
     let resizeMsg = 0.04
     let msgArr = [
-        { msg: '- Novo input no chat!!', color: 'rgb(0, 150, 255)' },
-        { msg: '- Sistema para controle adicionado!!', color: 'rgb(0, 150, 255)' },
+        { msg: '- Background com visualização da música!!', color: 'rgb(0, 255, 0)' },
         { msg: '' },
-        { msg: '- Mod "Bad Apple" adicionado!', color: 'rgb(0, 255, 0)' },
+        { msg: '- Configurações:', color: 'rgb(0, 255, 0)' },
+        { msg: '     "AudioVisualizer" adicionada', color: 'rgb(0, 255, 0)' },
+        { msg: '     "BackgroundOfuscation" adicionada', color: 'rgb(0, 255, 0)' },
+        { msg: '' },
         { msg: '' },
         { msg: '- Multiplayer desligado Temporariamente', color: 'rgb(255, 255, 0)' },
     ]

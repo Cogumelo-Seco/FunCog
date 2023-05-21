@@ -1,3 +1,4 @@
+import axios, {isCancel, AxiosError} from 'axios';
 export default async({ musicInfo, difficulty, listenerState, opponentPlayer, socket }, state) => {
     //try {
         let videoElement = document.getElementById('gameVideo')
@@ -202,6 +203,32 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             state.music = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
             state.musicVoice = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
 
+            if (state.smallFunctions.getConfig('AudioVisualizer')) {
+                const getBase64 = async (url) => {
+                    try {
+                        var result = await axios
+                            .get(url, { responseType: 'arraybuffer' })
+                            .then(response =>  new Buffer.from(response.data, 'binary').toString('base64'))
+                        return { data: result }
+                    }catch (e) {
+                        return { error: e };
+                    }
+                }
+                state.music.src = `data:audio/x-wav;base64,${(await getBase64(state.music.src)).data}`
+
+                state.music.audioCtx = new AudioContext()
+                state.music.audioSource = state.music.audioCtx.createMediaElementSource(state.music)
+                state.music.analyser = state.music.audioCtx.createAnalyser()
+                state.music.audioSource.connect(state.music.analyser)
+                state.music.analyser.connect(state.music.audioCtx.destination)
+                state.music.analyser.fftSize = 2048  //2048
+                state.music.analyser.minDecibels = -90  //-100
+                state.music.analyser.maxDecibels = -25  //-30
+                state.music.analyser.smoothingTimeConstant = 0.8  //0.8
+                state.music.bufferLength = state.music.analyser.frequencyBinCount
+                state.music.dataArr = new Uint8Array(state.music.bufferLength)
+            }
+
             if (musicInfo.cutscene && !state.online) {
                 videoElement.style.display = 'block'
                 videoElement.onended = () => startMusic()
@@ -218,7 +245,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                     if (state.countdown <= -1) {
                         state.animations.arrowKeys.paused = false
 
-                        function play() {
+                        async function play() {
                             if (musicInfo.backgroundVideo) state.videoBackground.play()
                             state.music?.play().catch(() => setTimeout(play, 500))
                             state.musicVoice?.play()

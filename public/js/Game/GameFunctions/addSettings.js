@@ -600,6 +600,21 @@ export default async (state) => {
             content: 1
         },
         {
+            name: 'Background Ofuscation',
+            id: 'BackgroundOfuscation',
+            type: 'Number',
+            add: 0.1,
+            max: 1,
+            min: 0,
+            content: 0.7
+        },
+        {
+            name: 'Audio Visualizer',
+            id: 'AudioVisualizer',
+            type: 'Boolean',
+            content: true
+        },
+        {
             name: 'Splashes',
             id: 'Splashes',
             type: 'Boolean',
