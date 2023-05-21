@@ -36,7 +36,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         for (let i = Math.floor(bufferLength*0.6);i > 0;i--) {
             let barHeight = Math.floor((dataArr[i]/250)*canvas.height*0.7)
             //ctx.fillStyle = `hsl(${x/canvas.width*720}, 100%, 50%)`
-            ctx.fillStyle = `hsl(${x/canvas.width*720}, 50%, 50%)`
+            ctx.fillStyle = `hsl(${x/canvas.width*720-game.state.rainbowColor}, 50%, 50%)`
             ctx.fillRect(Math.floor(x)-1, canvas.height-barHeight, Math.floor(barWidth)+2, barHeight)
             x += barWidth
         }
@@ -44,7 +44,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         for (let i = 0;i <= Math.floor(bufferLength*0.6);i++) {
             let barHeight = Math.floor((dataArr[i]/250)*canvas.height*0.7)
             //ctx.fillStyle = `hsl(${x/canvas.width*720}, 100%, 50%)`
-            ctx.fillStyle = `hsl(${x/canvas.width*720}, 50%, 50%)`
+            ctx.fillStyle = `hsl(${x/canvas.width*720-game.state.rainbowColor}, 50%, 50%)`
             ctx.fillRect(Math.floor(x)-1, canvas.height-barHeight, Math.floor(barWidth)+2, barHeight)
             x += barWidth
         }

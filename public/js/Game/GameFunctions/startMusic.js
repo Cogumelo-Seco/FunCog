@@ -222,7 +222,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                 state.music.audioSource.connect(state.music.analyser)
                 state.music.analyser.connect(state.music.audioCtx.destination)
                 state.music.analyser.fftSize = 2048  //2048
-                state.music.analyser.minDecibels = -90  //-100
+                state.music.analyser.minDecibels = -80  //-100
                 state.music.analyser.maxDecibels = -25  //-30
                 state.music.analyser.smoothingTimeConstant = 0.8  //0.8
                 state.music.bufferLength = state.music.analyser.frequencyBinCount
