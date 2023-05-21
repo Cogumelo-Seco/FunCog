@@ -251,7 +251,7 @@ const Game = (props) => {
                         ) playerSettingsOptions[i] = Object.assign(defaultSettingsOptions[i], playerSettingsOptions[i])//defaultSettingsOptions[i] = playerSettingsOptions[i]
                         else playerSettingsOptions[i] = defaultSettingsOptions[i]*/
                     }
-                    if (reset) playerSettingsOptions = defaultSettingsOptions
+                    if (reset || defaultSettingsOptions.length != playerSettingsOptions.length) playerSettingsOptions = defaultSettingsOptions
                     else game.state.selectSettingsOption.settingsOptions = playerSettingsOptions
                     /*for (let i in playerSettingsOptions) {
                         if (typeof defaultSettingsOptions[i] == 'object' && typeof playerSettingsOptions[i] == 'object') {
