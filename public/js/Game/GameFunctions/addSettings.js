@@ -606,7 +606,7 @@ export default async (state) => {
             add: 0.1,
             max: 1,
             min: 0,
-            content: 0.7
+            content: 0.8
         },
         {
             name: 'Audio Visualizer',
