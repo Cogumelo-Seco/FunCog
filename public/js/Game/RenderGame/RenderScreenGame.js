@@ -26,7 +26,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         } canvas.style.backgroundImage = `url(https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${game.state.musicInfo.backgroundImage})`
     } else canvas.style.backgroundImage = null
     
-    if (game.state.music?.bufferLength && !game.state.videoBackground.src && !game.state.musicInfo.dynamicBackgroundImage /*&& !game.state.musicInfo.backgroundImage*/) {
+    if (game.state.smallFunctions.getConfig('AudioVisualizer') && game.state.music?.bufferLength && !game.state.videoBackground.src && !game.state.musicInfo.dynamicBackgroundImage /*&& !game.state.musicInfo.backgroundImage*/) {
         let bufferLength = game.state.music.bufferLength
         let barWidth = (canvas.width/(bufferLength*0.6)/2)
         let dataArr = game.state.music.dataArr

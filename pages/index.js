@@ -291,7 +291,7 @@ const Game = (props) => {
                 <img id="gameBackground" src="https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/imgs/VSLullaby/Bygone/Background2.png" />
                 <canvas id="backgroundCanvas"/>
                 <canvas id="gameCanvas"/>
-                <img id="jumpscare" src="https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/imgs/VSLullaby/Bygone/Background2.png" />
+                <img id="overlayImage" src="https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/imgs/VSLullaby/Bygone/Background2.png" />
                 <video preload="auto" id="gameVideo" />
 
                 <button id="chat-button" />

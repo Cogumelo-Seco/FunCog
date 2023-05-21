@@ -50,6 +50,9 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
     let resizeMsg = 0.04
     let msgArr = [
+        { msg: '- Música "Shadows" do mod', color: 'rgb(0, 150, 255)' },
+        { msg: '  "VS Withered Freddy" terminada', color: 'rgb(0, 150, 255)' },
+        { msg: '' },
         { msg: '- Background com visualização da música!!', color: 'rgb(0, 255, 0)' },
         { msg: '' },
         { msg: '- Configurações:', color: 'rgb(0, 255, 0)' },

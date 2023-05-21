@@ -213,13 +213,13 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			if (variables.HUDFade && state.alphaHUD < 1) state.alphaHUD += 0.02
 			else if (state.alphaHUD == 1) variables.HUDFade = false
 
-			let jumpscareElement = document.getElementById('jumpscare')
+			let jumpscareElement = document.getElementById('overlayImage')
 			if (+new Date()-variables.jumpscareTime >= 450) jumpscareElement.style.display = 'none'
 			else {
 				let movementX = Math.floor(Math.random()*50)-25
 				let movementY = Math.floor(Math.random()*50)-25
 
-				jumpscareElement.src = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/jumpscares/GoldJumpscare.png'
+				jumpscareElement.src = currentTime >= 150 ? state.images['jumpscares/GoldAltJumpscare.png'].image.src : state.images['jumpscares/GoldJumpscare.png'].image.src
 				jumpscareElement.style.display = 'block'
 				jumpscareElement.style.transform = `translateX(${movementX}px) translateY(${movementY}px)`
 				jumpscareElement.style.width = '150%'

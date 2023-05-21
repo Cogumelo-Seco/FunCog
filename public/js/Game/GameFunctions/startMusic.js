@@ -1,4 +1,3 @@
-import axios, {isCancel, AxiosError} from 'axios';
 export default async({ musicInfo, difficulty, listenerState, opponentPlayer, socket }, state) => {
     //try {
         let videoElement = document.getElementById('gameVideo')
@@ -141,6 +140,32 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                     let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/'+dir
 
                     let sound = new Audio()
+                    const getBase64 = async (url) => {
+                        try {
+                            var result = await axios
+                                .get(url, { responseType: 'arraybuffer' })
+                                .then(response =>  new Buffer.from(response.data, 'binary').toString('base64'))
+                            return { data: result }
+                        }catch (e) {
+                            return { error: e };
+                        }
+                    }
+                
+                    sound.src = `data:audio/x-wav;base64,${await state.smallFunctions.getBase64(dir.split('/')[0] == 'Sounds' ? `/${dir}` : link)}`
+                    sound.preload = 'auto'
+                    state.sounds[dir] = sound
+                    sound.audioCtx = new AudioContext()
+                    sound.audioSource = sound.audioCtx.createMediaElementSource(sound)
+                    sound.analyser = sound.audioCtx.createAnalyser()
+                    sound.audioSource.connect(sound.analyser)
+                    sound.analyser.connect(sound.audioCtx.destination)
+                    sound.analyser.fftSize = 2048  //2048
+                    sound.analyser.minDecibels = -80  //-100
+                    sound.analyser.maxDecibels = -25  //-30
+                    sound.analyser.smoothingTimeConstant = 0.8  //0.8
+                    sound.bufferLength = sound.analyser.frequencyBinCount
+                    sound.dataArr = new Uint8Array(sound.bufferLength)
+
                     sound.addEventListener('loadeddata', (e) => {
                         state.toLoadInScreen[dir] = {
                             sound,
@@ -151,9 +176,6 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                         setTimeout(() => newLoad(dir), 100)
                     })
                     sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
-                    sound.src = dir.split('/')[0] == 'Sounds' ? `/${dir}` : link
-                    sound.preload = 'auto'
-                    state.sounds[dir] = sound
                 //}
             } else {
                 /*if (state.images[dir]?.image) newLoad()
@@ -202,32 +224,6 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             state.videoBackground = videoElementBackground
             state.music = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
             state.musicVoice = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
-
-            if (state.smallFunctions.getConfig('AudioVisualizer')) {
-                const getBase64 = async (url) => {
-                    try {
-                        var result = await axios
-                            .get(url, { responseType: 'arraybuffer' })
-                            .then(response =>  new Buffer.from(response.data, 'binary').toString('base64'))
-                        return { data: result }
-                    }catch (e) {
-                        return { error: e };
-                    }
-                }
-                state.music.src = `data:audio/x-wav;base64,${(await getBase64(state.music.src)).data}`
-
-                state.music.audioCtx = new AudioContext()
-                state.music.audioSource = state.music.audioCtx.createMediaElementSource(state.music)
-                state.music.analyser = state.music.audioCtx.createAnalyser()
-                state.music.audioSource.connect(state.music.analyser)
-                state.music.analyser.connect(state.music.audioCtx.destination)
-                state.music.analyser.fftSize = 2048  //2048
-                state.music.analyser.minDecibels = -80  //-100
-                state.music.analyser.maxDecibels = -25  //-30
-                state.music.analyser.smoothingTimeConstant = 0.8  //0.8
-                state.music.bufferLength = state.music.analyser.frequencyBinCount
-                state.music.dataArr = new Uint8Array(state.music.bufferLength)
-            }
 
             if (musicInfo.cutscene && !state.online) {
                 videoElement.style.display = 'block'

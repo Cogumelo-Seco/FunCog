@@ -35,7 +35,7 @@ img#gameBackground {
     display: none;
 }
 
-img#jumpscare {
+img#overlayImage {
     position: fixed;
     left: 0;
     top: 0;

@@ -1,5 +1,17 @@
+import axios, {isCancel, AxiosError} from 'axios';
+
 export default (state, Listener, socket) => {
     return {
+        getBase64: async (url) => {
+            try {
+                var result = await axios
+                    .get(url, { responseType: 'arraybuffer' })
+                    .then(response =>  new Buffer.from(response.data, 'binary').toString('base64'))
+                return result
+            }catch (e) {
+                return { error: e };
+            }
+        },
         getKey: (arrowID) => {
             let arrowsKey = (state.selectSettingsOption.settingsOptions.find(c => c[Object.keys(state.arrowsInfo).length+'K']))[Object.keys(state.arrowsInfo).length+'K']
             return (arrowsKey.find(c => c.id == 'Arrow-'+arrowID))?.content
@@ -44,7 +56,7 @@ export default (state, Listener, socket) => {
             state.speed = 1
             document.getElementById('gameBackground').style.display = 'none'
             document.getElementById('gameVideoBackground').style.display = 'none'
-            document.getElementById('jumpscare').style.display = 'none'
+            document.getElementById('overlayImage').style.display = 'none'
             state.backgroundInfo = {
 				zoom: 0,
 				movementX: 0,

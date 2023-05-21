@@ -47,8 +47,8 @@ export default function chat(state, socket) {
         state.onChat = 'off'
     }
 
-    gameCanvas.addEventListener('mouseover', focusout)
-    gameCanvas.addEventListener('mouseout', focusin)
+    chat.addEventListener('mouseover', focusin)
+    chat.addEventListener('mouseout', focusout)
 
     function openCloseChat(event) {
         if (event.pointerType != 'mouse') return
