@@ -985,6 +985,7 @@ export default async (state) => {
                     mod: 'LateNightCityTale',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 2,
+                    noteResize: 1.03,
                     toLoad: [
                         { dir: 'imgs/LateNightCityTale/hurt.png' },
                         { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
@@ -1011,6 +1012,7 @@ export default async (state) => {
                     mod: 'LateNightCityTale',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 2,
+                    noteResize: 1.03,
                     toLoad: [
                         { dir: 'imgs/LateNightCityTale/purple-filter.png' },
                         { dir: 'imgs/LateNightCityTale/hurt.png' },
@@ -1038,6 +1040,7 @@ export default async (state) => {
                     mod: 'LateNightCityTale',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 2,
+                    noteResize: 1.03,
                     toLoad: [
                         { dir: 'imgs/LateNightCityTale/Broken.png' },
                         { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
@@ -1093,6 +1096,7 @@ export default async (state) => {
                     mod: 'LateNightCityTale',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 2,
+                    noteResize: 1.03,
                     toLoad: [
                         { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
                         { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
@@ -1577,34 +1581,36 @@ export default async (state) => {
                     ]
                 },
                 {
-                    dev: true,
                     name: 'Shinto',
                     menuColor: null,
                     difficulties: [ 2, 3 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/Lullaby/splash.png',
+                    notesImageDir: 'Arrows/LullabyPixel/',
+                    splashDir: 'Arrows/LullabyPixel/splash.png',
                     splashResize: 1.5,
-                    backgroundImage: null,
+                    noteResize: 1.03,
+                    spaceBetweenArrowsAdd: 0.1,
+                    backgroundImage: 'backgrounds/Shinto.jpg',
                     mod: 'VSLullaby',
                     toLoad: [
-                        { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
+                        { dir: 'Arrows/LullabyPixel/Arrows.png', animationConfigDir: 'Arrows/LullabyPixel/Arrows.json' },
+                        { dir: 'Arrows/LullabyPixel/splash.png', animationConfigDir: 'Arrows/LullabyPixel/splash.json' },
                         { dir: 'Musics/musics/shinto/Inst.ogg' },
                         { dir: 'Musics/musics/shinto/Voices.ogg' },
                     ]
                 },
                 {
-                    dev: true,
                     name: 'Shitno',
                     menuColor: null,
                     difficulties: [ 2, 3 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/Lullaby/splash.png',
-                    splashResize: 1.5,
+                    notesImageDir: 'Arrows/Pixel/',
+                    splashDir: 'Arrows/LullabyPixel/splash.png',
+                    splashResize: 2,
                     backgroundImage: null,
                     cutscene: 'Lullaby/Shinto.mp4',
                     mod: 'VSLullaby',
                     toLoad: [
-                        { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
+                        { dir: 'Arrows/LullabyPixel/splash.png', animationConfigDir: 'Arrows/LullabyPixel/splash.json' },
+                        { dir: 'Arrows/Pixel/Arrows.png', animationConfigDir: 'Arrows/Pixel/Arrows.json' },
                         { dir: 'Musics/musics/shitno/Inst.ogg' },
                         { dir: 'Musics/musics/shitno/Voices.ogg' },
                     ]
@@ -1627,30 +1633,29 @@ export default async (state) => {
                     ]
                 },
                 {
-                    dev: true,
                     name: 'Brimstone',
                     menuColor: null,
                     difficulties: [ 2, 3 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/Lullaby/splash.png',
+                    notesImageDir: 'Arrows/LullabyPixelBuried/',
+                    splashDir: 'Arrows/LullabyPixel/splash.png',
                     splashResize: 1.5,
                     backgroundImage: null,
                     mod: 'VSLullaby',
                     toLoad: [
-                        { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
+                        { dir: 'Arrows/LullabyPixelBuried/Arrows.png', animationConfigDir: 'Arrows/LullabyPixelBuried/Arrows.json' },
+                        { dir: 'Arrows/LullabyPixel/splash.png', animationConfigDir: 'Arrows/LullabyPixel/splash.json' },
                         { dir: 'Musics/musics/brimstone/Inst.ogg' },
                         { dir: 'Musics/musics/brimstone/Voices.ogg' },
                     ]
                 },
                 {
-                    dev: true,
                     name: 'Purin',
                     menuColor: 'grey',
                     difficulties: [ 2, 3 ],
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
-                    backgroundImage: null,
+                    backgroundImage: 'backgrounds/Purin.jpeg',
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },

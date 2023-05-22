@@ -370,7 +370,7 @@ function createGame(Listener, canvas, socket) {
             if (state.musicChangeBPMNew && newBPM) state.musicBPM = state.musicChangeBPMNew
             clearTimeout(state.changeBPMTimeout)
 
-            //if (state.musicBPM > bpm-2 && state.musicBPM < bpm+2) state.musicBPM = bpm
+            if (state.musicBPM > bpm-1 && state.musicBPM < bpm+1) state.musicBPM = bpm
             if (state.musicBPM != bpm) {
                 state.musicBPM = state.musicBPM > bpm ? state.musicBPM-1 : state.musicBPM+1
                 state.musicChangeBPMNew = bpm
@@ -433,14 +433,14 @@ function createGame(Listener, canvas, socket) {
 
         if (state.gameStage == 'game') for (let i in state.musicNotes) {
             let note = state.musicNotes[i]
-            let newNoteY = -((note.time-musicCurrentTime)*((5**state.resizeNote)*state.musicBPM)*ScrollSpeed*state.speed)
-            if (note.time >= 0 && newNoteY >= -state.canvas.height && (note.Y <= state.canvas.height+note.hold || newNoteY <= state.canvas.height+note.hold)) moveNote(note, false, state.resizeNote)
+            let newNoteY = -((note.time-musicCurrentTime)*((5**(state.resizeNote*state.musicInfo.noteResize))*state.musicBPM)*ScrollSpeed*state.speed)
+            if (note.time >= 0 && newNoteY >= -state.canvas.height && (note.Y <= state.canvas.height+note.hold || newNoteY <= state.canvas.height+note.hold)) moveNote(note, false, (state.resizeNote*state.musicInfo.noteResize))
         }
 
         if (state.gameStage == 'game') for (let i in state.musicOpponentNotes) {
             let note = state.musicOpponentNotes[i]
-            let newNoteY = -((note.time-musicCurrentTime)*((5**state.resizeNoteOpponent)*state.musicBPM)*ScrollSpeed*state.speed)
-            if (note.time >= 0 && newNoteY >= -state.canvas.height && (note.Y <= state.canvas.height+note.hold || newNoteY <= state.canvas.height+note.hold)) moveNote(note, true, state.resizeNoteOpponent)
+            let newNoteY = -((note.time-musicCurrentTime)*((5**(state.resizeNoteOpponent*state.musicInfo.noteResize))*state.musicBPM)*ScrollSpeed*state.speed)
+            if (note.time >= 0 && newNoteY >= -state.canvas.height && (note.Y <= state.canvas.height+note.hold || newNoteY <= state.canvas.height+note.hold)) moveNote(note, true, (state.resizeNoteOpponent*state.musicInfo.noteResize))
         }
 
         state.musicInfo.accuracy = 0

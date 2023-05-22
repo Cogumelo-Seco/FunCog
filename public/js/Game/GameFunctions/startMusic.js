@@ -25,7 +25,9 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
         state.musicInfo = {
             name: musicInfo.name,
             splashDir: musicInfo.splashDir,
-            splashResize: musicInfo.splashResize,
+            splashResize: musicInfo.splashResize || 1,
+            noteResize: musicInfo.noteResize || 1,
+            spaceBetweenArrowsAdd: musicInfo.spaceBetweenArrowsAdd || 1,
             notesImageDir: musicInfo.notesImageDir,
             dynamicBackgroundImage: musicInfo.dynamicBackgroundImage,
             backgroundImage: musicInfo.backgroundImage,
@@ -140,16 +142,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                     let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/'+dir
 
                     let sound = new Audio()
-                    const getBase64 = async (url) => {
-                        try {
-                            var result = await axios
-                                .get(url, { responseType: 'arraybuffer' })
-                                .then(response =>  new Buffer.from(response.data, 'binary').toString('base64'))
-                            return { data: result }
-                        }catch (e) {
-                            return { error: e };
-                        }
-                    }
+                    sound.src = dir.split('/')[0] == 'Sounds' ? `/${dir}` : link
                 
                     sound.src = `data:audio/x-wav;base64,${await state.smallFunctions.getBase64(dir.split('/')[0] == 'Sounds' ? `/${dir}` : link)}`
                     sound.preload = 'auto'

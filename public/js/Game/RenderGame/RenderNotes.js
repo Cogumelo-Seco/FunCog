@@ -3,10 +3,10 @@ export default async (ctx, canvas, game, Listener, functions) => {
     let middleScroll = game.state.smallFunctions.getConfig('MiddleScroll')
 
     if (!game.state.holdHeight) game.state.holdHeight = game.state.images[`Arrows/Arrows.png`]?.animationConfig['Arrow-0']['Arrow-0-hold-piece']?.height
-    let resizeNote = game.state.resizeNote
+    let resizeNote = game.state.resizeNote*game.state.musicInfo.noteResize
     let arrowY = DownScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin
 
-    let resizeNoteOpponent = game.state.resizeNoteOpponent
+    let resizeNoteOpponent = game.state.resizeNoteOpponent*game.state.musicInfo.noteResize
     let arrowYOpponent = middleScroll ? DownScroll ? (canvas.height-canvas.height/3) : canvas.height/3 : DownScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin
 
     let arrowsInfo = game.state.arrowsInfo

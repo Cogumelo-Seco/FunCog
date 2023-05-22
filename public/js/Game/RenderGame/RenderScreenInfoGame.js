@@ -1,4 +1,7 @@
 export default async (ctx, canvas, game, Listener, functions) => {
+    let resizeNote = game.state.resizeNote*game.state.musicInfo.noteResize
+    let resizeNoteOpponent = game.state.resizeNoteOpponent*game.state.musicInfo.noteResize
+
     let downScroll = game.state.smallFunctions.getConfig('DownScroll')
     let middleScroll = game.state.smallFunctions.getConfig('MiddleScroll')
 
@@ -12,8 +15,8 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
     let arrowsInfoOpponent = Object.values(game.state.arrowsInfoOpponent).sort((a, b) => a.pos-b.pos)
     if (game.state.online) {
-        ctx.font = `bold ${game.state.resizeNoteOpponent != game.state.resizeNote ? 20**game.state.resizeNoteOpponent : 13}px Arial`
-        let musicInfoYOpponent = middleScroll ? downScroll ? arrowsInfoOpponent[0]?.defaultY+(arrowsInfoOpponent[0]?.height**game.state.resizeNoteOpponent) : arrowsInfoOpponent[0]?.defaultY-(arrowsInfoOpponent[0]?.height**game.state.resizeNoteOpponent) : downScroll ? canvas.height-20 : 33
+        ctx.font = `bold ${resizeNoteOpponent != resizeNote ? 20**resizeNoteOpponent : 13}px Arial`
+        let musicInfoYOpponent = middleScroll ? downScroll ? arrowsInfoOpponent[0]?.defaultY+(arrowsInfoOpponent[0]?.height**resizeNoteOpponent) : arrowsInfoOpponent[0]?.defaultY-(arrowsInfoOpponent[0]?.height**resizeNoteOpponent) : downScroll ? canvas.height-20 : 33
         let musicInfoXOpponent = middleScroll ? invertArrowPos ? canvas.width-canvas.width/6-ctx.measureText(musicInfoTxtOpponent).width/2 : canvas.width/6-ctx.measureText(musicInfoTxtOpponent).width/2 : invertArrowPos ? canvas.width-canvas.width/4-(ctx.measureText(musicInfoTxtOpponent).width/2) : canvas.width/4-(ctx.measureText(musicInfoTxtOpponent).width/2)
 
         functions.fillText({
@@ -78,33 +81,33 @@ export default async (ctx, canvas, game, Listener, functions) => {
     }
 
     let arrowsInfo = Object.values(game.state.arrowsInfo).sort((a, b) => a.pos-b.pos)
-    for (let i in game.state.musicInfo.ratings) renderRatings(game.state.musicInfo.ratings[i], arrowsInfo, game.state.musicInfo, game.state.resizeNote)
+    for (let i in game.state.musicInfo.ratings) renderRatings(game.state.musicInfo.ratings[i], arrowsInfo, game.state.musicInfo, resizeNote)
     for (let i in game.state.musicInfoOpponent.ratings) {
         let rating = JSON.parse(JSON.stringify(game.state.musicInfoOpponent.ratings[i]))
         rating.time += 500
-        renderRatings(rating, Object.values(game.stat.arrowsInfoOpponent).sort((a, b) => a.pos-b.pos), game.state.musicInfoOpponent, game.state.resizeNoteOpponent)
+        renderRatings(rating, Object.values(game.stat.arrowsInfoOpponent).sort((a, b) => a.pos-b.pos), game.state.musicInfoOpponent, resizeNoteOpponent)
     }
 
-    let ratingInfoX = arrowsInfo[arrowsInfo.length-1]?.X+arrowsInfo[arrowsInfo.length-1]?.width**game.state.resizeNote
+    let ratingInfoX = arrowsInfo[arrowsInfo.length-1]?.X+arrowsInfo[arrowsInfo.length-1]?.width**resizeNote
     let rating = game.state.musicInfo.ratings[game.state.musicInfo.ratings.length-1]
     if (rating) {
         let percent = (+new Date()-rating.time)/700 < 1 ? (+new Date()-rating.time)/700 : 1
 
         functions.fillText({
-            font: `bold ${14**game.state.resizeNote*((1-percent)/3+1)}px Arial`,
+            font: `bold ${14**resizeNote*((1-percent)/3+1)}px Arial`,
             alpha: percent > 0.6 ? 1-(percent-0.4)/0.6 : game.state.alphaHUD,
             style: `hsl(${110-Math.abs(rating.hitNote)}, 100%, 40%)`,
             text: rating.hitNote?.toFixed(2)+'ms',
             x: ratingInfoX+5, 
-            y: arrowsInfo[arrowsInfo.length-1]?.Y-(10**game.state.resizeNote),
+            y: arrowsInfo[arrowsInfo.length-1]?.Y-(10**resizeNote),
             add: 2
         })
 
         functions.fillText({
-            font: `bold ${17**game.state.resizeNote*((1-percent)/3+1)}px Arial`,
+            font: `bold ${17**resizeNote*((1-percent)/3+1)}px Arial`,
             text: game.state.musicInfo.combo+'X',
             x: ratingInfoX+5, 
-            y: arrowsInfo[arrowsInfo.length-1]?.Y+(30**game.state.resizeNote),
+            y: arrowsInfo[arrowsInfo.length-1]?.Y+(30**resizeNote),
             add: 2
         })
     }

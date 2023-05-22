@@ -5,8 +5,8 @@ export default async (ctx, canvas, game, Listener, functions) => {
     let downScroll = game.state.smallFunctions.getConfig('DownScroll')
     let middleScroll = game.state.smallFunctions.getConfig('MiddleScroll')
 
-    let resizeNote = game.state.resizeNote
-    let spaceBetweenArrows = game.state.smallFunctions.getConfig('SpaceBetweenArrows')**resizeNote
+    let resizeNote = game.state.resizeNote*game.state.musicInfo.noteResize
+    let spaceBetweenArrows = game.state.smallFunctions.getConfig('SpaceBetweenArrows')**resizeNote*game.state.musicInfo.spaceBetweenArrowsAdd
     let arrowsWidth = game.state.arrowsWidth
 
     let arrowX = middleScroll ? canvas.width/2-(arrowsWidth/2) : invertArrowPos ? canvas.width/4-arrowsWidth/2 : canvas.width-(arrowsWidth+(canvas.width/4-arrowsWidth/2))
@@ -14,8 +14,8 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
     game.state.arrowsWidth = 0
 
-    let resizeNoteOpponent = game.state.resizeNoteOpponent
-    let spaceBetweenArrowsOpponent = game.state.smallFunctions.getConfig('SpaceBetweenArrows')**resizeNoteOpponent
+    let resizeNoteOpponent = game.state.resizeNoteOpponent*game.state.musicInfo.noteResize
+    let spaceBetweenArrowsOpponent = game.state.smallFunctions.getConfig('SpaceBetweenArrows')**resizeNoteOpponent*game.state.musicInfo.spaceBetweenArrowsAdd
     let arrowsWidthOpponent = game.state.arrowsWidthOpponent
 
     let arrowXOpponent = middleScroll ? invertArrowPos ? canvas.width-canvas.width/6-(arrowsWidthOpponent/2) : canvas.width/6-(arrowsWidthOpponent/2) : invertArrowPos ? canvas.width-(arrowsWidthOpponent+(canvas.width/4-arrowsWidthOpponent/2)) : canvas.width/4-arrowsWidthOpponent/2
@@ -37,6 +37,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowInfo.arrowFrameID}`]
         if (!arrowFrames) return
         let arrowImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}`]
+        console.log(arrowImagePos)
 
         let arrowWidth = arrowImagePos?.width
         let arrowHeight = arrowImagePos?.height
@@ -54,7 +55,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         }
 
         if (Listener.state.arrows[arrowID]?.click) {
-            let note = musicNotes.find(n => (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.time >= game.state.musicInfo.oldPauseTime && n.arrowID == arrowID && n.Y >= -(arrowHeight**game.state.resizeNote) && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
+            let note = musicNotes.find(n => (n.errorWhenNotClicking || n.autoClick) && !n.disabled && n.time >= game.state.musicInfo.oldPauseTime && n.arrowID == arrowID && n.Y >= -(arrowHeight**resizeNote) && n.Y <= (game.state.holdHeight**resizeNote)*(n.hold/(game.state.holdHeight))+(game.state.holdHeight*2))
             let onNote = Listener.state.arrows[arrowID]?.state == 'onNote' && note ? true : false
 
             if (Listener.state.arrows[arrowID]?.state == 'onNote' || Listener.state.arrows[arrowID]?.state == 'noNote') arrowImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}-press-${game.state.animations.arrows.frame}${onNote ? '' : '-no'}`]

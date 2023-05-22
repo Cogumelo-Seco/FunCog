@@ -775,7 +775,7 @@
 				"lengthInSteps": 16,
 				"mustHitSection": false,
 				"changeBPM": true,
-				"bpm": 360
+				"bpm": 184
 			},
 			{
 				"sectionNotes": [
@@ -4671,7 +4671,7 @@
 				"sectionNotes": [],
 				"altAnim": false,
 				"gfSection": false,
-				"bpm": 360,
+				"bpm": 180,
 				"changeBPM": true,
 				"mustHitSection": false
 			},
