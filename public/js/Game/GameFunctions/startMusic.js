@@ -134,7 +134,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
 
             setTimeout(() => {
                 if (!loaded) newLoad('[ERROR] '+dir)
-            }, 10000)
+            }, 20000)
 
             if ([ 'ogg', 'mp3' ].includes(dir.split('.')[dir.split('.').length-1])) {
                 /*if (state.sounds[dir]?.src) newLoad()
@@ -142,10 +142,25 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                     let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/'+dir
 
                     let sound = new Audio()
-                    sound.src = dir.split('/')[0] == 'Sounds' ? `/${dir}` : link
-                
-                    sound.src = `data:audio/x-wav;base64,${await state.smallFunctions.getBase64(dir.split('/')[0] == 'Sounds' ? `/${dir}` : link)}`
-                    sound.preload = 'auto'
+
+                    await state.smallFunctions.getBase64FromUrl(dir.split('/')[0] == 'Sounds' ? `/${dir}` : link, async(base64) => {
+                        sound.src = `data:audio/x-wav;base64,${base64}`
+                        state.sounds[dir] = sound
+                        sound.audioCtx = new AudioContext()
+                        sound.audioSource = sound.audioCtx.createMediaElementSource(sound)
+                        sound.analyser = sound.audioCtx.createAnalyser()
+                        sound.audioSource.connect(sound.analyser)
+                        sound.analyser.connect(sound.audioCtx.destination)
+                        sound.analyser.fftSize = 2048  //2048
+                        sound.analyser.minDecibels = -80  //-100
+                        sound.analyser.maxDecibels = -25  //-30
+                        sound.analyser.smoothingTimeConstant = 0.8  //0.8
+                        sound.bufferLength = sound.analyser.frequencyBinCount
+                        sound.dataArr = new Uint8Array(sound.bufferLength)
+                    })
+                    
+                /*
+                    //sound.src = `data:audio/x-wav;base64,${await state.smallFunctions.getBase64(dir.split('/')[0] == 'Sounds' ? `/${dir}` : link)}`
                     state.sounds[dir] = sound
                     sound.audioCtx = new AudioContext()
                     sound.audioSource = sound.audioCtx.createMediaElementSource(sound)
@@ -157,7 +172,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
                     sound.analyser.maxDecibels = -25  //-30
                     sound.analyser.smoothingTimeConstant = 0.8  //0.8
                     sound.bufferLength = sound.analyser.frequencyBinCount
-                    sound.dataArr = new Uint8Array(sound.bufferLength)
+                    sound.dataArr = new Uint8Array(sound.bufferLength)*/
 
                     sound.addEventListener('loadeddata', (e) => {
                         state.toLoadInScreen[dir] = {

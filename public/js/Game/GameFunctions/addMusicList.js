@@ -1065,6 +1065,7 @@ export default async (state) => {
                     mod: 'LateNightCityTale',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 2,
+                    noteResize: 1.03,
                     toLoad: [
                         { dir: 'imgs/LateNightCityTale/purple-filter.png' },
                         { dir: 'imgs/LateNightCityTale/hurt.png' },

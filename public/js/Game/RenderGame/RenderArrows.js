@@ -37,7 +37,6 @@ export default async (ctx, canvas, game, Listener, functions) => {
         let arrowFrames = arrowImageData?.animationConfig[`Arrow-${arrowInfo.arrowFrameID}`]
         if (!arrowFrames) return
         let arrowImagePos = arrowFrames[`Arrow-${arrowInfo.arrowFrameID}`]
-        console.log(arrowImagePos)
 
         let arrowWidth = arrowImagePos?.width
         let arrowHeight = arrowImagePos?.height

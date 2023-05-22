@@ -1,16 +1,27 @@
-import axios, {isCancel, AxiosError} from 'axios';
-
 export default (state, Listener, socket) => {
     return {
-        getBase64: async (url) => {
-            try {
-                var result = await axios
-                    .get(url, { responseType: 'arraybuffer' })
-                    .then(response =>  new Buffer.from(response.data, 'binary').toString('base64'))
-                return result
-            }catch (e) {
-                return { error: e };
-            }
+        getBase64FromUrl: async (url, callback) => {
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                /*function Uint8ToString(u8a){
+                    var CHUNK_SZ = 0x8000;
+                    var c = [];
+                    for (var i=0; i < u8a.length; i+=CHUNK_SZ) {
+                        c.push(String.fromCharCode.apply(null, u8a.subarray(i, i+CHUNK_SZ)));
+                    }
+                    return c.join("");
+                }*/
+                
+                var u8 = new Uint8Array(xhr.response);
+                var b64encoded = Buffer.from(u8).toString('base64')
+                //var b64encoded = btoa(Uint8ToString(u8));
+
+                callback(b64encoded)
+            };
+
+            xhr.open('GET', url);
+            xhr.responseType = 'arraybuffer';
+            xhr.send();
         },
         getKey: (arrowID) => {
             let arrowsKey = (state.selectSettingsOption.settingsOptions.find(c => c[Object.keys(state.arrowsInfo).length+'K']))[Object.keys(state.arrowsInfo).length+'K']
