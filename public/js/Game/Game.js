@@ -477,7 +477,7 @@ function createGame(Listener, canvas, socket) {
             }
         }
 
-        if (state.gameLoopFPSControlTime+20 <= +new Date()) {
+        if (state.gameLoopFPSControlTime+25 <= +new Date()) {
             if (state.online && state.serverId) {
                 if (state.serverInfo.end == true) {
                     //state.smallFunctions.redirectGameStage('onlineServerList')
@@ -497,7 +497,7 @@ function createGame(Listener, canvas, socket) {
 
             state.gameLoopFPSControlTime = +new Date()
 
-            if (state.music?.currentTime > 0 && state.music?.currentTime < state.music?.duration) state.musicEventListener('gameLoop', { listenerState: Listener.state }, state)
+            if (state.music?.currentTime > 0 && state.music?.currentTime < state.music?.duration && !state.music.paused) state.musicEventListener('gameLoop', { listenerState: Listener.state }, state)
 
             for (let i in state.animations) {
                 let animation = state.animations[i]

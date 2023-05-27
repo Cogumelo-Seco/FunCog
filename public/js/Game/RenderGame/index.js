@@ -28,7 +28,7 @@ export default async function renderGame(canvas, game, Listener) {
         document.body.style.imageRendering = 'pixelated'
     }
 
-    if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration) game.state.musicEventListener('gameLoopFullFPSBackground', { listenerState: Listener.state }, game.state)
+    if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration && !game.state.music.paused) game.state.musicEventListener('gameLoopFullFPSBackground', { listenerState: Listener.state }, game.state)
     //require('./RenderScreenGame').default(ctx, canvas, game, Listener)
 
     const functions = require('./functions').default(ctx, canvas, game, Listener)
@@ -74,7 +74,7 @@ export default async function renderGame(canvas, game, Listener) {
     require('./RenderScreenInformation').default(ctx, canvas, game, Listener, functions)
 
     game.gameLoop()
-    if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration) game.state.musicEventListener('gameLoopFullFPS', { listenerState: Listener.state }, game.state)
+    if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration && !game.state.music.paused) game.state.musicEventListener('gameLoopFullFPS', { listenerState: Listener.state }, game.state)
 
     if (game.state.smallFunctions.getConfig('VSync')) window.requestAnimationFrame(() => renderGame(canvas, game, Listener))
     else setTimeout(() => renderGame(canvas, game, Listener), 0)

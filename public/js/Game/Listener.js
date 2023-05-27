@@ -236,7 +236,7 @@ export default function createListener(socket) {
                                 if (state.game.state.musicVoice) state.game.state.musicVoice.currentTime = state.game.state.music.currentTime -= 0.02
                                 if (state.game.state.videoBackground) state.game.state.videoBackground.currentTime = state.game.state.music.currentTime -= 0.02
 
-                                setTimeout(loop, 1000/30)
+                                setTimeout(loop, 1000/20)
                             } else {
                                 if (state.game.state.musicVoice) state.game.state.musicVoice.currentTime = state.game.state.music.currentTime
                                 if (state.game.state.videoBackground) state.game.state.videoBackground.currentTime = state.game.state.music.currentTime

@@ -58,7 +58,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					if (key) variables.keys[key.code] = true
 				}
 
-				variables.freezingLevel += 0.24
+				variables.freezingLevel += 0.22
 
 				if (variables.freezingLevel >= variables.freezingLevelMax) state.musicInfo.health = -100
 				variables.freezingLevel = variables.freezingLevel <= 0 ? 0 : variables.freezingLevel >= variables.freezingLevelMax ? variables.freezingLevelMax : variables.freezingLevel
