@@ -424,6 +424,7 @@ button#skipConnecting:hover {
 div#registerContent,
 div#loginContent {
     display: none;
+    z-index: 1;
 } 
 
 div.loginAndRegisterContent {
@@ -538,6 +539,10 @@ div.loginAndRegisterContent div#connections .connectionButton {
 img.buttonImage {
     position: relative;
     width: 100%;
+}
+
+img#connectionButtonDiscordImg {
+    border-radius: 5px;
 }
 
 span.contentSeparation {

@@ -15,8 +15,8 @@ function createGame(Listener, canvas, socket) {
             emoji: null
         },
         messages: [],
-        gameStage: 'menu',
-        inLogin: false,
+        gameStage: 'loading',
+        inLogin: true,
         online: false,
         waiting: true,
         serverId: null,
