@@ -60,11 +60,13 @@ export default async (ctx, canvas, game, Listener, functions) => {
         ctx.fillText(`[Q] Return`, returnButtonX+(returnButtonWidth/2)-(ctx.measureText(`[Q] Return`).width/2), returnButtonY+(returnButtonWidth*0.19))
     }
 
-    let cursorX = window.innerWidth*Listener.state.mouseInfo.x
+    /*let cursorX = window.innerWidth*Listener.state.mouseInfo.x
     let cursorY = window.innerHeight*Listener.state.mouseInfo.y
 
-    let cursorImage = game.state.images[`imgs/cursor${Listener.state.mouseInfo.mouseOnHover ? '-hover' : ''}.png`]
-    if (cursorImage && (Listener.state.mouseInfo.mouseOnHover || Listener.state.mouseInfo.lastMoveTime+3000 >= +new Date())) ctx.drawImage(cursorImage.image, cursorX, cursorY, 30, 30)
+    /*let cursorImage = game.state.images[`imgs/cursor${Listener.state.mouseInfo.mouseOnHover ? '-hover' : ''}.png`]
+    if (cursorImage && (Listener.state.mouseInfo.mouseOnHover || Listener.state.mouseInfo.lastMoveTime+3000 >= +new Date())) ctx.drawImage(cursorImage.image, cursorX, cursorY, 30, 30)*/
+    let cursorType = (Listener.state.mouseInfo.mouseOnHover || Listener.state.mouseInfo.lastMoveTime+3000 >= +new Date()) ? Listener.state.mouseInfo.mouseOnHover ? 'pointer' : 'default' : 'none'
+    document.body.style.cursor = cursorType
 
     let transitionAnimation = game.state.animations.transition
 

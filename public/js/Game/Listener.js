@@ -572,7 +572,7 @@ export default function createListener(socket) {
             }
 
             if (state.game.state.gameStage == 'menu' && on) {
-                keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
+                //keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
                 
                 switch (keyPressed) {
                     case keys.KeyUp:

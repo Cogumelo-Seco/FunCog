@@ -1,4 +1,7 @@
 export default async (ctx, canvas, game, Listener, functions) => {
+    let screenElements = document.getElementById('screenElements')
+    screenElements.innerHTML = ''
+    
     ctx.fillStyle = 'rgb(0, 0, 0, 0.95)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 

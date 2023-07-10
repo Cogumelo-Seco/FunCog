@@ -15,8 +15,8 @@ function createGame(Listener, canvas, socket) {
             emoji: null
         },
         messages: [],
-        gameStage: 'loading',
-        inLogin: true,
+        gameStage: 'menu',
+        inLogin: false,
         online: false,
         waiting: true,
         serverId: null,
@@ -37,7 +37,7 @@ function createGame(Listener, canvas, socket) {
         },
         selectMenuOption: {
             menuOptions: [ 'Singleplayer', 'Multiplayer', 'Settings' ],
-            menuSelect: 0
+            menuSelect: -1
         },
         selectSettingsOption: {
             settingsOptions: [],
@@ -140,6 +140,14 @@ function createGame(Listener, canvas, socket) {
         opponentRatingLoaded: {},
 
         defaultAnimations: {
+            menuLogoAnimation: {
+                frame: 0,
+                startFrame: 0,
+                endFrame: 300,
+                totalDalay: 0,
+                dalay: 0,
+                loop: true
+            },
             arrowKeys: {
                 frame: 0,
                 startFrame: 0,

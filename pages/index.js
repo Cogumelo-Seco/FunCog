@@ -27,6 +27,7 @@ const Game = (props) => {
                 withCredentials: true,
             }), null, true)
         }
+        skipConnecting.onclick()
 
         function tryConnect(SERVER, one) {
             if (skipConnecting.style.display == 'block') skipConnecting.focus()
@@ -44,7 +45,7 @@ const Game = (props) => {
                 setTimeout(() => {
                     if (!test && !skipedConnecting) {
                         connectingMessage.innerText = 'Connecting to Server...'
-                        if (!tryConnectOn) tryConnect(props.SERVER, one ? false : true)
+                        if (!tryConnectOn) setTimeout(tryConnect(props.SERVER, one ? false : true), 1000)
                     } else {
                         connectingMessage.style.display = 'none'
                         if (!skipedConnecting) start(socket, SERVER, false)
@@ -55,7 +56,7 @@ const Game = (props) => {
         tryConnect(props.SERVER, true)
 
         function start(socket, ServerLink, SkipLogin) {
-            document.body.style.cursor = 'none'
+            /*document.body.style.cursor = 'none'*/
             skipConnecting.style.display = 'none'
             connectingMessage.style.display = 'none'
             const canvas = document.getElementById('gameCanvas')        
@@ -292,6 +293,10 @@ const Game = (props) => {
                 <canvas id="backgroundCanvas"/>
                 <canvas id="gameCanvas"/>
                 <img id="overlayImage" src="https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/imgs/VSLullaby/Bygone/Background2.png" />
+
+                <div id="screenElements">
+                </div>
+
                 <video preload="auto" id="gameVideo" />
 
                 <button id="chat-button" />
@@ -322,7 +327,7 @@ const Game = (props) => {
 
                     <div id="connections">
                         <button class="connectionButton" id="discordButtonLogin">
-                            <img id="connectionButtonDiscordImg" src="/imgs/login/discord.png" />
+                            <img id="connectionButtonDiscordImg" className="buttonImage" src="/imgs/login/discord.png" />
                         </button>
                     </div>
                 </div>
@@ -357,7 +362,7 @@ const Game = (props) => {
 
                     <div id="connections">
                         <button className="connectionButton" id="discordButtonRegister">
-                            <img id="connectionButtonDiscordImg" src="/imgs/login/discord.png" />
+                            <img id="connectionButtonDiscordImg" className="buttonImage" src="/imgs/login/discord.png" />
                         </button>
                     </div>
                 </div>

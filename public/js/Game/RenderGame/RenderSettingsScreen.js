@@ -1,4 +1,7 @@
 export default async (ctx, canvas, game, Listener, functions) => {
+    let screenElements = document.getElementById('screenElements')
+    screenElements.innerHTML = ''
+
     let settingsSelect = game.state.selectSettingsOption.settingsSelect
     let Y = (canvas.height/2-(80/2)+47)-settingsSelect*(80)
 

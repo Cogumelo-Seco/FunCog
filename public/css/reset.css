@@ -118,12 +118,12 @@ h6 {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #1b1c24;
+    background: rgb(150, 0, 50);
     border-radius: 50px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #121218;
+    background: rgb(100, 0, 20);
 }
 
 button,
