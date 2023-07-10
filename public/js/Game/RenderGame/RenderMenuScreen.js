@@ -34,7 +34,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         Y += canvas.height*0.18
     }*/
 
-    let screenResize = canvas.width/canvas.height
+    let screenResize = Math.floor(Math.min(canvas.height*0.45, canvas.width*0.22))/150//canvas.width/canvas.height
 
     let screenElements = document.getElementById('screenElements')
     let notUpdate = screenElements && !screenElements.getElementsByClassName('menuElement')[0]
@@ -192,7 +192,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         
 
         let logoElement = document.getElementById('logoElement') || document.createElement('img')
-        let logoSize = screenResize*150
+        let logoSize = Math.floor(Math.min(canvas.height*0.45, canvas.width*0.22))
         logoElement.id = 'logoElement'
         logoElement.src = '/imgs/logo.png'
         logoElement.style.width = logoSize+'px'

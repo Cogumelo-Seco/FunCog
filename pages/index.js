@@ -27,7 +27,7 @@ const Game = (props) => {
                 withCredentials: true,
             }), null, true)
         }
-        //skipConnecting.onclick()
+        skipConnecting.onclick()
 
         function tryConnect(SERVER, one) {
             if (skipConnecting.style.display == 'block') skipConnecting.focus()
