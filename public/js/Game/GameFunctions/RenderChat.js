@@ -17,7 +17,7 @@ export default async (canvas, state, stateListener, command) => {
             .replace(/&lt;span/g, '<span')
             .replace(/&lt;\/span/g, '</span')
         
-        text = text.replace(/&lt;@([\s\S]*?)&gt;|&lt;@([\s\S]*?)>|\*{2}([\s\S]*?)\*{2}|\*([\s\S]*?)\*|~~([\S\s]*?)~~|__([\S\s]*?)__|`{2}([\S\s]*?)`{2}|`([^`]*)`|\|{2}([\S\s]*?)\|{2}/g, (match, a, b, c, d, e, f, g, h, i) => {
+        text = text.replace(/&lt;@([\s\S]*?)&gt;|&lt;@([\s\S]*?)>|\*{2}([\s\S]*?)\*{2}|\*([\s\S]*?)\*|~~([\S\s]*?)~~|__([\S\s]*?)__|`{2}([\S\s]*?)`{2}|`([^`]*)`|\|{2}([\S\s]*?)\|{2}|#([\S\s]*?)#/g, (match, a, b, c, d, e, f, g, h, i, j) => {
             let metion = a || b
             if (metion) {
                 update = true
@@ -51,12 +51,17 @@ export default async (canvas, state, stateListener, command) => {
                 update = true
                 return `<span class="spoiler is-hidden" contentEditable="true"${id ? 'id="'+id+'"' : ''}>${i}</span>&nbsp;`
             }
+            if (j) {
+                update = true
+                return `<span class="giant" contentEditable="true"${id ? 'id="'+id+'"' : ''}>${j}</span>&nbsp;`
+            }
             return match
         });
         return { text, update }
     }
 
     if (command == 'gameLoop') {
+        if (messageBoxContent.innerText == '') messageBoxContent.innerHTML = ''
         let { text, update } = replaces(messageBoxContent.innerHTML)
         if (messageBoxContent.innerText.length >= 400) messageBoxContent.style.color = 'red'
         else messageBoxContent.style.color = 'white'
@@ -66,20 +71,24 @@ export default async (canvas, state, stateListener, command) => {
             if (element.innerText.replace(/\s+/s, '').replace(/&nbsp;+/s, '') == '') element.remove()
             if (messageBoxContent.innerText.length >= 400) element.style.color = 'red'
         }
+
+        if (text && text.split('</span>').length > 1 && text.split('</span>')[text.split('</span>').length-1].split(';')[0] != '&nbsp') {
+            let endValue = '</span>'+text.split('</span>')[text.split('</span>').length-2].split('<span')[0]
+            text = text.split('</span>').slice(0, text.split('</span>').length-2).join('</span>')+endValue
+            update = true
+        }
+
         if (update && messageBoxContent.innerHTML !== text) {
             messageBoxContent.innerHTML = text
-            let metions = messageBoxContent.getElementsByClassName('metion')
-            //messageBoxContent.blur()
-            //setTimeout(() => {
-                //window.getSelection().removeAllRanges()
-                //messageBoxContent.focus()
+            function toEnd() {
                 for (let i = 0;i <= messageBoxContent.getElementsByTagName('span').length*2;i++) {
                     try {
                         window.getSelection().collapse(messageBoxContent, i);
                     } catch {}
                 }
-                //document.getSelection().setPosition(document.getSelection().focusNode, messageBoxContent.innerText.length-2)//.collapse(0, 1000)//document.getSelection().focusNode, document.getSelection().focusNode.length)
-            //}, 2000)
+            }
+            toEnd()
+            setTimeout(toEnd, 20)
         }
 
         return
@@ -95,7 +104,7 @@ export default async (canvas, state, stateListener, command) => {
         let message = messages[messages.length-1-i]
         let lastMessage = messages[messages.length-i] || null
 
-        if (message.loadTo == 'all' || message.loadTo == state.socket.id) {
+        if (message.loadTo == 'all' || message.loadTo == state.myConfig.author.playerID) {
             if (chat.style.display == 'block') {
                 if (command == 'newMessage' && chatContent.scrollTop < chatContent.scrollHeight-500) autoScroll = false
                 state.serverPlayers[message.author.id] = message.author
@@ -140,7 +149,7 @@ export default async (canvas, state, stateListener, command) => {
                         element.onclick = () => {
                             metionPlayer(element.id)
                         }
-                        if (element.id && state.socket.id && !contentElement.className.includes('Mentioned')) contentElement.className += 'Mentioned'
+                        if (element.id == state.myConfig.author.playerID && !contentElement.className.includes('Mentioned')) contentElement.className += 'Mentioned'
                     }
                     if (element.className.includes('spoiler')) {
                         element.onclick = () => {
@@ -154,9 +163,12 @@ export default async (canvas, state, stateListener, command) => {
                 message.loadTo = 'none'
                 message.unread = false
             } else if (message.unread) {
-                if (message.content.includes(`@${state.socket.id}`)) {
+                console.log(message.content)
+                //if (message.content.includes(`@${state.myConfig.author.playerID}`)) {
+                    //
+                if (message.content.includes(`<span class="metion" contenteditable="false" id="${state.myConfig.author.playerID}">`)) {
                     unreadMessagesAlert = true
-                    unreadMessages += 1
+                    unreadMessages = Number(unreadMessages)+1
                 }
                 if (unreadMessages <= 0) unreadMessages = ' '
             }
@@ -179,7 +191,7 @@ export default async (canvas, state, stateListener, command) => {
     if (unreadMessages > 0 || typeof(unreadMessages) == 'string') {
         unreadMessageCounter.style.display = 'flex'
         unreadMessageCounter.innerText = unreadMessages
-        unreadMessageCounter.style.backgroundColor = unreadMessagesAlert ? 'rgb(115, 0, 255)' : 'rgb(40, 40, 40)'
+        unreadMessageCounter.style.backgroundColor = unreadMessagesAlert ? 'rgba(150, 0, 50)' : 'rgb(40, 40, 40)'
         chatButton.style.background = 'rgba(0, 0, 0, 0.658) url(/imgs/chat/unreadChat.png) no-repeat center 0px / 100%'
     } else {
         unreadMessageCounter.style.display = 'none'

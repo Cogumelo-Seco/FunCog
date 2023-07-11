@@ -47,8 +47,8 @@ export default function chat(state, socket) {
         state.onChat = 'off'
     }
 
-    chat.addEventListener('mouseover', focusin)
-    chat.addEventListener('mouseout', focusout)
+    document.getElementById('screenElements').addEventListener('mouseover', focusout)
+    document.getElementById('screenElements').addEventListener('mouseout', focusin)
 
     function openCloseChat(event) {
         if (event.pointerType != 'mouse') return
@@ -77,7 +77,7 @@ export default function chat(state, socket) {
             author: {
                 name: state.game.state.myConfig.author.name || socket.id.slice(0, 20),
                 avatar: state.game.state.myConfig.author.avatar || null,
-                id: socket.id
+                id: state.game.state.myConfig.author.playerID || socket.id
             },
             colorName: state.game.state.myConfig.colorName || null,
             colorContent: state.game.state.myConfig.colorContent || null,
@@ -85,6 +85,8 @@ export default function chat(state, socket) {
             loadTo: 'all',
             content,
         })
+
+        console.log(state.game.state.myConfig)
 
         messageBoxContent.innerHTML = ''
         setTimeout(() => messageBoxContent.innerHTML = '', 10)

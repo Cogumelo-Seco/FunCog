@@ -1,40 +1,5 @@
 export default async (ctx, canvas, game, Listener, functions) => {
-    //let Y = (canvas.height/2-(70/2))-menuSelect*(70)
-/*
-    for (let i in game.state.selectMenuOption.menuOptions) {
-        let X = 20//canvas.width*0.2//-(Math.abs(canvas.height/2-Y))
-
-        ctx.font = `bold ${menuSelect == i ? canvas.width/canvas.height*45 : canvas.width/canvas.height*44}px Arial`
-        ctx.fillStyle = 'white'//menuSelect == i ? 'black' : 'white'
-        ctx.fillText(game.state.selectMenuOption.menuOptions[i], (menuSelect == i ? 20 : 0)+X, Y);
-
-        if (menuSelect == i) {
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'
-            ctx.fillRect(0, Y-(canvas.width/canvas.height*45)+10, canvas.width, canvas.width/canvas.height*45+10)
-        }
-        /*ctx.lineWidth = 4
-        ctx.strokeStyle  = menuSelect == i ? 'white' : 'black'
-        ctx.strokeText(game.state.selectMenuOption.menuOptions[i], (menuSelect == i ? 20 : 0)+X, Y);
-
-        Listener.state.buttons[`Menu-${i}`] = {
-            gameStage: [ 'menu' ],
-            minX: X/canvas.width*1000,
-            maxX: (X+ctx.measureText(game.state.selectMenuOption.menuOptions[i]).width)/canvas.width*1000,
-            minY: (Y-(menuSelect == i ? canvas.width/canvas.height*45 : canvas.width/canvas.height*44))/canvas.height*1000,
-            maxY: Y/canvas.height*1000,
-            pointer: true,
-            over: false,
-            onClick: () => {
-                game.state.selectMenuOption.menuSelect = i
-                Listener.handleKeys({ event: { code: 'Enter' }, on: true })
-                setTimeout(() => game.state.selectMenuOption.menuSelect = 0, 200)
-            }
-        }
-        
-        Y += canvas.height*0.18
-    }*/
-
-    let screenResize = Math.floor(Math.min(canvas.height*0.45, canvas.width*0.22))/150//canvas.width/canvas.height
+    let screenResize = Math.floor(Math.min(canvas.height*0.45, canvas.width*0.22))/150
 
     let screenElements = document.getElementById('screenElements')
     let notUpdate = screenElements && !screenElements.getElementsByClassName('menuElement')[0]
@@ -162,9 +127,10 @@ export default async (ctx, canvas, game, Listener, functions) => {
             optionElement.style.borderRadius = '8px'
             optionElement.style.backgroundColor = 'rgb(20, 0, 10)'
             optionElement.style.color = 'white'
-            //optionElement.onmouseover = () => optionElement.style.animation = 'optionButtonOver 0.2s ease forwards'
-            //optionElement.onmouseout = () => optionElement.style.animation = 'optionButtonOut 0.2s ease forwards'
-            optionElement.onmouseover = () => game.state.selectMenuOption.menuSelect = i
+            optionElement.onmouseover = () => {
+                game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })
+                game.state.selectMenuOption.menuSelect = i
+            }
 
             if (Number(game.state.selectMenuOption.menuSelect) == Number(i)) optionElement.style.animation = 'optionButtonOver 0.2s ease forwards'
             else optionElement.style.animation = 'optionButtonOut 0.2s ease forwards'
@@ -185,9 +151,6 @@ export default async (ctx, canvas, game, Listener, functions) => {
         nameText.style.color = 'white'
         nameText.style.fontSize = screenResize*40+'px'
         nameText.style.marginTop = screenResize*10+'px'
-        /*nameText.style.position = 'absolute'
-        nameText.style.left = canvas.width/2+canvas.width/4-(logoSize/2)+'px'
-        nameText.style.top = canvas.height/2-(logoSize/2)+'px'*/
         if (notUpdate) menuElement.appendChild(nameText)
         
 
@@ -244,7 +207,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         if (notUpdate) updateButton.appendChild(updateButtonImage)
 
         let buttonSize = screenResize*15
-        updateButton.style.padding = '5px'
+        updateButton.style.padding = '4px'
         updateButton.style.width = buttonSize+'px'
         updateButton.style.height = buttonSize+'px'
         updateButton.style.position = 'absolute'
@@ -257,6 +220,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         updateButton.onmouseover = () => updateButtonImage.style.animation = 'rotate 0.5s ease forwards'
         updateButton.onmouseout = () => updateButtonImage.style.animation = ''
         updateButton.onclick = () => {
+            game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })
             updateContainer.style.display = updateContainer.style.display == 'block' ? 'none' : 'block'
             logoElement.style.display = updateContainer.style.display == 'block' ? 'none' : 'block'
         }
@@ -265,74 +229,4 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
         if (notUpdate) screenElements.appendChild(menuElement)
     } catch (err) { console.error(err) }
-
-    //}
-/*
-    ctx.fillStyle = 'rgb(20, 20, 20)'
-    ctx.fillRect(canvas.width/2, 0, canvas.width/2, canvas.height)
-
-    ctx.fillStyle = 'rgb(200, 200, 200)'
-    ctx.fillRect(canvas.width/2-5, 0, 10, canvas.height)
-
-    ctx.font = `bold ${canvas.width/canvas.height*30}px Arial`
-    ctx.fillStyle = 'black'
-    ctx.fillText('Atualizações', canvas.width-canvas.width/4-ctx.measureText('Atualizações').width/2, canvas.height*0.18);
-    ctx.lineWidth = 3
-    ctx.strokeStyle  = 'rgb(255, 255, 255)'
-    ctx.strokeText('Atualizações', canvas.width-canvas.width/4-ctx.measureText('Atualizações').width/2, canvas.height*0.18);
-
-    let resizeMsg = 0.04
-    let msgArr = [
-        { msg: '- Música "Shadows" do mod', color: 'rgb(0, 150, 255)' },
-        { msg: '  "VS Withered Freddy" terminada', color: 'rgb(0, 150, 255)' },
-        { msg: '' },
-        { msg: '- Background com visualização da música!!', color: 'rgb(0, 255, 0)' },
-        { msg: '' },
-        { msg: '- Configurações:', color: 'rgb(0, 255, 0)' },
-        { msg: '     "AudioVisualizer" adicionada', color: 'rgb(0, 255, 0)' },
-        { msg: '     "BackgroundOfuscation" adicionada', color: 'rgb(0, 255, 0)' },
-        { msg: '' },
-        { msg: '' },
-        { msg: '- Multiplayer desligado Temporariamente', color: 'rgb(255, 255, 0)' },
-    ]
-
-    //'rgb(0, 150, 255)'
-    //'rgb(0, 255, 0)'
-    //'rgb(255, 0, 0)'
-    //'rgb(255, 0, 0)'
-    //'rgb(255, 255, 0)'
-
-
-    let msgX = canvas.width/2+(canvas.width*0.05)
-    let msgY = canvas.height/3
-    //msgY = (canvas.height-canvas.height/2.5)+(-((msgArr.length-1)*(canvas.width/2*resizeMsg)/2))
-    for (let i in msgArr) {
-        let msg = msgArr[i].msg
-
-        ctx.fillStyle = msgArr[i].color || 'black'
-        ctx.font = `bold ${canvas.width/2*resizeMsg}px Arial`
-        ctx.fillText(msg, msgX, msgY);
-
-        msgY += canvas.width/2*resizeMsg
-    }
-
-    let logoImage = game.state.images['imgs/logo.png']?.image
-    /*let alpha = 1//100/game.state.animations.menuLogoAnimation.frame
-    let size = (canvas.height/canvas.width*500)*((alpha/8)+1)
-
-    ctx.globalAlpha = alpha
-    if (logoImage) ctx.drawImage(logoImage, canvas.width/2+canvas.width/4-(size/2), canvas.height/2-(size/2), size, size)
-
-    let animation = (game.state.animations.menuLogoAnimation.frame)/((game.state.animations.menuLogoAnimation.endFrame)/30)
-    animation = animation >= 1 ? 1 : animation
-    let size = 300
-    let x = canvas.width/2+canvas.width/4
-    let y = canvas.height/2
-    ctx.save();
-    ctx.translate(x, y)
-    ctx.rotate((Math.PI*2)*animation)
-    
-    if (logoImage) ctx.drawImage(logoImage, -(size/2), -(size/2), size, size)
-
-    ctx.restore();*/
 }

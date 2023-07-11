@@ -75,6 +75,7 @@ div#screenElements .stage {
 /* Chat */
 
 button#chat-button {
+    z-index: 1;
     display: none;
     position: absolute;
     top: 5px;
@@ -89,6 +90,7 @@ button#chat-button {
 }
 
 div#unreadMessageCounter {
+    z-index: 1;
     position: absolute;
     display: none;
     align-items: center;
@@ -105,6 +107,7 @@ div#unreadMessageCounter {
 }
 
 div#chat {
+    z-index: 1;
     cursor: auto;
     position: absolute;
     vertical-align: baseline;
@@ -168,8 +171,8 @@ div#chat-content p#Content {
 }
 
 .Mentioned {
-    background-color: rgba(115, 0, 255, 0.5);
-    border-left: solid rgba(115, 0, 255, 1) 2px;
+    background-color: rgba(200, 50, 100, 0.5);
+    border-left: solid rgba(150, 0, 50, 1) 2px;
     padding: 1px;
 }
 
@@ -267,6 +270,10 @@ div#message-box .messageBoxText {
     padding: 1px;
     border-radius: 2px;
     background-color: #232428;
+}
+.giant {
+    font-weight: bold;
+    font-size: 22px;
 }
 .spoiler {
     padding: 1px 3px;
@@ -400,7 +407,7 @@ span#connectingMessage {
 }
 
 button#skipConnecting {
-    z-index: 1;
+    z-index: 2;
     display: none;
     position: absolute;
     left: 50%;

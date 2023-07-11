@@ -222,6 +222,7 @@ const Game = (props) => {
                     game.state.myConfig.logged = true
                     game.state.myConfig.author.name = player.name
                     game.state.myConfig.author.avatar = player.avatar
+                    game.state.myConfig.author.playerID = player.playerID
                     game.state.myConfig.colorName = player.chatColorName
                     game.state.myConfig.colorContent = player.chatColorContent
                     game.state.myConfig.emoji = player.chatEmoji
@@ -294,8 +295,7 @@ const Game = (props) => {
                 <canvas id="gameCanvas"/>
                 <img id="overlayImage" src="https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/imgs/VSLullaby/Bygone/Background2.png" />
 
-                <div id="screenElements">
-                </div>
+                <div id="screenElements" />
 
                 <video preload="auto" id="gameVideo" />
 
