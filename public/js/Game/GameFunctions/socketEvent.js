@@ -1,6 +1,7 @@
 export default function codesFunction(state, stateListener, socket) {
     setInterval(() => socket.emit('ping', +new Date()), 1000)
     socket.on('ping', (time) => state.ping = +new Date()-time || '???')
+    state.myConfig.logged = true
 
     if (state.myConfig.logged) socket.on('listServers', (listServers) => {
         state.selectServerOption.listServers = listServers
@@ -35,6 +36,31 @@ export default function codesFunction(state, stateListener, socket) {
         if (state.myConfig.logged) {
             state.messages.unshift(command)
             require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'newMessage')
+        }
+    })
+
+    socket.on('deleteMessage', (messageID) => {
+        const messageIndex = state.messages.findIndex(m => m.messageID == messageID)
+        const deletedMessage = state.messages.find(m => m.messageID == messageID)
+        if (!isNaN(Number(messageIndex)) && deletedMessage) {
+            let messageElementContent = document.getElementById(messageID+'-Content')
+            let messageElementHeader = document.getElementById(messageID+'-Header')
+            if (messageElementContent) messageElementContent.remove()
+            if (messageElementHeader) messageElementHeader.remove()
+
+            let arrCopy = Array.from(state.messages);
+            arrCopy.splice(messageIndex, 1);
+            state.messages = arrCopy
+
+            if (messageElementHeader.style.display == 'block') for (let i = messageIndex-1;i < state.messages.length;i++) {
+                let message = state.messages[i]
+
+                if (message?.author.id == deletedMessage?.author.id) {
+                    let messageElementHeader = document.getElementById(message.messageID+'-Header')
+                    messageElementHeader.style.display = 'block'
+                    break
+                }
+            }
         }
     })
 }

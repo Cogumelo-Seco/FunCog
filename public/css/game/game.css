@@ -133,7 +133,8 @@ div#chat-content {
     height: 50vh;
 }
 
-div#chat-content p#Header {
+div#chat-content p.Header {
+    position: relative;
     cursor: pointer;
     vertical-align: baseline;
     margin: 0; 
@@ -142,11 +143,11 @@ div#chat-content p#Header {
     margin-left: 40px;
 }
 
-div#chat-content p#Header span#Name:hover {
+div#chat-content p.Header span#Name:hover {
     text-decoration: underline;
 }
 
-div#chat-content p#Header span#Timestamp {
+div#chat-content p.Header span#Timestamp {
     cursor: text;
     font-size: 10px;
     color: rgb(180, 180, 180);
@@ -154,6 +155,8 @@ div#chat-content p#Header span#Timestamp {
 
 div#chat-content img#Avatar {
     position: absolute;
+    left: -40px;
+    top: -20px;
     width: 35px;
     height: 35px;
     float: left;
@@ -161,15 +164,53 @@ div#chat-content img#Avatar {
     border-radius: 100%;
 }
 
-div#chat-content p#Content {
+div#chat-content p.ContentContaner {
+    position: relative;
     vertical-align: baseline;
     margin: 0;
-    margin-bottom: 3px;
     margin-left: 40px;
+    line-height: 20px;
     /*overflow: hidden;*/
     text-overflow: ellipsis;
     word-wrap: break-word;
+    transition: all 0.2s linear;
 }
+
+div#chat-content p.ContentContaner:hover {
+    background-color: rgb(50, 50, 50);
+}
+
+div#chat-content p.ContentContaner span#messageProps {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: absolute;
+    right: 5px;
+    top: -15px;
+    background-color: rgb(40, 40, 40);
+    border-radius: 5px;
+    overflow: hidden;
+    height: 25px;
+    box-shadow: 0px 0px 4px black;
+}
+
+div#chat-content p.ContentContaner span#messageProps button {
+    height: 100%;
+    width: 25px;
+    border: none;
+    background-color: transparent;
+    transition: all 0.2s linear;
+    color: red;
+    padding: 4px;
+}
+
+div#chat-content p.ContentContaner span#messageProps button:hover {
+    background-color: rgb(50, 50, 50);
+}
+
 
 .Mentioned {
     background-color: rgba(200, 50, 100, 0.5);

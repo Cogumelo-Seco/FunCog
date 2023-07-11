@@ -32,9 +32,9 @@ export default function chat(state, socket) {
     function focusin(event) {
         messageBoxContent.focus()
         chat.style.backgroundColor = 'rgba(60, 60, 60, 1)'
-        chat.style.borderColor = 'rgb(50, 50, 50)'
-        messageBox.style.backgroundColor = 'rgba(50, 50, 50, 1)'
-        characterLimitWarning.style.backgroundColor = 'rgba(50, 50, 50, 1)'
+        chat.style.borderColor = 'rgb(40, 40, 40)'
+        messageBox.style.backgroundColor = 'rgba(40, 40, 40, 1)'
+        characterLimitWarning.style.backgroundColor = 'rgba(40, 40, 40, 1)'
         
         state.onChat = 'on'
     }
@@ -44,8 +44,8 @@ export default function chat(state, socket) {
         gameCanvas.focus()
         chat.style.backgroundColor = 'rgba(60, 60, 60, 0.2)'
         chat.style.borderColor = 'transparent'
-        messageBox.style.backgroundColor = 'rgba(50, 50, 50, 0.4)'
-        characterLimitWarning.style.backgroundColor = 'rgba(50, 50, 50, 0.4)'
+        messageBox.style.backgroundColor = 'rgba(40, 50, 40, 0.4)'
+        characterLimitWarning.style.backgroundColor = 'rgba(40, 40, 40, 0.4)'
         emojiBoxElement.style.display = 'none'
         state.onChat = 'off'
     }
