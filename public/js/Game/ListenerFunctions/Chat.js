@@ -3,6 +3,7 @@ export default function chat(state, socket) {
     
     const chatContent = document.getElementById('chat-content')
 
+    const characterLimitWarning = document.getElementById('characterLimitWarning')
     const messageBoxContent = document.getElementById('message-box-content')
     const messageBox = document.getElementById('message-box')
     const chat = document.getElementById('chat')   
@@ -33,6 +34,7 @@ export default function chat(state, socket) {
         chat.style.backgroundColor = 'rgba(60, 60, 60, 1)'
         chat.style.borderColor = 'rgb(50, 50, 50)'
         messageBox.style.backgroundColor = 'rgba(50, 50, 50, 1)'
+        characterLimitWarning.style.backgroundColor = 'rgba(50, 50, 50, 1)'
         
         state.onChat = 'on'
     }
@@ -43,6 +45,7 @@ export default function chat(state, socket) {
         chat.style.backgroundColor = 'rgba(60, 60, 60, 0.2)'
         chat.style.borderColor = 'transparent'
         messageBox.style.backgroundColor = 'rgba(50, 50, 50, 0.4)'
+        characterLimitWarning.style.backgroundColor = 'rgba(50, 50, 50, 0.4)'
         emojiBoxElement.style.display = 'none'
         state.onChat = 'off'
     }

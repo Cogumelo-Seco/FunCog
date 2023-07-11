@@ -1,6 +1,7 @@
 export default async (canvas, state, stateListener, command) => {
     if ([ 'loading', 'login' ].includes(state.gameStage) || !state.myConfig.logged) return
 
+    const characterLimitWarning = document.getElementById('characterLimitWarning')
     const messageBoxContent = document.getElementById('message-box-content')
     const chatContent = document.getElementById('chat-content')
     const chatButton = document.getElementById('chat-button')
@@ -63,8 +64,22 @@ export default async (canvas, state, stateListener, command) => {
     if (command == 'gameLoop') {
         if (messageBoxContent.innerText == '') messageBoxContent.innerHTML = ''
         let { text, update } = replaces(messageBoxContent.innerHTML)
-        if (messageBoxContent.innerText.length >= 400) messageBoxContent.style.color = 'red'
-        else messageBoxContent.style.color = 'white'
+        if (messageBoxContent.innerText.length >= 400) {
+            function numberConverter(nbr) {
+                let number = Number(nbr)
+                if (Math.floor(number/1000000000000) > 0) return Math.floor(number/1000000000000)+'T'
+                if (Math.floor(number/1000000000) > 0) return Math.floor(number/1000000000)+'B'
+                if (Math.floor(number/1000000) > 0) return Math.floor(number/1000000)+'M'
+                if (Math.floor(number/1000) > 0) return Math.floor(number/1000)+'K'
+                return number
+            }
+            characterLimitWarning.style.display = 'block'
+            characterLimitWarning.innerText = `${numberConverter(messageBoxContent.innerText.length)}/400`
+            messageBoxContent.style.color = 'rgb(255, 150, 150)'
+        } else {
+            characterLimitWarning.style.display = 'none'
+            messageBoxContent.style.color = 'white'
+        }
 
         let contentElements = messageBoxContent.getElementsByTagName('span')
         for (let element of contentElements) {

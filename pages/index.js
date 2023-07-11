@@ -372,6 +372,7 @@ const Game = (props) => {
                     <div id="message-box">
                         <span id="placeholder" onClick={() => document.getElementById('message-box-content').focus()}>Message</span>
                         <div id="message-box-content" contentEditable="true"/>
+                        <span id="characterLimitWarning">500/400</span>
                         <span id="openEmojiBoxButton">🤨</span>
                     </div>
                     <div id="emojiBox">
