@@ -81,11 +81,12 @@ button#chat-button {
     top: 5px;
     left: 5px;
     cursor: pointer;
-    border: solid black 2px;
+    /*border: solid rgb(150, 0, 50, 0.5) 2px;*/
+    border: none;
     border-radius: 5px;
     width: 40px; 
     height: 40px;
-    background: rgba(0, 0, 0, 0.658) url(/imgs/chat/chat.png) no-repeat center 0px / 100%;
+    background: rgb(30, 10, 20, 0.5) url(/imgs/chat/chat.png) no-repeat center 0px / 100%;
     transition: all 0.5s;
 }
 
