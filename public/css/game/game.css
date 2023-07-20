@@ -173,7 +173,7 @@ div#chat-content p.ContentContaner {
     /*overflow: hidden;*/
     text-overflow: ellipsis;
     word-wrap: break-word;
-    transition: all 0.2s linear;
+    transition: all 0.1s linear;
 }
 
 div#chat-content p.ContentContaner:hover {
