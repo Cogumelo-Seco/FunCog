@@ -70,6 +70,13 @@ export default async (state) => {
             color: '#8100e8',
             lifeDrain: 1.1
         },
+        {
+            id: 10,
+            name: 'Holy',
+            fileNameDifficulty: 'holy',
+            color: '#FFFFFF',
+            lifeDrain: 1.1
+        },
     ]
     
     return state.difficulties

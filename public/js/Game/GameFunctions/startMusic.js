@@ -1,4 +1,4 @@
-export default async({ musicInfo, difficulty, listenerState, opponentPlayer, socket }, state) => {
+export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPlayer, socket }, state) => {
     //try {
         let videoElement = document.getElementById('gameVideo')
         let videoElementBackground = document.getElementById('gameVideoBackground')
@@ -65,7 +65,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             }
         }
 
-        let musicData = JSON.parse(JSON.stringify(require(`../../../Musics/data/${musicInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)))
+        let musicData = JSON.parse(JSON.stringify(require(`../../../Musics/data/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)))
         let musicNotes = musicData.song.notes
         let musicNotesTotal = ((musicNotes.map(a => a.sectionNotes)).map(a => a.length)).reduce((a, b) => a+b)
         
@@ -77,7 +77,7 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
         state.musicInfo.events = musicData.song.events
         state.musicBPM = musicData.song.bpm
         try {
-            state.musicEventListener = require(`../../../Musics/data/${musicInfo.name.toLowerCase()}/eventListener`).default
+            state.musicEventListener = require(`../../../Musics/data/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/eventListener`).default
         } catch {}
         
         for (let i in musicNotes) {
@@ -230,8 +230,8 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             state.scoreToAdd = state.scoreToAdd < 1 ? 100 : state.scoreToAdd
 
             state.videoBackground = videoElementBackground
-            state.music = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
-            state.musicVoice = state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
+            state.music = state.sounds[`Musics/musics/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
+            state.musicVoice = state.sounds[`Musics/musics/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
 
             if (musicInfo.cutscene && !state.online) {
                 videoElement.style.display = 'block'
@@ -408,6 +408,16 @@ export default async({ musicInfo, difficulty, listenerState, opponentPlayer, soc
             if (note[1] >= 8) {
                 arrowID = note[1]-4
                 mustHitSection = false
+            }
+        }
+
+        if (musicInfo.mod == 'VSMami') {
+            if (note[1] >= 8) {
+                arrowID = note[1]%4
+                disabled = difficulty.name == 'Mania' ? true : false
+                errorWhenNotClicking = true
+                mustHitSection = true
+                type = 'pinkieSing'
             }
         }
 

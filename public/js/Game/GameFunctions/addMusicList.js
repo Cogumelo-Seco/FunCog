@@ -14,8 +14,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/tutorial/Inst.ogg' },
-                        { dir: 'Musics/musics/tutorial/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/tutorial/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/tutorial/Voices.ogg' },
                     ]
                 },
                 {
@@ -28,8 +28,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/bopeebo/Inst.ogg' },
-                        { dir: 'Musics/musics/bopeebo/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/bopeebo/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/bopeebo/Voices.ogg' },
                     ]
                 },
                 {
@@ -42,8 +42,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/fresh/Inst.ogg' },
-                        { dir: 'Musics/musics/fresh/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/fresh/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/fresh/Voices.ogg' },
                     ]
                 },
                 {
@@ -56,8 +56,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/dadbattle/Inst.ogg' },
-                        { dir: 'Musics/musics/dadbattle/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/dadbattle/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/dadbattle/Voices.ogg' },
                     ]
                 },
                 {
@@ -70,8 +70,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/spookeez/Inst.ogg' },
-                        { dir: 'Musics/musics/spookeez/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/spookeez/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/spookeez/Voices.ogg' },
                     ]
                 },
                 {
@@ -84,8 +84,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/south/Inst.ogg' },
-                        { dir: 'Musics/musics/south/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/south/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/south/Voices.ogg' },
                     ]
                 },
                 {
@@ -98,8 +98,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/monster/Inst.ogg' },
-                        { dir: 'Musics/musics/monster/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/monster/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/monster/Voices.ogg' },
                     ]
                 },
                 {
@@ -112,8 +112,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/pico/Inst.ogg' },
-                        { dir: 'Musics/musics/pico/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/pico/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/pico/Voices.ogg' },
                     ]
                 },
                 {
@@ -126,8 +126,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/philly/Inst.ogg' },
-                        { dir: 'Musics/musics/philly/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/philly/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/philly/Voices.ogg' },
                     ]
                 },
                 {
@@ -140,8 +140,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/blammed/Inst.ogg' },
-                        { dir: 'Musics/musics/blammed/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/blammed/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/blammed/Voices.ogg' },
                     ]
                 },
                 {
@@ -154,8 +154,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/satin-panties/Inst.ogg' },
-                        { dir: 'Musics/musics/satin-panties/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/satin-panties/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/satin-panties/Voices.ogg' },
                     ]
                 },
                 {
@@ -168,8 +168,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/high/Inst.ogg' },
-                        { dir: 'Musics/musics/high/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/high/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/high/Voices.ogg' },
                     ]
                 },
                 {
@@ -182,8 +182,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/milf/Inst.ogg' },
-                        { dir: 'Musics/musics/milf/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/milf/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/milf/Voices.ogg' },
                     ]
                 },
                 {
@@ -196,8 +196,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/cocoa/Inst.ogg' },
-                        { dir: 'Musics/musics/cocoa/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/cocoa/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/cocoa/Voices.ogg' },
                     ]
                 },
                 {
@@ -210,8 +210,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/eggnog/Inst.ogg' },
-                        { dir: 'Musics/musics/eggnog/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/eggnog/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/eggnog/Voices.ogg' },
                     ]
                 },
                 {
@@ -224,8 +224,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/winter-horrorland/Inst.ogg' },
-                        { dir: 'Musics/musics/winter-horrorland/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/winter-horrorland/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/winter-horrorland/Voices.ogg' },
                     ]
                 },
                 {
@@ -238,8 +238,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/senpai/Inst.ogg' },
-                        { dir: 'Musics/musics/senpai/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/senpai/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/senpai/Voices.ogg' },
                     ]
                 },
                 {
@@ -252,8 +252,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/roses/Inst.ogg' },
-                        { dir: 'Musics/musics/roses/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/roses/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/roses/Voices.ogg' },
                     ]
                 },
                 {
@@ -266,8 +266,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/thorns/Inst.ogg' },
-                        { dir: 'Musics/musics/thorns/Voices.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/thorns/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/thorns/Voices.ogg' },
                     ]
                 },
                 {
@@ -281,8 +281,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/ugh/Inst.mp3' },
-                        { dir: 'Musics/musics/ugh/Voices.mp3' },
+                        { dir: 'Musics/musics/fnfdefault/ugh/Inst.mp3' },
+                        { dir: 'Musics/musics/fnfdefault/ugh/Voices.mp3' },
                     ]
                 },
                 {
@@ -296,8 +296,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/guns/Inst.mp3' },
-                        { dir: 'Musics/musics/guns/Voices.mp3' },
+                        { dir: 'Musics/musics/fnfdefault/guns/Inst.mp3' },
+                        { dir: 'Musics/musics/fnfdefault/guns/Voices.mp3' },
                     ]
                 },
                 {
@@ -311,14 +311,14 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/stress/Inst.mp3' },
-                        { dir: 'Musics/musics/stress/Voices.mp3' },
+                        { dir: 'Musics/musics/fnfdefault/stress/Inst.mp3' },
+                        { dir: 'Musics/musics/fnfdefault/stress/Voices.mp3' },
                     ]
                 },
             ],
         },
         {
-            name: 'VS Tricky',
+            name: 'VS-Tricky',
             menuColor: 'green',
             musics: [
                 {
@@ -329,8 +329,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/trick.png',
                     mod: 'VSTricky',
                     toLoad: [
-                        { dir: 'Musics/musics/improbable-outset/Inst.ogg' },
-                        { dir: 'Musics/musics/improbable-outset/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-tricky/improbable-outset/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-tricky/improbable-outset/Voices.ogg' },
                     ]
                 },
                 {
@@ -342,8 +342,8 @@ export default async (state) => {
                     mod: 'VSTricky',
                     toLoad: [
                         { dir: 'Arrows/firenotes/Arrows.png', animationConfigDir: 'Arrows/firenotes/Arrows.json' },
-                        { dir: 'Musics/musics/madness/Inst.ogg' },
-                        { dir: 'Musics/musics/madness/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-tricky/madness/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-tricky/madness/Voices.ogg' },
                         { dir: 'Sounds/burnSound.ogg' },
                     ]
                 },
@@ -357,8 +357,8 @@ export default async (state) => {
                     mod: 'VSTricky',
                     toLoad: [
                         { dir: 'Arrows/firenotes/Arrows.png', animationConfigDir: 'Arrows/firenotes/Arrows.json' },
-                        { dir: 'Musics/musics/hellclown/Inst.ogg' },
-                        { dir: 'Musics/musics/hellclown/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-tricky/hellclown/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-tricky/hellclown/Voices.ogg' },
                         { dir: 'Sounds/burnSound.ogg' },
                     ]
                 },
@@ -373,14 +373,14 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'imgs/Expurgation/signs.png', animationConfigDir: 'imgs/Expurgation/signs.json' },
                         { dir: 'Arrows/deathnotes/Arrows.png', animationConfigDir: 'Arrows/deathnotes/Arrows.json' },
-                        { dir: 'Musics/musics/expurgation/Inst.ogg' },
-                        { dir: 'Musics/musics/expurgation/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-tricky/expurgation/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-tricky/expurgation/Voices.ogg' },
                     ]
                 }
             ],
         },
         {
-            name: 'Mid Fight Masses',
+            name: 'Mid-Fight-Masses',
             menuColor: 'rgb(255, 43, 234)',
             musics: [
                 {
@@ -391,8 +391,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/mid-fight-masses.png',
                     mod: 'MidFightMasses',
                     toLoad: [
-                        { dir: 'Musics/musics/sarvente-tutorial-remix/Inst.ogg' },
-                        { dir: 'Musics/musics/sarvente-tutorial-remix/Voices.ogg' },
+                        { dir: 'Musics/musics/mid-fight-masses/sarvente-tutorial-remix/Inst.ogg' },
+                        { dir: 'Musics/musics/mid-fight-masses/sarvente-tutorial-remix/Voices.ogg' },
                     ]
                 },
                 {
@@ -403,8 +403,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/mid-fight-masses.png',
                     mod: 'MidFightMasses',
                     toLoad: [
-                        { dir: 'Musics/musics/parish/Inst.ogg' },
-                        { dir: 'Musics/musics/parish/Voices.ogg' },
+                        { dir: 'Musics/musics/mid-fight-masses/parish/Inst.ogg' },
+                        { dir: 'Musics/musics/mid-fight-masses/parish/Voices.ogg' },
                     ]
                 },
                 {
@@ -415,8 +415,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/mid-fight-masses.png',
                     mod: 'MidFightMasses',
                     toLoad: [
-                        { dir: 'Musics/musics/worship/Inst.ogg' },
-                        { dir: 'Musics/musics/worship/Voices.ogg' },
+                        { dir: 'Musics/musics/mid-fight-masses/worship/Inst.ogg' },
+                        { dir: 'Musics/musics/mid-fight-masses/worship/Voices.ogg' },
                     ]
                 },
                 {
@@ -427,8 +427,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/mid-fight-masses.png',
                     mod: 'MidFightMasses',
                     toLoad: [
-                        { dir: 'Musics/musics/zavodila/Inst.ogg' },
-                        { dir: 'Musics/musics/zavodila/Voices.ogg' },
+                        { dir: 'Musics/musics/mid-fight-masses/zavodila/Inst.ogg' },
+                        { dir: 'Musics/musics/mid-fight-masses/zavodila/Voices.ogg' },
                     ]
                 },
                 {
@@ -440,8 +440,8 @@ export default async (state) => {
                     mod: 'MidFightMasses',
                     toLoad: [
                         { dir: 'Arrows/sarvente/Arrows.png', animationConfigDir: 'Arrows/sarvente/Arrows.json' },
-                        { dir: 'Musics/musics/gospel/Inst.ogg' },
-                        { dir: 'Musics/musics/gospel/Voices.ogg' },
+                        { dir: 'Musics/musics/mid-fight-masses/gospel/Inst.ogg' },
+                        { dir: 'Musics/musics/mid-fight-masses/gospel/Voices.ogg' },
                     ]
                 },
                 {
@@ -452,14 +452,14 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/mid-fight-masses.png',
                     mod: 'MidFightMasses',
                     toLoad: [
-                        { dir: 'Musics/musics/casanova/Inst.ogg' },
-                        { dir: 'Musics/musics/casanova/Voices.ogg' },
+                        { dir: 'Musics/musics/mid-fight-masses/casanova/Inst.ogg' },
+                        { dir: 'Musics/musics/mid-fight-masses/casanova/Voices.ogg' },
                     ]
                 }
             ],
         },
         {
-            name: 'Suicide Mouse',
+            name: 'Suicide-Mouse',
             menuColor: 'rgb(60, 60, 60)',
             musics: [
                 {
@@ -475,8 +475,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/suicidemouse/splash.png', animationConfigDir: 'Arrows/suicidemouse/splash.json' },
                         { dir: 'Arrows/suicidemouse/Arrows.png', animationConfigDir: 'Arrows/suicidemouse/Arrows.json' },
-                        { dir: 'Musics/musics/unhappy/Inst.ogg' },
-                        { dir: 'Musics/musics/unhappy/Voices.ogg' },
+                        { dir: 'Musics/musics/suicide-mouse/unhappy/Inst.ogg' },
+                        { dir: 'Musics/musics/suicide-mouse/unhappy/Voices.ogg' },
                     ]
                 },
                 {
@@ -495,8 +495,8 @@ export default async (state) => {
                         { dir: 'Arrows/suicidemouse/splash.png', animationConfigDir: 'Arrows/suicidemouse/splash.json' },
                         { dir: 'Arrows/hurtnotes-suicidemouse/Arrows.png', animationConfigDir: 'Arrows/hurtnotes-suicidemouse/Arrows.json' },
                         { dir: 'Arrows/suicidemouse/Arrows.png', animationConfigDir: 'Arrows/suicidemouse/Arrows.json' },
-                        { dir: 'Musics/musics/happy/Inst.ogg' },
-                        { dir: 'Musics/musics/happy/Voices.ogg' },
+                        { dir: 'Musics/musics/suicide-mouse/happy/Inst.ogg' },
+                        { dir: 'Musics/musics/suicide-mouse/happy/Voices.ogg' },
                     ]
                 },
                 {
@@ -515,8 +515,8 @@ export default async (state) => {
                         { dir: 'Arrows/suicidemouse/splash.png', animationConfigDir: 'Arrows/suicidemouse/splash.json' },
                         { dir: 'Arrows/hurtnotes-suicidemouse/Arrows.png', animationConfigDir: 'Arrows/hurtnotes-suicidemouse/Arrows.json' },
                         { dir: 'Arrows/suicidemouse/Arrows.png', animationConfigDir: 'Arrows/suicidemouse/Arrows.json' },
-                        { dir: 'Musics/musics/really-happy/Inst.ogg' },
-                        { dir: 'Musics/musics/really-happy/Voices.ogg' },
+                        { dir: 'Musics/musics/suicide-mouse/really-happy/Inst.ogg' },
+                        { dir: 'Musics/musics/suicide-mouse/really-happy/Voices.ogg' },
                     ]
                 },
                 {
@@ -532,14 +532,14 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/suicidemouse/splash.png', animationConfigDir: 'Arrows/suicidemouse/splash.json' },
                         { dir: 'Arrows/suicidemouse/Arrows.png', animationConfigDir: 'Arrows/suicidemouse/Arrows.json' },
-                        { dir: 'Musics/musics/smile/Inst.ogg' },
-                        { dir: 'Musics/musics/smile/Voices.ogg' },
+                        { dir: 'Musics/musics/suicide-mouse/smile/Inst.ogg' },
+                        { dir: 'Musics/musics/suicide-mouse/smile/Voices.ogg' },
                     ]
                 }
             ],
         },
         {
-            name: 'Dusk Till Dawn',
+            name: 'Dusk-Till-Dawn',
             menuColor:  'rgb(196, 0, 244)',
             musics: [
                 {
@@ -557,14 +557,14 @@ export default async (state) => {
                         { dir: 'Arrows/pinkieSing/splash.png', animationConfigDir: 'Arrows/pinkieSing/splash.json' },
                         { dir: 'Arrows/pinkieSing/Arrows.png', animationConfigDir: 'Arrows/pinkieSing/Arrows.json' },
                         { dir: 'Arrows/dusk-till-dawn/Arrows.png', animationConfigDir: 'Arrows/dusk-till-dawn/Arrows.json' },
-                        { dir: 'Musics/musics/dusk-till-dawn/Inst.ogg' },
-                        { dir: 'Musics/musics/dusk-till-dawn/Voices.ogg' },
+                        { dir: 'Musics/musics/dusk-till-dawn/dusk-till-dawn/Inst.ogg' },
+                        { dir: 'Musics/musics/dusk-till-dawn/dusk-till-dawn/Voices.ogg' },
                     ]
                 }
             ],
         },
         {
-            name: 'VS Bob',
+            name: 'VS-Bob',
             menuColor: null,
             musics: [
                 {
@@ -575,8 +575,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/bob.png',
                     mod: 'Bob',
                     toLoad: [
-                        { dir: 'Musics/musics/sunshine/Inst.ogg' },
-                        { dir: 'Musics/musics/sunshine/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-bob/sunshine/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-bob/sunshine/Voices.ogg' },
                     ]
                 },
                 {
@@ -587,8 +587,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/bob.png',
                     mod: 'Bob',
                     toLoad: [
-                        { dir: 'Musics/musics/withered/Inst.ogg' },
-                        { dir: 'Musics/musics/withered/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-bob/withered/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-bob/withered/Voices.ogg' },
                     ]
                 },
                 {
@@ -599,7 +599,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/bob.png',
                     mod: 'Bob',
                     toLoad: [
-                        { dir: 'Musics/musics/run/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-bob/run/Inst.ogg' },
                         { dir: 'Musics/musics/run/Voices.ogg' },
                     ]
                 },
@@ -611,8 +611,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/bob.png',
                     mod: 'Bob',
                     toLoad: [
-                        { dir: 'Musics/musics/run-remix/Inst.ogg' },
-                        { dir: 'Musics/musics/run-remix/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-bob/run-remix/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-bob/run-remix/Voices.ogg' },
                     ]
                 },
                 {
@@ -623,8 +623,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/bob.png',
                     mod: 'Bob',
                     toLoad: [
-                        { dir: 'Musics/musics/ron/Inst.ogg' },
-                        { dir: 'Musics/musics/ron/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-bob/ron/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-bob/ron/Voices.ogg' },
                     ]
                 },
                 {
@@ -635,8 +635,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/bob.png',
                     mod: 'Bob',
                     toLoad: [
-                        { dir: 'Musics/musics/trouble/Inst.ogg' },
-                        { dir: 'Musics/musics/trouble/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-bob/trouble/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-bob/trouble/Voices.ogg' },
                     ]
                 },
                 {
@@ -648,8 +648,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/bob.png',
                     mod: 'Bob',
                     toLoad: [
-                        { dir: 'Musics/musics/onslaught/Inst.ogg' },
-                        { dir: 'Musics/musics/onslaught/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-bob/onslaught/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-bob/onslaught/Voices.ogg' },
                         { dir: 'Sounds/Meow.ogg' },
                         { dir: 'Sounds/woeM.ogg' },
                         { dir: 'Sounds/pop_up.ogg' },
@@ -674,8 +674,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/bob.png',
                     mod: 'Bob',
                     toLoad: [
-                        { dir: 'Musics/musics/little-man/Inst.ogg' },
-                        { dir: 'Musics/musics/little-man/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-bob/little-man/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-bob/little-man/Voices.ogg' },
                     ]
                 }
             ],
@@ -692,8 +692,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/qt.png',
                     mod: 'QT',
                     toLoad: [
-                        { dir: 'Musics/musics/carefree/Inst.ogg' },
-                        { dir: 'Musics/musics/carefree/Voices.ogg' },
+                        { dir: 'Musics/musics/qt/carefree/Inst.ogg' },
+                        { dir: 'Musics/musics/qt/carefree/Voices.ogg' },
                     ]
                 },
                 {
@@ -704,8 +704,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/qt.png',
                     mod: 'QT',
                     toLoad: [
-                        { dir: 'Musics/musics/careless/Inst.ogg' },
-                        { dir: 'Musics/musics/careless/Voices.ogg' },
+                        { dir: 'Musics/musics/qt/careless/Inst.ogg' },
+                        { dir: 'Musics/musics/qt/careless/Voices.ogg' },
                     ]
                 },
                 {
@@ -716,8 +716,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/qt.png',
                     mod: 'QT',
                     toLoad: [
-                        { dir: 'Musics/musics/censory-overload/Inst.ogg' },
-                        { dir: 'Musics/musics/censory-overload/Voices.ogg' },
+                        { dir: 'Musics/musics/qt/censory-overload/Inst.ogg' },
+                        { dir: 'Musics/musics/qt/censory-overload/Voices.ogg' },
                     ]
                 },
                 {
@@ -732,8 +732,8 @@ export default async (state) => {
                         { dir: 'imgs/QT/pincer-open.png' },
                         { dir: 'imgs/QT/pincer-close.png' },
                         { dir: 'imgs/QT/alert.png', animationConfigDir: 'imgs/QT/alert.json' },
-                        { dir: 'Musics/musics/termination/Inst.ogg' },
-                        { dir: 'Musics/musics/termination/Voices.ogg' },
+                        { dir: 'Musics/musics/qt/termination/Inst.ogg' },
+                        { dir: 'Musics/musics/qt/termination/Voices.ogg' },
                         { dir: 'Sounds/alert.ogg' },
                         { dir: 'Sounds/alertDouble.ogg' },
                         { dir: 'Sounds/attack.ogg' },
@@ -748,8 +748,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/qt.png',
                     mod: 'QT',
                     toLoad: [
-                        { dir: 'Musics/musics/cessation/Inst.ogg' },
-                        { dir: 'Musics/musics/cessation/Voices.ogg' },
+                        { dir: 'Musics/musics/qt/cessation/Inst.ogg' },
+                        { dir: 'Musics/musics/qt/cessation/Voices.ogg' },
                     ]
                 },
                 {
@@ -760,8 +760,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/qt.png',
                     mod: 'QT',
                     toLoad: [
-                        { dir: 'Musics/musics/interlope/Inst.ogg' },
-                        { dir: 'Musics/musics/interlope/Voices.ogg' },
+                        { dir: 'Musics/musics/qt/interlope/Inst.ogg' },
+                        { dir: 'Musics/musics/qt/interlope/Voices.ogg' },
                     ]
                 }
             ],
@@ -791,8 +791,8 @@ export default async (state) => {
                         { dir: 'imgs/sonicEXE/sonicEXEHitStatic/sonicEXEHitStatic.png', animationConfigDir: 'imgs/sonicEXE/sonicEXEHitStatic/sonicEXEHitStatic.json' },
                         { dir: 'Arrows/staticNotes/Arrows.png', animationConfigDir: 'Arrows/staticNotes/Arrows.json' },
                         { dir: 'Arrows/sonicSplash.png', animationConfigDir: 'Arrows/sonicSplash.json' },
-                        { dir: 'Musics/musics/too-slow/Inst.ogg' },
-                        { dir: 'Musics/musics/too-slow/Voices.ogg' },
+                        { dir: 'Musics/musics/sonicexe/too-slow/Inst.ogg' },
+                        { dir: 'Musics/musics/sonicexe/too-slow/Voices.ogg' },
                     ]
                 },
                 {
@@ -809,8 +809,8 @@ export default async (state) => {
                         { dir: 'Arrows/phantomNotes/Arrows.png', animationConfigDir: 'Arrows/phantomNotes/Arrows.json' },
                         { dir: 'Arrows/staticNotes/Arrows.png', animationConfigDir: 'Arrows/staticNotes/Arrows.json' },
                         { dir: 'Arrows/sonicSplash.png', animationConfigDir: 'Arrows/sonicSplash.json' },
-                        { dir: 'Musics/musics/you-cant-run/Inst.ogg' },
-                        { dir: 'Musics/musics/you-cant-run/Voices.ogg' },
+                        { dir: 'Musics/musics/sonicexe/you-cant-run/Inst.ogg' },
+                        { dir: 'Musics/musics/sonicexe/you-cant-run/Voices.ogg' },
                     ]
                 },
                 {
@@ -825,8 +825,8 @@ export default async (state) => {
                     dev: true,
                     toLoad: [
                         { dir: 'Arrows/sonicSplash.png', animationConfigDir: 'Arrows/sonicSplash.json' },
-                        { dir: 'Musics/musics/triple-trouble/Inst.ogg' },
-                        { dir: 'Musics/musics/triple-trouble/Voices.ogg' },
+                        { dir: 'Musics/musics/sonicexe/triple-trouble/Inst.ogg' },
+                        { dir: 'Musics/musics/sonicexe/triple-trouble/Voices.ogg' },
                     ]
                 },
                 {
@@ -841,8 +841,8 @@ export default async (state) => {
                     dev: true,
                     toLoad: [
                         { dir: 'Arrows/sonicSplash.png', animationConfigDir: 'Arrows/sonicSplash.json' },
-                        { dir: 'Musics/musics/cycles/Inst.ogg' },
-                        { dir: 'Musics/musics/cycles/Voices.ogg' },
+                        { dir: 'Musics/musics/sonicexe/cycles/Inst.ogg' },
+                        { dir: 'Musics/musics/sonicexe/cycles/Voices.ogg' },
                     ]
                 },
                 {
@@ -859,8 +859,8 @@ export default async (state) => {
                         { dir: 'imgs/sonicEXE/one.png' },
                         { dir: 'imgs/sonicEXE/go.png' },
                         { dir: 'Arrows/sonicEXEMajinNotes/Arrows.png', animationConfigDir: 'Arrows/sonicEXEMajinNotes/Arrows.json' },
-                        { dir: 'Musics/musics/endless/Inst.ogg' },
-                        { dir: 'Musics/musics/endless/Voices.ogg' },
+                        { dir: 'Musics/musics/sonicexe/endless/Inst.ogg' },
+                        { dir: 'Musics/musics/sonicexe/endless/Voices.ogg' },
                     ]
                 },
                 {
@@ -875,8 +875,8 @@ export default async (state) => {
                     dev: true,
                     toLoad: [
                         { dir: 'Arrows/sonicSplash.png', animationConfigDir: 'Arrows/sonicSplash.json' },
-                        { dir: 'Musics/musics/sunshine/Inst.ogg' },
-                        { dir: 'Musics/musics/sunshine/Voices.ogg' },
+                        { dir: 'Musics/musics/sonicexe/sunshine/Inst.ogg' },
+                        { dir: 'Musics/musics/sonicexe/sunshine/Voices.ogg' },
                     ]
                 },
                 {
@@ -891,8 +891,8 @@ export default async (state) => {
                     dev: true,
                     toLoad: [
                         { dir: 'Arrows/sonicSplash.png', animationConfigDir: 'Arrows/sonicSplash.json' },
-                        { dir: 'Musics/musics/chaos/Inst.ogg' },
-                        { dir: 'Musics/musics/chaos/Voices.ogg' },
+                        { dir: 'Musics/musics/sonicexe/chaos/Inst.ogg' },
+                        { dir: 'Musics/musics/sonicexe/chaos/Voices.ogg' },
                     ]
                 },
                 {
@@ -907,8 +907,8 @@ export default async (state) => {
                     dev: true,
                     toLoad: [
                         { dir: 'Arrows/sonicSplash.png', animationConfigDir: 'Arrows/sonicSplash.json' },
-                        { dir: 'Musics/musics/faker/Inst.ogg' },
-                        { dir: 'Musics/musics/faker/Voices.ogg' },
+                        { dir: 'Musics/musics/sonicexe/faker/Inst.ogg' },
+                        { dir: 'Musics/musics/sonicexe/faker/Voices.ogg' },
                     ]
                 },
                 {
@@ -923,8 +923,8 @@ export default async (state) => {
                     dev: true,
                     toLoad: [
                         { dir: 'Arrows/sonicSplash.png', animationConfigDir: 'Arrows/sonicSplash.json' },
-                        { dir: 'Musics/musics/black-sun/Inst.ogg' },
-                        { dir: 'Musics/musics/black-sun/Voices.ogg' },
+                        { dir: 'Musics/musics/sonicexe/black-sun/Inst.ogg' },
+                        { dir: 'Musics/musics/sonicexe/black-sun/Voices.ogg' },
                     ]
                 },
                 {
@@ -936,8 +936,8 @@ export default async (state) => {
                     mod: 'SonicEXE',
                     dev: true,
                     toLoad: [
-                        { dir: 'Musics/musics/milk/Inst.ogg' },
-                        { dir: 'Musics/musics/milk/Voices.ogg' },
+                        { dir: 'Musics/musics/sonicexe/milk/Inst.ogg' },
+                        { dir: 'Musics/musics/sonicexe/milk/Voices.ogg' },
                     ]
                 },
                 {
@@ -952,8 +952,8 @@ export default async (state) => {
                     dev: true,
                     toLoad: [
                         { dir: 'Arrows/sonicSplash.png', animationConfigDir: 'Arrows/sonicSplash.json' },
-                        { dir: 'Musics/musics/too-fest/Inst.ogg' },
-                        { dir: 'Musics/musics/too-fest/Voices.ogg' },
+                        { dir: 'Musics/musics/sonicexe/too-fest/Inst.ogg' },
+                        { dir: 'Musics/musics/sonicexe/too-fest/Voices.ogg' },
                     ]
                 },
                 {
@@ -965,14 +965,14 @@ export default async (state) => {
                     mod: 'SonicEXE',
                     dev: true,
                     toLoad: [
-                        { dir: 'Musics/musics/execution/Inst.ogg' },
-                        { dir: 'Musics/musics/execution/Voices.ogg' },
+                        { dir: 'Musics/musics/sonicexe/execution/Inst.ogg' },
+                        { dir: 'Musics/musics/sonicexe/execution/Voices.ogg' },
                     ]
                 }
             ],
         },
         {
-            name: 'Late Night City Tale',
+            name: 'Late-Night-City-Tale',
             menuColor: 'rgb(138, 12, 162)',
             musics: [
                 {
@@ -995,8 +995,8 @@ export default async (state) => {
                         { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
                         { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
                         { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
-                        { dir: 'Musics/musics/azure-encounter/Inst.ogg' },
-                        { dir: 'Musics/musics/azure-encounter/Voices.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/azure-encounter/Inst.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/azure-encounter/Voices.ogg' },
                         { dir: 'Sounds/LateNightCityTale/blackNote1.ogg' },
                         { dir: 'Sounds/LateNightCityTale/blackNote2.ogg' },
                         { dir: 'Sounds/LateNightCityTale/heal.ogg' },
@@ -1023,8 +1023,8 @@ export default async (state) => {
                         { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
                         { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
                         { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
-                        { dir: 'Musics/musics/secret-marilee/Inst.ogg' },
-                        { dir: 'Musics/musics/secret-marilee/Voices.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/secret-marilee/Inst.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/secret-marilee/Voices.ogg' },
                         { dir: 'Sounds/LateNightCityTale/blackNote1.ogg' },
                         { dir: 'Sounds/LateNightCityTale/blackNote2.ogg' },
                         { dir: 'Sounds/LateNightCityTale/heal.ogg' },
@@ -1050,8 +1050,8 @@ export default async (state) => {
                         { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
                         { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
                         { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
-                        { dir: 'Musics/musics/broken-heart/Inst.ogg' },
-                        { dir: 'Musics/musics/broken-heart/Voices.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/broken-heart/Inst.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/broken-heart/Voices.ogg' },
                         { dir: 'Sounds/LateNightCityTale/broken.ogg' },
                     ]
                 },
@@ -1078,8 +1078,8 @@ export default async (state) => {
                         { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
                         { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
                         { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
-                        { dir: 'Musics/musics/aquaphobia/Inst.ogg' },
-                        { dir: 'Musics/musics/aquaphobia/Voices.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/aquaphobia/Inst.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/aquaphobia/Voices.ogg' },
                         { dir: 'Sounds/LateNightCityTale/blackNote1.ogg' },
                         { dir: 'Sounds/LateNightCityTale/blackNote2.ogg' },
                         { dir: 'Sounds/LateNightCityTale/heal.ogg' },
@@ -1106,14 +1106,14 @@ export default async (state) => {
                         { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
                         { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
                         { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
-                        { dir: 'Musics/musics/lonely-sapphire/Inst.ogg' },
-                        { dir: 'Musics/musics/lonely-sapphire/Voices.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/lonely-sapphire/Inst.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/lonely-sapphire/Voices.ogg' },
                     ]
                 }
             ]
         },
         {
-            name: 'VS Withered Freddy',
+            name: 'VS-Withered-Freddy',
             menuColor: null,
             musics: [
                 {
@@ -1124,8 +1124,8 @@ export default async (state) => {
                     backgroundImage: null,
                     mod: 'WitheredFreddy',
                     toLoad: [
-                        { dir: 'Musics/musics/nightshift/Inst.ogg' },
-                        { dir: 'Musics/musics/nightshift/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-withered-freddy/nightshift/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-withered-freddy/nightshift/Voices.ogg' },
                     ]
                 },
                 {
@@ -1139,8 +1139,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/WitheredFreddyDanger/Arrows.png', animationConfigDir: 'Arrows/WitheredFreddyDanger/Arrows.json' },
                         { dir: 'Arrows/WitheredFreddyCharge/Arrows.png', animationConfigDir: 'Arrows/WitheredFreddyCharge/Arrows.json' },
-                        { dir: 'Musics/musics/flashing-lights/Inst.ogg' },
-                        { dir: 'Musics/musics/flashing-lights/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-withered-freddy/flashing-lights/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-withered-freddy/flashing-lights/Voices.ogg' },
                     ]
                 },
                 {
@@ -1164,14 +1164,14 @@ export default async (state) => {
                         { dir: 'backgrounds/Shadows-3.png' },
                         { dir: 'backgrounds/Shadows-4.png' },
                         { dir: 'backgrounds/Shadows-5.png' },
-                        { dir: 'Musics/musics/shadows/Inst.ogg' },
-                        { dir: 'Musics/musics/shadows/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-withered-freddy/shadows/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-withered-freddy/shadows/Voices.ogg' },
                     ]
                 }
             ]
         },
         {
-            name: 'VS Chira',
+            name: 'VS-Chira',
             menuColor: 'rgb(86, 76, 74)',
             musics: [
                 {
@@ -1185,8 +1185,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/VSChiraMarsh/Arrows.png', animationConfigDir: 'Arrows/VSChiraMarsh/Arrows.json' },
                         { dir: 'Arrows/VSChira/Arrows.png', animationConfigDir: 'Arrows/VSChira/Arrows.json' },
-                        { dir: 'Musics/musics/molly-howdy/Inst.ogg' },
-                        { dir: 'Musics/musics/molly-howdy/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-chira/molly-howdy/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-chira/molly-howdy/Voices.ogg' },
                     ]
                 },
                 {
@@ -1200,8 +1200,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/VSChiraMarsh/Arrows.png', animationConfigDir: 'Arrows/VSChiraMarsh/Arrows.json' },
                         { dir: 'Arrows/VSChira/Arrows.png', animationConfigDir: 'Arrows/VSChira/Arrows.json' },
-                        { dir: 'Musics/musics/goody-two-shoes/Inst.ogg' },
-                        { dir: 'Musics/musics/goody-two-shoes/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-chira/goody-two-shoes/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-chira/goody-two-shoes/Voices.ogg' },
                     ]
                 },
                 {
@@ -1215,14 +1215,14 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/VSChiraMarsh/Arrows.png', animationConfigDir: 'Arrows/VSChiraMarsh/Arrows.json' },
                         { dir: 'Arrows/VSChira/Arrows.png', animationConfigDir: 'Arrows/VSChira/Arrows.json' },
-                        { dir: 'Musics/musics/cab-calloway/Inst.ogg' },
-                        { dir: 'Musics/musics/cab-calloway/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-chira/cab-calloway/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-chira/cab-calloway/Voices.ogg' },
                     ]
                 },
             ]
         },
         {
-            name: 'VS Kapi',
+            name: 'VS-Kapi',
             menuColor: '#7b8191',
             musics: [
                 {
@@ -1234,8 +1234,8 @@ export default async (state) => {
                     mod: 'VSKapi',
                     toLoad: [
                         { dir: 'Arrows/VSKapi/Arrows.png', animationConfigDir: 'Arrows/VSKapi/Arrows.json' },
-                        { dir: 'Musics/musics/wocky/Inst.ogg' },
-                        { dir: 'Musics/musics/wocky/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-kapi/wocky/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-kapi/wocky/Voices.ogg' },
                     ]
                 },
                 {
@@ -1247,8 +1247,8 @@ export default async (state) => {
                     mod: 'VSKapi',
                     toLoad: [
                         { dir: 'Arrows/VSKapi/Arrows.png', animationConfigDir: 'Arrows/VSKapi/Arrows.json' },
-                        { dir: 'Musics/musics/beathoven/Inst.ogg' },
-                        { dir: 'Musics/musics/beathoven/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-kapi/beathoven/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-kapi/beathoven/Voices.ogg' },
                     ]
                 },
                 {
@@ -1260,8 +1260,8 @@ export default async (state) => {
                     mod: 'VSKapi',
                     toLoad: [
                         { dir: 'Arrows/VSKapi/Arrows.png', animationConfigDir: 'Arrows/VSKapi/Arrows.json' },
-                        { dir: 'Musics/musics/hairball/Inst.ogg' },
-                        { dir: 'Musics/musics/hairball/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-kapi/hairball/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-kapi/hairball/Voices.ogg' },
                     ]
                 },
                 {
@@ -1273,8 +1273,8 @@ export default async (state) => {
                     mod: 'VSKapi',
                     toLoad: [
                         { dir: 'Arrows/VSKapi/Arrows.png', animationConfigDir: 'Arrows/VSKapi/Arrows.json' },
-                        { dir: 'Musics/musics/nyaw/Inst.ogg' },
-                        { dir: 'Musics/musics/nyaw/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-kapi/nyaw/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-kapi/nyaw/Voices.ogg' },
                     ]
                 },
                 {
@@ -1286,14 +1286,14 @@ export default async (state) => {
                     mod: 'VSKapi',
                     toLoad: [
                         { dir: 'Arrows/VSKapi/Arrows.png', animationConfigDir: 'Arrows/VSKapi/Arrows.json' },
-                        { dir: 'Musics/musics/flatzone/Inst.ogg' },
-                        { dir: 'Musics/musics/flatzone/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-kapi/flatzone/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-kapi/flatzone/Voices.ogg' },
                     ]
                 },
             ]
         },
         {
-            name: 'VS Zardy',
+            name: 'VS-Zardy',
             menuColor: '#ff8e3e',
             musics: [
                 {
@@ -1304,8 +1304,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/VSZardy.jpg',
                     mod: 'VSZardy',
                     toLoad: [
-                        { dir: 'Musics/musics/foolhardy/Inst.ogg' },
-                        { dir: 'Musics/musics/foolhardy/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-zardy/foolhardy/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-zardy/foolhardy/Voices.ogg' },
                     ]
                 },
                 {
@@ -1317,14 +1317,14 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/VSZardy.jpg',
                     mod: 'VSZardy',
                     toLoad: [
-                        { dir: 'Musics/musics/bushwhack/Inst.ogg' },
-                        { dir: 'Musics/musics/bushwhack/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-zardy/bushwhack/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-zardy/bushwhack/Voices.ogg' },
                     ]
                 },
             ]
         },
         {
-            name: 'VS Hypno\'s Lullaby',
+            name: 'VS-Hypno\'s-Lullaby',
             special: true,
             menuColor: 'rgb(154, 129, 0)',
             musics: [
@@ -1344,8 +1344,8 @@ export default async (state) => {
                         { dir: 'Sounds/Lullaby/Psyshock.ogg' },
                         { dir: 'imgs/VSLullaby/StaticHypno.png', animationConfigDir: 'imgs/VSLullaby/StaticHypno.json' },
                         { dir: 'imgs/VSLullaby/Pendelum.png' },
-                        { dir: 'Musics/musics/safety-lullaby/Inst.ogg' },
-                        { dir: 'Musics/musics/safety-lullaby/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/safety-lullaby/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/safety-lullaby/Voices.ogg' },
                     ]
                 },
                 {
@@ -1364,8 +1364,8 @@ export default async (state) => {
                         { dir: 'Sounds/Lullaby/Psyshock.ogg' },
                         { dir: 'imgs/VSLullaby/StaticHypno.png', animationConfigDir: 'imgs/VSLullaby/StaticHypno.json' },
                         { dir: 'imgs/VSLullaby/Pendelum.png' },
-                        { dir: 'Musics/musics/left-unchecked/Inst.ogg' },
-                        { dir: 'Musics/musics/left-unchecked/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/left-unchecked/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/left-unchecked/Voices.ogg' },
                     ]
                 },
                 {
@@ -1384,8 +1384,8 @@ export default async (state) => {
                         { dir: 'Sounds/Lullaby/Psyshock.ogg' },
                         { dir: 'imgs/VSLullaby/StaticHypno.png', animationConfigDir: 'imgs/VSLullaby/StaticHypno.json' },
                         { dir: 'imgs/VSLullaby/Pendelum.png' },
-                        { dir: 'Musics/musics/lost-cause/Inst.ogg' },
-                        { dir: 'Musics/musics/lost-cause/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/lost-cause/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/lost-cause/Voices.ogg' },
                     ]
                 },
                 {
@@ -1402,8 +1402,8 @@ export default async (state) => {
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
                         { dir: 'imgs/VSLullaby/TyphlosionVit.png', animationConfigDir: 'imgs/VSLullaby/TyphlosionVit.json' },
                         { dir: 'imgs/VSLullaby/Thermostat.png', animationConfigDir: 'imgs/VSLullaby/Thermostat.json' },
-                        { dir: 'Musics/musics/frostbite/Inst.ogg' },
-                        { dir: 'Musics/musics/frostbite/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/frostbite/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/frostbite/Voices.ogg' },
                     ]
                 },
                 {
@@ -1417,8 +1417,8 @@ export default async (state) => {
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
-                        { dir: 'Musics/musics/insomnia/Inst.ogg' },
-                        { dir: 'Musics/musics/insomnia/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/insomnia/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/insomnia/Voices.ogg' },
                     ]
                 },
                 {
@@ -1442,8 +1442,8 @@ export default async (state) => {
                         { dir: 'imgs/VSLullaby/goldNoMore.png', animationConfigDir: 'imgs/VSLullaby/goldNoMore.json' },
                         { dir: 'imgs/VSLullaby/gold.png', animationConfigDir: 'imgs/VSLullaby/gold.json' },
                         { dir: 'imgs/VSLullaby/celebi.png', animationConfigDir: 'imgs/VSLullaby/celebi.json' },
-                        { dir: 'Musics/musics/monochrome/Inst.ogg' },
-                        { dir: 'Musics/musics/monochrome/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/monochrome/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/monochrome/Voices.ogg' },
                     ]
                 },
                 {
@@ -1462,8 +1462,8 @@ export default async (state) => {
                         { dir: 'imgs/VSLullaby/alphabet.png', animationConfigDir: 'imgs/VSLullaby/alphabet.json' },
                         { dir: 'imgs/VSLullaby/gold.png', animationConfigDir: 'imgs/VSLullaby/gold.json' },
                         { dir: 'imgs/VSLullaby/celebi.png', animationConfigDir: 'imgs/VSLullaby/celebi.json' },
-                        { dir: 'Musics/musics/monochrome-v1/Inst.ogg' },
-                        { dir: 'Musics/musics/monochrome-v1/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/monochrome-v1/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/monochrome-v1/Voices.ogg' },
                     ]
                 },
                 {
@@ -1477,8 +1477,8 @@ export default async (state) => {
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
-                        { dir: 'Musics/musics/isotope/Inst.ogg' },
-                        { dir: 'Musics/musics/isotope/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/isotope/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/isotope/Voices.ogg' },
                     ]
                 },
                 {
@@ -1492,8 +1492,8 @@ export default async (state) => {
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
-                        { dir: 'Musics/musics/dissension/Inst.ogg' },
-                        { dir: 'Musics/musics/dissension/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/dissension/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/dissension/Voices.ogg' },
                     ]
                 },
                 {
@@ -1512,8 +1512,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
                         { dir: 'Arrows/Bronzong/Arrows.png', animationConfigDir: 'Arrows/Bronzong/Arrows.json' },
-                        { dir: 'Musics/musics/death-toll/Inst.ogg' },
-                        { dir: 'Musics/musics/death-toll/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/death-toll/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/death-toll/Voices.ogg' },
                     ]
                 },
                 {
@@ -1529,8 +1529,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
                         { dir: 'backgrounds/amusia.png' },
-                        { dir: 'Musics/musics/amusia/Inst.ogg' },
-                        { dir: 'Musics/musics/amusia/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/amusia/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/amusia/Voices.ogg' },
                     ]
                 },
                 {
@@ -1550,8 +1550,8 @@ export default async (state) => {
                         { dir: 'Sounds/Lullaby/POW.ogg' },
                         { dir: 'imgs/VSLullaby/StaticHypno.png', animationConfigDir: 'imgs/VSLullaby/StaticHypno.json' },
                         { dir: 'imgs/VSLullaby/Pendelum.png' },
-                        { dir: 'Musics/musics/pasta-night/Inst.ogg' },
-                        { dir: 'Musics/musics/pasta-night/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/pasta-night/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/pasta-night/Voices.ogg' },
                     ]
                 },
                 {
@@ -1577,8 +1577,8 @@ export default async (state) => {
                         { dir: 'imgs/VSLullaby/Bygone/Alexis.png', animationConfigDir: 'imgs/VSLullaby/Bygone/Alexis.json' },
                         { dir: 'imgs/VSLullaby/Bygone/smolHypno.png', animationConfigDir: 'imgs/VSLullaby/Bygone/smolHypno.json' },
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
-                        { dir: 'Musics/musics/bygone-purpose/Inst.ogg' },
-                        { dir: 'Musics/musics/bygone-purpose/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/bygone-purpose/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/bygone-purpose/Voices.ogg' },
                     ]
                 },
                 {
@@ -1595,8 +1595,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/LullabyPixel/Arrows.png', animationConfigDir: 'Arrows/LullabyPixel/Arrows.json' },
                         { dir: 'Arrows/LullabyPixel/splash.png', animationConfigDir: 'Arrows/LullabyPixel/splash.json' },
-                        { dir: 'Musics/musics/shinto/Inst.ogg' },
-                        { dir: 'Musics/musics/shinto/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/shinto/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/shinto/Voices.ogg' },
                     ]
                 },
                 {
@@ -1612,8 +1612,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/LullabyPixel/splash.png', animationConfigDir: 'Arrows/LullabyPixel/splash.json' },
                         { dir: 'Arrows/Pixel/Arrows.png', animationConfigDir: 'Arrows/Pixel/Arrows.json' },
-                        { dir: 'Musics/musics/shitno/Inst.ogg' },
-                        { dir: 'Musics/musics/shitno/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/shitno/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/shitno/Voices.ogg' },
                     ]
                 },
                 {
@@ -1629,8 +1629,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/Pixel/splash.png', animationConfigDir: 'Arrows/Pixel/splash.json' },
                         { dir: 'Arrows/Pixel/Arrows.png', animationConfigDir: 'Arrows/Pixel/Arrows.json' },
-                        { dir: 'Musics/musics/missingno/Inst.ogg' },
-                        { dir: 'Musics/musics/missingno/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/missingno/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/missingno/Voices.ogg' },
                     ]
                 },
                 {
@@ -1645,8 +1645,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/LullabyPixelBuried/Arrows.png', animationConfigDir: 'Arrows/LullabyPixelBuried/Arrows.json' },
                         { dir: 'Arrows/LullabyPixel/splash.png', animationConfigDir: 'Arrows/LullabyPixel/splash.json' },
-                        { dir: 'Musics/musics/brimstone/Inst.ogg' },
-                        { dir: 'Musics/musics/brimstone/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/brimstone/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/brimstone/Voices.ogg' },
                     ]
                 },
                 {
@@ -1660,8 +1660,8 @@ export default async (state) => {
                     mod: 'VSLullaby',
                     toLoad: [
                         { dir: 'Arrows/Lullaby/splash.png', animationConfigDir: 'Arrows/Lullaby/splash.json' },
-                        { dir: 'Musics/musics/purin/Inst.ogg' },
-                        { dir: 'Musics/musics/purin/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/purin/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-hypno\'s-lullaby/purin/Voices.ogg' },
                     ]
                 },
                 
@@ -1669,7 +1669,7 @@ export default async (state) => {
             ]
         },
         {
-            name: 'VS Tabi',
+            name: 'VS-Tabi',
             menuColor: 'rgb(72, 100, 120)',
             musics: [
                 {
@@ -1680,8 +1680,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/VSTabi.jpg',
                     mod: 'VSTabi',
                     toLoad: [
-                        { dir: 'Musics/musics/my-battle/Inst.ogg' },
-                        { dir: 'Musics/musics/my-battle/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-tabi/my-battle/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-tabi/my-battle/Voices.ogg' },
                     ]
                 },
                 {
@@ -1692,8 +1692,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/VSTabi.jpg',
                     mod: 'VSTabi',
                     toLoad: [
-                        { dir: 'Musics/musics/last-chance/Inst.ogg' },
-                        { dir: 'Musics/musics/last-chance/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-tabi/last-chance/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-tabi/last-chance/Voices.ogg' },
                     ]
                 },
                 {
@@ -1708,8 +1708,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/VSTabi/splash.png', animationConfigDir: 'Arrows/VSTabi/splash.json' },
                         { dir: 'Arrows/VSTabi/Arrows.png', animationConfigDir: 'Arrows/VSTabi/Arrows.json' },
-                        { dir: 'Musics/musics/genocide/Inst.ogg' },
-                        { dir: 'Musics/musics/genocide/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-tabi/genocide/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-tabi/genocide/Voices.ogg' },
                     ]
                 }
             ]
@@ -1726,8 +1726,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/Camellia.png',
                     mod: 'Camellia',
                     toLoad: [
-                        { dir: 'Musics/musics/camellia-tutorial/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia-tutorial/Voices.ogg' },
+                        { dir: 'Musics/musics/camellia/camellia-tutorial/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/camellia-tutorial/Voices.ogg' },
                     ]
                 },
                 {
@@ -1738,8 +1738,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/Camellia.png',
                     mod: 'Camellia',
                     toLoad: [
-                        { dir: 'Musics/musics/boyfriend/Inst.ogg' },
-                        { dir: 'Musics/musics/boyfriend/Voices.ogg' },
+                        { dir: 'Musics/musics/camellia/boyfriend/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/boyfriend/Voices.ogg' },
                     ]
                 },
                 {
@@ -1750,8 +1750,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/Camellia.png',
                     mod: 'Camellia',
                     toLoad: [
-                        { dir: 'Musics/musics/first-town/Inst.ogg' },
-                        { dir: 'Musics/musics/first-town/Voices.ogg' },
+                        { dir: 'Musics/musics/camellia/first-town/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/first-town/Voices.ogg' },
                     ]
                 },
                 {
@@ -1762,8 +1762,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/Camellia.png',
                     mod: 'Camellia',
                     toLoad: [
-                        { dir: 'Musics/musics/liquated/Inst.ogg' },
-                        { dir: 'Musics/musics/liquated/Voices.ogg' },
+                        { dir: 'Musics/musics/camellia/liquated/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/liquated/Voices.ogg' },
                     ]
                 },
                 {
@@ -1774,8 +1774,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/Camellia.png',
                     mod: 'Camellia',
                     toLoad: [
-                        { dir: 'Musics/musics/why-do-you-hate-me/Inst.ogg' },
-                        { dir: 'Musics/musics/why-do-you-hate-me/Voices.ogg' },
+                        { dir: 'Musics/musics/camellia/why-do-you-hate-me/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/why-do-you-hate-me/Voices.ogg' },
                     ]
                 },
                 {
@@ -1786,8 +1786,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/Camellia.png',
                     mod: 'Camellia',
                     toLoad: [
-                        { dir: 'Musics/musics/quaoar/Inst.ogg' },
-                        { dir: 'Musics/musics/quaoar/Voices.ogg' },
+                        { dir: 'Musics/musics/camellia/quaoar/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/quaoar/Voices.ogg' },
                     ]
                 },
                 {
@@ -1798,8 +1798,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/Camellia.png',
                     mod: 'Camellia',
                     toLoad: [
-                        { dir: 'Musics/musics/crystallized/Inst.ogg' },
-                        { dir: 'Musics/musics/crystallized/Voices.ogg' },
+                        { dir: 'Musics/musics/camellia/crystallized/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/crystallized/Voices.ogg' },
                     ]
                 },
                 {
@@ -1810,8 +1810,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/Camellia.png',
                     mod: 'Camellia',
                     toLoad: [
-                        { dir: 'Musics/musics/nacreous-snowmelt/Inst.ogg' },
-                        { dir: 'Musics/musics/nacreous-snowmelt/Voices.ogg' },
+                        { dir: 'Musics/musics/camellia/nacreous-snowmelt/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/nacreous-snowmelt/Voices.ogg' },
                     ]
                 },
                 {
@@ -1822,8 +1822,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/Camellia.png',
                     mod: 'Camellia',
                     toLoad: [
-                        { dir: 'Musics/musics/lioness-pride/Inst.ogg' },
-                        { dir: 'Musics/musics/lioness-pride/Voices.ogg' },
+                        { dir: 'Musics/musics/camellia/lioness-pride/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/lioness-pride/Voices.ogg' },
                     ]
                 },
                 {
@@ -1834,8 +1834,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/Camellia.png',
                     mod: 'Camellia',
                     toLoad: [
-                        { dir: 'Musics/musics/ghost/Inst.ogg' },
-                        { dir: 'Musics/musics/ghost/Voices.ogg' },
+                        { dir: 'Musics/musics/camellia/ghost/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/ghost/Voices.ogg' },
                     ]
                 },
                 {
@@ -1846,8 +1846,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/Camellia.png',
                     mod: 'Camellia',
                     toLoad: [
-                        { dir: 'Musics/musics/ghoul/Inst.ogg' },
-                        { dir: 'Musics/musics/ghoul/Voices.ogg' },
+                        { dir: 'Musics/musics/camellia/ghoul/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/ghoul/Voices.ogg' },
                     ]
                 },
                 {
@@ -1858,8 +1858,8 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/Camellia.png',
                     mod: 'Camellia',
                     toLoad: [
-                        { dir: 'Musics/musics/ghost-vip/Inst.ogg' },
-                        { dir: 'Musics/musics/ghost-vip/Voices.ogg' },
+                        { dir: 'Musics/musics/camellia/ghost-vip/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/ghost-vip/Voices.ogg' },
                     ]
                 },
             ]
@@ -1888,8 +1888,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
                         { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
-                        { dir: 'Musics/musics/thunderstorm/Inst.ogg' },
-                        { dir: 'Musics/musics/thunderstorm/Voices.ogg' },
+                        { dir: 'Musics/musics/undefined/thunderstorm/Inst.ogg' },
+                        { dir: 'Musics/musics/undefined/thunderstorm/Voices.ogg' },
                     ]
                 },
                 {
@@ -1914,8 +1914,8 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
                         { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
-                        { dir: 'Musics/musics/space-breaker/Inst.ogg' },
-                        { dir: 'Musics/musics/space-breaker/Voices.ogg' },
+                        { dir: 'Musics/musics/undefined/space-breaker/Inst.ogg' },
+                        { dir: 'Musics/musics/undefined/space-breaker/Voices.ogg' },
                     ]
                 },
                 {
@@ -1926,7 +1926,7 @@ export default async (state) => {
                     backgroundImage: 'backgrounds/rush-e.jpg',
                     mod: 'Undefined',
                     toLoad: [
-                        { dir: 'Musics/musics/rush-e/Inst.ogg' }
+                        { dir: 'Musics/musics/undefined/rush-e/Inst.ogg' }
                     ]
                 },
                 {
@@ -1937,8 +1937,8 @@ export default async (state) => {
                     backgroundImage: null,
                     mod: 'Undefined',
                     toLoad: [
-                        { dir: 'Musics/musics/missingcraft/Inst.ogg' },
-                        { dir: 'Musics/musics/missingcraft/Voices.ogg' },
+                        { dir: 'Musics/musics/undefined/missingcraft/Inst.ogg' },
+                        { dir: 'Musics/musics/undefined/missingcraft/Voices.ogg' },
                     ]
                 },
                 {
@@ -1949,8 +1949,8 @@ export default async (state) => {
                     backgroundImage: null,
                     mod: 'Undefined',
                     toLoad: [
-                        { dir: 'Musics/musics/rednecks/Inst.ogg' },
-                        { dir: 'Musics/musics/rednecks/Voices.ogg' },
+                        { dir: 'Musics/musics/undefined/rednecks/Inst.ogg' },
+                        { dir: 'Musics/musics/undefined/rednecks/Voices.ogg' },
                     ]
                 },
                 {
@@ -1961,8 +1961,8 @@ export default async (state) => {
                     backgroundImage: null,
                     mod: 'Undefined',
                     toLoad: [
-                        { dir: 'Musics/musics/sansno/Inst.ogg' },
-                        { dir: 'Musics/musics/sansno/Voices.ogg' },
+                        { dir: 'Musics/musics/undefined/sansno/Inst.ogg' },
+                        { dir: 'Musics/musics/undefined/sansno/Voices.ogg' },
                     ]
                 },
                 {
@@ -1973,14 +1973,14 @@ export default async (state) => {
                     backgroundImage: null,
                     mod: 'Undefined',
                     toLoad: [
-                        { dir: 'Musics/musics/through-the-fire-and-flames/Inst.ogg' },
-                        { dir: 'Musics/musics/through-the-fire-and-flames/Voices.ogg' },
+                        { dir: 'Musics/musics/undefined/through-the-fire-and-flames/Inst.ogg' },
+                        { dir: 'Musics/musics/undefined/through-the-fire-and-flames/Voices.ogg' },
                     ]
                 },
             ]
         },
         {
-            name: 'Bad Apple',
+            name: 'Bad-Apple',
             menuColor: 'white',
             musics: [
                 {
@@ -1992,8 +1992,88 @@ export default async (state) => {
                     screenFilter: 'contrast(200%) grayscale(100%)',
                     mod: 'BadApple',
                     toLoad: [
-                        { dir: 'Musics/musics/bad-apple/Inst.ogg' },
-                        { dir: 'Musics/musics/bad-apple/Voices.ogg' },
+                        { dir: 'Musics/musics/bad-apple/bad-apple/Inst.ogg' },
+                        { dir: 'Musics/musics/bad-apple/bad-apple/Voices.ogg' },
+                    ]
+                }
+            ]
+        },
+        {
+            name: 'VS-Mami',
+            menuColor: '#cba360',
+            musics: [
+                {
+                    dev: true,
+                    name: 'Connect',
+                    menuColor: '#cba360',
+                    difficulties: [ 0, 1, 2, 10 ],
+                    notesImageDir: 'Arrows/',
+                    mod: 'VSMami',
+                    toLoad: [
+                        { dir: 'Musics/musics/vs-mami/connect/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-mami/connect/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Konnect',
+                    menuColor: '#cba360',
+                    difficulties: [ 0, 1, 2, 10 ],
+                    notesImageDir: 'Arrows/',
+                    mod: 'VSMami',
+                    toLoad: [
+                        { dir: 'Musics/musics/vs-mami/konnect/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-mami/konnect/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Mamigation',
+                    menuColor: '#cba360',
+                    difficulties: [ 0, 1, 2, 10 ],
+                    notesImageDir: 'Arrows/',
+                    mod: 'VSMami',
+                    toLoad: [
+                        { dir: 'Musics/musics/vs-mami/mamigation/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-mami/mamigation/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Reminisce',
+                    menuColor: '#cba360',
+                    difficulties: [ 0, 1, 2, 10 ],
+                    notesImageDir: 'Arrows/',
+                    mod: 'VSMami',
+                    toLoad: [
+                        { dir: 'Musics/musics/vs-mami/reminisce/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-mami/reminisce/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Salvation',
+                    menuColor: '#cba360',
+                    difficulties: [ 0, 1, 2, 10 ],
+                    notesImageDir: 'Arrows/',
+                    mod: 'VSMami',
+                    toLoad: [
+                        { dir: 'Arrows/hurtnotes-suicidemouse/Arrows.png', animationConfigDir: 'Arrows/hurtnotes-suicidemouse/Arrows.json' },
+                        { dir: 'Arrows/pinkieSing/Arrows.png', animationConfigDir: 'Arrows/pinkieSing/Arrows.json' },
+                        { dir: 'Musics/musics/vs-mami/salvation/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-mami/salvation/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Tetris',
+                    menuColor: '#cba360',
+                    difficulties: [ 0, 1, 2, 10 ],
+                    notesImageDir: 'Arrows/',
+                    mod: 'VSMami',
+                    toLoad: [
+                        { dir: 'Musics/musics/vs-mami/tetris/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-mami/tetris/Voices.ogg' },
                     ]
                 }
             ]

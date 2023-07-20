@@ -402,11 +402,12 @@ span#openEmojiBoxButton {
     margin: 0px;
     filter: grayscale(100%);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease-out;
 }
 
 span#openEmojiBoxButton:hover {
-    font-size: 130%;
+    /*font-size: 130%;*/
+    scale: 1.17;
     filter: grayscale(0);
 }
 

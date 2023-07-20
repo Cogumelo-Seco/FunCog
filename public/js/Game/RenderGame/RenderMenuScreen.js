@@ -184,6 +184,8 @@ export default async (ctx, canvas, game, Listener, functions) => {
             <div id="updateLogTitle">Atualizações</div>
             
             <div id="updateContent">
+                <div id="updateDate">20/jul/2023</div>
+                <div id="updateNew" class="updateContentText">- Novo mod "VS-Mami" adicionado (em desenvolvimento)</div>
                 <div id="updateDate">11/jul/2023</div>
                 <div id="updateNew" class="updateContentText">- Painel de propriedades da mensagem adicionado, com função de deletar mensagem</div>
                 <div id="updateDate">10/jul/2023</div>

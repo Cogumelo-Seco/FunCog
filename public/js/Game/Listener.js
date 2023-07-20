@@ -231,22 +231,29 @@ export default function createListener(socket) {
                         let count = 0
                         function loop() {
                             count += 1
-                            if (count <= 50) {
-                                state.game.state.music.currentTime -= 0.02
-                                if (state.game.state.musicVoice) state.game.state.musicVoice.currentTime = state.game.state.music.currentTime -= 0.02
-                                if (state.game.state.videoBackground) state.game.state.videoBackground.currentTime = state.game.state.music.currentTime -= 0.02
-
+                            if (count <= 20) {
+                                if (state.game.state.music.currentTime-0.04 <= 0) count = 20
+                                else {
+                                    state.game.state.music.currentTime -= 0.04
+                                    if (state.game.state.musicVoice) state.game.state.musicVoice.currentTime = state.game.state.music.currentTime -= 0.02
+                                    if (state.game.state.videoBackground) state.game.state.videoBackground.currentTime = state.game.state.music.currentTime -= 0.02
+                                }
                                 setTimeout(loop, 1000/20)
                             } else {
-                                if (state.game.state.musicVoice) state.game.state.musicVoice.currentTime = state.game.state.music.currentTime
-                                if (state.game.state.videoBackground) state.game.state.videoBackground.currentTime = state.game.state.music.currentTime
+                                if (state.game.state.music) state.game.state.music.play()
+                                if (state.game.state.musicVoice) {
+                                    state.game.state.musicVoice.play()
+                                    state.game.state.musicVoice.currentTime = state.game.state.music.currentTime
+                                }
+                                if (state.game.state.videoBackground) {
+                                    state.game.state.videoBackground.play()
+                                    state.game.state.videoBackground.currentTime = state.game.state.music.currentTime
+                                }
                             }
                         }
                         loop()
 
-                        state.game.state.music.play()
-                        if (state.game.state.musicVoice) state.game.state.musicVoice.play()
-                        if (state.game.state.videoBackground) state.game.state.videoBackground.play()
+                        
                     } else if (state.game.state.musicInfo.oldPauseTime+1 < state.game.state.music.currentTime) {
                         state.game.state.musicInfo.oldPauseTime = state.game.state.music.currentTime
                         state.game.state.music.pause()
@@ -355,9 +362,10 @@ export default function createListener(socket) {
                         state.game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })
                         break
                     case keys.KeyEnter:
+                        let modInfo = state.game.state.musics[state.game.state.selectMusicMenu.modSelect]
                         let musicInfo = state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics[state.game.state.selectMusicMenu.musicSelect]
 
-                        if (musicInfo && state.game.state.online) {
+                        if (modInfo && musicInfo && state.game.state.online) {
                             state.musicMenu?.pause()
                             state.game.state.smallFunctions.redirectGameStage('game')
                             socket.emit('newServer', {
@@ -366,18 +374,20 @@ export default function createListener(socket) {
                                 music: state.game.state.selectMusicMenu.musicSelect
                             })
 
-                            state.game.startMusic({ 
+                            state.game.startMusic({
+                                modInfo,
                                 musicInfo,
                                 difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
                                 listenerState: state,
                                 socket
                             })
-                        } else if (musicInfo) {
+                        } else if (modInfo && musicInfo) {
                             state.musicMenu?.pause()
                             state.game.playSong('Sounds/confirmMenu.ogg', { volume: 0.5 })
                             state.game.state.smallFunctions.redirectGameStage('game')
 
                             state.game.startMusic({ 
+                                modInfo,
                                 musicInfo,
                                 difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
                                 listenerState: state,
@@ -425,13 +435,15 @@ export default function createListener(socket) {
                             state.game.state.serverId = server.id
 
                             if (state.game.state.serverId) {
+                                let modInfo = state.game.state.musics[server.mod]
                                 let musicInfo = state.game.state.musics[server.mod].musics[server.music]
 
                                 socket.emit('connectServer', {
                                     serverId: state.game.state.serverId
                                 })
 
-                                state.game.startMusic({ 
+                                state.game.startMusic({
+                                    modInfo,
                                     musicInfo,
                                     difficulty: state.game.state.difficulties[musicInfo.difficulties[server.difficulty]],
                                     listenerState: state,
