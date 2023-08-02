@@ -42,7 +42,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					setTimeout(() => state.musicInfo.popups['pyramid'].alpha = 0, 500)
 				}
 			}
-			if (beat%50 == 0 && beat != variables.oldBeat) pyramid()
+			if (beat%100 == 0 && beat != variables.oldBeat) pyramid()
 			
 
 			variables.oldBeat = beat

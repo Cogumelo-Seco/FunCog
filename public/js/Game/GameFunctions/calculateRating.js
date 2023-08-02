@@ -23,8 +23,8 @@ export default (time, state) => {
     let rating = null
 
     if (time >= 120) rating = ratings[0]
-    else if (time <= 120 && time >= 95) rating = ratings[1]
-    else if (time <= 95 && time >= 70) rating = ratings[2]
+    else if (time <= 120 && time >= 90) rating = ratings[1]
+    else if (time <= 90 && time >= 65) rating = ratings[2]
     else rating = ratings[3]
     
     state.musicInfo.rating = rating
