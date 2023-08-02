@@ -110,6 +110,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
                     alpha: arrowKeysAlpha <= game.state.alphaHUD ? arrowKeysAlpha : game.state.alphaHUD,
                     style: `rgb(255, 255, 255)`,
                     text: key,
+                    font: `bold ${30**resizeNote}px Arial`,
                     x: arrowInfo.X+(arrowInfo.width**resizeNote)/2-(ctx.measureText(key).width/2), 
                     y: arrowInfo.Y+(downScroll ? -(arrowInfo.height**resizeNote/2)-20 : (arrowInfo.height**resizeNote/2)+25),
                     add: 2

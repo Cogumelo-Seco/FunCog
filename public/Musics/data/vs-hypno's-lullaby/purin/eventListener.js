@@ -2,14 +2,14 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
     switch (type) {
 		case 'started':
 			state.musicInfo.variables = {
-				oladBeat: 0,
+				oldBeat: 0,
 			}
 			break
         case 'gameLoop':
 			let beat = state.musicBeat
 
 			if (state.screenZoom < 20 && state.camZooming) {
-				if (state.musicInfo.variables.oladBeat != beat && beat%4 == 0) state.screenZoom = 20
+				if (state.musicInfo.variables.oldBeat != beat && beat%4 == 0) state.screenZoom = 20
 			} else if (state.screenZoom <= 0) {
 				state.screenZoom = 0
 				state.camZooming = true
@@ -18,7 +18,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 				state.screenZoom -= 1
 			}
 
-			state.musicInfo.variables.oladBeat = beat
+			state.musicInfo.variables.oldBeat = beat
             break
     }
 }

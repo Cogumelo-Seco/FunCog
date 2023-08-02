@@ -54,6 +54,9 @@ export default async (state) => {
         VSChiraMarsh: {
             newArrowImage: `Arrows/VSChiraMarsh/Arrows.png`,
         },
+        holynote: {
+            newArrowImage: `Arrows/holynote/Arrows.png`,
+        },
     }
     
     return state.sounds.length

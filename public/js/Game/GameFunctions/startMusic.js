@@ -62,7 +62,8 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
                 bad: 0,
                 good: 0,
                 sick: 0,
-            }
+            },
+            additionalScreenInfo: null
         }
 
         let musicData = JSON.parse(JSON.stringify(require(`../../../Musics/data/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}${difficulty.fileNameDifficulty ? '-'+difficulty.fileNameDifficulty : ''}.json`)))
@@ -417,7 +418,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
                 disabled = difficulty.name == 'Mania' ? true : false
                 errorWhenNotClicking = true
                 mustHitSection = true
-                type = 'pinkieSing'
+                type = 'holynote'
             }
         }
 

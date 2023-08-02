@@ -166,9 +166,9 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				let a = 3 * (10 ** (-3))
 				let getNewDistance = (S0, v, t) => S0 + v*t + 0.5 * (a*t)**2
 
-				let timeGap = +new Date()-arrowInfo.gravity.time
+				let timeGap = Math.min(30, +new Date()-arrowInfo.gravity.time)
 				arrowInfo.gravity.time = +new Date()
-				arrowInfo.gravity.distance = Math.max(getNewDistance(arrowInfo.gravity.distance, arrowInfo.gravity.v, timeGap), 0)
+				arrowInfo.gravity.distance = Math.min(state.canvas.height, Math.max(getNewDistance(arrowInfo.gravity.distance, arrowInfo.gravity.v, timeGap), 0))
 
 				if (arrowInfo.gravity.distance <= 0) {
 					arrowInfo.gravity.v = arrowInfo.gravity.v > -0.2 ? 0 : (arrowInfo.gravity.v * -1) * (1-arrowInfo.gravity.bounce/200)
@@ -180,7 +180,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			
 
 			if (state.screenZoom < 10 && state.camZooming) {
-				if (variables.oladBeat != beat && beat%4 == 0) state.screenZoom = 10
+				if (variables.oldBeat != beat && beat%4 == 0) state.screenZoom = 10
 			} else if (state.screenZoom <= 0) {
 				state.screenZoom = 0
 				state.camZooming = true

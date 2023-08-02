@@ -35,20 +35,20 @@ export default async (ctx, canvas, game, Listener, functions) => {
             ctx.shadowBlur = game.state.personalizedNotes[note.type]?.noteShadowBlur || arrowInfo.noteShadowBlur
 
             if (note.hold && arrowImage && holdImagePos && holdEndImagePos && arrowImagePos) {
-                let holdY = noteY-(holdImagePos.height/2)
+                let holdY = noteY-(game.state.holdHeight/2)
                 let holdX = (arrowInfo.X)+(arrowImagePos.width**resizeNote/2)-(holdImagePos.width**resizeNote/2)
-                if (!note.holdHeight) note.holdHeight = holdImagePos.height
+                if (!note.holdHeight) note.holdHeight = game.state.holdHeight
 
-                for (let i = 0;i <= note.hold;i += holdImagePos?.height) {
-                    holdY = downScroll ? holdY-(holdImagePos.height**resizeNote) : holdY+(holdImagePos.height**resizeNote)
-                    let holdYInRelationToTheLine = downScroll ? (holdY+(holdImagePos.height/2))-arrowInfo?.Y : arrowInfo?.Y-holdY
+                for (let i = 0;i <= note.hold;i += game.state.holdHeight) {
+                    holdY = downScroll ? holdY-(game.state.holdHeight**resizeNote) : holdY+(game.state.holdHeight**resizeNote)
+                    let holdYInRelationToTheLine = downScroll ? (holdY+(game.state.holdHeight/2))-arrowInfo?.Y : arrowInfo?.Y-holdY
 
                     let alphaHUD = game.state.alphaHUD >= 1 ? 1 : game.state.alphaHUD <= 0 ? 0 : game.state.alphaHUD
                     let noteAlpha = arrowInfo.noteAlpha >= 1 ? 1 : arrowInfo.noteAlpha <= 0 ? 0 : arrowInfo.noteAlpha
                     ctx.globalAlpha = holdYInRelationToTheLine > 0 || (note.disabled || (note.time < game.state.musicInfo.oldPauseTime)) ? 0.2 : noteAlpha <= alphaHUD ? noteAlpha : alphaHUD
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
-                        if (i+holdImagePos?.height >= note.hold) {
+                        if (i+game.state.holdHeight >= note.hold) {
                             let holdWidth = holdEndImagePos.width**resizeNote
                             let holdHeight = holdEndImagePos.height**resizeNote
                             let scaleV = downScroll ? -1 : 1
@@ -61,7 +61,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
                             
                             ctx.restore()
                         } else {
-                            ctx.drawImage(arrowImage, holdImagePos.x, holdImagePos.y, holdImagePos.width, holdImagePos.height, holdX, holdY, holdImagePos.width**resizeNote, holdImagePos.height**resizeNote)
+                            ctx.drawImage(arrowImage, holdImagePos.x, holdImagePos.y, holdImagePos.width, game.state.holdHeight, holdX, holdY, holdImagePos.width**resizeNote, game.state.holdHeight**resizeNote+4)
                         }
                     }
                 }
@@ -112,20 +112,20 @@ export default async (ctx, canvas, game, Listener, functions) => {
             ctx.shadowBlur = game.state.personalizedNotes[note.type]?.noteShadowBlur || arrowInfo.noteShadowBlur
 
             if (note.hold && arrowImage && holdImagePos && holdEndImagePos && arrowImagePos) {
-                let holdY = noteY-(holdImagePos.height/2)
+                let holdY = noteY-(game.state.holdHeight/2)
                 let holdX = (arrowInfo.X)+(arrowImagePos.width**resizeNoteOpponent/2)-(holdImagePos.width**resizeNoteOpponent/2)
-                if (!note.holdHeight) note.holdHeight = holdImagePos.height
+                if (!note.holdHeight) note.holdHeight = game.state.holdHeight
 
-                for (let i = 0;i <= note.hold;i += holdImagePos?.height) {
-                    holdY = downScroll ? holdY-(holdImagePos.height**resizeNoteOpponent) : holdY+(holdImagePos.height**resizeNoteOpponent)
-                    let holdYInRelationToTheLine = downScroll ? (holdY+(holdImagePos.height/2))-arrowInfo?.Y : arrowInfo?.Y-holdY
+                for (let i = 0;i <= note.hold;i += game.state.holdHeight) {
+                    holdY = downScroll ? holdY-(game.state.holdHeight**resizeNoteOpponent) : holdY+(game.state.holdHeight**resizeNoteOpponent)
+                    let holdYInRelationToTheLine = downScroll ? (holdY+(game.state.holdHeight/2))-arrowInfo?.Y : arrowInfo?.Y-holdY
                     
                     let alphaHUD = game.state.alphaHUD >= 1 ? 1 : game.state.alphaHUD <= 0 ? 0 : game.state.alphaHUD
                     let noteAlpha = arrowInfo.noteAlpha >= 1 ? 1 : arrowInfo.noteAlpha <= 0 ? 0 : arrowInfo.noteAlpha
                     ctx.globalAlpha = holdYInRelationToTheLine > 0 || (note.disabled || (note.time < game.state.musicInfo.oldPauseTime)) ? 0.2 : noteAlpha <= alphaHUD ? noteAlpha : alphaHUD
 
                     if (note.clicked ? holdYInRelationToTheLine < 0 : true) {
-                        if (i+holdImagePos?.height >= note.hold) {
+                        if (i+game.state.holdHeight >= note.hold) {
                             let holdWidth = holdEndImagePos.width**resizeNoteOpponent
                             let holdHeight = holdEndImagePos.height**resizeNoteOpponent
                             let scaleV = downScroll ? -1 : 1
@@ -138,7 +138,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
                             
                             ctx.restore()
                         } else {
-                            ctx.drawImage(arrowImage, holdImagePos.x, holdImagePos.y, holdImagePos.width, holdImagePos.height, holdX, holdY, holdImagePos.width**resizeNoteOpponent, holdImagePos.height**resizeNoteOpponent)
+                            ctx.drawImage(arrowImage, holdImagePos.x, holdImagePos.y, holdImagePos.width, game.state.holdHeight, holdX, holdY-2, holdImagePos.width**resizeNoteOpponent, game.state.holdHeight**resizeNoteOpponent+4)
                         }
                     }
                 }

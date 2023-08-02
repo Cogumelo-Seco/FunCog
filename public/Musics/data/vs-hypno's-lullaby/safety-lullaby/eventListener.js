@@ -57,7 +57,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			let currentTime = state.music?.currentTime
 
 			if (state.screenZoom < 10 && state.camZooming) {
-				if (variables.oladBeat != beat && beat%4 == 0) state.screenZoom = 10
+				if (variables.oldBeat != beat && beat%4 == 0) state.screenZoom = 10
 			} else if (state.screenZoom <= 0) {
 				state.screenZoom = 0
 				state.camZooming = true

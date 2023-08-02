@@ -220,7 +220,7 @@ export default function createListener(socket) {
                 }*/
                 let gameVideoElement = document.getElementById('gameVideo')
                 
-                if (keyPressed == keys.KeyEnter && on && gameVideoElement.duration >= 6 && state.game.state.music.currentTime <= 0) {
+                if (keyPressed == keys.KeyEnter && on && gameVideoElement.duration >= 6 && state.game.state.music?.currentTime <= 0) {
                     gameVideoElement.currentTime = gameVideoElement.duration
                     gameVideoElement.style.display = 'none'
                 }

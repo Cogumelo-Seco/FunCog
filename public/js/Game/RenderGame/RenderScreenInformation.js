@@ -5,6 +5,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         style: `hsl(${game.state.rainbowColor}, 100%, 40%)`,
         style2: `hsl(${game.state.rainbowColor+180}, 100%, 40%)`,
         text: 'Created by: Cogu',
+        font: 'bold 11px Arial',
         x: canvas.width-ctx.measureText('Created by: Cogu').width-5,
         y: canvas.height-5,
         add: 1
@@ -19,6 +20,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             style: `hsl(${game.state.rainbowColor}, 100%, 40%)`,
             style2: `hsl(${game.state.rainbowColor+180}, 100%, 40%)`,
             text: `${game.state.fpsDisplay}FPS`,
+            font: 'bold 11px Arial',
             x: (canvas.width-5)-ctx.measureText(`${game.state.fpsDisplay}FPS`).width,
             y: 15,
             add: 1
@@ -27,6 +29,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             style: `hsl(${game.state.rainbowColor}, 100%, 40%)`,
             style2: `hsl(${game.state.rainbowColor+180}, 100%, 40%)`,
             text: `${game.state.ping || '???'}Ping`,
+            font: 'bold 11px Arial',
             x: (canvas.width-5)-ctx.measureText(`${game.state.ping}Ping`).width,
             y: 30,
             add: 1
@@ -35,7 +38,8 @@ export default async (ctx, canvas, game, Listener, functions) => {
         functions.fillText({
             alpha: (game.state.animations.code.frame/game.state.animations.code.endFrame) > 0.5 ? 1-((game.state.animations.code.frame/game.state.animations.code.endFrame)-0.5)/0.5 : game.state.alphaHUD,
             style: `rgb(255, 255, 255)`,
-            text: `Code Detected - ${game.state.animations.code.on ? 'ON' : 'OFF'}`,
+            font: 'bold 11px Arial',
+            text: `Code Detected - &b${game.state.animations.code.on ? 'ON' : 'OFF'}`,
             x: 5,
             y: 60,
             add: 2

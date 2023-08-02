@@ -2,7 +2,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
     switch (type) {
 		case 'started':
 			state.musicInfo.variables = {
-				oladBeat: 0,
+				oldBeat: 0,
 				oldStep: 0,
 			}
 			break
@@ -13,7 +13,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, diffi
 			let fast = (beat >= 180 && beat <= 309)
 
 			if (state.screenZoom < (fast ? 30 : 20) && state.camZooming) {
-				if (state.musicInfo.variables.oladBeat != beat && (fast ? true : beat%4 == 0)) state.screenZoom = fast ? 30 : 20
+				if (state.musicInfo.variables.oldBeat != beat && (fast ? true : beat%4 == 0)) state.screenZoom = fast ? 30 : 20
 			} else if (state.screenZoom <= 0) {
 				state.screenZoom = 0
 				state.camZooming = true

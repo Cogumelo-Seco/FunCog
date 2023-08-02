@@ -36,16 +36,18 @@ export default async (ctx, canvas, game, Listener, functions) => {
                 font-size: ${canvas.height*0.04}px;
                 text-align: center;
                 color: rgb(200, 200, 200);
-                background-color: rgb(10, 0, 5);
+                background-color: rgb(9, 4, 27);
                 padding: 5px;
                 margin: 10px ${canvas.width*0.05}px;
-                margin-top: 25px
+                margin-top: 25px;
+                border-radius: 8px;
             }
             .updateContentText {
                 font-size: ${canvas.height*0.035}px;
-                background-color: rgb(20, 0, 10);
+                background-color: rgb(16, 7, 45);
                 padding: 10px;
                 margin: 5px 0;
+                border-radius: 8px;
             }
             #updateNew {
                 color: rgb(0, 255, 100);
@@ -58,6 +60,9 @@ export default async (ctx, canvas, game, Listener, functions) => {
             }
             #updateWarning {
                 color: rgb(255, 200, 0);
+            }
+            #bugFix {
+                color: rgb(255, 100, 150);
             }
 
             @keyframes logo {
@@ -88,13 +93,13 @@ export default async (ctx, canvas, game, Listener, functions) => {
                     scale: 1
                 }
                 to {
-                    background-color: rgb(40, 20, 30);
+                    background: linear-gradient(90deg, rgba(255,102,170,1) 0%, rgba(208,57,125,1) 100%);
                     scale: 1.02
                 }
             }
             @keyframes optionButtonOut {
                 from {
-                    background-color: rgb(40, 20, 30);
+                    background: linear-gradient(90deg, rgba(255,102,170,1) 0%, rgba(208,57,125,1) 100%);
                     scale: 1.02
                 }
                 to {
@@ -109,27 +114,38 @@ export default async (ctx, canvas, game, Listener, functions) => {
                     transform: rotateZ(360deg);
                 }
             }
+
+            .skew-fix{
+                display:inline-block;
+                transform: skew(20deg);
+            }
+            .menuButton {
+                border: none;
+                border-radius: 8px;
+                background: linear-gradient(90deg, rgba(64,46,120,1) 0%, rgba(100,75,175,1) 100%);
+                color: white;
+                transform: skew(-20deg);
+            }
         `
         if (notUpdate) menuElement.appendChild(menuStyle)
 
         let Y = canvas.height*0.29
         for (let i in game.state.selectMenuOption.menuOptions) {
             let optionElement = document.getElementById(i+'-menuOptions') || document.createElement('button')
+            optionElement.className = 'menuButton'
             optionElement.id = i+'-menuOptions'
-            optionElement.innerText = game.state.selectMenuOption.menuOptions[i]
+            optionElement.innerHTML = `<span class="skew-fix">${game.state.selectMenuOption.menuOptions[i]}</span>`
             optionElement.style.width = canvas.width*0.30+'px'
             optionElement.style.height = 50+'px'
             optionElement.style.position = 'absolute'
             optionElement.style.left = canvas.width*0.25/2+'px'
             optionElement.style.top = Y+'px'
             optionElement.style.fontSize = screenResize*12+'px'
-            optionElement.style.border = 'solid 2px rgb(150, 0, 50)'
-            optionElement.style.borderRadius = '8px'
-            optionElement.style.backgroundColor = 'rgb(20, 0, 10)'
-            optionElement.style.color = 'white'
             optionElement.onmouseover = () => {
-                game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })
-                game.state.selectMenuOption.menuSelect = i
+                if (game.state.selectMenuOption.menuSelect != i) {
+                    game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })
+                    game.state.selectMenuOption.menuSelect = i
+                }
             }
 
             if (Number(game.state.selectMenuOption.menuSelect) == Number(i)) optionElement.style.animation = 'optionButtonOver 0.2s ease forwards'
@@ -176,14 +192,18 @@ export default async (ctx, canvas, game, Listener, functions) => {
         updateContainer.style.height = canvas.height-(canvas.height*0.15)-canvas.height*0.1+'px'
         updateContainer.style.left = canvas.width*0.5+'px'
         updateContainer.style.top = canvas.height*0.20+'px'
-        updateContainer.style.backgroundColor = 'rgb(40, 20, 30)'
+        updateContainer.style.backgroundColor = 'rgb(50, 50, 50)'
         updateContainer.style.borderRadius = '8px'
-        updateContainer.style.border = 'solid 2px rgb(150, 0, 50)'
+        updateContainer.style.border = 'solid 4px rgb(50, 50, 50)'
 
         if (notUpdate) updateContainer.innerHTML = `
             <div id="updateLogTitle">Atualizações</div>
             
             <div id="updateContent">
+                <div id="updateDate">01/ago/2023</div>
+                <div id="updateUpdate" class="updateContentText">- Mod "VS Mami" Terminado</div>
+                <div id="updateUpdate" class="updateContentText">- Aparência do menu atualizado</div>
+                <div id="bugFix" class="updateContentText">- Bug de setas sumirem ao pausar na música "Pasta Night" corrigido</div>
                 <div id="updateDate">20/jul/2023</div>
                 <div id="updateNew" class="updateContentText">- Novo mod "VS-Mami" adicionado (em desenvolvimento)</div>
                 <div id="updateDate">11/jul/2023</div>
@@ -210,7 +230,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         if (notUpdate) updateButtonImage.src = '/imgs/update.png'
         if (notUpdate) updateButton.appendChild(updateButtonImage)
 
-        let buttonSize = screenResize*15
+        let buttonSize = screenResize*17
         updateButton.style.padding = '4px'
         updateButton.style.width = buttonSize+'px'
         updateButton.style.height = buttonSize+'px'
@@ -219,17 +239,23 @@ export default async (ctx, canvas, game, Listener, functions) => {
         updateButton.style.top = canvas.height-buttonSize-20+'px'
         updateButton.style.border = 'none'
         updateButton.style.borderRadius = '8px'
-        updateButton.style.backgroundColor = 'rgb(20, 0, 10)'
-        updateButton.style.border = 'solid 2px rgb(150, 0, 50)'
-        updateButton.onmouseover = () => updateButtonImage.style.animation = 'rotate 0.5s ease forwards'
-        updateButton.onmouseout = () => updateButtonImage.style.animation = ''
+        updateButton.style.transition = 'all 0.5s'
+        if (!updateButton.style.backgroundColor) updateButton.style.backgroundColor = 'rgba(64,46,120,1)'
+        updateButton.style.border = 'none'
+        updateButton.onmouseover = () => {
+            updateButton.style.backgroundColor = 'rgba(208,57,125,1)'
+            updateButtonImage.style.animation = 'rotate 0.5s ease forwards'
+        }
+        updateButton.onmouseout = () => {
+            updateButton.style.backgroundColor = 'rgba(64,46,120,1)'
+            updateButtonImage.style.animation = ''
+        }
         updateButton.onclick = () => {
             game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })
             updateContainer.style.display = updateContainer.style.display == 'block' ? 'none' : 'block'
             logoElement.style.display = updateContainer.style.display == 'block' ? 'none' : 'block'
         }
         if (notUpdate) menuElement.appendChild(updateButton)
-
 
         if (notUpdate) screenElements.appendChild(menuElement)
     } catch (err) { console.error(err) }

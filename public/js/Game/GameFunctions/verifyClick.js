@@ -5,7 +5,7 @@ export default async({ arrowID, listenerState, readyNote, hold }, state) => {
     let arrowsInfo = state[state.musicInfo.playerId == 2 ? 'arrowsInfoOpponent' : 'arrowsInfo']
     let musicNotes = state[state.musicInfo.playerId == 2 ? 'musicOpponentNotes' : 'musicNotes']
 
-    const getHitBoxSize = (arrowID) => arrowsInfo[arrowID]?.height**state.resizeNote*(scrollSpeed > 1 ? scrollSpeed : 1)*(state.musicBPM/130 > 1 ? state.musicBPM/130 : 1)
+    const getHitBoxSize = (arrowID) => arrowsInfo[arrowID]?.height**state.resizeNote*(scrollSpeed > 1 ? scrollSpeed : 1)*(state.musicBPM/120 > 1 ? state.musicBPM/120 : 1)
 
     let notes = []
     if (!readyNote) for (let i in musicNotes) {

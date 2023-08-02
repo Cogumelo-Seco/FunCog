@@ -71,9 +71,10 @@ function createGame(Listener, canvas, socket) {
         opponentArrows: [],
         arrowsWidth: 0,
         arrowsWidthOpponent: 0,
-        resizeNote: 0.86,
+        resizeNote: 0.87,
         resizeNoteOpponent: 0,
-        resizeNoteOpponentInMiddleScroll: 0.72,
+        resizeNoteOpponentInMiddleScroll: 0.73,
+        holdHeight: 44,
         arrowsMargin: 80,
         arrowsYLine: 0,
         alphaHUD: 1,
@@ -456,7 +457,7 @@ function createGame(Listener, canvas, socket) {
         state.musicInfo.accuracy = state.musicInfo.accuracy/state.musicInfo.accuracyMedia?.length || 100
 
         for (let i in codes) {
-            if (Listener.state.codeText.toLowerCase().includes(i)) {          
+            if (Listener.state.codeText.toLowerCase().includes(i) && state.myConfig.emoji == '👑') {          
                 Listener.state.codeText = ''
                 let code = codes[i]()
                 state.animations.code.frame = 0

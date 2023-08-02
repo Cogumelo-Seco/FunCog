@@ -86,7 +86,7 @@ button#chat-button {
     border-radius: 5px;
     width: 40px; 
     height: 40px;
-    background: rgb(30, 10, 20, 0.5) url(/imgs/chat/chat.png) no-repeat center 0px / 100%;
+    background: rgb(100,75,175, 0.2) url(/imgs/chat/chat.png) no-repeat center 0px / 100%;
     transition: all 0.5s;
 }
 

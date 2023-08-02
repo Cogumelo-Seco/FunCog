@@ -235,9 +235,9 @@ export default async (canvas, state, stateListener, command) => {
         unreadMessageCounter.style.display = 'flex'
         unreadMessageCounter.innerText = unreadMessages
         unreadMessageCounter.style.backgroundColor = unreadMessagesAlert ? 'rgba(150, 0, 50)' : 'rgb(40, 40, 40)'
-        chatButton.style.background = 'rgb(30, 10, 20, 0.5) url(/imgs/chat/unreadChat.png) no-repeat center 0px / 100%'
+        chatButton.style.background = 'rgba(100,75,175,0.2) url(/imgs/chat/unreadChat.png) no-repeat center 0px / 100%'
     } else {
         unreadMessageCounter.style.display = 'none'
-        chatButton.style.background = 'rgb(30, 10, 20, 0.5) url(/imgs/chat/chat.png) no-repeat center 0px / 100%'
+        chatButton.style.background = 'rgba(100,75,175,0.2) url(/imgs/chat/chat.png) no-repeat center 0px / 100%'
     }
 }
