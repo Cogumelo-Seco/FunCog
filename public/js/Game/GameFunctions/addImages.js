@@ -8,7 +8,7 @@ export default async (state) => {
 
         { dir: 'BongoCat/BongoCat.png', animationConfigDir: 'BongoCat/BongoCat.json' },
         
-        /* ---- */
+        /* ---- 
 
         { dir: 'imgs/cursor.png' },
         { dir: 'imgs/cursor-hover.png' },
@@ -33,12 +33,12 @@ export default async (state) => {
         { dir: 'Arrows/Arrows.png', animationConfigDir: 'Arrows/Arrows.json' },
         { dir: 'Arrows/splash.png', animationConfigDir: 'Arrows/splash.json' },
 
-        /* ---- */
+        /* ---- 
 
         { dir: 'icons/icon-bf.png' },
         { dir: 'icons/icon-bf-red.png' },
         { dir: 'icons/icon-face.png' },
-        { dir: 'icons/BongoCat.png' },
+        { dir: 'icons/BongoCat.png' },*/
     ]
     
     return state.images.length

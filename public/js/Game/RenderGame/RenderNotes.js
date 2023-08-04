@@ -61,7 +61,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
                             
                             ctx.restore()
                         } else {
-                            ctx.drawImage(arrowImage, holdImagePos.x, holdImagePos.y, holdImagePos.width, game.state.holdHeight, holdX, holdY, holdImagePos.width**resizeNote, game.state.holdHeight**resizeNote+4)
+                            ctx.drawImage(arrowImage, holdImagePos.x, holdImagePos.y, holdImagePos.width, game.state.holdHeight, holdX, holdY, holdImagePos.width**resizeNote, game.state.holdHeight**resizeNote+2)
                         }
                     }
                 }
@@ -138,7 +138,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
                             
                             ctx.restore()
                         } else {
-                            ctx.drawImage(arrowImage, holdImagePos.x, holdImagePos.y, holdImagePos.width, game.state.holdHeight, holdX, holdY-2, holdImagePos.width**resizeNoteOpponent, game.state.holdHeight**resizeNoteOpponent+4)
+                            ctx.drawImage(arrowImage, holdImagePos.x, holdImagePos.y, holdImagePos.width, game.state.holdHeight, holdX, holdY-2, holdImagePos.width**resizeNoteOpponent, game.state.holdHeight**resizeNoteOpponent+2)
                         }
                     }
                 }
