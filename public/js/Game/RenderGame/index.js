@@ -31,7 +31,7 @@ export default async function renderGame(canvas, game, Listener) {
     if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration && !game.state.music.paused) game.state.musicEventListener('gameLoopFullFPSBackground', { listenerState: Listener.state }, game.state)
     //require('./RenderScreenGame').default(ctx, canvas, game, Listener)
 
-    const functions = require('./functions').default(ctx, canvas, game, Listener)
+    const functions = require('./functions').default(ctx, canvas, game.state, Listener)
     switch (game.state.gameStage) {
         case 'game':
             require('./RenderScreenGame').default(ctx, canvas, game, Listener, functions)

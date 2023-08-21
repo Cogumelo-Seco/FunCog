@@ -1,6 +1,23 @@
 export default async (state) => {
     state.musics = [
         {
+            name: 'Test',
+            menuColor: 'pink',
+            musics: [
+                {
+                    name: 'Test',
+                    menuColor: 'pink',
+                    difficulties: [ 1 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Test',
+                    toLoad: [
+                        { dir: 'Musics/musics/test/test/Inst.ogg' },
+                    ]
+                },
+            ]
+        },
+        {
             name: 'FNFDefault',
             menuColor: null,
             musics: [
@@ -1430,6 +1447,7 @@ export default async (state) => {
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
                     cutscene: 'Lullaby/Monochrome.mp4',
+                    initialImage: 'imgs/VSLullaby/unownAlphabet.png',
                     backgroundImage: 'backgrounds/monochrome.png',
                     mod: 'VSLullaby',
                     toLoad: [
@@ -1454,6 +1472,7 @@ export default async (state) => {
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
+                    initialImage: 'imgs/VSLullaby/unownAlphabet.png',
                     backgroundImage: 'backgrounds/monochrome.png',
                     mod: 'VSLullaby',
                     toLoad: [

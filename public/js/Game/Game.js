@@ -228,6 +228,7 @@ function createGame(Listener, canvas, socket) {
     const calculateRating = (command) => require('./GameFunctions/calculateRating').default(command, state)
     const smallFunctions = require('./GameFunctions/smallFunctions').default(state, Listener, socket)
     const codes = require('./GameFunctions/codes').default(state)
+    state.Listener = Listener
     state.smallFunctions = smallFunctions
     state.calculateRating = calculateRating
     state.playSong = playSong

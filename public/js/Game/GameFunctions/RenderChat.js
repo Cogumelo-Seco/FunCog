@@ -1,6 +1,7 @@
 export default async (canvas, state, stateListener, command) => {
     if ([ 'loading', 'login' ].includes(state.gameStage) || !state.myConfig.logged) return
 
+    const functions = require('../RenderGame/functions').default(canvas.getContext('2d'), canvas, state, state.Listener)
     const characterLimitWarning = document.getElementById('characterLimitWarning')
     const messageBoxContent = document.getElementById('message-box-content')
     const chatContent = document.getElementById('chat-content')
@@ -161,7 +162,7 @@ export default async (canvas, state, stateListener, command) => {
 
                 let contentElement = document.createElement('span')
                 //contentElement.id = 'Content'
-                contentElement.innerHTML = message.content
+                contentElement.innerHTML = await functions.fillTextHTML(message.content, `${message.colorContent?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp+(Number(message.colorContent.split('-')[1]) || 0)}, 100%, 50%)` : message.colorContent || 'white'}`)
                 contentElementContaner.appendChild(contentElement)
 
                 let messagePropsElement = document.createElement('span')

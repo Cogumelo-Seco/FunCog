@@ -134,7 +134,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             let optionElement = document.getElementById(i+'-menuOptions') || document.createElement('button')
             optionElement.className = 'menuButton'
             optionElement.id = i+'-menuOptions'
-            optionElement.innerHTML = `<span class="skew-fix">${game.state.selectMenuOption.menuOptions[i]}</span>`
+            if (notUpdate) optionElement.innerHTML = `<span class="skew-fix">${await functions.fillTextHTML(game.state.selectMenuOption.menuOptions[i])}</span>`
             optionElement.style.width = canvas.width*0.30+'px'
             optionElement.style.height = 50+'px'
             optionElement.style.position = 'absolute'
@@ -150,11 +150,13 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
             if (Number(game.state.selectMenuOption.menuSelect) == Number(i)) optionElement.style.animation = 'optionButtonOver 0.2s ease forwards'
             else optionElement.style.animation = 'optionButtonOut 0.2s ease forwards'
+            let optionButtonElements = optionElement.getElementsByTagName('span')
             optionElement.onclick = () => {
                 game.state.selectMenuOption.menuSelect = Number(i)
                 Listener.handleKeys({ event: { code: 'Enter' }, on: true })
                 setTimeout(() => game.state.selectMenuOption.menuSelect = 0, 200)
             }
+            for (let element of optionButtonElements) element.onclick = () => optionElement.onclick()
 
             if (notUpdate) menuElement.appendChild(optionElement)
             Y += (canvas.height-(canvas.height*0.25*2))/(game.state.selectMenuOption.menuOptions.length-1)

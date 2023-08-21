@@ -39,7 +39,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             alpha: (game.state.animations.code.frame/game.state.animations.code.endFrame) > 0.5 ? 1-((game.state.animations.code.frame/game.state.animations.code.endFrame)-0.5)/0.5 : game.state.alphaHUD,
             style: `rgb(255, 255, 255)`,
             font: 'bold 11px Arial',
-            text: `Code Detected - &b${game.state.animations.code.on ? 'ON' : 'OFF'}`,
+            text: `Code Detected - §b${game.state.animations.code.on ? 'ON' : 'OFF'}`,
             x: 5,
             y: 60,
             add: 2

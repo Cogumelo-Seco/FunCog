@@ -165,7 +165,7 @@ export default function createListener(socket) {
             time: +new Date(),
             lastClickTime: lastClick?.time || null
         }
-
+        
         /*if (on && keyPressed == 'KeyZ') {
             state.game.state.rainbowColor += 1
             console.log(state.game.state.rainbowColor)

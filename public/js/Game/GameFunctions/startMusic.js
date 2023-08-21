@@ -1,5 +1,6 @@
 export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPlayer, socket }, state) => {
     //try {
+        let overlayImageElement = document.getElementById('overlayImage')
         let videoElement = document.getElementById('gameVideo')
         let videoElementBackground = document.getElementById('gameVideoBackground')
 
@@ -111,6 +112,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
                 if (state.musicNotes.length+state.musicOpponentNotes.length >= musicNotesTotal) {
                     if (musicInfo.cutscene) videoElement.src = `https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/${musicInfo.cutscene}`
                     if (musicInfo.backgroundVideo) videoElementBackground.src = `https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/${musicInfo.backgroundVideo}`
+                    if (musicInfo.initialImage) overlayImageElement.src = `https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${musicInfo.initialImage}`
                     load(musicInfo.toLoad[0])
                 }
             }
@@ -152,7 +154,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
                         sound.analyser = sound.audioCtx.createAnalyser()
                         sound.audioSource.connect(sound.analyser)
                         sound.analyser.connect(sound.audioCtx.destination)
-                        sound.analyser.fftSize = 2048  //2048
+                        sound.analyser.fftSize = 1024/2  //2048
                         sound.analyser.minDecibels = -80  //-100
                         sound.analyser.maxDecibels = -25  //-30
                         sound.analyser.smoothingTimeConstant = 0.8  //0.8
@@ -234,7 +236,24 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
             state.music = state.sounds[`Musics/musics/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
             state.musicVoice = state.sounds[`Musics/musics/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
 
-            if (musicInfo.cutscene && !state.online) {
+            console.log(musicInfo.initialImage)
+            if (musicInfo.initialImage && !state.online) {
+                overlayImageElement.style.display = 'block'
+                let loop = () => {
+                    let click = false
+                    for (let i in listenerState.keys) if (listenerState.keys[i].clicked && listenerState.keys[i].key) click = true
+                    if (!click) setTimeout(loop, 0)
+                    else {
+                        overlayImageElement.style.display = 'none'
+                        if (musicInfo.cutscene) {
+                            videoElement.style.display = 'block'
+                            videoElement.onended = () => startMusic()
+                            videoElement.play()
+                        } else startMusic()
+                    }
+                }
+                loop()
+            } else if (musicInfo.cutscene && !state.online) {
                 videoElement.style.display = 'block'
                 videoElement.onended = () => startMusic()
                 videoElement.play()

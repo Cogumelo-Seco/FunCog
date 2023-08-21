@@ -13,7 +13,7 @@ function App({ Component, pageProps }) {
     return (
         <>
             <Head>
-                <link rel="shortcut icon" href="/imgs/favicon.ico" />
+                <link rel="shortcut icon" href="https://alpha-site.vercel.app/imgs/Cogu-avatar/Default.png" />
                 <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#000000" />
             </Head>
             <head>

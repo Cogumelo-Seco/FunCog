@@ -1,4 +1,4 @@
-export default (ctx, canvas, game, Listener) => {
+export default (ctx, canvas, state, Listener) => {
     let functions =  {
         getTextWidth: (text, font) => {
             let data = functions.textDataConvert(text)
@@ -13,79 +13,79 @@ export default (ctx, canvas, game, Listener) => {
         },
         textDataConvert: (text, style) => {
             let data = []
-            if (text[0] != '&') data.push({ txt: text.split('&')[0], color: style || 'white', bold: false, italic: false })
+            if (text[0] != '§') data.push({ txt: text.split('§')[0], color: style || 'white', bold: false, italic: false })
             let lastStringData = {}
-            text.replace(/&[a-z0-9]([^&]*)/g, (match, txt) => {
+            text.replace(/§[a-z0-9]([^§]*)/g, (match, txt) => {
                 let color = style || 'white'
                 let modifierType = match.replace(txt, '')
 
                 switch (modifierType) {
-                    case '&0':
+                    case '§0':
                         color = '#000000'
                         break
-                    case '&1':
+                    case '§1':
                         color = '#0000aa'
                         break
-                    case '&2':
+                    case '§2':
                         color = '#00aa00'
                         break
-                    case '&3':
+                    case '§3':
                         color = '#00aaaa'
                         break
-                    case '&4':
+                    case '§4':
                         color = '#aa0000'
                         break
-                    case '&5':
+                    case '§5':
                         color = '#aa00aa'
                         break
-                    case '&6':
+                    case '§6':
                         color = '#ffaa00'
                         break
-                    case '&7':
+                    case '§7':
                         color = '#aaaaaa'
                         break
-                    case '&8':
+                    case '§8':
                         color = '#555555'
                         break
-                    case '&9':
+                    case '§9':
                         color = '#5555ff'
                         break
-                    case '&a':
+                    case '§a':
                         color = '#55ff55'
                         break
-                    case '&b':
+                    case '§b':
                         color = '#55ffff'
                         break
-                    case '&c':
+                    case '§c':
                         color = '#ff5555'
                         break
-                    case '&d':
+                    case '§d':
                         color = '#ff55ff'
                         break
-                    case '&e':
+                    case '§e':
                         color = '#ffff55'
                         break
-                    case '&f':
+                    case '§f':
                         color = '#ffffff'
                         break
-                    case '&g':
-                        color = style || '#ddd605'
+                    case '§g':
+                        color = style || '#ffffff'
                         break
                 }
 
-                let stringData = { txt, color, bold: true, italic: false }
+                let stringData = { txt, color, bold: false, italic: false }
 
-                if (modifierType == '&r') {
+                if (modifierType == '§r') {
                     stringData.italic = false
                     stringData.bold = false
                     stringData.color = style || 'white'
                 }
-                if (modifierType == '&l') {
+                if (modifierType == '§l') {
                     stringData.bold = true
                     stringData.color = lastStringData.color
                     stringData.italic = lastStringData.italic
                 }
-                if (modifierType == '&o') {
+                if (modifierType == '§o') {
                     stringData.italic = true
                     stringData.color = lastStringData.color
                     stringData.bold = lastStringData.bold
@@ -96,11 +96,20 @@ export default (ctx, canvas, game, Listener) => {
             })
             return data
         },
-        fillText: async ({ alpha, style, style2, text, x, y, add, font }) => {
+        fillTextHTML: async (text, color) => {
+            let data = functions.textDataConvert(text, color)
+            let newText = ''
+            for (let i in data) {
+                newText += `<span style="color: ${data[i].color || color}; font-weight: ${data[i].bold ? 'bold' : 'normal'}; font-style: ${data[i].italic ? 'italic' : 'normal'}">${data[i].txt} </span>`
+            }
+
+            return newText
+        },
+        fillText: async ({ alpha, style, style2, text, x, y, add, font }, notCanvas) => {
             let data = functions.textDataConvert(text, style)
 
             let oldAlpha = Number(String(ctx.globalAlpha))
-            ctx.globalAlpha = isNaN(Number(alpha)) ? game.state.alphaHUD : alpha
+            ctx.globalAlpha = isNaN(Number(alpha)) ? state.alphaHUD : alpha
             for (let i in data) {
                 if (font) ctx.font = (data[i].bold ? 'bold ' : '')+(data[i].italic ? 'italic ' : '')+font
                 else ctx.font = font
@@ -127,7 +136,7 @@ export default (ctx, canvas, game, Listener) => {
                 x += ctx.measureText(txt+' ').width
             }
             /*let oldAlpha = Number(String(ctx.globalAlpha))
-            ctx.globalAlpha = isNaN(Number(alpha)) ? game.state.alphaHUD : alpha
+            ctx.globalAlpha = isNaN(Number(alpha)) ? state.alphaHUD : alpha
             ctx.font = font
             if (add) {
                 ctx.fillStyle = style2 || 'black'

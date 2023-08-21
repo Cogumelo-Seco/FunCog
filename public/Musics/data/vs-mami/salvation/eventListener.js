@@ -60,7 +60,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 
 			if (beat%15 == 0 && variables.oldBeat != beat && variables.holyPower > 25) variables.holyPower -= 0.5
 
-			state.musicInfo.additionalScreenInfo = `&f&lHOLY POWER: &r&c${variables.holyPower}%`
+			state.musicInfo.additionalScreenInfo = `§f§lHOLY POWER: §r§c${variables.holyPower}%`
 
 			let image = state.images['imgs/Mami/pyramid.png']?.image
 			if (image && !state.musicInfo.popups['pyramid']) {

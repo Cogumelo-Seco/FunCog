@@ -37,9 +37,10 @@ img#gameBackground {
 
 img#overlayImage {
     position: fixed;
-    left: 0;
+    left: 50%;
     top: 0;
-    width: 100%;
+    transform: translateX(-50%);
+    /*width: 100%;*/
     height: 100%;
     display: none;
 }
@@ -298,6 +299,7 @@ div#message-box .messageBoxText {
 
 .bold {
     font-weight: bold;
+    font-weight: unset;
 }
 .italic {
     font-style: italic;

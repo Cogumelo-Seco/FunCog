@@ -10,7 +10,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     ctx.globalAlpha = game.state.alphaHUD
     ctx.font = `bold 13px Arial`
 
-    let musicInfoTxt = `&f&lSCORE: ${game.state.musicInfo.score < 0 ? '&c' : '&6'}&o${game.state.musicInfo.score} &3&l| &f&lMISSES: ${game.state.musicInfo.misses >= 100 ? '&c' : '&6'}&o${game.state.musicInfo.misses || 0}${game.state.musicInfo.misses <= 0 ? ' (FC)' : ''} &3&l| &f&lACCURANCY: &6&o${game.state.musicInfo.accuracy?.toFixed(2)}%`
+    let musicInfoTxt = `§f§lSCORE: ${game.state.musicInfo.score < 0 ? '§c' : '§6'}§o${game.state.musicInfo.score} §3§l| §f§lMISSES: ${game.state.musicInfo.misses >= 100 ? '§c' : '§6'}§o${game.state.musicInfo.misses || 0}${game.state.musicInfo.misses <= 0 ? ' (FC)' : ''} §3§l| §f§0lACCURANCY: §6§o${game.state.musicInfo.accuracy?.toFixed(2)}%`
 
     ctx.font = `13px Arial`
     functions.fillText({
@@ -33,7 +33,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     }
     
     functions.fillText({
-        text: `&f&lDifficulty: &r&c${game.state.musicInfo.difficulty.name}`,
+        text: `§f§lDifficulty: §r§c${game.state.musicInfo.difficulty.name}`,
         font: `10px Arial`,
         x: 2,
         y: canvas.height-5,
@@ -41,7 +41,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     })
 
     functions.fillText({
-        text: `&7ScrollSpeed: &r&7${game.state.smallFunctions.getConfig('ScrollSpeed')}`,
+        text: `§7ScrollSpeed: §r§7${game.state.smallFunctions.getConfig('ScrollSpeed')}`,
         font: `10px Arial`,
         x: 2,
         y: canvas.height-15
@@ -49,13 +49,13 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
     if (game.state.debug) {
         functions.fillText({
-            text: `&7Beat: &r&7${game.state.musicBeat}`,
+            text: `§7Beat: §r§7${game.state.musicBeat}`,
             font: `10px Arial`,
             x: 2,
             y: canvas.height-25
         })
         functions.fillText({
-            text: `&7Step: &r&7${game.state.musicStep}`,
+            text: `§7Step: §r§7${game.state.musicStep}`,
             font: `10px Arial`,
             x: 2,
             y: canvas.height-35
