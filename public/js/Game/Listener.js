@@ -320,6 +320,7 @@ export default function createListener(socket) {
 
             if (state.game.state.gameStage == 'selectMusic' && on) {
                 keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
+                let filtredMusics = state.game.state.musics.filter(m => !m.dev || game.state.myConfig.emoji == '👑')
                 let selectMusicMenu = state.game.state.selectMusicMenu
 
                 if (state.game.state.gameStageTime != 0 && state.game.state.gameStageTime+100 <= +new Date()) switch (keyPressed) {
@@ -335,10 +336,10 @@ export default function createListener(socket) {
                         switch(selectMusicMenu.currentSelection) {
                             case 0:
                                 selectMusicMenu.musicSelect = 0
-                                selectMusicMenu.modSelect = selectMusicMenu.modSelect >= state.game.state.musics.length-1 ? 0 : selectMusicMenu.modSelect+1
+                                selectMusicMenu.modSelect = selectMusicMenu.modSelect >= filtredMusics.length-1 ? 0 : selectMusicMenu.modSelect+1
                                 break
                             case 1:
-                                selectMusicMenu.musicSelect = selectMusicMenu.musicSelect >= state.game.state.musics[selectMusicMenu.modSelect].musics.length-1 ? 0 : selectMusicMenu.musicSelect+1
+                                selectMusicMenu.musicSelect = selectMusicMenu.musicSelect >= filtredMusics[selectMusicMenu.modSelect].musics.length-1 ? 0 : selectMusicMenu.musicSelect+1
                                 break
                             case 2:
                                 selectMusicMenu.difficultySelected += 1
@@ -350,10 +351,10 @@ export default function createListener(socket) {
                         switch(selectMusicMenu.currentSelection) {
                             case 0:
                                 selectMusicMenu.musicSelect = 0
-                                selectMusicMenu.modSelect = selectMusicMenu.modSelect <= 0 ? state.game.state.musics.length-1 : selectMusicMenu.modSelect-1
+                                selectMusicMenu.modSelect = selectMusicMenu.modSelect <= 0 ? filtredMusics.length-1 : selectMusicMenu.modSelect-1
                                 break
                             case 1:
-                                selectMusicMenu.musicSelect = selectMusicMenu.musicSelect <= 0 ? state.game.state.musics[selectMusicMenu.modSelect].musics.length-1 : selectMusicMenu.musicSelect-1
+                                selectMusicMenu.musicSelect = selectMusicMenu.musicSelect <= 0 ? filtredMusics[selectMusicMenu.modSelect].musics.length-1 : selectMusicMenu.musicSelect-1
                                 break
                             case 2:
                                 selectMusicMenu.difficultySelected -= 1
@@ -362,8 +363,8 @@ export default function createListener(socket) {
                         state.game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })
                         break
                     case keys.KeyEnter:
-                        let modInfo = state.game.state.musics[state.game.state.selectMusicMenu.modSelect]
-                        let musicInfo = state.game.state.musics[state.game.state.selectMusicMenu.modSelect].musics[state.game.state.selectMusicMenu.musicSelect]
+                        let modInfo = filtredMusics[state.game.state.selectMusicMenu.modSelect]
+                        let musicInfo = filtredMusics[state.game.state.selectMusicMenu.modSelect].musics[state.game.state.selectMusicMenu.musicSelect]
 
                         if (modInfo && musicInfo && state.game.state.online) {
                             state.musicMenu?.pause()
@@ -397,7 +398,7 @@ export default function createListener(socket) {
                         break
                 }
             }
-
+/*
             if (state.game.state.gameStage == 'onlineServerList' && on) {
                 keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
 
@@ -456,7 +457,7 @@ export default function createListener(socket) {
                         }
                         break
                 }
-            }
+            }*/
 
             if (state.game.state.gameStage == 'settings' && on) {
                 keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
