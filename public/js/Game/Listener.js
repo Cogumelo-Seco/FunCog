@@ -320,7 +320,7 @@ export default function createListener(socket) {
 
             if (state.game.state.gameStage == 'selectMusic' && on) {
                 keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
-                let filtredMusics = state.game.state.musics.filter(m => !m.dev || game.state.myConfig.emoji == '👑')
+                let filtredMusics = state.game.state.musics.filter(m => !m.dev || state.game.state.myConfig.emoji == '👑')
                 let selectMusicMenu = state.game.state.selectMusicMenu
 
                 if (state.game.state.gameStageTime != 0 && state.game.state.gameStageTime+100 <= +new Date()) switch (keyPressed) {
