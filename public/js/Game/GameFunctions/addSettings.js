@@ -558,6 +558,7 @@ export default async (state) => {
             name: 'Bongo Cat response time',
             id: 'botResponseTime',
             type: 'Number',
+            displayFormat: '~##content##ms',
             add: 5,
             max: 200,
             min: 0,
@@ -579,6 +580,7 @@ export default async (state) => {
             name: 'Space Between Arrows',
             id: 'SpaceBetweenArrows',
             type: 'Number',
+            displayFormat: '##content##px',
             add: 1,
             max: 50,
             min: 0,
@@ -653,6 +655,30 @@ export default async (state) => {
             id: 'VSync',
             type: 'Boolean',
             content: true
+        },
+        {
+            name: 'Audio',
+            type: 'ConfigTitle'
+        },
+        {
+            name: 'Music Volume',
+            id: 'musicVol',
+            type: 'Number',
+            displayFormat: '##content##%',
+            add: 10,
+            max: 100,
+            min: 0,
+            content: 50
+        },
+        {
+            name: 'Effects Volume',
+            id: 'effectsVol',
+            type: 'Number',
+            displayFormat: '##content##%',
+            add: 10,
+            max: 100,
+            min: 0,
+            content: 100
         },
         {
             name: 'Game',

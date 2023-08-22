@@ -1,6 +1,6 @@
 export default async (type, { noteClickAuthor, note, click, listenerState, difficulty, events, hold }, state) => {
     let shoot = () => {
-		state.playSong('Sounds/Mami/MAMI_shoot.ogg', { newSong: true, volume: 0.7 })
+		state.playSong('Sounds/Mami/MAMI_shoot.ogg', { newSong: true, volume: 0.3 })
 		let current = 0
 		let loop = () => {
 			if (current >= 6) {

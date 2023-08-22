@@ -13,9 +13,12 @@ export default (type, command, state) => {
         state.musicMenu = song
     }
 
+    let volume = isNaN(Number(command?.volume)) ? 1 : Number(command?.volume)
+    volume = volume*(state.smallFunctions.getConfig('effectsVol')/100) > 100 ? 100 : volume*(state.smallFunctions.getConfig('effectsVol')/100)
+
     song.pause()
     song.currentTime = 0
     song.loop = command?.loop ? true : false
-    song.volume = isNaN(Number(command?.volume)) ? 1 : Number(command?.volume)
+    song.volume = volume
     song.play()
 }

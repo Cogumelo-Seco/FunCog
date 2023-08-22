@@ -247,6 +247,14 @@ const Game = (props) => {
                         //if (option) defaultSettingsOptions[i].content = option.content
                         //else reset = true
                         if (!option) reset = true
+                        else {
+                            playerSettingsOptions[i].name = defaultSettingsOptions[i].name
+                            playerSettingsOptions[i].type = defaultSettingsOptions[i].type
+                            playerSettingsOptions[i].displayFormat = defaultSettingsOptions[i].displayFormat
+                            playerSettingsOptions[i].add = defaultSettingsOptions[i].add
+                            playerSettingsOptions[i].max = defaultSettingsOptions[i].max
+                            playerSettingsOptions[i].min = defaultSettingsOptions[i].min
+                        }
                         /*if (
                             playerSettingsOptions[i].name == defaultSettingsOptions[i].name && 
                             playerSettingsOptions[i].add == defaultSettingsOptions[i].add &&

@@ -273,7 +273,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
                             state.music?.play().catch(() => setTimeout(play, 500))
                             state.musicVoice?.play()
     
-                            state.music.volume = 0.5
+                            state.music.volume = state.smallFunctions.getConfig('musicVol')/100
                             state.music.playbackRate = state.modifiers.speed
                         }
                         play()
@@ -281,7 +281,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
                         if (state.musicVoice) {
                             state.musicVoice.currentTime = state.music?.currentTime || 0
                             state.musicVoice.playbackRate = state.modifiers.speed
-                            state.musicVoice.volume = 0.5
+                            state.musicVoice.volume = state.smallFunctions.getConfig('musicVol')/100
                         }
                         if (musicInfo.backgroundVideo) {
                             state.videoBackground.style.display = 'block'

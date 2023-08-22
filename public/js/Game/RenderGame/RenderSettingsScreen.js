@@ -67,7 +67,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         ctx.fillStyle = config.menuColor || 'white'
         ctx.font = `bold 50px Arial`
         if (config.content != undefined) {
-            let configContent = config.content
+            let configContent = config.displayFormat ? config.displayFormat.replace(/##content##/g, config.content) : config.content
 
             if (settingsSelect == i && config.type == 'Number') {
                 ctx.fillText('< '+configContent.toString()+' >', canvas.width-ctx.measureText('< '+configContent.toString()+' >').width-X, Y);
