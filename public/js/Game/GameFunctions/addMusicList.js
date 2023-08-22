@@ -1,6 +1,7 @@
 export default async (state) => {
     state.musics = [
         {
+            dev: true,
             name: 'Test',
             menuColor: 'pink',
             musics: [

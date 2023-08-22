@@ -10,7 +10,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     ctx.globalAlpha = game.state.alphaHUD
     ctx.font = `bold 13px Arial`
 
-    let musicInfoTxt = `§f§lSCORE: ${game.state.musicInfo.score < 0 ? '§c' : '§6'}§o${game.state.musicInfo.score} §3§l| §f§lMISSES: ${game.state.musicInfo.misses >= 100 ? '§c' : '§6'}§o${game.state.musicInfo.misses || 0}${game.state.musicInfo.misses <= 0 ? ' (FC)' : ''} §3§l| §f§0lACCURANCY: §6§o${game.state.musicInfo.accuracy?.toFixed(2)}%`
+    let musicInfoTxt = `§f§lSCORE: ${game.state.musicInfo.score < 0 ? '§c' : '§6'}§o${game.state.musicInfo.score} §3§l| §f§lMISSES: ${game.state.musicInfo.misses >= 100 ? '§c' : '§6'}§o${game.state.musicInfo.misses || 0}${game.state.musicInfo.misses <= 0 ? ' (FC)' : ''} §3§l| §f§lACCURANCY: §6§o${game.state.musicInfo.accuracy?.toFixed(2)}%`
 
     ctx.font = `13px Arial`
     functions.fillText({
