@@ -665,7 +665,7 @@ export default async (state) => {
             id: 'musicVol',
             type: 'Number',
             displayFormat: '##content##%',
-            add: 10,
+            add: 5,
             max: 100,
             min: 0,
             content: 50
@@ -675,7 +675,7 @@ export default async (state) => {
             id: 'effectsVol',
             type: 'Number',
             displayFormat: '##content##%',
-            add: 10,
+            add: 5,
             max: 100,
             min: 0,
             content: 100
