@@ -202,6 +202,9 @@ export default async (ctx, canvas, game, Listener, functions) => {
             <div id="updateLogTitle">Atualizações</div>
             
             <div id="updateContent">
+                <div id="updateDate">21/ago/2023</div>
+                <div id="updateWarning" class="updateContentText">- Dificuldade MANIA renomeada para BABY</div>
+                <div id="updateUpdate" class="updateContentText">- Placas da "Expurgation" novamente!!</div>
                 <div id="updateDate">01/ago/2023</div>
                 <div id="updateUpdate" class="updateContentText">- Mod "VS Mami" Terminado</div>
                 <div id="updateUpdate" class="updateContentText">- Aparência do menu atualizado</div>

@@ -167,8 +167,12 @@ const Game = (props) => {
                     discordButton.onclick = (event) => {
                         socket.emit(login ? 'login' : 'register', 'discord')
 
-                        window.open(ServerLink+'/api/auth', "discord-auth-window", `width=400px,height=700px,top=30px,left=20pxstatus=yes,scrollbars=yes,resizable=yes`)
+                        //window.open(ServerLink+'/api/auth', "discord-auth-window", `width=400px,height=700px,top=30px,left=20pxstatus=yes,scrollbars=yes,resizable=yes`)
                     }
+
+                    socket.on('discordLogin', (loginID) => {
+                        window.open(ServerLink+'/api/auth'+loginID, "discord-auth-window", `width=400px,height=700px,top=30px,left=20pxstatus=yes,scrollbars=yes,resizable=yes`)
+                    })
 
                     username.value = username.value.slice(0, 20).replace(/[^A-Za-z0-9\-\_]/g, '')
                     

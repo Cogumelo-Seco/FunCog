@@ -74,13 +74,13 @@ export default function chat(state, socket) {
 
     function send() {
         let content = messageBoxContent.innerHTML
-        
+        console.log(state.game.state.myConfig)
         if (content.split(' ')[0] == '/s') state.game.state.gameStage = content.split(' ')[1]
         else socket.emit('message', {
             author: {
                 name: state.game.state.myConfig.author.name || socket.id.slice(0, 20),
                 avatar: state.game.state.myConfig.author.avatar || null,
-                id: state.game.state.myConfig.author.playerID || socket.id
+                playerID: state.game.state.myConfig.author.playerID || socket.id
             },
             colorName: state.game.state.myConfig.colorName || null,
             colorContent: state.game.state.myConfig.colorContent || null,

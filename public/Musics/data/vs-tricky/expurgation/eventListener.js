@@ -27,7 +27,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 
             let variables = state.musicInfo.variables
             let step = state.musicStep
-/*
+
             for (let i in variables.signs) {
                 let resize = 0.6
                 let signInfo = variables.signs[i]
@@ -84,7 +84,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
                         }
                         break
                 }
-            }*/
+            }
 
             function doStopSign(sign, fuck, load) {
                 variables.currentSignId += 1

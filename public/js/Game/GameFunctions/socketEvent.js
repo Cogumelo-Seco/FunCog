@@ -5,7 +5,7 @@ export default function codesFunction(state, stateListener, socket) {
 
     if (state.myConfig.logged) socket.on('listServers', (listServers) => {
         state.selectServerOption.listServers = listServers
-        let server = listServers.find(s => s.id == state.serverId)
+        let server = listServers.find(s => s.serverID == state.serverID)
         if (server) state.serverInfo = server
         if (server && server.playerData2) {
             state.waiting = false
@@ -39,12 +39,12 @@ export default function codesFunction(state, stateListener, socket) {
         }
     })
 
-    socket.on('deleteMessage', (messageID) => {
-        const messageIndex = state.messages.findIndex(m => m.messageID == messageID)
-        const deletedMessage = state.messages.find(m => m.messageID == messageID)
+    socket.on('deleteMessage', (command) => {
+        const messageIndex = state.messages.findIndex(m => m.messageID == command.messageID && (m.author?.playerID == command.playerData.author.playerID || command.playerData.emoji == '👑'))
+        const deletedMessage = state.messages.find(m => m.messageID == command.messageID && (m.author?.playerID == command.playerData.author.playerID || command.playerData.emoji == '👑'))
         if (!isNaN(Number(messageIndex)) && deletedMessage) {
-            let messageElementContent = document.getElementById(messageID+'-Content')
-            let messageElementHeader = document.getElementById(messageID+'-Header')
+            let messageElementContent = document.getElementById(command.messageID+'-Content')
+            let messageElementHeader = document.getElementById(command.messageID+'-Header')
             if (messageElementContent) messageElementContent.remove()
             if (messageElementHeader) messageElementHeader.remove()
 
@@ -55,7 +55,7 @@ export default function codesFunction(state, stateListener, socket) {
             if (messageElementHeader.style.display == 'block') for (let i = messageIndex-1;i < state.messages.length;i++) {
                 let message = state.messages[i]
 
-                if (message?.author.id == deletedMessage?.author.id) {
+                if (message?.author.playerID == deletedMessage?.author.playerID) {
                     let messageElementHeader = document.getElementById(message.messageID+'-Header')
                     messageElementHeader.style.display = 'block'
                     break

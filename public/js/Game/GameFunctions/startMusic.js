@@ -236,7 +236,6 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
             state.music = state.sounds[`Musics/musics/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
             state.musicVoice = state.sounds[`Musics/musics/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
 
-            console.log(musicInfo.initialImage)
             if (musicInfo.initialImage && !state.online) {
                 overlayImageElement.style.display = 'block'
                 let loop = () => {
@@ -274,6 +273,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
                             state.music?.play().catch(() => setTimeout(play, 500))
                             state.musicVoice?.play()
     
+                            state.music.volume = 0.5
                             state.music.playbackRate = state.modifiers.speed
                         }
                         play()
@@ -281,6 +281,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
                         if (state.musicVoice) {
                             state.musicVoice.currentTime = state.music?.currentTime || 0
                             state.musicVoice.playbackRate = state.modifiers.speed
+                            state.musicVoice.volume = 0.5
                         }
                         if (musicInfo.backgroundVideo) {
                             state.videoBackground.style.display = 'block'
@@ -326,7 +327,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
             if (note[1] > 3) {
                 note[2] = 0
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 errorWhenNotClicking = false
                 type = 'hitKillNote'
             } 
@@ -335,7 +336,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
             if (note[1] > 3) {
                 note[2] = 0
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 errorWhenNotClicking = false
                 type = 'fireNote'
             }
@@ -343,7 +344,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
         if (musicInfo.mod == 'SuicideMouse') {
             if (note[3] && note[1] != -1) {
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 errorWhenNotClicking = false
                 type = 'hurtNoteSuicidemouse'
             }
@@ -360,12 +361,12 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
         if (musicInfo.mod == 'SonicEXE') {
             if (note[3] == 2) {
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 //errorWhenNotClicking = false
                 type = 'sonicEXEStaticNote'
             } else if (note[3]) {
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 errorWhenNotClicking = false
                 type = 'sonicEXEphantomNote'
             }
@@ -373,51 +374,51 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
 
         if (musicInfo.mod == 'LateNightCityTale') {
             if (note[3] == 'black') {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 errorWhenNotClicking = false
                 type = 'LNCTBlack'
             }
             if (note[3] == 'white') {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 type = 'LNCTWhite'
             }
             if (note[3] == 'red') {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 type = 'LNCTRed'
             }
         }
         if (musicInfo.mod == 'WitheredFreddy') {
             if (note[3] == 3) {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 errorWhenNotClicking = false
                 type = 'WitheredFreddyDanger'
             }
             if (note[3] == 4) {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 errorWhenNotClicking = false
                 type = 'WitheredFreddyCharge'
             }
             if (note[3] == 2) {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 errorWhenNotClicking = false
                 type = 'WitheredFreddyRemnant'
             }
             if (note[3] == 5) {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 errorWhenNotClicking = false
                 type = 'WitheredFreddyLoose'
             }
         }
         if (musicInfo.mod == 'VSChira') {
             if (note[3] == 'chiraNote') {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 type = 'VSChiraMarsh'
             }
         }
 
         if (name == 'death-toll') {
             if (note[1] == 8) {
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 arrowID = 4
                 type = 'Bronzong'
                 mustHitSection = true       
@@ -434,7 +435,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
         if (musicInfo.mod == 'VSMami') {
             if (note[1] >= 8) {
                 arrowID = note[1]%4
-                disabled = difficulty.name == 'Mania' ? true : false
+                disabled = difficulty.id == 3 ? true : false
                 errorWhenNotClicking = true
                 mustHitSection = true
                 type = 'holynote'

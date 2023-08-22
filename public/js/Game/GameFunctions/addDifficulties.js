@@ -23,9 +23,9 @@ export default async (state) => {
         },
         {
             id: 3,
-            name: 'Mania',
+            name: 'BABY',
             fileNameDifficulty: 'hard',
-            color: 'rgb(255, 43, 234)',
+            color: '#4287f5',
             lifeDrain: 0.8
         },
         {

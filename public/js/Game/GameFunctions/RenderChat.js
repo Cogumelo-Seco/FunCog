@@ -123,13 +123,13 @@ export default async (canvas, state, stateListener, command) => {
         if (message.loadTo == 'all' || message.loadTo == state.myConfig.author.playerID) {
             if (chat.style.display == 'block') {
                 if (command == 'newMessage' && chatContent.scrollTop < chatContent.scrollHeight-500) autoScroll = false
-                state.serverPlayers[message.author.id] = message.author
+                state.serverPlayers[message.author.playerID] = message.author
 
                 let headerElement = document.createElement('p')
                 headerElement.className = 'Header'
                 headerElement.id = message.messageID+'-Header'
                 headerElement.style = `color: ${message.colorName?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp+(Number(message.colorName.split('-')[1]) || 0)}, 100%, 50%)` : message.colorName || 'rgb(0, 229, 255)'} ${message.nameAdditionalCSS ? ';'+message.nameAdditionalCSS : ''}`
-                headerElement.style.display = lastMessage && lastMessage.author.id == message.author.id && lastMessage.timestamp+120000 >= message.timestamp  ? 'none' : 'block'
+                headerElement.style.display = lastMessage && lastMessage.author.playerID == message.author.playerID && lastMessage.timestamp+120000 >= message.timestamp  ? 'none' : 'block'
 
                 let nameElement = document.createElement('span')
                 nameElement.id = 'Name'
@@ -149,8 +149,8 @@ export default async (canvas, state, stateListener, command) => {
                 chatContent.appendChild(headerElement)
 
                 nameElement.addEventListener('click', () => {
-                    if (message.author.id && !message.author.server) {
-                        metionPlayer(message.author.id)
+                    if (message.author.playerID && !message.author.server) {
+                        metionPlayer(message.author.playerID)
                     }
                 })
 
@@ -174,14 +174,14 @@ export default async (canvas, state, stateListener, command) => {
                 deleteMessageButton.id = 'deleteMessageButton'
                 deleteMessageButton.innerHTML = '<svg style="color: red; width: 100%; height: 100%" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"> <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" fill="red"></path> <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" fill="red"></path> </svg>'
                 deleteMessageButton.onclick = () => {
-                    if (message.author.id == state.myConfig.author.playerID) {
-                        state.socket.emit('deleteMessage', message.messageID)
+                    if (message.author.playerID == state.myConfig.author.playerID || state.myConfig.emoji == '👑') {
+                        state.socket.emit('deleteMessage', { messageID: message.messageID, playerData: state.myConfig })
                     }
                 }
                 messagePropsElement.appendChild(deleteMessageButton)
 
                 contentElementContaner.onmouseover = () => {
-                    if (message.author.id == state.myConfig.author.playerID) {
+                    if (message.author.playerID == state.myConfig.author.playerID || state.myConfig.emoji == '👑') {
                         messagePropsElement.style.display = 'block'
                     }
                 }

@@ -2033,7 +2033,7 @@ export default async (state) => {
                     mod: 'VSMami',
                     toLoad: [
                         { dir: 'imgs/Mami/pyramid.png' },
-                        { dir: 'Sounds/pop_up.ogg' },
+                        { dir: 'Sounds/Chamoy.mp3' },
                         { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
                         { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
                         { dir: 'Musics/musics/vs-mami/connect/Inst.ogg' },
@@ -2051,7 +2051,7 @@ export default async (state) => {
                     mod: 'VSMami',
                     toLoad: [
                         { dir: 'imgs/Mami/pyramid.png' },
-                        { dir: 'Sounds/pop_up.ogg' },
+                        { dir: 'Sounds/Chamoy.mp3' },
                         { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
                         { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
                         { dir: 'Musics/musics/vs-mami/reminisce/Inst.ogg' },
@@ -2069,7 +2069,7 @@ export default async (state) => {
                     mod: 'VSMami',
                     toLoad: [
                         { dir: 'imgs/Mami/pyramid.png' },
-                        { dir: 'Sounds/pop_up.ogg' },
+                        { dir: 'Sounds/Chamoy.mp3' },
                         { dir: 'Sounds/Mami/MAMI_shoot.ogg' },
                         { dir: 'Arrows/holynote/Arrows.png', animationConfigDir: 'Arrows/holynote/Arrows.json' },
                         { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
@@ -2089,7 +2089,7 @@ export default async (state) => {
                     mod: 'VSMami',
                     toLoad: [
                         { dir: 'imgs/Mami/pyramid.png' },
-                        { dir: 'Sounds/pop_up.ogg' },
+                        { dir: 'Sounds/Chamoy.mp3' },
                         { dir: 'imgs/Mami/crowd.png' },
                         { dir: 'Sounds/Mami/MAMI_shoot.ogg' },
                         { dir: 'Arrows/holynote/Arrows.png', animationConfigDir: 'Arrows/holynote/Arrows.json' },
@@ -2110,7 +2110,7 @@ export default async (state) => {
                     mod: 'VSMami',
                     toLoad: [
                         { dir: 'imgs/Mami/pyramid.png' },
-                        { dir: 'Sounds/pop_up.ogg' },
+                        { dir: 'Sounds/Chamoy.mp3' },
                         { dir: 'Sounds/Mami/MAMI_shoot.ogg' },
                         { dir: 'Arrows/holynote/Arrows.png', animationConfigDir: 'Arrows/holynote/Arrows.json' },
                         { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
@@ -2130,7 +2130,7 @@ export default async (state) => {
                     mod: 'VSMami',
                     toLoad: [
                         { dir: 'imgs/Mami/pyramid.png' },
-                        { dir: 'Sounds/pop_up.ogg' },
+                        { dir: 'Sounds/Chamoy.mp3' },
                         { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
                         { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
                         { dir: 'Musics/musics/vs-mami/konnect/Inst.ogg' },

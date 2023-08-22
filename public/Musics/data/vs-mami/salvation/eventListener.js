@@ -77,9 +77,9 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				state.musicInfo.popups['pyramid'].y = state.canvas.height/2-(image.height*1.5/2)
 			}
 			let pyramid = () => {
-				if (!state.musicInfo.popups['pyramid'].alpha && (Math.random()*100) <= 1.5) {
+				if (!state.musicInfo.popups['pyramid'].alpha && (Math.random()*100) <= 2) {
 					state.musicInfo.popups['pyramid'].alpha = 1
-					state.playSong('Sounds/pop_up.ogg', { newSong: true })
+					state.playSong('Sounds/Chamoy.mp3', { newSong: true })
 					setTimeout(() => state.musicInfo.popups['pyramid'].alpha = 0, 500)
 				}
 			}
