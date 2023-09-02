@@ -368,7 +368,7 @@ function createGame(Listener, canvas, socket) {
         if (musicCurrentTime > 1 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
             state.gameStageTime = +new Date()
             socket.emit('musicCompleted', { playerInfo:  state.myConfig, musicInfo: state.musicInfo })
-            /*if (!botPlay)*/ state.smallFunctions.rewardXP(((state.musicInfo.score/250)+(state.musicInfo.difficulty.xp || 100))*(state.musicInfo.accuracy/100))
+            if (!botPlay) state.smallFunctions.rewardXP(((state.musicInfo.score/250)+(state.musicInfo.difficulty.xp || 100))*(state.musicInfo.accuracy/100))
             state.smallFunctions.resetGame()
             state.smallFunctions.redirectGameStage('score', 'menu')
         }
