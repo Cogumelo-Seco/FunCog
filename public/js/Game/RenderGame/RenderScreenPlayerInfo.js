@@ -29,7 +29,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         `
 
         let playerName = document.getElementById('playerName') || document.createElement('span')
-        playerName.innerText = game.state.myConfig.author.name+' '+game.state.myConfig.emoji
+        playerName.innerText = game.state.myConfig.author.name+' '+(game.state.myConfig.emoji || '')
         playerName.id = 'playerName'
         playerName.style = `
             position: absolute;
