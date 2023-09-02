@@ -12,7 +12,9 @@ function createGame(Listener, canvas, socket) {
             },
             colorName: null,
             colorContent: null,
-            emoji: null
+            emoji: null,
+            xp: 0,
+            level: 0
         },
         messages: [],
         gameStage: 'loading',
@@ -365,6 +367,8 @@ function createGame(Listener, canvas, socket) {
 
         if (musicCurrentTime > 1 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
             state.gameStageTime = +new Date()
+            socket.emit('musicCompleted', { playerInfo:  state.myConfig, musicInfo: state.musicInfo })
+            /*if (!botPlay)*/ state.smallFunctions.rewardXP(((state.musicInfo.score/250)+(state.musicInfo.difficulty.xp || 100))*(state.musicInfo.accuracy/100))
             state.smallFunctions.resetGame()
             state.smallFunctions.redirectGameStage('score', 'menu')
         }
@@ -475,6 +479,8 @@ function createGame(Listener, canvas, socket) {
         require('./GameFunctions/RenderChat').default(state.canvas, state, Listener.state, 'gameLoop')
         if (state.gameLoopFPSControlTime2+1000 <= +new Date()) {
             state.gameLoopFPSControlTime2 = +new Date()
+            
+            smallFunctions.loopImages()
             
             if (state.musicInfo.accuracyMedia?.length >= 1 && musicCurrentTime < musicDuration) {
                 let media = 0

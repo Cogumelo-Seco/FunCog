@@ -129,14 +129,20 @@ export default async (canvas, state, stateListener, command) => {
                 headerElement.className = 'Header'
                 headerElement.id = message.messageID+'-Header'
                 headerElement.style = `color: ${message.colorName?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp+(Number(message.colorName.split('-')[1]) || 0)}, 100%, 50%)` : message.colorName || 'rgb(0, 229, 255)'} ${message.nameAdditionalCSS ? ';'+message.nameAdditionalCSS : ''}`
-                headerElement.style.display = lastMessage && lastMessage.author.playerID == message.author.playerID && lastMessage.timestamp+120000 >= message.timestamp  ? 'none' : 'block'
+                headerElement.style.display = (lastMessage && lastMessage.author.playerID == message.author.playerID && lastMessage.timestamp+120000 >= message.timestamp) || lastMessage && message.author.server && lastMessage.author.name == message.author.name  ? 'none' : 'block'
 
                 let nameElement = document.createElement('span')
                 nameElement.id = 'Name'
                 nameElement.innerText = `${message.author.name} ${message.emoji || '' } `
 
+                let levelElement = document.createElement('span')
+                levelElement.id = 'Level'
+                levelElement.innerText = `${message.author.level || '??'} `
+                levelElement.title = `Level: ${message.author.level || '??'}\nXP: ${Number.parseInt(message.author.xp) || '???'}/${state.smallFunctions.requiredXPCalc(message.author.level) || '???'}`
+
                 let avatarElement = document.createElement('img')
                 avatarElement.id = 'Avatar'
+                avatarElement.className += 'zoom'
                 avatarElement.src = message.author.avatar || './imgs/sticker-sla.png'
 
                 let timestampElement = document.createElement('span')
@@ -144,6 +150,7 @@ export default async (canvas, state, stateListener, command) => {
                 timestampElement.innerText = `${new Date(message.timestamp).toLocaleDateString()} - ${new Date(message.timestamp).toLocaleTimeString()}`
 
                 headerElement.appendChild(avatarElement)
+                headerElement.appendChild(levelElement)
                 headerElement.appendChild(nameElement)
                 headerElement.appendChild(timestampElement)
                 chatContent.appendChild(headerElement)

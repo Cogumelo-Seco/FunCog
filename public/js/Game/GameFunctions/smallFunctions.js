@@ -108,6 +108,38 @@ export default (state, Listener, socket) => {
                     clearInterval(state.moveBackgroundInterval)
                 }
             }, 1000/30)
-        }
+        },
+        loopImages: () => {
+            let images = document.getElementsByClassName('zoom')
+            for (let imageElement of images) {
+                const zoom = document.getElementById('zoom');
+                const zoomImage = document.getElementById('zoomImage');
+                const openOriginal = document.getElementById('openOriginal')
+
+                zoom.onclick = (e) => e.target.id == 'zoom' ? zoom.classList.toggle('open') : null
+
+                imageElement.onclick = (e) => {
+                    if (e.target.className.includes('zoom') && e.target.src) {
+                        zoom.classList.toggle('open')
+                        zoomImage.src = e.target.src
+                        openOriginal.href = e.target.src
+                    }
+                }
+            }
+        },
+        rewardXP: (rewardXP) => {
+            console.log(rewardXP)
+            let playerInfo = state.myConfig
+
+            playerInfo.totalXP += rewardXP
+            if (playerInfo.xp+rewardXP >= state.smallFunctions.requiredXPCalc(playerInfo.level)) {
+                playerInfo.xp = playerInfo.xp+rewardXP-state.smallFunctions.requiredXPCalc(playerInfo.level)
+                playerInfo.level += 1
+                if (playerInfo.xp >= state.smallFunctions.requiredXPCalc(playerInfo.level)) state.smallFunctions.rewardXP(0)
+            } else playerInfo.xp += rewardXP
+
+            socket.emit('updatePlayer', playerInfo)
+        },
+        requiredXPCalc: (level) => Number.parseInt(5 * level ** 2 * level + 100)
     }
 }

@@ -156,9 +156,10 @@ const Game = (props) => {
                     const withoutAccountButton = document.getElementById('withoutAccountButton')
                     withoutAccountButton.onclick = (event) => {
                         //alert('Sem uma conta, você terá acesso limitado ao jogo e todo o seu progresso não será salvo. Limite de 5 Mods e sem permissão ao chat.\n\nWithout an account you will have limited access to the game and all your progress will not be saved. Limit of 5 Mods and no chat permission.')
-                        alert('Sem uma conta, você terá acesso limitado ao jogo e todo o seu progresso não será salvo. Sem permissão ao chat.\n\nWithout an account you will have limited access to the game and all your progress will not be saved. No chat permission.')
+                        alert('Sem uma conta, você terá acesso limitado ao jogo e todo o seu progresso não será salvo.\n\nWithout an account you will have limited access to the game and all your progress will not be saved.')
         
                         //game.state.musics = game.state.musics.splice(0, 5)
+                        socket.emit('getMessageHistory')
                         game.state.inLogin = false
                         //game.state.smallFunctions.redirectGameStage('menu')
                     }
@@ -227,6 +228,9 @@ const Game = (props) => {
                     game.state.myConfig.author.name = player.name
                     game.state.myConfig.author.avatar = player.avatar
                     game.state.myConfig.author.playerID = player.playerID
+                    game.state.myConfig.xp = player.xp || 0
+                    game.state.myConfig.totalXP = player.totalXP || player.xp || 0
+                    game.state.myConfig.level = player.level || 1
                     game.state.myConfig.colorName = player.chatColorName
                     game.state.myConfig.colorContent = player.chatColorContent
                     game.state.myConfig.emoji = player.chatEmoji
@@ -254,6 +258,14 @@ const Game = (props) => {
                             playerSettingsOptions[i].add = defaultSettingsOptions[i].add
                             playerSettingsOptions[i].max = defaultSettingsOptions[i].max
                             playerSettingsOptions[i].min = defaultSettingsOptions[i].min
+
+                            if (!isNaN(Number(playerSettingsOptions[i].max)) || !isNaN(Number(playerSettingsOptions[i].min))) {
+                                if (
+                                    Number(playerSettingsOptions[i].content) <= Number(playerSettingsOptions[i].min) ||
+                                    Number(playerSettingsOptions[i].content) >= Number(playerSettingsOptions[i].max) ||
+                                    (playerSettingsOptions[i].numberType == 'Interger' || defaultSettingsOptions[i].numberType == 'Interger') && String(playerSettingsOptions[i].content).includes('.')
+                                ) playerSettingsOptions[i].content = defaultSettingsOptions[i].content
+                            }
                         }
                         /*if (
                             playerSettingsOptions[i].name == defaultSettingsOptions[i].name && 
@@ -275,7 +287,7 @@ const Game = (props) => {
                         } else defaultSettingsOptions[i] = playerSettingsOptions[i]  
                     }*/
                     
-                    socket.emit('setup')
+                    socket.emit('getMessageHistory')
                 } else alert('ERROR: No player data')
             })
 

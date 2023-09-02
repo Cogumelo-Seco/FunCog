@@ -605,10 +605,12 @@ export default async (state) => {
             name: 'Background Ofuscation',
             id: 'BackgroundOfuscation',
             type: 'Number',
-            add: 0.1,
-            max: 1,
+            numberType: 'Interger',
+            displayFormat: '##content##%',
+            add: 5,
+            max: 100,
             min: 0,
-            content: 0.8
+            content: 60
         },
         {
             name: 'Audio Visualizer',

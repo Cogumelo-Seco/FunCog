@@ -20,7 +20,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     ctx.font = `bold 15px Arial`
 
     ctx.fillStyle = 'rgb(255, 255, 255)'
-    ctx.fillText(`${(loadinPercent*100).toFixed(2)}%`, canvas.width/2-(ctx.measureText(`${(loadinPercent*100).toFixed(2)}%`).width/2), canvas.height/2+7.5);
+    ctx.fillText(`${(loadinPercent*100).toFixed(0)}%`, canvas.width/2-(ctx.measureText(`${(loadinPercent*100).toFixed(0)}%`).width/2), canvas.height/2+7.5);
 
     ctx.font = `bold 10px Arial`
     ctx.fillStyle = game.state.loading.msg.includes('ERROR') ? 'rgba(255, 0, 0, 0.4)' : 'rgba(255, 255, 255, 0.1)'

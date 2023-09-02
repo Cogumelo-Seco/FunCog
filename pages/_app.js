@@ -29,6 +29,14 @@ function App({ Component, pageProps }) {
                     }
                 `}</style>
             </nav>
+
+            <div id="zoom" className="zoom">
+                <div id="zoomContent">
+                    <img id="zoomImage" src="/imgs/logo.png" />
+                    <a id="openOriginal" href="/imgs/logo.png" target="_blank">Open original</a>
+                </div>
+            </div>
+
             <CookiesProvider>
                 <Component {...pageProps} />
             </CookiesProvider>

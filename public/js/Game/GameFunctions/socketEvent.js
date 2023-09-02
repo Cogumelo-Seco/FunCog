@@ -5,7 +5,7 @@ export default function codesFunction(state, stateListener, socket) {
 
     if (state.myConfig.logged) socket.on('listServers', (listServers) => {
         state.selectServerOption.listServers = listServers
-        let server = listServers.find(s => s.serverID == state.serverID)
+        /*let server = listServers.find(s => s.serverID == state.serverID)
         if (server) state.serverInfo = server
         if (server && server.playerData2) {
             state.waiting = false
@@ -17,26 +17,26 @@ export default function codesFunction(state, stateListener, socket) {
                     state.opponentRatingLoaded[rating.time] = true
                     rating.time = +new Date()
                 }
-            }*/
-        }
+            }
+        }*/
     })
 
-    socket.on('connect', () => {
+    /*socket.on('connect', () => {
         socket.emit('playerConnected', state.myConfig)
-    })
+    })*/
 
     socket.on('messageHistory', (command) => {
-        if (state.myConfig.logged) {
+        //if (state.myConfig.logged) {
             state.messages = command || []
             require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'historyMessage')
-        }
+        //}
     })
 
     socket.on('message', (command) => {
-        if (state.myConfig.logged) {
+        //if (state.myConfig.logged) {
             state.messages.unshift(command)
             require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'newMessage')
-        }
+        //}
     })
 
     socket.on('deleteMessage', (command) => {

@@ -83,7 +83,7 @@ button#chat-button {
     left: 5px;
     cursor: pointer;
     /*border: solid rgb(150, 0, 50, 0.5) 2px;*/
-    border: none;
+    border: solid rgba(255,255,255,0.2) 1px;
     border-radius: 5px;
     width: 40px; 
     height: 40px;
@@ -152,6 +152,13 @@ div#chat-content p.Header span#Timestamp {
     cursor: text;
     font-size: 10px;
     color: rgb(180, 180, 180);
+}
+
+div#chat-content p.Header span#Level {
+    font-weight: bold;
+    color: #debd00;
+    font-size: 15px;
+    cursor: text;
 }
 
 div#chat-content img#Avatar {
@@ -624,4 +631,63 @@ span.contentSeparation {
     width: 100%;
     height: 2px;
     margin: 10px 0;
+}
+
+
+/* ZOOM Image */
+
+div.zoom {
+    z-index: 100;
+    position: fixed;
+    display: none;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+div.zoom.open {
+    display: flex;
+    opacity: 0;
+    animation: openZoom 0.2s forwards ease;
+}
+
+div.zoom div#zoomContent {
+    transform: scale(50%);
+    opacity: 0;
+    animation: openZoom 0.2s forwards ease;
+}
+
+div.zoom div#zoomContent img {
+    display: block;
+    max-height: 80vh;
+    max-width: 90vw;
+    text-align: left;
+}
+
+div.zoom a#openOriginal {
+    float: left;
+    width: fit-content;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 30px;
+    transition: opacity .15s ease;
+    opacity: .5;
+}
+
+div.zoom a#openOriginal:hover {
+    opacity: 1;
+    text-decoration: underline;
 }

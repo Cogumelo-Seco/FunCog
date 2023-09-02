@@ -1,5 +1,12 @@
 export default async (ctx, canvas, game, Listener, functions) => {
+    ctx.fillStyle = `rgba(0, 0, 0, ${game.state.smallFunctions.getConfig('BackgroundOfuscation')/100})`
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
     let screenResize = Math.floor(Math.min(canvas.height*0.45, canvas.width*0.22))/150
+
+    /*let gameBackground = document.getElementById('gameBackground')
+    gameBackground.style.display = 'block'
+    gameBackground.src = '/imgs/logo.png'*/
 
     let screenElements = document.getElementById('screenElements')
     let notUpdate = screenElements && !screenElements.getElementsByClassName('menuElement')[0]
@@ -163,15 +170,6 @@ export default async (ctx, canvas, game, Listener, functions) => {
         }
 
 
-        let nameText = document.getElementById('nameText') || document.createElement('div')
-        nameText.id = 'nameText'
-        nameText.innerText = 'FunCog'
-        nameText.style.color = 'white'
-        nameText.style.fontSize = screenResize*40+'px'
-        nameText.style.marginTop = screenResize*10+'px'
-        if (notUpdate) menuElement.appendChild(nameText)
-        
-
         let logoElement = document.getElementById('logoElement') || document.createElement('img')
         let logoSize = Math.floor(Math.min(canvas.height*0.45, canvas.width*0.22))
         logoElement.id = 'logoElement'
@@ -183,6 +181,17 @@ export default async (ctx, canvas, game, Listener, functions) => {
         logoElement.style.left = canvas.width/2+canvas.width/4-(logoSize/2)+'px'
         logoElement.style.top = canvas.height*0.55-(logoSize/2)+'px'
         if (notUpdate) menuElement.appendChild(logoElement)
+
+        let nameText = document.getElementById('nameText') || document.createElement('div')
+        nameText.id = 'nameText'
+        nameText.innerText = 'FunCog'
+        nameText.style.position = 'absolute'
+        nameText.style.left = canvas.width*0.65+'px'
+        nameText.style.fontSize = screenResize*60+'px'
+        nameText.style.marginTop = screenResize*92+'px'
+        nameText.style.transform = 'rotateZ(25deg)'
+        nameText.style.color = 'white'
+        if (notUpdate) menuElement.appendChild(nameText)
 
 
         let updateContainer = document.getElementById('updateContainer') || document.createElement('div')
@@ -202,10 +211,14 @@ export default async (ctx, canvas, game, Listener, functions) => {
             <div id="updateLogTitle">Atualizações</div>
             
             <div id="updateContent">
+                <div id="updateDate">02/sep/2023</div>
+                <div id="updateNew" class="updateContentText">- SISTEMA DE NÍVEIS!!!!</div>
+                <div id="updateNew" class="updateContentText">- Adicionado painel de informações em algumas páginas</div>
+                <div id="updateNew" class="updateContentText">- Adicionado visualizador de imagem, para avatares no chat</div>
                 <div id="updateDate">21/ago/2023</div>
                 <div id="updateUpdate" class="updateContentText">- Novas configurações, categoria de Audio</div>
                 <div id="updateWarning" class="updateContentText">- Dificuldade MANIA renomeada para BABY</div>
-                <div id="updateUpdate" class="updateContentText">- Placas da "Expurgation" novamente!!</div>
+                <div id="updateNew" class="updateContentText">- Placas da "Expurgation" novamente!!</div>
                 <div id="updateDate">01/ago/2023</div>
                 <div id="updateUpdate" class="updateContentText">- Mod "VS Mami" Terminado</div>
                 <div id="updateUpdate" class="updateContentText">- Aparência do menu atualizado</div>

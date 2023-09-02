@@ -1,4 +1,7 @@
 export default async (ctx, canvas, game, Listener, functions) => {
+    let screenElements = document.getElementById('screenElements')
+    screenElements.innerHTML = ''
+    
     ctx.globalAlpha = 0
     for (let i in game.state.toLoadInScreen) {
         let data = game.state.toLoadInScreen[i]
@@ -51,7 +54,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     }
 
     if (!game.state.videoBackground || game.state.videoBackground.style.display != 'block') {
-        ctx.fillStyle = `rgba(0, 0, 0, ${game.state.smallFunctions.getConfig('BackgroundOfuscation')})`
+        ctx.fillStyle = `rgba(0, 0, 0, ${game.state.smallFunctions.getConfig('BackgroundOfuscation')/100})`
         ctx.fillRect(0, 0, canvas.width, canvas.height)
     }
 }

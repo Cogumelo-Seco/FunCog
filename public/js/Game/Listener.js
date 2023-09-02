@@ -532,6 +532,9 @@ export default function createListener(socket) {
                 //keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
                 
                 switch (keyPressed) {
+                    case 'KeyO':
+                        state.game.state.smallFunctions.rewardXP(10)
+                        break
                     case keys.KeyUp:
                         state.game.state.selectMenuOption.menuSelect = state.game.state.selectMenuOption.menuSelect <= 0 ? state.game.state.selectMenuOption.menuOptions.length-1 : state.game.state.selectMenuOption.menuSelect-1
                         state.game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })

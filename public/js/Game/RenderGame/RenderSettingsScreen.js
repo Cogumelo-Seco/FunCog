@@ -1,4 +1,7 @@
 export default async (ctx, canvas, game, Listener, functions) => {
+    ctx.fillStyle = `rgba(0, 0, 0, ${game.state.smallFunctions.getConfig('BackgroundOfuscation')/100})`
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
     let screenElements = document.getElementById('screenElements')
     screenElements.innerHTML = ''
 
