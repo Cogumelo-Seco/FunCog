@@ -65,6 +65,7 @@ const Game = (props) => {
         const game = null
 
         function newSocketConnect() {
+            console.log('Nova conexão')
             setTimeout(() => {
                 let newSocket = io(props.SERVER, {
                     withCredentials: true,
@@ -284,7 +285,7 @@ const Game = (props) => {
                         let option = playerSettingsOptions.find((o, pI) => !o.name || o?.id == defaultSettingsOptions[i].id && i == pI)
                         //if (option) defaultSettingsOptions[i].content = option.content
                         //else reset = true
-                        if (!option || !playerSettingsOptions[i]?.name) reset = true
+                        if (!option || !playerSettingsOptions[i]) reset = true
                         else if (playerSettingsOptions && playerSettingsOptions[i]?.name) {
                             try {
                                 playerSettingsOptions[i].name = defaultSettingsOptions[i].name
@@ -302,7 +303,7 @@ const Game = (props) => {
                                     ) playerSettingsOptions[i].content = defaultSettingsOptions[i].content
                                 }
                             } catch {}
-                        } else reset = true
+                        } //else reset = true
                         /*if (
                             playerSettingsOptions[i].name == defaultSettingsOptions[i].name && 
                             playerSettingsOptions[i].add == defaultSettingsOptions[i].add &&

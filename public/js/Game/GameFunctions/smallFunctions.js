@@ -33,7 +33,7 @@ export default (state, Listener, socket) => {
             state.oldGameStage = oldStage || state.gameStage
             state.gameStage = newStage
 
-            socket.emit('updatePlayer', state.myConfig)
+            socket.emit('updatePlayer', { settings: state.myConfig.settings, token: state.myConfig.token })
         },
         getConfig: (id) => {
             return (state.selectSettingsOption.settingsOptions.find((g) => g?.id == id))?.content

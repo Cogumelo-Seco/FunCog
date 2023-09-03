@@ -368,7 +368,6 @@ function createGame(Listener, canvas, socket) {
 
         if (musicCurrentTime > 1 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
             state.gameStageTime = +new Date()
-            console.log(state.myConfig)
             if (!botPlay && state.myConfig.logged) {
                 let XPgained = ((state.musicInfo.score/250)+(state.musicInfo.difficulty.xp || 100))*(state.musicInfo.accuracy/100)
                 state.smallFunctions.rewardXP(XPgained)
