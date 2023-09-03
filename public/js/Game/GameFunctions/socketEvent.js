@@ -1,9 +1,8 @@
 export default function codesFunction(state, stateListener, socket) {
     setInterval(() => socket.emit('ping', +new Date()), 1000)
     socket.on('ping', (time) => state.ping = +new Date()-time || '???')
-    state.myConfig.logged = true
 
-    if (state.myConfig.logged) socket.on('listServers', (listServers) => {
+    socket.on('listServers', (listServers) => {
         state.selectServerOption.listServers = listServers
         /*let server = listServers.find(s => s.serverID == state.serverID)
         if (server) state.serverInfo = server

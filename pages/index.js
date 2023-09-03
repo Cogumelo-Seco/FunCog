@@ -224,12 +224,12 @@ const Game = (props) => {
 
                     document.cookie = `token=${player.token}; path=/`;
 
+                    console.log('p-p')
                     game.state.myConfig.logged = true
                     game.state.myConfig.author.name = player.name
                     game.state.myConfig.author.avatar = player.avatar
                     game.state.myConfig.author.playerID = player.playerID
                     game.state.myConfig.xp = player.xp || 0
-                    game.state.myConfig.totalXP = player.totalXP || player.xp || 0
                     game.state.myConfig.level = player.level || 1
                     game.state.myConfig.colorName = player.chatColorName
                     game.state.myConfig.colorContent = player.chatColorContent
@@ -243,6 +243,9 @@ const Game = (props) => {
                         playerSettingsOptions = Object.assign(playerSettingsOptions, defaultSettingsOptions)
                         game.state.selectSettingsOption.settingsOptions = playerSettingsOptions
                     }*/
+                    
+                    socket.emit('getMessageHistory')
+
                     let defaultSettingsOptions = game.state.selectSettingsOption.settingsOptions
                     let playerSettingsOptions = player.settings
                     let reset = false
@@ -250,23 +253,25 @@ const Game = (props) => {
                         let option = playerSettingsOptions.find((o, pI) => !o.name || o?.id == defaultSettingsOptions[i].id && i == pI)
                         //if (option) defaultSettingsOptions[i].content = option.content
                         //else reset = true
-                        if (!option) reset = true
-                        else {
-                            playerSettingsOptions[i].name = defaultSettingsOptions[i].name
-                            playerSettingsOptions[i].type = defaultSettingsOptions[i].type
-                            playerSettingsOptions[i].displayFormat = defaultSettingsOptions[i].displayFormat
-                            playerSettingsOptions[i].add = defaultSettingsOptions[i].add
-                            playerSettingsOptions[i].max = defaultSettingsOptions[i].max
-                            playerSettingsOptions[i].min = defaultSettingsOptions[i].min
+                        if (!option || !playerSettingsOptions[i]?.name) reset = true
+                        else if (playerSettingsOptions && playerSettingsOptions[i]?.name) {
+                            try {
+                                playerSettingsOptions[i].name = defaultSettingsOptions[i].name
+                                playerSettingsOptions[i].type = defaultSettingsOptions[i].type
+                                playerSettingsOptions[i].displayFormat = defaultSettingsOptions[i].displayFormat
+                                playerSettingsOptions[i].add = defaultSettingsOptions[i].add
+                                playerSettingsOptions[i].max = defaultSettingsOptions[i].max
+                                playerSettingsOptions[i].min = defaultSettingsOptions[i].min
 
-                            if (!isNaN(Number(playerSettingsOptions[i].max)) || !isNaN(Number(playerSettingsOptions[i].min))) {
-                                if (
-                                    Number(playerSettingsOptions[i].content) <= Number(playerSettingsOptions[i].min) ||
-                                    Number(playerSettingsOptions[i].content) >= Number(playerSettingsOptions[i].max) ||
-                                    (playerSettingsOptions[i].numberType == 'Interger' || defaultSettingsOptions[i].numberType == 'Interger') && String(playerSettingsOptions[i].content).includes('.')
-                                ) playerSettingsOptions[i].content = defaultSettingsOptions[i].content
-                            }
-                        }
+                                if (!isNaN(Number(playerSettingsOptions[i]?.max)) || !isNaN(Number(playerSettingsOptions[i].min))) {
+                                    if (
+                                        Number(playerSettingsOptions[i]?.content) <= Number(playerSettingsOptions[i]?.min) ||
+                                        Number(playerSettingsOptions[i]?.content) >= Number(playerSettingsOptions[i]?.max) ||
+                                        (playerSettingsOptions[i]?.numberType == 'Interger' || defaultSettingsOptions[i].numberType == 'Interger') && String(playerSettingsOptions[i].content).includes('.')
+                                    ) playerSettingsOptions[i].content = defaultSettingsOptions[i].content
+                                }
+                            } catch {}
+                        } else reset = true
                         /*if (
                             playerSettingsOptions[i].name == defaultSettingsOptions[i].name && 
                             playerSettingsOptions[i].add == defaultSettingsOptions[i].add &&
@@ -287,7 +292,6 @@ const Game = (props) => {
                         } else defaultSettingsOptions[i] = playerSettingsOptions[i]  
                     }*/
                     
-                    socket.emit('getMessageHistory')
                 } else alert('ERROR: No player data')
             })
 

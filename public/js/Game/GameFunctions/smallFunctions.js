@@ -131,7 +131,6 @@ export default (state, Listener, socket) => {
             console.log(rewardXP)
             let playerInfo = state.myConfig
 
-            playerInfo.totalXP += rewardXP
             if (playerInfo.xp+rewardXP >= state.smallFunctions.requiredXPCalc(playerInfo.level)) {
                 playerInfo.xp = playerInfo.xp+rewardXP-state.smallFunctions.requiredXPCalc(playerInfo.level)
                 playerInfo.level += 1
