@@ -18,10 +18,11 @@ export default function createListener(socket) {
             mouseOnHover: false,
             mouseInfoType: 'percent',
             lastMoveTime: 0
-        }
+        },
+        socket,
     }
 
-    const chatFunctions = chat(state, socket)
+    const chatFunctions = chat(state, state.socket)
     require('./ListenerFunctions/addButtons').default(state, handleKeys)
 
     document.onmousemove = (event) => {
@@ -369,7 +370,7 @@ export default function createListener(socket) {
                         if (modInfo && musicInfo && state.game.state.online) {
                             state.musicMenu?.pause()
                             state.game.state.smallFunctions.redirectGameStage('game')
-                            socket.emit('newServer', {
+                            state.socket.emit('newServer', {
                                 difficulty: state.game.state.selectMusicMenu.difficultySelected,
                                 mod: state.game.state.selectMusicMenu.modSelect,
                                 music: state.game.state.selectMusicMenu.musicSelect
@@ -380,7 +381,7 @@ export default function createListener(socket) {
                                 musicInfo,
                                 difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
                                 listenerState: state,
-                                socket
+                                socket: state.socket
                             })
                         } else if (modInfo && musicInfo) {
                             state.musicMenu?.pause()
@@ -392,7 +393,7 @@ export default function createListener(socket) {
                                 musicInfo,
                                 difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
                                 listenerState: state,
-                                socket
+                                socket: state.socket
                             })
                         }
                         break
@@ -430,7 +431,7 @@ export default function createListener(socket) {
                         if (state.game.state.selectServerOption.createServer) {
                             state.game.state.smallFunctions.redirectGameStage('selectMusic')
 
-                            state.game.state.serverId = socket.id
+                            state.game.state.serverId = state.socket.id
                         } else if (state.game.state.selectServerOption.listServers[0]) {
                             let server = filtredServers[state.game.state.selectServerOption.serverSelect]
                             state.game.state.serverId = server.id
@@ -439,7 +440,7 @@ export default function createListener(socket) {
                                 let modInfo = state.game.state.musics[server.mod]
                                 let musicInfo = state.game.state.musics[server.mod].musics[server.music]
 
-                                socket.emit('connectServer', {
+                                state.socket.emit('connectServer', {
                                     serverId: state.game.state.serverId
                                 })
 
@@ -449,7 +450,7 @@ export default function createListener(socket) {
                                     difficulty: state.game.state.difficulties[musicInfo.difficulties[server.difficulty]],
                                     listenerState: state,
                                     opponentPlayer: true,
-                                    socket
+                                    socket: state.socket
                                 })
 
                                 state.game.state.smallFunctions.redirectGameStage('game')
@@ -552,7 +553,7 @@ export default function createListener(socket) {
                             /*if (state.game.state.ping) {
                                 state.game.state.online = true
                                 state.game.state.smallFunctions.redirectGameStage('onlineServerList')
-                                socket.emit('getListServers')
+                                state.socket.emit('getListServers')
                             } else alert('No connection to the server!')*/
                         } else {
                             state.game.state.online = true

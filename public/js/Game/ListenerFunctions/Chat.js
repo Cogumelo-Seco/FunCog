@@ -6,6 +6,7 @@ export default function chat(state, socket) {
     const characterLimitWarning = document.getElementById('characterLimitWarning')
     const messageBoxContent = document.getElementById('message-box-content')
     const messageBox = document.getElementById('message-box')
+    const placeholder = document.getElementById('placeholder')
     const chat = document.getElementById('chat')   
     const gameCanvas = document.getElementById('gameCanvas')
     const emojiBoxElement = document.getElementById('emojiBox')
@@ -20,7 +21,7 @@ export default function chat(state, socket) {
             emojiBoxElement.appendChild(emojiElement)
 
             emojiElement.onclick = () => {
-                messageBoxContent.innerHTML += emojiElement.innerText
+                if (!isNaN(Number(state.game.state.ping))) messageBoxContent.innerHTML += emojiElement.innerText
             }
         }
     }
@@ -37,6 +38,16 @@ export default function chat(state, socket) {
         characterLimitWarning.style.backgroundColor = 'rgba(40, 40, 40, 1)'
         
         state.onChat = 'on'
+
+        if (isNaN(Number(state.game.state.ping))) {
+            messageBoxContent.contentEditable = false
+            messageBox.style.backgroundColor = 'rgb(255, 50, 40)'
+            placeholder.innerText = 'No connection to the server'
+        } else {
+            messageBoxContent.contentEditable = true
+            messageBox.style.backgroundColor = 'rgba(40, 40, 40, 1)'
+            placeholder.innerText = 'Message'
+        }
     }
 
     function focusout(event) {
@@ -74,13 +85,12 @@ export default function chat(state, socket) {
 
     function send() {
         let content = messageBoxContent.innerHTML
-        //console.log(state.game.state.myConfig)
         if (content.split(' ')[0] == '/s') state.game.state.gameStage = content.split(' ')[1]
-        else socket.emit('message', {
+        else state.socket.emit('message', {
             author: {
-                name: state.game.state.myConfig.author.name || socket.id.slice(0, 20),
+                name: state.game.state.myConfig.author.name || state.socket.id.slice(0, 20),
                 avatar: state.game.state.myConfig.author.avatar || null,
-                playerID: state.game.state.myConfig.author.playerID || socket.id,
+                playerID: state.game.state.myConfig.author.playerID || state.socket.id,
                 xp: state.game.state.myConfig.xp || 0,
                 level: state.game.state.myConfig.level || 0,
             },
@@ -91,7 +101,7 @@ export default function chat(state, socket) {
             content,
         })
 
-        console.log(state.game.state.myConfig)
+        //console.log(state.game.state.myConfig)
 
         messageBoxContent.innerHTML = ''
         setTimeout(() => messageBoxContent.innerHTML = '', 10)

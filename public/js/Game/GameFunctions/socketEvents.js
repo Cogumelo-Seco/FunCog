@@ -1,8 +1,15 @@
-export default function codesFunction(state, stateListener, socket) {
-    setInterval(() => socket.emit('ping', +new Date()), 1000)
-    socket.on('ping', (time) => state.ping = +new Date()-time || '???')
+export default function codesFunction(state, stateListener) {
+    let loop = () => {
+        if (state.socket.id) {
+            setTimeout(loop, 1000/2)
+            state.socket.emit('ping', +new Date())
+        } else state.ping = '???'
+    }
+    loop()
 
-    socket.on('listServers', (listServers) => {
+    state.socket.on('ping', (time) => state.ping = +new Date()-time || '???')
+
+    state.socket.on('listServers', (listServers) => {
         state.selectServerOption.listServers = listServers
         /*let server = listServers.find(s => s.serverID == state.serverID)
         if (server) state.serverInfo = server
@@ -20,25 +27,17 @@ export default function codesFunction(state, stateListener, socket) {
         }*/
     })
 
-    /*socket.on('connect', () => {
-        socket.emit('playerConnected', state.myConfig)
-    })*/
-
-    socket.on('messageHistory', (command) => {
-        //if (state.myConfig.logged) {
-            state.messages = command || []
-            require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'historyMessage')
-        //}
+    state.socket.on('messageHistory', (command) => {
+        state.messages = command || []
+        require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'historyMessage')
     })
 
-    socket.on('message', (command) => {
-        //if (state.myConfig.logged) {
-            state.messages.unshift(command)
-            require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'newMessage')
-        //}
+    state.socket.on('message', (command) => {
+        state.messages.unshift(command)
+        require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'newMessage')
     })
 
-    socket.on('deleteMessage', (command) => {
+    state.socket.on('deleteMessage', (command) => {
         const messageIndex = state.messages.findIndex(m => m.messageID == command.messageID && (m.author?.playerID == command.playerData.author.playerID || command.playerData.emoji == '👑'))
         const deletedMessage = state.messages.find(m => m.messageID == command.messageID && (m.author?.playerID == command.playerData.author.playerID || command.playerData.emoji == '👑'))
         if (!isNaN(Number(messageIndex)) && deletedMessage) {
@@ -62,4 +61,6 @@ export default function codesFunction(state, stateListener, socket) {
             }
         }
     })
+
+    state.socket.on('error', (err) => alert(err))
 }

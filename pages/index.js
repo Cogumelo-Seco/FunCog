@@ -13,6 +13,7 @@ const Game = (props) => {
     const router = useRouter()
 
     useEffect(() => {
+        let connected = false
         let tryTime = 1000
         let skipedConnecting = false
         const skipConnecting = document.getElementById('skipConnecting')
@@ -41,31 +42,62 @@ const Game = (props) => {
             socket.emit('test')
             socket.on('test', (r) => test = r)
             socket.on('connect', () => {
-                connectingMessage.innerText = `Waiting Response (${(tryTime-1000)/1000}s)...`
-                setTimeout(() => {
-                    if (!test && !skipedConnecting) {
-                        connectingMessage.innerText = 'Connecting to Server...'
-                        if (!tryConnectOn) setTimeout(tryConnect(props.SERVER, one ? false : true), 1000)
-                    } else {
-                        connectingMessage.style.display = 'none'
-                        if (!skipedConnecting) start(socket, SERVER, false)
-                    }
-                }, tryTime)
+                if (!connected) {
+                    connectingMessage.innerText = `Waiting Response (${(tryTime-1000)/1000}s)...`
+                    setTimeout(() => {
+                        if (!test && !skipedConnecting) {
+                            connectingMessage.innerText = 'Connecting to Server...'
+                            if (!tryConnectOn) setTimeout(tryConnect(props.SERVER, one ? false : true), 1000)
+                        } else {
+                            connectingMessage.style.display = 'none'
+                            if (!skipedConnecting) {
+                                start(socket, SERVER, false)
+                                connected = true
+                            }
+                        }
+                    }, tryTime)
+                } else newSocketConnect()
             })
         }
         tryConnect(props.SERVER, true)
+
+        const Listener = null;
+        const game = null
+
+        function newSocketConnect() {
+            setTimeout(() => {
+                let newSocket = io(props.SERVER, {
+                    withCredentials: true,
+                })
+                newSocket.on('connect', () => {
+                    setNewSocket(newSocket)
+                })
+            }, 1000/2)
+        }
+
+        function setNewSocket(socket) {
+            game.state.socket.removeAllListeners()
+            game.state.socket.on('connect', newSocketConnect)
+
+            Listener.state.socket = socket
+            game.state.socket = socket
+            game.socketEvents()
+            game.state.socket.emit('getMessageHistory')
+        }
 
         function start(socket, ServerLink, SkipLogin) {
             /*document.body.style.cursor = 'none'*/
             skipConnecting.style.display = 'none'
             connectingMessage.style.display = 'none'
             const canvas = document.getElementById('gameCanvas')        
-            const Listener = createListener(socket);
-            const game = createGame(Listener, canvas, socket);
+            Listener = createListener(socket);
+            game = createGame(Listener, canvas, socket);
             game.state.inLogin = SkipLogin ? false : true
 
             game.loading({ Listener })
             game.state.router = router
+            game.state.socket = socket
+            Listener.state.socket = socket
             Listener.state.game = game
             game.start()
 
@@ -224,7 +256,6 @@ const Game = (props) => {
 
                     document.cookie = `token=${player.token}; path=/`;
 
-                    console.log('p-p')
                     game.state.myConfig.logged = true
                     game.state.myConfig.author.name = player.name
                     game.state.myConfig.author.avatar = player.avatar
@@ -294,8 +325,6 @@ const Game = (props) => {
                     
                 } else alert('ERROR: No player data')
             })
-
-            socket.on('error', (err) => alert(err))
         }
     }, [])
 

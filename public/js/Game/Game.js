@@ -217,6 +217,7 @@ function createGame(Listener, canvas, socket) {
             total: 0,
             msg: 'Loading...'
         },
+        socket,
     }
 
     const addImages = (command) => require('./GameFunctions/addImages').default(state)
@@ -228,19 +229,19 @@ function createGame(Listener, canvas, socket) {
 
     const playSong = (type, command) => require('./GameFunctions/playSong').default(type, command, state)
     const calculateRating = (command) => require('./GameFunctions/calculateRating').default(command, state)
-    const smallFunctions = require('./GameFunctions/smallFunctions').default(state, Listener, socket)
+    const smallFunctions = require('./GameFunctions/smallFunctions').default(state, Listener, state.socket)
     const codes = require('./GameFunctions/codes').default(state)
     state.Listener = Listener
     state.smallFunctions = smallFunctions
     state.calculateRating = calculateRating
     state.playSong = playSong
     state.canvas = canvas
-    state.socket = socket
 
     const startMusic = (command) => require('./GameFunctions/startMusic').default(command, state)
     const verifyClick = (command) => require('./GameFunctions/verifyClick').default(command, state)
 
-    require('./GameFunctions/socketEvent').default(state, Listener.state, socket)
+    const socketEvents = () => require('./GameFunctions/socketEvents').default(state, Listener.state)
+    socketEvents()
 
     async function start() {
         let videoElement = document.getElementById('gameVideo')
@@ -345,7 +346,7 @@ function createGame(Listener, canvas, socket) {
             state.gameStageTime = +new Date()
 
             if (state.online && state.serverId) {
-                socket.emit('deadPlayer', { 
+                state.socket.emit('deadPlayer', { 
                     serverId: state.serverId
                 })
                 state.smallFunctions.redirectGameStage('score', 'menu')
@@ -371,7 +372,7 @@ function createGame(Listener, canvas, socket) {
             if (!botPlay && state.myConfig.logged) {
                 let XPgained = ((state.musicInfo.score/250)+(state.musicInfo.difficulty.xp || 100))*(state.musicInfo.accuracy/100)
                 state.smallFunctions.rewardXP(XPgained)
-                socket.emit('musicCompleted', { xp: Number.parseInt(XPgained), playerInfo: state.myConfig, musicInfo: state.musicInfo })
+                state.socket.emit('musicCompleted', { xp: Number.parseInt(XPgained), playerInfo: state.myConfig, musicInfo: state.musicInfo })
             }
             state.smallFunctions.resetGame()
             state.smallFunctions.redirectGameStage('score', 'menu')
@@ -508,7 +509,7 @@ function createGame(Listener, canvas, socket) {
     
                 state.musicInfo.arrows = Listener.state.arrows
     
-                socket.emit('updateGame', {
+                state.socket.emit('updateGame', {
                     serverId: state.serverId,
     
                     data: state.musicInfo
@@ -627,7 +628,8 @@ function createGame(Listener, canvas, socket) {
         playSong,
         state,
         startMusic,
-        verifyClick
+        verifyClick,
+        socketEvents
     }
 }
 
