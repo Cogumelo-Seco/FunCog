@@ -57,7 +57,7 @@ export default (state, handleKeys) => {
         pointer: true,
         over: false,
         onClick: () => {
-            open('https://www.instagram.com/wellingtonfelipe_cogu/')
+            open('https://www.instagram.com/wellingtonfelipe_kogu/')
         }
     }
 
