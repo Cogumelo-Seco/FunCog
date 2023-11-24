@@ -577,7 +577,7 @@ function createGame(Listener, canvas, socket) {
             }
         }
 
-        const load = async({ dir, animationConfigDir}) => {
+        const load = async({ dir, animationConfigDir, local }) => {
             let loaded = false
 
             setTimeout(() => {
@@ -598,7 +598,7 @@ function createGame(Listener, canvas, socket) {
                 sound.preload = 'auto'
                 state.sounds[dir] = sound
             } else {
-                let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+dir
+                let link = local ? '/'+dir : 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+dir
                 let animationConfig = animationConfigDir ? JSON.parse(await fetch('https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+animationConfigDir).then(r => r.text())) : null
 
                 let img = new Image()

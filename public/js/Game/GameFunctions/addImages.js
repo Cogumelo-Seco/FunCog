@@ -1,6 +1,6 @@
 export default async (state) => {
     state.images = [
-        { dir: 'imgs/logo.png' },
+        { dir: 'imgs/logo.png', local: true },
         { dir: 'imgs/alert.png' },
         { dir: 'imgs/check.png', animationConfigDir: 'imgs/check.json' },
         
