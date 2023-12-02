@@ -335,7 +335,7 @@ export default async (state) => {
                 },
             ],
         },
-        {    
+        /*{    
             name: 'In-The-Galaxy',
             special: true,
             menuColor: 'rgb(154, 129, 0)',
@@ -356,7 +356,7 @@ export default async (state) => {
                     ]
                 },
             ]
-        },
+        },*/
         {    
             name: 'VS-Hypno\'s-Lullaby',
             special: true,
