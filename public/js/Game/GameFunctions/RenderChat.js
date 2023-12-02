@@ -66,14 +66,6 @@ export default async (canvas, state, stateListener, command) => {
         if (messageBoxContent.innerText == '') messageBoxContent.innerHTML = ''
         let { text, update } = replaces(messageBoxContent.innerHTML)
         if (messageBoxContent.innerText.length >= 400) {
-            function numberConverter(nbr) {
-                let number = Number(nbr)
-                if (Math.floor(number/1000000000000) > 0) return Math.floor(number/1000000000000)+'T'
-                if (Math.floor(number/1000000000) > 0) return Math.floor(number/1000000000)+'B'
-                if (Math.floor(number/1000000) > 0) return Math.floor(number/1000000)+'M'
-                if (Math.floor(number/1000) > 0) return Math.floor(number/1000)+'K'
-                return number
-            }
             characterLimitWarning.style.display = 'block'
             characterLimitWarning.innerText = `${numberConverter(messageBoxContent.innerText.length)}/400`
             messageBoxContent.style.color = 'rgb(255, 150, 150)'
@@ -129,7 +121,7 @@ export default async (canvas, state, stateListener, command) => {
                 headerElement.className = 'Header'
                 headerElement.id = message.messageID+'-Header'
                 headerElement.style = `color: ${message.colorName?.includes('RAINBOW') ? `hsl(${state.rainbowColor+message.timestamp+(Number(message.colorName.split('-')[1]) || 0)}, 100%, 50%)` : message.colorName || 'rgb(0, 229, 255)'} ${message.nameAdditionalCSS ? ';'+message.nameAdditionalCSS : ''}`
-                headerElement.style.display = (lastMessage && lastMessage.author.playerID == message.author.playerID && lastMessage.timestamp+120000 >= message.timestamp) || lastMessage && message.author.server && lastMessage.author.name == message.author.name  ? 'none' : 'block'
+                headerElement.style.display = (lastMessage && (lastMessage.author.playerID == message.author.playerID || message.author.server && lastMessage.author.name == message.author.name) && lastMessage.timestamp+120000 >= message.timestamp)  ? 'none' : 'block'
 
                 let nameElement = document.createElement('span')
                 nameElement.id = 'Name'
@@ -247,5 +239,15 @@ export default async (canvas, state, stateListener, command) => {
     } else {
         unreadMessageCounter.style.display = 'none'
         chatButton.style.background = 'rgba(100,75,175,0.2) url(/imgs/chat/chat.png) no-repeat center 0px / 100%'
+    }
+
+
+    function numberConverter(nbr) {
+        let number = Number(nbr)
+        if (Math.floor(number/1000000000000) > 0) return Math.floor(number/1000000000000)+'T'
+        if (Math.floor(number/1000000000) > 0) return Math.floor(number/1000000000)+'B'
+        if (Math.floor(number/1000000) > 0) return Math.floor(number/1000000)+'M'
+        if (Math.floor(number/1000) > 0) return Math.floor(number/1000)+'K'
+        return number
     }
 }
