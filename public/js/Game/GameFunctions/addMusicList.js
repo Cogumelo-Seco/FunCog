@@ -1308,7 +1308,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '🔼',
                     name: 'Hellclown',
                     menuColor: 'green',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -1323,7 +1323,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '🔼',
                     name: 'Expurgation',
                     menuColor: 'red',
                     difficulties: [ 2, 3 ],
@@ -1494,7 +1494,7 @@ export default async (state) => {
             menuColor: 'rgb(138, 12, 162)',
             musics: [
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Azure-Encounter',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -1521,7 +1521,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Secret-Marilee',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -1549,7 +1549,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Broken-Heart',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -1574,7 +1574,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Aquaphobia',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -1606,7 +1606,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Lonely-Sapphire',
                     menuColor: 'rgb(138, 12, 162)',
                     difficulties: [ 0, 1, 2 ],
@@ -1731,7 +1731,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Happy',
                     screenFilter: 'grayscale(100%)',
                     menuColor: 'rgb(60, 60, 60)',
@@ -1751,7 +1751,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Really-Happy',
                     screenFilter: 'grayscale(100%)',
                     menuColor: 'rgb(60, 60, 60)',
@@ -1794,7 +1794,7 @@ export default async (state) => {
             menuColor:  'rgb(196, 0, 244)',
             musics: [
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Dusk-Till-Dawn',
                     menuColor:  'rgb(196, 0, 244)',
                     difficulties: [ 0, 1, 2 ],
@@ -1936,7 +1936,7 @@ export default async (state) => {
             menuColor: 'rgb(0, 0, 110)',
             musics: [
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Too-Slow',
                     menuColor: 'rgb(0, 0, 110)',
                     difficulties: [ 0, 1, 2, 3 ],
@@ -2199,7 +2199,7 @@ export default async (state) => {
             menuColor: 'rgb(86, 76, 74)',
             musics: [
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Molly-Howdy',
                     menuColor: 'rgb(86, 76, 74)',
                     difficulties: [ 0, 1, 2 ],
@@ -2214,7 +2214,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Goody-Two-Shoes',
                     menuColor: 'rgb(86, 76, 74)',
                     difficulties: [ 0, 1, 2 ],
@@ -2229,7 +2229,7 @@ export default async (state) => {
                     ]
                 },
                 {
-                    suffix: '❗',
+                    suffix: '❗🔼',
                     name: 'Cab-Calloway',
                     menuColor: 'rgb(86, 76, 74)',
                     difficulties: [ 0, 1, 2 ],
