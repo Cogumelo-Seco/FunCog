@@ -110,9 +110,9 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
                 }
 
                 if (state.musicNotes.length+state.musicOpponentNotes.length >= musicNotesTotal) {
-                    if (musicInfo.cutscene) videoElement.src = `https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/${musicInfo.cutscene}`
-                    if (musicInfo.backgroundVideo) videoElementBackground.src = `https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/Videos/${musicInfo.backgroundVideo}`
-                    if (musicInfo.initialImage) overlayImageElement.src = `https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${musicInfo.initialImage}`
+                    if (musicInfo.cutscene) videoElement.src = `${state.filesURL}Videos/${musicInfo.cutscene}`
+                    if (musicInfo.backgroundVideo) videoElementBackground.src = `${state.filesURL}Videos/${musicInfo.backgroundVideo}`
+                    if (musicInfo.initialImage) overlayImageElement.src = `${state.filesURL}imgs/${musicInfo.initialImage}`
                     load(musicInfo.toLoad[0])
                 }
             }
@@ -142,7 +142,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
             if ([ 'ogg', 'mp3' ].includes(dir.split('.')[dir.split('.').length-1])) {
                 /*if (state.sounds[dir]?.src) newLoad()
                 else {*/
-                    let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/'+dir
+                    let link = state.filesURL+dir
 
                     let sound = new Audio()
 
@@ -191,8 +191,8 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
             } else {
                 /*if (state.images[dir]?.image) newLoad()
                 else {*/
-                    let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+dir
-                    let animationConfig = animationConfigDir ? JSON.parse(await fetch('https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+animationConfigDir).then(r => r.text())) : null
+                    let link = state.filesURL+'imgs/'+dir
+                    let animationConfig = animationConfigDir ? JSON.parse(await fetch(state.filesURL+'imgs/'+animationConfigDir).then(r => r.text())) : null
 
                     let img = new Image()
                     img.addEventListener('load', (e) => {

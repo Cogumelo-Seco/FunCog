@@ -218,6 +218,7 @@ function createGame(Listener, canvas, socket) {
             msg: 'Loading...'
         },
         socket,
+        filesURL: 'https://raw.githubusercontent.com/Cogumelo-Seco/FunCog-Files/main/'
     }
 
     const addImages = (command) => require('./GameFunctions/addImages').default(state)
@@ -585,7 +586,7 @@ function createGame(Listener, canvas, socket) {
             }, 10000)
 
             if ([ 'ogg', 'mp3' ].includes(dir.split('.')[dir.split('.').length-1])) {
-                let link = 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/'+dir
+                let link = state.filesURL+dir
 
                 let sound = new Audio()
                 sound.addEventListener('loadeddata', (e) => {
@@ -598,8 +599,8 @@ function createGame(Listener, canvas, socket) {
                 sound.preload = 'auto'
                 state.sounds[dir] = sound
             } else {
-                let link = local ? '/'+dir : 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+dir
-                let animationConfig = animationConfigDir ? JSON.parse(await fetch('https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/'+animationConfigDir).then(r => r.text())) : null
+                let link = local ? '/'+dir : state.filesURL+'imgs/'+dir
+                let animationConfig = animationConfigDir ? JSON.parse(await fetch(state.filesURL+'imgs/'+animationConfigDir).then(r => r.text())) : null
 
                 let img = new Image()
                 img.addEventListener('load', (e) => {

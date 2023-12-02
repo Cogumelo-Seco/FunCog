@@ -2,18 +2,143 @@ export default async (state) => {
     state.musics = [
         {
             dev: true,
-            name: 'Test',
-            menuColor: 'pink',
+            name: 'In-The-Galaxy',
+            special: true,
+            menuColor: 'rgb(55, 109, 246)',
             musics: [
                 {
-                    name: 'Test',
-                    menuColor: 'pink',
-                    difficulties: [ 1 ],
+                    suffix: '❗',
+                    name: 'Galaxy',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
                     backgroundImage: null,
-                    mod: 'Test',
+                    mod: 'InTheGalaxy',
                     toLoad: [
-                        { dir: 'Musics/musics/test/test/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/galaxy/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/galaxy/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗',
+                    name: 'Game',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/game/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/game/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗',
+                    name: 'Kastimagina',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/kastimagina/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/kastimagina/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗',
+                    name: 'Cona',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/cona/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/cona/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗',
+                    name: 'Underworld',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/underworld/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/underworld/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗',
+                    name: 'Cyber',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/Cyber/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/Cyber/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗',
+                    name: 'Newton',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/newton/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/newton/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗',
+                    name: 'Destiny',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/destiny/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/destiny/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗',
+                    name: 'Peace',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/peace/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/peace/Voices.ogg' },
                     ]
                 },
             ]
@@ -294,7 +419,7 @@ export default async (state) => {
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/FNFDefault.png',
-                    cutscene: 'week7/ughCutscene.mp4',
+                    //cutscene: 'week7/ughCutscene.mp4',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
@@ -309,7 +434,7 @@ export default async (state) => {
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/FNFDefault.png',
-                    cutscene: 'week7/gunsCutscene.mp4',
+                    //cutscene: 'week7/gunsCutscene.mp4',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
@@ -324,7 +449,7 @@ export default async (state) => {
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: 'backgrounds/FNFDefault.png',
-                    cutscene: 'week7/stressCutscene.mp4',
+                    //cutscene: 'week7/stressCutscene.mp4',
                     mod: 'FNFDefault',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
@@ -335,28 +460,6 @@ export default async (state) => {
                 },
             ],
         },
-        /*{    
-            name: 'In-The-Galaxy',
-            special: true,
-            menuColor: 'rgb(154, 129, 0)',
-            musics: [
-                {
-                    suffix: '❗',
-                    name: 'Galaxy',
-                    menuColor: 'rgb(154, 129, 0)',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 1.4,
-                    backgroundImage: null,
-                    mod: 'InTheGalaxy',
-                    toLoad: [
-                        { dir: 'Musics/musics/in-the-galaxy/galaxy/Inst.ogg' },
-                        { dir: 'Musics/musics/in-the-galaxy/galaxy/Voices.ogg' },
-                    ]
-                },
-            ]
-        },*/
         {    
             name: 'VS-Hypno\'s-Lullaby',
             special: true,
@@ -705,6 +808,476 @@ export default async (state) => {
             ]
         },
         {
+            name: 'Shaggy',
+            menuColor: 'rgb(51, 114, 74)',
+            musics: [
+                {
+                    name: 'Big-Shot',
+                    menuColor: 'yellow',
+                    difficulties: [ 0, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/shaggy/big-shot/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/big-shot/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Where-Are-You',
+                    menuColor: 'rgb(51, 114, 74)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/shaggy/where-are-you/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/where-are-you/Voices.ogg' },
+                    ]
+                },
+                {
+                    //suffix: '🔼',
+                    name: 'Eruption',
+                    menuColor: 'rgb(51, 114, 74)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/shaggy/eruption/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/eruption/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '🔼',
+                    name: 'Kaio-Ken',
+                    menuColor: 'rgb(51, 114, 74)',
+                    difficulties: [ 0, 1, 2 ],
+                    filterNotes: {
+                        1: 6,
+                        2: 6,
+                    },
+                    difficultyAlert: {
+                        1: '6k',
+                        2: '6k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/shaggy/kaio-ken/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/kaio-ken/Voices.ogg' },
+                    ]
+                },
+                {
+                    //suffix: '🔼',
+                    name: 'Whats-New',
+                    menuColor: 'rgb(51, 114, 74)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/shaggy/whats-new/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/whats-new/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '🔼',
+                    name: 'Blast',
+                    menuColor: 'rgb(51, 114, 74)',
+                    difficulties: [ 0, 1, 2 ],
+                    filterNotes: {
+                        1: 6,
+                        2: 6,
+                    },
+                    difficultyAlert: {
+                        1: '6k',
+                        2: '6k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/shaggy/blast/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/blast/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '🔼',
+                    name: 'Super-Saiyan',
+                    menuColor: 'rgb(51, 114, 74)',
+                    difficulties: [ 0, 1, 2 ],
+                    filterNotes: {
+                        1: 6,
+                        2: 6,
+                    },
+                    difficultyAlert: {
+                        1: '6k',
+                        2: '6k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/shaggy/super-saiyan/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/super-saiyan/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Soothing-Power',
+                    menuColor: 'rgb(209, 26, 26)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Musics/musics/shaggy/soothing-power/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/soothing-power/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '🔼',
+                    name: 'Thunderstorm',
+                    menuColor: 'rgb(209, 26, 26)',
+                    difficulties: [ 0, 1, 2 ],
+                    filterNotes: {
+                        1: 6,
+                        2: 7,
+                    },
+                    difficultyAlert: {
+                        1: '6k',
+                        2: '7k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/shaggy/thunderstorm/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/thunderstorm/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '🔼',
+                    name: 'Dissasembler',
+                    menuColor: 'rgb(209, 26, 26)',
+                    difficulties: [ 0, 1, 2 ],
+                    filterNotes: {
+                        1: 7,
+                        2: 7,
+                    },
+                    difficultyAlert: {
+                        1: '7k',
+                        2: '7k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/shaggy/dissasembler/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/dissasembler/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '🔼',
+                    name: 'Astral-Calamity',
+                    menuColor: 'rgb(51, 114, 74)',
+                    difficulties: [ 0, 1, 2 ],
+                    filterNotes: {
+                        1: 7,
+                        2: 7,
+                    },
+                    difficultyAlert: {
+                        1: '7k',
+                        2: '7k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/shaggy/astral-calamity/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/astral-calamity/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '🔼',
+                    name: 'God-Eater',
+                    menuColor: 'rgb(51, 114, 74)',
+                    difficulties: [ 0, 1, 2 ],
+                    filterNotes: {
+                        1: 7,
+                        2: 7,
+                    },
+                    difficultyAlert: {
+                        1: '7k',
+                        2: '7k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/shaggy/god-eater/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/god-eater/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '🔼',
+                    name: 'Talladega',
+                    menuColor: 'rgb(51, 255, 74)',
+                    difficulties: [ 0, 1, 2 ],
+                    filterNotes: {
+                        1: 8,
+                        2: 9,
+                    },
+                    difficultyAlert: {
+                        1: '8k',
+                        2: '9k',
+                    },
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: null,
+                    mod: 'Shaggy',
+                    toLoad: [
+                        { dir: 'Arrows/Arrows-26K/splash.png', animationConfigDir: 'Arrows/Arrows-26K/splash.json' },
+                        { dir: 'Arrows/Arrows-26K/Arrows.png', animationConfigDir: 'Arrows/Arrows-26K/Arrows.json' },
+                        { dir: 'Musics/musics/shaggy/talladega/Inst.ogg' },
+                        { dir: 'Musics/musics/shaggy/talladega/Voices.ogg' },
+                    ]
+                },
+            ]
+        },
+        {
+            name: 'VS-Mami',
+            menuColor: '#cba360',
+            musics: [
+                {
+                    name: 'Connect',
+                    menuColor: '#cba360',
+                    difficulties: [ 0, 1, 2, 10 ],
+                    notesImageDir: 'Arrows/MamiArrowsAlt/',
+                    splashDir: 'Arrows/MamiArrowsAlt/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: 'backgrounds/VsMami.png',
+                    mod: 'VSMami',
+                    toLoad: [
+                        { dir: 'imgs/Mami/pyramid.png' },
+                        { dir: 'Sounds/Chamoy.mp3' },
+                        { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
+                        { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
+                        { dir: 'Musics/musics/vs-mami/connect/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-mami/connect/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Reminisce',
+                    menuColor: '#cba360',
+                    difficulties: [ 0, 1, 2, 10 ],
+                    notesImageDir: 'Arrows/MamiArrowsAlt/',
+                    splashDir: 'Arrows/MamiArrowsAlt/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: 'backgrounds/VsMami.png',
+                    mod: 'VSMami',
+                    toLoad: [
+                        { dir: 'imgs/Mami/pyramid.png' },
+                        { dir: 'Sounds/Chamoy.mp3' },
+                        { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
+                        { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
+                        { dir: 'Musics/musics/vs-mami/reminisce/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-mami/reminisce/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '🔼',
+                    name: 'Salvation',
+                    menuColor: '#cba360',
+                    difficulties: [ 0, 1, 2, 10 ],
+                    notesImageDir: 'Arrows/MamiArrowsAlt/',
+                    splashDir: 'Arrows/MamiArrowsAlt/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: 'backgrounds/VsMami.png',
+                    mod: 'VSMami',
+                    toLoad: [
+                        { dir: 'imgs/Mami/pyramid.png' },
+                        { dir: 'Sounds/Chamoy.mp3' },
+                        { dir: 'Sounds/Mami/MAMI_shoot.ogg' },
+                        { dir: 'Arrows/holynote/Arrows.png', animationConfigDir: 'Arrows/holynote/Arrows.json' },
+                        { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
+                        { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
+                        { dir: 'Musics/musics/vs-mami/salvation/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-mami/salvation/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗🔼',
+                    name: 'Tetris',
+                    menuColor: '#cba360',
+                    difficulties: [ 0, 1, 2, 10 ],
+                    notesImageDir: 'Arrows/MamiArrowsTetris/',
+                    splashDir: 'Arrows/MamiArrowsAlt/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: 'backgrounds/VsMami.png',
+                    mod: 'VSMami',
+                    toLoad: [
+                        { dir: 'imgs/Mami/pyramid.png' },
+                        { dir: 'Sounds/Chamoy.mp3' },
+                        { dir: 'imgs/Mami/crowd.png' },
+                        { dir: 'Sounds/Mami/MAMI_shoot.ogg' },
+                        { dir: 'Arrows/holynote/Arrows.png', animationConfigDir: 'Arrows/holynote/Arrows.json' },
+                        { dir: 'Arrows/MamiArrowsTetris/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsTetris/Arrows.json' },
+                        { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
+                        { dir: 'Musics/musics/vs-mami/tetris/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-mami/tetris/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '🔼',
+                    name: 'Mamigation',
+                    menuColor: '#cba360',
+                    difficulties: [ 0, 1, 2, 10 ],
+                    notesImageDir: 'Arrows/MamiArrowsAlt/',
+                    splashDir: 'Arrows/MamiArrowsAlt/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: 'backgrounds/VsMami.png',
+                    mod: 'VSMami',
+                    toLoad: [
+                        { dir: 'imgs/Mami/pyramid.png' },
+                        { dir: 'Sounds/Chamoy.mp3' },
+                        { dir: 'Sounds/Mami/MAMI_shoot.ogg' },
+                        { dir: 'Arrows/holynote/Arrows.png', animationConfigDir: 'Arrows/holynote/Arrows.json' },
+                        { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
+                        { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
+                        { dir: 'Musics/musics/vs-mami/mamigation/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-mami/mamigation/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Konnect',
+                    menuColor: '#cba360',
+                    difficulties: [ 0, 1, 2, 10 ],
+                    notesImageDir: 'Arrows/MamiArrowsAlt/',
+                    splashDir: 'Arrows/MamiArrowsAlt/splash.png',
+                    splashResize: 1.5,
+                    backgroundImage: 'backgrounds/VsMami.png',
+                    mod: 'VSMami',
+                    toLoad: [
+                        { dir: 'imgs/Mami/pyramid.png' },
+                        { dir: 'Sounds/Chamoy.mp3' },
+                        { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
+                        { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
+                        { dir: 'Musics/musics/vs-mami/konnect/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-mami/konnect/Voices.ogg' },
+                    ]
+                },
+            ]
+        },
+        {
+            name: 'QT',
+            menuColor: 'rgb(251, 150, 183)',
+            musics: [
+                {
+                    name: 'Carefree',
+                    menuColor: 'rgb(251, 150, 183)',
+                    difficulties: [ 0, 1, 2, 5 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/qt.png',
+                    mod: 'QT',
+                    toLoad: [
+                        { dir: 'Musics/musics/qt/carefree/Inst.ogg' },
+                        { dir: 'Musics/musics/qt/carefree/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Careless',
+                    menuColor: 'rgb(251, 150, 183)',
+                    difficulties: [ 0, 1, 2, 5 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/qt.png',
+                    mod: 'QT',
+                    toLoad: [
+                        { dir: 'Musics/musics/qt/careless/Inst.ogg' },
+                        { dir: 'Musics/musics/qt/careless/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Censory-Overload',
+                    menuColor: 'rgb(251, 150, 183)',
+                    difficulties: [ 0, 1, 2, 5 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/qt.png',
+                    mod: 'QT',
+                    toLoad: [
+                        { dir: 'Musics/musics/qt/censory-overload/Inst.ogg' },
+                        { dir: 'Musics/musics/qt/censory-overload/Voices.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗🔼',
+                    name: 'Termination',
+                    menuColor: 'rgb(251, 150, 183)',
+                    difficulties: [ 2, 5, 3 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/qt.png',
+                    mod: 'QT',
+                    toLoad: [
+                        { dir: 'imgs/QT/pincer-open.png' },
+                        { dir: 'imgs/QT/pincer-close.png' },
+                        { dir: 'imgs/QT/alert.png', animationConfigDir: 'imgs/QT/alert.json' },
+                        { dir: 'Musics/musics/qt/termination/Inst.ogg' },
+                        { dir: 'Musics/musics/qt/termination/Voices.ogg' },
+                        { dir: 'Sounds/alert.ogg' },
+                        { dir: 'Sounds/alertDouble.ogg' },
+                        { dir: 'Sounds/attack.ogg' },
+                        { dir: 'Sounds/attack-double.ogg' },
+                    ]
+                },
+                {
+                    name: 'Cessation',
+                    menuColor: 'rgb(251, 150, 183)',
+                    difficulties: [ 1 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/qt.png',
+                    mod: 'QT',
+                    toLoad: [
+                        { dir: 'Musics/musics/qt/cessation/Inst.ogg' },
+                        { dir: 'Musics/musics/qt/cessation/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Interlope',
+                    menuColor: 'rgb(251, 150, 183)',
+                    difficulties: [ 1 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/qt.png',
+                    mod: 'QT',
+                    toLoad: [
+                        { dir: 'Musics/musics/qt/interlope/Inst.ogg' },
+                        { dir: 'Musics/musics/qt/interlope/Voices.ogg' },
+                    ]
+                }
+            ],
+        },
+        {
             name: 'VS-Tricky',
             menuColor: 'green',
             musics: [
@@ -765,6 +1338,297 @@ export default async (state) => {
                     ]
                 }
             ],
+        },
+        {
+            name: 'Camellia',
+            menuColor: '#d55f56',
+            musics: [
+                {
+                    name: 'Camellia-Tutorial',
+                    menuColor: '#ff9292',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia/camellia-tutorial/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/camellia-tutorial/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Boyfriend',
+                    menuColor: '#ff9292',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia/boyfriend/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/boyfriend/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'First-Town',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia/first-town/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/first-town/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Liquated',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia/liquated/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/liquated/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Why-do-you-hate-me',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia/why-do-you-hate-me/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/why-do-you-hate-me/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Quaoar',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia/quaoar/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/quaoar/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Crystallized',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia/crystallized/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/crystallized/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Nacreous-Snowmelt',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia/nacreous-snowmelt/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/nacreous-snowmelt/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Lioness-Pride',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia/lioness-pride/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/lioness-pride/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Ghost',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia/ghost/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/ghost/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Ghoul',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia/ghoul/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/ghoul/Voices.ogg' },
+                    ]
+                },
+                {
+                    name: 'Ghost-Vip',
+                    menuColor: '#d55f56',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    backgroundImage: 'backgrounds/Camellia.png',
+                    mod: 'Camellia',
+                    toLoad: [
+                        { dir: 'Musics/musics/camellia/ghost-vip/Inst.ogg' },
+                        { dir: 'Musics/musics/camellia/ghost-vip/Voices.ogg' },
+                    ]
+                },
+            ]
+        },
+        {
+            name: 'Late-Night-City-Tale',
+            menuColor: 'rgb(138, 12, 162)',
+            musics: [
+                {
+                    suffix: '❗',
+                    name: 'Azure-Encounter',
+                    menuColor: 'rgb(138, 12, 162)',
+                    difficulties: [ 0, 1, 2, 3 ],
+                    notesImageDir: 'Arrows/LNCTNotes/',
+                    backgroundImage: 'backgrounds/LateNightCityTale.jpg',
+                    mod: 'LateNightCityTale',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 2,
+                    noteResize: 1.03,
+                    toLoad: [
+                        { dir: 'imgs/LateNightCityTale/hurt.png' },
+                        { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
+                        { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
+                        { dir: 'Arrows/LNCTRed/splash.png', animationConfigDir: 'Arrows/LNCTRed/splash.json' },
+                        { dir: 'Arrows/LNCTNotes/Arrows.png', animationConfigDir: 'Arrows/LNCTNotes/Arrows.json' },
+                        { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
+                        { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
+                        { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
+                        { dir: 'Musics/musics/late-night-city-tale/azure-encounter/Inst.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/azure-encounter/Voices.ogg' },
+                        { dir: 'Sounds/LateNightCityTale/blackNote1.ogg' },
+                        { dir: 'Sounds/LateNightCityTale/blackNote2.ogg' },
+                        { dir: 'Sounds/LateNightCityTale/heal.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗',
+                    name: 'Secret-Marilee',
+                    menuColor: 'rgb(138, 12, 162)',
+                    difficulties: [ 0, 1, 2, 3 ],
+                    notesImageDir: 'Arrows/LNCTNotes/',
+                    backgroundImage: 'backgrounds/LateNightCityTale.jpg',
+                    mod: 'LateNightCityTale',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 2,
+                    noteResize: 1.03,
+                    toLoad: [
+                        { dir: 'imgs/LateNightCityTale/purple-filter.png' },
+                        { dir: 'imgs/LateNightCityTale/hurt.png' },
+                        { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
+                        { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
+                        { dir: 'Arrows/LNCTRed/splash.png', animationConfigDir: 'Arrows/LNCTRed/splash.json' },
+                        { dir: 'Arrows/LNCTNotes/Arrows.png', animationConfigDir: 'Arrows/LNCTNotes/Arrows.json' },
+                        { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
+                        { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
+                        { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
+                        { dir: 'Musics/musics/late-night-city-tale/secret-marilee/Inst.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/secret-marilee/Voices.ogg' },
+                        { dir: 'Sounds/LateNightCityTale/blackNote1.ogg' },
+                        { dir: 'Sounds/LateNightCityTale/blackNote2.ogg' },
+                        { dir: 'Sounds/LateNightCityTale/heal.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗',
+                    name: 'Broken-Heart',
+                    menuColor: 'rgb(138, 12, 162)',
+                    difficulties: [ 0, 1, 2, 3 ],
+                    notesImageDir: 'Arrows/LNCTNotes/',
+                    backgroundImage: 'backgrounds/LateNightCityTale.jpg',
+                    mod: 'LateNightCityTale',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 2,
+                    noteResize: 1.03,
+                    toLoad: [
+                        { dir: 'imgs/LateNightCityTale/Broken.png' },
+                        { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
+                        { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
+                        { dir: 'Arrows/LNCTRed/splash.png', animationConfigDir: 'Arrows/LNCTRed/splash.json' },
+                        { dir: 'Arrows/LNCTNotes/Arrows.png', animationConfigDir: 'Arrows/LNCTNotes/Arrows.json' },
+                        { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
+                        { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
+                        { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
+                        { dir: 'Musics/musics/late-night-city-tale/broken-heart/Inst.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/broken-heart/Voices.ogg' },
+                        { dir: 'Sounds/LateNightCityTale/broken.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗',
+                    name: 'Aquaphobia',
+                    menuColor: 'rgb(138, 12, 162)',
+                    difficulties: [ 0, 1, 2, 3 ],
+                    notesImageDir: 'Arrows/LNCTNotes/',
+                    backgroundImage: 'backgrounds/LateNightCityTale.jpg',
+                    mod: 'LateNightCityTale',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 2,
+                    noteResize: 1.03,
+                    toLoad: [
+                        { dir: 'imgs/LateNightCityTale/purple-filter.png' },
+                        { dir: 'imgs/LateNightCityTale/hurt.png' },
+                        { dir: 'imgs/LateNightCityTale/brokenScreen/whiteScreen.png' },
+                        { dir: 'imgs/LateNightCityTale/brokenScreen/brokenScreen.png', animationConfigDir: 'imgs/LateNightCityTale/brokenScreen/brokenScreen.json' },
+                        { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
+                        { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
+                        { dir: 'Arrows/LNCTRed/splash.png', animationConfigDir: 'Arrows/LNCTRed/splash.json' },
+                        { dir: 'Arrows/LNCTNotes/Arrows.png', animationConfigDir: 'Arrows/LNCTNotes/Arrows.json' },
+                        { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
+                        { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
+                        { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
+                        { dir: 'Musics/musics/late-night-city-tale/aquaphobia/Inst.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/aquaphobia/Voices.ogg' },
+                        { dir: 'Sounds/LateNightCityTale/blackNote1.ogg' },
+                        { dir: 'Sounds/LateNightCityTale/blackNote2.ogg' },
+                        { dir: 'Sounds/LateNightCityTale/heal.ogg' },
+                        { dir: 'Sounds/LateNightCityTale/glassBreak1.ogg' },
+                        { dir: 'Sounds/LateNightCityTale/glassBreak2.ogg' },
+                    ]
+                },
+                {
+                    suffix: '❗',
+                    name: 'Lonely-Sapphire',
+                    menuColor: 'rgb(138, 12, 162)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/LNCTNotes/',
+                    backgroundImage: 'backgrounds/LateNightCityTale.jpg',
+                    mod: 'LateNightCityTale',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 2,
+                    noteResize: 1.03,
+                    toLoad: [
+                        { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
+                        { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
+                        { dir: 'Arrows/LNCTRed/splash.png', animationConfigDir: 'Arrows/LNCTRed/splash.json' },
+                        { dir: 'Arrows/LNCTNotes/Arrows.png', animationConfigDir: 'Arrows/LNCTNotes/Arrows.json' },
+                        { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
+                        { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
+                        { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
+                        { dir: 'Musics/musics/late-night-city-tale/lonely-sapphire/Inst.ogg' },
+                        { dir: 'Musics/musics/late-night-city-tale/lonely-sapphire/Voices.ogg' },
+                    ]
+                }
+            ]
         },
         {
             name: 'Mid-Fight-Masses',
@@ -936,7 +1800,7 @@ export default async (state) => {
                     difficulties: [ 0, 1, 2 ],
                     notesImageDir: 'Arrows/dusk-till-dawn/',
                     backgroundImage: 'backgrounds/dusk-till-dawn.png',
-                    cutscene: 'DuskTillDawn/cutscene.mp4',
+                    //cutscene: 'DuskTillDawn/cutscene.mp4',
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.3,
                     mod: 'DuskTillDawn',
@@ -1063,92 +1927,6 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Musics/musics/vs-bob/little-man/Inst.ogg' },
                         { dir: 'Musics/musics/vs-bob/little-man/Voices.ogg' },
-                    ]
-                }
-            ],
-        },
-        {
-            name: 'QT',
-            menuColor: 'rgb(251, 150, 183)',
-            musics: [
-                {
-                    name: 'Carefree',
-                    menuColor: 'rgb(251, 150, 183)',
-                    difficulties: [ 0, 1, 2, 5 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/qt.png',
-                    mod: 'QT',
-                    toLoad: [
-                        { dir: 'Musics/musics/qt/carefree/Inst.ogg' },
-                        { dir: 'Musics/musics/qt/carefree/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Careless',
-                    menuColor: 'rgb(251, 150, 183)',
-                    difficulties: [ 0, 1, 2, 5 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/qt.png',
-                    mod: 'QT',
-                    toLoad: [
-                        { dir: 'Musics/musics/qt/careless/Inst.ogg' },
-                        { dir: 'Musics/musics/qt/careless/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Censory-Overload',
-                    menuColor: 'rgb(251, 150, 183)',
-                    difficulties: [ 0, 1, 2, 5 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/qt.png',
-                    mod: 'QT',
-                    toLoad: [
-                        { dir: 'Musics/musics/qt/censory-overload/Inst.ogg' },
-                        { dir: 'Musics/musics/qt/censory-overload/Voices.ogg' },
-                    ]
-                },
-                {
-                    suffix: '❗🔼',
-                    name: 'Termination',
-                    menuColor: 'rgb(251, 150, 183)',
-                    difficulties: [ 2, 5, 3 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/qt.png',
-                    mod: 'QT',
-                    toLoad: [
-                        { dir: 'imgs/QT/pincer-open.png' },
-                        { dir: 'imgs/QT/pincer-close.png' },
-                        { dir: 'imgs/QT/alert.png', animationConfigDir: 'imgs/QT/alert.json' },
-                        { dir: 'Musics/musics/qt/termination/Inst.ogg' },
-                        { dir: 'Musics/musics/qt/termination/Voices.ogg' },
-                        { dir: 'Sounds/alert.ogg' },
-                        { dir: 'Sounds/alertDouble.ogg' },
-                        { dir: 'Sounds/attack.ogg' },
-                        { dir: 'Sounds/attack-double.ogg' },
-                    ]
-                },
-                {
-                    name: 'Cessation',
-                    menuColor: 'rgb(251, 150, 183)',
-                    difficulties: [ 1 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/qt.png',
-                    mod: 'QT',
-                    toLoad: [
-                        { dir: 'Musics/musics/qt/cessation/Inst.ogg' },
-                        { dir: 'Musics/musics/qt/cessation/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Interlope',
-                    menuColor: 'rgb(251, 150, 183)',
-                    difficulties: [ 1 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/qt.png',
-                    mod: 'QT',
-                    toLoad: [
-                        { dir: 'Musics/musics/qt/interlope/Inst.ogg' },
-                        { dir: 'Musics/musics/qt/interlope/Voices.ogg' },
                     ]
                 }
             ],
@@ -1357,147 +2135,6 @@ export default async (state) => {
                     ]
                 }
             ],
-        },
-        {
-            name: 'Late-Night-City-Tale',
-            menuColor: 'rgb(138, 12, 162)',
-            musics: [
-                {
-                    suffix: '❗',
-                    name: 'Azure-Encounter',
-                    menuColor: 'rgb(138, 12, 162)',
-                    difficulties: [ 0, 1, 2, 3 ],
-                    notesImageDir: 'Arrows/LNCTNotes/',
-                    backgroundImage: 'backgrounds/LateNightCityTale.jpg',
-                    mod: 'LateNightCityTale',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 2,
-                    noteResize: 1.03,
-                    toLoad: [
-                        { dir: 'imgs/LateNightCityTale/hurt.png' },
-                        { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
-                        { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
-                        { dir: 'Arrows/LNCTRed/splash.png', animationConfigDir: 'Arrows/LNCTRed/splash.json' },
-                        { dir: 'Arrows/LNCTNotes/Arrows.png', animationConfigDir: 'Arrows/LNCTNotes/Arrows.json' },
-                        { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
-                        { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
-                        { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
-                        { dir: 'Musics/musics/late-night-city-tale/azure-encounter/Inst.ogg' },
-                        { dir: 'Musics/musics/late-night-city-tale/azure-encounter/Voices.ogg' },
-                        { dir: 'Sounds/LateNightCityTale/blackNote1.ogg' },
-                        { dir: 'Sounds/LateNightCityTale/blackNote2.ogg' },
-                        { dir: 'Sounds/LateNightCityTale/heal.ogg' },
-                    ]
-                },
-                {
-                    suffix: '❗',
-                    name: 'Secret-Marilee',
-                    menuColor: 'rgb(138, 12, 162)',
-                    difficulties: [ 0, 1, 2, 3 ],
-                    notesImageDir: 'Arrows/LNCTNotes/',
-                    backgroundImage: 'backgrounds/LateNightCityTale.jpg',
-                    mod: 'LateNightCityTale',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 2,
-                    noteResize: 1.03,
-                    toLoad: [
-                        { dir: 'imgs/LateNightCityTale/purple-filter.png' },
-                        { dir: 'imgs/LateNightCityTale/hurt.png' },
-                        { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
-                        { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
-                        { dir: 'Arrows/LNCTRed/splash.png', animationConfigDir: 'Arrows/LNCTRed/splash.json' },
-                        { dir: 'Arrows/LNCTNotes/Arrows.png', animationConfigDir: 'Arrows/LNCTNotes/Arrows.json' },
-                        { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
-                        { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
-                        { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
-                        { dir: 'Musics/musics/late-night-city-tale/secret-marilee/Inst.ogg' },
-                        { dir: 'Musics/musics/late-night-city-tale/secret-marilee/Voices.ogg' },
-                        { dir: 'Sounds/LateNightCityTale/blackNote1.ogg' },
-                        { dir: 'Sounds/LateNightCityTale/blackNote2.ogg' },
-                        { dir: 'Sounds/LateNightCityTale/heal.ogg' },
-                    ]
-                },
-                {
-                    suffix: '❗',
-                    name: 'Broken-Heart',
-                    menuColor: 'rgb(138, 12, 162)',
-                    difficulties: [ 0, 1, 2, 3 ],
-                    notesImageDir: 'Arrows/LNCTNotes/',
-                    backgroundImage: 'backgrounds/LateNightCityTale.jpg',
-                    mod: 'LateNightCityTale',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 2,
-                    noteResize: 1.03,
-                    toLoad: [
-                        { dir: 'imgs/LateNightCityTale/Broken.png' },
-                        { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
-                        { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
-                        { dir: 'Arrows/LNCTRed/splash.png', animationConfigDir: 'Arrows/LNCTRed/splash.json' },
-                        { dir: 'Arrows/LNCTNotes/Arrows.png', animationConfigDir: 'Arrows/LNCTNotes/Arrows.json' },
-                        { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
-                        { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
-                        { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
-                        { dir: 'Musics/musics/late-night-city-tale/broken-heart/Inst.ogg' },
-                        { dir: 'Musics/musics/late-night-city-tale/broken-heart/Voices.ogg' },
-                        { dir: 'Sounds/LateNightCityTale/broken.ogg' },
-                    ]
-                },
-                {
-                    suffix: '❗',
-                    name: 'Aquaphobia',
-                    menuColor: 'rgb(138, 12, 162)',
-                    difficulties: [ 0, 1, 2, 3 ],
-                    notesImageDir: 'Arrows/LNCTNotes/',
-                    backgroundImage: 'backgrounds/LateNightCityTale.jpg',
-                    mod: 'LateNightCityTale',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 2,
-                    noteResize: 1.03,
-                    toLoad: [
-                        { dir: 'imgs/LateNightCityTale/purple-filter.png' },
-                        { dir: 'imgs/LateNightCityTale/hurt.png' },
-                        { dir: 'imgs/LateNightCityTale/brokenScreen/whiteScreen.png' },
-                        { dir: 'imgs/LateNightCityTale/brokenScreen/brokenScreen.png', animationConfigDir: 'imgs/LateNightCityTale/brokenScreen/brokenScreen.json' },
-                        { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
-                        { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
-                        { dir: 'Arrows/LNCTRed/splash.png', animationConfigDir: 'Arrows/LNCTRed/splash.json' },
-                        { dir: 'Arrows/LNCTNotes/Arrows.png', animationConfigDir: 'Arrows/LNCTNotes/Arrows.json' },
-                        { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
-                        { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
-                        { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
-                        { dir: 'Musics/musics/late-night-city-tale/aquaphobia/Inst.ogg' },
-                        { dir: 'Musics/musics/late-night-city-tale/aquaphobia/Voices.ogg' },
-                        { dir: 'Sounds/LateNightCityTale/blackNote1.ogg' },
-                        { dir: 'Sounds/LateNightCityTale/blackNote2.ogg' },
-                        { dir: 'Sounds/LateNightCityTale/heal.ogg' },
-                        { dir: 'Sounds/LateNightCityTale/glassBreak1.ogg' },
-                        { dir: 'Sounds/LateNightCityTale/glassBreak2.ogg' },
-                    ]
-                },
-                {
-                    suffix: '❗',
-                    name: 'Lonely-Sapphire',
-                    menuColor: 'rgb(138, 12, 162)',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/LNCTNotes/',
-                    backgroundImage: 'backgrounds/LateNightCityTale.jpg',
-                    mod: 'LateNightCityTale',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 2,
-                    noteResize: 1.03,
-                    toLoad: [
-                        { dir: 'Arrows/LNCTWhite/splash.png', animationConfigDir: 'Arrows/LNCTWhite/splash.json' },
-                        { dir: 'Arrows/LNCTBlack/splash.png', animationConfigDir: 'Arrows/LNCTBlack/splash.json' },
-                        { dir: 'Arrows/LNCTRed/splash.png', animationConfigDir: 'Arrows/LNCTRed/splash.json' },
-                        { dir: 'Arrows/LNCTNotes/Arrows.png', animationConfigDir: 'Arrows/LNCTNotes/Arrows.json' },
-                        { dir: 'Arrows/LNCTBlack/Arrows.png', animationConfigDir: 'Arrows/LNCTBlack/Arrows.json' },
-                        { dir: 'Arrows/LNCTRed/Arrows.png', animationConfigDir: 'Arrows/LNCTRed/Arrows.json' },
-                        { dir: 'Arrows/LNCTWhite/Arrows.png', animationConfigDir: 'Arrows/LNCTWhite/Arrows.json' },
-                        { dir: 'Musics/musics/late-night-city-tale/lonely-sapphire/Inst.ogg' },
-                        { dir: 'Musics/musics/late-night-city-tale/lonely-sapphire/Voices.ogg' },
-                    ]
-                }
-            ]
         },
         {
             name: 'VS-Withered-Freddy',
@@ -1757,153 +2394,22 @@ export default async (state) => {
             ]
         },
         {
-            name: 'Camellia',
-            menuColor: '#d55f56',
+            name: 'Bad-Apple',
+            menuColor: 'white',
             musics: [
                 {
-                    name: 'Camellia-Tutorial',
-                    menuColor: '#ff9292',
-                    difficulties: [ 0, 1, 2 ],
+                    name: 'Bad-Apple',
+                    menuColor: 'white',
+                    difficulties: [ 1, 9 ],
                     notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/Camellia.png',
-                    mod: 'Camellia',
+                    backgroundVideo: 'Bad-Apple/Bad-Apple.mp4',
+                    screenFilter: 'contrast(200%) grayscale(100%)',
+                    mod: 'BadApple',
                     toLoad: [
-                        { dir: 'Musics/musics/camellia/camellia-tutorial/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia/camellia-tutorial/Voices.ogg' },
+                        { dir: 'Musics/musics/bad-apple/bad-apple/Inst.ogg' },
+                        { dir: 'Musics/musics/bad-apple/bad-apple/Voices.ogg' },
                     ]
-                },
-                {
-                    name: 'Boyfriend',
-                    menuColor: '#ff9292',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/Camellia.png',
-                    mod: 'Camellia',
-                    toLoad: [
-                        { dir: 'Musics/musics/camellia/boyfriend/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia/boyfriend/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'First-Town',
-                    menuColor: '#d55f56',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/Camellia.png',
-                    mod: 'Camellia',
-                    toLoad: [
-                        { dir: 'Musics/musics/camellia/first-town/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia/first-town/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Liquated',
-                    menuColor: '#d55f56',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/Camellia.png',
-                    mod: 'Camellia',
-                    toLoad: [
-                        { dir: 'Musics/musics/camellia/liquated/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia/liquated/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Why-do-you-hate-me',
-                    menuColor: '#d55f56',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/Camellia.png',
-                    mod: 'Camellia',
-                    toLoad: [
-                        { dir: 'Musics/musics/camellia/why-do-you-hate-me/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia/why-do-you-hate-me/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Quaoar',
-                    menuColor: '#d55f56',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/Camellia.png',
-                    mod: 'Camellia',
-                    toLoad: [
-                        { dir: 'Musics/musics/camellia/quaoar/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia/quaoar/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Crystallized',
-                    menuColor: '#d55f56',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/Camellia.png',
-                    mod: 'Camellia',
-                    toLoad: [
-                        { dir: 'Musics/musics/camellia/crystallized/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia/crystallized/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Nacreous-Snowmelt',
-                    menuColor: '#d55f56',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/Camellia.png',
-                    mod: 'Camellia',
-                    toLoad: [
-                        { dir: 'Musics/musics/camellia/nacreous-snowmelt/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia/nacreous-snowmelt/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Lioness-Pride',
-                    menuColor: '#d55f56',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/Camellia.png',
-                    mod: 'Camellia',
-                    toLoad: [
-                        { dir: 'Musics/musics/camellia/lioness-pride/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia/lioness-pride/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Ghost',
-                    menuColor: '#d55f56',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/Camellia.png',
-                    mod: 'Camellia',
-                    toLoad: [
-                        { dir: 'Musics/musics/camellia/ghost/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia/ghost/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Ghoul',
-                    menuColor: '#d55f56',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/Camellia.png',
-                    mod: 'Camellia',
-                    toLoad: [
-                        { dir: 'Musics/musics/camellia/ghoul/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia/ghoul/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Ghost-Vip',
-                    menuColor: '#d55f56',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundImage: 'backgrounds/Camellia.png',
-                    mod: 'Camellia',
-                    toLoad: [
-                        { dir: 'Musics/musics/camellia/ghost-vip/Inst.ogg' },
-                        { dir: 'Musics/musics/camellia/ghost-vip/Voices.ogg' },
-                    ]
-                },
+                }
             ]
         },
         {
@@ -1913,7 +2419,7 @@ export default async (state) => {
                 {
                     name: 'Thunderstorm',
                     menuColor: 'RAINBOW-4894',
-                    difficulties: [ 0, 1, 2 ],
+                    difficulties: [ 2 ],
                     filterNotes: {
                         1: 6,
                         2: 26,
@@ -2017,146 +2523,6 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Musics/musics/undefined/through-the-fire-and-flames/Inst.ogg' },
                         { dir: 'Musics/musics/undefined/through-the-fire-and-flames/Voices.ogg' },
-                    ]
-                },
-            ]
-        },
-        {
-            name: 'Bad-Apple',
-            menuColor: 'white',
-            musics: [
-                {
-                    name: 'Bad-Apple',
-                    menuColor: 'white',
-                    difficulties: [ 1, 9 ],
-                    notesImageDir: 'Arrows/',
-                    backgroundVideo: 'Bad-Apple/Bad-Apple.mp4',
-                    screenFilter: 'contrast(200%) grayscale(100%)',
-                    mod: 'BadApple',
-                    toLoad: [
-                        { dir: 'Musics/musics/bad-apple/bad-apple/Inst.ogg' },
-                        { dir: 'Musics/musics/bad-apple/bad-apple/Voices.ogg' },
-                    ]
-                }
-            ]
-        },
-        {
-            name: 'VS-Mami',
-            menuColor: '#cba360',
-            musics: [
-                {
-                    name: 'Connect',
-                    menuColor: '#cba360',
-                    difficulties: [ 0, 1, 2, 10 ],
-                    notesImageDir: 'Arrows/MamiArrowsAlt/',
-                    splashDir: 'Arrows/MamiArrowsAlt/splash.png',
-                    splashResize: 1.5,
-                    backgroundImage: 'backgrounds/VsMami.png',
-                    mod: 'VSMami',
-                    toLoad: [
-                        { dir: 'imgs/Mami/pyramid.png' },
-                        { dir: 'Sounds/Chamoy.mp3' },
-                        { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
-                        { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
-                        { dir: 'Musics/musics/vs-mami/connect/Inst.ogg' },
-                        { dir: 'Musics/musics/vs-mami/connect/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Reminisce',
-                    menuColor: '#cba360',
-                    difficulties: [ 0, 1, 2, 10 ],
-                    notesImageDir: 'Arrows/MamiArrowsAlt/',
-                    splashDir: 'Arrows/MamiArrowsAlt/splash.png',
-                    splashResize: 1.5,
-                    backgroundImage: 'backgrounds/VsMami.png',
-                    mod: 'VSMami',
-                    toLoad: [
-                        { dir: 'imgs/Mami/pyramid.png' },
-                        { dir: 'Sounds/Chamoy.mp3' },
-                        { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
-                        { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
-                        { dir: 'Musics/musics/vs-mami/reminisce/Inst.ogg' },
-                        { dir: 'Musics/musics/vs-mami/reminisce/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Salvation',
-                    menuColor: '#cba360',
-                    difficulties: [ 0, 1, 2, 10 ],
-                    notesImageDir: 'Arrows/MamiArrowsAlt/',
-                    splashDir: 'Arrows/MamiArrowsAlt/splash.png',
-                    splashResize: 1.5,
-                    backgroundImage: 'backgrounds/VsMami.png',
-                    mod: 'VSMami',
-                    toLoad: [
-                        { dir: 'imgs/Mami/pyramid.png' },
-                        { dir: 'Sounds/Chamoy.mp3' },
-                        { dir: 'Sounds/Mami/MAMI_shoot.ogg' },
-                        { dir: 'Arrows/holynote/Arrows.png', animationConfigDir: 'Arrows/holynote/Arrows.json' },
-                        { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
-                        { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
-                        { dir: 'Musics/musics/vs-mami/salvation/Inst.ogg' },
-                        { dir: 'Musics/musics/vs-mami/salvation/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Tetris',
-                    menuColor: '#cba360',
-                    difficulties: [ 0, 1, 2, 10 ],
-                    notesImageDir: 'Arrows/MamiArrowsTetris/',
-                    splashDir: 'Arrows/MamiArrowsAlt/splash.png',
-                    splashResize: 1.5,
-                    backgroundImage: 'backgrounds/VsMami.png',
-                    mod: 'VSMami',
-                    toLoad: [
-                        { dir: 'imgs/Mami/pyramid.png' },
-                        { dir: 'Sounds/Chamoy.mp3' },
-                        { dir: 'imgs/Mami/crowd.png' },
-                        { dir: 'Sounds/Mami/MAMI_shoot.ogg' },
-                        { dir: 'Arrows/holynote/Arrows.png', animationConfigDir: 'Arrows/holynote/Arrows.json' },
-                        { dir: 'Arrows/MamiArrowsTetris/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsTetris/Arrows.json' },
-                        { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
-                        { dir: 'Musics/musics/vs-mami/tetris/Inst.ogg' },
-                        { dir: 'Musics/musics/vs-mami/tetris/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Mamigation',
-                    menuColor: '#cba360',
-                    difficulties: [ 0, 1, 2, 10 ],
-                    notesImageDir: 'Arrows/MamiArrowsAlt/',
-                    splashDir: 'Arrows/MamiArrowsAlt/splash.png',
-                    splashResize: 1.5,
-                    backgroundImage: 'backgrounds/VsMami.png',
-                    mod: 'VSMami',
-                    toLoad: [
-                        { dir: 'imgs/Mami/pyramid.png' },
-                        { dir: 'Sounds/Chamoy.mp3' },
-                        { dir: 'Sounds/Mami/MAMI_shoot.ogg' },
-                        { dir: 'Arrows/holynote/Arrows.png', animationConfigDir: 'Arrows/holynote/Arrows.json' },
-                        { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
-                        { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
-                        { dir: 'Musics/musics/vs-mami/mamigation/Inst.ogg' },
-                        { dir: 'Musics/musics/vs-mami/mamigation/Voices.ogg' },
-                    ]
-                },
-                {
-                    name: 'Konnect',
-                    menuColor: '#cba360',
-                    difficulties: [ 0, 1, 2, 10 ],
-                    notesImageDir: 'Arrows/MamiArrowsAlt/',
-                    splashDir: 'Arrows/MamiArrowsAlt/splash.png',
-                    splashResize: 1.5,
-                    backgroundImage: 'backgrounds/VsMami.png',
-                    mod: 'VSMami',
-                    toLoad: [
-                        { dir: 'imgs/Mami/pyramid.png' },
-                        { dir: 'Sounds/Chamoy.mp3' },
-                        { dir: 'Arrows/MamiArrowsAlt/Arrows.png', animationConfigDir: 'Arrows/MamiArrowsAlt/Arrows.json' },
-                        { dir: 'Arrows/MamiArrowsAlt/splash.png', animationConfigDir: 'Arrows/MamiArrowsAlt/splash.json' },
-                        { dir: 'Musics/musics/vs-mami/konnect/Inst.ogg' },
-                        { dir: 'Musics/musics/vs-mami/konnect/Voices.ogg' },
                     ]
                 },
             ]

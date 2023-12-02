@@ -103,6 +103,50 @@ export default async (state) => {
                     content: 'KeyL'
                 }
             ],
+            "7K": [
+                {
+                    name: 'Arrow 1',
+                    id: 'Arrow-0',
+                    type: 'KeyBind',
+                    content: 'KeyS'
+                },
+                {
+                    name: 'Arrow 2',
+                    id: 'Arrow-1',
+                    type: 'KeyBind',
+                    content: 'KeyD'
+                },
+                {
+                    name: 'Arrow 3',
+                    id: 'Arrow-2',
+                    type: 'KeyBind',
+                    content: 'KeyF'
+                },
+                {
+                    name: 'Arrow 4',
+                    id: 'Arrow-3',
+                    type: 'KeyBind',
+                    content: 'Space'
+                },
+                {
+                    name: 'Arrow 5',
+                    id: 'Arrow-4',
+                    type: 'KeyBind',
+                    content: 'KeyJ'
+                },
+                {
+                    name: 'Arrow 6',
+                    id: 'Arrow-5',
+                    type: 'KeyBind',
+                    content: 'KeyK'
+                },
+                {
+                    name: 'Arrow 7',
+                    id: 'Arrow-6',
+                    type: 'KeyBind',
+                    content: 'KeyL'
+                }
+            ],
             "9K": [
                 {
                     name: 'Arrow 1',

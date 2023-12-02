@@ -25,9 +25,9 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
     for (let i in filtredMusics) {
         let mod = filtredMusics[i]
-        let modNameTxt = `${mod.special ? '👑' : ''} ${mod.name.replace(/-/g, ' ')} ${mod.special ? '👑' : ''}`
+        let modNameTxt = `${mod.dev ? '⚒' : mod.special ? '👑' : ''} ${mod.name.replace(/-/g, ' ')} ${mod.dev ? '⚒' : mod.special ? '👑' : ''}`
 
-        ctx.fillStyle = mod.special ? `rgba(200, 150, 00, ${currentSelection == 0 ? 0.6 : 0.3})` : `rgba(130, 130, 130, ${currentSelection == 0 ? 0.6 : 0.3})`
+        ctx.fillStyle = mod.dev ? 'rgba(150, 25, 25)' : mod.special ? `rgba(200, 150, 00, ${currentSelection == 0 ? 0.6 : 0.3})` : `rgba(130, 130, 130, ${currentSelection == 0 ? 0.6 : 0.3})`
         ctx.fillRect(20, modsY-20, contentWidth-40, 30);
 
         if (i == modSelect) {
