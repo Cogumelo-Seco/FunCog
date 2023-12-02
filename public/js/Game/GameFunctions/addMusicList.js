@@ -1048,11 +1048,11 @@ export default async (state) => {
                     menuColor: 'rgb(51, 255, 74)',
                     difficulties: [ 0, 1, 2 ],
                     filterNotes: {
-                        1: 8,
+                        1: 9,
                         2: 9,
                     },
                     difficultyAlert: {
-                        1: '8k',
+                        1: '9k',
                         2: '9k',
                     },
                     notesImageDir: 'Arrows/',
