@@ -211,7 +211,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             <div id="updateLogTitle">Atualizações</div>
             
             <div id="updateContent">
-                <div id="updateDate">02/dec/2023</div>
+                <div id="updateDate">03/dec/2023</div>
                 <div id="updateNew" class="updateContentText">- Novo mod "Shaggy" adicionado</div>
                 <div id="updateUpdate" class="updateContentText">- Lista de mods reorganizada</div>
                 <div id="updateDate">02/sep/2023</div>
