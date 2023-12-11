@@ -284,8 +284,12 @@ const Game = (props) => {
                     for (let i in defaultSettingsOptions) {
                         let option = playerSettingsOptions.find((o, pI) => /*!o.name && defaultSettingsOptions[i]['4K'] ||*/ o?.id == defaultSettingsOptions[i].id && i == pI)
 
-                        let keyBindListOption = playerSettingsOptions.find((o) => o['4K'])
-                        if (defaultSettingsOptions[i]['4K']) keyBindListOption = defaultSettingsOptions[i]
+                        //let keyBindListOption = playerSettingsOptions.find((o) => o['4K'])
+                        //console.log(playerSettingsOptions.indexOf(keyBindListOption))
+                        if (defaultSettingsOptions[i]['4K']) {
+                            playerSettingsOptions[i] = defaultSettingsOptions[i]
+                            //keyBindListOption = defaultSettingsOptions[i]
+                        }
 
                         if (!option || !playerSettingsOptions[i]) reset = true
                         else if (playerSettingsOptions && playerSettingsOptions[i]?.name) {
