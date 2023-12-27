@@ -1,9 +1,9 @@
 export default function codesFunction(state, stateListener) {
     let loop = () => {
-        if (state.socket.id) {
+        //if (state.socket.id) {
             setTimeout(loop, 1000/2)
             state.socket.emit('ping', +new Date())
-        } else state.ping = '???'
+        //} else state.ping = '???'
     }
     loop()
 
@@ -28,6 +28,7 @@ export default function codesFunction(state, stateListener) {
     })
 
     state.socket.on('messageHistory', (command) => {
+        state.messages = []
         state.messages = command || []
         require('./RenderChat').default(document.getElementById('gameCanvas'), state, stateListener, 'historyMessage')
     })

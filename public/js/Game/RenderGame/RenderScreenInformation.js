@@ -4,9 +4,9 @@ export default async (ctx, canvas, game, Listener, functions) => {
     functions.fillText({
         style: `hsl(${game.state.rainbowColor}, 100%, 40%)`,
         style2: `hsl(${game.state.rainbowColor+180}, 100%, 40%)`,
-        text: 'Created by: Kogu',
+        text: 'Created by: Cogu',
         font: 'bold 11px Arial',
-        x: canvas.width-ctx.measureText('Created by: Kogu').width-5,
+        x: canvas.width-ctx.measureText('Created by: Cogu').width-5,
         y: canvas.height-5,
         add: 1
     })

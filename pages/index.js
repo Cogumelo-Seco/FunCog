@@ -56,7 +56,7 @@ const Game = (props) => {
                             }
                         }
                     }, tryTime)
-                } else newSocketConnect()
+                } //else newSocketConnect(socket)
             })
         }
         tryConnect(props.SERVER, true)
@@ -64,12 +64,12 @@ const Game = (props) => {
         const Listener = null;
         const game = null
 
-        function newSocketConnect() {
+        function newSocketConnect(socket) {
             console.log('Nova conexão')
             setTimeout(() => {
-                let newSocket = io(props.SERVER, {
+                let newSocket = socket/*io(props.SERVER, {
                     withCredentials: true,
-                })
+                })*/
                 newSocket.on('connect', () => {
                     setNewSocket(newSocket)
                 })
@@ -77,8 +77,9 @@ const Game = (props) => {
         }
 
         function setNewSocket(socket) {
+            Listener.state.socket.removeAllListeners()
             game.state.socket.removeAllListeners()
-            game.state.socket.on('connect', newSocketConnect)
+            //game.state.socket.on('connect', () => newSocketConnect(game.state.socket))
 
             Listener.state.socket = socket
             game.state.socket = socket
@@ -164,7 +165,7 @@ const Game = (props) => {
                     const loginAndRegisterContents = document.getElementsByClassName('loginAndRegisterContent')
 
                     /*if (countFrame%30 == 0) for (let connectingMessage of connectingMessages) {
-                        if (connect) connectingMessage.style.display = 'none'
+                        if () connectingMessage.style.display = 'none'
                         else {
                             if (inConnecting) connectingMessage.innerText = ''
                             connectingMessage.innerText += '.'
