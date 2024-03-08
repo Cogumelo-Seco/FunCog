@@ -46,7 +46,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				state.screenZoom -= step > 700 ? 4 : 1
 			}
 
-			if (state.musicInfo.difficulty.name != 'Mania') {
+			if (state.musicInfo.difficulty.id != 3) {
 				let key = listenerState.keys['Space']
 				if (key && !key.clicked && variables.keys[key.code]) variables.keys[key.code] = false
 				if (
@@ -76,7 +76,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 
 			let ThermostatData = state.images['imgs/VSLullaby/Thermostat.png']
 			let TyphlosionVitData = state.images['imgs/VSLullaby/TyphlosionVit.png']
-			if (ThermostatData && TyphlosionVitData && state.musicInfo.difficulty.name != 'Mania') {
+			if (ThermostatData && TyphlosionVitData && state.musicInfo.difficulty.id != 3) {
 				let percent = variables.freezingLevel/variables.freezingLevelMax
 
 				let TyphlosionVitImage = TyphlosionVitData.image

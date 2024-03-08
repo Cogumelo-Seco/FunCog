@@ -287,7 +287,8 @@ export default function createListener(socket) {
                                 break
                             case 'Exit':
                                 state.game.state.musicInfo.dead = true
-                                state.game.state.music.currentTime = state.game.state.music.duration
+                                //state.game.state.music.currentTime = state.game.state.music.duration
+                                state.game.state.musicInfo.exit = true
                                 break
                         }
                         break
@@ -545,7 +546,7 @@ export default function createListener(socket) {
                         state.game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })
                         break
                     case keys.KeyEnter:
-                        if (state.game.state.selectMenuOption.menuOptions[state.game.state.selectMenuOption.menuSelect] == 'Singleplayer') {
+                        if (state.game.state.selectMenuOption.menuOptions[state.game.state.selectMenuOption.menuSelect] == 'ModList') {
                             state.game.state.online = false
                             state.game.state.smallFunctions.redirectGameStage('selectMusic')
                         } else if (state.game.state.selectMenuOption.menuOptions[state.game.state.selectMenuOption.menuSelect] == 'Multiplayer') {

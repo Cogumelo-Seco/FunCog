@@ -136,7 +136,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         `
         if (notUpdate) menuElement.appendChild(menuStyle)
 
-        let Y = canvas.height*0.29
+        let Y = canvas.height*0.35//canvas.height*0.29
         for (let i in game.state.selectMenuOption.menuOptions) {
             let optionElement = document.getElementById(i+'-menuOptions') || document.createElement('button')
             optionElement.className = 'menuButton'
@@ -166,7 +166,8 @@ export default async (ctx, canvas, game, Listener, functions) => {
             for (let element of optionButtonElements) element.onclick = () => optionElement.onclick()
 
             if (notUpdate) menuElement.appendChild(optionElement)
-            Y += (canvas.height-(canvas.height*0.25*2))/(game.state.selectMenuOption.menuOptions.length-1)
+            //Y += (canvas.height-(canvas.height*0.25*2))/(game.state.selectMenuOption.menuOptions.length-1)
+            Y += (canvas.height-(canvas.height*0.30*2))/(game.state.selectMenuOption.menuOptions.length-1)
         }
 
 
@@ -211,6 +212,9 @@ export default async (ctx, canvas, game, Listener, functions) => {
             <div id="updateLogTitle">Atualizações</div>
             
             <div id="updateContent">
+                <div id="updateDate">08/mar/2024</div>
+                <div id="bugFix" class="updateContentText">- Correção da dificuldade "BABY" em algumas músicas</div>
+                <div id="bugFix" class="updateContentText">- Correção de Bug ao sair da música</div>
                 <div id="updateDate">03/dec/2023</div>
                 <div id="updateNew" class="updateContentText">- Novo mod "Shaggy" adicionado</div>
                 <div id="updateUpdate" class="updateContentText">- Lista de mods reorganizada</div>

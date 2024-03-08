@@ -184,7 +184,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 					let values = state.musicInfo.events[i][1][a]
 
 					if (variables.oldCurrentTime*1000 <= time && currentTime*1000 >= time) {
-						if (state.musicInfo.difficulty.name != 'Mania' || values[0] == 'streetBG state' || values[0] == 'TerminationIntro' || values[0] == 'TerminationOutro') switch(values[0]) {
+						if (state.musicInfo.difficulty.id != 3 || values[0] == 'streetBG state' || values[0] == 'TerminationIntro' || values[0] == 'TerminationOutro') switch(values[0]) {
 							case 'TerminationIntro':
 								intro_outro(values[2] == 'player', Number(values[1]), 0.04)
 								break

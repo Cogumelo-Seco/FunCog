@@ -38,7 +38,8 @@ function createGame(Listener, canvas, socket) {
             currentSelection: 0
         },
         selectMenuOption: {
-            menuOptions: [ 'Singleplayer', 'Multiplayer', 'Settings' ],
+            //menuOptions: [ 'Singleplayer', 'Multiplayer', 'Settings' ],
+            menuOptions: [ 'ModList', 'Settings' ],
             menuSelect: -1
         },
         selectSettingsOption: {
@@ -367,7 +368,8 @@ function createGame(Listener, canvas, socket) {
         let musicDuration = state.music?.duration
         let musicCurrentTime = state.music?.currentTime
 
-        if (musicCurrentTime > 1 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
+        if (state.musicInfo.exit || musicCurrentTime > 1 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
+            state.musicInfo.exit = false
             state.gameStageTime = +new Date()
             if (!botPlay && state.myConfig.logged) {
                 let XPgained = ((state.musicInfo.score/250)+(state.musicInfo.difficulty.xp || 100))*(state.musicInfo.accuracy/100)

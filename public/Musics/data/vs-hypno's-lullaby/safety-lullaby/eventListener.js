@@ -66,7 +66,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				state.screenZoom -= 1
 			}
 
-			if (state.musicInfo.difficulty.name != 'Mania') {
+			if (state.musicInfo.difficulty.id != 3) {
 				let pendelumAnimation = state.animations['Pendelum']
 				let pendelumImageData = state.images['imgs/VSLullaby/Pendelum.png']
 

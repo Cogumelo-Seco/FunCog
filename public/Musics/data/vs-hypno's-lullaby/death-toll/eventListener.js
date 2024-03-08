@@ -3,7 +3,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 		case 'noteClick':
 			break
 		case 'loaded':
-			if (state.musicInfo.difficulty.name != 'Mania') {
+			if (state.musicInfo.difficulty.id != 3) {
 				state.arrowsInfo[4] = {
 					arrowID: 4,
 					arrowFrameID: 4,

@@ -70,7 +70,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				}
 			}
 
-			if (state.musicInfo.difficulty.name != 'Mania' && step >= 316) {
+			if (state.musicInfo.difficulty.id != 3 && step >= 316) {
 				let pendelumAnimation = state.animations['Pendelum']
 				let pendelumImageData = state.images['imgs/VSLullaby/Pendelum.png']
 

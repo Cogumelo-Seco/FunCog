@@ -37,7 +37,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
                 let event = events[i]
 
                 if (variables.oldCurrentTime*1000 <= event[0] && currentTime*1000 >= event[0]) {
-					if (event[2] == 'Missingno' && state.musicInfo.difficulty.name != 'Mania') {
+					if (event[2] == 'Missingno' && state.musicInfo.difficulty.id != 3) {
 						let downScrool = Math.floor(Math.random()*100) > 50 ? true : false
 						state.selectSettingsOption.settingsOptions.find((g) => g.id == 'DownScroll').content = downScrool
 						let arrowSize = arrowsInfo[0]?.height**resizeNote

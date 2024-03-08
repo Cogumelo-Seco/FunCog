@@ -330,7 +330,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						state.animations['GoldNoMore'].frame = 0
 					}
 
-					if (event[2] == 'Unown' && state.musicInfo.difficulty.name != 'Mania') {
+					if (event[2] == 'Unown' && state.musicInfo.difficulty.id != 3) {
 						let percent = Math.floor(Math.random()*100)
 						let letters = monochromeTexts.words
 						if (percent >= 70 && percent < 85) letters = monochromeTexts.rareWords

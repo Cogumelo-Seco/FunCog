@@ -132,7 +132,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 
 			//if (variables.oldCurrentTime*1000 <= time && currentTime*1000 >= time) {
 
-			if (state.musicInfo.difficulty.name != 'Mania') for (let event of state.musicInfo.events) {
+			if (state.musicInfo.difficulty.id != 3) for (let event of state.musicInfo.events) {
 				if (variables.oldCurrentTime*1000 <= event[0] && currentTime*1000 >= event[0]) {
 					variables.changeScroll = true
 					state.sounds['Sounds/Lullaby/POW.ogg'].volume = 1
@@ -189,7 +189,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				state.screenZoom -= 1
 			}
 
-			if (state.musicInfo.difficulty.name != 'Mania' && state.musicInfo.difficulty.name != 'Hard') {
+			if (state.musicInfo.difficulty.id != 3 && state.musicInfo.difficulty.name != 'Hard') {
 				let pendelumAnimation = state.animations['Pendelum']
 				let pendelumImageData = state.images['imgs/VSLullaby/Pendelum.png']
 

@@ -28,7 +28,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 			let arrowsInfoOpponent = state.arrowsInfoOpponent
 			let spinLength = (beat-200)/300 * 15 + 10
 
-			if (beat >= 328 && state.musicInfo.difficulty.name != 'Mania') {
+			if (beat >= 328 && state.musicInfo.difficulty.id != 3) {
 				if (beat != variables.oldBeat && beat%10 == 0) variables.IsNoteSpinning = true
 
 				if (variables.arrowsMovementXAdd) {
@@ -50,8 +50,8 @@ export default async (type, { noteClickAuthor, note, notes, listenerState }, sta
 				}
 			}
 
-			if (beat >= 200 && !variables.waveNotes && state.musicInfo.difficulty.name != 'Mania') variables.waveNotes = true
-			if (beat == 201 && !state.invertArrowPos && state.musicInfo.difficulty.name != 'Mania') {
+			if (beat >= 200 && !variables.waveNotes && state.musicInfo.difficulty.id != 3) variables.waveNotes = true
+			if (beat == 201 && !state.invertArrowPos && state.musicInfo.difficulty.id != 3) {
 				variables.IsNoteSpinning = true
 				state.invertArrowPos = true
 
