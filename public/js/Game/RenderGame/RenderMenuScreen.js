@@ -213,6 +213,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             
             <div id="updateContent">
                 <div id="updateDate">08/mar/2024</div>
+                <div id="updateUpdate" class="updateContentText">- Layout da página de seleção de música alterado</div>
                 <div id="bugFix" class="updateContentText">- Correção da dificuldade "BABY" em algumas músicas</div>
                 <div id="bugFix" class="updateContentText">- Correção de Bug ao sair da música</div>
                 <div id="updateDate">03/dec/2023</div>
