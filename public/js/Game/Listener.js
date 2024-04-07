@@ -1,6 +1,6 @@
 import chat from './ListenerFunctions/Chat.js';
 
-export default function createListener(socket) {
+export default function createListener() {
     const state = {
         buttons: {},
         keys: {},
@@ -19,10 +19,9 @@ export default function createListener(socket) {
             mouseInfoType: 'percent',
             lastMoveTime: 0
         },
-        socket,
     }
 
-    const chatFunctions = chat(state, state.socket)
+    //const chatFunctions = chat(state)
     require('./ListenerFunctions/addButtons').default(state, handleKeys)
 
     document.onmousemove = (event) => {
@@ -368,23 +367,7 @@ export default function createListener(socket) {
                         let modInfo = filtredMusics[state.game.state.selectMusicMenu.modSelect]
                         let musicInfo = filtredMusics[state.game.state.selectMusicMenu.modSelect].musics[state.game.state.selectMusicMenu.musicSelect]
 
-                        if (modInfo && musicInfo && state.game.state.online) {
-                            state.musicMenu?.pause()
-                            state.game.state.smallFunctions.redirectGameStage('game')
-                            state.socket.emit('newServer', {
-                                difficulty: state.game.state.selectMusicMenu.difficultySelected,
-                                mod: state.game.state.selectMusicMenu.modSelect,
-                                music: state.game.state.selectMusicMenu.musicSelect
-                            })
-
-                            state.game.startMusic({
-                                modInfo,
-                                musicInfo,
-                                difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
-                                listenerState: state,
-                                socket: state.socket
-                            })
-                        } else if (modInfo && musicInfo) {
+                        if (modInfo && musicInfo) {
                             state.musicMenu?.pause()
                             state.game.playSong('Sounds/confirmMenu.ogg', { volume: 0.5 })
                             state.game.state.smallFunctions.redirectGameStage('game')
@@ -393,11 +376,9 @@ export default function createListener(socket) {
                                 modInfo,
                                 musicInfo,
                                 difficulty: state.game.state.difficulties[musicInfo.difficulties[state.game.state.selectMusicMenu.difficultySelected]],
-                                listenerState: state,
-                                socket: state.socket
+                                listenerState: state
                             })
                         }
-                        break
                 }
             }
 /*
@@ -566,7 +547,7 @@ export default function createListener(socket) {
             }
         }
 
-        if (on) chatFunctions.keyPressed(event)
+        //if (on) chatFunctions.keyPressed(event)
     }
 
     return {

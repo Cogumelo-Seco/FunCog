@@ -11,7 +11,7 @@ export default (ctx, canvas, state, Listener) => {
             }
             return width
         },
-        textDataConvert: (text, style) => {
+        textDataConvert: (text, style, customModifierType) => {
             let data = []
             if (text[0] != '§') data.push({ txt: text.split('§')[0], color: style || 'white', bold: false, italic: false })
             let lastStringData = {}

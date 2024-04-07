@@ -1,4 +1,4 @@
-export default function chat(state, socket) {
+export default function chat(state) {
     document.getElementById('chat-button').addEventListener('click', openCloseChat);
     
     const chatContent = document.getElementById('chat-content')

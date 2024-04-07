@@ -12,7 +12,6 @@ export default async (ctx, canvas, game, Listener, functions) => {
     let notUpdate = screenElements && !screenElements.getElementsByClassName('menuElement')[0]
     try {
         let menuElement = screenElements.getElementsByClassName('menuElement')[0] || document.createElement('div')
-
         
         if (notUpdate) screenElements.innerHTML = ''
         menuElement.className = 'menuElement stage'
@@ -136,7 +135,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         `
         if (notUpdate) menuElement.appendChild(menuStyle)
 
-        let Y = canvas.height*0.35//canvas.height*0.29
+        let Y = canvas.height*0.29//canvas.height*0.29
         for (let i in game.state.selectMenuOption.menuOptions) {
             let optionElement = document.getElementById(i+'-menuOptions') || document.createElement('button')
             optionElement.className = 'menuButton'

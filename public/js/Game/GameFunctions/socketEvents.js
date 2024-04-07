@@ -1,4 +1,4 @@
-export default function codesFunction(state, stateListener) {
+export default function codesFunction(state, stateListener) {/*
     let loop = () => {
         //if (state.socket.id) {
             setTimeout(loop, 1000/2)
@@ -24,7 +24,7 @@ export default function codesFunction(state, stateListener) {
                     rating.time = +new Date()
                 }
             }
-        }*/
+        }
     })
 
     state.socket.on('messageHistory', (command) => {
@@ -63,5 +63,5 @@ export default function codesFunction(state, stateListener) {
         }
     })
 
-    state.socket.on('error', (err) => alert(err))
+    state.socket.on('error', (err) => alert(err))*/
 }

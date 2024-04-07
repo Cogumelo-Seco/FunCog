@@ -46,19 +46,19 @@ export default async function renderGame(canvas, game, Listener) {
             break
         case 'menu':
             require('./RenderMenuScreen').default(ctx, canvas, game, Listener, functions)
-            require('./RenderScreenPlayerInfo').default(ctx, canvas, game, Listener, functions)
+            //require('./RenderScreenPlayerInfo').default(ctx, canvas, game, Listener, functions)
             break
         case 'settings':
             require('./RenderSettingsScreen').default(ctx, canvas, game, Listener, functions)
-            require('./RenderScreenPlayerInfo').default(ctx, canvas, game, Listener, functions)
+            //require('./RenderScreenPlayerInfo').default(ctx, canvas, game, Listener, functions)
             break
         case 'onlineServerList':
             require('./RenderOnlineServerListScreen').default(ctx, canvas, game, Listener, functions)
-            require('./RenderScreenPlayerInfo').default(ctx, canvas, game, Listener, functions)
+            //require('./RenderScreenPlayerInfo').default(ctx, canvas, game, Listener, functions)
             break
         case 'selectMusic':
             require('./RenderMusicSelectScreen').default(ctx, canvas, game, Listener, functions)
-            require('./RenderScreenPlayerInfo').default(ctx, canvas, game, Listener, functions)
+            //require('./RenderScreenPlayerInfo').default(ctx, canvas, game, Listener, functions)
             break
         case 'dead':
             require('./RenderDeadScreen').default(ctx, canvas, game, Listener, functions)

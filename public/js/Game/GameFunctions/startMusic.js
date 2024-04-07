@@ -1,4 +1,4 @@
-export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPlayer, socket }, state) => {
+export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPlayer }, state) => {
     //try {
         let overlayImageElement = document.getElementById('overlayImage')
         let videoElement = document.getElementById('gameVideo')
@@ -55,7 +55,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
             lastPopupTime: 0,
             variables: {},
             playerId: opponentPlayer ? 2 : 1,
-            playerServerId: socket.id,
+            playerServerId: '1',
             ratings: [],
             oldPauseTime: 0,
             judgements: {
@@ -216,8 +216,6 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
         }
 
         async function loaded() {
-            if (opponentPlayer && state.online) socket.emit('startMusic', { serverId: state.serverId })
-            if (!opponentPlayer && state.online) socket.emit('openServer', { serverId: state.serverId })
             state.musicEventListener('loaded', { difficulty, listenerState }, state)
 
             if (state.musicOpponentNotes.length <= 0 && state.online) {

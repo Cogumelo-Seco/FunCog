@@ -1,4 +1,4 @@
-export default (state, Listener, socket) => {
+export default (state, Listener) => {
     return {
         getBase64FromUrl: async (url, callback) => {
             var xhr = new XMLHttpRequest();
@@ -28,12 +28,13 @@ export default (state, Listener, socket) => {
             return (arrowsKey.find(c => c.id == 'Arrow-'+arrowID))?.content
         },
         redirectGameStage: async (newStage, oldStage) => {
+            let screenElements = document.getElementById('screenElements')
+            if (screenElements) screenElements.innerHTML = ''
+
             state.animations.transition.frame = 0
             state.gameStageTime = +new Date()
             state.oldGameStage = oldStage || state.gameStage
             state.gameStage = newStage
-
-            socket.emit('updatePlayer', { settings: state.myConfig.settings, token: state.myConfig.token })
         },
         getConfig: (id) => {
             return (state.selectSettingsOption.settingsOptions.find((g) => g?.id == id))?.content
@@ -136,8 +137,6 @@ export default (state, Listener, socket) => {
                 playerInfo.level += 1
                 if (playerInfo.xp >= state.smallFunctions.requiredXPCalc(playerInfo.level)) state.smallFunctions.rewardXP(0)
             } else playerInfo.xp += rewardXP
-
-            socket.emit('updatePlayer', playerInfo)
         },
         requiredXPCalc: (level) => Number.parseInt(5 * level ** 2 * level + 100)
     }

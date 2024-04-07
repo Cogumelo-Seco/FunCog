@@ -20,7 +20,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             x: (canvas.width-5)-ctx.measureText(`${game.state.fpsDisplay}FPS`).width,
             y: 15,
             add: 1
-        })
+        })/*
         functions.fillText({
             style: `hsl(${game.state.rainbowColor}, 100%, 40%)`,
             style2: `hsl(${game.state.rainbowColor+180}, 100%, 40%)`,
@@ -29,7 +29,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             x: (canvas.width-5)-ctx.measureText(`${game.state.ping}Ping`).width,
             y: 30,
             add: 1
-        })
+        })*/
 
         functions.fillText({
             alpha: (game.state.animations.code.frame/game.state.animations.code.endFrame) > 0.5 ? 1-((game.state.animations.code.frame/game.state.animations.code.endFrame)-0.5)/0.5 : game.state.alphaHUD,
@@ -41,7 +41,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             add: 2
         })
     }
-
+/*
     let ReturnPageButton = Listener.state.buttons['ReturnPageButton']
     if (ReturnPageButton.gameStage.includes(game.state.gameStage)) {
         let returnButtonX = canvas.width*(ReturnPageButton.minX/1000)

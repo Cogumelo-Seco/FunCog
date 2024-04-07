@@ -1,4 +1,4 @@
-function createGame(Listener, canvas, socket) {
+function createGame(Listener, canvas) {
     const state = {
         debug: false,
         fps: '0-0',
@@ -218,7 +218,6 @@ function createGame(Listener, canvas, socket) {
             total: 0,
             msg: 'Loading...'
         },
-        socket,
         filesURL: 'https://raw.githubusercontent.com/Cogumelo-Seco/FunCog-Files/main/'
     }
 
@@ -231,7 +230,7 @@ function createGame(Listener, canvas, socket) {
 
     const playSong = (type, command) => require('./GameFunctions/playSong').default(type, command, state)
     const calculateRating = (command) => require('./GameFunctions/calculateRating').default(command, state)
-    const smallFunctions = require('./GameFunctions/smallFunctions').default(state, Listener, state.socket)
+    const smallFunctions = require('./GameFunctions/smallFunctions').default(state, Listener)
     const codes = require('./GameFunctions/codes').default(state)
     state.Listener = Listener
     state.smallFunctions = smallFunctions
@@ -241,9 +240,6 @@ function createGame(Listener, canvas, socket) {
 
     const startMusic = (command) => require('./GameFunctions/startMusic').default(command, state)
     const verifyClick = (command) => require('./GameFunctions/verifyClick').default(command, state)
-
-    const socketEvents = () => require('./GameFunctions/socketEvents').default(state, Listener.state)
-    socketEvents()
 
     async function start() {
         let videoElement = document.getElementById('gameVideo')
@@ -346,18 +342,11 @@ function createGame(Listener, canvas, socket) {
 
         if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !botPlay && !state.debug && state.music?.currentTime > 1) {
             state.gameStageTime = +new Date()
-
-            if (state.online && state.serverId) {
-                state.socket.emit('deadPlayer', { 
-                    serverId: state.serverId
-                })
-                state.smallFunctions.redirectGameStage('score', 'menu')
-            } else {
-                //playSong('Sounds/fnf_loss_sfx.ogg')
-                //setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
-                state.musicInfo.dead = true
-                state.smallFunctions.redirectGameStage('score', 'menu')
-            }
+            
+            //playSong('Sounds/fnf_loss_sfx.ogg')
+            //setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
+            state.musicInfo.dead = true
+            state.smallFunctions.redirectGameStage('score', 'menu')
 
             state.animations.BFDead.frame = 0
             state.smallFunctions.resetGame()
@@ -371,11 +360,11 @@ function createGame(Listener, canvas, socket) {
         if (state.musicInfo.exit || musicCurrentTime > 1 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
             state.musicInfo.exit = false
             state.gameStageTime = +new Date()
-            if (!botPlay && state.myConfig.logged) {
+            /*if (!botPlay && state.myConfig.logged) {
                 let XPgained = ((state.musicInfo.score/250)+(state.musicInfo.difficulty.xp || 100))*(state.musicInfo.accuracy/100)
                 state.smallFunctions.rewardXP(XPgained)
-                state.socket.emit('musicCompleted', { xp: Number.parseInt(XPgained), playerInfo: state.myConfig, musicInfo: state.musicInfo })
-            }
+                .emit('musicCompleted', { xp: Number.parseInt(XPgained), playerInfo: state.myConfig, musicInfo: state.musicInfo })
+            }*/
             state.smallFunctions.resetGame()
             state.smallFunctions.redirectGameStage('score', 'menu')
         }
@@ -483,7 +472,8 @@ function createGame(Listener, canvas, socket) {
 
         /* !!!!!!! FPS LIMITADO !!!!!!! */
 
-        require('./GameFunctions/RenderChat').default(state.canvas, state, Listener.state, 'gameLoop')
+        //require('./GameFunctions/RenderChat').default(state.canvas, state, Listener.state, 'gameLoop')
+        
         if (state.gameLoopFPSControlTime2+1000 <= +new Date()) {
             state.gameLoopFPSControlTime2 = +new Date()
             
@@ -501,23 +491,6 @@ function createGame(Listener, canvas, socket) {
         }
 
         if (state.gameLoopFPSControlTime+25 <= +new Date()) {
-            if (state.online && state.serverId) {
-                if (state.serverInfo.end == true) {
-                    //state.smallFunctions.redirectGameStage('onlineServerList')
-                    state.gameStageTime = +new Date()
-                    state.smallFunctions.redirectGameStage('score', 'menu')
-                    state.smallFunctions.resetGame()
-                }
-    
-                state.musicInfo.arrows = Listener.state.arrows
-    
-                state.socket.emit('updateGame', {
-                    serverId: state.serverId,
-    
-                    data: state.musicInfo
-                })
-            }
-
             state.gameLoopFPSControlTime = +new Date()
 
             if (state.music?.currentTime > 0 && state.music?.currentTime < state.music?.duration && !state.music.paused) state.musicEventListener('gameLoop', { listenerState: Listener.state }, state)
@@ -567,14 +540,12 @@ function createGame(Listener, canvas, socket) {
             state.loading.msg = `(${state.loading.loaded}/${state.loading.total}) 100% - Complete loading`
             if (state.gameStage == 'loading') {
                 let interval = setInterval(() => {
-                    if (!state.inLogin) {
-                        state.animations.loadingLogo.paused = false
+                    state.animations.loadingLogo.paused = false
 
-                        if (state.animations.loadingLogo.frame >= state.animations.loadingLogo.endFrame) {
-                            clearInterval(interval)
-                            state.animations.loadingLogo.paused = true
-                            state.smallFunctions.redirectGameStage('menu')
-                        }
+                    if (state.animations.loadingLogo.frame >= state.animations.loadingLogo.endFrame) {
+                        clearInterval(interval)
+                        state.animations.loadingLogo.paused = true
+                        state.smallFunctions.redirectGameStage('menu')
                     }
                 }, 1000)
             }
@@ -630,8 +601,7 @@ function createGame(Listener, canvas, socket) {
         playSong,
         state,
         startMusic,
-        verifyClick,
-        socketEvents
+        verifyClick
     }
 }
 
