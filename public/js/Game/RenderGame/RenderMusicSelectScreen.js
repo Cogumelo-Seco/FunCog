@@ -168,7 +168,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
                 }
                 musicElement.onclick = () => Listener.handleKeys({ event: { code: 'Enter' }, on: true })
 
-                if (i == game.state.selectMusicMenu.difficultySelected) canvas.style.backgroundImage = `url(https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${music.backgroundImage})`
+                if (Number(game.state.selectMusicMenu.musicSelect) == Number(i)) canvas.style.backgroundImage = `url(https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${music.backgroundImage})`
 
                 if (notUpdate) musicSelectMenuElement.appendChild(musicElement)
                 musicY += 62

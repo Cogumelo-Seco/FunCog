@@ -439,8 +439,8 @@ export default async (state) => {
                     splashDir: 'Arrows/splash.png',
                     splashResize: 1.4,
                     toLoad: [
-                        { dir: 'Musics/musics/fnfdefault/guns/Inst.mp3' },
-                        { dir: 'Musics/musics/fnfdefault/guns/Voices.mp3' },
+                        { dir: 'Musics/musics/fnfdefault/guns/Inst.ogg' },
+                        { dir: 'Musics/musics/fnfdefault/guns/Voices.ogg' },
                     ]
                 },
                 {

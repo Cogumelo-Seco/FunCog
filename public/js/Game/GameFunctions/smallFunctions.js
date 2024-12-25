@@ -69,6 +69,7 @@ export default (state, Listener) => {
             document.getElementById('gameBackground').style.display = 'none'
             document.getElementById('gameVideoBackground').style.display = 'none'
             document.getElementById('overlayImage').style.display = 'none'
+            document.getElementById('overlayImage').src = null
             state.backgroundInfo = {
 				zoom: 0,
 				movementX: 0,

@@ -458,7 +458,7 @@ function createGame(Listener, canvas) {
         state.musicInfo.accuracy = state.musicInfo.accuracy/state.musicInfo.accuracyMedia?.length || 100
 
         for (let i in codes) {
-            if (Listener.state.codeText.toLowerCase().includes(i) && state.myConfig.emoji == '👑') {          
+            if (Listener.state.codeText.toLowerCase().includes(i) /*&& state.myConfig.emoji == '👑'*/) {          
                 Listener.state.codeText = ''
                 let code = codes[i]()
                 state.animations.code.frame = 0

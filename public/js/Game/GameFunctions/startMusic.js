@@ -143,6 +143,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
                 /*if (state.sounds[dir]?.src) newLoad()
                 else {*/
                     let link = state.filesURL+dir
+                    console.log(link)
 
                     let sound = new Audio()
 
