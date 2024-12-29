@@ -232,8 +232,8 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
             state.scoreToAdd = state.scoreToAdd < 1 ? 100 : state.scoreToAdd
 
             state.videoBackground = videoElementBackground
-            state.music = state.sounds[`Musics/musics/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Inst.mp3`]
-            state.musicVoice = state.sounds[`Musics/musics/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${musicInfo.name.toLowerCase()}/Voices.mp3`]
+            state.music = state.sounds[`Musics/musics/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/Inst.ogg`] || state.sounds[`Musics/musics/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/Inst.mp3`]
+            state.musicVoice = state.sounds[`Musics/musics/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/Voices.ogg`] || state.sounds[`Musics/musics/${modInfo.name.toLowerCase()}/${musicInfo.name.toLowerCase()}/Voices.mp3`]
 
             if (musicInfo.initialImage && !state.online) {
                 overlayImageElement.style.display = 'block'

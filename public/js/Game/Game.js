@@ -218,7 +218,7 @@ function createGame(Listener, canvas) {
             total: 0,
             msg: 'Loading...'
         },
-        filesURL: 'https://raw.githubusercontent.com/Cogumelo-Seco/FunCog-Files/main/'
+        filesURL: 'https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/refs/heads/main/'
     }
 
     const addImages = (command) => require('./GameFunctions/addImages').default(state)
