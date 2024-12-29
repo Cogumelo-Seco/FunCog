@@ -5,7 +5,7 @@ export default async (state) => {
             name: 'Easy',
             fileNameDifficulty: 'easy',
             color: 'rgb(1, 255, 1)',
-            lifeDrain: 0.1,
+            lifeDrain: 0.2,
             xp: 100,
         },
         {
@@ -13,7 +13,7 @@ export default async (state) => {
             name: 'Normal',
             fileNameDifficulty: '',
             color: 'rgb(255, 255, 10)',
-            lifeDrain: 0.3,
+            lifeDrain: 0.4,
             xp: 200,
         },
         {
@@ -21,7 +21,7 @@ export default async (state) => {
             name: 'Hard',
             fileNameDifficulty: 'hard',
             color: 'rgb(254, 7, 7)',
-            lifeDrain: 0.8,
+            lifeDrain: 1,
             xp: 350,
         },
         {
@@ -29,7 +29,7 @@ export default async (state) => {
             name: 'BABY 👶',
             fileNameDifficulty: 'hard',
             color: '#4287f5',
-            lifeDrain: 0.8,
+            lifeDrain: 1,
             xp: 200,
         },
         {
@@ -37,7 +37,7 @@ export default async (state) => {
             name: 'Alt',
             fileNameDifficulty: 'alt',
             color: 'rgb(232, 105, 236)',
-            lifeDrain: 1.1,
+            lifeDrain: 1.3,
             xp: 400,
         },
         {
@@ -45,7 +45,7 @@ export default async (state) => {
             name: 'Harder',
             fileNameDifficulty: 'harder',
             color: 'rgb(255, 0, 0)',
-            lifeDrain: 1.1,
+            lifeDrain: 1.3,
             xp: 500,
         },
         {
@@ -53,7 +53,7 @@ export default async (state) => {
             name: 'God',
             fileNameDifficulty: 'god',
             color: '#ffff00',
-            lifeDrain: 1.1,
+            lifeDrain: 1.3,
             xp: 600,
         },
         {
@@ -69,7 +69,7 @@ export default async (state) => {
             name: 'Hard+',
             fileNameDifficulty: 'hard',
             color: 'rgb(254, 7, 7)',
-            lifeDrain: 0.8,
+            lifeDrain: 1,
             xp: 450,
         },
         {
@@ -77,7 +77,7 @@ export default async (state) => {
             name: 'Lunatic',
             fileNameDifficulty: 'lunatic',
             color: '#8100e8',
-            lifeDrain: 1.1,
+            lifeDrain: 1.3,
             xp: 400,
         },
         {
@@ -85,7 +85,7 @@ export default async (state) => {
             name: 'Holy',
             fileNameDifficulty: 'holy',
             color: '#FFFFFF',
-            lifeDrain: 1.1,
+            lifeDrain: 1.3,
             xp: 400,
         },
     ]

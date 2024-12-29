@@ -78,9 +78,9 @@ export default async({ arrowID, listenerState, readyNote, hold }, state) => {
                     note.disabled = true
                 } else if (!state.music?.paused) {
                     state.musicEventListener('noteClick', { noteClickAuthor: 'player', note, listenerState, hold: true }, state)
-                    state.musicInfo.health += 0.2
+                    state.musicInfo.health += 0.3
                     state.musicInfo.score += Number.parseInt((state.scoreToAdd/2)*(rating.media/100))
-                    setTimeout(() => loop(), 1000/5)   
+                    setTimeout(() => loop(), 1000/10)   
                 }
             }
             setTimeout(() => loop(), 1000/5)

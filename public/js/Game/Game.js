@@ -78,7 +78,7 @@ function createGame(Listener, canvas) {
         resizeNoteOpponent: 0,
         resizeNoteOpponentInMiddleScroll: 0.75,
         holdHeight: 44,
-        arrowsMargin: 80,
+        arrowsMargin: 85,
         arrowsYLine: 0,
         alphaHUD: 1,
         speed: 1,
@@ -431,9 +431,12 @@ function createGame(Listener, canvas) {
                         let loop = () => {
                             if (!state.music?.paused && note.Y <= ((state.holdHeight**resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
                                 state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, hold: true }, state)
-                                setTimeout(() => loop(), 1000/5)
+                                console.log(`p-p`)
+                                state.musicInfo.health -= 0.2
+                                setTimeout(() => loop(), 1000/10)
                             }
                         }
+                        loop()
                     }
                     note.clicked = true
                     if (state.musicInfo.health > 10 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain

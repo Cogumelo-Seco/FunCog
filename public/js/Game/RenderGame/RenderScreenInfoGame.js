@@ -17,7 +17,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         text: musicInfoTxt,
         font: `13px Arial`,
         x: canvas.width/2-functions.getTextWidth(musicInfoTxt, '13px Arial')/2,
-        y: downScroll ? canvas.height-20+2 : 28,
+        y: canvas.height-20+2,//downScroll ? canvas.height-20+2 : 28,
         add: 2
     })
 
@@ -27,7 +27,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             text: game.state.musicInfo.additionalScreenInfo,
             font: `13px Arial`,
             x: canvas.width/2-functions.getTextWidth(game.state.musicInfo.additionalScreenInfo, '13px Arial')/2,
-            y: downScroll ? 28 : canvas.height-20+2,
+            y: downScroll ? 70 : canvas.height-45+2,
             add: 2
         })
     }
@@ -67,6 +67,16 @@ export default async (ctx, canvas, game, Listener, functions) => {
         let introWidth = introImage.image.width*0.4
         let introHeight = introImage.image.height*0.4
         ctx.drawImage(introImage.image, canvas.width/2-(introWidth/2), canvas.height/2-(introHeight/2), introWidth, introHeight);
+    }
+
+    let alertImage = game.state.images[`imgs/alert.png`]?.image
+    if (game.state.musicInfo.dev && alertImage) {
+        ctx.font = `bold 13px Arial`
+        ctx.fillStyle = 'rgb(255, 0, 0)'
+        let X = 5
+        let Y = 30
+        ctx.drawImage(alertImage, X, Y-28, 30, 30)
+        ctx.fillText('In development', X+27, Y-(16/2));
     }
 
     function renderRatings(rating, arrowsInfo, musicInfo, resize) {
@@ -117,7 +127,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     }
 
     ctx.globalAlpha = 1
-
+/*
     if (game.state.online && !game.state.serverInfo.start) {
         ctx.fillStyle = `rgba(255, 50, 50, 0.7)`
         ctx.fillRect(0, canvas.height/2-20, canvas.width, 40)
@@ -131,5 +141,5 @@ export default async (ctx, canvas, game, Listener, functions) => {
         ctx.lineWidth = 1
         ctx.strokeStyle  = 'black'
         ctx.strokeText(txt, canvas.width/2-(ctx.measureText(txt).width/2), canvas.height/2+10)
-    }
+    }*/
 }

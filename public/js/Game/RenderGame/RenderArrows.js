@@ -10,7 +10,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     let arrowsWidth = game.state.arrowsWidth
 
     let arrowX = middleScroll ? canvas.width/2-(arrowsWidth/2) : invertArrowPos ? canvas.width/4-arrowsWidth/2 : canvas.width-(arrowsWidth+(canvas.width/4-arrowsWidth/2))
-    let arrowY = downScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin
+    let arrowY = downScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin+20
 
     game.state.arrowsWidth = 0
 
@@ -19,7 +19,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     let arrowsWidthOpponent = game.state.arrowsWidthOpponent
 
     let arrowXOpponent = middleScroll ? invertArrowPos ? canvas.width-canvas.width/6-(arrowsWidthOpponent/2) : canvas.width/6-(arrowsWidthOpponent/2) : invertArrowPos ? canvas.width-(arrowsWidthOpponent+(canvas.width/4-arrowsWidthOpponent/2)) : canvas.width/4-arrowsWidthOpponent/2
-    let arrowYOpponent = middleScroll ? downScroll ? (canvas.height-canvas.height/3) : canvas.height/3 : downScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin
+    let arrowYOpponent = middleScroll ? downScroll ? (canvas.height-canvas.height/3) : canvas.height/3 : downScroll ? canvas.height-game.state.arrowsMargin : game.state.arrowsMargin+20
 
     game.state.arrowsWidthOpponent = 0
 

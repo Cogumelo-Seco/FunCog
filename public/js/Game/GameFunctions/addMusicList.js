@@ -814,7 +814,7 @@ export default async (state) => {
                 {
                     name: 'Big-Shot',
                     menuColor: 'yellow',
-                    difficulties: [ 0, 2 ],
+                    difficulties: [ 1, 2 ],
                     notesImageDir: 'Arrows/',
                     backgroundImage: null,
                     mod: 'Shaggy',
