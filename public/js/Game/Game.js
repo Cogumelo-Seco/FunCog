@@ -431,15 +431,14 @@ function createGame(Listener, canvas) {
                         let loop = () => {
                             if (!state.music?.paused && note.Y <= ((state.holdHeight**resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight/2*2))) {
                                 state.musicEventListener('noteClick', { noteClickAuthor: 'opponent', note, hold: true }, state)
-                                console.log(`p-p`)
-                                state.musicInfo.health -= 0.2
+                                if (state.musicInfo.health > 5 && state.music?.currentTime > 1) state.musicInfo.health -= 0.2
                                 setTimeout(() => loop(), 1000/10)
                             }
                         }
                         loop()
                     }
                     note.clicked = true
-                    if (state.musicInfo.health > 10 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
+                    if (state.musicInfo.health > 5 && state.music?.currentTime > 1) state.musicInfo.health -= state.musicInfo.lifeDrain
                 }
             }
         }
