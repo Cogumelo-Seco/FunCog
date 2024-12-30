@@ -5,7 +5,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     let downScroll = game.state.smallFunctions.getConfig('DownScroll')
     let middleScroll = game.state.smallFunctions.getConfig('MiddleScroll')
 
-    let resizeNote = game.state.resizeNote*game.state.musicInfo.noteResize
+    let resizeNote = (game.state.resizeNote*game.state.musicInfo.noteResize)*(1-0.1*(100-game.state.smallFunctions.getConfig('ArrowSize'))/100)
     let spaceBetweenArrows = game.state.smallFunctions.getConfig('SpaceBetweenArrows')**resizeNote*game.state.musicInfo.spaceBetweenArrowsAdd
     let arrowsWidth = game.state.arrowsWidth
 
@@ -14,7 +14,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
     game.state.arrowsWidth = 0
 
-    let resizeNoteOpponent = game.state.resizeNoteOpponent*game.state.musicInfo.noteResize
+    let resizeNoteOpponent = (game.state.resizeNoteOpponent*game.state.musicInfo.noteResize)*(1-0.1*(100-game.state.smallFunctions.getConfig('ArrowSize'))/100)
     let spaceBetweenArrowsOpponent = game.state.smallFunctions.getConfig('SpaceBetweenArrows')**resizeNoteOpponent*game.state.musicInfo.spaceBetweenArrowsAdd
     let arrowsWidthOpponent = game.state.arrowsWidthOpponent
 

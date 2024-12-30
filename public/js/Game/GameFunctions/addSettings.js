@@ -621,6 +621,16 @@ export default async (state) => {
             content: true
         },
         {
+            name: 'Arrow Size',
+            id: 'ArrowSize',
+            type: 'Number',
+            displayFormat: '##content##%',
+            add: 1,
+            max: 150,
+            min: 50,
+            content: 100
+        },
+        {
             name: 'Space Between Arrows',
             id: 'SpaceBetweenArrows',
             type: 'Number',
