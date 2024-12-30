@@ -10,6 +10,11 @@ export default function codesFunction(state) {
         speed: () => {
             state.modifiers.speed = state.modifiers.speed == 1 ? 1.5 : 1
             return state.modifiers.speed == 1.5
+        },
+        sunshine: () => {
+            state.SunshineMeme = state.SunshineMeme ? false : true
+            return state.SunshineMeme
         }
+
     }
 }

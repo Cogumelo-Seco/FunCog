@@ -4,6 +4,7 @@ function createGame(Listener, canvas) {
         fps: '0-0',
         ping: '???',
         customBongPosition: { X: null, Y: null },
+        SunshineMeme: false,
         myConfig: {
             logged: false,
             author: {
@@ -177,9 +178,9 @@ function createGame(Listener, canvas) {
                 loop: true
             },
             transition: {
-                frame: 10,
+                frame: 15,
                 startFrame: 0,
-                endFrame: 10,
+                endFrame: 15,
                 totalDalay: 0,
                 dalay: 0,
             },

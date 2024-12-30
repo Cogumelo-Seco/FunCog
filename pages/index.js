@@ -52,6 +52,7 @@ const Game = (props) => {
                 <img id="overlayImage" src="https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/imgs/VSLullaby/Bygone/Background2.png" />
 
                 <div id="screenElements" />
+                <div id="transitionElement" />
 
                 <video preload="auto" id="gameVideo" />
 
