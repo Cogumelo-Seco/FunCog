@@ -1851,7 +1851,7 @@ export default async (state) => {
                     mod: 'Bob',
                     toLoad: [
                         { dir: 'Musics/musics/vs-bob/run/Inst.ogg' },
-                        { dir: 'Musics/musics/run/Voices.ogg' },
+                        { dir: 'Musics/musics/vs-bob/run/Voices.ogg' },
                     ]
                 },
                 {

@@ -1,5 +1,5 @@
 export default async (ctx, canvas, game, Listener, functions) => {
-    let resizeNote = game.state.resizeNote*game.state.musicInfo.noteResize
+    let resizeNote = (game.state.resizeNote*game.state.musicInfo.noteResize)*(1-0.1*(100-game.state.smallFunctions.getConfig('ArrowSize'))/100)
     let resizeNoteOpponent = game.state.resizeNoteOpponent*game.state.musicInfo.noteResize
 
     let downScroll = game.state.smallFunctions.getConfig('DownScroll')
@@ -87,8 +87,8 @@ export default async (ctx, canvas, game, Listener, functions) => {
         if (ratingImage) {
             let ratingImageWidth = ratingImage.image.width**resize*0.5
             let ratingImageHeight = ratingImage.image.height**resize*0.5
-            let ratingImageY = (arrowsInfo[0]?.Y+(arrowsInfo[0]?.height**resize*0.2)-(ratingImage.image.height**resize*0.6/2))-(90**resize)*percent
-            let ratingImageX = arrowsInfo[0]?.X-(ratingImageWidth**resize*2)
+            let ratingImageY = (arrowsInfo[0]?.Y+(arrowsInfo[0]?.height**resize*0.2)-(ratingImage.image.height**resize*0.6/2))-(95**resize)*percent
+            let ratingImageX = arrowsInfo[0]?.X-ratingImageWidth-5
 
             ctx.drawImage(ratingImage.image, ratingImageX, ratingImageY, ratingImageWidth*((1-percent)/9+1), ratingImageHeight*((1-percent)/9+1));
         }
@@ -118,7 +118,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
         })
 
         functions.fillText({
-            font: `bold ${17**resizeNote*((1-percent)/3+1)}px Arial`,
+            font: `bold ${17**resizeNote*((1-percent)+1)}px Arial`,
             text: game.state.musicInfo.combo+'X',
             x: ratingInfoX+5, 
             y: arrowsInfo[arrowsInfo.length-1]?.Y+(30**resizeNote),

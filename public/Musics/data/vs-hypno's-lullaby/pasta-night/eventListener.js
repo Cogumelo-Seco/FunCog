@@ -87,7 +87,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 
 			let arrowXOpponent = state.canvas.width/5-(state.arrowsWidthOpponent/2)/2
 			let arrowXOpponent2 = state.canvas.width-((state.arrowsWidthOpponent/2)+(state.canvas.width/5-(state.arrowsWidthOpponent/2)/2))
-			let arrowYOpponent = state.selectSettingsOption.settingsOptions.find((g) => g.id == 'DownScroll').content ? state.canvas.height-state.arrowsMargin : state.arrowsMargin
+			let arrowYOpponent = state.selectSettingsOption.settingsOptions.find((g) => g.id == 'DownScroll').content ? state.canvas.height-state.arrowsMargin : state.arrowsMargin+20
 
 			for (let i in state.arrowsInfoOpponent) {
 				let arrowInfo = state.arrowsInfoOpponent[i]
@@ -109,7 +109,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			}
 
 			let arrowX = state.canvas.width/2-(state.arrowsWidth/2)
-			let arrowY = variables.downScroll ? state.canvas.height-state.arrowsMargin : state.arrowsMargin
+			let arrowY = variables.downScroll ? state.canvas.height-state.arrowsMargin : state.arrowsMargin+20
 
 			for (let i in state.arrowsInfo) {
 				let arrowInfo = state.arrowsInfo[i]

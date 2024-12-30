@@ -262,6 +262,7 @@ function createGame(Listener, canvas) {
         updateLocalPlayer()
 
         let botPlay = state.smallFunctions.getConfig('botPlay')
+        let botResponseTime = state.smallFunctions.getConfig('botResponseTime')
         let ScrollSpeed = state.smallFunctions.getConfig('ScrollSpeed')
 
         document.title = `Cogu - ${state.gameStage}`
@@ -395,10 +396,12 @@ function createGame(Listener, canvas) {
                 note.Y = newNoteY
                 //note.oldY = newNoteY
             //}
+            if (botPlay && !note.botMissVerify && note.type == 'normal') note.botMiss = botResponseTime >= 160 ? Math.random()*(botResponseTime*2)-botResponseTime >= 160 ? true : false : false
+            note.botMissVerify = true
 
             if (!opponent && (state.debug || !state.online) && Listener.state.arrows[note.arrowID]) {
-                if (((botPlay || note.autoClick) /*|| Listener.state.arrows[note.arrowID].inAutoClick*/) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
-                if (!note.clicked && !note.disabled && (botPlay || note.autoClick) && (note.errorWhenNotClicking || note.autoClick) && newNoteY >= -10 && newNoteY <= (state.holdHeight**resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight*2)) {
+                if ((((botPlay && !note.botMiss) || note.autoClick) /*|| Listener.state.arrows[note.arrowID].inAutoClick*/) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
+                if (!note.clicked && !note.disabled && ((botPlay && !note.botMiss) || note.autoClick) && (note.errorWhenNotClicking || note.autoClick) && newNoteY >= -10 && newNoteY <= (state.holdHeight**resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight*2)) {
                     //if (Math.floor(Math.random()*100) <= 10) {
                         //Listener.state.arrows[note.arrowID].inAutoClick = note.autoClick
                         Listener.state.arrows[note.arrowID].state = 'onNote'
@@ -411,7 +414,7 @@ function createGame(Listener, canvas) {
                 }
             }
             
-            if (!opponent && !Listener.state.pauseGameKeys && note.errorWhenNotClicking && (state.online || !botPlay) && state.arrowsInfo[note.arrowID] && note.Y > (state.arrowsInfo[note.arrowID]?.height**resizeNote) && !note.disabled && !note.clicked && (Number(note.arrowID) >= 0 && Number(note.arrowID) < Object.keys(state.arrowsInfo).length)) {
+            if (!opponent && !Listener.state.pauseGameKeys && note.errorWhenNotClicking && (botPlay && note.botMiss) && state.arrowsInfo[note.arrowID] && note.Y > (state.arrowsInfo[note.arrowID]?.height**resizeNote) && !note.disabled && !note.clicked && (Number(note.arrowID) >= 0 && Number(note.arrowID) < Object.keys(state.arrowsInfo).length)) {
                 note.disabled = true
                 state.musicInfo.misses += 1
                 state.musicInfo.score -= Number.parseInt(state.scoreToAdd/2)
