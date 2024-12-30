@@ -21,7 +21,7 @@ export default async (type, { noteClickAuthor, note, notes, listenerState, event
 			for (let i in events) {
 				let change = events[i]
 
-				state.musicChangeBPM[change.startTime] = state.musicBPM*(change.multiplier+0.3)
+				state.musicChangeBPM[change.startTime] = state.musicBPM*change.multiplier
 			}
             break
         case 'end':

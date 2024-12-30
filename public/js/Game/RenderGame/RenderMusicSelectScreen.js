@@ -1,6 +1,6 @@
 export default async (ctx, canvas, game, Listener, functions) => {
     let screenResize = Math.floor(Math.min(canvas.height*0.45, canvas.width*0.22))/150
-    let filtredMusics = game.state.musics.filter(m => !m.dev || game.state.myConfig.emoji == '👑')
+    let filtredMusics = game.state.musics//.filter(m => !m.dev)
 
     ctx.fillStyle = 'rgb(0, 0, 0, 0.9)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -71,7 +71,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
         for (let i in filtredMusics) {
             let mod = filtredMusics[i]
-            let modNameTxt = `${mod.dev ? '⚒' : mod.special ? '👑' : ''} ${mod.name.replace(/-/g, ' ')} ${mod.dev ? '⚒' : mod.special ? '👑' : ''}`
+            let modNameTxt = `${mod.dev ? '⚠️⚒' : mod.special ? '👑' : ''} ${mod.name.replace(/-/g, ' ')} ${mod.dev ? '⚒⚠️' : mod.special ? '👑' : ''}`
             if (Number(game.state.selectMusicMenu.modSelect) == Number(i)) selectedModNameTxt = modNameTxt
             
             let modElement = document.getElementById(i+'-modElement') || document.createElement('button')
@@ -83,6 +83,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             modElement.style.left = canvas.width/8-(canvas.width/4/2)+canvas.width/22+'px'
             modElement.style.top = modsY+'px'
             modElement.style.fontSize = screenResize*12+'px'
+            modElement.style.color = mod.dev ? 'red' : 'white'
             if (notUpdate) modElement.innerHTML = `<span class="skew-fix">${modNameTxt}</span>`
 
             let colorElement = document.getElementById(i+'-modColorElement') || document.createElement('div')
@@ -121,11 +122,11 @@ export default async (ctx, canvas, game, Listener, functions) => {
         let musicY = startMusicY+((endMusicY-startMusicY)*(game.state.selectMusicMenu.musicSelect/(filtredMusics[game.state.selectMusicMenu.modSelect].musics.length)))-(game.state.selectMusicMenu.musicSelect*(62+2))
         if (startMusicY+(60*filtredMusics[game.state.selectMusicMenu.modSelect].musics.length) < endMusicY) musicY = startMusicY
 
-        for (let i = 0;i <= 20; i++) {
+        for (let i = 0;i <= 30; i++) {
             let music = filtredMusics[game.state.selectMusicMenu.modSelect].musics[i]
 
             if (music) {
-                let musicName = music.name.replace(/-/g, ' ')+(music.suffix ? ' '+music.suffix : '')
+                let musicName = (music.dev ? '⚠️⚒' : '')+music.name.replace(/-/g, ' ')+(music.suffix ? ' '+music.suffix : '')
                 if (Number(game.state.selectMusicMenu.musicSelect) == Number(i)) selectedMusicName = musicName
 
                 let musicElement = document.getElementById(i+'-musicElement') || document.createElement('button')
@@ -139,7 +140,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
                 musicElement.style.top = musicY+'px'
                 musicElement.style.fontSize = screenResize*12+'px'
                 musicElement.style.display = 'block'
-                musicElement.style.backgroundColor = 'red'
+                musicElement.style.color = music.dev ? 'red' : 'white'
                 /*if (notUpdate)*/ musicElement.innerHTML = `<span class="skew-fix">${musicName}</span>`
 
                 let colorElement = document.getElementById(i+'-musicColorElement') || document.createElement('div')

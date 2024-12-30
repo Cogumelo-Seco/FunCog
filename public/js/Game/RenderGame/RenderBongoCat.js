@@ -1,5 +1,5 @@
 export default async (ctx, canvas, game, Listener, functions) => {
-    if (!game.state.smallFunctions.getConfig('botPlay') || game.state.online) return
+    if (!game.state.smallFunctions.getConfig('botPlay')) return
 
     ctx.globalAlpha = game.state.alphaHUD
 

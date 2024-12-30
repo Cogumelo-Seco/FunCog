@@ -10,28 +10,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     ctx.fillStyle = game.state.musicInfo.difficulty.color || 'white'
     ctx.fillText(`(${difficultyName})`, 10+canvas.width/2+((ctx.measureText(musicName).width+ctx.measureText(`(${difficultyName})`).width)/2-(ctx.measureText(`(${difficultyName})`).width)), 80);
 
-    let playerWin = game.state.musicInfoOpponent.score == game.state.musicInfo.score ? 'draw' : game.state.musicInfo.score > game.state.musicInfoOpponent.score ? true : false
-
-    if (game.state.online) {
-        drawBox({
-            playerId: 2,
-            popupColor: playerWin == 'draw' ? 'rgb(255, 150, 100)' : playerWin ? 'rgb(255, 100, 100)' : 'rgb(130, 200, 120)',
-            playerMusicInfo: game.state.musicInfoOpponent,
-            musicInfoPopupWidth: canvas.width/4,
-            musicInfoPopupHeight: canvas.width/4,
-            musicInfoPopupX: canvas.width/12,
-            musicInfoPopupY: 120+((canvas.height-120)/2-(canvas.width/4/2))
-        })
-        drawBox({
-            playerId: 1,
-            popupColor: playerWin == 'draw' ? 'rgb(255, 150, 100)' : playerWin ? 'rgb(130, 200, 120)' : 'rgb(255, 100, 100)',
-            playerMusicInfo: game.state.musicInfo,
-            musicInfoPopupWidth: canvas.width/4,
-            musicInfoPopupHeight: canvas.width/4,
-            musicInfoPopupX: canvas.width-canvas.width/4-canvas.width/12,
-            musicInfoPopupY: 120+((canvas.height-120)/2-(canvas.width/4/2))
-        })
-    } else drawBox({
+    drawBox({
         popupColor: game.state.musicInfo.dead ? 'rgb(255, 100, 100)' : 'rgb(200, 200, 200)',
         playerMusicInfo: game.state.musicInfo,
         musicInfoPopupWidth: canvas.width/4,
@@ -43,10 +22,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
     function drawBox({ musicInfoPopupWidth, musicInfoPopupHeight, musicInfoPopupX, musicInfoPopupY, playerMusicInfo, popupColor, playerId }) {
         ctx.font = `bold ${musicInfoPopupWidth*0.1}px Arial`
         ctx.fillStyle = 'white'//'rgb(50, 150, 40)'
-        if (game.state.online) {
-            let txt = playerId == 1 ? 'Your Results' : 'Opponent Results'
-            ctx.fillText(txt, musicInfoPopupX+(musicInfoPopupWidth/2)-(ctx.measureText(txt).width/2), musicInfoPopupY-7);
-        }
+        
         ctx.fillStyle = popupColor
         ctx.fillRect(musicInfoPopupX, musicInfoPopupY, musicInfoPopupWidth, musicInfoPopupHeight)
 
@@ -146,46 +122,44 @@ export default async (ctx, canvas, game, Listener, functions) => {
         }
     }
 
-    if (!game.state.online) {
-        let graphicWidth = canvas.width/4
-        let graphicHeight = graphicWidth/2
-        let graphicX = canvas.width-(canvas.width/12)-graphicWidth
-        let graphicY = 120+((canvas.height-120)/2-(canvas.width/4/2))
-        
+    let graphicWidth = canvas.width/4
+    let graphicHeight = graphicWidth/2
+    let graphicX = canvas.width-(canvas.width/12)-graphicWidth
+    let graphicY = 120+((canvas.height-120)/2-(canvas.width/4/2))
+    
 
-        ctx.strokeStyle = 'rgb(200, 200, 200)'
-        ctx.lineWidth = 5
-        ctx.rect(graphicX, graphicY, graphicWidth, graphicHeight)
-        ctx.stroke()
+    ctx.strokeStyle = 'rgb(200, 200, 200)'
+    ctx.lineWidth = 5
+    ctx.rect(graphicX, graphicY, graphicWidth, graphicHeight)
+    ctx.stroke()
 
-        graphicX += 10
-        graphicY += 10
-        graphicHeight -= 20
-        graphicWidth -= 20
+    graphicX += 10
+    graphicY += 10
+    graphicHeight -= 20
+    graphicWidth -= 20
 
-        function renderGraphic(graphicData, color, color2) {
-            ctx.lineWidth = 2
-            ctx.strokeStyle = color
-            let lastGraphicInfo = { x: graphicX,  y: graphicY }
-            if (graphicData.length <= 5000) for (let i in graphicData) {
-                let percent = (graphicData[i] || 1)/100
-                let percentNext = (graphicData[Number(i)+1] || 100)/100
+    function renderGraphic(graphicData, color, color2) {
+        ctx.lineWidth = 2
+        ctx.strokeStyle = color
+        let lastGraphicInfo = { x: graphicX,  y: graphicY }
+        if (graphicData.length <= 5000) for (let i in graphicData) {
+            let percent = (graphicData[i] || 1)/100
+            let percentNext = (graphicData[Number(i)+1] || 100)/100
 
-                let x = graphicX+(graphicWidth*(i/(graphicData.length-1)))-ctx.lineWidth
-                let y = graphicY+(graphicHeight-graphicHeight*(percent))
+            let x = graphicX+(graphicWidth*(i/(graphicData.length-1)))-ctx.lineWidth
+            let y = graphicY+(graphicHeight-graphicHeight*(percent))
 
-                ctx.strokeStyle = percent <= 0.5 || percentNext <= 0.5 ? color2 || color : color
+            ctx.strokeStyle = percent <= 0.5 || percentNext <= 0.5 ? color2 || color : color
 
-                ctx.beginPath();
-                ctx.moveTo(lastGraphicInfo.x, lastGraphicInfo.y);
-                ctx.lineTo(x, y);
-                ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(lastGraphicInfo.x, lastGraphicInfo.y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
 
-                lastGraphicInfo = { x, y }
-            }
+            lastGraphicInfo = { x, y }
         }
-        //renderGraphic(game.state.musicInfo.accuracyMedia, 'rgba(0, 255, 0, 0.5)')
-        renderGraphic(game.state.musicInfo.linearAccuracyMedia, 'cyan')
-        renderGraphic(game.state.musicInfo.accuracyMediaLow, 'green', 'red')
     }
+    //renderGraphic(game.state.musicInfo.accuracyMedia, 'rgba(0, 255, 0, 0.5)')
+    renderGraphic(game.state.musicInfo.linearAccuracyMedia, 'cyan')
+    renderGraphic(game.state.musicInfo.accuracyMediaLow, 'green', 'red')
 }

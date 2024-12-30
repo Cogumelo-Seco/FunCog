@@ -123,47 +123,8 @@ export default async (ctx, canvas, game, Listener, functions) => {
         ctx.restore();
     }
 
-    drawIcon({ dir: game.state.smallFunctions.getConfig('botPlay') && !game.state.online ? 'icons/BongoCat.png' : 'icons/icon-bf.png', imageType: healthPercent >= 0.80 ? 2 : 1, flipY: true })
-    drawIcon({ dir: game.state.online ? 'icons/icon-bf-red.png' : 'icons/icon-face.png', imageType: healthPercent <= 0.20 ? 2 : 1, flipY: false })
-
-    /*let healthBarWidth = canvas.width*0.5
-    let healthBarHeight = 20
-    let healthBarY = game.state.smallFunctions.getConfig('DownScroll') ? 40 : canvas.height-60
-    let healthPercent = game.state.online ? game.state.musicInfoOpponent.health/(game.state.musicInfo.health+game.state.musicInfoOpponent.health) : 1-(game.state.musicInfo.health/100)
-    healthPercent = healthPercent > 1 ? 1 : healthPercent < 0 ? 0 : healthPercent
-
-    ctx.fillStyle = invertArrowPos ? 'red' : 'rgb(49, 176, 209)'//'rgb(19, 189, 0)'
-    ctx.fillRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth, healthBarHeight)
-
-    ctx.fillStyle = invertArrowPos ? 'rgb(49, 176, 209)' : 'red'
-    ctx.fillRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth*(invertArrowPos ? 1-healthPercent : healthPercent), healthBarHeight)
-
-    ctx.lineWidth = 2.5
-    ctx.strokeStyle = 'black'
-    ctx.strokeRect(canvas.width/2-healthBarWidth/2, healthBarY, healthBarWidth, healthBarHeight)
-
-    function drawIcon({ dir, flipY, imageType }) {
-        let iconImage = game.state.images[dir].image
-        if (!iconImage) return
-        let iconResize = 0.86+(((game.state.music?.currentTime*15)%4+1)/100)
-        let iconWidth = iconImage.width/2
-        let iconHeight = iconImage.height
-        let iconX = canvas.width/2-healthBarWidth/2+(healthBarWidth*(invertArrowPos ? 1-healthPercent : healthPercent))-(flipY ? 10 : iconWidth**iconResize-10)
-        let iconY = healthBarY-(healthBarHeight)
-
-        let scaleH = flipY ? -1 : 1
-        let posX = flipY ? ((iconWidth**iconResize)+iconX)* -1 : iconX
-
-        ctx.save();
-        ctx.scale(scaleH, 1);
-        
-        ctx.drawImage(iconImage, imageType == 1 ? 0 : iconWidth, 0, iconWidth, iconHeight, posX, iconY, iconWidth**iconResize, iconHeight**iconResize)
-
-        ctx.restore();
-    }
-
-    drawIcon({ dir: game.state.smallFunctions.getConfig('botPlay') && !game.state.online ? 'icons/BongoCat.png' : 'icons/icon-bf.png', imageType: healthPercent >= 0.80 ? 2 : 1, flipY: invertArrowPos ? false : true })
-    drawIcon({ dir: game.state.online ? 'icons/icon-bf-red.png' : 'icons/icon-face.png', imageType: healthPercent <= 0.20 ? 2 : 1, flipY: invertArrowPos ? true : false })*/
+    drawIcon({ dir: game.state.smallFunctions.getConfig('botPlay') ? 'icons/icon-BongoCat.png' : 'icons/icon-Cogu.png', imageType: healthPercent >= 0.90 ? 2 : 1, flipY: true })
+    drawIcon({ dir: 'icons/icon-Guto.png', imageType: healthPercent <= 0.10 ? 2 : 1, flipY: false })
     
     function formatTime(time) {
         if (!time) time = 0

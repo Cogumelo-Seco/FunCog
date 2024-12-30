@@ -19,12 +19,10 @@ function createGame(Listener, canvas) {
         messages: [],
         gameStage: 'loading',
         inLogin: true,
-        online: false,
         waiting: true,
         serverId: null,
         serverInfo: {},
         serverPlayers: {
-            'B': { name: 'A' }
         },
         gameLoopFPSControlTime: 0,
         gameLoopFPSControlTime2: 0,
@@ -38,7 +36,6 @@ function createGame(Listener, canvas) {
             currentSelection: 0
         },
         selectMenuOption: {
-            //menuOptions: [ 'Singleplayer', 'Multiplayer', 'Settings' ],
             menuOptions: [ 'ModList', 'Settings' ],
             menuSelect: -1
         },
@@ -86,6 +83,7 @@ function createGame(Listener, canvas) {
         invertArrowPos: false,
         
         arrowsYLineOpponent: 0,
+        changeBPMTimeoutValue: 1000/30,
         musicChangeBPM: {},
         oldChangeBPM: 0,
         musicNotes: [],
@@ -104,19 +102,6 @@ function createGame(Listener, canvas) {
         musicEventListener: () => null,
         notesImageDir: null,
         musicInfo: {
-            name: 'Test',
-            menuColor: 'purple',
-            difficultyAlert: {
-                3: '5k'
-            },
-            difficulty: {
-                id: 3,
-                name: 'Mania',
-                fileNameDifficulty: 'hard',
-                color: 'rgb(255, 43, 234)',
-                lifeDrain: 1
-            },
-            judgements: {}
         },
         musicInfoOpponent: {
             judgements: {}
@@ -344,8 +329,6 @@ function createGame(Listener, canvas) {
         if (state.gameStage == 'game' && state.musicInfo.health <= 0 && !botPlay && !state.debug && state.music?.currentTime > 1) {
             state.gameStageTime = +new Date()
             
-            //playSong('Sounds/fnf_loss_sfx.ogg')
-            //setTimeout(() => playSong('Sounds/gameOver.ogg', { musicMenu: true }), 2000)
             state.musicInfo.dead = true
             state.smallFunctions.redirectGameStage('score', 'menu')
 
@@ -361,60 +344,47 @@ function createGame(Listener, canvas) {
         if (state.musicInfo.exit || musicCurrentTime > 1 && musicDuration <= musicCurrentTime && state.musicNotes.length+state.musicOpponentNotes.length > 0) {
             state.musicInfo.exit = false
             state.gameStageTime = +new Date()
-            /*if (!botPlay && state.myConfig.logged) {
-                let XPgained = ((state.musicInfo.score/250)+(state.musicInfo.difficulty.xp || 100))*(state.musicInfo.accuracy/100)
-                state.smallFunctions.rewardXP(XPgained)
-                .emit('musicCompleted', { xp: Number.parseInt(XPgained), playerInfo: state.myConfig, musicInfo: state.musicInfo })
-            }*/
             state.smallFunctions.resetGame()
             state.smallFunctions.redirectGameStage('score', 'menu')
         }
 
         for (let i in state.musicChangeBPM) {
-            if (Number(i)/1000 <= musicCurrentTime && state.musicChangeBPM[i] != state.oldChangeBPM) {
-                changeBPM(state.musicChangeBPM[i], true)
+            if (Number(i)/1000 >= musicCurrentTime && Number(i)/1000 <= musicCurrentTime+3 && state.musicChangeBPM[i] != state.oldChangeBPM) {
+                changeBPM(state.musicChangeBPM[i])
                 state.oldChangeBPM = state.musicChangeBPM[i]
             }
         }
 
-        function changeBPM(bpm, newBPM) {
-            if (state.musicChangeBPMNew && newBPM) state.musicBPM = state.musicChangeBPMNew
+        function changeBPM(bpm) {
             clearTimeout(state.changeBPMTimeout)
 
             if (state.musicBPM > bpm-1 && state.musicBPM < bpm+1) state.musicBPM = bpm
             if (state.musicBPM != bpm) {
                 state.musicBPM = state.musicBPM > bpm ? state.musicBPM-1 : state.musicBPM+1
                 state.musicChangeBPMNew = bpm
-                state.changeBPMTimeout = setTimeout(() => changeBPM(bpm), 1000/30)
+                state.changeBPMTimeout = setTimeout(() => changeBPM(bpm), state.changeBPMTimeoutValue)
             }
         }
 
         function moveNote(note, opponent, resizeNote) {
             let newNoteY = -((note.time-musicCurrentTime)*((5**resizeNote)*state.musicBPM)*ScrollSpeed*state.speed)
-            //let oldNoteY = note.oldY || -musicDuration*1000
-            //if (newNoteY >= oldNoteY) {
-                note.Y = newNoteY
-                //note.oldY = newNoteY
-            //}
+            note.Y = newNoteY
             if (botPlay && !note.botMissVerify && note.type == 'normal') note.botMiss = botResponseTime >= 160 ? Math.random()*(botResponseTime*2)-botResponseTime >= 160 ? true : false : false
             note.botMissVerify = true
 
-            if (!opponent && (state.debug || !state.online) && Listener.state.arrows[note.arrowID]) {
-                if ((((botPlay && !note.botMiss) || note.autoClick) /*|| Listener.state.arrows[note.arrowID].inAutoClick*/) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
+            if (!opponent && Listener.state.arrows[note.arrowID]) {
+                if (((botPlay && !note.botMiss) || note.autoClick) && Listener.state.arrows[note.arrowID].lastNoteClicked && Listener.state.arrows[note.arrowID].lastNoteClicked.Y >= (state.holdHeight**resizeNote)*(Listener.state.arrows[note.arrowID].lastNoteClicked.hold/(state.holdHeight))+(state.holdHeight*2)) Listener.state.arrows[note.arrowID].click = false
                 if (!note.clicked && !note.disabled && ((botPlay && !note.botMiss) || note.autoClick) && (note.errorWhenNotClicking || note.autoClick) && newNoteY >= -10 && newNoteY <= (state.holdHeight**resizeNote)*(note.hold/(state.holdHeight))+(state.holdHeight*2)) {
-                    //if (Math.floor(Math.random()*100) <= 10) {
-                        //Listener.state.arrows[note.arrowID].inAutoClick = note.autoClick
-                        Listener.state.arrows[note.arrowID].state = 'onNote'
-                        Listener.state.arrows[note.arrowID].click = true
-                        Listener.state.arrows[note.arrowID].lastNoteClicked = note
+                    Listener.state.arrows[note.arrowID].state = 'onNote'
+                    Listener.state.arrows[note.arrowID].click = true
+                    Listener.state.arrows[note.arrowID].lastNoteClicked = note
 
-                        note.clicked = true
-                        verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, readyNote: note })
-                    //}
+                    note.clicked = true
+                    verifyClick({ arrowID: note.arrowID, listenerState: Listener.state, readyNote: note })
                 }
             }
             
-            if (!opponent && !Listener.state.pauseGameKeys && note.errorWhenNotClicking && (botPlay && note.botMiss) && state.arrowsInfo[note.arrowID] && note.Y > (state.arrowsInfo[note.arrowID]?.height**resizeNote) && !note.disabled && !note.clicked && (Number(note.arrowID) >= 0 && Number(note.arrowID) < Object.keys(state.arrowsInfo).length)) {
+            if (!opponent && !Listener.state.pauseGameKeys && note.errorWhenNotClicking && (!botPlay || botPlay && note.botMiss) && state.arrowsInfo[note.arrowID] && note.Y > (state.arrowsInfo[note.arrowID]?.height**resizeNote) && !note.disabled && !note.clicked && (Number(note.arrowID) >= 0 && Number(note.arrowID) < Object.keys(state.arrowsInfo).length)) {
                 note.disabled = true
                 state.musicInfo.misses += 1
                 state.musicInfo.score -= Number.parseInt(state.scoreToAdd/2)
@@ -463,7 +433,7 @@ function createGame(Listener, canvas) {
         state.musicInfo.accuracy = state.musicInfo.accuracy/state.musicInfo.accuracyMedia?.length || 100
 
         for (let i in codes) {
-            if (Listener.state.codeText.toLowerCase().includes(i) /*&& state.myConfig.emoji == '👑'*/) {          
+            if (Listener.state.codeText.toLowerCase().includes(i)) {          
                 Listener.state.codeText = ''
                 let code = codes[i]()
                 state.animations.code.frame = 0
@@ -476,8 +446,6 @@ function createGame(Listener, canvas) {
         chatPlaceholder.style.display = messageBoxContent.innerHTML.length >= 1 ? 'none' : 'block'
 
         /* !!!!!!! FPS LIMITADO !!!!!!! */
-
-        //require('./GameFunctions/RenderChat').default(state.canvas, state, Listener.state, 'gameLoop')
         
         if (state.gameLoopFPSControlTime2+1000 <= +new Date()) {
             state.gameLoopFPSControlTime2 = +new Date()
@@ -520,7 +488,7 @@ function createGame(Listener, canvas) {
         }
     }
 
-    async function loading(command) {
+    async function loading() {
         state.animations = state.defaultAnimations
         let loadingImagesTotal = await addImages()
         let loadingSoundsTotal = await addSounds()
@@ -569,7 +537,6 @@ function createGame(Listener, canvas) {
                 let sound = new Audio()
                 sound.addEventListener('loadeddata', (e) => {
                     loaded = true
-                    //newLoad(e.path[0].src)
                     newLoad(dir)
                 })
                 sound.addEventListener('error', (e) => newLoad('[ERROR] '+dir))
@@ -583,7 +550,6 @@ function createGame(Listener, canvas) {
                 let img = new Image()
                 img.addEventListener('load', (e) => {
                     loaded = true
-                    //newLoad(e.path[0].src)
                     newLoad(dir)
                 })
                 img.addEventListener('error',(e) => newLoad('[ERROR] '+dir))

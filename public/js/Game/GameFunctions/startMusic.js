@@ -287,7 +287,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
                             state.videoBackground.playbackRate = state.modifiers.speed
                         } else state.videoBackground.style.display = 'none'
 
-                        state.musicEventListener('started', { difficulty, listenerState }, state)
+                        state.musicEventListener('started', { difficulty, listenerState, events: state.musicInfo.events }, state)
                     } else {
                         state.musicInfo.bestCombo = 0
                         state.musicInfo.combo = 0

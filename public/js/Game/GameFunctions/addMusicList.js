@@ -7,6 +7,7 @@ export default async (state) => {
             menuColor: 'rgb(55, 109, 246)',
             musics: [
                 {
+                    dev: true,
                     suffix: '❗',
                     name: 'Galaxy',
                     menuColor: 'rgb(55, 109, 246)',
@@ -22,6 +23,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    dev: true,
                     suffix: '❗',
                     name: 'Game',
                     menuColor: 'rgb(55, 109, 246)',
@@ -37,6 +39,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    dev: true,
                     suffix: '❗',
                     name: 'Kastimagina',
                     menuColor: 'rgb(55, 109, 246)',
@@ -52,6 +55,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    dev: true,
                     suffix: '❗',
                     name: 'Cona',
                     menuColor: 'rgb(55, 109, 246)',
@@ -67,6 +71,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    dev: true,
                     suffix: '❗',
                     name: 'Underworld',
                     menuColor: 'rgb(55, 109, 246)',
@@ -82,6 +87,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    dev: true,
                     suffix: '❗',
                     name: 'Cyber',
                     menuColor: 'rgb(55, 109, 246)',
@@ -97,6 +103,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    dev: true,
                     suffix: '❗',
                     name: 'Newton',
                     menuColor: 'rgb(55, 109, 246)',
@@ -112,6 +119,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    dev: true,
                     suffix: '❗',
                     name: 'Destiny',
                     menuColor: 'rgb(55, 109, 246)',
@@ -127,6 +135,7 @@ export default async (state) => {
                     ]
                 },
                 {
+                    dev: true,
                     suffix: '❗',
                     name: 'Peace',
                     menuColor: 'rgb(55, 109, 246)',

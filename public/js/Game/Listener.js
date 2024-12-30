@@ -212,7 +212,7 @@ export default function createListener() {
             }
 
             if (state.game.state.gameStage == 'game') {
-                /*if (keyPressed == keys.KeyExit && on && state.keys[keyPressed].time-state.keys[keyPressed].lastClickTime <= 100 && !state.game.state.online && state.game.state.music.currentTime >= 1) {
+                /*if (keyPressed == keys.KeyExit && on && state.keys[keyPressed].time-state.keys[keyPressed].lastClickTime <= 100 && state.game.state.music.currentTime >= 1) {
                     let botPlay = state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content
                     state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
                     state.game.state.musicInfo.health = -100
@@ -226,7 +226,7 @@ export default function createListener() {
                 }
 
                 if (state.pauseGameKeys) return
-                if (keyPressed == keys.KeyExit && on && !state.game.state.online && state.game.state.countdown <= -1) {
+                if (keyPressed == keys.KeyExit && on && state.game.state.countdown <= -1) {
                     if (state.game.state.music.paused) {
                         let count = 0
                         function loop() {
@@ -314,14 +314,13 @@ export default function createListener() {
             if (state.game.state.gameStage == 'score' && on) {
                 if (![ 'F11', 'PrintScreen' ].includes(keyPressed) && state.game.state.gameStageTime != 0 && state.game.state.gameStageTime+1000 <= +new Date()) {
                     //state.game.state.selectMusicMenu.musicSelect = -1
-                    if (state.game.state.online) state.game.state.smallFunctions.redirectGameStage('onlineServerList', 'menu')
-                    else state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu')
+                    state.game.state.smallFunctions.redirectGameStage('selectMusic', 'menu')
                 }
             }
 
             if (state.game.state.gameStage == 'selectMusic' && on) {
                 keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
-                let filtredMusics = state.game.state.musics.filter(m => !m.dev || state.game.state.myConfig.emoji == '👑')
+                let filtredMusics = state.game.state.musics//.filter(m => !m.dev || state.game.state.myConfig.emoji == '👑')
                 let selectMusicMenu = state.game.state.selectMusicMenu
 
                 if (state.game.state.gameStageTime != 0 && state.game.state.gameStageTime+100 <= +new Date()) switch (keyPressed) {
@@ -381,67 +380,7 @@ export default function createListener() {
                         }
                 }
             }
-/*
-            if (state.game.state.gameStage == 'onlineServerList' && on) {
-                keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
-
-                switch (keyPressed) {
-                    case keys.KeyUp:
-                        if (!state.game.state.selectServerOption.createServer) {
-                            state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect <= 0 ? (state.game.state.selectServerOption.listServers.filter(s => s.open)).length-1 : state.game.state.selectServerOption.serverSelect-1
-                            state.game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })
-                        }
-                        break
-                    case keys.KeyDown:
-                        if (!state.game.state.selectServerOption.createServer) {
-                            state.game.state.selectServerOption.serverSelect = state.game.state.selectServerOption.serverSelect >= (state.game.state.selectServerOption.listServers.filter(s => s.open)).length-1 ? 0 : state.game.state.selectServerOption.serverSelect+1
-                            state.game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })
-                        }
-                        break
-                    case keys.KeyLeft:
-                        state.game.state.selectServerOption.createServer = true
-                        state.game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })
-                        break
-                    case keys.KeyRight:
-                        state.game.state.selectServerOption.createServer = false
-                        state.game.playSong('Sounds/scrollMenu.ogg', { volume: 0.5 })
-                        break
-                    case keys.KeyEnter:
-                        let filtredServers = state.game.state.selectServerOption.listServers.filter(s => s.open)
-                        //if (!state.game.state.debug) state.game.state.selectSettingsOption.settingsOptions.find((g) => g.id == 'botPlay').content = false
-
-                        if (state.game.state.selectServerOption.createServer) {
-                            state.game.state.smallFunctions.redirectGameStage('selectMusic')
-
-                            state.game.state.serverId = state.socket.id
-                        } else if (state.game.state.selectServerOption.listServers[0]) {
-                            let server = filtredServers[state.game.state.selectServerOption.serverSelect]
-                            state.game.state.serverId = server.id
-
-                            if (state.game.state.serverId) {
-                                let modInfo = state.game.state.musics[server.mod]
-                                let musicInfo = state.game.state.musics[server.mod].musics[server.music]
-
-                                state.socket.emit('connectServer', {
-                                    serverId: state.game.state.serverId
-                                })
-
-                                state.game.startMusic({
-                                    modInfo,
-                                    musicInfo,
-                                    difficulty: state.game.state.difficulties[musicInfo.difficulties[server.difficulty]],
-                                    listenerState: state,
-                                    opponentPlayer: true,
-                                    socket: state.socket
-                                })
-
-                                state.game.state.smallFunctions.redirectGameStage('game')
-                            }
-                        }
-                        break
-                }
-            }*/
-
+            
             if (state.game.state.gameStage == 'settings' && on) {
                 keyPressed = keyPressed.replace('WheelUp', keys.KeyUp).replace('WheelDown', keys.KeyDown)
                 let currentConfig = state.game.state.selectSettingsOption.settingsOptionsFiltered ? state.game.state.selectSettingsOption.settingsOptionsFiltered[state.game.state.selectSettingsOption.settingsSelect] : {}
@@ -528,17 +467,8 @@ export default function createListener() {
                         break
                     case keys.KeyEnter:
                         if (state.game.state.selectMenuOption.menuOptions[state.game.state.selectMenuOption.menuSelect] == 'ModList') {
-                            state.game.state.online = false
                             state.game.state.smallFunctions.redirectGameStage('selectMusic')
-                        } else if (state.game.state.selectMenuOption.menuOptions[state.game.state.selectMenuOption.menuSelect] == 'Multiplayer') {
-                            alert('Multiplayer desligado Temporariamente\n\nMultiplayer Temporarily Off')
-                            /*if (state.game.state.ping) {
-                                state.game.state.online = true
-                                state.game.state.smallFunctions.redirectGameStage('onlineServerList')
-                                state.socket.emit('getListServers')
-                            } else alert('No connection to the server!')*/
                         } else {
-                            state.game.state.online = true
                             state.game.state.smallFunctions.redirectGameStage('settings')
                         }
                         

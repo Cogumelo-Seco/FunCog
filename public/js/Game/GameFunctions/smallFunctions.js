@@ -66,6 +66,7 @@ export default (state, Listener) => {
             state.animations = state.defaultAnimations
             state.invertArrowPos = false
             state.speed = 1
+            state.changeBPMTimeoutValue = 1000/30
             document.getElementById('gameBackground').style.display = 'none'
             document.getElementById('gameVideoBackground').style.display = 'none'
             document.getElementById('overlayImage').style.display = 'none'

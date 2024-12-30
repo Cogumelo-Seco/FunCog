@@ -128,7 +128,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
     ctx.globalAlpha = 1
 /*
-    if (game.state.online && !game.state.serverInfo.start) {
+    if (!game.state.serverInfo.start) {
         ctx.fillStyle = `rgba(255, 50, 50, 0.7)`
         ctx.fillRect(0, canvas.height/2-20, canvas.width, 40)
 

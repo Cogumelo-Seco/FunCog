@@ -35,10 +35,9 @@ export default async (state) => {
 
         /* ---- */
 
-        { dir: 'icons/icon-bf.png' },
-        { dir: 'icons/icon-bf-red.png' },
-        { dir: 'icons/icon-face.png' },
-        { dir: 'icons/BongoCat.png' },
+        { dir: 'icons/icon-Cogu.png' },
+        { dir: 'icons/icon-Guto.png' },
+        { dir: 'icons/icon-BongoCat.png' },
     ]
     
     return state.images.length
