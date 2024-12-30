@@ -129,6 +129,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
                 if (Number(game.state.selectMusicMenu.musicSelect) == Number(i)) selectedMusicName = musicName
 
                 let musicElement = document.getElementById(i+'-musicElement') || document.createElement('button')
+                let musicElementUpdate = musicElement.style.display != 'block'
                 musicElement.className = 'menuElement musicElement'
                 musicElement.id = i+'-musicElement'
                 musicElement.style.width = canvas.width/4+'px'
@@ -170,7 +171,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
                 if (Number(game.state.selectMusicMenu.musicSelect) == Number(i)) canvas.style.backgroundImage = `url(https://raw.githubusercontent.com/Cogumelo-Seco/Cogu-FNF-Files/main/imgs/${music.backgroundImage})`
 
-                if (notUpdate) musicSelectMenuElement.appendChild(musicElement)
+                if (notUpdate || musicElementUpdate) musicSelectMenuElement.appendChild(musicElement)
                 musicY += 62
             } else {
                 let musicElement = document.getElementById(i+'-musicElement')
@@ -185,12 +186,12 @@ export default async (ctx, canvas, game, Listener, functions) => {
         let difficultyY = canvas.height/3//startDifficultyY+((endDifficultyY-startDifficultyY)*(difficultySelected/(game.state.difficulties.length)))-(difficultySelected*(40+(currentSelection == 2 ? 12 : 0)))
         //if (startDifficultyY+(40*game.state.difficulties.length) < endDifficultyY) difficultyY = startDifficultyY
 
-        for (let i in game.state.difficulties) {
+        for (let i in game.state?.difficulties) {
             game.state.selectMusicMenu.difficultySelected = game.state.selectMusicMenu.difficultySelected > selectMusicInfo.difficulties.length-1 ? 0 : game.state.selectMusicMenu.difficultySelected
             game.state.selectMusicMenu.difficultySelected = game.state.selectMusicMenu.difficultySelected < 0 ? selectMusicInfo.difficulties.length-1 : game.state.selectMusicMenu.difficultySelected
             
             //console.log(selectMusicInfo.difficulties)
-            let difficulty = game.state.difficulties[selectMusicInfo.difficulties[i]]
+            let difficulty = game.state.difficulties[selectMusicInfo?.difficulties[i]]
             if (difficulty) {
                 let difficultyName = difficulty.name+(selectMusicInfo.difficultyAlert && selectMusicInfo.difficultyAlert[selectMusicInfo.difficulties[i]] ? ` ${selectMusicInfo.difficultyAlert[selectMusicInfo.difficulties[i]]}` : '')
                 if (Number(game.state.selectMusicMenu.difficultySelected) == Number(i)) selectedDifficultyName = difficultyName

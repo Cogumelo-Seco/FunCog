@@ -130,7 +130,6 @@ export default (state, Listener) => {
             }
         },
         rewardXP: (rewardXP) => {
-            console.log(rewardXP)
             let playerInfo = state.myConfig
 
             if (playerInfo.xp+rewardXP >= state.smallFunctions.requiredXPCalc(playerInfo.level)) {
