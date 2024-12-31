@@ -35,6 +35,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 			break
 		case 'loaded':
 			state.musicInfo.backgroundImage = null
+            state.changeBPMTimeoutValue = 0
 			
 			if (!state.smallFunctions.getConfig('MiddleScroll')) {
 				state.customBongPosition = {
@@ -342,7 +343,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						variables.onWriting = true
 						variables.onWritingEndTime = +new Date()+5000
 
-						//if(event[4] == 'NO MORE') variables.onWritingTroll = true
+						if(event[4] == 'NO MORE') variables.onWritingTroll = true
 
 						listenerState.pauseGameKeys = true
 					}
@@ -414,6 +415,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 
 					for (let i in textArr) {
 						let txt = textArr[i]
+                        console.log(txt)
 
 						ctx.fillStyle = 'black'
 						ctx.fillText(txt, X+1, canvas.height*0.75-(lyric.onState == Number(i) ? 5 : 0)+1)
@@ -443,7 +445,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				ctx.font = `bold 25px Arial`
 				ctx.fillText(time, canvas.width/2-(ctx.measureText(time).width/2), canvas.height*0.75)
 
-				let text = variables.monochromeText?.toLowerCase() || '??????????????'
+				let text = variables.onWritingTroll ? 'no more' : variables.monochromeText?.toLowerCase() || '??????????????'
 
 				if (text[variables.pastLetters] == ' ') variables.pastLetters += 1
 
@@ -455,20 +457,21 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					variables.keys[key.code] = true
 				}
 
-				if (variables.botOnNote != null) listenerState.arrows[variables.botOnNote].click = true
+                if (isNaN(Number(variables.onBotClick))) variables.onBotClick = 0
 				if (state.smallFunctions.getConfig('botPlay') && state.musicStep != variables.oldStep && !variables.keys['bot']) {
-					variables.botOnNote = Math.floor(Math.random()*4)
+                    for (let i = 0;i < 4;i++) listenerState.arrows[i].click = false
+                    listenerState.arrows[variables.onBotClick%4].click = true
+                    variables.onBotClick += 1
 					variables.keys['bot'] = true
 					variables.pastLetters += 1
 				}
-				if (state.smallFunctions.getConfig('botPlay') && state.musicStep == variables.oldStep && state.musicStep%2 == 0) {
-					variables.botOnNote = null
+				if (state.smallFunctions.getConfig('botPlay') && state.musicStep != variables.oldStep && state.musicStep%2 == 0) {
 					variables.keys['bot'] = false
 				}
 
 				let phraseWidth = 0
 				let letterResize = (canvas.width/text.length)/250 < 0.4 ? (canvas.width/text.length)/250 : 0.4
-				let letterSpace = 50*letterResize
+				let letterSpace = variables.onWritingTroll ? -20*letterResize+(Math.random()*10-5) : 50*letterResize
 				let spaceWidth = 90*letterResize
 				
 				for (let i in text) {
@@ -489,7 +492,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 						let letterHeight = imagePos.height*letterResize
 
 						if (Number(i)+1 > variables.pastLetters) {
-							ctx.drawImage(image, imagePos.x, imagePos.y, imagePos.width, imagePos.height, X, canvas.height*0.2, letterWidth, letterHeight)
+							ctx.drawImage(image, imagePos.x, imagePos.y, imagePos.width, imagePos.height, X, variables.onWritingTroll ? canvas.height*0.2+(Math.random()*10-5) : canvas.height*0.2, letterWidth, letterHeight)
 
 							ctx.fillStyle = 'black'
 							ctx.fillRect(X, canvas.height*0.9, letterWidth, 5)
@@ -500,12 +503,15 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 				}
 
 				if (variables.onWritingEndTime < +new Date() || text.length-1 < variables.pastLetters) {
-					if (text.length-1 >= variables.pastLetters && !state.smallFunctions.getConfig('botPlay') && !variables.onWritingTroll) state.musicInfo.health = -100
+					if (text.length-1 >= variables.pastLetters && !state.smallFunctions.getConfig('botPlay')) state.musicInfo.health = -100
 					variables.onWriting = false
 					variables.onWritingTroll = false
 					listenerState.pauseGameKeys = false
 				}
-			}
+			} else if (variables.keys['bot']) {
+                variables.keys['bot'] = false
+                for (let i = 0;i < 4;i++) listenerState.arrows[i].click = false
+            }
 			break
     }
 }

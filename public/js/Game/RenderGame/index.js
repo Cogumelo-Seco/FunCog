@@ -73,6 +73,7 @@ export default async function renderGame(canvas, game, Listener) {
     //require('./RenderChat').default(ctx, canvas, game, Listener)
     require('./RenderScreenInformation').default(ctx, canvas, game, Listener, functions)
 
+    ctx.globalAlpha = 1
     game.gameLoop()
     if (game.state.music?.currentTime > 0 && game.state.music?.currentTime < game.state.music?.duration && !game.state.music.paused) game.state.musicEventListener('gameLoopFullFPS', { listenerState: Listener.state }, game.state)
 

@@ -575,7 +575,7 @@ export default async (state) => {
                     notesImageDir: 'Arrows/',
                     splashDir: 'Arrows/Lullaby/splash.png',
                     splashResize: 1.5,
-                    cutscene: 'Lullaby/Monochrome.mp4',
+                    //cutscene: 'Lullaby/Monochrome.mp4',
                     initialImage: 'imgs/VSLullaby/unownAlphabet.png',
                     backgroundImage: 'backgrounds/monochrome.png',
                     mod: 'VSLullaby',
