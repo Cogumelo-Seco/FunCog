@@ -126,6 +126,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
                 transform: skew(20deg);
             }
             .menuButton {
+                text-shadow: 1px 1px 2px black;
                 border: none;
                 border-radius: 8px;
                 background: linear-gradient(90deg, rgba(64,46,120,1) 0%, rgba(100,75,175,1) 100%);
