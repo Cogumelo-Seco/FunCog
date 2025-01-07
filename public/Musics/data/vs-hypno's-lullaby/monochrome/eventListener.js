@@ -24,6 +24,7 @@ export default async (type, { noteClickAuthor, note, click, listenerState, diffi
 					state.animations['GoldNoteIntroOutro'].frame = 0
 					state.musicInfo.variables.outro = false
 				}
+                
 				state.musicInfo.variables.animation = animation
 
 				clearTimeout(state.musicInfo.variables.timeout)

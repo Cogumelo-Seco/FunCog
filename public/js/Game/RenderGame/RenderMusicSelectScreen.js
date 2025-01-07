@@ -25,6 +25,8 @@ export default async (ctx, canvas, game, Listener, functions) => {
                 transform: skew(20deg);
             }
             .menuElement {
+                text-shadow: 1px 1px 2px black;
+                overflow: hidden;
                 border: none;
                 border-radius: 8px;
                 background: linear-gradient(90deg, rgba(64,46,120,1) 0%, rgba(100,75,175,1) 100%);
@@ -33,6 +35,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             }
 
             .colorElement {
+                box-shadow: 1px 1px 2px black;
                 position: absolute;
                 display: block;
                 left: 2%;
@@ -71,7 +74,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
         for (let i in filtredMusics) {
             let mod = filtredMusics[i]
-            let modNameTxt = `${mod.dev ? '⚠️⚒' : mod.special ? '👑' : ''} ${mod.name.replace(/-/g, ' ')} ${mod.dev ? '⚒⚠️' : mod.special ? '👑' : ''}`
+            let modNameTxt = `${mod.dev ? '⚠️⚒' : mod.special ? '👑' : ''} ${(mod.customName || mod.name).replace(/-/g, ' ')} ${mod.dev ? '⚒⚠️' : mod.special ? '👑' : ''}`
             if (Number(game.state.selectMusicMenu.modSelect) == Number(i)) selectedModNameTxt = modNameTxt
             
             let modElement = document.getElementById(i+'-modElement') || document.createElement('button')
@@ -84,7 +87,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
             modElement.style.top = modsY+'px'
             modElement.style.fontSize = screenResize*12+'px'
             modElement.style.color = mod.dev ? 'red' : 'white'
-            if (notUpdate) modElement.innerHTML = `<span class="skew-fix">${modNameTxt}</span>`
+            if (notUpdate) modElement.innerHTML = `<span class="skew-fix">${await functions.fillTextHTML(modNameTxt, mod.dev ? 'red' : 'white')}</span>`
 
             let colorElement = document.getElementById(i+'-modColorElement') || document.createElement('div')
             colorElement.className = 'colorElement'
@@ -141,7 +144,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
                 musicElement.style.fontSize = screenResize*12+'px'
                 musicElement.style.display = 'block'
                 musicElement.style.color = music.dev ? 'red' : 'white'
-                /*if (notUpdate)*/ musicElement.innerHTML = `<span class="skew-fix">${musicName}</span>`
+                /*if (notUpdate)*/ musicElement.innerHTML = `<span class="skew-fix">${await functions.fillTextHTML(musicName, music.dev ? 'red' : 'white')}</span>`
 
                 let colorElement = document.getElementById(i+'-musicColorElement') || document.createElement('div')
                 colorElement.className = 'colorElement'
@@ -207,7 +210,7 @@ export default async (ctx, canvas, game, Listener, functions) => {
                 difficultyElement.style.top = difficultyY+'px'
                 difficultyElement.style.fontSize = screenResize*12+'px'
                 difficultyElement.style.display = 'block'
-                /*if (notUpdate)*/ difficultyElement.innerHTML = `<span class="skew-fix">${difficultyName}</span>`
+                /*if (notUpdate)*/ difficultyElement.innerHTML = `<span class="skew-fix">${await functions.fillTextHTML(difficultyName, difficulty.color || 'white')}</span>`
 
                 let colorElement = document.getElementById(i+'-difficultyColorElement') || document.createElement('div')
                 colorElement.className = 'colorElement'
@@ -300,11 +303,11 @@ export default async (ctx, canvas, game, Listener, functions) => {
         titleContanerElement.style.top = 40+'px'
         titleContanerElement.style.width = '100%'
         titleContanerElement.innerHTML = `
-            <spam style="color: ${filtredMusics[game.state.selectMusicMenu.modSelect].menuColor};">${selectedModNameTxt}</spam>
+            <spam style="color: ${filtredMusics[game.state.selectMusicMenu.modSelect].menuColor};">${await functions.fillTextHTML(selectedModNameTxt)}</spam>
             <spam>-></spam>
-            <spam style="color: ${filtredMusics[game.state.selectMusicMenu.modSelect].musics[game.state.selectMusicMenu.musicSelect].menuColor};">${selectedMusicName}</spam>
+            <spam style="color: ${filtredMusics[game.state.selectMusicMenu.modSelect].musics[game.state.selectMusicMenu.musicSelect].menuColor};">${await functions.fillTextHTML(selectedMusicName)}</spam>
             <spam>-></spam>
-            <spam style="color: ${game.state.difficulties[selectMusicInfo.difficulties[game.state.selectMusicMenu.difficultySelected]]?.color};">${selectedDifficultyName}</spam>
+            <spam style="color: ${game.state.difficulties[selectMusicInfo.difficulties[game.state.selectMusicMenu.difficultySelected]]?.color};">${await functions.fillTextHTML(selectedDifficultyName)}</spam>
         `
 
         screenElements.appendChild(titleContanerElement)

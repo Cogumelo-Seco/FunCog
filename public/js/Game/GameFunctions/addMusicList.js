@@ -1,158 +1,6 @@
 export default async (state) => {
     state.musics = [
         {
-            dev: true,
-            name: 'In-The-Galaxy',
-            special: true,
-            menuColor: 'rgb(55, 109, 246)',
-            musics: [
-                {
-                    dev: true,
-                    suffix: '❗',
-                    name: 'Galaxy',
-                    menuColor: 'rgb(55, 109, 246)',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 1.4,
-                    backgroundImage: null,
-                    mod: 'InTheGalaxy',
-                    toLoad: [
-                        { dir: 'Musics/musics/in-the-galaxy/galaxy/Inst.ogg' },
-                        { dir: 'Musics/musics/in-the-galaxy/galaxy/Voices.ogg' },
-                    ]
-                },
-                {
-                    dev: true,
-                    suffix: '❗',
-                    name: 'Game',
-                    menuColor: 'rgb(55, 109, 246)',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 1.4,
-                    backgroundImage: null,
-                    mod: 'InTheGalaxy',
-                    toLoad: [
-                        { dir: 'Musics/musics/in-the-galaxy/game/Inst.ogg' },
-                        { dir: 'Musics/musics/in-the-galaxy/game/Voices.ogg' },
-                    ]
-                },
-                {
-                    dev: true,
-                    suffix: '❗',
-                    name: 'Kastimagina',
-                    menuColor: 'rgb(55, 109, 246)',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 1.4,
-                    backgroundImage: null,
-                    mod: 'InTheGalaxy',
-                    toLoad: [
-                        { dir: 'Musics/musics/in-the-galaxy/kastimagina/Inst.ogg' },
-                        { dir: 'Musics/musics/in-the-galaxy/kastimagina/Voices.ogg' },
-                    ]
-                },
-                {
-                    dev: true,
-                    suffix: '❗',
-                    name: 'Cona',
-                    menuColor: 'rgb(55, 109, 246)',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 1.4,
-                    backgroundImage: null,
-                    mod: 'InTheGalaxy',
-                    toLoad: [
-                        { dir: 'Musics/musics/in-the-galaxy/cona/Inst.ogg' },
-                        { dir: 'Musics/musics/in-the-galaxy/cona/Voices.ogg' },
-                    ]
-                },
-                {
-                    dev: true,
-                    suffix: '❗',
-                    name: 'Underworld',
-                    menuColor: 'rgb(55, 109, 246)',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 1.4,
-                    backgroundImage: null,
-                    mod: 'InTheGalaxy',
-                    toLoad: [
-                        { dir: 'Musics/musics/in-the-galaxy/underworld/Inst.ogg' },
-                        { dir: 'Musics/musics/in-the-galaxy/underworld/Voices.ogg' },
-                    ]
-                },
-                {
-                    dev: true,
-                    suffix: '❗',
-                    name: 'Cyber',
-                    menuColor: 'rgb(55, 109, 246)',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 1.4,
-                    backgroundImage: null,
-                    mod: 'InTheGalaxy',
-                    toLoad: [
-                        { dir: 'Musics/musics/in-the-galaxy/Cyber/Inst.ogg' },
-                        { dir: 'Musics/musics/in-the-galaxy/Cyber/Voices.ogg' },
-                    ]
-                },
-                {
-                    dev: true,
-                    suffix: '❗',
-                    name: 'Newton',
-                    menuColor: 'rgb(55, 109, 246)',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 1.4,
-                    backgroundImage: null,
-                    mod: 'InTheGalaxy',
-                    toLoad: [
-                        { dir: 'Musics/musics/in-the-galaxy/newton/Inst.ogg' },
-                        { dir: 'Musics/musics/in-the-galaxy/newton/Voices.ogg' },
-                    ]
-                },
-                {
-                    dev: true,
-                    suffix: '❗',
-                    name: 'Destiny',
-                    menuColor: 'rgb(55, 109, 246)',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 1.4,
-                    backgroundImage: null,
-                    mod: 'InTheGalaxy',
-                    toLoad: [
-                        { dir: 'Musics/musics/in-the-galaxy/destiny/Inst.ogg' },
-                        { dir: 'Musics/musics/in-the-galaxy/destiny/Voices.ogg' },
-                    ]
-                },
-                {
-                    dev: true,
-                    suffix: '❗',
-                    name: 'Peace',
-                    menuColor: 'rgb(55, 109, 246)',
-                    difficulties: [ 0, 1, 2 ],
-                    notesImageDir: 'Arrows/',
-                    splashDir: 'Arrows/splash.png',
-                    splashResize: 1.4,
-                    backgroundImage: null,
-                    mod: 'InTheGalaxy',
-                    toLoad: [
-                        { dir: 'Musics/musics/in-the-galaxy/peace/Inst.ogg' },
-                        { dir: 'Musics/musics/in-the-galaxy/peace/Voices.ogg' },
-                    ]
-                },
-            ]
-        },
-        {
             name: 'FNFDefault',
             menuColor: null,
             musics: [
@@ -468,6 +316,61 @@ export default async (state) => {
                     ]
                 },
             ],
+        },
+        {
+            special: true,
+            name: 'VS-Bocchi-§The-Rock',
+            customName: '§9VS-§eBocchi-§4The-§dRock',
+            menuColor: '#ffaec9',
+            musics: [
+                {
+                    dev: true,
+                    name: 'Grass',
+                    menuColor: '#4c6ca5',
+                    difficulties: [ 1, 2 ],
+                    notesImageDir: 'Arrows/VSBocchi/',
+                    backgroundImage: null,
+                    mod: 'VSBocchi',
+                    splashDir: 'Arrows/VSBocchi/splash.png',
+                    splashResize: 1.3,
+                    toLoad: [
+                        { dir: 'Arrows/VSBocchi/Arrows.png', animationConfigDir: 'Arrows/VSBocchi/Arrows.json' },
+                        { dir: 'Arrows/VSBocchi/splash.png', animationConfigDir: 'Arrows/VSBocchi/splash.json' },
+                        { dir: 'Musics/musics/vs-bocchi-the-rock/grass/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-bocchi-the-rock/grass/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Guitar-Loneliness',
+                    menuColor: '#ffaec9',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/VSBocchi/',
+                    backgroundImage: null,
+                    mod: 'VSBocchi',
+                    splashDir: 'Arrows/VSBocchi/splash.png',
+                    splashResize: 1.3,
+                    toLoad: [
+                        { dir: 'Musics/musics/vs-bocchi-the-rock/guitar-loneliness/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-bocchi-the-rock/guitar-loneliness/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    name: 'Too-Fame',
+                    menuColor: '#ffd500',
+                    difficulties: [ 2 ],
+                    notesImageDir: 'Arrows/VSBocchi/',
+                    backgroundImage: null,
+                    mod: 'VSBocchi',
+                    splashDir: 'Arrows/VSBocchi/splash.png',
+                    splashResize: 1.3,
+                    toLoad: [
+                        { dir: 'Musics/musics/vs-bocchi-the-rock/too-fame/Inst.ogg' },
+                        { dir: 'Musics/musics/vs-bocchi-the-rock/too-fame/Voices.ogg' },
+                    ]
+                },
+            ]
         },
         {    
             name: 'VS-Hypno\'s-Lullaby',
@@ -2532,6 +2435,158 @@ export default async (state) => {
                     toLoad: [
                         { dir: 'Musics/musics/undefined/through-the-fire-and-flames/Inst.ogg' },
                         { dir: 'Musics/musics/undefined/through-the-fire-and-flames/Voices.ogg' },
+                    ]
+                },
+            ]
+        },
+        {
+            dev: true,
+            name: 'In-The-Galaxy',
+            special: true,
+            menuColor: 'rgb(55, 109, 246)',
+            musics: [
+                {
+                    dev: true,
+                    suffix: '❗',
+                    name: 'Galaxy',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/galaxy/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/galaxy/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    suffix: '❗',
+                    name: 'Game',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/game/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/game/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    suffix: '❗',
+                    name: 'Kastimagina',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/kastimagina/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/kastimagina/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    suffix: '❗',
+                    name: 'Cona',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/cona/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/cona/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    suffix: '❗',
+                    name: 'Underworld',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/underworld/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/underworld/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    suffix: '❗',
+                    name: 'Cyber',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/Cyber/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/Cyber/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    suffix: '❗',
+                    name: 'Newton',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/newton/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/newton/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    suffix: '❗',
+                    name: 'Destiny',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/destiny/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/destiny/Voices.ogg' },
+                    ]
+                },
+                {
+                    dev: true,
+                    suffix: '❗',
+                    name: 'Peace',
+                    menuColor: 'rgb(55, 109, 246)',
+                    difficulties: [ 0, 1, 2 ],
+                    notesImageDir: 'Arrows/',
+                    splashDir: 'Arrows/splash.png',
+                    splashResize: 1.4,
+                    backgroundImage: null,
+                    mod: 'InTheGalaxy',
+                    toLoad: [
+                        { dir: 'Musics/musics/in-the-galaxy/peace/Inst.ogg' },
+                        { dir: 'Musics/musics/in-the-galaxy/peace/Voices.ogg' },
                     ]
                 },
             ]
