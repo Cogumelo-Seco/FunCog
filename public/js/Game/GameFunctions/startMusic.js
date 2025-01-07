@@ -86,7 +86,7 @@ export default async({ modInfo, musicInfo, difficulty, listenerState, opponentPl
             if (musicNotes[i].changeBPM) {
                 try {
                     state.musicChangeBPM[musicNotes[i].timeToChangeBPM || musicNotes[i].sectionNotes[0][0]] = musicNotes[i].bpm
-                } catch {}
+                } catch {alert('p-p')}
             }
 
             for (let a in musicNotes[i].sectionNotes) {

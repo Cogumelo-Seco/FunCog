@@ -319,7 +319,7 @@ export default async (state) => {
         },
         {
             special: true,
-            name: 'VS-Bocchi-§The-Rock',
+            name: 'VS-Bocchi-The-Rock',
             customName: '§9VS-§eBocchi-§4The-§dRock',
             menuColor: '#ffaec9',
             musics: [
@@ -351,6 +351,8 @@ export default async (state) => {
                     splashDir: 'Arrows/VSBocchi/splash.png',
                     splashResize: 1.3,
                     toLoad: [
+                        { dir: 'Arrows/VSBocchi/Arrows.png', animationConfigDir: 'Arrows/VSBocchi/Arrows.json' },
+                        { dir: 'Arrows/VSBocchi/splash.png', animationConfigDir: 'Arrows/VSBocchi/splash.json' },
                         { dir: 'Musics/musics/vs-bocchi-the-rock/guitar-loneliness/Inst.ogg' },
                         { dir: 'Musics/musics/vs-bocchi-the-rock/guitar-loneliness/Voices.ogg' },
                     ]
@@ -366,6 +368,8 @@ export default async (state) => {
                     splashDir: 'Arrows/VSBocchi/splash.png',
                     splashResize: 1.3,
                     toLoad: [
+                        { dir: 'Arrows/VSBocchi/Arrows.png', animationConfigDir: 'Arrows/VSBocchi/Arrows.json' },
+                        { dir: 'Arrows/VSBocchi/splash.png', animationConfigDir: 'Arrows/VSBocchi/splash.json' },
                         { dir: 'Musics/musics/vs-bocchi-the-rock/too-fame/Inst.ogg' },
                         { dir: 'Musics/musics/vs-bocchi-the-rock/too-fame/Voices.ogg' },
                     ]
