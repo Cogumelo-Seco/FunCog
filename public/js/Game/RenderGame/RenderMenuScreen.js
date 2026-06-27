@@ -185,10 +185,10 @@ export default async (ctx, canvas, game, Listener, functions) => {
 
         let nameText = document.getElementById('nameText') || document.createElement('div')
         nameText.id = 'nameText'
-        nameText.innerText = 'FunCog'
+        nameText.innerText = 'Glitchbound Funk'
         nameText.style.position = 'absolute'
         nameText.style.left = canvas.width*0.65+'px'
-        nameText.style.fontSize = screenResize*60+'px'
+        nameText.style.fontSize = screenResize*40+'px'
         nameText.style.marginTop = screenResize*92+'px'
         nameText.style.transform = 'rotateZ(25deg)'
         nameText.style.color = 'white'

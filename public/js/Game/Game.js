@@ -204,7 +204,7 @@ function createGame(Listener, canvas) {
             total: 0,
             msg: 'Loading...'
         },
-        filesURL: 'https://raw.githubusercontent.com/Cogumelo-Seco/FunCogFiles/refs/heads/main/'
+        filesURL: 'https://raw.githubusercontent.com/Cogumelo-Seco/GlitchboundFunkFiles/refs/heads/main/'
     }
 
     const addImages = (command) => require('./GameFunctions/addImages').default(state)
@@ -546,6 +546,7 @@ function createGame(Listener, canvas) {
                 state.sounds[dir] = sound
             } else {
                 let link = local ? '/'+dir : state.filesURL+'imgs/'+dir
+                console.log(link)
                 let animationConfig = animationConfigDir ? JSON.parse(await fetch(state.filesURL+'imgs/'+animationConfigDir).then(r => r.text())) : null
 
                 let img = new Image()
