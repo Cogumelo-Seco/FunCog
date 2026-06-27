@@ -141,11 +141,9 @@ const Game = (props) => {
 }
 
 export async function getStaticProps() {
-    const SERVER = process.env.SERVER
 
     return {
         props: {
-            SERVER
         },
         revalidate: 1800
     }
